@@ -62,6 +62,8 @@ user: laravel
 password: secret
 ```
 
+Si conectas desde tu maquina al MySQL de Docker, usa el puerto `3307`.
+
 Tambien hay una configuracion independiente de MySQL en:
 
 ```txt

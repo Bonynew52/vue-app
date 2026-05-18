@@ -7,6 +7,7 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
+      - backend_vendor:/var/www/html/vendor
     depends_on:
       - mysql
     environment:
@@ -31,7 +32,7 @@ services:
     image: mysql:8.4
     container_name: backend_laravel_mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: backend_laravel
       MYSQL_USER: laravel
@@ -42,3 +43,4 @@ services:
 
 volumes:
   mysql_data:
+  backend_vendor:
