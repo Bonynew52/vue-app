@@ -1,18 +1,10 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const count = ref(0)
+<script setup>
+import AppLayout from './components/layout/AppLayout.vue'
+import HomeView from './views/HomeView.vue'
 </script>
 
 <template>
-  <main class="page">
-    <section class="panel">
-      <p class="eyebrow">Vue is running locally</p>
-      <h1>New Project</h1>
-      <p class="intro">
-        Your Vue.js test page is ready. Edit <code>src/App.vue</code> to start building.
-      </p>
-      <button type="button" @click="count++">Count is {{ count }}</button>
-    </section>
-  </main>
+  <AppLayout>
+    <HomeView />
+  </AppLayout>
 </template>

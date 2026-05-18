@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 583" role="img" aria-labelledby="title">
+  <title id="title">Mascot icon</title>
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#A6C99D" d="M118 119h114c28 0 51 23 51 51v235c0 28-23 50-51 50H118c-28 0-51-22-51-50V170c0-28 23-51 51-51Z"/>
+    <path fill="#A6C99D" d="M133 447h25v33c0 24-14 44-35 52l-23 9c-12 5-22-8-15-19l10-16c9-15 23-25 38-31v-28Zm61 0h25v28c15 6 29 16 38 31l10 16c7 11-3 24-15 19l-23-9c-21-8-35-28-35-52v-33Z"/>
+    <path fill="#A6C99D" d="M121 128c-3-25-8-47-18-65 18 3 32 13 42 29 11 18 14 38 12 55l-36-19Zm108 0c3-25 8-47 18-65-18 3-32 13-42 29-11 18-14 38-12 55l36-19Z"/>
+
+    <path stroke="#D36C00" stroke-linecap="round" stroke-width="21" d="M43 160C43 88 101 30 175 30s132 58 132 130"/>
+    <rect width="41" height="91" x="31" y="158" fill="#D36C00" rx="18"/>
+    <rect width="41" height="91" x="278" y="158" fill="#D36C00" rx="18"/>
+    <rect width="16" height="84" x="55" y="164" fill="#E3925D" rx="8"/>
+    <rect width="16" height="84" x="279" y="164" fill="#E3925D" rx="8"/>
+
+    <path fill="#7E4743" d="M143 114c4-13 17-19 25-5 7-16 24-14 29 2 7-7 20-1 21 11l1 13h-88l1-11c1-9 8-14 11-10Z"/>
+
+    <circle cx="174" cy="215" r="72" fill="#F6F1EA"/>
+    <path fill="#74413E" d="M230 215c0 31-25 56-56 56-11 0-22-4-30-10 5-10 9-22 3-28-9-8-19 2-23 11-4-8-6-18-6-29 0-31 25-56 56-56s56 25 56 56Z"/>
+    <circle cx="204" cy="186" r="13" fill="#F6F1EA"/>
+
+    <path stroke="#74413E" stroke-linecap="round" stroke-width="7" d="M95 294c15 24 35 38 57 45"/>
+    <path fill="#F6F1EA" d="M90 327c9-20 18-31 30-33 3 18-5 31-23 39-5 2-9-1-7-6Z"/>
+  </g>
+</svg>
