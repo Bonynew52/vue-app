@@ -34,8 +34,8 @@ defineProps({
 }
 
 .primary {
-  background: var(--color-primary);
-  color: #ffffff;
+  background: var(--color-second);
+  color: var(--color-text);
 }
 
 .primary:hover {

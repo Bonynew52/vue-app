@@ -11,7 +11,7 @@ const navItems = ['Inicio', 'Proyecto', 'Recursos']
         <span class="brand-mark">
           <img :src="mascotIcon" alt="" />
         </span>
-        <span>Vue Preset</span>
+        <span>Home</span>
       </a>
 
       <nav class="nav" aria-label="Navegacion principal">
