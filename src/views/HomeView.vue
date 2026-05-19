@@ -1,144 +1,87 @@
 <script setup>
-import BaseButton from '../components/ui/BaseButton.vue'
-import StatCard from '../components/ui/StatCard.vue'
-import { projectStats, starterFolders } from '../data/starterPreset'
-import { useCounter } from '../composables/useCounter'
+import { onMounted, ref } from 'vue'
+import PaletteSwitcher from '../components/ui/PaletteSwitcher.vue'
+import { imagePalettes } from '../data/imagePalettes'
 
-const { count, increment } = useCounter()
+const activePalette = ref(imagePalettes[0])
+
+function applyPalette(palette) {
+  activePalette.value = palette
+
+  const root = document.documentElement
+  root.style.setProperty('--color-first', palette.colors.first)
+  root.style.setProperty('--color-second', palette.colors.second)
+  root.style.setProperty('--color-third', palette.colors.third)
+}
+
+onMounted(() => {
+  applyPalette(activePalette.value)
+})
 </script>
 
 <template>
   <main class="home-view">
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Preset basico</p>
-        <h1>Base Vue lista para construir sin desorden</h1>
-        <p class="intro">
-          Componentes, vistas, composables, datos y estilos globales separados desde el inicio.
-        </p>
-        <div class="actions">
-          <BaseButton @click="increment">Clicks: {{ count }}</BaseButton>
-          <BaseButton variant="secondary" href="https://vuejs.org/">Docs Vue</BaseButton>
-        </div>
-      </div>
+    <PaletteSwitcher
+      :palettes="imagePalettes"
+      :active-palette-id="activePalette.id"
+      @select="applyPalette"
+    />
 
-      <div class="folder-panel" aria-label="Distribucion de carpetas">
-        <div v-for="folder in starterFolders" :key="folder.path" class="folder-row">
-          <code>{{ folder.path }}</code>
-          <span>{{ folder.description }}</span>
-        </div>
+    <footer class="footer-shell">
+      <div class="site-footer">
+        <span>&copy; 2026 Belly Monster Bites</span>
+        <a href="/">Terminos y condiciones</a>
+        <a href="/">Privacidad</a>
+        <a href="/">Contacto</a>
       </div>
-    </section>
-
-    <section class="stats" aria-label="Resumen del preset">
-      <StatCard
-        v-for="stat in projectStats"
-        :key="stat.label"
-        :label="stat.label"
-        :value="stat.value"
-        :detail="stat.detail"
-      />
-    </section>
+    </footer>
   </main>
 </template>
 
 <style scoped>
 .home-view {
+  display: flex;
+  flex-direction: column;
   width: min(100%, 1180px);
+  min-height: calc(100vh - 72px);
   margin: 0 auto;
-  padding: clamp(32px, 6vw, 72px) clamp(20px, 5vw, 56px);
+  padding: clamp(32px, 6vw, 72px) clamp(20px, 5vw, 56px) 0;
 }
 
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
-  gap: clamp(28px, 5vw, 56px);
-  align-items: center;
+.footer-shell {
+  width: 100vw;
+  margin-top: clamp(48px, 10vw, 96px);
+  flex: 1;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: clamp(34px, 7vw, 72px) clamp(20px, 5vw, 56px);
+  background: var(--color-second);
+  transition: background-color 420ms ease;
 }
 
-.hero-copy {
-  min-width: 0;
-}
-
-.eyebrow {
-  margin: 0 0 10px;
-  color: var(--color-secondary-dark);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-h1 {
-  max-width: 680px;
-  margin: 0;
-  color: var(--color-text);
-  font-size: clamp(2.25rem, 8vw, 4.8rem);
-  line-height: 0.98;
-}
-
-.intro {
-  max-width: 620px;
-  margin: 22px 0 0;
-  color: var(--color-text-muted);
-  font-size: 1.1rem;
-  line-height: 1.65;
-}
-
-.actions {
+.site-footer {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-.folder-panel {
-  display: grid;
-  gap: 10px;
-  padding: 18px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  background: var(--color-surface);
-  box-shadow: var(--shadow-panel);
-}
-
-.folder-row {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 16px;
+  gap: 14px 22px;
   align-items: center;
-  padding: 14px;
-  border-radius: 6px;
-  background: var(--color-surface-muted);
-}
-
-code {
+  justify-content: center;
+  width: min(100%, 1180px);
+  min-height: 112px;
+  margin: 0 auto;
+  padding: 24px 0;
   color: var(--color-text);
   font-size: 0.92rem;
-  font-weight: 800;
+  font-weight: 700;
+  transition: color 420ms ease;
 }
 
-.folder-row span {
-  color: var(--color-text-muted);
-  line-height: 1.45;
+.site-footer a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 420ms ease;
 }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: clamp(28px, 5vw, 52px);
-}
-
-@media (max-width: 860px) {
-  .hero,
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
-  .folder-row {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
+.site-footer a:hover {
+  text-decoration: underline;
 }
 </style>

@@ -15,6 +15,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color 420ms ease,
+    color 420ms ease;
 }
 
 * {
@@ -24,12 +27,15 @@
 html {
   min-width: 320px;
   background: var(--color-background);
+  transition: background-color 420ms ease;
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+  background: var(--color-background);
+  transition: background-color 420ms ease;
 }
 
 button,
@@ -49,4 +55,5 @@ a {
 
 #app {
   min-height: 100vh;
+  transition: background-color 420ms ease;
 }

@@ -1,6 +1,6 @@
 :root {
-  --color-first: #a6c4bf;
-  --color-second: #c6dad6;
+  --color-first: #c6dad6;
+  --color-second: #b6cfcb;
   --color-third: #aa7e85;
   --color-background: var(--color-first);
   --color-surface: var(--color-first);

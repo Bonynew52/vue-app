@@ -1,7 +1,5 @@
 <script setup>
 import mascotIcon from '../../assets/brand/mascot.svg'
-
-const navItems = ['Inicio', 'Proyecto', 'Recursos']
 </script>
 
 <template>
@@ -13,12 +11,6 @@ const navItems = ['Inicio', 'Proyecto', 'Recursos']
         </span>
         <span>Home</span>
       </a>
-
-      <nav class="nav" aria-label="Navegacion principal">
-        <a v-for="item in navItems" :key="item" href="/">
-          {{ item }}
-        </a>
-      </nav>
     </header>
 
     <slot />
@@ -36,13 +28,16 @@ const navItems = ['Inicio', 'Proyecto', 'Recursos']
   z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 24px;
   min-height: 72px;
   padding: 0 clamp(20px, 5vw, 56px);
   border-bottom: 1px solid var(--color-border);
   background: color-mix(in srgb, var(--color-background) 88%, white);
   backdrop-filter: blur(16px);
+  transition:
+    background-color 420ms ease,
+    border-color 420ms ease;
 }
 
 .brand {
@@ -52,6 +47,7 @@ const navItems = ['Inicio', 'Proyecto', 'Recursos']
   color: var(--color-text);
   font-weight: 800;
   text-decoration: none;
+  transition: color 420ms ease;
 }
 
 .brand-mark {
@@ -69,42 +65,9 @@ const navItems = ['Inicio', 'Proyecto', 'Recursos']
   object-fit: contain;
 }
 
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.nav a {
-  padding: 8px 10px;
-  border-radius: 6px;
-  color: var(--color-text-muted);
-  font-size: 0.92rem;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.nav a:hover {
-  background: var(--color-secondary);
-  color: var(--color-text);
-}
-
 @media (max-width: 640px) {
   .app-header {
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 118px;
-    padding-block: 18px;
-  }
-
-  .nav {
-    width: 100%;
-    overflow-x: auto;
-  }
-
-  .nav a {
-    white-space: nowrap;
+    min-height: 72px;
   }
 }
 </style>
