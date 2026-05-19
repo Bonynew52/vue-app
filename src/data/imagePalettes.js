@@ -1,5 +1,5 @@
-import raspberryImage from '../assets/campaigns/cinnamon_roll_raspberry.png'
-import tresLechesImage from '../assets/campaigns/cinnamon_roll_tres_leches.png'
+import raspberryImage from '../assets/menu/cinnamon_roll_raspberry.png'
+import tresLechesImage from '../assets/menu/cinnamon_roll_tres_leches.png'
 
 export const imagePalettes = [
   {

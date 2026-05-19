@@ -22,6 +22,19 @@ function setCardElement(element, index) {
   }
 }
 
+function emitPaletteSelection(index) {
+  const isTwoColumn = window.matchMedia('(min-width: 980px)').matches
+  const rowStart = isTwoColumn ? index - (index % 2) : index
+  const leftPalette = props.palettes[rowStart]
+  const rightPalette = props.palettes[rowStart + 1] || leftPalette
+
+  emit('select', props.palettes[index], {
+    isTwoColumn,
+    leftPalette,
+    rightPalette,
+  })
+}
+
 function selectCenteredPalette() {
   const viewportCenter = window.innerHeight / 2
   let closestIndex = 0
@@ -42,7 +55,7 @@ function selectCenteredPalette() {
     }
   })
 
-  emit('select', props.palettes[closestIndex])
+  emitPaletteSelection(closestIndex)
 }
 
 let animationFrame = 0
@@ -81,8 +94,13 @@ onBeforeUnmount(() => {
       :ref="(element) => setCardElement(element, index)"
       class="palette-card"
       :class="{ active: palette.id === activePaletteId }"
+      :style="{
+        '--card-first': palette.colors.first,
+        '--card-second': palette.colors.second,
+        '--card-third': palette.colors.third,
+      }"
       type="button"
-      @click="emit('select', palette)"
+      @click="emitPaletteSelection(index)"
     >
       <span v-if="palette.placeholder" class="placeholder-image" aria-hidden="true"></span>
       <img v-else :src="palette.image" :alt="palette.name" />
@@ -96,28 +114,28 @@ onBeforeUnmount(() => {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-auto-rows: auto;
-  gap: 16px;
+  gap: clamp(16px, 3vw, 28px);
 }
 
 @media (min-width: 980px) {
   .palette-switcher {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 .palette-card {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 18px;
+  gap: 16px;
   align-items: stretch;
-  width: min(100%, 66.666%);
-  min-height: 620px;
+  width: min(100%, 560px);
+  min-height: 560px;
   margin: 0 auto;
-  padding: 24px;
+  padding: clamp(16px, 2vw, 22px);
   border: 2px solid transparent;
   border-radius: 8px;
-  background: var(--color-surface-muted);
-  color: var(--color-text);
+  background: var(--card-second);
+  color: var(--card-third);
   text-align: left;
   transition:
     background-color 420ms ease,
@@ -126,25 +144,26 @@ onBeforeUnmount(() => {
 }
 
 .palette-card.active {
-  border-color: var(--color-text);
+  border-color: var(--card-third);
 }
 
 .palette-card img {
   width: 100%;
-  height: 520px;
-  min-height: 520px;
+  height: min(66vw, 460px);
+  min-height: 360px;
   flex-shrink: 0;
   border-radius: 6px;
-  object-fit: cover;
+  background: var(--card-first);
+  object-fit: contain;
 }
 
 .placeholder-image {
   display: block;
   width: 100%;
-  height: 520px;
-  min-height: 520px;
+  height: min(66vw, 460px);
+  min-height: 360px;
   border-radius: 6px;
-  background: #000000;
+  background: var(--card-first);
 }
 
 .palette-card span {
@@ -156,7 +175,7 @@ onBeforeUnmount(() => {
   .palette-card {
     grid-template-columns: 1fr;
     width: 100%;
-    min-height: 430px;
+    min-height: 410px;
     padding: 20px;
   }
 

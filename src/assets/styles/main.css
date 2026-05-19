@@ -1,8 +1,45 @@
 @import './tokens.css';
 
+@property --background-left {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #c6dad6;
+}
+
+@property --background-right {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #b6cfcb;
+}
+
+@property --color-first {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #c6dad6;
+}
+
+@property --color-second {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #b6cfcb;
+}
+
+@property --color-third {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #aa7e85;
+}
+
 :root {
   color: var(--color-text);
-  background: var(--color-background);
+  background:
+    linear-gradient(
+      180deg,
+      var(--background-left) 0%,
+      var(--background-left) 30%,
+      var(--background-right) 70%,
+      var(--background-right) 100%
+    );
   font-family:
     Inter,
     ui-sans-serif,
@@ -16,7 +53,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition:
-    background-color 420ms ease,
+    --background-left 520ms ease,
+    --background-right 520ms ease,
+    --color-first 520ms ease,
+    --color-second 520ms ease,
+    --color-third 520ms ease,
     color 420ms ease;
 }
 
@@ -26,16 +67,34 @@
 
 html {
   min-width: 320px;
-  background: var(--color-background);
-  transition: background-color 420ms ease;
+  background:
+    linear-gradient(
+      180deg,
+      var(--background-left) 0%,
+      var(--background-left) 30%,
+      var(--background-right) 70%,
+      var(--background-right) 100%
+    );
+  transition:
+    --background-left 520ms ease,
+    --background-right 520ms ease;
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background: var(--color-background);
-  transition: background-color 420ms ease;
+  background:
+    linear-gradient(
+      180deg,
+      var(--background-left) 0%,
+      var(--background-left) 30%,
+      var(--background-right) 70%,
+      var(--background-right) 100%
+    );
+  transition:
+    --background-left 520ms ease,
+    --background-right 520ms ease;
 }
 
 button,
@@ -55,5 +114,22 @@ a {
 
 #app {
   min-height: 100vh;
-  transition: background-color 420ms ease;
+  transition:
+    --background-left 520ms ease,
+    --background-right 520ms ease;
+}
+
+@media (min-width: 980px) {
+  :root,
+  html,
+  body {
+    background:
+      linear-gradient(
+        90deg,
+        var(--background-left) 0%,
+        var(--background-left) 34%,
+        var(--background-right) 66%,
+        var(--background-right) 100%
+      );
+  }
 }

@@ -2,6 +2,8 @@
   --color-first: #c6dad6;
   --color-second: #b6cfcb;
   --color-third: #aa7e85;
+  --background-left: var(--color-first);
+  --background-right: var(--color-second);
   --color-background: var(--color-first);
   --color-surface: var(--color-first);
   --color-surface-muted: var(--color-second);

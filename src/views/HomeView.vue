@@ -1,87 +1,131 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-import PaletteSwitcher from '../components/ui/PaletteSwitcher.vue'
-import { imagePalettes } from '../data/imagePalettes'
-
-const activePalette = ref(imagePalettes[0])
-
-function applyPalette(palette) {
-  activePalette.value = palette
-
-  const root = document.documentElement
-  root.style.setProperty('--color-first', palette.colors.first)
-  root.style.setProperty('--color-second', palette.colors.second)
-  root.style.setProperty('--color-third', palette.colors.third)
-}
-
-onMounted(() => {
-  applyPalette(activePalette.value)
-})
+import { campaigns } from '../data/campaigns'
 </script>
 
 <template>
   <main class="home-view">
-    <PaletteSwitcher
-      :palettes="imagePalettes"
-      :active-palette-id="activePalette.id"
-      @select="applyPalette"
-    />
+    <section class="campaign-list" aria-label="Campanas">
+      <article
+        v-for="campaign in campaigns"
+        :key="campaign.id"
+        class="campaign-card"
+      >
+        <div class="campaign-media">
+          <img :src="campaign.image" :alt="campaign.name" />
+        </div>
 
-    <footer class="footer-shell">
-      <div class="site-footer">
-        <span>&copy; 2026 Belly Monster Bites</span>
-        <a href="/">Terminos y condiciones</a>
-        <a href="/">Privacidad</a>
-        <a href="/">Contacto</a>
-      </div>
-    </footer>
+        <div class="campaign-copy">
+          <p class="eyebrow">{{ campaign.eyebrow }}</p>
+          <h1>{{ campaign.name }}</h1>
+          <p class="description">{{ campaign.description }}</p>
+        </div>
+      </article>
+    </section>
   </main>
 </template>
 
 <style scoped>
 .home-view {
   display: flex;
-  flex-direction: column;
-  width: min(100%, 1180px);
-  min-height: calc(100vh - 72px);
-  margin: 0 auto;
-  padding: clamp(32px, 6vw, 72px) clamp(20px, 5vw, 56px) 0;
-}
-
-.footer-shell {
-  width: 100vw;
-  margin-top: clamp(48px, 10vw, 96px);
-  flex: 1;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  padding: clamp(34px, 7vw, 72px) clamp(20px, 5vw, 56px);
-  background: var(--color-second);
-  transition: background-color 420ms ease;
-}
-
-.site-footer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px 22px;
-  align-items: center;
   justify-content: center;
-  width: min(100%, 1180px);
-  min-height: 112px;
+  width: min(100%, 1280px);
+  min-height: calc(100vh - 100px);
   margin: 0 auto;
-  padding: 24px 0;
-  color: var(--color-text);
-  font-size: 0.92rem;
-  font-weight: 700;
-  transition: color 420ms ease;
+  padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 48px);
 }
 
-.site-footer a {
-  color: var(--color-text);
-  text-decoration: none;
-  transition: color 420ms ease;
+.campaign-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 30px);
+  width: 100%;
 }
 
-.site-footer a:hover {
-  text-decoration: underline;
+.campaign-card {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.92fr) minmax(260px, 1fr);
+  gap: clamp(22px, 5vw, 64px);
+  align-items: center;
+  width: 100%;
+  min-height: clamp(430px, 58vw, 680px);
+  padding: clamp(16px, 2.4vw, 28px);
+  border: 2px solid var(--color-third);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-third);
+  box-shadow: var(--shadow-panel);
+}
+
+.campaign-media {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: clamp(390px, 54vw, 620px);
+  border-radius: 6px;
+  background: #0f1115;
+  overflow: hidden;
+}
+
+.campaign-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 11ch;
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 0.92;
+}
+
+.description {
+  max-width: 34rem;
+  margin: clamp(18px, 3vw, 30px) 0 0;
+  color: #0f1115;
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+@media (max-width: 820px) {
+  .campaign-card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .campaign-media {
+    height: clamp(360px, 110vw, 620px);
+  }
+
+  h1 {
+    max-width: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .home-view {
+    padding-inline: 12px;
+  }
+
+  .campaign-card {
+    padding: 14px;
+  }
+
+  .campaign-media {
+    height: 360px;
+  }
+
+  .description {
+    font-size: 1.05rem;
+  }
 }
 </style>
