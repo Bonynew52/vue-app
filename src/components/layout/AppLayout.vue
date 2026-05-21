@@ -74,7 +74,8 @@ function closeMenu() {
     <aside id="side-menu" class="side-menu" :class="{ open: isMenuOpen }" aria-label="Menu lateral">
       <RouterLink :to="{ name: 'home' }" @click="closeMenu">Home</RouterLink>
       <RouterLink :to="{ name: 'menu' }" @click="closeMenu">Menu</RouterLink>
-      <RouterLink :to="{ name: 'test-form' }" @click="closeMenu">Formulario de prueba</RouterLink>
+      <RouterLink :to="{ name: 'orders' }" @click="closeMenu">Ordenes</RouterLink>
+      <RouterLink :to="{ name: 'login' }" @click="closeMenu">Login</RouterLink>
       <RouterLink :to="{ name: 'home' }" @click="closeMenu">Contacto</RouterLink>
     </aside>
 
@@ -88,7 +89,8 @@ function closeMenu() {
 }
 
 .app-layout.home-layout,
-.app-layout.test-form-layout {
+.app-layout.orders-layout,
+.app-layout.login-layout {
   --color-first: #0f1115;
   --color-second: #ffffff;
   --color-third: #6f4e37;
@@ -126,7 +128,8 @@ function closeMenu() {
 }
 
 .home-layout .app-header,
-.test-form-layout .app-header {
+.orders-layout .app-header,
+.login-layout .app-header {
   background: #0f1115;
   transition: none;
 }
@@ -179,10 +182,14 @@ function closeMenu() {
 .home-layout .icon-button,
 .home-layout .menu-button,
 .home-layout .brand,
-.test-form-layout .side-menu a,
-.test-form-layout .icon-button,
-.test-form-layout .menu-button,
-.test-form-layout .brand {
+.orders-layout .side-menu a,
+.orders-layout .icon-button,
+.orders-layout .menu-button,
+.orders-layout .brand,
+.login-layout .side-menu a,
+.login-layout .icon-button,
+.login-layout .menu-button,
+.login-layout .brand {
   transition: none;
 }
 

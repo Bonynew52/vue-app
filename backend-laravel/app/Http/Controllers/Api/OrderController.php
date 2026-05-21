@@ -6,15 +6,15 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class TestFormController
+class OrderController
 {
-    private const STORAGE_PATH = 'test-form-submissions.json';
+    private const STORAGE_PATH = 'orders.json';
 
     public function index(): JsonResponse
     {
         return response()->json([
             'status' => 'ok',
-            'data' => $this->submissions(),
+            'data' => $this->orders(),
         ]);
     }
 
@@ -27,28 +27,28 @@ class TestFormController
             'message' => ['required', 'string', 'max:500'],
         ]);
 
-        $submission = [
+        $order = [
             'id' => now()->timestamp,
             'received_at' => now()->toIso8601String(),
             ...$data,
         ];
 
-        $submissions = $this->submissions();
-        array_unshift($submissions, $submission);
+        $orders = $this->orders();
+        array_unshift($orders, $order);
 
         Storage::disk('local')->put(
             self::STORAGE_PATH,
-            json_encode($submissions, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
+            json_encode($orders, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
         );
 
         return response()->json([
             'status' => 'received',
-            'message' => 'Formulario recibido por Laravel.',
-            'data' => $submission,
+            'message' => 'Orden recibida por Laravel.',
+            'data' => $order,
         ], 201);
     }
 
-    private function submissions(): array
+    private function orders(): array
     {
         if (! Storage::disk('local')->exists(self::STORAGE_PATH)) {
             return [];

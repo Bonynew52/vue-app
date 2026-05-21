@@ -20,7 +20,7 @@ async function loadSubmissions() {
   isLoadingSubmissions.value = true
 
   try {
-    const response = await fetch('/api/test-form', {
+    const response = await fetch('/api/orders', {
       headers: {
         Accept: 'application/json',
       },
@@ -41,7 +41,7 @@ async function submitForm() {
   errorMessage.value = ''
 
   try {
-    const response = await fetch('/api/test-form', {
+    const response = await fetch('/api/orders', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -72,17 +72,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="test-form-view">
+  <main class="orders-view">
     <section class="form-shell">
       <div class="form-copy">
-        <p class="eyebrow">Formulario de prueba</p>
-        <h1>Datos para mandar al backend</h1>
+          <p class="eyebrow">Ordenes</p>
+          <h1>Datos para mandar al backend</h1>
         <p>
           Esta pantalla envia un POST a Laravel con datos simples para probar la conexion.
         </p>
       </div>
 
-      <form class="test-form" @submit.prevent="submitForm">
+      <form class="orders-form" @submit.prevent="submitForm">
         <label>
           Nombre
           <input v-model="form.name" name="name" type="text" required />
@@ -104,7 +104,7 @@ onMounted(() => {
         </label>
 
         <button type="submit" :disabled="isSubmitting">
-          {{ isSubmitting ? 'Enviando...' : 'Enviar prueba' }}
+          {{ isSubmitting ? 'Enviando...' : 'Enviar orden' }}
         </button>
 
         <p v-if="responseMessage" class="status success">{{ responseMessage }}</p>
@@ -113,9 +113,9 @@ onMounted(() => {
         <pre v-if="responseData">{{ responseData }}</pre>
       </form>
 
-      <section class="received-panel" aria-label="Datos recibidos por el backend">
+      <section class="received-panel" aria-label="Ordenes recibidas por el backend">
         <div class="received-header">
-          <h2>Recibido por backend</h2>
+          <h2>Ordenes recibidas</h2>
           <button class="ghost-button" type="button" @click="loadSubmissions">
             {{ isLoadingSubmissions ? 'Cargando...' : 'Actualizar' }}
           </button>
@@ -142,7 +142,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.test-form-view {
+.orders-view {
   display: flex;
   justify-content: center;
   width: min(100%, 1180px);
@@ -220,7 +220,7 @@ p {
   line-height: 1.3;
 }
 
-.test-form {
+.orders-form {
   display: grid;
   gap: 18px;
 }

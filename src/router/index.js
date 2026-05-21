@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import LoginView from '../views/LoginView.vue'
 import MenuView from '../views/MenuView.vue'
-import TestFormView from '../views/TestFormView.vue'
+import OrdersView from '../views/OrdersView.vue'
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -17,9 +18,14 @@ export const router = createRouter({
       component: MenuView,
     },
     {
-      path: '/formulario-prueba',
-      name: 'test-form',
-      component: TestFormView,
+      path: '/ordenes',
+      name: 'orders',
+      component: OrdersView,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView,
     },
   ],
 })
