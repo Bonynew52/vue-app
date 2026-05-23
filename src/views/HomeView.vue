@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import backgroundLogo from '../assets/background/belly_monster_logo-removed.png'
 import { campaigns } from '../data/campaigns'
 
@@ -46,11 +46,15 @@ const patternSprites = patternImages.flatMap((image, imageIndex) =>
 const activeSection = ref('')
 const selectedSection = ref('')
 const sectionElements = ref([])
+const selectedCampaign = computed(() =>
+  campaigns.find((campaign) => campaign.id === selectedSection.value),
+)
+const isIntroSelected = computed(() => selectedSection.value === 'home-intro')
 
 let observer
 
 function setSectionElement(element, id) {
-  if (element) {
+  if (element && !sectionElements.value.some((section) => section.id === id)) {
     sectionElements.value.push({ element, id })
   }
 }
@@ -71,7 +75,12 @@ onMounted(() => {
         .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0]
 
       if (centeredEntry) {
-        activeSection.value = centeredEntry.target.dataset.sectionId
+        const centeredSectionId = centeredEntry.target.dataset.sectionId
+        activeSection.value = centeredSectionId
+
+        if (selectedSection.value && selectedSection.value !== centeredSectionId) {
+          selectedSection.value = ''
+        }
       }
     },
     {
@@ -102,6 +111,43 @@ onBeforeUnmount(() => {
       @click="clearSelectedSection"
     ></button>
 
+    <section
+      v-if="isIntroSelected"
+      class="focus-preview home-intro"
+      aria-label="Presentacion principal seleccionada"
+      @click.stop="clearSelectedSection"
+    >
+      <div class="intro-title">
+        <p class="eyebrow">Belly Monster Bites</p>
+        <h1>Postres con presencia</h1>
+      </div>
+
+      <div class="intro-text">
+        <p>
+          Este bloque funciona como un espacio principal para presentar la marca,
+          destacar una campana activa o dejar un mensaje temporal mientras se define
+          el contenido final. La idea es que tome bastante espacio visual en la parte
+          superior del Home y sirva como entrada antes de mostrar las campanas.
+        </p>
+      </div>
+    </section>
+
+    <article
+      v-else-if="selectedCampaign"
+      class="focus-preview campaign-card"
+      @click.stop="clearSelectedSection"
+    >
+      <div class="campaign-media">
+        <img :src="selectedCampaign.image" :alt="selectedCampaign.name" />
+      </div>
+
+      <div class="campaign-copy">
+        <p class="eyebrow">{{ selectedCampaign.eyebrow }}</p>
+        <h1>{{ selectedCampaign.name }}</h1>
+        <p class="description">{{ selectedCampaign.description }}</p>
+      </div>
+    </article>
+
     <div class="background-patterns" aria-hidden="true">
       <img
         v-for="sprite in patternSprites"
@@ -122,10 +168,9 @@ onBeforeUnmount(() => {
           class="home-intro focus-section"
           :class="{
             'in-view': activeSection === 'home-intro',
-            selected: selectedSection === 'home-intro',
           }"
           aria-label="Presentacion principal"
-          @click="selectSection('home-intro')"
+          @click.stop="selectSection('home-intro')"
         >
           <div class="intro-title">
             <p class="eyebrow">Belly Monster Bites</p>
@@ -137,7 +182,7 @@ onBeforeUnmount(() => {
               Este bloque funciona como un espacio principal para presentar la marca,
               destacar una campana activa o dejar un mensaje temporal mientras se define
               el contenido final. La idea es que tome bastante espacio visual en la parte
-              superior del Home y sirva como entrada antes de mostrar las campanas.
+              superior del Home y sirva como entrada antes de mostrar las campanas. L
             </p>
           </div>
         </section>
@@ -150,9 +195,8 @@ onBeforeUnmount(() => {
             class="campaign-card focus-section"
             :class="{
               'in-view': activeSection === campaign.id,
-              selected: selectedSection === campaign.id,
             }"
-            @click="selectSection(campaign.id)"
+            @click.stop="selectSection(campaign.id)"
           >
             <div class="campaign-media">
               <img :src="campaign.image" :alt="campaign.name" />
@@ -260,6 +304,88 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(10px);
 }
 
+.focus-preview {
+  --focus-preview-inset: clamp(22px, 4vw, 52px);
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 6;
+  width: min(calc(100vw - (var(--focus-preview-inset) * 2)), 980px);
+  max-height: calc(100vh - (var(--focus-preview-inset) * 2));
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  overflow: visible;
+  filter: saturate(1.06);
+}
+
+.focus-preview::before,
+.focus-preview::after {
+  position: absolute;
+  inset: -18px;
+  z-index: 0;
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+.focus-preview::before {
+  box-shadow:
+    -86px 0 112px rgb(143 211 255 / 58%),
+    86px 0 112px rgb(143 211 255 / 58%),
+    0 -28px 72px rgb(143 211 255 / 34%),
+    0 28px 72px rgb(143 211 255 / 34%),
+    0 0 110px rgb(143 211 255 / 38%);
+  filter: blur(18px);
+}
+
+.focus-preview::after {
+  border: 2px solid rgb(143 211 255 / 86%);
+  background:
+    radial-gradient(circle at top left, rgb(143 211 255 / 22%), transparent 18%),
+    radial-gradient(circle at top right, rgb(143 211 255 / 22%), transparent 18%),
+    radial-gradient(circle at bottom left, rgb(143 211 255 / 22%), transparent 18%),
+    radial-gradient(circle at bottom right, rgb(143 211 255 / 22%), transparent 18%);
+  box-shadow:
+    0 0 20px rgb(143 211 255 / 72%),
+    0 0 58px rgb(143 211 255 / 50%),
+    0 0 104px rgb(143 211 255 / 30%),
+    inset 0 0 22px rgb(143 211 255 / 24%);
+}
+
+.focus-preview > * {
+  position: relative;
+  z-index: 1;
+}
+
+.focus-preview.home-intro {
+  box-shadow: none;
+}
+
+.focus-preview.home-intro::after {
+  background:
+    linear-gradient(90deg, transparent, rgb(143 211 255 / 54%) 44%, rgb(143 211 255 / 54%) 56%, transparent),
+    radial-gradient(ellipse at center, rgb(143 211 255 / 42%), transparent 62%);
+  filter: blur(20px);
+}
+
+.focus-preview.home-intro .intro-title,
+.focus-preview.home-intro .intro-text {
+  box-shadow:
+    0 0 18px rgb(143 211 255 / 60%),
+    0 0 48px rgb(143 211 255 / 34%);
+}
+
+.focus-preview.campaign-card {
+  min-height: min(540px, calc(100vh - (var(--focus-preview-inset) * 2)));
+  padding: clamp(14px, 2vw, 22px);
+}
+
+.focus-preview.campaign-card .campaign-media {
+  height: min(480px, calc(100vh - (var(--focus-preview-inset) * 2) - 80px));
+  min-height: 280px;
+}
+
 @keyframes pattern-travel {
   from {
     transform:
@@ -280,7 +406,7 @@ onBeforeUnmount(() => {
   width: 100%;
   background: transparent;
   box-shadow: var(--shadow-panel);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .focus-section {
@@ -298,50 +424,41 @@ onBeforeUnmount(() => {
 .focus-section::before,
 .focus-section::after {
   position: absolute;
-  inset: -34px;
+  inset: -18px;
   z-index: 0;
   border-radius: inherit;
   opacity: 0;
   content: "";
   pointer-events: none;
-  transition: opacity 280ms ease;
+  transition: none;
 }
 
 .focus-section::before {
-  background:
-    linear-gradient(90deg, rgb(143 211 255 / 70%), transparent 28% 72%, rgb(143 211 255 / 70%)),
-    radial-gradient(ellipse at left center, rgb(143 211 255 / 55%), transparent 64%),
-    radial-gradient(ellipse at right center, rgb(143 211 255 / 55%), transparent 64%);
-  filter: blur(26px);
+  box-shadow:
+    -86px 0 112px rgb(143 211 255 / 58%),
+    86px 0 112px rgb(143 211 255 / 58%),
+    0 -28px 72px rgb(143 211 255 / 34%),
+    0 28px 72px rgb(143 211 255 / 34%),
+    0 0 110px rgb(143 211 255 / 38%);
+  filter: blur(18px);
 }
 
 .focus-section::after {
   border: 2px solid rgb(143 211 255 / 86%);
+  background:
+    radial-gradient(circle at top left, rgb(143 211 255 / 22%), transparent 18%),
+    radial-gradient(circle at top right, rgb(143 211 255 / 22%), transparent 18%),
+    radial-gradient(circle at bottom left, rgb(143 211 255 / 22%), transparent 18%),
+    radial-gradient(circle at bottom right, rgb(143 211 255 / 22%), transparent 18%);
   box-shadow:
-    0 0 20px rgb(143 211 255 / 75%),
-    0 0 58px rgb(143 211 255 / 55%),
-    0 0 110px rgb(143 211 255 / 34%),
+    0 0 20px rgb(143 211 255 / 72%),
+    0 0 58px rgb(143 211 255 / 50%),
+    0 0 104px rgb(143 211 255 / 30%),
     inset 0 0 22px rgb(143 211 255 / 24%);
 }
 
 .focus-section.in-view {
   transform: scale(1.025);
-}
-
-.focus-section.selected::before,
-.focus-section.selected::after {
-  opacity: 1;
-}
-
-.focus-section.selected {
-  z-index: 5;
-  transform: scale(1.04);
-  box-shadow:
-    var(--shadow-panel),
-    0 0 0 2px rgb(143 211 255 / 70%),
-    0 0 42px rgb(143 211 255 / 70%),
-    0 0 120px rgb(143 211 255 / 44%);
-  filter: saturate(1.06);
 }
 
 .focus-section > * {
@@ -359,30 +476,38 @@ onBeforeUnmount(() => {
   display: grid;
   gap: clamp(22px, 4vw, 38px);
   width: 100%;
-  padding: clamp(16px, 2.4vw, 28px);
+  padding: clamp(22px, 4vw, 52px);
 }
 
 .home-intro {
+  --intro-gap: clamp(20px, 4vw, 48px);
+
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) minmax(280px, 1.1fr);
-  gap: clamp(20px, 4vw, 48px);
+  gap: var(--intro-gap);
   align-items: stretch;
   width: 100%;
   min-height: clamp(360px, 45vw, 560px);
-  border: 2px solid var(--stage-blue);
-  border-radius: 8px;
-  background: var(--color-surface);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   overflow: visible;
 }
 
 .intro-title,
 .intro-text {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 100%;
+  border: 2px solid var(--stage-blue);
   border-radius: 6px;
   padding: clamp(22px, 4vw, 44px);
+  box-shadow: none;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .intro-title {
