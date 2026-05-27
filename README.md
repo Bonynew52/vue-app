@@ -17,6 +17,10 @@ src/
 
 Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 
+## Docs
+
+- [Belly Monster Bites context](docs/belly-monster-bites-context.md)
+
 ## Comandos
 
 ```sh
