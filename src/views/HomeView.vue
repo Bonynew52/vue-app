@@ -3,55 +3,92 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import backgroundLogo from '../assets/background/belly_monster_logo-removed.png'
 import { campaigns } from '../data/campaigns'
 
-const patternModules = import.meta.glob('../assets/background/background_patterns/*', {
+const patternModules = import.meta.glob('../assets/background/background_patterns_transparent/*', {
   eager: true,
   query: '?url',
   import: 'default',
 })
 
 const patternImages = Object.values(patternModules)
-const spritesPerImage = 24
+const patternSpriteCount = 30
 const rotationLimit = 60
+const patternSpeed = 42
+const introContent = {
+  eyebrow: 'Belly Monster Bites',
+  title: 'Postres con presencia',
+  body:
+    'Este bloque funciona como un espacio principal para presentar la marca, destacar una campana activa o dejar un mensaje temporal mientras se define el contenido final. La idea es que tome bastante espacio visual en la parte superior del Home y sirva como entrada antes de mostrar las campanas.',
+}
 
-const patternSprites = patternImages.flatMap((image, imageIndex) =>
-  Array.from({ length: spritesPerImage }, (_, spriteIndex) => {
-    const seed = imageIndex * spritesPerImage + spriteIndex
-    const verticalLane = 8 + ((seed * 23) % 78)
-    const drift = ((seed * 17) % 28) - 14
-    const startFromLeft = seed % 2 === 0
-    const startX = startFromLeft ? -28 - (seed % 3) * 14 : 112 + (seed % 3) * 14
-    const endX = startFromLeft ? 112 + (seed % 4) * 12 : -34 - (seed % 4) * 12
-    const rotationStart = -rotationLimit + ((seed * 37) % (rotationLimit * 2 + 1))
-    const spinAmount = (seed % 2 === 0 ? 1 : -1) * (120 + ((seed * 29) % 121))
+function randomFromSeed(seed) {
+  const value = Math.sin(seed * 999.91) * 10000
+
+  return value - Math.floor(value)
+}
+
+const activeSection = ref('')
+const selectedSection = ref('')
+const sectionElements = ref([])
+const selectedImageRatio = ref(0.8)
+const viewportSize = ref({
+  width: typeof window === 'undefined' ? 1440 : window.innerWidth,
+  height: typeof window === 'undefined' ? 900 : window.innerHeight,
+})
+const selectedCampaign = computed(() =>
+  campaigns.find((campaign) => campaign.id === selectedSection.value),
+)
+const isIntroSelected = computed(() => selectedSection.value === 'home-intro')
+const patternSprites = computed(() => {
+  if (!patternImages.length) {
+    return []
+  }
+
+  const { width, height } = viewportSize.value
+
+  return Array.from({ length: patternSpriteCount }, (_, spriteIndex) => {
+    const seed = spriteIndex + 1
+    const image = patternImages[Math.floor(randomFromSeed(seed * 3) * patternImages.length)]
+    const size = 78 + Math.round(randomFromSeed(seed * 5) * 72)
+    const verticalLane = height * (0.06 + randomFromSeed(seed * 7) * 0.84)
+    const drift = (randomFromSeed(seed * 11) * 2 - 1) * height * 0.18
+    const startFromLeft = randomFromSeed(seed * 13) > 0.5
+    const startOffset = size * (1.1 + randomFromSeed(seed * 17) * 1.2)
+    const endOffset = size * (1.1 + randomFromSeed(seed * 19) * 1.2)
+    const startX = startFromLeft ? -startOffset : width + startOffset
+    const endX = startFromLeft ? width + endOffset : -endOffset
+    const endY = verticalLane + drift
+    const distance = Math.hypot(endX - startX, endY - verticalLane)
+    const duration = distance / patternSpeed
+    const rotationStart = -rotationLimit + randomFromSeed(seed * 23) * (rotationLimit * 2)
+    const spinAmount = (randomFromSeed(seed * 29) > 0.5 ? 1 : -1) * (90 + randomFromSeed(seed * 31) * 180)
 
     return {
-      id: `${imageIndex}-${spriteIndex}`,
+      id: `${image}-${spriteIndex}`,
       image,
       style: {
-        '--pattern-start-x': `${startX}vw`,
-        '--pattern-start-y': `${verticalLane}vh`,
-        '--pattern-end-x': `${endX}vw`,
-        '--pattern-end-y': `${verticalLane + drift}vh`,
-        '--pattern-size': `${86 + ((seed * 19) % 52)}px`,
-        '--pattern-duration': `${24 + ((seed * 7) % 18)}s`,
-        '--pattern-delay': `${-(spriteIndex * 0.9 + ((seed * 11) % 7) / 10)}s`,
+        '--pattern-start-x': `${startX}px`,
+        '--pattern-start-y': `${verticalLane}px`,
+        '--pattern-end-x': `${endX}px`,
+        '--pattern-end-y': `${endY}px`,
+        '--pattern-size': `${size}px`,
+        '--pattern-duration': `${duration}s`,
+        '--pattern-delay': `${-randomFromSeed(seed * 37) * duration}s`,
         '--pattern-rotation-start': `${rotationStart}deg`,
         '--pattern-rotation-end': `${rotationStart + spinAmount}deg`,
         '--pattern-z-index': seed + 1,
       },
     }
-  }),
-)
-
-const activeSection = ref('')
-const selectedSection = ref('')
-const sectionElements = ref([])
-const selectedCampaign = computed(() =>
-  campaigns.find((campaign) => campaign.id === selectedSection.value),
-)
-const isIntroSelected = computed(() => selectedSection.value === 'home-intro')
+  })
+})
 
 let observer
+
+function updateViewportSize() {
+  viewportSize.value = {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  }
+}
 
 function setSectionElement(element, id) {
   if (element && !sectionElements.value.some((section) => section.id === id)) {
@@ -67,7 +104,18 @@ function clearSelectedSection() {
   selectedSection.value = ''
 }
 
+function updateSelectedImageRatio(event) {
+  const { naturalWidth, naturalHeight } = event.target
+
+  if (naturalWidth && naturalHeight) {
+    selectedImageRatio.value = naturalWidth / naturalHeight
+  }
+}
+
 onMounted(() => {
+  updateViewportSize()
+  window.addEventListener('resize', updateViewportSize)
+
   observer = new IntersectionObserver(
     (entries) => {
       const centeredEntry = entries
@@ -97,6 +145,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateViewportSize)
   observer?.disconnect()
 })
 </script>
@@ -118,27 +167,27 @@ onBeforeUnmount(() => {
       @click.stop="clearSelectedSection"
     >
       <div class="intro-title">
-        <p class="eyebrow">Belly Monster Bites</p>
-        <h1>Postres con presencia</h1>
+        <p class="eyebrow">{{ introContent.eyebrow }}</p>
+        <h1>{{ introContent.title }}</h1>
       </div>
 
       <div class="intro-text">
-        <p>
-          Este bloque funciona como un espacio principal para presentar la marca,
-          destacar una campana activa o dejar un mensaje temporal mientras se define
-          el contenido final. La idea es que tome bastante espacio visual en la parte
-          superior del Home y sirva como entrada antes de mostrar las campanas.
-        </p>
+        <p>{{ introContent.body }}</p>
       </div>
     </section>
 
     <article
       v-else-if="selectedCampaign"
-      class="focus-preview campaign-card"
+      class="focus-preview focus-campaign-preview"
+      :style="{ '--preview-image-ratio': selectedImageRatio }"
       @click.stop="clearSelectedSection"
     >
       <div class="campaign-media">
-        <img :src="selectedCampaign.image" :alt="selectedCampaign.name" />
+        <img
+          :src="selectedCampaign.image"
+          :alt="selectedCampaign.name"
+          @load="updateSelectedImageRatio"
+        />
       </div>
 
       <div class="campaign-copy">
@@ -173,17 +222,12 @@ onBeforeUnmount(() => {
           @click.stop="selectSection('home-intro')"
         >
           <div class="intro-title">
-            <p class="eyebrow">Belly Monster Bites</p>
-            <h1>Postres con presencia</h1>
+            <p class="eyebrow">{{ introContent.eyebrow }}</p>
+            <h1>{{ introContent.title }}</h1>
           </div>
 
           <div class="intro-text">
-            <p>
-              Este bloque funciona como un espacio principal para presentar la marca,
-              destacar una campana activa o dejar un mensaje temporal mientras se define
-              el contenido final. La idea es que tome bastante espacio visual en la parte
-              superior del Home y sirva como entrada antes de mostrar las campanas. L
-            </p>
+            <p>{{ introContent.body }}</p>
           </div>
         </section>
 
@@ -241,6 +285,7 @@ onBeforeUnmount(() => {
   min-height: calc(100vh - 100px);
   margin: 0;
   padding: clamp(28px, 5vw, 64px) 0 0;
+  overflow-x: clip;
 }
 
 .home-view::before {
@@ -294,7 +339,7 @@ onBeforeUnmount(() => {
 .section-focus-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 4;
+  z-index: 40;
   border: 0;
   background:
     radial-gradient(ellipse at left center, rgb(143 211 255 / 44%), transparent 46%),
@@ -305,15 +350,20 @@ onBeforeUnmount(() => {
 }
 
 .focus-preview {
-  --focus-preview-inset: clamp(22px, 4vw, 52px);
+  --focus-preview-inset: clamp(16px, 4vw, 56px);
+  --focus-preview-top-inset: clamp(44px, 10vw, 140px);
 
   position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 6;
-  width: min(calc(100vw - (var(--focus-preview-inset) * 2)), 980px);
-  max-height: calc(100vh - (var(--focus-preview-inset) * 2));
-  transform: translate(-50%, -50%);
+  inset:
+    var(--focus-preview-top-inset)
+    var(--focus-preview-inset)
+    var(--focus-preview-inset);
+  z-index: 41;
+  width: auto;
+  max-width: none;
+  height: auto;
+  max-height: none;
+  box-sizing: border-box;
   cursor: pointer;
   overflow: visible;
   filter: saturate(1.06);
@@ -359,6 +409,8 @@ onBeforeUnmount(() => {
 }
 
 .focus-preview.home-intro {
+  width: auto;
+  min-height: 0;
   box-shadow: none;
 }
 
@@ -376,14 +428,45 @@ onBeforeUnmount(() => {
     0 0 48px rgb(143 211 255 / 34%);
 }
 
-.focus-preview.campaign-card {
-  min-height: min(540px, calc(100vh - (var(--focus-preview-inset) * 2)));
+.focus-campaign-preview {
+  display: grid;
+  grid-template-columns:
+    minmax(
+      220px,
+      min(
+        46%,
+        calc((min(620px, calc(100vh - (var(--focus-preview-inset) * 2))) - clamp(28px, 4vw, 44px)) * var(--preview-image-ratio))
+      )
+    )
+    minmax(260px, 1fr);
+  gap: clamp(22px, 5vw, 64px);
+  align-items: stretch;
+  box-sizing: border-box;
+  height: auto;
+  min-height: 0;
   padding: clamp(14px, 2vw, 22px);
+  border: 2px solid var(--stage-blue);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-third);
+  box-shadow: var(--shadow-panel);
 }
 
-.focus-preview.campaign-card .campaign-media {
-  height: min(480px, calc(100vh - (var(--focus-preview-inset) * 2) - 80px));
-  min-height: 280px;
+.focus-campaign-preview .campaign-media {
+  align-self: stretch;
+  height: 100%;
+  min-height: 0;
+  padding: clamp(8px, 1vw, 16px);
+  background: #0f1115;
+}
+
+.focus-campaign-preview .campaign-media img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 3px;
 }
 
 @keyframes pattern-travel {
@@ -638,7 +721,46 @@ h1 {
   line-height: 1.25;
 }
 
+.focus-preview.home-intro {
+  width: auto;
+  min-height: 0;
+}
+
 @media (max-width: 820px) {
+  .focus-preview {
+    --focus-preview-inset: clamp(14px, 4vw, 28px);
+    --focus-preview-top-inset: clamp(34px, 10vw, 64px);
+
+    overflow: hidden;
+  }
+
+  .focus-campaign-preview {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 72%) minmax(0, 28%);
+    gap: clamp(12px, 3vw, 20px);
+  }
+
+  .focus-campaign-preview .campaign-media {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .focus-campaign-preview .campaign-copy {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .focus-campaign-preview h1 {
+    font-size: clamp(1.75rem, 8vw, 2.65rem);
+    line-height: 0.98;
+  }
+
+  .focus-campaign-preview .description {
+    margin-top: clamp(8px, 2vw, 12px);
+    font-size: clamp(0.82rem, 3.7vw, 1.05rem);
+    line-height: 1.12;
+  }
+
   .home-intro {
     grid-template-columns: 1fr;
     min-height: 0;
@@ -659,6 +781,17 @@ h1 {
 }
 
 @media (max-width: 520px) {
+  .focus-preview {
+    --focus-preview-inset: 14px;
+    --focus-preview-top-inset: 38px;
+  }
+
+  .focus-campaign-preview {
+    padding: 14px;
+    grid-template-rows: minmax(0, 73%) minmax(0, 27%);
+    gap: 10px;
+  }
+
   .home-stack {
     padding: 14px;
   }
