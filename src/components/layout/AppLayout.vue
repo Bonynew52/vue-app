@@ -128,6 +128,12 @@ function closeMenu() {
   background: #0f1115;
 }
 
+.app-layout.order-layout {
+  --app-header-height: 0px;
+  --app-footer-min-height: 0px;
+  background: #fffaf3;
+}
+
 .app-header {
   position: sticky;
   top: 0;
@@ -152,6 +158,11 @@ function closeMenu() {
 .order-layout .app-header {
   background: #0f1115;
   transition: none;
+}
+
+.order-layout .app-header,
+.order-layout .app-footer {
+  display: none;
 }
 
 .menu-backdrop {
