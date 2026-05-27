@@ -1,0 +1,652 @@
+{
+  "source": "https://www.rappi.com.mx/restaurantes/1930084023-belly-monster-bites",
+  "sourceName": "Rappi",
+  "extractedAt": "2026-05-27T20:15:35.996Z",
+  "restaurantName": "Belly Monster Bites",
+  "rappiTitle": "Belly Monster Bites - Madero",
+  "status": "placeholder_seed",
+  "notes": [
+    "Seed data extracted from Rappi structured data.",
+    "Use only as a placeholder for v1 menu shaping.",
+    "Verify names, categories, descriptions, prices, options, and availability with the restaurant or Parrot before customer use.",
+    "Rappi prices may differ from in-store prices.",
+    "Prices of 0 probably mean the item price depends on options/modifiers or was not represented in the structured data."
+  ],
+  "categories": [
+    {
+      "name": "Specialty Cofy (Caliente)",
+      "items": [
+        {
+          "name": "Lavanda Latte",
+          "description": "Bebida caliente de Latte con nuestro jarabe de lavanda natural",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Mocha Latte",
+          "description": "Bebida caliente de Latte con nuestro jarabe de mocha",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Caramelo Latte",
+          "description": "Latte caliente con jarabe de caramelo.",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Vainilla Latte",
+          "description": "Bebida caliente Latte con nuestro jarabe de vainilla",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Hot Chocolate",
+          "description": "Bebida caliente con chocolate mexicano.",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Chai Latte",
+          "description": "Bebida caliente de chai con leche.",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Matcha Latte",
+          "description": "Bebida caliente de matcha con leche.",
+          "price": 0,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Specialty Cofy (Helado)",
+      "items": [
+        {
+          "name": "Caramelo Latte",
+          "description": "Bebida fria Latte con nuestro jarabe de caramelo",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Chai Latte",
+          "description": "Bebida fria de Latte de chai",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Hot Chocolate",
+          "description": "Bebida fria de Chocolate mexicano",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Mocha Latte",
+          "description": "Bebida fria de Latte con nuestro jarade de mocha",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Vainilla Latte",
+          "description": "Bebida fria de Latte con nuestro jarabe de vainilla",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Lavanda Latte",
+          "description": "Bebida fria de Latte con nuestro jarabe de lavanda natural",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Matcha Latte",
+          "description": "Bebida fria de Matcha latte",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Strawberry Matcha (Julio)",
+          "description": "Bebida fria de Matcha helado con coldfoam de fresa",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Matcha Pistache",
+          "description": "Bebida de matcha con coal foam de pistache",
+          "price": 0,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Specialty Cofy (Frappe)",
+      "items": [
+        {
+          "name": "Frappe Lavanda Latte",
+          "description": "Combinacion de Latte con nuestro jarabe de lavanda natural",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Frappe Matcha Latte",
+          "description": "Combinacion de Matcha latte",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Frappe de Chai Latte",
+          "description": "Combinacion de Latte de chai",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Frappe de Hot Chocolate",
+          "description": "Combinacion de Chocolate mexicano",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Frappe de Caramelo Latte",
+          "description": "Combinacion de Latte con nuestro jarabe de caramelo",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Frappe de Vainilla Latte",
+          "description": "Combinacion de Latte con nuestro jarabe de vainilla",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Frappe Mocha Latte",
+          "description": "Combinacion de Latte con nuestro jarabe de mocha",
+          "price": 0,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Cofy (caliente)",
+      "items": [
+        {
+          "name": "Capuchino (Capuccino)",
+          "description": "Bebida caliente de Capuccino caliente",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Daily Cofy (Americano)",
+          "description": "Bebida caliente de Cafe americano de chispas",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Godlatte (Latte)",
+          "description": "Godlatte (Latte) es una bebida caliente de cafe con leche vaporizada, ideal para disfrutar en cualquier momento.",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Cortado",
+          "description": "Shot de espresso con 2 oz de leche",
+          "price": 50,
+          "currency": "MXN"
+        },
+        {
+          "name": "Espresso",
+          "description": "Shot de espresso",
+          "price": 0,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Cofy (Helado)",
+      "items": [
+        {
+          "name": "Helado Godlatte (Latte)",
+          "description": "Combinacion de Espresso con tu leche favorita",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Helado Daily Cofy (Americano)",
+          "description": "Helado de cafe americano con chispas de chocolate.",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Helado de Capuchino",
+          "description": "Helado de capuchino con espresso helado y opcion de leche a eleccion.",
+          "price": 0,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Cofy Chillers",
+      "items": [
+        {
+          "name": "Espresso Tonic",
+          "description": "Shot de espresso con agua tonica",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Sparkling Americano",
+          "description": "Shot de espresso con agua mineral y un toque de naranja",
+          "price": 0,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Cofy (frappe)",
+      "items": [
+        {
+          "name": "Frappe de Capuchino (Capuccino)",
+          "description": "Combinacion de Espresso con leche frapeado",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Frappe de Godlatte (Latte)",
+          "description": "Combinacion de Espresso con leche frapeado",
+          "price": 0,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Chillers",
+      "items": [
+        {
+          "name": "Limonada Sparkling Mojito",
+          "description": "Limonada con agua mineral y menta",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Limonada Peach Tea Lemonade",
+          "description": "Limonada con durazno y te de durazno",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Limonada Coconut Mint",
+          "description": "Limonada con agua de coco y menta",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Limonada Matcha",
+          "description": "Limonada con matcha.",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Limonada Blackberry Basil",
+          "description": "Limonada con zarzamora y albahaca",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Limonada Mango",
+          "description": "Preparacion de Limonada con mango y te de mango",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Limonada",
+          "description": "Limonada natural",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Limonada Arnie",
+          "description": "Preparacion de Limonada con te negro",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Limonada Rosa",
+          "description": "Preparacion de Limonada con fresa natural",
+          "price": 0,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Frappe Chillers",
+      "items": [
+        {
+          "name": "Frappe Tamarindo Chamoy",
+          "description": "Frappe de tamarindo con chamoy",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Frappe Fresa Miguelito",
+          "description": "Frappe de fresa con miguelito",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Frappe Mango Chamoy",
+          "description": "Frappe de mango con chamoy",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Frappe Pepino Menta",
+          "description": "Frappe de pepino menta",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Frappe Jamaiquina",
+          "description": "Frappe de jamaica con chamoy",
+          "price": 0,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Otras Bebidas...",
+      "items": [
+        {
+          "name": "Leche Milky",
+          "description": "Vaso de Leche Milky.",
+          "price": 38,
+          "currency": "MXN"
+        },
+        {
+          "name": "Agua Natural",
+          "description": "Agua embotellada ciel 500 ml",
+          "price": 25,
+          "currency": "MXN"
+        },
+        {
+          "name": "Agua Mineral",
+          "description": "Agua mineral topo chico 600 ml",
+          "price": 32,
+          "currency": "MXN"
+        },
+        {
+          "name": "Choco",
+          "description": "Bebida de Nesquik sabor chocolate preparada con leche.",
+          "price": 47,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Te Helado",
+      "items": [
+        {
+          "name": "Te Helado Earl Grey",
+          "description": "Te negro",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Te Helado Mintha",
+          "description": "Te de menta",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Te Helado Durazno",
+          "description": "Te negro con durazno",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Te Helado Sencha",
+          "description": "Te verde con toques de limon",
+          "price": 0,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Te Caliente",
+      "items": [
+        {
+          "name": "Te Caliente Earl Grey",
+          "description": "Te negro",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Te Caliente Manzanilla Lavanda",
+          "description": "Te de manzanilla lavanda",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Te Caliente Frutos Rojos",
+          "description": "Te negro con frutos rojos",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Te Caliente Durazno",
+          "description": "Te negro con durazno",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Te Caliente Mango",
+          "description": "Te roiboos con mango",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Te Caliente Sencha",
+          "description": "Te verde con toques de limon",
+          "price": 0,
+          "currency": "MXN"
+        },
+        {
+          "name": "Te Caliente Mintha",
+          "description": "Te de menta",
+          "price": 0,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Waffles Y Pan Frances",
+      "items": [
+        {
+          "name": "Wafflete (waffle)",
+          "description": "Waffle con frijoles, chorizo y queso derretido.",
+          "price": 180,
+          "currency": "MXN"
+        },
+        {
+          "name": "American Breakfast Waffle (waffle)",
+          "description": "Waffle sandwich con huevo, tocino, jamon, queso cheddar y aderezo chipotle",
+          "price": 210,
+          "currency": "MXN"
+        },
+        {
+          "name": "Spicy Chick'n'waffle (waffle)",
+          "description": "Waffle con pollo empanizado y salsa de sriracha maple syrup.",
+          "price": 215,
+          "currency": "MXN"
+        },
+        {
+          "name": "Just A Waffle (waffle)",
+          "description": "Waffle acompanado de mantequilla.",
+          "price": 135,
+          "currency": "MXN"
+        },
+        {
+          "name": "French Toast (pan Frances)",
+          "description": "Pan frances con azucar glass y opcion de elegir toppings adicionales.",
+          "price": 135,
+          "currency": "MXN"
+        },
+        {
+          "name": "S'mores French Toast (pf)",
+          "description": "Pan frances con chocoalte, bombon y graham crackers",
+          "price": 175,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Sandwiches (rappi)",
+      "items": [
+        {
+          "name": "Sandwich Buffalo Chicken",
+          "description": "Sandwich con pollo buffalo, tomate, lechuga y aderezo ranch",
+          "price": 195,
+          "currency": "MXN"
+        },
+        {
+          "name": "Sandwich Chicken Jalapeno",
+          "description": "Sandwich con pollo empanizado, lechuga, tomate y aderezo jalapeno",
+          "price": 185,
+          "currency": "MXN"
+        },
+        {
+          "name": "Grilled Cheese (sandwich)",
+          "description": "Sandwich de 3 quesos",
+          "price": 150,
+          "currency": "MXN"
+        },
+        {
+          "name": "Chicken Blt (sandwich)",
+          "description": "Sandwich de pollo a la parrilla, jamon de pavo, tocino, queso cheddar, aguacate, tomate, lechuga y aderezo chipotle",
+          "price": 210,
+          "currency": "MXN"
+        },
+        {
+          "name": "Tuna Melt (sandwich)",
+          "description": "Sandwich de atun, queso suizo, aderezo de albahaca, cebolla y apio",
+          "price": 190,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Toast (rappi)",
+      "items": [
+        {
+          "name": "Serrano Caprese (toast)",
+          "description": "Rebanada de pan rustico con jamon serrano, tomate cherry, queso mozzarella, espinacas y vinagre balsamico",
+          "price": 160,
+          "currency": "MXN"
+        },
+        {
+          "name": "Avocado Panela (toast)",
+          "description": "Rebanada de pan rustico con queso panela a la plancha, laminas de aguacate y chile quebrado",
+          "price": 140,
+          "currency": "MXN"
+        },
+        {
+          "name": "Pizza Deluxe (toast)",
+          "description": "Rebanada de pan rustico con salsa de tomate, pepperoni, queso mozzarella, cebolla, pimiento y aceitunas",
+          "price": 135,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Ensaladas (rappi)",
+      "items": [
+        {
+          "name": "Cesar Salad (ensalada)",
+          "description": "Mezcla de lechugas con pollo a la parrilla, queso parmesano, aderezo cesar de la casa y croutones",
+          "price": 160,
+          "currency": "MXN"
+        },
+        {
+          "name": "Jamon Serrano Y Parmesano (ensalada) (n)",
+          "description": "Ensalada de mezcla de lechugas, espinaca y arugula con jamon serrano, queso parmesano y aceite oliva y vinagre balsamico",
+          "price": 175,
+          "currency": "MXN"
+        },
+        {
+          "name": "Goat Cheese Mango (ensalada)",
+          "description": "Mezcla de lechugas y kale con pollo a la parrilla, queso de cabra, durazno, blueberry y aderezo spicy mango",
+          "price": 200,
+          "currency": "MXN"
+        },
+        {
+          "name": "Chicken Orange (ensalada)",
+          "description": "Mezclas de lechuga, kale y espinaca con pollo a la parrilla, tomate cherry, cacahuate y aderezo naranja",
+          "price": 190,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Sides (rappi)",
+      "items": [
+        {
+          "name": "Sweet Potato Fries (sides)",
+          "description": "Sweet Potato Fries servidos con sal y acompanados de una salsa.",
+          "price": 50,
+          "currency": "MXN"
+        },
+        {
+          "name": "French Fries (sides)",
+          "description": "Papas a la francesa",
+          "price": 50,
+          "currency": "MXN"
+        },
+        {
+          "name": "Mac'n Cheese (sides)",
+          "description": "Macarrones con queso",
+          "price": 55,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Kids Menu (rappi)",
+      "items": [
+        {
+          "name": "Chicken N Fries (kids)",
+          "description": "Pollo empanizado acompanado de papas a la francesa, ideal para ninos.",
+          "price": 135,
+          "currency": "MXN"
+        },
+        {
+          "name": "Pepperoni Toast (kids)",
+          "description": "Toast con salsa de tomate, queso mozzarella y pepperoni",
+          "price": 125,
+          "currency": "MXN"
+        },
+        {
+          "name": "Mac N Chicken (kids)",
+          "description": "Plato de pollo empanizado y mac n'cheese",
+          "price": 140,
+          "currency": "MXN"
+        }
+      ]
+    },
+    {
+      "name": "Reposteria (rappi)",
+      "items": [
+        {
+          "name": "Rol De Chocolate (rc)",
+          "description": "Rol relleno de chocolate con glaseado de vainilla y nutella",
+          "price": 85,
+          "currency": "MXN"
+        },
+        {
+          "name": "Rol De Canela (rc)",
+          "description": "Rol relleno de canela y glaseado de vainilla",
+          "price": 75,
+          "currency": "MXN"
+        }
+      ]
+    }
+  ]
+}

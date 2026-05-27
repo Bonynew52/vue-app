@@ -18,6 +18,11 @@ export const router = createRouter({
       component: MenuView,
     },
     {
+      path: '/ordenar',
+      name: 'order',
+      component: MenuView,
+    },
+    {
       path: '/ordenes',
       name: 'orders',
       component: OrdersView,
