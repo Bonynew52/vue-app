@@ -152,50 +152,54 @@ onBeforeUnmount(() => {
 
 <template>
   <main class="home-view" :style="{ '--home-background-logo': `url(${backgroundLogo})` }">
-    <button
-      v-if="selectedSection"
-      class="section-focus-backdrop"
-      type="button"
-      aria-label="Cerrar enfoque"
-      @click="clearSelectedSection"
-    ></button>
+    <Transition name="zoom-fade">
+      <button
+        v-if="selectedSection"
+        class="section-focus-backdrop"
+        type="button"
+        aria-label="Cerrar enfoque"
+        @click="clearSelectedSection"
+      ></button>
+    </Transition>
 
-    <section
-      v-if="isIntroSelected"
-      class="focus-preview home-intro"
-      aria-label="Presentacion principal seleccionada"
-      @click.stop="clearSelectedSection"
-    >
-      <div class="intro-title">
-        <p class="eyebrow">{{ introContent.eyebrow }}</p>
-        <h1>{{ introContent.title }}</h1>
-      </div>
+    <Transition name="zoom-fade">
+      <section
+        v-if="isIntroSelected"
+        class="focus-preview home-intro"
+        aria-label="Presentacion principal seleccionada"
+        @click.stop="clearSelectedSection"
+      >
+        <div class="intro-title">
+          <p class="eyebrow">{{ introContent.eyebrow }}</p>
+          <h1>{{ introContent.title }}</h1>
+        </div>
 
-      <div class="intro-text">
-        <p>{{ introContent.body }}</p>
-      </div>
-    </section>
+        <div class="intro-text">
+          <p>{{ introContent.body }}</p>
+        </div>
+      </section>
 
-    <article
-      v-else-if="selectedCampaign"
-      class="focus-preview focus-campaign-preview"
-      :style="{ '--preview-image-ratio': selectedImageRatio }"
-      @click.stop="clearSelectedSection"
-    >
-      <div class="campaign-media">
-        <img
-          :src="selectedCampaign.image"
-          :alt="selectedCampaign.name"
-          @load="updateSelectedImageRatio"
-        />
-      </div>
+      <article
+        v-else-if="selectedCampaign"
+        class="focus-preview focus-campaign-preview"
+        :style="{ '--preview-image-ratio': selectedImageRatio }"
+        @click.stop="clearSelectedSection"
+      >
+        <div class="campaign-media">
+          <img
+            :src="selectedCampaign.image"
+            :alt="selectedCampaign.name"
+            @load="updateSelectedImageRatio"
+          />
+        </div>
 
-      <div class="campaign-copy">
-        <p class="eyebrow">{{ selectedCampaign.eyebrow }}</p>
-        <h1>{{ selectedCampaign.name }}</h1>
-        <p class="description">{{ selectedCampaign.description }}</p>
-      </div>
-    </article>
+        <div class="campaign-copy">
+          <p class="eyebrow">{{ selectedCampaign.eyebrow }}</p>
+          <h1>{{ selectedCampaign.name }}</h1>
+          <p class="description">{{ selectedCampaign.description }}</p>
+        </div>
+      </article>
+    </Transition>
 
     <div class="background-patterns" aria-hidden="true">
       <img
@@ -257,15 +261,6 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="home-footer-spacer" aria-hidden="true"></div>
-
-    <footer class="footer-shell">
-      <div class="site-footer">
-        <span>&copy; 2026 Belly Monster Bites</span>
-        <a href="/">Terminos y condiciones</a>
-        <a href="/">Privacidad</a>
-        <a href="/">Contacto</a>
-      </div>
-    </footer>
   </main>
 </template>
 
@@ -282,7 +277,7 @@ onBeforeUnmount(() => {
     minmax(0, 1280px)
     minmax(clamp(16px, 4vw, 48px), 1fr);
   width: 100%;
-  min-height: calc(100vh - 100px);
+  min-height: max(0px, calc(100svh - var(--app-header-height) - var(--app-footer-min-height)));
   margin: 0;
   padding: clamp(28px, 5vw, 64px) 0 0;
   overflow-x: clip;
@@ -290,7 +285,7 @@ onBeforeUnmount(() => {
 
 .home-view::before {
   position: fixed;
-  top: calc(100px + 12vh + (var(--logo-size) * 52 / 225));
+  top: calc(var(--app-header-height) + 12svh + (var(--logo-size) * 52 / 225));
   left: calc(50% - (var(--logo-size) / 2) + (var(--logo-size) * 42 / 225));
   z-index: 0;
   width: calc(var(--logo-size) * 68 / 225);
@@ -304,7 +299,7 @@ onBeforeUnmount(() => {
 
 .home-view::after {
   position: fixed;
-  inset: 100px 0 0;
+  inset: var(--app-header-height) 0 0;
   z-index: 1;
   background-image: var(--home-background-logo);
   background-repeat: no-repeat;
@@ -316,7 +311,7 @@ onBeforeUnmount(() => {
 
 .background-patterns {
   position: fixed;
-  inset: 100px 0 0;
+  inset: var(--app-header-height) 0 0;
   z-index: 1;
   overflow: hidden;
   opacity: 0.18;
@@ -349,9 +344,28 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(10px);
 }
 
+.zoom-fade-enter-active,
+.zoom-fade-leave-active {
+  transition:
+    opacity 360ms ease,
+    filter 360ms ease;
+}
+
+.zoom-fade-enter-from,
+.zoom-fade-leave-to {
+  opacity: 0;
+  filter: blur(8px);
+}
+
+.zoom-fade-enter-to,
+.zoom-fade-leave-from {
+  opacity: 1;
+  filter: blur(0);
+}
+
 .focus-preview {
   --focus-preview-inset: clamp(16px, 4vw, 56px);
-  --focus-preview-top-inset: clamp(44px, 10vw, 140px);
+  --focus-preview-top-inset: calc(var(--app-header-height) + clamp(16px, 5vw, 64px));
 
   position: fixed;
   inset:
@@ -435,7 +449,7 @@ onBeforeUnmount(() => {
       220px,
       min(
         46%,
-        calc((min(620px, calc(100vh - (var(--focus-preview-inset) * 2))) - clamp(28px, 4vw, 44px)) * var(--preview-image-ratio))
+        calc((min(620px, calc(100svh - var(--app-header-height) - (var(--focus-preview-inset) * 2))) - clamp(28px, 4vw, 44px)) * var(--preview-image-ratio))
       )
     )
     minmax(260px, 1fr);
@@ -661,42 +675,6 @@ onBeforeUnmount(() => {
   background: transparent;
 }
 
-.footer-shell {
-  position: relative;
-  grid-column: 1 / -1;
-  z-index: 4;
-  width: 100vw;
-  min-height: clamp(360px, 42vw, 620px);
-  display: grid;
-  place-items: center;
-  padding: clamp(34px, 7vw, 72px) clamp(20px, 5vw, 56px);
-  border-top: 2px solid var(--stage-blue);
-  background: #0f1115;
-}
-
-.site-footer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px 22px;
-  align-items: center;
-  justify-content: center;
-  min-height: 220px;
-  margin: 0 auto;
-  padding: 24px 0;
-  color: #ffffff;
-  font-size: 0.92rem;
-  font-weight: 700;
-}
-
-.site-footer a {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.site-footer a:hover {
-  text-decoration: underline;
-}
-
 .eyebrow {
   margin: 0 0 12px;
   font-size: 0.9rem;
@@ -729,7 +707,7 @@ h1 {
 @media (max-width: 820px) {
   .focus-preview {
     --focus-preview-inset: clamp(14px, 4vw, 28px);
-    --focus-preview-top-inset: clamp(34px, 10vw, 64px);
+    --focus-preview-top-inset: calc(var(--app-header-height) + clamp(14px, 4vw, 28px));
 
     overflow: hidden;
   }
@@ -783,7 +761,7 @@ h1 {
 @media (max-width: 520px) {
   .focus-preview {
     --focus-preview-inset: 14px;
-    --focus-preview-top-inset: 38px;
+    --focus-preview-top-inset: calc(var(--app-header-height) + 14px);
   }
 
   .focus-campaign-preview {

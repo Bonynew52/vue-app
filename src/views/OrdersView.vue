@@ -146,7 +146,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   width: min(100%, 1180px);
-  min-height: calc(100vh - 100px);
+  min-height: max(0px, calc(100svh - var(--app-header-height) - var(--app-footer-min-height)));
   margin: 0 auto;
   padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 48px);
 }

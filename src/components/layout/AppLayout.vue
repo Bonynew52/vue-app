@@ -79,13 +79,31 @@ function closeMenu() {
       <RouterLink :to="{ name: 'home' }" @click="closeMenu">Contacto</RouterLink>
     </aside>
 
-    <slot />
+    <div class="app-content">
+      <slot />
+    </div>
+
+    <footer class="app-footer" aria-label="Soporte del sitio">
+      <div class="site-footer">
+        <span>&copy; 2026 Belly Monster Bites</span>
+        <a href="/">Terminos y condiciones</a>
+        <a href="/">Privacidad</a>
+        <a href="/">Contacto</a>
+      </div>
+    </footer>
   </div>
 </template>
 
 <style scoped>
 .app-layout {
+  --app-header-height: 100px;
+  --app-footer-min-height: clamp(220px, 35svh, 520px);
+  --stage-blue: #8fd3ff;
+
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 .app-layout.home-layout,
@@ -158,14 +176,73 @@ function closeMenu() {
   border-left: 1px solid var(--color-border);
   box-shadow: -18px 0 48px rgb(0 0 0 / 12%);
   transform: translateX(100%);
+  visibility: hidden;
   transition:
     transform 260ms ease,
+    visibility 0s linear 260ms,
     background-color 420ms ease,
     border-color 420ms ease;
 }
 
+.app-content {
+  flex: 1 0 auto;
+  min-width: 0;
+}
+
+.app-footer {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  flex: 0 0 auto;
+  min-height: var(--app-footer-min-height);
+  place-items: center;
+  padding: clamp(34px, 7vw, 72px) clamp(20px, 5vw, 56px);
+  border-top: 2px solid var(--stage-blue, var(--color-border));
+  background: #0f1115;
+}
+
+.menu-layout .app-footer {
+  background: var(--color-second);
+  transition: background-color 420ms ease;
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 1180px);
+  min-height: 112px;
+  margin: 0 auto;
+  padding: 24px 0;
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.menu-layout .site-footer {
+  color: var(--color-text);
+  transition: color 420ms ease;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
 .side-menu.open {
   transform: translateX(0);
+  visibility: visible;
+  transition:
+    transform 260ms ease,
+    visibility 0s,
+    background-color 420ms ease,
+    border-color 420ms ease;
 }
 
 .side-menu a {
@@ -292,16 +369,21 @@ function closeMenu() {
 }
 
 @media (max-width: 640px) {
+  .app-layout {
+    --app-header-height: 76px;
+    --app-footer-min-height: clamp(190px, 32svh, 360px);
+  }
+
   .app-header {
     min-height: 76px;
-    gap: 14px;
-    padding-inline: 16px;
+    gap: 10px;
+    padding-inline: 14px;
   }
 
   .brand {
-    gap: 10px;
+    gap: 8px;
     min-height: 56px;
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 
   .brand-mark {
@@ -310,26 +392,26 @@ function closeMenu() {
   }
 
   .header-actions {
-    gap: 14px;
+    gap: 8px;
   }
 
   .icon-button,
   .menu-button {
-    width: 54px;
-    height: 54px;
+    width: 40px;
+    height: 48px;
   }
 
   .menu-button {
-    width: 64px;
+    width: 46px;
   }
 
   .icon-button img {
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
   }
 
   .menu-button span {
-    width: 42px;
+    width: 32px;
     height: 4px;
   }
 
