@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import MenuView from '../views/MenuView.vue'
+import OrderView from '../views/OrderView.vue'
 import OrdersView from '../views/OrdersView.vue'
 
 export const router = createRouter({
@@ -20,7 +21,7 @@ export const router = createRouter({
     {
       path: '/ordenar',
       name: 'order',
-      component: MenuView,
+      component: OrderView,
     },
     {
       path: '/ordenes',

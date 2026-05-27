@@ -108,7 +108,8 @@ function closeMenu() {
 
 .app-layout.home-layout,
 .app-layout.orders-layout,
-.app-layout.login-layout {
+.app-layout.login-layout,
+.app-layout.order-layout {
   --color-first: #0f1115;
   --color-second: #ffffff;
   --color-third: #6f4e37;
@@ -147,7 +148,8 @@ function closeMenu() {
 
 .home-layout .app-header,
 .orders-layout .app-header,
-.login-layout .app-header {
+.login-layout .app-header,
+.order-layout .app-header {
   background: #0f1115;
   transition: none;
 }
@@ -206,6 +208,12 @@ function closeMenu() {
   transition: background-color 420ms ease;
 }
 
+.order-layout .app-footer {
+  min-height: 0;
+  padding: 22px clamp(16px, 4vw, 32px);
+  background: #0f1115;
+}
+
 .site-footer {
   display: flex;
   flex-wrap: wrap;
@@ -224,6 +232,13 @@ function closeMenu() {
 .menu-layout .site-footer {
   color: var(--color-text);
   transition: color 420ms ease;
+}
+
+.order-layout .site-footer {
+  min-height: 0;
+  padding: 0;
+  color: #ffffff;
+  font-size: 0.82rem;
 }
 
 .site-footer a {
@@ -266,7 +281,11 @@ function closeMenu() {
 .login-layout .side-menu a,
 .login-layout .icon-button,
 .login-layout .menu-button,
-.login-layout .brand {
+.login-layout .brand,
+.order-layout .side-menu a,
+.order-layout .icon-button,
+.order-layout .menu-button,
+.order-layout .brand {
   transition: none;
 }
 
