@@ -134,6 +134,13 @@ function closeMenu() {
   background: #fffaf3;
 }
 
+.app-layout.orders-layout,
+.app-layout.login-layout {
+  --app-header-height: 0px;
+  --app-footer-min-height: 0px;
+  background: #fff8ef;
+}
+
 .app-header {
   position: sticky;
   top: 0;
@@ -161,7 +168,11 @@ function closeMenu() {
 }
 
 .order-layout .app-header,
-.order-layout .app-footer {
+.order-layout .app-footer,
+.orders-layout .app-header,
+.orders-layout .app-footer,
+.login-layout .app-header,
+.login-layout .app-footer {
   display: none;
 }
 

@@ -5,10 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:full": "vercel dev",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "staff:create": "node scripts/create-staff-user.mjs"
   },
   "dependencies": {
+    "better-auth": "^1.6.11",
+    "pg": "^8.21.0",
     "vue": "^3.5.34",
     "vue-router": "^5.0.7"
   },

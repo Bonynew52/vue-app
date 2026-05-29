@@ -1,235 +1,165 @@
 <script setup>
 import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { authClient } from '../lib/auth-client'
 
-const loginForm = reactive({
-  email: 'cliente@example.com',
-  password: 'secret123',
+const router = useRouter()
+
+const form = reactive({
+  email: 'staff@bellymonsterbites.com',
+  password: '',
 })
 
-const registerForm = reactive({
-  name: 'Cliente de prueba',
-  email: 'cliente@example.com',
-  password: 'secret123',
-})
-
-const user = ref(null)
-const message = ref('')
+const isSubmitting = ref(false)
 const error = ref('')
-const isLoading = ref(false)
 
-async function sendAuthRequest(path, data) {
-  isLoading.value = true
-  message.value = ''
+async function signIn() {
+  isSubmitting.value = true
   error.value = ''
 
   try {
-    const response = await fetch(path, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+    const result = await authClient.signIn.email({
+      email: form.email.trim(),
+      password: form.password,
+      rememberMe: true,
     })
 
-    const payload = await response.json()
-
-    if (!response.ok) {
-      throw new Error(payload.message || 'No se pudo completar la solicitud.')
+    if (result?.error) {
+      throw new Error(result.error.message || 'No se pudo iniciar sesion.')
     }
 
-    user.value = payload.user
-    message.value = payload.message
+    await router.replace({ name: 'orders' })
   } catch (authError) {
     error.value = authError.message
   } finally {
-    isLoading.value = false
+    isSubmitting.value = false
   }
 }
 </script>
 
 <template>
-  <main class="login-view">
-    <section class="login-shell">
-      <div class="login-copy">
-        <p class="eyebrow">Cuentas</p>
-        <h1>Login conectado a MySQL</h1>
-        <p>Estas pruebas crean y validan usuarios desde la base de datos del backend.</p>
-      </div>
+  <main class="staff-login">
+    <section class="login-card">
+      <p class="eyebrow">Belly Monster Bites</p>
+      <h1>Panel del personal</h1>
+      <p class="copy">Entra para ver pedidos de mesa y pasarlos a Parrot.</p>
 
-      <div class="auth-panels">
-        <form class="auth-card" @submit.prevent="sendAuthRequest('/api/auth/register', registerForm)">
-          <h2>Crear cuenta</h2>
+      <form class="login-form" @submit.prevent="signIn">
+        <label>
+          Correo
+          <input
+            v-model="form.email"
+            type="email"
+            autocomplete="username"
+            inputmode="email"
+            required
+          />
+        </label>
 
-          <label>
-            Nombre
-            <input v-model="registerForm.name" type="text" required />
-          </label>
+        <label>
+          Contraseña
+          <input
+            v-model="form.password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+        </label>
 
-          <label>
-            Email
-            <input v-model="registerForm.email" type="email" required />
-          </label>
+        <button type="submit" :disabled="isSubmitting">
+          {{ isSubmitting ? 'Entrando...' : 'Entrar' }}
+        </button>
 
-          <label>
-            Password
-            <input v-model="registerForm.password" type="password" required />
-          </label>
-
-          <button type="submit" :disabled="isLoading">
-            {{ isLoading ? 'Procesando...' : 'Registrar' }}
-          </button>
-        </form>
-
-        <form class="auth-card" @submit.prevent="sendAuthRequest('/api/auth/login', loginForm)">
-          <h2>Iniciar sesion</h2>
-
-          <label>
-            Email
-            <input v-model="loginForm.email" type="email" required />
-          </label>
-
-          <label>
-            Password
-            <input v-model="loginForm.password" type="password" required />
-          </label>
-
-          <button type="submit" :disabled="isLoading">
-            {{ isLoading ? 'Procesando...' : 'Entrar' }}
-          </button>
-        </form>
-      </div>
-
-      <section class="auth-result" aria-label="Resultado de autenticacion">
-        <p v-if="message" class="success">{{ message }}</p>
         <p v-if="error" class="error">{{ error }}</p>
-        <pre v-if="user">{{ user }}</pre>
-      </section>
+      </form>
     </section>
   </main>
 </template>
 
 <style scoped>
-.login-view {
-  display: flex;
-  justify-content: center;
-  width: min(100%, 1180px);
-  min-height: max(0px, calc(100svh - var(--app-header-height) - var(--app-footer-min-height)));
-  margin: 0 auto;
-  padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 48px);
-}
-
-.login-shell {
+.staff-login {
+  min-height: 100svh;
   display: grid;
-  grid-template-columns: minmax(240px, 0.75fr) minmax(320px, 1.15fr);
-  gap: clamp(24px, 5vw, 64px);
-  width: 100%;
-  padding: clamp(18px, 3vw, 32px);
-  border: 2px solid var(--color-third);
-  border-radius: 8px;
-  background: var(--color-surface);
-  color: var(--color-third);
-  box-shadow: var(--shadow-panel);
+  place-items: center;
+  padding: max(24px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
+  background: #fff8ef;
+  color: #2a1c14;
 }
 
-.login-copy {
-  max-width: 360px;
+.login-card {
+  width: min(100%, 390px);
+  padding: 24px;
+  border: 1px solid #eadfce;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 18px 50px rgb(42 28 20 / 12%);
 }
 
 .eyebrow {
-  margin: 0 0 12px;
-  color: var(--color-third);
-  font-size: 0.9rem;
+  margin: 0 0 8px;
+  color: #8b7a6d;
+  font-size: 0.78rem;
   font-weight: 900;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
 h1 {
   margin: 0;
-  color: var(--color-third);
-  font-size: clamp(2.4rem, 5vw, 4.8rem);
-  line-height: 0.92;
+  font-size: 2rem;
+  line-height: 1;
 }
 
-.login-copy p {
-  margin: 22px 0 0;
-  color: #0f1115;
-  font-size: clamp(1rem, 1.7vw, 1.3rem);
-  font-weight: 800;
-  line-height: 1.3;
+.copy {
+  margin: 12px 0 22px;
+  color: #6f4e37;
+  line-height: 1.45;
 }
 
-.auth-panels {
+.login-form {
   display: grid;
-  gap: 18px;
-}
-
-.auth-card {
-  display: grid;
-  gap: 14px;
-  border: 2px solid color-mix(in srgb, var(--color-third) 35%, white);
-  border-radius: 6px;
-  padding: 18px;
-  background: #f6f2ee;
-}
-
-h2 {
-  margin: 0;
-  color: var(--color-third);
+  gap: 16px;
 }
 
 label {
   display: grid;
-  gap: 8px;
-  color: #0f1115;
-  font-weight: 900;
+  gap: 7px;
+  color: #2a1c14;
+  font-weight: 800;
 }
 
 input {
   width: 100%;
-  border: 2px solid color-mix(in srgb, var(--color-third) 48%, white);
-  border-radius: 6px;
-  padding: 14px 16px;
-  background: #ffffff;
-  color: #0f1115;
-  font-weight: 700;
+  min-height: 46px;
+  border: 1px solid #ded0bf;
+  border-radius: 8px;
+  padding: 0 13px;
+  background: #fffaf4;
+  color: #2a1c14;
+}
+
+input:focus {
+  outline: 3px solid rgb(31 157 87 / 18%);
+  border-color: #1f9d57;
 }
 
 button {
-  width: fit-content;
+  min-height: 50px;
   border: 0;
-  border-radius: 6px;
-  padding: 14px 22px;
-  background: var(--color-third);
-  color: #ffffff;
+  border-radius: 8px;
+  background: #1f9d57;
+  color: #fff;
   font-weight: 900;
 }
 
-.auth-result {
-  grid-column: 1 / -1;
-}
-
-.success {
-  color: #1d6b3a;
-  font-weight: 900;
+button:disabled {
+  cursor: progress;
+  opacity: 0.68;
 }
 
 .error {
-  color: #9f1d1d;
-  font-weight: 900;
-}
-
-pre {
-  overflow: auto;
-  border-radius: 6px;
-  padding: 14px;
-  background: #0f1115;
-  color: #ffffff;
-}
-
-@media (max-width: 820px) {
-  .login-shell {
-    grid-template-columns: 1fr;
-  }
+  margin: 0;
+  color: #b42a2a;
+  font-weight: 800;
 }
 </style>

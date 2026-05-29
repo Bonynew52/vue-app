@@ -1,337 +1,676 @@
 <script setup>
-import { onMounted } from 'vue'
-import { reactive, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { authClient } from '../lib/auth-client'
+import { formatMXN } from '../utils/formatPrice'
 
-const form = reactive({
-  name: 'Cristian',
-  email: 'test@example.com',
-  favorite: 'Cinnamon Roll Tres Leches',
-  message: 'Este es un envio de prueba desde Vue hacia Laravel.',
-})
+const router = useRouter()
 
-const isSubmitting = ref(false)
-const responseMessage = ref('')
-const responseData = ref(null)
-const errorMessage = ref('')
-const submissions = ref([])
-const isLoadingSubmissions = ref(false)
+const statusLabels = {
+  new: 'Nuevo',
+  capturing: 'En Parrot',
+  preparing: 'Preparando',
+  ready: 'Listo',
+  served: 'Servido',
+  cancelled: 'Cancelado',
+}
 
-async function loadSubmissions() {
-  isLoadingSubmissions.value = true
+const statusActions = [
+  { value: 'capturing', label: 'Capturar' },
+  { value: 'preparing', label: 'Preparar' },
+  { value: 'ready', label: 'Listo' },
+  { value: 'served', label: 'Servido' },
+]
 
-  try {
-    const response = await fetch('/api/orders', {
-      headers: {
-        Accept: 'application/json',
-      },
-    })
-    const payload = await response.json()
-    submissions.value = payload.data || []
-  } catch {
-    submissions.value = []
-  } finally {
-    isLoadingSubmissions.value = false
+const session = ref(null)
+const orders = ref([])
+const filter = ref('active')
+const isBooting = ref(true)
+const isLoading = ref(false)
+const error = ref('')
+const lastUpdated = ref('')
+const now = ref(Date.now())
+let pollTimer = null
+let clockTimer = null
+
+const activeOrders = computed(() => orders.value.filter((order) => order.status !== 'served' && order.status !== 'cancelled'))
+const newCount = computed(() => orders.value.filter((order) => order.status === 'new').length)
+const readyCount = computed(() => orders.value.filter((order) => order.status === 'ready').length)
+
+function money(cents, hasUnpriced = false) {
+  return `${formatMXN((Number(cents) || 0) / 100)}${hasUnpriced ? '+' : ''}`
+}
+
+function timeLabel(value) {
+  return new Intl.DateTimeFormat('es-MX', {
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date(value))
+}
+
+function minutesSince(value) {
+  return Math.max(0, Math.floor((now.value - new Date(value).getTime()) / 60000))
+}
+
+function elapsedLabel(value) {
+  const mins = minutesSince(value)
+  if (mins < 1) {
+    return 'recién'
+  }
+  if (mins < 60) {
+    return `${mins} min`
+  }
+  const hours = Math.floor(mins / 60)
+  return `${hours} h ${mins % 60} min`
+}
+
+/* Aging tiers drive the urgency accent on open tickets. */
+function ageTier(order) {
+  if (order.status === 'served' || order.status === 'cancelled') {
+    return 'done'
+  }
+  const mins = minutesSince(order.createdAt)
+  if (mins >= 15) {
+    return 'late'
+  }
+  if (mins >= 8) {
+    return 'warn'
+  }
+  return 'fresh'
+}
+
+async function loadSession() {
+  const result = await authClient.getSession()
+  session.value = result?.data || null
+
+  if (!session.value) {
+    await router.replace({ name: 'login' })
   }
 }
 
-async function submitForm() {
-  isSubmitting.value = true
-  responseMessage.value = ''
-  responseData.value = null
-  errorMessage.value = ''
+async function loadOrders({ quiet = false } = {}) {
+  if (!quiet) {
+    isLoading.value = true
+  }
+  error.value = ''
 
   try {
-    const response = await fetch('/api/orders', {
-      method: 'POST',
+    const response = await fetch(`/api/orders?status=${filter.value}`, {
+      headers: { Accept: 'application/json' },
+    })
+    const payload = await response.json()
+
+    if (response.status === 401) {
+      await router.replace({ name: 'login' })
+      return
+    }
+
+    if (!response.ok) {
+      throw new Error(payload.message || 'No se pudieron cargar los pedidos.')
+    }
+
+    orders.value = payload.data || []
+    lastUpdated.value = new Intl.DateTimeFormat('es-MX', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    }).format(new Date())
+  } catch (loadError) {
+    error.value = loadError.message
+  } finally {
+    isLoading.value = false
+  }
+}
+
+async function setFilter(nextFilter) {
+  filter.value = nextFilter
+  await loadOrders()
+}
+
+async function updateStatus(order, status) {
+  error.value = ''
+
+  try {
+    const response = await fetch(`/api/orders/${order.id}`, {
+      method: 'PATCH',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ status }),
     })
-
     const payload = await response.json()
 
     if (!response.ok) {
-      throw new Error(payload.message || 'No se pudo enviar el formulario.')
+      throw new Error(payload.message || 'No se pudo actualizar el pedido.')
     }
 
-    responseMessage.value = payload.message
-    responseData.value = payload.data
-    await loadSubmissions()
-  } catch (error) {
-    errorMessage.value = error.message
-  } finally {
-    isSubmitting.value = false
+    const updated = payload.data
+    orders.value = orders.value
+      .map((entry) => (entry.id === updated.id ? updated : entry))
+      .filter((entry) => filter.value === 'all' || !['served', 'cancelled'].includes(entry.status))
+  } catch (statusError) {
+    error.value = statusError.message
   }
 }
 
-onMounted(() => {
-  loadSubmissions()
+async function signOut() {
+  await authClient.signOut()
+  await router.replace({ name: 'login' })
+}
+
+onMounted(async () => {
+  await loadSession()
+  if (session.value) {
+    await loadOrders()
+    pollTimer = window.setInterval(() => loadOrders({ quiet: true }), 8000)
+    clockTimer = window.setInterval(() => {
+      now.value = Date.now()
+    }, 15000)
+  }
+  isBooting.value = false
+})
+
+onBeforeUnmount(() => {
+  if (pollTimer) {
+    window.clearInterval(pollTimer)
+  }
+  if (clockTimer) {
+    window.clearInterval(clockTimer)
+  }
 })
 </script>
 
 <template>
-  <main class="orders-view">
-    <section class="form-shell">
-      <div class="form-copy">
-          <p class="eyebrow">Ordenes</p>
-          <h1>Datos para mandar al backend</h1>
-        <p>
-          Esta pantalla envia un POST a Laravel con datos simples para probar la conexion.
-        </p>
+  <main class="board">
+    <header class="toolbar">
+      <div class="toolbar__title">
+        <h1>Pedidos de mesa</h1>
+        <span v-if="lastUpdated" class="toolbar__sync" :class="{ 'is-busy': isLoading }">
+          Actualizado {{ lastUpdated }}
+        </span>
       </div>
 
-      <form class="orders-form" @submit.prevent="submitForm">
-        <label>
-          Nombre
-          <input v-model="form.name" name="name" type="text" required />
-        </label>
+      <div class="counts" aria-label="Resumen de pedidos">
+        <span class="count count--new"><b>{{ newCount }}</b>Nuevos</span>
+        <span class="count count--active"><b>{{ activeOrders.length }}</b>Activos</span>
+        <span class="count count--ready"><b>{{ readyCount }}</b>Listos</span>
+      </div>
 
-        <label>
-          Email
-          <input v-model="form.email" name="email" type="email" required />
-        </label>
-
-        <label>
-          Producto favorito
-          <input v-model="form.favorite" name="favorite" type="text" required />
-        </label>
-
-        <label>
-          Mensaje
-          <textarea v-model="form.message" name="message" rows="5" required></textarea>
-        </label>
-
-        <button type="submit" :disabled="isSubmitting">
-          {{ isSubmitting ? 'Enviando...' : 'Enviar orden' }}
-        </button>
-
-        <p v-if="responseMessage" class="status success">{{ responseMessage }}</p>
-        <p v-if="errorMessage" class="status error">{{ errorMessage }}</p>
-
-        <pre v-if="responseData">{{ responseData }}</pre>
-      </form>
-
-      <section class="received-panel" aria-label="Ordenes recibidas por el backend">
-        <div class="received-header">
-          <h2>Ordenes recibidas</h2>
-          <button class="ghost-button" type="button" @click="loadSubmissions">
-            {{ isLoadingSubmissions ? 'Cargando...' : 'Actualizar' }}
+      <div class="toolbar__controls">
+        <div class="segmented" role="group" aria-label="Filtro de pedidos">
+          <button :class="{ active: filter === 'active' }" type="button" @click="setFilter('active')">
+            Activos
+          </button>
+          <button :class="{ active: filter === 'all' }" type="button" @click="setFilter('all')">
+            Todos
           </button>
         </div>
+        <button class="ghost-btn" type="button" @click="loadOrders()">
+          {{ isLoading ? 'Actualizando…' : 'Actualizar' }}
+        </button>
+        <button class="ghost-btn" type="button" aria-label="Cerrar sesión" @click="signOut">
+          Salir
+        </button>
+      </div>
+    </header>
 
-        <p v-if="!submissions.length" class="empty-state">
-          Todavia no hay envios guardados.
-        </p>
+    <p v-if="error" class="error" role="alert">{{ error }}</p>
 
-        <article
-          v-for="submission in submissions"
-          :key="submission.id"
-          class="submission-card"
-        >
-          <strong>{{ submission.name }}</strong>
-          <span>{{ submission.email }}</span>
-          <span>{{ submission.favorite }}</span>
-          <p>{{ submission.message }}</p>
-          <small>{{ submission.received_at }}</small>
-        </article>
-      </section>
+    <section v-if="isBooting" class="empty-state">Cargando panel…</section>
+
+    <section v-else-if="orders.length === 0" class="empty-state">
+      No hay pedidos en este momento.
+    </section>
+
+    <section v-else class="board__grid" aria-label="Pedidos recibidos">
+      <article
+        v-for="order in orders"
+        :key="order.id"
+        class="ticket"
+        :class="[`is-${order.status}`, `age-${ageTier(order)}`]"
+      >
+        <header class="ticket__head">
+          <div class="ticket__table">
+            <span class="ticket__mesa">Mesa {{ order.tableId }}</span>
+            <span class="ticket__code">#{{ order.shortCode }}</span>
+          </div>
+          <span class="ticket__status">{{ statusLabels[order.status] || order.status }}</span>
+        </header>
+
+        <div class="ticket__meta">
+          <span>{{ timeLabel(order.createdAt) }}</span>
+          <span class="ticket__age">{{ elapsedLabel(order.createdAt) }}</span>
+        </div>
+
+        <ul class="ticket__items">
+          <li v-for="item in order.items" :key="item.id">
+            <span class="qty">{{ item.quantity }}</span>
+            <div class="ticket__item-body">
+              <strong>{{ item.name }}</strong>
+              <small v-if="item.note">{{ item.note }}</small>
+            </div>
+            <span class="ticket__line">{{ item.lineTotalCents == null ? 'Tienda' : money(item.lineTotalCents) }}</span>
+          </li>
+        </ul>
+
+        <footer class="ticket__foot">
+          <span>{{ order.itemCount }} artículo{{ order.itemCount === 1 ? '' : 's' }}</span>
+          <strong>{{ money(order.subtotalCents, order.hasUnpriced) }}</strong>
+        </footer>
+
+        <div class="ticket__actions">
+          <button
+            v-for="action in statusActions"
+            :key="action.value"
+            type="button"
+            :class="{ active: order.status === action.value }"
+            @click="updateStatus(order, action.value)"
+          >
+            {{ action.label }}
+          </button>
+          <button class="danger" type="button" @click="updateStatus(order, 'cancelled')">
+            Cancelar
+          </button>
+        </div>
+      </article>
     </section>
   </main>
 </template>
 
 <style scoped>
-.orders-view {
+.board {
+  --ink: #2a1c14;
+  --muted: #8b7a6d;
+  --line: #eadfce;
+  --accent: #1f9d57;
+  --accent-press: #18854a;
+
+  min-height: 100svh;
+  padding: 0 max(14px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  background: #fff8ef;
+  color: var(--ink);
+}
+
+/* ---- Sticky toolbar ---- */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
   display: flex;
-  justify-content: center;
-  width: min(100%, 1180px);
-  min-height: max(0px, calc(100svh - var(--app-header-height) - var(--app-footer-min-height)));
-  margin: 0 auto;
-  padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 48px);
-}
-
-.form-shell {
-  display: grid;
-  grid-template-columns: minmax(240px, 0.8fr) minmax(280px, 1fr);
-  gap: clamp(24px, 5vw, 64px);
-  align-items: start;
-  width: 100%;
-  padding: clamp(18px, 3vw, 32px);
-  border: 2px solid var(--color-third);
-  border-radius: 8px;
-  background: var(--color-surface);
-  color: var(--color-third);
-  box-shadow: var(--shadow-panel);
-}
-
-.received-panel {
-  grid-column: 1 / -1;
-  display: grid;
-  gap: 14px;
-  border-top: 2px solid color-mix(in srgb, var(--color-third) 32%, white);
-  padding-top: clamp(18px, 3vw, 28px);
-}
-
-.received-header {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
   align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  padding: max(12px, env(safe-area-inset-top)) 4px 12px;
+  background: #fff8ef;
+  border-bottom: 1px solid var(--line);
 }
 
-h2 {
+.toolbar__title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-right: auto;
+}
+
+.toolbar__title h1 {
   margin: 0;
-  color: var(--color-third);
-  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-size: 1.45rem;
+  font-weight: 950;
+  letter-spacing: 0;
   line-height: 1;
 }
 
-.form-copy {
-  max-width: 360px;
-  align-self: start;
-  overflow-wrap: anywhere;
-}
-
-.eyebrow {
-  margin: 0 0 12px;
-  color: var(--color-third);
-  font-size: 0.9rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-h1 {
-  max-width: 9ch;
-  margin: 0;
-  color: var(--color-third);
-  font-size: clamp(2.4rem, 5vw, 4.8rem);
-  line-height: 0.92;
-}
-
-p {
-  max-width: 32rem;
-  margin: 22px 0 0;
-  color: #0f1115;
-  font-size: clamp(1rem, 1.7vw, 1.3rem);
+.toolbar__sync {
+  color: var(--muted);
+  font-size: 0.78rem;
   font-weight: 800;
-  line-height: 1.3;
 }
 
-.orders-form {
-  display: grid;
-  gap: 18px;
+.toolbar__sync.is-busy {
+  color: var(--accent);
 }
 
-label {
-  display: grid;
+/* ---- Count pills ---- */
+.counts {
+  display: flex;
   gap: 8px;
-  color: #0f1115;
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 0.8rem;
   font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
 }
 
-input,
-textarea {
-  width: 100%;
-  border: 2px solid color-mix(in srgb, var(--color-third) 48%, white);
-  border-radius: 6px;
-  padding: 14px 16px;
-  background: #ffffff;
-  color: #0f1115;
-  font-weight: 700;
+.count b {
+  display: grid;
+  place-items: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: #f1e7d8;
+  color: var(--ink);
+  font-size: 1.1rem;
+  font-weight: 950;
 }
 
-input:focus,
-textarea:focus {
-  outline: 3px solid color-mix(in srgb, var(--color-third) 28%, transparent);
-  border-color: var(--color-third);
+.count--new b {
+  background: #fde3df;
+  color: #c12e23;
 }
 
-button {
-  width: fit-content;
+.count--ready b {
+  background: #def0e4;
+  color: var(--accent-press);
+}
+
+/* ---- Controls ---- */
+.toolbar__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.segmented {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.segmented button {
+  min-height: 38px;
+  padding: 0 16px;
   border: 0;
-  border-radius: 6px;
-  padding: 14px 22px;
-  background: var(--color-third);
-  color: #ffffff;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
   font-weight: 900;
 }
 
-.ghost-button {
-  border: 2px solid var(--color-third);
-  background: transparent;
-  color: var(--color-third);
+.segmented button.active {
+  background: var(--ink);
+  color: #fff;
 }
 
-button:disabled {
-  opacity: 0.65;
+.ghost-btn {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 900;
 }
 
-.status {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.success {
-  color: #1d6b3a;
+.ghost-btn:active {
+  background: #f6efe3;
 }
 
 .error {
-  color: #9f1d1d;
+  margin: 12px 4px 0;
+  color: #b42a2a;
+  font-weight: 900;
 }
 
 .empty-state {
-  margin: 0;
+  margin: 32px auto 0;
+  max-width: 460px;
+  padding: 28px;
+  border: 1px dashed #d8c7b3;
+  border-radius: 12px;
+  background: #fff;
+  color: #6f4e37;
+  font-weight: 900;
+  text-align: center;
 }
 
-.submission-card {
+/* ---- Order board grid ---- */
+.board__grid {
   display: grid;
-  gap: 4px;
-  border: 2px solid color-mix(in srgb, var(--color-third) 35%, white);
-  border-radius: 6px;
-  padding: 14px;
-  background: #f6f2ee;
-  color: #0f1115;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 12px;
+  padding: 14px 4px 0;
+  align-items: start;
 }
 
-.submission-card strong {
-  color: var(--color-third);
-  font-size: 1.1rem;
+.ticket {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-top: 5px solid #b9a48d;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgb(42 28 20 / 6%);
 }
 
-.submission-card span,
-.submission-card small {
+.ticket.is-new {
+  border-top-color: #d93b30;
+}
+
+.ticket.is-ready {
+  border-top-color: var(--accent);
+}
+
+/* Aging accent: open tickets warm up the longer they wait. */
+.ticket.age-warn {
+  border-top-color: #e08a16;
+}
+
+.ticket.age-late {
+  border-top-color: #d93b30;
+  box-shadow: 0 0 0 2px rgb(217 59 48 / 28%), 0 4px 14px rgb(42 28 20 / 6%);
+}
+
+.ticket__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px 8px;
+}
+
+.ticket__table {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ticket__mesa {
+  font-size: 1.3rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.ticket__code {
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 900;
+}
+
+.ticket__status {
+  flex: 0 0 auto;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #f1e7d8;
+  color: #6f4e37;
+  font-size: 0.74rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.is-new .ticket__status {
+  background: #fde3df;
+  color: #c12e23;
+}
+
+.is-ready .ticket__status {
+  background: #def0e4;
+  color: var(--accent-press);
+}
+
+.ticket__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 14px 8px;
+  color: var(--muted);
+  font-size: 0.8rem;
   font-weight: 800;
 }
 
-.submission-card p {
-  margin: 8px 0;
-  font-size: 1rem;
+.ticket__age {
+  font-variant-numeric: tabular-nums;
 }
 
-pre {
+.age-warn .ticket__age {
+  color: #b86c0a;
+}
+
+.age-late .ticket__age {
+  color: #c12e23;
+}
+
+.ticket__items {
+  flex: 1 1 auto;
   margin: 0;
-  overflow: auto;
-  border-radius: 6px;
-  padding: 14px;
-  background: #0f1115;
-  color: #ffffff;
-  font-size: 0.9rem;
+  padding: 4px 14px;
+  list-style: none;
+  border-top: 1px solid #f4ecdf;
 }
 
-@media (max-width: 820px) {
-  .form-shell {
-    grid-template-columns: 1fr;
+.ticket__items li {
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  gap: 10px;
+  align-items: start;
+  padding: 8px 0;
+  border-bottom: 1px solid #f4ecdf;
+}
+
+.ticket__items li:last-child {
+  border-bottom: 0;
+}
+
+.qty {
+  display: grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 5px;
+  border-radius: 8px;
+  background: #fff1df;
+  color: #6f4e37;
+  font-weight: 950;
+  font-variant-numeric: tabular-nums;
+}
+
+.ticket__item-body strong {
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.ticket__item-body small {
+  display: block;
+  margin-top: 2px;
+  color: #b4541f;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.ticket__line {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.ticket__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-top: 1px solid #f0e7da;
+  font-weight: 900;
+}
+
+.ticket__foot strong {
+  font-size: 1.05rem;
+}
+
+.ticket__actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 0 12px 12px;
+}
+
+.ticket__actions button {
+  min-height: 44px;
+  padding: 0 4px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.ticket__actions button:active {
+  background: #f6efe3;
+}
+
+.ticket__actions button.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.ticket__actions .danger {
+  grid-column: 1 / -1;
+  color: #b42a2a;
+}
+
+@media (max-width: 540px) {
+  .toolbar__title {
+    width: 100%;
   }
 
-  .form-copy {
-    position: static;
+  .counts {
+    flex: 1 1 auto;
   }
 
-  h1 {
-    max-width: 11ch;
+  .count {
+    flex: 1 1 0;
+    justify-content: center;
+  }
+
+  .toolbar__controls {
+    width: 100%;
+  }
+
+  .segmented {
+    flex: 1 1 auto;
+  }
+
+  .segmented button {
+    flex: 1 1 0;
   }
 }
 </style>

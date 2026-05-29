@@ -1,0 +1,18 @@
+{
+  "name": "Belly Monster Bites",
+  "short_name": "Belly",
+  "description": "Pedidos QR y panel del personal para Belly Monster Bites.",
+  "start_url": "/ordenes",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fff8ef",
+  "theme_color": "#fff8ef",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

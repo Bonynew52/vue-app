@@ -8,9 +8,7 @@ function canUseStorage() {
   return typeof window !== 'undefined' && window.sessionStorage
 }
 
-// Cart is local-only (sessionStorage). There is no backend in v1, so this never
-// leaves the device — it just powers the on-screen review and the comanda the
-// diner shows to the waiter.
+// Cart state stays local until the diner submits the order to the staff board.
 export function useCart(tableId) {
   const items = ref({})
   const key = storageKey(tableId)
@@ -38,7 +36,7 @@ export function useCart(tableId) {
   )
 
   const entries = computed(() =>
-    // Stable, menu-like order so the review and comanda read predictably.
+    // Stable, menu-like order so customer review and staff tickets read predictably.
     Object.values(items.value).sort((a, b) => (a.addedAt || 0) - (b.addedAt || 0)),
   )
   const count = computed(() =>

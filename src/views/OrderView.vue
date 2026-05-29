@@ -1,5 +1,5 @@
 <script setup>
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useCart } from '../composables/useCart'
 import { coverImage, featuredItems, menuCategories } from '../data/menu'
@@ -88,10 +88,10 @@ const activeItem = ref(null)
 const sheetQty = ref(1)
 const sheetNote = ref('')
 const showCart = ref(false)
-const showComanda = ref(false)
+const showConfirmation = ref(false)
 
 const anySheetOpen = computed(
-  () => Boolean(activeItem.value) || showCart.value || showComanda.value,
+  () => Boolean(activeItem.value) || showCart.value || showConfirmation.value,
 )
 watch(anySheetOpen, (open) => {
   if (typeof document !== 'undefined') {
@@ -143,63 +143,61 @@ function quickAdd(item) {
   cart.add(item, { quantity: 1 })
 }
 
-/* ---- Comanda ---- */
-const comandaStamp = ref('')
-const copied = ref(false)
+/* ---- Order submit ---- */
+const isSubmitting = ref(false)
+const submitError = ref('')
+const submittedOrder = ref(null)
 
-function openComanda() {
-  const now = new Date()
-  comandaStamp.value = new Intl.DateTimeFormat('es-MX', {
-    day: '2-digit',
-    month: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(now)
-  copied.value = false
-  showCart.value = false
-  showComanda.value = true
-}
-
-const comandaText = computed(() => {
-  const lines = []
-  lines.push('BELLY MONSTER BITES')
-  lines.push(`${tableLabel.value} · ${comandaStamp.value}`)
-  lines.push('----------------------------')
-  for (const entry of cart.entries.value) {
-    const price = entry.hasPrice
-      ? formatMXN(entry.price * entry.quantity)
-      : 'Precio en tienda'
-    lines.push(`${entry.quantity}x ${entry.sourceName}  —  ${price}`)
-    if (entry.note) {
-      lines.push(`   • ${entry.note}`)
-    }
+async function submitOrder() {
+  if (cart.isEmpty.value || isSubmitting.value) {
+    return
   }
-  lines.push('----------------------------')
-  lines.push(`Artículos: ${cart.count.value}`)
-  lines.push(`Subtotal estimado: ${formatMXN(cart.estimatedTotal.value)}`)
-  if (cart.hasUnpriced.value) {
-    lines.push('* Incluye productos con precio en tienda; el mesero confirma el total.')
-  }
-  lines.push('Pago directo con el personal. No es un pedido en línea.')
-  return lines.join('\n')
-})
 
-async function copyComanda() {
+  isSubmitting.value = true
+  submitError.value = ''
+
   try {
-    await navigator.clipboard.writeText(comandaText.value)
-    copied.value = true
-    window.setTimeout(() => {
-      copied.value = false
-    }, 2200)
-  } catch {
-    copied.value = false
+    const response = await fetch('/api/orders', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        tableId: tableId.value,
+        items: cart.entries.value.map((entry) => ({
+          id: entry.id,
+          quantity: entry.quantity,
+          note: entry.note,
+        })),
+      }),
+    })
+
+    const payload = await response.json()
+    if (!response.ok) {
+      throw new Error(payload.message || 'No se pudo enviar el pedido.')
+    }
+
+    submittedOrder.value = payload.data
+    showCart.value = false
+    showConfirmation.value = true
+    cart.clear()
+  } catch (error) {
+    submitError.value = error.message
+  } finally {
+    isSubmitting.value = false
   }
 }
 
 function clearOrder() {
   cart.clear()
-  showComanda.value = false
+  showConfirmation.value = false
   showCart.value = false
+}
+
+function closeConfirmation() {
+  showConfirmation.value = false
+  submittedOrder.value = null
 }
 
 /* ---- helpers ---- */
@@ -498,8 +496,16 @@ function priceLabel(item) {
               <p v-if="cart.hasUnpriced.value" class="totals__hint">
                 Algunos productos son <strong>precio en tienda</strong>; el total final lo confirma tu mesero.
               </p>
-              <button class="btn-primary btn-primary--full" type="button" @click="openComanda">
-                Mostrar pedido
+              <p v-if="submitError" class="totals__hint totals__hint--error">
+                {{ submitError }}
+              </p>
+              <button
+                class="btn-primary btn-primary--full"
+                type="button"
+                :disabled="isSubmitting"
+                @click="submitOrder"
+              >
+                {{ isSubmitting ? 'Enviando...' : 'Enviar pedido' }}
               </button>
               <button class="btn-text" type="button" @click="clearOrder">Vaciar pedido</button>
             </div>
@@ -508,25 +514,43 @@ function priceLabel(item) {
       </Transition>
     </Teleport>
 
-    <!-- Comanda sheet -->
+    <!-- Confirmation sheet -->
     <Teleport to="body">
       <Transition name="sheet">
-        <div v-if="showComanda" class="sheet-root" @click.self="showComanda = false">
-          <div class="sheet sheet--comanda" role="dialog" aria-modal="true">
+        <div v-if="showConfirmation" class="sheet-root" @click.self="closeConfirmation">
+          <div class="sheet sheet--done" role="dialog" aria-modal="true" aria-label="Pedido enviado">
             <div class="sheet__grab"></div>
-            <button class="sheet__close" type="button" aria-label="Cerrar" @click="showComanda = false">×</button>
+            <button class="sheet__close" type="button" aria-label="Cerrar" @click="closeConfirmation">×</button>
             <div class="sheet__scroll">
-              <h3 class="comanda__title">Muéstrale esto a tu mesero</h3>
-              <p class="comanda__sub">
-                Muéstrale este pedido al personal. No se envía en línea y se paga al final.
-              </p>
-              <pre class="comanda__ticket">{{ comandaText }}</pre>
+              <div class="done">
+                <span class="done__check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-11" /></svg>
+                </span>
+                <h3 class="done__title">Pedido enviado</h3>
+                <p v-if="submittedOrder" class="done__line">
+                  {{ tableLabel }} ·
+                  {{ submittedOrder.itemCount }} artículo{{ submittedOrder.itemCount === 1 ? '' : 's' }}
+                </p>
+
+                <div v-if="submittedOrder" class="done__code">
+                  <span>Código de pedido</span>
+                  <strong>#{{ submittedOrder.shortCode }}</strong>
+                </div>
+                <p class="done__hint">El personal ya lo recibió en su panel.</p>
+
+                <div v-if="submittedOrder" class="done__total">
+                  <span>Subtotal estimado</span>
+                  <strong>
+                    {{ formatMXN(submittedOrder.subtotalCents / 100)
+                    }}<template v-if="submittedOrder.hasUnpriced">+</template>
+                  </strong>
+                </div>
+              </div>
             </div>
             <div class="sheet__foot sheet__foot--col">
-              <button class="btn-primary btn-primary--full" type="button" @click="copyComanda">
-                {{ copied ? '¡Copiado!' : 'Copiar pedido' }}
+              <button class="btn-primary btn-primary--full" type="button" @click="closeConfirmation">
+                Seguir pidiendo
               </button>
-              <button class="btn-text" type="button" @click="showComanda = false">Seguir pidiendo</button>
             </div>
           </div>
         </div>
@@ -651,7 +675,7 @@ function priceLabel(item) {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 900;
-  letter-spacing: -0.4px;
+  letter-spacing: 0;
   line-height: 1.05;
 }
 .identity__meta {
@@ -769,7 +793,7 @@ function priceLabel(item) {
   margin: 18px 16px 10px;
   font-size: 1.18rem;
   font-weight: 900;
-  letter-spacing: -0.3px;
+  letter-spacing: 0;
 }
 .menu-section {
   scroll-margin-top: 124px;
@@ -1093,7 +1117,7 @@ function priceLabel(item) {
   margin: 0;
   font-size: 1.25rem;
   font-weight: 900;
-  letter-spacing: -0.3px;
+  letter-spacing: 0;
 }
 .isheet__price {
   flex: 0 0 auto;
@@ -1189,6 +1213,10 @@ function priceLabel(item) {
 }
 .btn-primary:active {
   background: var(--accent-press);
+}
+.btn-primary:disabled {
+  cursor: progress;
+  opacity: 0.68;
 }
 .btn-primary--full {
   width: 100%;
@@ -1288,31 +1316,106 @@ function priceLabel(item) {
   color: var(--muted);
   line-height: 1.35;
 }
+.totals__hint--error {
+  color: #b42a2a;
+  font-weight: 800;
+}
 
-/* Comanda sheet */
-.comanda__title {
-  margin: 14px 16px 4px;
-  font-size: 1.2rem;
+/* Confirmation sheet */
+.done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 20px 4px;
+  text-align: center;
+}
+.done__check {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 8px 22px rgb(31 157 87 / 36%);
+}
+.done__check svg {
+  width: 34px;
+  height: 34px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: done-tick 0.4s 0.08s ease forwards;
+}
+@keyframes done-tick {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.done__title {
+  margin: 14px 0 2px;
+  font-size: 1.35rem;
+  font-weight: 950;
+  letter-spacing: 0;
+}
+.done__line {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.done__hint {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+.done__code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  margin: 18px 0 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+}
+.done__code span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+.done__code strong {
+  font-size: 2.4rem;
+  font-weight: 950;
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+}
+.done__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 12px;
   font-weight: 900;
 }
-.comanda__sub {
-  margin: 0 16px 12px;
-  font-size: 0.84rem;
+.done__total span {
   color: var(--muted);
-  line-height: 1.4;
+  font-weight: 800;
 }
-.comanda__ticket {
-  margin: 0 16px 16px;
-  padding: 16px;
-  border: 1px dashed #c9b9a6;
-  border-radius: 14px;
-  background: #fff;
-  color: var(--ink);
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
-  font-size: 0.8rem;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  word-break: break-word;
+.done__total strong {
+  font-size: 1.15rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .done__check svg {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 /* ---- Transitions ---- */
