@@ -2,7 +2,14 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import mascot from '../assets/brand/mascot.svg'
-import { menuCategories, menuDisclaimer, menuItemsById, upsellIds } from '../data/menu'
+import {
+  coverImage,
+  featuredItems,
+  menuCategories,
+  menuDisclaimer,
+  menuItemsById,
+  upsellIds,
+} from '../data/menu'
 import { useCart } from '../composables/useCart'
 import { formatMXN, formatMenuPrice } from '../utils/formatPrice'
 
@@ -227,13 +234,86 @@ onBeforeUnmount(() => {
 
 <template>
   <main class="order">
-    <div class="intro">
-      <span class="intro-mark"><img :src="mascot" alt="" /></span>
-      <div class="intro-copy">
-        <p class="intro-name">Belly Monster Bites</p>
-        <p class="intro-note">Arma tu pedido y muéstraselo al mesero. Sin pagos en línea.</p>
+    <header class="hero" :class="{ 'no-cover': !coverImage }">
+      <div v-if="coverImage" class="hero-cover">
+        <img :src="coverImage" alt="" />
       </div>
-    </div>
+
+      <div class="hero-body">
+        <span class="hero-mark"><img :src="mascot" alt="" /></span>
+        <div class="hero-copy">
+          <p class="hero-name">Belly Monster Bites</p>
+          <p class="hero-note">Arma tu pedido y muéstraselo al mesero.</p>
+        </div>
+      </div>
+
+      <div class="hero-chips" aria-label="Cómo funciona el pedido">
+        <span class="op-chip op-chip-mesa">{{ mesaLabel }}</span>
+        <span class="op-chip">Paga al final</span>
+        <span class="op-chip">Sin pago en línea</span>
+      </div>
+    </header>
+
+    <section
+      v-if="featuredItems.length && !isSearching"
+      class="rail"
+      aria-label="Más pedidos"
+    >
+      <div class="rail-head">
+        <h2 class="rail-title">Más pedidos</h2>
+      </div>
+
+      <div class="rail-track">
+        <article
+          v-for="item in featuredItems"
+          :key="item.id"
+          class="promo"
+          :class="{ chosen: quantityFor(item.id) > 0 }"
+        >
+          <div class="promo-photo">
+            <img :src="item.image" :alt="item.name" loading="lazy" />
+
+            <Transition name="pop" mode="out-in">
+              <button
+                v-if="quantityFor(item.id) === 0"
+                key="add"
+                class="promo-add"
+                type="button"
+                :aria-label="`Agregar ${item.name}`"
+                @click="add(item)"
+              >
+                +
+              </button>
+
+              <div v-else key="step" class="promo-step">
+                <button
+                  class="promo-min"
+                  type="button"
+                  :aria-label="`Quitar uno de ${item.name}`"
+                  @click="decrement(item.id)"
+                >
+                  −
+                </button>
+                <span class="promo-qty">{{ quantityFor(item.id) }}</span>
+                <button
+                  class="promo-min"
+                  type="button"
+                  :aria-label="`Agregar otro ${item.name}`"
+                  @click="add(item)"
+                >
+                  +
+                </button>
+              </div>
+            </Transition>
+          </div>
+
+          <p class="promo-price" :class="{ tba: !item.hasPrice }">
+            {{ formatMenuPrice(item) }}
+          </p>
+          <p class="promo-name">{{ item.name }}</p>
+        </article>
+      </div>
+    </section>
 
     <div class="stick">
       <div class="search">
@@ -525,6 +605,8 @@ onBeforeUnmount(() => {
   --sky: #8fd3ff;
   --jam: #d36c00;
   --jam-deep: #b85c00;
+  --leaf: #17a44c;
+  --leaf-deep: #128a3f;
 
   position: relative;
   display: flex;
@@ -535,49 +617,257 @@ onBeforeUnmount(() => {
   color: var(--ink);
 }
 
-/* ---------- Compact intro (scrolls away) ---------- */
-.intro {
+/* ---------- Hero cover + operational chips (scrolls away) ---------- */
+.hero {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.hero-cover {
+  position: relative;
+  height: clamp(150px, 40vw, 210px);
+  overflow: hidden;
+}
+
+.hero-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+.hero-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 78%, var(--paper));
+}
+
+.hero-body {
   display: flex;
   gap: 12px;
   align-items: center;
-  padding: 14px clamp(14px, 4vw, 22px);
+  padding: 0 clamp(14px, 4vw, 22px);
+}
+
+.hero-cover + .hero-body {
+  margin-top: 12px;
+}
+
+.hero-mark {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow: 0 0 0 3px var(--paper), 0 8px 18px rgb(0 0 0 / 22%);
+}
+
+.hero-mark img {
+  width: 74%;
+  height: 74%;
+  object-fit: contain;
+}
+
+.hero-copy {
+  min-width: 0;
+}
+
+.hero-name {
+  margin: 0;
+  font-size: clamp(1.45rem, 6vw, 1.85rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.hero-note {
+  margin: 3px 0 0;
+  color: var(--coffee-soft);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.hero-chips {
+  display: flex;
+  gap: 8px;
+  padding: 12px clamp(14px, 4vw, 22px) 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hero-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.op-chip {
+  flex: 0 0 auto;
+  padding: 7px 13px;
+  border: 1.5px solid var(--paper-line);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--coffee);
+  font-size: 0.77rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.op-chip-mesa {
+  border-color: transparent;
   background: var(--ink);
   color: #ffffff;
 }
 
-.intro-mark {
-  display: grid;
+/* ---------- "Más pedidos" rail (scrolls away) ---------- */
+.rail {
+  padding: 16px 0 6px;
+  background: var(--paper);
+}
+
+.rail-head {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 0 clamp(14px, 4vw, 22px) 10px;
+}
+
+.rail-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.rail-track {
+  display: flex;
+  gap: 14px;
+  padding: 0 clamp(14px, 4vw, 22px) 4px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rail-track::-webkit-scrollbar {
+  display: none;
+}
+
+.promo {
   flex: 0 0 auto;
+  width: 156px;
+  scroll-snap-align: start;
+}
+
+.promo-photo {
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--coffee) 8%, var(--paper));
+  box-shadow: 0 6px 16px rgb(15 17 21 / 12%);
+}
+
+.promo-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.promo.chosen .promo-photo {
+  box-shadow: 0 0 0 2px var(--leaf), 0 6px 16px rgb(23 164 76 / 28%);
+}
+
+.promo-add {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
   width: 38px;
   height: 38px;
   place-items: center;
+  border: 0;
   border-radius: 999px;
-  background: var(--paper);
-  box-shadow: 0 0 0 2px rgb(143 211 255 / 55%);
+  background: var(--leaf);
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  box-shadow: 0 4px 12px rgb(18 138 63 / 40%);
+  transition: transform 130ms ease, background-color 130ms ease;
 }
 
-.intro-mark img {
-  width: 72%;
-  height: 72%;
-  object-fit: contain;
+.promo-add:active {
+  transform: scale(0.88);
+  background: var(--leaf-deep);
 }
 
-.intro-copy {
-  min-width: 0;
+.promo-step {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--leaf);
+  box-shadow: 0 4px 12px rgb(18 138 63 / 40%);
 }
 
-.intro-name {
-  margin: 0;
+.promo-min {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: background-color 130ms ease, transform 120ms ease;
+}
+
+.promo-min:active {
+  transform: scale(0.86);
+  background: rgb(255 255 255 / 18%);
+}
+
+.promo-qty {
+  min-width: 18px;
+  color: #ffffff;
   font-size: 0.95rem;
   font-weight: 900;
-  letter-spacing: 0.01em;
+  text-align: center;
 }
 
-.intro-note {
+.promo-price {
+  margin: 9px 0 0;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.promo-price.tba {
+  color: var(--coffee-soft);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.promo-name {
   margin: 2px 0 0;
-  color: rgb(255 255 255 / 72%);
-  font-size: 0.78rem;
-  font-weight: 600;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 700;
   line-height: 1.25;
 }
 
@@ -675,8 +965,8 @@ onBeforeUnmount(() => {
 
 .tabs-track {
   display: flex;
-  gap: 8px;
-  padding: 10px clamp(14px, 4vw, 22px);
+  gap: 20px;
+  padding: 2px clamp(14px, 4vw, 22px) 0;
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -687,25 +977,31 @@ onBeforeUnmount(() => {
 }
 
 .tab {
+  position: relative;
   flex: 0 0 auto;
-  padding: 7px 14px;
-  border: 1.5px solid var(--paper-line);
-  border-radius: 999px;
-  background: #ffffff;
-  color: var(--coffee);
-  font-size: 0.84rem;
+  padding: 11px 0;
+  border: 0;
+  background: transparent;
+  color: var(--coffee-soft);
+  font-size: 0.9rem;
   font-weight: 800;
   white-space: nowrap;
-  transition:
-    color 160ms ease,
-    background-color 160ms ease,
-    border-color 160ms ease;
+  transition: color 160ms ease;
 }
 
 .tab.active {
-  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
   background: var(--ink);
-  color: #ffffff;
 }
 
 /* ---------- Menu list ---------- */
@@ -1412,7 +1708,7 @@ onBeforeUnmount(() => {
 }
 
 @media (min-width: 720px) {
-  .intro-note {
+  .hero-note {
     font-size: 0.82rem;
   }
 }

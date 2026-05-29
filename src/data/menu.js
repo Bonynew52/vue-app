@@ -1,17 +1,4 @@
-import cinnamonRollRaspberry from '../assets/menu/cinnamon_roll_raspberry.png'
-import cinnamonRollTresLeches from '../assets/menu/cinnamon_roll_tres_leches.png'
 import seed from './menuSeed.rappi.json'
-
-const ITEM_IMAGE_MATCHES = [
-  {
-    image: cinnamonRollRaspberry,
-    patterns: ['raspberry', 'frambuesa'],
-  },
-  {
-    image: cinnamonRollTresLeches,
-    patterns: ['tres leches'],
-  },
-]
 
 const DISPLAY_SUFFIX_PATTERN =
   /\s*\((rappi|waffle|toast|kids|rc|n|pf|pan frances|pan francés)\)\s*/gi
@@ -27,15 +14,6 @@ function slugify(value) {
 
 function cleanDisplayName(value) {
   return value.replace(DISPLAY_SUFFIX_PATTERN, ' ').replace(/\s+/g, ' ').trim()
-}
-
-function imageForItem(name) {
-  const normalizedName = name.toLowerCase()
-  const match = ITEM_IMAGE_MATCHES.find(({ patterns }) =>
-    patterns.some((pattern) => normalizedName.includes(pattern)),
-  )
-
-  return match?.image || ''
 }
 
 export const menuSource = seed
@@ -57,15 +35,20 @@ export const menuCategories = seed.categories.map((category, categoryIndex) => {
 
       return {
         id,
+        rappiProductId: item.id,
         categoryId: `cat-${categoryIndex}-${slugify(categoryName)}`,
         categoryName,
         sourceName: item.name,
         name: displayName,
         description: item.description || '',
         price,
+        realPrice: Number(item.realPrice || price),
         currency: item.currency || 'MXN',
         hasPrice: price > 0,
-        image: imageForItem(displayName),
+        image: item.image || '',
+        isAvailable: item.isAvailable !== false,
+        isPopular: Boolean(item.isPopular),
+        hasToppings: Boolean(item.hasToppings),
       }
     }),
   }
@@ -74,6 +57,34 @@ export const menuCategories = seed.categories.map((category, categoryIndex) => {
 export const menuItemsById = Object.fromEntries(
   menuCategories.flatMap((category) => category.items.map((item) => [item.id, item])),
 )
+
+// Every item that has a real Rappi product photo, in menu order.
+export const imageBackedItems = menuCategories
+  .flatMap((category) => category.items)
+  .filter((item) => item.image)
+
+const preferredFeaturedNames = [
+  'Cesar Salad',
+  'Just A Waffle',
+  'Chicken Blt',
+  'American Breakfast Waffle',
+  "Spicy Chick'n'waffle",
+  'Sandwich Buffalo Chicken',
+  'French Toast',
+  'Serrano Caprese',
+  'Rol De Chocolate',
+  'Rol De Canela',
+]
+
+// Rappi does not currently mark popular items in the public data, so this rail
+// uses visible, priced food items that match the reference screenshot shape.
+export const featuredItems = preferredFeaturedNames
+  .map((name) =>
+    imageBackedItems.find((item) => item.name.toLowerCase().includes(name.toLowerCase())),
+  )
+  .filter(Boolean)
+
+export const coverImage = seed.backgroundImage || featuredItems[0]?.image || imageBackedItems[0]?.image || ''
 
 const preferredUpsells = ['Agua Natural', 'Rol De Canela', 'French Fries', 'Cortado']
 
