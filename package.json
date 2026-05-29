@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "convex:dev": "convex dev",
     "dev:full": "vercel dev",
     "build": "vite build",
     "preview": "vite preview",
@@ -13,8 +12,6 @@
   },
   "dependencies": {
     "better-auth": "^1.6.11",
-    "convex": "^1.39.1",
-    "convex-vue": "^0.1.5",
     "pg": "^8.21.0",
     "vue": "^3.5.34",
     "vue-router": "^5.0.7"

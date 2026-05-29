@@ -1,9 +1,8 @@
 {
   "ignoreCommand": "[ \"$VERCEL_ENV\" = \"production\" ] && exit 1 || exit 0",
-  "buildCommand": "npx convex deploy --cmd 'npm run build' --cmd-url-env-var-name VITE_CONVEX_URL",
   "rewrites": [
     {
-      "source": "/((?!api/|assets/|favicon.svg|manifest.webmanifest|sw.js|@vite/|@id/|@fs/|src/|convex/|node_modules/).*)",
+      "source": "/((?!api/|assets/|favicon.svg|manifest.webmanifest|sw.js|@vite/|@id/|@fs/|src/|node_modules/).*)",
       "destination": "/index.html"
     }
   ]
