@@ -8,15 +8,18 @@ function canUseStorage() {
   return typeof window !== 'undefined' && window.sessionStorage
 }
 
+// Cart is local-only (sessionStorage). There is no backend in v1, so this never
+// leaves the device — it just powers the on-screen review and the comanda the
+// diner shows to the waiter.
 export function useCart(tableId) {
   const items = ref({})
   const key = storageKey(tableId)
 
   if (canUseStorage()) {
     try {
-      const savedItems = JSON.parse(window.sessionStorage.getItem(key) || '{}')
-      if (savedItems && typeof savedItems === 'object') {
-        items.value = savedItems
+      const saved = JSON.parse(window.sessionStorage.getItem(key) || '{}')
+      if (saved && typeof saved === 'object') {
+        items.value = saved
       }
     } catch {
       items.value = {}
@@ -29,42 +32,71 @@ export function useCart(tableId) {
       if (!canUseStorage()) {
         return
       }
-
       window.sessionStorage.setItem(key, JSON.stringify(value))
     },
     { deep: true },
   )
 
-  const entries = computed(() => Object.values(items.value))
+  const entries = computed(() =>
+    // Stable, menu-like order so the review and comanda read predictably.
+    Object.values(items.value).sort((a, b) => (a.addedAt || 0) - (b.addedAt || 0)),
+  )
   const count = computed(() =>
     entries.value.reduce((total, entry) => total + Number(entry.quantity || 0), 0),
   )
+  const lineCount = computed(() => entries.value.length)
   const estimatedTotal = computed(() =>
-    entries.value.reduce((total, entry) => {
-      if (!entry.hasPrice) {
-        return total
-      }
-
-      return total + entry.price * entry.quantity
-    }, 0),
+    entries.value.reduce(
+      (total, entry) => (entry.hasPrice ? total + entry.price * entry.quantity : total),
+      0,
+    ),
   )
   const hasUnpriced = computed(() => entries.value.some((entry) => !entry.hasPrice))
+  const isEmpty = computed(() => entries.value.length === 0)
 
-  function add(item) {
+  function snapshot(item, extra) {
+    return {
+      id: item.id,
+      name: item.name,
+      sourceName: item.sourceName || item.name,
+      categoryName: item.categoryName || '',
+      price: item.price,
+      hasPrice: item.hasPrice,
+      image: item.image || '',
+      note: '',
+      quantity: 1,
+      addedAt: Object.keys(items.value).length,
+      ...extra,
+    }
+  }
+
+  function add(item, { quantity = 1, note } = {}) {
     const current = items.value[item.id]
-
+    if (current) {
+      items.value = {
+        ...items.value,
+        [item.id]: {
+          ...current,
+          quantity: current.quantity + quantity,
+          note: note === undefined ? current.note : note,
+        },
+      }
+      return
+    }
     items.value = {
       ...items.value,
-      [item.id]: current
-        ? { ...current, quantity: current.quantity + 1 }
-        : {
-            id: item.id,
-            name: item.name,
-            categoryName: item.categoryName,
-            price: item.price,
-            hasPrice: item.hasPrice,
-            quantity: 1,
-          },
+      [item.id]: snapshot(item, { quantity: Math.max(1, quantity), note: note || '' }),
+    }
+  }
+
+  function increment(itemId) {
+    const current = items.value[itemId]
+    if (!current) {
+      return
+    }
+    items.value = {
+      ...items.value,
+      [itemId]: { ...current, quantity: current.quantity + 1 },
     }
   }
 
@@ -73,22 +105,46 @@ export function useCart(tableId) {
     if (!current) {
       return
     }
-
     if (current.quantity <= 1) {
       remove(itemId)
       return
     }
-
     items.value = {
       ...items.value,
       [itemId]: { ...current, quantity: current.quantity - 1 },
     }
   }
 
+  function setQuantity(itemId, quantity) {
+    const current = items.value[itemId]
+    if (!current) {
+      return
+    }
+    if (quantity <= 0) {
+      remove(itemId)
+      return
+    }
+    items.value = {
+      ...items.value,
+      [itemId]: { ...current, quantity },
+    }
+  }
+
+  function setNote(itemId, note) {
+    const current = items.value[itemId]
+    if (!current) {
+      return
+    }
+    items.value = {
+      ...items.value,
+      [itemId]: { ...current, note },
+    }
+  }
+
   function remove(itemId) {
-    const nextItems = { ...items.value }
-    delete nextItems[itemId]
-    items.value = nextItems
+    const next = { ...items.value }
+    delete next[itemId]
+    items.value = next
   }
 
   function clear() {
@@ -99,16 +155,26 @@ export function useCart(tableId) {
     return items.value[itemId]?.quantity || 0
   }
 
+  function noteFor(itemId) {
+    return items.value[itemId]?.note || ''
+  }
+
   return {
     items,
     entries,
     count,
+    lineCount,
     estimatedTotal,
     hasUnpriced,
+    isEmpty,
     add,
+    increment,
     decrement,
+    setQuantity,
+    setNote,
     remove,
     clear,
     quantityFor,
+    noteFor,
   }
 }
