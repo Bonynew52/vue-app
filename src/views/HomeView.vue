@@ -13,6 +13,10 @@ const patternImages = Object.values(patternModules)
 const patternSpriteCount = 30
 const rotationLimit = 60
 const patternSpeed = 42
+const patternSeed =
+  typeof crypto !== 'undefined' && crypto.getRandomValues
+    ? crypto.getRandomValues(new Uint32Array(1))[0]
+    : Math.floor(Math.random() * 100000)
 const introContent = {
   eyebrow: 'Belly Monster Bites',
   title: 'Postres con presencia',
@@ -24,6 +28,10 @@ function randomFromSeed(seed) {
   const value = Math.sin(seed * 999.91) * 10000
 
   return value - Math.floor(value)
+}
+
+function randomRange(seed, min, max) {
+  return min + randomFromSeed(seed) * (max - min)
 }
 
 const activeSection = ref('')
@@ -46,33 +54,31 @@ const patternSprites = computed(() => {
   const { width, height } = viewportSize.value
 
   return Array.from({ length: patternSpriteCount }, (_, spriteIndex) => {
-    const seed = spriteIndex + 1
+    const seed = patternSeed + spriteIndex + 1
     const image = patternImages[Math.floor(randomFromSeed(seed * 3) * patternImages.length)]
-    const size = 78 + Math.round(randomFromSeed(seed * 5) * 72)
-    const verticalLane = height * (0.06 + randomFromSeed(seed * 7) * 0.84)
-    const drift = (randomFromSeed(seed * 11) * 2 - 1) * height * 0.18
-    const startFromLeft = randomFromSeed(seed * 13) > 0.5
-    const startOffset = size * (1.1 + randomFromSeed(seed * 17) * 1.2)
-    const endOffset = size * (1.1 + randomFromSeed(seed * 19) * 1.2)
-    const startX = startFromLeft ? -startOffset : width + startOffset
-    const endX = startFromLeft ? width + endOffset : -endOffset
-    const endY = verticalLane + drift
-    const distance = Math.hypot(endX - startX, endY - verticalLane)
+    const size = Math.round(randomRange(seed * 5, 118, 230))
+    const startOffset = size * randomRange(seed * 7, 1.1, 2.2)
+    const endOffset = size * randomRange(seed * 11, 1.1, 2.2)
+    const startEdge = Math.floor(randomFromSeed(seed * 13) * 4)
+    const endEdge = (startEdge + 2 + Math.floor(randomFromSeed(seed * 17) * 3)) % 4
+    const startPoint = getPatternEdgePoint(startEdge, startOffset, width, height, seed * 19)
+    const endPoint = getPatternEdgePoint(endEdge, endOffset, width, height, seed * 23)
+    const distance = Math.hypot(endPoint.x - startPoint.x, endPoint.y - startPoint.y)
     const duration = distance / patternSpeed
-    const rotationStart = -rotationLimit + randomFromSeed(seed * 23) * (rotationLimit * 2)
-    const spinAmount = (randomFromSeed(seed * 29) > 0.5 ? 1 : -1) * (90 + randomFromSeed(seed * 31) * 180)
+    const rotationStart = randomRange(seed * 29, -rotationLimit, rotationLimit)
+    const spinAmount = (randomFromSeed(seed * 31) > 0.5 ? 1 : -1) * randomRange(seed * 37, 110, 310)
 
     return {
       id: `${image}-${spriteIndex}`,
       image,
       style: {
-        '--pattern-start-x': `${startX}px`,
-        '--pattern-start-y': `${verticalLane}px`,
-        '--pattern-end-x': `${endX}px`,
-        '--pattern-end-y': `${endY}px`,
+        '--pattern-start-x': `${startPoint.x}px`,
+        '--pattern-start-y': `${startPoint.y}px`,
+        '--pattern-end-x': `${endPoint.x}px`,
+        '--pattern-end-y': `${endPoint.y}px`,
         '--pattern-size': `${size}px`,
         '--pattern-duration': `${duration}s`,
-        '--pattern-delay': `${-randomFromSeed(seed * 37) * duration}s`,
+        '--pattern-delay': `${-randomFromSeed(seed * 41) * duration}s`,
         '--pattern-rotation-start': `${rotationStart}deg`,
         '--pattern-rotation-end': `${rotationStart + spinAmount}deg`,
         '--pattern-z-index': seed + 1,
@@ -82,6 +88,25 @@ const patternSprites = computed(() => {
 })
 
 let observer
+
+function getPatternEdgePoint(edge, offset, width, height, seed) {
+  const x = randomRange(seed, 0.04, 0.96) * width
+  const y = randomRange(seed + 3, 0.04, 0.96) * height
+
+  if (edge === 0) {
+    return { x, y: -offset }
+  }
+
+  if (edge === 1) {
+    return { x: width + offset, y }
+  }
+
+  if (edge === 2) {
+    return { x, y: height + offset }
+  }
+
+  return { x: -offset, y }
+}
 
 function updateViewportSize() {
   viewportSize.value = {

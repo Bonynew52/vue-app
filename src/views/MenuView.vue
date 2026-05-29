@@ -1,7 +1,16 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { formatMXN } from '../utils/formatPrice'
 import { menuCategories } from '../data/menu'
+
+const sectionPalettes = [
+  { primary: '#f0d8c8', secondary: '#fff8f2', tertiary: '#7a4d35' },
+  { primary: '#dfebf2', secondary: '#ffffff', tertiary: '#426a78' },
+  { primary: '#f0d8c8', secondary: '#fff8f2', tertiary: '#7a4d35' },
+  { primary: '#dfebf2', secondary: '#ffffff', tertiary: '#426a78' },
+  { primary: '#ffffff', secondary: '#eaf7fb', tertiary: '#9a6a4d' },
+  { primary: '#e8dce7', secondary: '#fff8ff', tertiary: '#7d5876' },
+]
 
 const fallbackSections = Array.from({ length: 6 }, (_, index) => ({
   id: `placeholder-${index + 1}`,
@@ -28,16 +37,168 @@ const menuSections = computed(() => {
   return [...sections, ...fallbackSections.slice(sections.length)]
 })
 
+const displayedMenuSections = computed(() => {
+  const sections = [...menuSections.value]
+
+  if (sections.length >= 4) {
+    ;[sections[2], sections[3]] = [sections[3], sections[2]]
+  }
+
+  return sections
+})
+
+const sectionElements = ref([])
+const selectedItem = ref(null)
+const selectedPreviewPosition = ref({ x: 0, y: 0 })
+let paletteFrame = 0
+let activePaletteIndex = -1
+
+function setSectionElement(element, index) {
+  if (element) {
+    sectionElements.value[index] = element
+  }
+}
+
+function applySectionPalette(index = 0) {
+  const palette = sectionPalettes[index % sectionPalettes.length]
+  const root = document.documentElement
+
+  root.style.setProperty('--background-left', palette.primary)
+  root.style.setProperty('--background-right', palette.primary)
+  root.style.setProperty('--color-first', palette.primary)
+  root.style.setProperty('--color-second', palette.secondary)
+  root.style.setProperty('--color-third', palette.tertiary)
+  root.style.setProperty('--color-background', palette.primary)
+  root.style.setProperty('--color-surface', palette.secondary)
+  root.style.setProperty('--color-surface-muted', palette.primary)
+  root.style.setProperty('--color-primary', palette.tertiary)
+  root.style.setProperty('--color-secondary', palette.secondary)
+  root.style.setProperty('--color-secondary-dark', palette.tertiary)
+  root.style.setProperty('--color-accent', palette.tertiary)
+  root.style.setProperty('--color-highlight', palette.secondary)
+  root.style.setProperty('--color-text', palette.tertiary)
+  root.style.setProperty('--color-text-muted', palette.tertiary)
+  root.style.setProperty('--color-border', palette.tertiary)
+}
+
 function priceLabel(item) {
   return item.hasPrice ? formatMXN(item.price) : 'Precio por confirmar'
 }
+
+const selectedPreviewStyle = computed(() => ({
+  '--preview-x': `${selectedPreviewPosition.value.x}px`,
+  '--preview-y': `${selectedPreviewPosition.value.y}px`,
+}))
+
+function selectItem(item) {
+  selectedPreviewPosition.value = {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+  }
+  selectedItem.value = selectedItem.value?.id === item.id ? null : item
+}
+
+function clearSelectedItem() {
+  selectedItem.value = null
+}
+
+function syncActivePalette() {
+  paletteFrame = 0
+  const scrollTop = window.scrollY || document.documentElement.scrollTop || 0
+
+  if (scrollTop <= 4) {
+    activePaletteIndex = 0
+    applySectionPalette(0)
+
+    return
+  }
+
+  const activationLine = window.innerHeight * 0.62
+  const sections = sectionElements.value.filter(Boolean)
+  const activeSection = sections.find((element) => {
+    const rect = element.getBoundingClientRect()
+
+    return rect.top <= activationLine && rect.bottom >= activationLine
+  })
+
+  if (!activeSection) {
+    return
+  }
+
+  const nextIndex = Number(activeSection.dataset.sectionIndex || 0)
+
+  if (nextIndex !== activePaletteIndex) {
+    activePaletteIndex = nextIndex
+    applySectionPalette(nextIndex)
+  }
+}
+
+function requestPaletteSync() {
+  if (!paletteFrame) {
+    paletteFrame = window.requestAnimationFrame(syncActivePalette)
+  }
+}
+
+function handleWindowScroll() {
+  clearSelectedItem()
+  requestPaletteSync()
+}
+
+onMounted(() => {
+  applySectionPalette(0)
+  activePaletteIndex = -1
+
+  sectionElements.value.forEach((element, index) => {
+    element.dataset.sectionIndex = String(index)
+  })
+
+  window.addEventListener('scroll', handleWindowScroll, { passive: true })
+  window.addEventListener('resize', requestPaletteSync)
+  window.requestAnimationFrame(syncActivePalette)
+  window.setTimeout(syncActivePalette, 80)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleWindowScroll)
+  window.removeEventListener('resize', requestPaletteSync)
+
+  if (paletteFrame) {
+    window.cancelAnimationFrame(paletteFrame)
+  }
+})
 </script>
 
 <template>
   <main class="menu-view">
+    <Teleport to="body">
+      <Transition name="backdrop-fade">
+        <button
+          v-if="selectedItem"
+          class="item-preview-backdrop"
+          type="button"
+          aria-label="Cerrar producto seleccionado"
+          @click="clearSelectedItem"
+        ></button>
+      </Transition>
+
+      <Transition name="item-preview-fade">
+        <aside
+          v-if="selectedItem"
+          class="item-preview"
+          :style="selectedPreviewStyle"
+          :aria-label="`Producto seleccionado: ${selectedItem.name}`"
+          @click="clearSelectedItem"
+        >
+          <img v-if="selectedItem.image" :src="selectedItem.image" :alt="selectedItem.name" />
+          <span v-else aria-hidden="true"></span>
+        </aside>
+      </Transition>
+    </Teleport>
+
     <section
-      v-for="section in menuSections"
+      v-for="(section, sectionIndex) in displayedMenuSections"
       :key="section.id"
+      :ref="(element) => setSectionElement(element, sectionIndex)"
       class="menu-section"
       :aria-label="section.name"
     >
@@ -46,8 +207,22 @@ function priceLabel(item) {
         <h1>{{ section.name }}</h1>
       </header>
 
-      <div class="section-rail" tabindex="0" :aria-label="`Productos de ${section.name}`">
-        <article v-for="item in section.items" :key="item.id" class="menu-card">
+      <div
+        class="section-rail"
+        tabindex="0"
+        :aria-label="`Productos de ${section.name}`"
+        @scroll.passive="clearSelectedItem"
+      >
+        <article
+          v-for="item in section.items"
+          :key="item.id"
+          class="menu-card"
+          role="button"
+          tabindex="0"
+          @click="selectItem(item)"
+          @keydown.enter.prevent="selectItem(item)"
+          @keydown.space.prevent="selectItem(item)"
+        >
           <div class="menu-card__image">
             <img v-if="item.image" :src="item.image" :alt="item.name" />
             <span v-else aria-hidden="true"></span>
@@ -66,6 +241,7 @@ function priceLabel(item) {
 
 <style scoped>
 .menu-view {
+  position: relative;
   display: grid;
   gap: clamp(34px, 7vw, 72px);
   width: min(100%, 1440px);
@@ -73,6 +249,52 @@ function priceLabel(item) {
   margin: 0 auto;
   padding: clamp(28px, 5vw, 64px) 0 clamp(38px, 7vw, 78px);
   animation: menu-fade-in 520ms ease both;
+}
+
+.item-preview-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;
+  z-index: 35;
+  border: 0;
+  background: rgb(15 17 21 / 42%);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+.item-preview {
+  position: fixed;
+  top: var(--preview-y);
+  left: var(--preview-x);
+  z-index: 36;
+  display: grid;
+  place-items: center;
+  width: min(620px, calc(100vw - 32px));
+  height: min(420px, calc(100svh - 32px));
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--color-surface) 86%, transparent);
+  box-shadow: 0 24px 82px rgb(15 17 21 / 34%);
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+}
+
+.item-preview img,
+.item-preview span {
+  width: min(72%, 540px);
+  max-height: 72%;
+  object-fit: contain;
+  opacity: 0.34;
+}
+
+.item-preview span {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 42% 38%, #ffffff 0 12%, transparent 13%),
+    radial-gradient(circle at 58% 38%, #ffffff 0 12%, transparent 13%),
+    var(--color-border);
 }
 
 .menu-section {
@@ -84,15 +306,17 @@ function priceLabel(item) {
   width: min(100% - 32px, 1180px);
   margin: 0 auto;
   color: var(--color-text);
+  transition: color 520ms ease;
 }
 
 .section-header p {
   margin: 0 0 8px;
-  color: var(--color-third);
+  color: var(--color-text);
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 0;
   text-transform: uppercase;
+  transition: color 520ms ease;
 }
 
 .section-header h1 {
@@ -100,6 +324,7 @@ function priceLabel(item) {
   color: var(--color-text);
   font-size: clamp(2rem, 6vw, 4.75rem);
   line-height: 0.95;
+  transition: color 520ms ease;
 }
 
 .section-rail {
@@ -116,7 +341,7 @@ function priceLabel(item) {
 }
 
 .section-rail:focus-visible {
-  outline: 3px solid rgb(143 211 255 / 45%);
+  outline: 3px solid color-mix(in srgb, var(--color-border) 45%, transparent);
   outline-offset: -3px;
 }
 
@@ -125,33 +350,50 @@ function priceLabel(item) {
 }
 
 .section-rail::-webkit-scrollbar-track {
-  background: rgb(255 255 255 / 12%);
+  background: color-mix(in srgb, var(--color-secondary) 55%, transparent);
 }
 
 .section-rail::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: var(--color-third);
+  background: var(--color-border);
 }
 
 .menu-card {
   display: grid;
   grid-template-rows: 260px 1fr;
   min-height: 470px;
-  border: 2px solid var(--stage-blue, #8fd3ff);
+  border: 2px solid var(--color-border);
   border-radius: 8px;
   background: var(--color-surface);
-  color: #0f1115;
+  color: var(--color-text);
   box-shadow: var(--shadow-panel);
   overflow: hidden;
   scroll-snap-align: start;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background-color 520ms ease,
+    border-color 520ms ease,
+    color 520ms ease;
+}
+
+.menu-card:hover,
+.menu-card:focus-visible {
+  transform: translateY(-3px);
+}
+
+.menu-card:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-border) 45%, transparent);
+  outline-offset: 3px;
 }
 
 .menu-card__image {
   display: grid;
   place-items: center;
   min-height: 0;
-  background: #0f1115;
+  background: var(--color-primary);
   overflow: hidden;
+  transition: background-color 520ms ease;
 }
 
 .menu-card__image img {
@@ -167,7 +409,8 @@ function priceLabel(item) {
   background:
     radial-gradient(circle at 42% 38%, #ffffff 0 12%, transparent 13%),
     radial-gradient(circle at 58% 38%, #ffffff 0 12%, transparent 13%),
-    var(--color-third);
+    var(--color-border);
+  transition: background-color 520ms ease;
 }
 
 .menu-card__copy {
@@ -179,9 +422,10 @@ function priceLabel(item) {
 
 .menu-card__copy h2 {
   margin: 0;
-  color: var(--color-third);
+  color: var(--color-text);
   font-size: 1.35rem;
   line-height: 1.05;
+  transition: color 520ms ease;
 }
 
 .menu-card__copy p {
@@ -189,18 +433,20 @@ function priceLabel(item) {
   min-height: 3.6em;
   margin: 0;
   overflow: hidden;
-  color: #0f1115;
+  color: var(--color-text);
   font-weight: 700;
   line-height: 1.2;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  transition: color 520ms ease;
 }
 
 .menu-card__copy strong {
   margin-top: 4px;
-  color: #0f1115;
+  color: var(--color-text);
   font-size: 1.05rem;
   font-weight: 900;
+  transition: color 520ms ease;
 }
 
 @keyframes menu-fade-in {
@@ -213,6 +459,43 @@ function priceLabel(item) {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.backdrop-fade-enter-active,
+.backdrop-fade-leave-active {
+  transition: opacity 180ms ease;
+}
+
+.backdrop-fade-enter-from,
+.backdrop-fade-leave-to {
+  opacity: 0;
+}
+
+.backdrop-fade-enter-to,
+.backdrop-fade-leave-from {
+  opacity: 1;
+}
+
+.item-preview-fade-enter-active,
+.item-preview-fade-leave-active {
+  transition:
+    opacity 280ms ease,
+    transform 280ms ease,
+    filter 280ms ease;
+}
+
+.item-preview-fade-enter-from,
+.item-preview-fade-leave-to {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translate(-50%, -50%) scale(0.97);
+}
+
+.item-preview-fade-enter-to,
+.item-preview-fade-leave-from {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate(-50%, -50%) scale(1);
 }
 
 @media (max-width: 640px) {
