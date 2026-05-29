@@ -1,5 +1,7 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useConvexMutation, useConvexQuery } from 'convex-vue'
+import { api } from '../../convex/_generated/api'
 import { useRouter } from 'vue-router'
 import { authClient } from '../lib/auth-client'
 import { formatMXN } from '../utils/formatPrice'
@@ -23,15 +25,16 @@ const statusActions = [
 ]
 
 const session = ref(null)
-const orders = ref([])
 const filter = ref('active')
 const isBooting = ref(true)
-const isLoading = ref(false)
-const error = ref('')
-const lastUpdated = ref('')
+const statusError = ref('')
 const now = ref(Date.now())
-let pollTimer = null
 let clockTimer = null
+const orderQuery = useConvexQuery(api.orders.list, () => ({ status: filter.value }))
+const updateOrderStatus = useConvexMutation(api.orders.updateStatus)
+const orders = computed(() => orderQuery.data.value || [])
+const isLoading = computed(() => orderQuery.isPending.value || updateOrderStatus.isPending.value)
+const error = computed(() => statusError.value || orderQuery.error.value?.message || '')
 
 const activeOrders = computed(() => orders.value.filter((order) => order.status !== 'served' && order.status !== 'cancelled'))
 const newCount = computed(() => orders.value.filter((order) => order.status === 'new').length)
@@ -88,69 +91,17 @@ async function loadSession() {
   }
 }
 
-async function loadOrders({ quiet = false } = {}) {
-  if (!quiet) {
-    isLoading.value = true
-  }
-  error.value = ''
-
-  try {
-    const response = await fetch(`/api/orders?status=${filter.value}`, {
-      headers: { Accept: 'application/json' },
-    })
-    const payload = await response.json()
-
-    if (response.status === 401) {
-      await router.replace({ name: 'login' })
-      return
-    }
-
-    if (!response.ok) {
-      throw new Error(payload.message || 'No se pudieron cargar los pedidos.')
-    }
-
-    orders.value = payload.data || []
-    lastUpdated.value = new Intl.DateTimeFormat('es-MX', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    }).format(new Date())
-  } catch (loadError) {
-    error.value = loadError.message
-  } finally {
-    isLoading.value = false
-  }
-}
-
 async function setFilter(nextFilter) {
   filter.value = nextFilter
-  await loadOrders()
 }
 
 async function updateStatus(order, status) {
-  error.value = ''
+  statusError.value = ''
 
   try {
-    const response = await fetch(`/api/orders/${order.id}`, {
-      method: 'PATCH',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ status }),
-    })
-    const payload = await response.json()
-
-    if (!response.ok) {
-      throw new Error(payload.message || 'No se pudo actualizar el pedido.')
-    }
-
-    const updated = payload.data
-    orders.value = orders.value
-      .map((entry) => (entry.id === updated.id ? updated : entry))
-      .filter((entry) => filter.value === 'all' || !['served', 'cancelled'].includes(entry.status))
-  } catch (statusError) {
-    error.value = statusError.message
+    await updateOrderStatus.mutate({ orderId: order.id, status })
+  } catch (updateError) {
+    statusError.value = updateError.message
   }
 }
 
@@ -162,8 +113,6 @@ async function signOut() {
 onMounted(async () => {
   await loadSession()
   if (session.value) {
-    await loadOrders()
-    pollTimer = window.setInterval(() => loadOrders({ quiet: true }), 8000)
     clockTimer = window.setInterval(() => {
       now.value = Date.now()
     }, 15000)
@@ -172,9 +121,6 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => {
-  if (pollTimer) {
-    window.clearInterval(pollTimer)
-  }
   if (clockTimer) {
     window.clearInterval(clockTimer)
   }
@@ -186,8 +132,8 @@ onBeforeUnmount(() => {
     <header class="toolbar">
       <div class="toolbar__title">
         <h1>Pedidos de mesa</h1>
-        <span v-if="lastUpdated" class="toolbar__sync" :class="{ 'is-busy': isLoading }">
-          Actualizado {{ lastUpdated }}
+        <span class="toolbar__sync" :class="{ 'is-busy': isLoading }">
+          {{ isLoading ? 'Sincronizando…' : 'En vivo' }}
         </span>
       </div>
 
@@ -206,9 +152,6 @@ onBeforeUnmount(() => {
             Todos
           </button>
         </div>
-        <button class="ghost-btn" type="button" @click="loadOrders()">
-          {{ isLoading ? 'Actualizando…' : 'Actualizar' }}
-        </button>
         <button class="ghost-btn" type="button" aria-label="Cerrar sesión" @click="signOut">
           Salir
         </button>

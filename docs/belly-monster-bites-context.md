@@ -71,3 +71,31 @@ customer, learn from it, then move to the next customer with a different fit.
 
 Pedro wants to serve more restaurants, but not by selling the exact same Belly
 Monster Bites implementation to them.
+
+## Staff Dashboard Design Notes
+
+- The staff dashboard is an internal operational surface, not a public customer
+  page.
+- It should not inherit the public website header, social links, or broad
+  navigation when those do not help employees process orders.
+- The PWA install prompt is expected browser behavior, but the dashboard design
+  should account for kiosk/tablet usage where install affordances may appear.
+- A future Claude-led UI pass should treat the staff dashboard as a separate
+  operational workflow from the public website and QR ordering experience.
+- The current `Actualizar` button manually refreshes the orders list. This may
+  be useful as a fallback, but it should not be the primary employee workflow.
+- The dashboard likely wants a Linear-style state model for each order: clear
+  states, explicit transitions, and a visual sense of where every order is in
+  the workflow.
+- The staff dashboard will be hard to design in isolation. It should be
+  iterated alongside the actual employees because they will be the daily drivers
+  of the system and will reveal the real workflow constraints.
+- The internal system does not need to feel whimsical just because the public
+  brand does. Employees need speed, legibility, confidence, and low-friction
+  order handling more than brand expression.
+- Moving orders to Convex means order data can be handled through Convex
+  realtime queries and mutations instead of Vercel API routes.
+- The remaining backend edge case is staff authentication/authorization. If
+  Better Auth stays on Vercel, Vercel functions may still be needed for auth or
+  as a protected proxy. If Convex becomes auth-aware, the staff dashboard can
+  talk directly to Convex while preserving backend authorization.

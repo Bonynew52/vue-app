@@ -1,6 +1,8 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import { useConvexMutation, useConvexQuery } from 'convex-vue'
+import { api } from '../../convex/_generated/api'
 import { useCart } from '../composables/useCart'
 import { coverImage, featuredItems, menuCategories } from '../data/menu'
 import { formatMenuPrice, formatMXN } from '../utils/formatPrice'
@@ -15,8 +17,17 @@ const tableId = computed(() => {
 })
 const hasTable = computed(() => tableId.value.length > 0)
 const tableLabel = computed(() => (hasTable.value ? `Mesa ${tableId.value}` : 'Sin mesa'))
+const orderStatusLabels = {
+  new: 'Recibido',
+  capturing: 'Capturando',
+  preparing: 'Preparando',
+  ready: 'Listo',
+  served: 'Servido',
+  cancelled: 'Cancelado',
+}
 
 const cart = useCart(tableId.value)
+const createOrderMutation = useConvexMutation(api.orders.create)
 
 const allItems = menuCategories.flatMap((category) => category.items)
 
@@ -147,6 +158,11 @@ function quickAdd(item) {
 const isSubmitting = ref(false)
 const submitError = ref('')
 const submittedOrder = ref(null)
+const submittedOrderId = computed(() => submittedOrder.value?.id || null)
+const liveSubmittedOrder = useConvexQuery(api.orders.get, () => ({
+  orderId: submittedOrderId.value,
+}))
+const visibleSubmittedOrder = computed(() => liveSubmittedOrder.data.value || submittedOrder.value)
 
 async function submitOrder() {
   if (cart.isEmpty.value || isSubmitting.value) {
@@ -157,28 +173,26 @@ async function submitOrder() {
   submitError.value = ''
 
   try {
-    const response = await fetch('/api/orders', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        tableId: tableId.value,
-        items: cart.entries.value.map((entry) => ({
-          id: entry.id,
+    const order = await createOrderMutation.mutate({
+      tableId: tableId.value,
+      items: cart.entries.value.map((entry, index) => {
+        const unitPriceCents = entry.hasPrice ? Math.round(Number(entry.price || 0) * 100) : null
+        return {
+          menuItemId: entry.id,
+          name: entry.name,
+          sourceName: entry.sourceName || entry.name,
+          categoryName: entry.categoryName || '',
           quantity: entry.quantity,
-          note: entry.note,
-        })),
+          unitPriceCents,
+          lineTotalCents: unitPriceCents == null ? null : unitPriceCents * entry.quantity,
+          note: entry.note || '',
+          imageUrl: entry.image || '',
+          sortIndex: index,
+        }
       }),
     })
 
-    const payload = await response.json()
-    if (!response.ok) {
-      throw new Error(payload.message || 'No se pudo enviar el pedido.')
-    }
-
-    submittedOrder.value = payload.data
+    submittedOrder.value = order
     showCart.value = false
     showConfirmation.value = true
     cart.clear()
@@ -203,6 +217,10 @@ function closeConfirmation() {
 /* ---- helpers ---- */
 function priceLabel(item) {
   return formatMenuPrice(item)
+}
+
+function orderStatusLabel(order) {
+  return orderStatusLabels[order?.status] || order?.status || 'Recibido'
 }
 </script>
 
@@ -527,22 +545,26 @@ function priceLabel(item) {
                   <svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-11" /></svg>
                 </span>
                 <h3 class="done__title">Pedido enviado</h3>
-                <p v-if="submittedOrder" class="done__line">
+                <p v-if="visibleSubmittedOrder" class="done__line">
                   {{ tableLabel }} ·
-                  {{ submittedOrder.itemCount }} artículo{{ submittedOrder.itemCount === 1 ? '' : 's' }}
+                  {{ visibleSubmittedOrder.itemCount }} artículo{{ visibleSubmittedOrder.itemCount === 1 ? '' : 's' }}
                 </p>
 
-                <div v-if="submittedOrder" class="done__code">
+                <div v-if="visibleSubmittedOrder" class="done__code">
                   <span>Código de pedido</span>
-                  <strong>#{{ submittedOrder.shortCode }}</strong>
+                  <strong>#{{ visibleSubmittedOrder.shortCode }}</strong>
+                </div>
+                <div v-if="visibleSubmittedOrder" class="done__code done__code--status">
+                  <span>Estado en vivo</span>
+                  <strong>{{ orderStatusLabel(visibleSubmittedOrder) }}</strong>
                 </div>
                 <p class="done__hint">El personal ya lo recibió en su panel.</p>
 
-                <div v-if="submittedOrder" class="done__total">
+                <div v-if="visibleSubmittedOrder" class="done__total">
                   <span>Subtotal estimado</span>
                   <strong>
-                    {{ formatMXN(submittedOrder.subtotalCents / 100)
-                    }}<template v-if="submittedOrder.hasUnpriced">+</template>
+                    {{ formatMXN(visibleSubmittedOrder.subtotalCents / 100)
+                    }}<template v-if="visibleSubmittedOrder.hasUnpriced">+</template>
                   </strong>
                 </div>
               </div>
@@ -1395,6 +1417,15 @@ function priceLabel(item) {
   font-weight: 950;
   line-height: 1.05;
   letter-spacing: 0.5px;
+}
+.done__code--status {
+  margin-top: 10px;
+  border-color: rgb(31 157 87 / 24%);
+  background: rgb(31 157 87 / 8%);
+}
+.done__code--status strong {
+  color: var(--accent);
+  font-size: 1.3rem;
 }
 .done__total {
   display: flex;
