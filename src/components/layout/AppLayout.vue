@@ -136,12 +136,9 @@ function closeMenu() {
 
 .app-layout.orders-layout,
 .app-layout.login-layout {
+  --app-header-height: 0px;
   --app-footer-min-height: 0px;
   background: #fff8ef;
-}
-
-.app-layout.orders-layout {
-  --app-header-height: 0px;
 }
 
 .app-header {
@@ -174,6 +171,7 @@ function closeMenu() {
 .order-layout .app-footer,
 .orders-layout .app-header,
 .orders-layout .app-footer,
+.login-layout .app-header,
 .login-layout .app-footer {
   display: none;
 }
