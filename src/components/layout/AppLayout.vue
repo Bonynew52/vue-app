@@ -2,9 +2,9 @@
 import { ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import mascotIcon from '../../assets/brand/mascot.svg'
+import facebookLogo from '../../assets/social_media/facebook.svg'
 import instagramLogo from '../../assets/social_media/instagram.svg'
 import whatsappLogo from '../../assets/social_media/Whatsapp.png'
-import youtubeLogo from '../../assets/social_media/youtube.svg'
 
 const isMenuOpen = ref(false)
 const route = useRoute()
@@ -43,8 +43,8 @@ function closeMenu() {
           <img :src="instagramLogo" alt="" />
         </a>
 
-        <a class="icon-button" href="/" aria-label="YouTube">
-          <img :src="youtubeLogo" alt="" />
+        <a class="icon-button" href="/" aria-label="Facebook">
+          <img :src="facebookLogo" alt="" />
         </a>
 
         <button
@@ -136,9 +136,12 @@ function closeMenu() {
 
 .app-layout.orders-layout,
 .app-layout.login-layout {
-  --app-header-height: 0px;
   --app-footer-min-height: 0px;
   background: #fff8ef;
+}
+
+.app-layout.orders-layout {
+  --app-header-height: 0px;
 }
 
 .app-header {
@@ -171,7 +174,6 @@ function closeMenu() {
 .order-layout .app-footer,
 .orders-layout .app-header,
 .orders-layout .app-footer,
-.login-layout .app-header,
 .login-layout .app-footer {
   display: none;
 }

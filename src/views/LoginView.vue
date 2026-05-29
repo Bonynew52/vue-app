@@ -78,7 +78,7 @@ async function signIn() {
 
 <style scoped>
 .staff-login {
-  min-height: 100svh;
+  min-height: calc(100svh - var(--app-header-height, 0px));
   display: grid;
   place-items: center;
   padding: max(24px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
