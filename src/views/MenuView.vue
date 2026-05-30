@@ -47,7 +47,7 @@ const displayedMenuSections = computed(() => {
   return sections
 })
 
-const placeholderGroups = ['Bebidas', 'Sandwiches', 'Desayunos', 'Toast', 'Postres'].map(
+const placeholderGroups = ['Bebidas', 'Desayunos', 'Sandwiches', 'Toast', 'Postres'].map(
   (name, groupIndex) => ({
     id: `menu-placeholder-${groupIndex}`,
     name,
@@ -110,21 +110,33 @@ const drinksSectionIndex = computed(() => displayedMenuSections.value.length)
 const lastSectionIndex = computed(
   () => displayedMenuSections.value.length + placeholderGroups.length - 1,
 )
-const cartelSections = computed(() =>
-  [
-    { index: 0, name: 'Cafes' },
-    ...placeholderGroups.map((section, index) => ({
-      index: index + 1,
-      name: section.name,
-    })),
-  ],
-)
-const leftCartelSections = computed(() =>
-  cartelSections.value.filter((section) => section.index % 2 === 0).slice(0, 8),
-)
-const rightCartelSections = computed(() =>
-  cartelSections.value.filter((section) => section.index % 2 === 1).slice(0, 8),
-)
+const cartelSections = computed(() => {
+  const placeholderIndexByName = new Map(
+    placeholderGroups.map((section, index) => [section.name.toLowerCase(), index]),
+  )
+  const targetFor = (name) => {
+    if (name === 'Cafes') {
+      return 0
+    }
+
+    return displayedMenuSections.value.length + placeholderIndexByName.get(name.toLowerCase())
+  }
+
+  return {
+    left: [
+      { index: 0, name: 'Cafes', targetIndex: targetFor('Cafes') },
+      { index: 1, name: 'Bebidas', targetIndex: targetFor('Bebidas') },
+      { index: 5, name: 'Postres', targetIndex: targetFor('Postres') },
+    ],
+    right: [
+      { index: 2, name: 'Desayunos', targetIndex: targetFor('Desayunos') },
+      { index: 3, name: 'Sandwiches', targetIndex: targetFor('Sandwiches') },
+      { index: 4, name: 'Toasts', targetIndex: targetFor('Toast') },
+    ],
+  }
+})
+const leftCartelSections = computed(() => cartelSections.value.left)
+const rightCartelSections = computed(() => cartelSections.value.right)
 const activeCartelSectionIndex = computed(() => {
   if (activeSectionIndex.value < displayedMenuSections.value.length) {
     return 0
@@ -134,6 +146,43 @@ const activeCartelSectionIndex = computed(() => {
 })
 const showBottomCartel = computed(() => activeSectionIndex.value < lastSectionIndex.value)
 const showTopCartel = computed(() => showBottomCartel.value)
+
+function easeInOutCubic(progress) {
+  return progress < 0.5
+    ? 4 * progress * progress * progress
+    : 1 - Math.pow(-2 * progress + 2, 3) / 2
+}
+
+function scrollToMainSection(targetIndex) {
+  const target = sectionElements.value[targetIndex]
+
+  if (!target) {
+    return
+  }
+
+  clearSelectedItem()
+
+  const headerOffset = 18
+  const startY = window.scrollY || document.documentElement.scrollTop || 0
+  const targetY = startY + target.getBoundingClientRect().top - headerOffset
+  const distance = targetY - startY
+  const duration = 900
+  const startTime = window.performance.now()
+
+  function step(now) {
+    const elapsed = now - startTime
+    const progress = Math.min(elapsed / duration, 1)
+    window.scrollTo(0, startY + distance * easeInOutCubic(progress))
+
+    if (progress < 1) {
+      window.requestAnimationFrame(step)
+    } else {
+      requestPaletteSync()
+    }
+  }
+
+  window.requestAnimationFrame(step)
+}
 
 function selectItem(item) {
   selectedPreviewPosition.value = {
@@ -221,35 +270,39 @@ onBeforeUnmount(() => {
       <div
         class="menu-decoration menu-decoration--top"
         :class="{ 'is-visible': showTopCartel }"
-        aria-hidden="true"
+        aria-label="Secciones de comida"
       >
         <span class="menu-decoration__plate"></span>
         <span class="menu-decoration__lines"></span>
         <span class="menu-decoration__labels">
-          <span
+          <button
             v-for="section in rightCartelSections"
             :key="section.index"
+            type="button"
             :class="{ 'is-active': section.index === activeCartelSectionIndex }"
+            @click="scrollToMainSection(section.targetIndex)"
           >
             {{ section.name }}
-          </span>
+          </button>
         </span>
       </div>
       <div
         class="menu-decoration menu-decoration--bottom"
         :class="{ 'is-visible': showBottomCartel }"
-        aria-hidden="true"
+        aria-label="Secciones de bebidas"
       >
         <span class="menu-decoration__plate"></span>
         <span class="menu-decoration__lines"></span>
         <span class="menu-decoration__labels">
-          <span
+          <button
             v-for="section in leftCartelSections"
             :key="section.index"
+            type="button"
             :class="{ 'is-active': section.index === activeCartelSectionIndex }"
+            @click="scrollToMainSection(section.targetIndex)"
           >
             {{ section.name }}
-          </span>
+          </button>
         </span>
       </div>
     </Teleport>
@@ -415,7 +468,7 @@ onBeforeUnmount(() => {
   z-index: 24;
   --cartel-perspective-tilt: -3deg;
   --cartel-offset-y: 0px;
-  width: clamp(244px, 46vw, 488px);
+  width: clamp(218px, 39vw, 420px);
   height: clamp(104px, 20vw, 208px);
   opacity: 0;
   pointer-events: none;
@@ -474,31 +527,55 @@ onBeforeUnmount(() => {
 
 .menu-decoration__labels {
   position: absolute;
-  inset: 24px calc(24% + 12px) 20px 36px;
+  inset: 14px calc(22% + 8px) 14px 18px;
   z-index: 2;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-content: start;
-  gap: 10px 18px;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 0;
   color: var(--color-secondary);
-  font-size: clamp(0.88rem, 1.8vw, 1.28rem);
+  font-size: clamp(1.05rem, 2.25vw, 1.62rem);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 0.95;
   text-transform: uppercase;
   transition: color 520ms ease;
 }
 
-.menu-decoration__labels span {
-  min-height: 1.05em;
+.menu-decoration__labels button {
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-family: 'Robust', 'Arial Black', Impact, Haettenschweiler, sans-serif;
+  font-size: inherit;
+  font-weight: 900;
+  font-stretch: expanded;
+  letter-spacing: 0;
   opacity: 0.42;
   overflow: hidden;
+  pointer-events: auto;
+  text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
+  transform: scaleX(1.16);
+  transform-origin: left center;
   transition: opacity 180ms ease;
 }
 
-.menu-decoration__labels span.is-active {
+.menu-decoration__labels button:hover,
+.menu-decoration__labels button:focus-visible,
+.menu-decoration__labels button.is-active {
   opacity: 1;
+}
+
+.menu-decoration__labels button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
 }
 
 .menu-decoration--top {
@@ -525,7 +602,7 @@ onBeforeUnmount(() => {
 }
 
 .menu-decoration--bottom .menu-decoration__labels {
-  inset: 24px 36px 20px calc(24% + 12px);
+  inset: 14px 18px 14px calc(22% + 8px);
 }
 
 .item-preview-backdrop {
