@@ -9,6 +9,7 @@
     "dev:full": "vercel dev",
     "build": "vite build",
     "preview": "vite preview",
+    "qr:tables": "node scripts/generate-table-qr.mjs",
     "staff:create": "node scripts/create-staff-user.mjs"
   },
   "dependencies": {
@@ -21,6 +22,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.7",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.34.5",
     "vite": "^8.0.13"
   }
 }
