@@ -66,8 +66,10 @@ const sectionElements = ref([])
 const selectedItem = ref(null)
 const selectedPreviewPosition = ref({ x: 0, y: 0 })
 const activeSectionIndex = ref(0)
+const hasShownCartels = ref(false)
 let paletteFrame = 0
 let activePaletteIndex = -1
+let cartelIntroTimeout = 0
 
 function setSectionElement(element, index) {
   if (element) {
@@ -144,8 +146,9 @@ const activeCartelSectionIndex = computed(() => {
 
   return activeSectionIndex.value - displayedMenuSections.value.length + 1
 })
-const showBottomCartel = computed(() => activeSectionIndex.value < lastSectionIndex.value)
-const showTopCartel = computed(() => showBottomCartel.value)
+const showCartels = computed(() => hasShownCartels.value)
+const showBottomCartel = computed(() => showCartels.value)
+const showTopCartel = computed(() => showCartels.value)
 
 function easeInOutCubic(progress) {
   return progress < 0.5
@@ -162,11 +165,15 @@ function scrollToMainSection(targetIndex) {
 
   clearSelectedItem()
 
-  const headerOffset = 18
+  const headerHeight =
+    Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--app-header-height')) ||
+    document.querySelector('.app-header')?.getBoundingClientRect().height ||
+    0
+  const headerOffset = headerHeight + 18
   const startY = window.scrollY || document.documentElement.scrollTop || 0
   const targetY = startY + target.getBoundingClientRect().top - headerOffset
   const distance = targetY - startY
-  const duration = 900
+  const duration = 1050
   const startTime = window.performance.now()
 
   function step(now) {
@@ -252,6 +259,9 @@ onMounted(() => {
   window.addEventListener('resize', requestPaletteSync)
   window.requestAnimationFrame(syncActivePalette)
   window.setTimeout(syncActivePalette, 80)
+  cartelIntroTimeout = window.setTimeout(() => {
+    hasShownCartels.value = true
+  }, 1000)
 })
 
 onBeforeUnmount(() => {
@@ -260,6 +270,10 @@ onBeforeUnmount(() => {
 
   if (paletteFrame) {
     window.cancelAnimationFrame(paletteFrame)
+  }
+
+  if (cartelIntroTimeout) {
+    window.clearTimeout(cartelIntroTimeout)
   }
 })
 </script>
@@ -466,6 +480,8 @@ onBeforeUnmount(() => {
 .menu-decoration {
   position: fixed;
   z-index: 24;
+  --cartel-border-color: color-mix(in srgb, var(--color-border) 58%, #000000);
+  --cartel-fill-color: color-mix(in srgb, var(--color-border) 78%, #000000);
   --cartel-perspective-tilt: -3deg;
   --cartel-offset-y: 0px;
   width: clamp(218px, 39vw, 420px);
@@ -494,11 +510,11 @@ onBeforeUnmount(() => {
   inset: 10px auto 10px 10px;
   z-index: 1;
   width: 78%;
-  background: color-mix(in srgb, var(--color-border) 78%, #000000);
-  border: 3px solid color-mix(in srgb, var(--color-border) 58%, #000000);
+  background: var(--cartel-fill-color);
+  border: 3px solid var(--cartel-border-color);
   box-shadow:
     0 0 0 4px var(--color-secondary),
-    0 0 0 7px color-mix(in srgb, var(--color-border) 72%, #000000);
+    0 0 0 7px var(--cartel-border-color);
   transition:
     background 520ms ease,
     border-color 520ms ease,
@@ -511,15 +527,16 @@ onBeforeUnmount(() => {
   right: 0;
   z-index: 0;
   width: 28%;
-  height: 42%;
-  background: linear-gradient(
+  height: 60px;
+  background: repeating-linear-gradient(
     to bottom,
-    var(--color-border) 0 33.333%,
-    var(--color-background) 33.333% 66.666%,
-    var(--color-secondary) 66.666% 100%
+    var(--cartel-border-color) 0 4px,
+    var(--color-secondary) 4px 8px,
+    var(--cartel-fill-color) 8px 12px,
+    var(--cartel-border-color) 12px 16px,
+    transparent 16px 20px
   );
-  background-size: 100% 24px;
-  background-repeat: repeat-y;
+  background-repeat: no-repeat;
   transition:
     background 520ms ease,
     box-shadow 520ms ease;
@@ -527,7 +544,7 @@ onBeforeUnmount(() => {
 
 .menu-decoration__labels {
   position: absolute;
-  inset: 14px calc(22% + 8px) 14px 18px;
+  inset: 14px calc(22% + 8px) 14px 28px;
   z-index: 2;
   display: grid;
   grid-template-rows: repeat(3, minmax(0, 1fr));
@@ -673,9 +690,9 @@ onBeforeUnmount(() => {
 
 .section-rail {
   display: grid;
-  grid-auto-columns: minmax(260px, 340px);
+  grid-auto-columns: minmax(276px, 356px);
   grid-auto-flow: column;
-  gap: clamp(14px, 2.4vw, 24px);
+  gap: clamp(6px, 1.2vw, 12px);
   width: 100%;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
@@ -685,12 +702,16 @@ onBeforeUnmount(() => {
 }
 
 .section-rail--placeholder {
-  grid-auto-flow: row;
-  grid-auto-columns: unset;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  --placeholder-gap: clamp(14px, 2.4vw, 24px);
+  grid-auto-flow: column;
+  grid-auto-columns: calc((min(100vw - 32px, 1180px) - (var(--placeholder-gap) * 3)) / 4);
+  grid-template-columns: none;
+  gap: var(--placeholder-gap);
   width: min(100% - 32px, 1180px);
   margin: 0 auto;
-  overflow-x: visible;
+  overflow-x: auto;
+  scroll-padding-inline: 0;
+  scroll-snap-type: x mandatory;
   padding: 4px 0 20px;
 }
 
@@ -713,9 +734,11 @@ onBeforeUnmount(() => {
 }
 
 .menu-card {
+  position: relative;
   display: grid;
   grid-template-rows: 260px 1fr;
   min-height: 470px;
+  margin: 10px;
   border: 2px solid var(--color-border);
   border-radius: 8px;
   background: var(--color-surface);
@@ -729,6 +752,16 @@ onBeforeUnmount(() => {
     background-color 520ms ease,
     border-color 520ms ease,
     color 520ms ease;
+}
+
+.menu-card::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  z-index: -1;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  pointer-events: none;
 }
 
 .menu-card:hover,

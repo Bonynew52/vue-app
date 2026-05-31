@@ -226,8 +226,11 @@ function closeMenu() {
 }
 
 .menu-layout .app-footer {
-  background: var(--color-second);
-  transition: background-color 420ms ease;
+  border-top-color: var(--color-border);
+  background: var(--color-background);
+  transition:
+    background-color 420ms ease,
+    border-color 420ms ease;
 }
 
 .order-layout .app-footer {
@@ -252,7 +255,7 @@ function closeMenu() {
 }
 
 .menu-layout .site-footer {
-  color: var(--color-text);
+  color: var(--color-border);
   transition: color 420ms ease;
 }
 
