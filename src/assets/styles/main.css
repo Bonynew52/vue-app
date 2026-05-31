@@ -1,35 +1,5 @@
 @import './tokens.css';
 
-@property --background-left {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #c6dad6;
-}
-
-@property --background-right {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #b6cfcb;
-}
-
-@property --color-first {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #c6dad6;
-}
-
-@property --color-second {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #b6cfcb;
-}
-
-@property --color-third {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #aa7e85;
-}
-
 :root {
   color: var(--color-text);
   background:

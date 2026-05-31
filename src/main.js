@@ -2,9 +2,14 @@ import { createApp } from 'vue'
 import { convexVue } from 'convex-vue'
 import App from './App.vue'
 import { router } from './router'
+import { setupSentry } from './lib/sentry'
 import './assets/styles/main.css'
 
-const app = createApp(App).use(router)
+const app = createApp(App)
+
+setupSentry(app, router)
+
+app.use(router)
 
 const convexUrl = import.meta.env.VITE_CONVEX_URL
 if (convexUrl) {
