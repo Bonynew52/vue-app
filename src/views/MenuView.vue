@@ -74,6 +74,9 @@ const sectionElements = ref([])
 const selectedItem = ref(null)
 const selectedPreviewPosition = ref({ x: 0, y: 0 })
 const activeSectionIndex = ref(0)
+const isSmallMenuViewport = ref(
+  typeof window !== 'undefined' ? window.matchMedia('(max-width: 640px)').matches : false,
+)
 const hasShownCartels = ref(false)
 const areCartelsEnabled = false
 let paletteFrame = 0
@@ -117,20 +120,21 @@ const selectedPreviewStyle = computed(() => ({
   '--preview-y': `${selectedPreviewPosition.value.y}px`,
 }))
 
+const renderedPlaceholderGroups = computed(() => (isSmallMenuViewport.value ? [] : placeholderGroups))
 const drinksSectionIndex = computed(() => displayedMenuSections.value.length)
 const lastSectionIndex = computed(
-  () => displayedMenuSections.value.length + placeholderGroups.length - 1,
+  () => displayedMenuSections.value.length + renderedPlaceholderGroups.value.length - 1,
 )
 const cartelSections = computed(() => {
   const placeholderIndexByName = new Map(
-    placeholderGroups.map((section, index) => [section.name.toLowerCase(), index]),
+    renderedPlaceholderGroups.value.map((section, index) => [section.name.toLowerCase(), index]),
   )
   const targetFor = (name) => {
     if (name === 'Cafes') {
       return 0
     }
 
-    return displayedMenuSections.value.length + placeholderIndexByName.get(name.toLowerCase())
+    return displayedMenuSections.value.length + (placeholderIndexByName.get(name.toLowerCase()) ?? 0)
   }
 
   return {
@@ -268,9 +272,19 @@ function isSmallViewport() {
   return window.matchMedia('(max-width: 640px)').matches
 }
 
+function syncMenuViewport() {
+  isSmallMenuViewport.value = isSmallViewport()
+}
+
+function handleWindowResize() {
+  syncMenuViewport()
+  requestPaletteSync()
+}
+
 onMounted(() => {
   applySectionPalette(0)
   activePaletteIndex = -1
+  syncMenuViewport()
 
   sectionElements.value.forEach((element, index) => {
     element.dataset.sectionIndex = String(index)
@@ -278,10 +292,11 @@ onMounted(() => {
 
   if (!isSmallViewport()) {
     window.addEventListener('scroll', handleWindowScroll, { passive: true })
-    window.addEventListener('resize', requestPaletteSync)
     window.requestAnimationFrame(syncActivePalette)
     window.setTimeout(syncActivePalette, 80)
   }
+
+  window.addEventListener('resize', handleWindowResize)
 
   if (areCartelsEnabled) {
     cartelIntroTimeout = window.setTimeout(() => {
@@ -292,7 +307,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleWindowScroll)
-  window.removeEventListener('resize', requestPaletteSync)
+  window.removeEventListener('resize', handleWindowResize)
 
   if (paletteFrame) {
     window.cancelAnimationFrame(paletteFrame)
@@ -431,7 +446,7 @@ onBeforeUnmount(() => {
     </section>
 
     <section
-      v-for="(section, sectionIndex) in placeholderGroups"
+      v-for="(section, sectionIndex) in renderedPlaceholderGroups"
       :key="section.id"
       :ref="(element) => setSectionElement(element, sectionIndex + displayedMenuSections.length)"
       class="menu-section"
@@ -719,6 +734,8 @@ onBeforeUnmount(() => {
 .menu-section {
   display: grid;
   gap: clamp(16px, 3vw, 24px);
+  content-visibility: auto;
+  contain-intrinsic-size: 560px;
 }
 
 .section-header {
@@ -959,6 +976,11 @@ onBeforeUnmount(() => {
 
   .menu-view {
     gap: 38px;
+    overflow-x: clip;
+  }
+
+  .menu-section {
+    contain-intrinsic-size: 520px;
   }
 
   .section-rail {
