@@ -150,6 +150,10 @@ const showCartels = computed(() => hasShownCartels.value)
 const showBottomCartel = computed(() => showCartels.value)
 const showTopCartel = computed(() => showCartels.value)
 
+function imageLoadingMode(sectionIndex) {
+  return sectionIndex === 0 ? 'eager' : 'lazy'
+}
+
 function easeInOutCubic(progress) {
   return progress < 0.5
     ? 4 * progress * progress * progress
@@ -383,7 +387,14 @@ onBeforeUnmount(() => {
             @keydown.space.prevent="selectItem(item)"
           >
             <div class="menu-card__image">
-              <img v-if="item.image" :src="item.image" :alt="item.name" />
+              <img
+                v-if="item.image"
+                :src="item.image"
+                :alt="item.name"
+                :loading="imageLoadingMode(sectionIndex)"
+                decoding="async"
+                draggable="false"
+              />
               <span v-else aria-hidden="true"></span>
             </div>
 
@@ -425,7 +436,14 @@ onBeforeUnmount(() => {
           @keydown.space.prevent="selectItem(item)"
         >
           <div class="menu-card__image">
-            <img v-if="item.image" :src="item.image" :alt="item.name" />
+            <img
+              v-if="item.image"
+              :src="item.image"
+              :alt="item.name"
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+            />
             <span v-else aria-hidden="true"></span>
           </div>
 
@@ -886,6 +904,10 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 640px) {
+  .menu-decoration {
+    display: none;
+  }
+
   .menu-view {
     gap: 38px;
   }
