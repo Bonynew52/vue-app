@@ -75,6 +75,7 @@ const selectedItem = ref(null)
 const selectedPreviewPosition = ref({ x: 0, y: 0 })
 const activeSectionIndex = ref(0)
 const hasShownCartels = ref(false)
+const areCartelsEnabled = false
 let paletteFrame = 0
 let activePaletteIndex = -1
 let cartelIntroTimeout = 0
@@ -154,9 +155,13 @@ const activeCartelSectionIndex = computed(() => {
 
   return activeSectionIndex.value - displayedMenuSections.value.length + 1
 })
-const showCartels = computed(() => hasShownCartels.value)
+const showCartels = computed(() => areCartelsEnabled && hasShownCartels.value)
 const showBottomCartel = computed(() => showCartels.value)
 const showTopCartel = computed(() => showCartels.value)
+
+function imageLoadingMode(sectionIndex) {
+  return sectionIndex === 0 ? 'eager' : 'lazy'
+}
 
 function easeInOutCubic(progress) {
   return progress < 0.5
@@ -245,6 +250,10 @@ function syncActivePalette() {
 }
 
 function requestPaletteSync() {
+  if (isSmallViewport()) {
+    return
+  }
+
   if (!paletteFrame) {
     paletteFrame = window.requestAnimationFrame(syncActivePalette)
   }
@@ -255,6 +264,10 @@ function handleWindowScroll() {
   requestPaletteSync()
 }
 
+function isSmallViewport() {
+  return window.matchMedia('(max-width: 640px)').matches
+}
+
 onMounted(() => {
   applySectionPalette(0)
   activePaletteIndex = -1
@@ -263,13 +276,18 @@ onMounted(() => {
     element.dataset.sectionIndex = String(index)
   })
 
-  window.addEventListener('scroll', handleWindowScroll, { passive: true })
-  window.addEventListener('resize', requestPaletteSync)
-  window.requestAnimationFrame(syncActivePalette)
-  window.setTimeout(syncActivePalette, 80)
-  cartelIntroTimeout = window.setTimeout(() => {
-    hasShownCartels.value = true
-  }, 1000)
+  if (!isSmallViewport()) {
+    window.addEventListener('scroll', handleWindowScroll, { passive: true })
+    window.addEventListener('resize', requestPaletteSync)
+    window.requestAnimationFrame(syncActivePalette)
+    window.setTimeout(syncActivePalette, 80)
+  }
+
+  if (areCartelsEnabled) {
+    cartelIntroTimeout = window.setTimeout(() => {
+      hasShownCartels.value = true
+    }, 1000)
+  }
 })
 
 onBeforeUnmount(() => {
@@ -288,7 +306,7 @@ onBeforeUnmount(() => {
 
 <template>
   <main class="menu-view">
-    <Teleport to="body">
+    <Teleport v-if="areCartelsEnabled" to="body">
       <div
         class="menu-decoration menu-decoration--top"
         :class="{ 'is-visible': showTopCartel }"
@@ -391,7 +409,14 @@ onBeforeUnmount(() => {
             @keydown.space.prevent="selectItem(item)"
           >
             <div class="menu-card__image">
-              <img v-if="item.image" :src="item.image" :alt="item.name" />
+              <img
+                v-if="item.image"
+                :src="item.image"
+                :alt="item.name"
+                :loading="imageLoadingMode(sectionIndex)"
+                decoding="async"
+                draggable="false"
+              />
               <span v-else aria-hidden="true"></span>
             </div>
 
@@ -442,7 +467,14 @@ onBeforeUnmount(() => {
               @keydown.space.prevent="selectItem(item)"
             >
               <div class="menu-card__image">
-                <img v-if="item.image" :src="item.image" :alt="item.name" />
+                <img
+                  v-if="item.image"
+                  :src="item.image"
+                  :alt="item.name"
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                />
                 <span v-else aria-hidden="true"></span>
               </div>
 
@@ -921,6 +953,10 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 640px) {
+  .menu-decoration {
+    display: none;
+  }
+
   .menu-view {
     gap: 38px;
   }

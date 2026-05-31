@@ -2,6 +2,7 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { authClient } from '../lib/auth-client'
+import brandLogo from '../assets/background/belly_monster_logo.png'
 
 const router = useRouter()
 
@@ -39,127 +40,186 @@ async function signIn() {
 
 <template>
   <main class="staff-login">
-    <section class="login-card">
-      <p class="eyebrow">Belly Monster Bites</p>
-      <h1>Panel del personal</h1>
-      <p class="copy">Entra para ver pedidos de mesa y pasarlos a Parrot.</p>
+    <div class="login-card">
+      <img class="login-logo" :src="brandLogo" alt="Belly Monster Bites" />
 
-      <form class="login-form" @submit.prevent="signIn">
-        <label>
-          Correo
+      <h1 class="login-title">Acceso del personal</h1>
+      <p class="login-sub">Tablero de pedidos de mesa · uso interno</p>
+
+      <form class="login-form" name="staff-login" @submit.prevent="signIn">
+        <div class="field">
+          <label for="staff-email">Correo</label>
           <input
+            id="staff-email"
             v-model="form.email"
+            name="email"
             type="email"
             autocomplete="username"
             inputmode="email"
+            autocapitalize="off"
+            spellcheck="false"
             required
           />
-        </label>
+        </div>
 
-        <label>
-          Contraseña
+        <div class="field">
+          <label for="staff-password">Contraseña</label>
           <input
+            id="staff-password"
             v-model="form.password"
+            name="password"
             type="password"
             autocomplete="current-password"
             required
           />
-        </label>
+        </div>
 
-        <button type="submit" :disabled="isSubmitting">
-          {{ isSubmitting ? 'Entrando...' : 'Entrar' }}
+        <p v-if="error" class="login-error" role="alert">{{ error }}</p>
+
+        <button class="login-submit" type="submit" :disabled="isSubmitting">
+          {{ isSubmitting ? 'Entrando…' : 'Entrar al tablero' }}
         </button>
-
-        <p v-if="error" class="error">{{ error }}</p>
       </form>
-    </section>
+    </div>
   </main>
 </template>
 
 <style scoped>
 .staff-login {
-  min-height: calc(100svh - var(--app-header-height, 0px));
+  --bg: #fff8ef;
+  --surface: #ffffff;
+  --line: #efe1cb;
+  --ink: #2e1c12;
+  --coffee: #7e4743;
+  --muted: #9c8473;
+  --faint: #c2ad97;
+  --orange: #d36c00;
+  --orange-press: #b85e00;
+  --danger: #c0392b;
+
   display: grid;
   place-items: center;
-  padding: max(24px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
-  background: #fff8ef;
-  color: #2a1c14;
+  min-height: 100svh;
+  padding: max(28px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
+  background:
+    radial-gradient(120% 70% at 50% -8%, rgb(248 217 74 / 28%) 0%, rgb(248 217 74 / 0%) 55%),
+    var(--bg);
+  color: var(--ink);
+  font-family: 'Archivo', system-ui, -apple-system, sans-serif;
 }
 
 .login-card {
+  position: relative;
   width: min(100%, 390px);
-  padding: 24px;
-  border: 1px solid #eadfce;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 18px 50px rgb(42 28 20 / 12%);
+  padding: 64px 32px 30px;
+  margin-top: 52px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: 0 2px 4px rgb(46 28 18 / 5%), 0 22px 50px rgb(46 28 18 / 9%);
+  text-align: center;
 }
 
-.eyebrow {
-  margin: 0 0 8px;
-  color: #8b7a6d;
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  text-transform: uppercase;
+.login-logo {
+  position: absolute;
+  top: -52px;
+  left: 50%;
+  width: 104px;
+  height: 104px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  box-shadow: 0 8px 22px rgb(126 71 67 / 22%);
 }
 
-h1 {
-  margin: 0;
-  font-size: 2rem;
-  line-height: 1;
+.login-title {
+  margin: 0 0 5px;
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
-.copy {
-  margin: 12px 0 22px;
-  color: #6f4e37;
-  line-height: 1.45;
+.login-sub {
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .login-form {
   display: grid;
   gap: 16px;
+  text-align: left;
 }
 
-label {
+.field {
   display: grid;
   gap: 7px;
-  color: #2a1c14;
-  font-weight: 800;
 }
 
-input {
+.field label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--coffee);
+}
+
+.field input {
   width: 100%;
-  min-height: 46px;
-  border: 1px solid #ded0bf;
-  border-radius: 8px;
-  padding: 0 13px;
-  background: #fffaf4;
-  color: #2a1c14;
+  min-height: 52px;
+  padding: 0 15px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fffaf3;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
 }
 
-input:focus {
-  outline: 3px solid rgb(31 157 87 / 18%);
-  border-color: #1f9d57;
+.field input:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgb(211 108 0 / 18%);
 }
 
-button {
-  min-height: 50px;
+.login-error {
+  margin: -2px 0 0;
+  padding: 10px 12px;
+  border: 1px solid rgb(192 57 43 / 24%);
+  border-radius: 10px;
+  background: rgb(192 57 43 / 7%);
+  color: var(--danger);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.login-submit {
+  min-height: 54px;
+  margin-top: 4px;
   border: 0;
-  border-radius: 8px;
-  background: #1f9d57;
+  border-radius: 13px;
+  background: var(--orange);
   color: #fff;
-  font-weight: 900;
-}
-
-button:disabled {
-  cursor: progress;
-  opacity: 0.68;
-}
-
-.error {
-  margin: 0;
-  color: #b42a2a;
+  font-size: 1.04rem;
   font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: 0 6px 16px rgb(211 108 0 / 28%);
+  transition: background-color 140ms ease, transform 80ms ease;
+}
+
+.login-submit:hover {
+  background: var(--orange-press);
+}
+
+.login-submit:active {
+  transform: translateY(1px);
+}
+
+.login-submit:disabled {
+  cursor: progress;
+  opacity: 0.62;
+  box-shadow: none;
 }
 </style>

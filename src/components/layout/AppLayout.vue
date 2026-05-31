@@ -136,12 +136,9 @@ function closeMenu() {
 
 .app-layout.orders-layout,
 .app-layout.login-layout {
+  --app-header-height: 0px;
   --app-footer-min-height: 0px;
   background: #fff8ef;
-}
-
-.app-layout.orders-layout {
-  --app-header-height: 0px;
 }
 
 .app-header {
@@ -174,6 +171,7 @@ function closeMenu() {
 .order-layout .app-footer,
 .orders-layout .app-header,
 .orders-layout .app-footer,
+.login-layout .app-header,
 .login-layout .app-footer {
   display: none;
 }
@@ -228,8 +226,11 @@ function closeMenu() {
 }
 
 .menu-layout .app-footer {
-  background: var(--color-second);
-  transition: background-color 420ms ease;
+  border-top-color: var(--color-border);
+  background: var(--color-background);
+  transition:
+    background-color 420ms ease,
+    border-color 420ms ease;
 }
 
 .order-layout .app-footer {
@@ -254,7 +255,7 @@ function closeMenu() {
 }
 
 .menu-layout .site-footer {
-  color: var(--color-text);
+  color: var(--color-border);
   transition: color 420ms ease;
 }
 
