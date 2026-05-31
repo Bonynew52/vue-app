@@ -47,11 +47,37 @@ const displayedMenuSections = computed(() => {
   return sections
 })
 
+const placeholderGroups = ['Bebidas', 'Desayunos', 'Sandwiches', 'Toast', 'Postres'].map(
+  (name, groupIndex) => ({
+    id: `menu-placeholder-${groupIndex}`,
+    name,
+    subsections: Array.from({ length: 3 }, (_, subsectionIndex) => ({
+      id: `menu-placeholder-${groupIndex}-subsection-${subsectionIndex}`,
+      name: `Placeholder ${subsectionIndex + 1}`,
+      items: Array.from({ length: 4 }, (_, itemIndex) => {
+        const productIndex = subsectionIndex * 4 + itemIndex + 1
+
+        return {
+          id: `menu-placeholder-${groupIndex}-${productIndex}`,
+          name: `${name} ${productIndex}`,
+          description: 'Espacio temporal para acomodar esta seccion del menu.',
+          price: 0,
+          hasPrice: false,
+          image: '',
+        }
+      }),
+    })),
+  }),
+)
+
 const sectionElements = ref([])
 const selectedItem = ref(null)
 const selectedPreviewPosition = ref({ x: 0, y: 0 })
+const activeSectionIndex = ref(0)
+const hasShownCartels = ref(false)
 let paletteFrame = 0
 let activePaletteIndex = -1
+let cartelIntroTimeout = 0
 
 function setSectionElement(element, index) {
   if (element) {
@@ -90,6 +116,89 @@ const selectedPreviewStyle = computed(() => ({
   '--preview-y': `${selectedPreviewPosition.value.y}px`,
 }))
 
+const drinksSectionIndex = computed(() => displayedMenuSections.value.length)
+const lastSectionIndex = computed(
+  () => displayedMenuSections.value.length + placeholderGroups.length - 1,
+)
+const cartelSections = computed(() => {
+  const placeholderIndexByName = new Map(
+    placeholderGroups.map((section, index) => [section.name.toLowerCase(), index]),
+  )
+  const targetFor = (name) => {
+    if (name === 'Cafes') {
+      return 0
+    }
+
+    return displayedMenuSections.value.length + placeholderIndexByName.get(name.toLowerCase())
+  }
+
+  return {
+    left: [
+      { index: 0, name: 'Cafes', targetIndex: targetFor('Cafes') },
+      { index: 1, name: 'Bebidas', targetIndex: targetFor('Bebidas') },
+      { index: 5, name: 'Postres', targetIndex: targetFor('Postres') },
+    ],
+    right: [
+      { index: 2, name: 'Desayunos', targetIndex: targetFor('Desayunos') },
+      { index: 3, name: 'Sandwiches', targetIndex: targetFor('Sandwiches') },
+      { index: 4, name: 'Toasts', targetIndex: targetFor('Toast') },
+    ],
+  }
+})
+const leftCartelSections = computed(() => cartelSections.value.left)
+const rightCartelSections = computed(() => cartelSections.value.right)
+const activeCartelSectionIndex = computed(() => {
+  if (activeSectionIndex.value < displayedMenuSections.value.length) {
+    return 0
+  }
+
+  return activeSectionIndex.value - displayedMenuSections.value.length + 1
+})
+const showCartels = computed(() => hasShownCartels.value)
+const showBottomCartel = computed(() => showCartels.value)
+const showTopCartel = computed(() => showCartels.value)
+
+function easeInOutCubic(progress) {
+  return progress < 0.5
+    ? 4 * progress * progress * progress
+    : 1 - Math.pow(-2 * progress + 2, 3) / 2
+}
+
+function scrollToMainSection(targetIndex) {
+  const target = sectionElements.value[targetIndex]
+
+  if (!target) {
+    return
+  }
+
+  clearSelectedItem()
+
+  const headerHeight =
+    Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--app-header-height')) ||
+    document.querySelector('.app-header')?.getBoundingClientRect().height ||
+    0
+  const headerOffset = headerHeight + 18
+  const startY = window.scrollY || document.documentElement.scrollTop || 0
+  const targetY = startY + target.getBoundingClientRect().top - headerOffset
+  const distance = targetY - startY
+  const duration = 1050
+  const startTime = window.performance.now()
+
+  function step(now) {
+    const elapsed = now - startTime
+    const progress = Math.min(elapsed / duration, 1)
+    window.scrollTo(0, startY + distance * easeInOutCubic(progress))
+
+    if (progress < 1) {
+      window.requestAnimationFrame(step)
+    } else {
+      requestPaletteSync()
+    }
+  }
+
+  window.requestAnimationFrame(step)
+}
+
 function selectItem(item) {
   selectedPreviewPosition.value = {
     x: window.innerWidth / 2,
@@ -108,6 +217,7 @@ function syncActivePalette() {
 
   if (scrollTop <= 4) {
     activePaletteIndex = 0
+    activeSectionIndex.value = 0
     applySectionPalette(0)
 
     return
@@ -126,6 +236,7 @@ function syncActivePalette() {
   }
 
   const nextIndex = Number(activeSection.dataset.sectionIndex || 0)
+  activeSectionIndex.value = nextIndex
 
   if (nextIndex !== activePaletteIndex) {
     activePaletteIndex = nextIndex
@@ -156,6 +267,9 @@ onMounted(() => {
   window.addEventListener('resize', requestPaletteSync)
   window.requestAnimationFrame(syncActivePalette)
   window.setTimeout(syncActivePalette, 80)
+  cartelIntroTimeout = window.setTimeout(() => {
+    hasShownCartels.value = true
+  }, 1000)
 })
 
 onBeforeUnmount(() => {
@@ -165,11 +279,56 @@ onBeforeUnmount(() => {
   if (paletteFrame) {
     window.cancelAnimationFrame(paletteFrame)
   }
+
+  if (cartelIntroTimeout) {
+    window.clearTimeout(cartelIntroTimeout)
+  }
 })
 </script>
 
 <template>
   <main class="menu-view">
+    <Teleport to="body">
+      <div
+        class="menu-decoration menu-decoration--top"
+        :class="{ 'is-visible': showTopCartel }"
+        aria-label="Secciones de comida"
+      >
+        <span class="menu-decoration__plate"></span>
+        <span class="menu-decoration__lines"></span>
+        <span class="menu-decoration__labels">
+          <button
+            v-for="section in rightCartelSections"
+            :key="section.index"
+            type="button"
+            :class="{ 'is-active': section.index === activeCartelSectionIndex }"
+            @click="scrollToMainSection(section.targetIndex)"
+          >
+            {{ section.name }}
+          </button>
+        </span>
+      </div>
+      <div
+        class="menu-decoration menu-decoration--bottom"
+        :class="{ 'is-visible': showBottomCartel }"
+        aria-label="Secciones de bebidas"
+      >
+        <span class="menu-decoration__plate"></span>
+        <span class="menu-decoration__lines"></span>
+        <span class="menu-decoration__labels">
+          <button
+            v-for="section in leftCartelSections"
+            :key="section.index"
+            type="button"
+            :class="{ 'is-active': section.index === activeCartelSectionIndex }"
+            @click="scrollToMainSection(section.targetIndex)"
+          >
+            {{ section.name }}
+          </button>
+        </span>
+      </div>
+    </Teleport>
+
     <Teleport to="body">
       <Transition name="backdrop-fade">
         <button
@@ -195,45 +354,106 @@ onBeforeUnmount(() => {
       </Transition>
     </Teleport>
 
+    <header class="menu-page-title">
+      <h1>Menu</h1>
+    </header>
+
+    <section class="menu-group" aria-label="Cafes">
+      <header class="menu-group-header">
+        <h2>Cafes</h2>
+      </header>
+
+      <section
+        v-for="(section, sectionIndex) in displayedMenuSections"
+        :key="section.id"
+        :ref="(element) => setSectionElement(element, sectionIndex)"
+        class="menu-section"
+        :aria-label="section.name"
+      >
+        <header class="section-header">
+          <h1>{{ section.name }}</h1>
+        </header>
+
+        <div
+          class="section-rail"
+          tabindex="0"
+          :aria-label="`Productos de ${section.name}`"
+          @scroll.passive="clearSelectedItem"
+        >
+          <article
+            v-for="item in section.items"
+            :key="item.id"
+            class="menu-card"
+            role="button"
+            tabindex="0"
+            @click="selectItem(item)"
+            @keydown.enter.prevent="selectItem(item)"
+            @keydown.space.prevent="selectItem(item)"
+          >
+            <div class="menu-card__image">
+              <img v-if="item.image" :src="item.image" :alt="item.name" />
+              <span v-else aria-hidden="true"></span>
+            </div>
+
+            <div class="menu-card__copy">
+              <h2>{{ item.name }}</h2>
+              <p>{{ item.description || 'Descripcion temporal del producto.' }}</p>
+              <strong>{{ priceLabel(item) }}</strong>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+
     <section
-      v-for="(section, sectionIndex) in displayedMenuSections"
+      v-for="(section, sectionIndex) in placeholderGroups"
       :key="section.id"
-      :ref="(element) => setSectionElement(element, sectionIndex)"
+      :ref="(element) => setSectionElement(element, sectionIndex + displayedMenuSections.length)"
       class="menu-section"
       :aria-label="section.name"
     >
       <header class="section-header">
-        <p>Menu</p>
         <h1>{{ section.name }}</h1>
       </header>
 
-      <div
-        class="section-rail"
-        tabindex="0"
-        :aria-label="`Productos de ${section.name}`"
-        @scroll.passive="clearSelectedItem"
-      >
-        <article
-          v-for="item in section.items"
-          :key="item.id"
-          class="menu-card"
-          role="button"
-          tabindex="0"
-          @click="selectItem(item)"
-          @keydown.enter.prevent="selectItem(item)"
-          @keydown.space.prevent="selectItem(item)"
+      <div class="placeholder-subsections">
+        <section
+          v-for="subsection in section.subsections"
+          :key="subsection.id"
+          class="placeholder-subsection"
+          :aria-label="`${section.name}: ${subsection.name}`"
         >
-          <div class="menu-card__image">
-            <img v-if="item.image" :src="item.image" :alt="item.name" />
-            <span v-else aria-hidden="true"></span>
-          </div>
+          <h2>{{ subsection.name }}</h2>
 
-          <div class="menu-card__copy">
-            <h2>{{ item.name }}</h2>
-            <p>{{ item.description || 'Descripcion temporal del producto.' }}</p>
-            <strong>{{ priceLabel(item) }}</strong>
+          <div
+            class="section-rail section-rail--placeholder"
+            tabindex="0"
+            :aria-label="`Productos de ${section.name}, ${subsection.name}`"
+            @scroll.passive="clearSelectedItem"
+          >
+            <article
+              v-for="item in subsection.items"
+              :key="item.id"
+              class="menu-card"
+              role="button"
+              tabindex="0"
+              @click="selectItem(item)"
+              @keydown.enter.prevent="selectItem(item)"
+              @keydown.space.prevent="selectItem(item)"
+            >
+              <div class="menu-card__image">
+                <img v-if="item.image" :src="item.image" :alt="item.name" />
+                <span v-else aria-hidden="true"></span>
+              </div>
+
+              <div class="menu-card__copy">
+                <h2>{{ item.name }}</h2>
+                <p>{{ item.description || 'Descripcion temporal del producto.' }}</p>
+                <strong>{{ priceLabel(item) }}</strong>
+              </div>
+            </article>
           </div>
-        </article>
+        </section>
       </div>
     </section>
   </main>
@@ -249,6 +469,173 @@ onBeforeUnmount(() => {
   margin: 0 auto;
   padding: clamp(28px, 5vw, 64px) 0 clamp(38px, 7vw, 78px);
   animation: menu-fade-in 520ms ease both;
+}
+
+.menu-page-title,
+.menu-group-header {
+  width: min(100% - 32px, 1180px);
+  margin: 0 auto;
+  color: var(--color-text);
+  transition: color 520ms ease;
+}
+
+.menu-page-title h1 {
+  margin: 0;
+  font-size: clamp(4rem, 18vw, 11rem);
+  line-height: 0.82;
+}
+
+.menu-group {
+  display: grid;
+  gap: clamp(30px, 6vw, 64px);
+}
+
+.menu-group-header h2 {
+  margin: 0;
+  font-size: clamp(2.25rem, 8vw, 6rem);
+  line-height: 0.9;
+}
+
+.menu-decoration {
+  position: fixed;
+  z-index: 24;
+  --cartel-border-color: color-mix(in srgb, var(--color-border) 58%, #000000);
+  --cartel-fill-color: color-mix(in srgb, var(--color-border) 78%, #000000);
+  --cartel-perspective-tilt: -3deg;
+  --cartel-offset-y: 0px;
+  width: clamp(218px, 39vw, 420px);
+  height: clamp(104px, 20vw, 208px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(var(--cartel-offset-y));
+  transform-origin: right center;
+  visibility: hidden;
+  transition:
+    opacity 280ms ease,
+    visibility 260ms ease;
+}
+
+.menu-decoration.is-visible {
+  opacity: 1;
+  transform: translateY(var(--cartel-offset-y));
+  visibility: visible;
+}
+
+.menu-decoration__plate {
+  position: absolute;
+  inset: 10px auto 10px 10px;
+  z-index: 1;
+  width: 78%;
+  background: var(--cartel-fill-color);
+  border: 3px solid var(--cartel-border-color);
+  box-shadow:
+    0 0 0 4px var(--color-secondary),
+    0 0 0 7px var(--cartel-border-color);
+  transition:
+    background 520ms ease,
+    border-color 520ms ease,
+    box-shadow 520ms ease;
+}
+
+.menu-decoration__lines {
+  position: absolute;
+  top: 30%;
+  right: 0;
+  z-index: 0;
+  width: 28%;
+  height: 60px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--cartel-border-color) 0 4px,
+    var(--color-secondary) 4px 8px,
+    var(--cartel-fill-color) 8px 12px,
+    var(--cartel-border-color) 12px 16px,
+    transparent 16px 20px
+  );
+  background-repeat: no-repeat;
+  transition:
+    background 520ms ease,
+    box-shadow 520ms ease;
+}
+
+.menu-decoration__labels {
+  position: absolute;
+  inset: 14px calc(22% + 8px) 14px 28px;
+  z-index: 2;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 0;
+  color: var(--color-secondary);
+  font-size: clamp(1.05rem, 2.25vw, 1.62rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  transition: color 520ms ease;
+}
+
+.menu-decoration__labels button {
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-family: 'Robust', 'Arial Black', Impact, Haettenschweiler, sans-serif;
+  font-size: inherit;
+  font-weight: 900;
+  font-stretch: expanded;
+  letter-spacing: 0;
+  opacity: 0.42;
+  overflow: hidden;
+  pointer-events: auto;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  transform: scaleX(1.16);
+  transform-origin: left center;
+  transition: opacity 180ms ease;
+}
+
+.menu-decoration__labels button:hover,
+.menu-decoration__labels button:focus-visible,
+.menu-decoration__labels button.is-active {
+  opacity: 1;
+}
+
+.menu-decoration__labels button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.menu-decoration--top {
+  bottom: clamp(12px, 3vw, 34px);
+  right: 0;
+  --cartel-offset-y: 0px;
+}
+
+.menu-decoration--bottom {
+  z-index: 34;
+  bottom: clamp(12px, 3vw, 34px);
+  left: 0;
+  --cartel-perspective-tilt: 3deg;
+  transform-origin: left center;
+}
+
+.menu-decoration--bottom .menu-decoration__plate {
+  inset: 10px 10px 10px auto;
+}
+
+.menu-decoration--bottom .menu-decoration__lines {
+  right: auto;
+  left: 0;
+}
+
+.menu-decoration--bottom .menu-decoration__labels {
+  inset: 14px 18px 14px calc(22% + 8px);
 }
 
 .item-preview-backdrop {
@@ -309,16 +696,6 @@ onBeforeUnmount(() => {
   transition: color 520ms ease;
 }
 
-.section-header p {
-  margin: 0 0 8px;
-  color: var(--color-text);
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  text-transform: uppercase;
-  transition: color 520ms ease;
-}
-
 .section-header h1 {
   margin: 0;
   color: var(--color-text);
@@ -329,15 +706,48 @@ onBeforeUnmount(() => {
 
 .section-rail {
   display: grid;
-  grid-auto-columns: minmax(260px, 340px);
+  grid-auto-columns: minmax(276px, 356px);
   grid-auto-flow: column;
-  gap: clamp(14px, 2.4vw, 24px);
+  gap: clamp(6px, 1.2vw, 12px);
   width: 100%;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   scroll-padding-inline: max(16px, calc((100vw - 1180px) / 2));
   scroll-snap-type: x proximity;
   padding: 4px max(16px, calc((100vw - 1180px) / 2)) 20px;
+}
+
+.section-rail--placeholder {
+  --placeholder-gap: clamp(14px, 2.4vw, 24px);
+  grid-auto-flow: column;
+  grid-auto-columns: calc((min(100vw - 32px, 1180px) - (var(--placeholder-gap) * 3)) / 4);
+  grid-template-columns: none;
+  gap: var(--placeholder-gap);
+  width: min(100% - 32px, 1180px);
+  margin: 0 auto;
+  overflow-x: auto;
+  scroll-padding-inline: 0;
+  scroll-snap-type: x mandatory;
+  padding: 4px 0 20px;
+}
+
+.placeholder-subsections {
+  display: grid;
+  gap: clamp(18px, 4vw, 34px);
+}
+
+.placeholder-subsection {
+  display: grid;
+  gap: clamp(12px, 2vw, 18px);
+}
+
+.placeholder-subsection h2 {
+  width: min(100% - 32px, 1180px);
+  margin: 0 auto;
+  color: var(--color-text);
+  font-size: clamp(1.35rem, 3.6vw, 2.45rem);
+  line-height: 1;
+  transition: color 520ms ease;
 }
 
 .section-rail:focus-visible {
@@ -359,9 +769,11 @@ onBeforeUnmount(() => {
 }
 
 .menu-card {
+  position: relative;
   display: grid;
   grid-template-rows: 260px 1fr;
   min-height: 470px;
+  margin: 10px;
   border: 2px solid var(--color-border);
   border-radius: 8px;
   background: var(--color-surface);
@@ -375,6 +787,16 @@ onBeforeUnmount(() => {
     background-color 520ms ease,
     border-color 520ms ease,
     color 520ms ease;
+}
+
+.menu-card::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  z-index: -1;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  pointer-events: none;
 }
 
 .menu-card:hover,
