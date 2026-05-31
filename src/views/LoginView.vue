@@ -2,7 +2,7 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { authClient } from '../lib/auth-client'
-import brandLogo from '../assets/background/belly_monster_logo-removed.png'
+import brandLogo from '../assets/background/belly_monster_logo.png'
 
 const router = useRouter()
 

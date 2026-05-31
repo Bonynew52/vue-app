@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import backgroundLogo from '../assets/background/belly_monster_logo-removed.png'
+import backgroundLogo from '../assets/background/belly_monster_logo.png'
 import { campaigns } from '../data/campaigns'
 
 const patternModules = import.meta.glob('../assets/background/background_patterns_transparent/*', {
@@ -38,6 +38,7 @@ const activeSection = ref('')
 const selectedSection = ref('')
 const sectionElements = ref([])
 const selectedImageRatio = ref(0.8)
+const isHomeReady = ref(false)
 const viewportSize = ref({
   width: typeof window === 'undefined' ? 1440 : window.innerWidth,
   height: typeof window === 'undefined' ? 900 : window.innerHeight,
@@ -88,6 +89,7 @@ const patternSprites = computed(() => {
 })
 
 let observer
+let homeIntroTimeout = 0
 
 function getPatternEdgePoint(edge, offset, width, height, seed) {
   const x = randomRange(seed, 0.04, 0.96) * width
@@ -140,6 +142,9 @@ function updateSelectedImageRatio(event) {
 onMounted(() => {
   updateViewportSize()
   window.addEventListener('resize', updateViewportSize)
+  homeIntroTimeout = window.setTimeout(() => {
+    isHomeReady.value = true
+  }, 1000)
 
   observer = new IntersectionObserver(
     (entries) => {
@@ -171,12 +176,25 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateViewportSize)
+  window.clearTimeout(homeIntroTimeout)
   observer?.disconnect()
 })
 </script>
 
 <template>
-  <main class="home-view" :style="{ '--home-background-logo': `url(${backgroundLogo})` }">
+  <main
+    class="home-view"
+    :class="{ 'is-ready': isHomeReady }"
+    :style="{ '--home-background-logo': `url(${backgroundLogo})` }"
+  >
+    <Transition name="home-logo-intro">
+      <section v-if="!isHomeReady" class="home-logo-intro" aria-label="Belly Monster Bites">
+        <div class="home-logo-intro__card">
+          <img :src="backgroundLogo" alt="Belly Monster Bites" />
+        </div>
+      </section>
+    </Transition>
+
     <Transition name="zoom-fade">
       <button
         v-if="selectedSection"
@@ -308,30 +326,54 @@ onBeforeUnmount(() => {
   overflow-x: clip;
 }
 
-.home-view::before {
-  position: fixed;
-  top: calc(var(--app-header-height) + 12svh + (var(--logo-size) * 52 / 225));
-  left: calc(50% - (var(--logo-size) / 2) + (var(--logo-size) * 42 / 225));
-  z-index: 0;
-  width: calc(var(--logo-size) * 68 / 225);
-  height: calc(var(--logo-size) * 68 / 225);
-  border-radius: 999px;
-  background: #ffffff;
-  box-shadow: calc(var(--logo-size) * 72 / 225) 0 0 #ffffff;
-  content: "";
-  pointer-events: none;
+.home-view > :not(.home-logo-intro) {
+  opacity: 0;
+  transition: opacity 520ms ease;
 }
 
-.home-view::after {
+.home-view.is-ready > :not(.home-logo-intro) {
+  opacity: 1;
+}
+
+.home-logo-intro {
   position: fixed;
   inset: var(--app-header-height) 0 0;
-  z-index: 1;
-  background-image: var(--home-background-logo);
-  background-repeat: no-repeat;
-  background-position: center 12vh;
-  background-size: var(--logo-size) auto;
-  content: "";
-  pointer-events: none;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: var(--color-background);
+}
+
+.home-logo-intro__card {
+  display: grid;
+  place-items: center;
+  width: min(72vw, 520px);
+  aspect-ratio: 1;
+}
+
+.home-logo-intro__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.home-logo-intro-enter-active,
+.home-logo-intro-leave-active {
+  transition:
+    opacity 520ms ease,
+    filter 520ms ease;
+}
+
+.home-logo-intro-enter-from,
+.home-logo-intro-leave-to {
+  opacity: 0;
+  filter: blur(8px);
+}
+
+.home-logo-intro-enter-to,
+.home-logo-intro-leave-from {
+  opacity: 1;
+  filter: blur(0);
 }
 
 .background-patterns {
