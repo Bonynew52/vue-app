@@ -20,3 +20,5 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
 Expected result: launch **Belly Print Test**, tap **Print native test**, and verify whether the kiosk prints a small receipt.
+
+The v0.3 APK uses iMin SDK V1.3.1 with the documented USB path for D4 / Android 11 devices. Sentry Logs include `sdk.family=imin-v1`, `printer.connect_type=USB`, and `printer.status`.

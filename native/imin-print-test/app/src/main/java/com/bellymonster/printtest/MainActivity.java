@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,9 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.imin.printer.INeoPrinterCallback;
-import com.imin.printer.InitPrinterCallback;
-import com.imin.printer.PrinterHelper;
+import com.imin.printerlib.IminPrintUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,14 +27,13 @@ import io.sentry.SentryLogLevel;
 import io.sentry.logger.SentryLogParameters;
 
 public class MainActivity extends Activity {
-    private final PrinterHelper printer = PrinterHelper.getInstance();
     private final AtomicInteger sequence = new AtomicInteger(0);
     private final String sessionId = UUID.randomUUID().toString();
 
     private TextView statusView;
     private Button printButton;
-    private boolean serviceConnected;
-    private boolean serviceBindRequested;
+    private IminPrintUtils printer;
+    private boolean printerInitialized;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,25 +41,31 @@ public class MainActivity extends Activity {
         setContentView(buildContentView());
         Sentry.setTag("component", "native-imin-print-test");
         Sentry.setTag("app", "belly-monster-bites");
+        printer = IminPrintUtils.getInstance(this);
+        IminPrintUtils.setIsOpenLog(1);
         record(SentryLogLevel.INFO, "app_start", "App started", attrs(
-                "sdk.version", safeSdkVersion()
+                "sdk.family", "imin-v1",
+                "sdk.version", safeSdkVersion(),
+                "printer.connect_type", "USB"
         ));
-        initPrinterService();
+        initPrinterConnection();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         record(SentryLogLevel.INFO, "app_destroy", "App closing", attrs());
         try {
-            printer.deInitPrinterService(this);
+            if (printer != null) {
+                printer.disConnectDevices();
+            }
         } catch (Exception error) {
-            record(SentryLogLevel.WARN, "service_unbind_failed", "Printer service unbind failed", attrs(
+            record(SentryLogLevel.WARN, "printer_disconnect_failed", "Printer disconnect failed", attrs(
                     "error.type", error.getClass().getSimpleName(),
                     "error.message", String.valueOf(error.getMessage())
             ));
         }
         Sentry.flush(2000);
+        super.onDestroy();
     }
 
     private ScrollView buildContentView() {
@@ -107,90 +109,97 @@ public class MainActivity extends Activity {
         return scroll;
     }
 
-    private void initPrinterService() {
-        record(SentryLogLevel.INFO, "service_bind_start", "Binding to iMin printer service...", attrs());
+    private void initPrinterConnection() {
+        record(SentryLogLevel.INFO, "printer_v1_usb_init_start", "Initializing iMin V1 USB printer path...", attrs(
+                "printer.connect_type", "USB"
+        ));
 
-        try {
-            serviceBindRequested = printer.initPrinterService(getApplicationContext(), new InitPrinterCallback() {
-                @Override
-                public void onConnected() {
-                    serviceConnected = true;
-                    runOnUiThread(() -> printButton.setEnabled(true));
-                    record(SentryLogLevel.INFO, "service_connected", "Printer service connected.", attrs(
-                            "service.version", safeServiceVersion(),
-                            "printer.status", safePrinterStatus()
-                    ));
-                    record(SentryLogLevel.INFO, "printer_ready_prompt", "Tap the button to invoke one tiny receipt.", attrs());
-                }
+        new Thread(() -> {
+            try {
+                printer.initPrinter(IminPrintUtils.PrintConnectType.USB);
+                printerInitialized = true;
 
-                @Override
-                public void onDisconnected() {
-                    serviceConnected = false;
-                    runOnUiThread(() -> printButton.setEnabled(false));
-                    record(SentryLogLevel.WARN, "service_disconnected", "Printer service disconnected.", attrs(
-                            "printer.status", safePrinterStatus()
-                    ));
-                }
-            });
-
-            record(serviceBindRequested ? SentryLogLevel.INFO : SentryLogLevel.ERROR, "service_bind_requested", "Service bind requested: " + serviceBindRequested, attrs(
-                    "service.bind_requested", serviceBindRequested,
-                    "service.version", safeServiceVersion(),
-                    "printer.status", safePrinterStatus()
-            ));
-        } catch (Exception error) {
-            serviceBindRequested = false;
-            record(SentryLogLevel.ERROR, "service_bind_exception", "Printer service bind threw an exception", attrs(
-                    "error.type", error.getClass().getSimpleName(),
-                    "error.message", String.valueOf(error.getMessage()),
-                    "service.bind_requested", false
-            ));
-        }
-
-        printButton.postDelayed(() -> {
-            if (!serviceConnected) {
-                printButton.setEnabled(true);
-                record(SentryLogLevel.WARN, "service_not_connected_timeout", "Service did not report connected yet. Button enabled to test direct SDK behavior.", attrs(
-                        "service.bind_requested", serviceBindRequested,
-                        "printer.status", safePrinterStatus()
+                int status = safePrinterStatusCode();
+                record(status == 0 ? SentryLogLevel.INFO : SentryLogLevel.WARN, "printer_v1_usb_init_complete", "USB printer init complete. Status: " + status, attrs(
+                        "printer.connect_type", "USB",
+                        "printer.status", status
+                ));
+            } catch (Exception error) {
+                printerInitialized = false;
+                record(SentryLogLevel.ERROR, "printer_v1_usb_init_exception", "USB printer init failed: " + error.getClass().getSimpleName() + ": " + error.getMessage(), attrs(
+                        "error.type", error.getClass().getSimpleName(),
+                        "error.message", String.valueOf(error.getMessage()),
+                        "printer.connect_type", "USB"
                 ));
             }
-        }, 2500);
+
+            runOnUiThread(() -> printButton.setEnabled(true));
+            record(SentryLogLevel.INFO, "printer_ready_prompt", "Tap the button to invoke one tiny USB receipt.", attrs(
+                    "printer.connect_type", "USB",
+                    "printer.initialized", printerInitialized,
+                    "printer.status", safePrinterStatusCode()
+            ));
+            Sentry.flush(2000);
+        }, "imin-v1-usb-init").start();
     }
 
     private void printNativeTest() {
         printButton.setEnabled(false);
-        record(serviceConnected ? SentryLogLevel.INFO : SentryLogLevel.WARN, "print_button_tapped", "Starting print test...", attrs(
-                "service.bind_requested", serviceBindRequested,
-                "printer.status", safePrinterStatus()
+        record(printerInitialized ? SentryLogLevel.INFO : SentryLogLevel.WARN, "print_button_tapped", "Starting iMin V1 USB print test...", attrs(
+                "printer.connect_type", "USB",
+                "printer.initialized", printerInitialized,
+                "printer.status", safePrinterStatusCode()
         ));
 
         new Thread(() -> {
             try {
                 String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(new Date());
 
-                printer.initPrinterParams();
+                if (!printerInitialized) {
+                    printer.initPrinter(IminPrintUtils.PrintConnectType.USB);
+                    printerInitialized = true;
+                    record(SentryLogLevel.INFO, "printer_v1_usb_lazy_init_complete", "USB printer lazy init complete.", attrs(
+                            "printer.connect_type", "USB",
+                            "printer.status", safePrinterStatusCode()
+                    ));
+                }
+
+                int beforeStatus = safePrinterStatusCode();
+                record(beforeStatus == 0 ? SentryLogLevel.INFO : SentryLogLevel.WARN, "printer_status_before_print", "Printer status before print: " + beforeStatus, attrs(
+                        "printer.connect_type", "USB",
+                        "printer.status", beforeStatus
+                ));
+
+                printer.initParams();
                 record(SentryLogLevel.DEBUG, "printer_params_initialized", "Printer params initialized", attrs(
-                        "printer.status", safePrinterStatus()
+                        "printer.connect_type", "USB",
+                        "printer.status", safePrinterStatusCode()
                 ));
 
                 printer.setPageFormat(0);
-                printer.setFontBold(true);
-                printer.printTextWithAli("BELLY MONSTER BITES\n", 1, callback("title"));
-                printer.setFontBold(false);
-                printer.printTextWithAli("Native iMin print test\n", 1, callback("subtitle"));
-                printer.printText("--------------------------------\n", callback("divider"));
-                printer.printText("If this printed, third-party native code can reach the kiosk printer.\n", callback("body"));
-                printer.printText("Time: " + timestamp + "\n", callback("time"));
-                printer.printText("App: com.bellymonster.printtest\n", callback("app"));
-                printer.printText("Version: " + appVersionName() + "\n", callback("version"));
-                printer.printText("--------------------------------\n\n", callback("end"));
+                printer.setAlignment(1);
+                printer.setTextStyle(Typeface.BOLD);
+                printer.setTextSize(30);
+                printer.printText("BELLY MONSTER BITES\n");
+                printer.setTextSize(24);
+                printer.printText("Native iMin V1 USB test\n");
+                printer.setTextStyle(Typeface.NORMAL);
+                printer.setTextSize(22);
+                printer.setAlignment(0);
+                printer.printText("--------------------------------\n");
+                printer.printText("If this printed, third-party native code can reach the kiosk printer.\n");
+                printer.printText("Time: " + timestamp + "\n");
+                printer.printText("App: com.bellymonster.printtest\n");
+                printer.printText("Version: " + appVersionName() + "\n");
+                printer.printText("SDK: " + safeSdkVersion() + "\n");
+                printer.printText("--------------------------------\n\n");
                 printer.printAndFeedPaper(80);
 
+                int afterStatus = safePrinterStatusCode();
                 runOnUiThread(() -> printButton.setEnabled(true));
-                record(SentryLogLevel.INFO, "print_commands_invoked", "Print commands invoked. Paper output is the final proof.", attrs(
-                        "service.bind_requested", serviceBindRequested,
-                        "printer.status", safePrinterStatus()
+                record(SentryLogLevel.INFO, "print_commands_invoked", "V1 USB print commands invoked. Paper output is the final proof.", attrs(
+                        "printer.connect_type", "USB",
+                        "printer.status", afterStatus
                 ));
                 Sentry.flush(2000);
             } catch (Exception error) {
@@ -198,54 +207,13 @@ public class MainActivity extends Activity {
                 record(SentryLogLevel.ERROR, "print_exception", "Print failed: " + error.getClass().getSimpleName() + ": " + error.getMessage(), attrs(
                         "error.type", error.getClass().getSimpleName(),
                         "error.message", String.valueOf(error.getMessage()),
-                        "service.bind_requested", serviceBindRequested,
-                        "printer.status", safePrinterStatus()
+                        "printer.connect_type", "USB",
+                        "printer.initialized", printerInitialized,
+                        "printer.status", safePrinterStatusCode()
                 ));
                 Sentry.flush(2000);
             }
-        }, "imin-print-test").start();
-    }
-
-    private INeoPrinterCallback callback(String label) {
-        return new INeoPrinterCallback() {
-            @Override
-            public void onRunResult(boolean success) throws RemoteException {
-                record(success ? SentryLogLevel.DEBUG : SentryLogLevel.WARN, "printer_callback_run_result", label + " runResult=" + success, attrs(
-                        "callback.label", label,
-                        "callback.success", success,
-                        "printer.status", safePrinterStatus()
-                ));
-            }
-
-            @Override
-            public void onReturnString(String value) throws RemoteException {
-                record(SentryLogLevel.DEBUG, "printer_callback_return_string", label + " return=" + value, attrs(
-                        "callback.label", label,
-                        "callback.value", value,
-                        "printer.status", safePrinterStatus()
-                ));
-            }
-
-            @Override
-            public void onRaiseException(int code, String message) throws RemoteException {
-                record(SentryLogLevel.ERROR, "printer_callback_exception", label + " exception=" + code + " " + message, attrs(
-                        "callback.label", label,
-                        "callback.code", code,
-                        "callback.message", message,
-                        "printer.status", safePrinterStatus()
-                ));
-            }
-
-            @Override
-            public void onPrintResult(int code, String message) throws RemoteException {
-                record(SentryLogLevel.INFO, "printer_callback_print_result", label + " printResult=" + code + " " + message, attrs(
-                        "callback.label", label,
-                        "callback.code", code,
-                        "callback.message", message,
-                        "printer.status", safePrinterStatus()
-                ));
-            }
-        };
+        }, "imin-v1-usb-print-test").start();
     }
 
     private void record(SentryLogLevel level, String event, String message, Map<String, Object> attributes) {
@@ -262,7 +230,9 @@ public class MainActivity extends Activity {
         enriched.put("device.model", Build.MODEL);
         enriched.put("session.id", sessionId);
         enriched.put("sequence", sequence.incrementAndGet());
-        enriched.put("service.connected", serviceConnected);
+        enriched.put("sdk.family", "imin-v1");
+        enriched.put("printer.connect_type", "USB");
+        enriched.put("printer.initialized", printerInitialized);
 
         try {
             Sentry.logger().log(
@@ -291,25 +261,20 @@ public class MainActivity extends Activity {
 
     private String safeSdkVersion() {
         try {
-            return PrinterHelper.getSDKVersionName();
+            return IminPrintUtils.getSDKVersionName();
         } catch (Exception error) {
             return "unavailable (" + error.getClass().getSimpleName() + ")";
         }
     }
 
-    private String safeServiceVersion() {
+    private int safePrinterStatusCode() {
         try {
-            return printer.getServiceVersion();
+            if (printer == null) {
+                return -998;
+            }
+            return printer.getPrinterStatus(IminPrintUtils.PrintConnectType.USB);
         } catch (Exception error) {
-            return "unavailable (" + error.getClass().getSimpleName() + ")";
-        }
-    }
-
-    private String safePrinterStatus() {
-        try {
-            return String.valueOf(printer.getPrinterStatus());
-        } catch (Exception error) {
-            return "unavailable (" + error.getClass().getSimpleName() + ")";
+            return -999;
         }
     }
 

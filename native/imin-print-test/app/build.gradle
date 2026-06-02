@@ -44,8 +44,8 @@ android {
         applicationId "com.bellymonster.printtest"
         minSdk 23
         targetSdk 30
-        versionCode 1
-        versionName "0.2.0"
+        versionCode 2
+        versionName "0.3.0"
         manifestPlaceholders = [
                 sentryDsn: sentryDsn,
         ]
@@ -53,6 +53,7 @@ android {
 }
 
 dependencies {
-    implementation "com.github.iminsoftware:IminPrinterLibrary:V2.0.0.18"
+    implementation files("libs/IminLibs1.0.15.jar")
+    implementation files("libs/iminPrinterSDK-14_V1.3.1_2408141540.jar")
     implementation "io.sentry:sentry-android:8.34.0"
 }
