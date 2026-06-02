@@ -2,6 +2,40 @@ plugins {
     id "com.android.application"
 }
 
+def readEnvFile(File file) {
+    def values = [:]
+    if (!file.exists()) {
+        return values
+    }
+    file.eachLine { line ->
+        def trimmed = line.trim()
+        if (!trimmed || trimmed.startsWith("#") || !trimmed.contains("=")) {
+            return
+        }
+        def parts = trimmed.split("=", 2)
+        def value = parts[1].trim()
+        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+            value = value.substring(1, value.length() - 1)
+        }
+        values[parts[0].trim()] = value
+    }
+    return values
+}
+
+def localEnv = readEnvFile(rootProject.file("../../.env.local"))
+def sentryBuildEnv = readEnvFile(rootProject.file("../../.env.sentry-build"))
+def sentryDsn = System.getenv("SENTRY_DSN")
+        ?: System.getenv("VITE_SENTRY_DSN")
+        ?: localEnv["SENTRY_DSN"]
+        ?: localEnv["VITE_SENTRY_DSN"]
+        ?: sentryBuildEnv["SENTRY_DSN"]
+        ?: sentryBuildEnv["VITE_SENTRY_DSN"]
+        ?: ""
+
+if (!sentryDsn) {
+    throw new GradleException("Sentry DSN is required to build the print-test APK with Sentry Logs. Set SENTRY_DSN or VITE_SENTRY_DSN.")
+}
+
 android {
     namespace "com.bellymonster.printtest"
     compileSdk 35
@@ -11,10 +45,14 @@ android {
         minSdk 23
         targetSdk 30
         versionCode 1
-        versionName "0.1.0"
+        versionName "0.2.0"
+        manifestPlaceholders = [
+                sentryDsn: sentryDsn,
+        ]
     }
 }
 
 dependencies {
     implementation "com.github.iminsoftware:IminPrinterLibrary:V2.0.0.18"
+    implementation "io.sentry:sentry-android:8.34.0"
 }

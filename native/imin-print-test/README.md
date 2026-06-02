@@ -6,11 +6,12 @@ Build:
 
 ```bash
 cd native/imin-print-test
-JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home \
-ANDROID_HOME=/opt/homebrew/share/android-commandlinetools \
-ANDROID_SDK_ROOT=/opt/homebrew/share/android-commandlinetools \
-./gradlew assembleDebug
+cd ../..
+vercel env run --environment=production -- bash -lc \
+  'cd native/imin-print-test && JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home ANDROID_HOME=/opt/homebrew/share/android-commandlinetools ANDROID_SDK_ROOT=/opt/homebrew/share/android-commandlinetools PATH=/opt/homebrew/opt/openjdk@17/bin:$PATH ./gradlew assembleDebug'
 ```
+
+The APK build requires `SENTRY_DSN` or `VITE_SENTRY_DSN`; Gradle fails if neither is present. The test app emits Sentry Logs through the Android SDK with `io.sentry.logs.enabled=true`.
 
 Install locally through ADB when a device is connected:
 
