@@ -12,3 +12,6 @@ pnpm-debug.log*
 .DS_Store
 .vercel
 .env*.local
+native/imin-print-test/.gradle/
+native/imin-print-test/**/build/
+native/imin-print-test/local.properties

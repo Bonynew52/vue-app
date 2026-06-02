@@ -213,6 +213,13 @@ onBeforeUnmount(() => {
         <button class="print-demo" type="button" @click="printDemoTicket">
           Imprimir prueba
         </button>
+        <a
+          class="apk-download"
+          href="/downloads/belly-imin-print-test.apk"
+          download="belly-imin-print-test.apk"
+        >
+          APK impresión
+        </a>
         <button class="signout" type="button" @click="signOut">Salir</button>
       </div>
     </header>
@@ -617,6 +624,25 @@ onBeforeUnmount(() => {
 
 .print-demo:hover {
   background: var(--coffee);
+}
+
+.apk-download {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border: 1px solid rgb(17 97 73 / 28%);
+  border-radius: 11px;
+  background: #e8f3ee;
+  color: #116149;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.apk-download:hover {
+  background: #d8ece4;
 }
 
 /* ---------- Errors / boot ---------- */
@@ -1162,6 +1188,7 @@ onBeforeUnmount(() => {
   }
 
   .print-demo,
+  .apk-download,
   .signout {
     flex: 1 1 0;
   }

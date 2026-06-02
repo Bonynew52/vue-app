@@ -1,0 +1,20 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "com.bellymonster.printtest"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.bellymonster.printtest"
+        minSdk 23
+        targetSdk 30
+        versionCode 1
+        versionName "0.1.0"
+    }
+}
+
+dependencies {
+    implementation "com.github.iminsoftware:IminPrinterLibrary:V2.0.0.18"
+}
