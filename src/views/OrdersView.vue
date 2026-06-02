@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useConvexMutation, useConvexQuery } from 'convex-vue'
 import { api } from '../../convex/_generated/api'
 import { useRouter } from 'vue-router'
@@ -31,6 +31,7 @@ const filter = ref('active')
 const isBooting = ref(true)
 const statusError = ref('')
 const now = ref(Date.now())
+const printRequestedAt = ref(null)
 let clockTimer = null
 const orderQuery = useConvexQuery(api.orders.list, () => ({ status: filter.value }))
 const updateOrderStatus = useConvexMutation(api.orders.updateStatus)
@@ -96,6 +97,19 @@ function elapsedLabel(value) {
   }
   const hours = Math.floor(mins / 60)
   return `${hours} h ${mins % 60} min`
+}
+
+function printTimestamp(value) {
+  return new Intl.DateTimeFormat('es-MX', {
+    dateStyle: 'short',
+    timeStyle: 'short',
+  }).format(new Date(value))
+}
+
+async function printDemoTicket() {
+  printRequestedAt.value = Date.now()
+  await nextTick()
+  window.print()
 }
 
 /* Aging tiers drive the urgency accent on open tickets. */
@@ -196,6 +210,9 @@ onBeforeUnmount(() => {
             Todos
           </button>
         </div>
+        <button class="print-demo" type="button" @click="printDemoTicket">
+          Imprimir prueba
+        </button>
         <button class="signout" type="button" @click="signOut">Salir</button>
       </div>
     </header>
@@ -351,6 +368,50 @@ onBeforeUnmount(() => {
       </aside>
     </div>
   </main>
+
+  <section class="print-ticket" aria-hidden="true">
+    <header class="print-ticket__header">
+      <strong>Belly Monster Bites</strong>
+      <span>Prueba de impresion</span>
+    </header>
+
+    <dl class="print-ticket__meta">
+      <div>
+        <dt>Mesa</dt>
+        <dd>Demo</dd>
+      </div>
+      <div>
+        <dt>Orden</dt>
+        <dd>#PRINT</dd>
+      </div>
+      <div>
+        <dt>Hora</dt>
+        <dd>{{ printTimestamp(printRequestedAt || now) }}</dd>
+      </div>
+      <div>
+        <dt>Impresora</dt>
+        <dd>InnerPrinter / 80mm</dd>
+      </div>
+    </dl>
+
+    <ul class="print-ticket__items">
+      <li>
+        <span>1</span>
+        <strong>Cookie demo</strong>
+        <em>$0.00</em>
+      </li>
+      <li>
+        <span>1</span>
+        <strong>Cafe demo</strong>
+        <em>$0.00</em>
+      </li>
+    </ul>
+
+    <p class="print-ticket__note">
+      Si este ticket sale en el kiosco, Chrome puede imprimir desde el tablero.
+    </p>
+    <footer>Generado desde /ordenes</footer>
+  </section>
 </template>
 
 <style scoped>
@@ -541,6 +602,21 @@ onBeforeUnmount(() => {
 
 .signout:hover {
   background: var(--cream-2);
+}
+
+.print-demo {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 3px 10px rgb(46 28 18 / 18%);
+}
+
+.print-demo:hover {
+  background: var(--coffee);
 }
 
 /* ---------- Errors / boot ---------- */
@@ -1085,8 +1161,117 @@ onBeforeUnmount(() => {
     flex: 1 1 0;
   }
 
+  .print-demo,
+  .signout {
+    flex: 1 1 0;
+  }
+
   .queue__grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.print-ticket {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: 80mm auto;
+    margin: 4mm;
+  }
+
+  :global(html),
+  :global(body),
+  :global(#app) {
+    min-width: 0;
+    min-height: 0;
+    background: #fff;
+  }
+
+  .board {
+    display: none;
+  }
+
+  .print-ticket {
+    display: block;
+    width: 72mm;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    color: #000;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10pt;
+    line-height: 1.25;
+  }
+
+  .print-ticket__header {
+    display: grid;
+    gap: 1mm;
+    padding-bottom: 3mm;
+    border-bottom: 1px dashed #000;
+    text-align: center;
+  }
+
+  .print-ticket__header strong {
+    font-size: 13pt;
+    text-transform: uppercase;
+  }
+
+  .print-ticket__header span,
+  .print-ticket footer {
+    font-size: 8.5pt;
+  }
+
+  .print-ticket__meta {
+    display: grid;
+    gap: 1mm;
+    margin: 3mm 0;
+    padding-bottom: 3mm;
+    border-bottom: 1px dashed #000;
+  }
+
+  .print-ticket__meta div {
+    display: flex;
+    justify-content: space-between;
+    gap: 4mm;
+  }
+
+  .print-ticket__meta dt,
+  .print-ticket__meta dd {
+    margin: 0;
+  }
+
+  .print-ticket__items {
+    margin: 0;
+    padding: 0 0 3mm;
+    border-bottom: 1px dashed #000;
+    list-style: none;
+  }
+
+  .print-ticket__items li {
+    display: grid;
+    grid-template-columns: 8mm 1fr auto;
+    gap: 2mm;
+    padding: 1mm 0;
+  }
+
+  .print-ticket__items strong {
+    font-weight: 700;
+  }
+
+  .print-ticket__items em {
+    font-style: normal;
+  }
+
+  .print-ticket__note {
+    margin: 3mm 0;
+    font-size: 8.5pt;
+  }
+
+  .print-ticket footer {
+    padding-top: 2mm;
+    text-align: center;
   }
 }
 </style>
