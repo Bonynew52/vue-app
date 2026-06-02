@@ -1,0 +1,446 @@
+[00:00:00.880] speaker_0: Bueno.
+[00:00:01.720] speaker_1: Es que todo fue muy a la rapidez. Creo que nada más estas últimas dos juntas de esta semana fuimos-
+[00:00:07.460] speaker_0: Dos juntas a toda... [risas] También. Okey, eh, ¿qué necesitas?
+[00:00:13.340] speaker_1: Eh, nada más. A veces cuando no estoy tan ocupado, a veces sí a su tiempo. O sea, yo, este, no tengo problema.
+[00:00:20.300] speaker_0: Siempre estoy hasta el tope, pero tú dime.
+[00:00:22.740] speaker_1: En momentos cuando... como ahorita que de repente hay algo. O sea, yo estar aquí presente, ajá, se lo voy a preguntar, porque el que conoce más bien la operación y los servers y todo eso, es usted.
+[00:00:32.180] speaker_0: Bueno, eh, am, ¿ahorita qué necesitas?
+[00:00:36.380] speaker_1: Eh, si quiere lo, eh, doy como que un poquito más mi plática de lo que ahorita ya, ya que estamos, pues ya vio. No sé si viste el sistema, pero igual.
+[00:00:43.480] speaker_0: No. Digo, no sabía nada del sistema, así que... [risas]
+[00:00:46.449] speaker_1: ¿Gustaría verlo?
+[00:00:47.320] speaker_2: Sí, sí, claro.
+[00:00:48.200] speaker_1: Este, si tiene su teléfono como cliente puede escanear este QR.
+[00:00:54.400] speaker_1: Nos falta pegarlos en las mesas, pero...
+[00:00:56.260] speaker_2: Ni modo, lo pasan allá funciona.
+[00:01:09.180] speaker_0: Okey.
+[00:01:10.300] speaker_1: Entonces, como cliente...
+[00:01:12.660] speaker_1: Ah, ese menú no está completo, nos falta el menú real. Este, como cliente vas eligiendo, como mesero virtual, eh, ya al final puedes hacer tu orden. No se cobra, este, todo va a ser igual si en el Parrot. Pero ya que tienes esa orden te genera...
+[00:01:27.280] speaker_0: Pregunta.
+[00:01:28.500] speaker_1: Mhm.
+[00:01:29.100] speaker_0: Si un...
+[00:01:32.640] speaker_0: Este producto está como un pick and go también, ¿no?
+[00:01:35.220] speaker_1: Serviría, sí. Nada más que siento que el mesero virtual es un poco más sencillo de momento y luego ya que tengamos toda esta información-
+[00:01:41.420] speaker_0: Es que a nadie le va a evitar: «Tómale foto y me lo llevo a la casa y pídemelo desde allá».
+[00:01:46.740] speaker_2: De hecho, una de las cosas que estamos haciendo, pero hay varias formas de lidiar con ello que yo sepa. Eh, una de ellas y la más fácil sería el propio mesero, o sea, la persona que está aquí en cajero, eh, puede checar si alguien pidió en esa mesa, porque el QR tiene registrado...
+[00:02:03.030] speaker_0: De, de qué mesa vino.
+[00:02:04.480] speaker_2: Sí.
+[00:02:06.200] speaker_2: Y esta era mía, era cosa de mi forma de pensar, pero como este lugar tiene Internet y sería raro que alguien usara datos, pues se puede checar por IP también, confirmar que sea en este lugar.
+[00:02:19.280] speaker_0: El, el, el IP sería uno... Sí, porque ahí está la clave del Internet, ¿sabes?
+[00:02:25.290] speaker_2: Sí.
+[00:02:25.340] speaker_0: Okey. Entonces, cada QR va a ser distinto en cada mesa.
+[00:02:29.360] speaker_2: Okey.
+[00:02:29.650] speaker_1: Exactamente.
+[00:02:33.520] speaker_0: Okey, eh, lo otro es... ¿Este menú de dónde lo sacaste?
+[00:02:39.140] speaker_1: Yo me lo robé de Rappi. Como no lo tenía. Ya me lo están, ya me lo están trabajando para exportarlo de, de Parrot.
+[00:02:44.230] speaker_0: Sí, es que por ejemplo, sí, lo noté porque estas imágenes, estos no son nuestros. La imagen no es la nuestra.
+[00:02:50.240] speaker_1: A lo mejor Rappi lo pone ahí.
+[00:02:51.440] speaker_0: No, Rappi pone lo que le da en entender y ya. Es-estas presentaciones que vio es un pleito que tengo con ellos.
+[00:02:57.920] speaker_1: [risas]
+[00:02:58.440] speaker_0: Eh, por ejemplo, este no es un café americano.
+[00:03:03.160] speaker_2: No.
+[00:03:03.880] speaker_0: Y es un daily coffee americano y ponen unas nieves. [risas] Entonces, yo les he dicho que tenemos que arreglar eso, pero en fin, yo no tengo el acceso a eso. Okey, bueno, entonces es QR por mesa. Si de repente llega una orden y resulta que en la mesa no hay nadie, pues...
+[00:03:22.480] speaker_1: Igualmente, como no se autoliga a Parrot, o sea, no es como que haya tanto riesgo, o sea, por todos-
+[00:03:27.000] speaker_0: No, no, no. A lo que voy es que... No, de hecho, las cámaras de seguridad ya se las voy a poner aquí.
+[00:03:32.980] speaker_1: Es lo que salvé, tengo que tener algo fácil de verificar. La mesa sí llegó.
+[00:03:37.060] speaker_0: Sí, sobre todo la de arriba, ¿verdad? [risas]
+[00:03:39.020] speaker_1: Sí.
+[00:03:39.840] speaker_0: Aquí escanean y listo, ¿no? Pero allá...
+[00:03:43.340] speaker_0: Ya, nomás estoy esperando que me reemplace el sistema de seguridad también. Okey, se van por menú.
+[00:03:50.240] speaker_1: Y de hecho, va a cambiar ahorita poquito. Al momento de crear la orden, ahorita se guarda el sistema y todo, te da tu número de orden. Eh, platicando con Olga se va a cambiar para que ya que tengas orden, te manda WhatsApp web, eh, WhatsApp web, perdón, te manda WhatsApp-
+[00:04:03.440] speaker_2: Empresarial.
+[00:04:03.960] speaker_1: Empresarial que... no sé si lo tenga Olga, a ver si me lo pasa, para que puedas ver el seguimiento de los status.
+[00:04:09.740] speaker_0: No, yo no, no, no tenemos WhatsApp. Bueno, yo no lo tengo, lo ha de tener Yoyis.
+[00:04:14.800] speaker_1: Ah, okey. Pero bueno, la idea es que va a cambiar. Digo, para poner una jugada de cómo eventualmente va a ser.
+[00:04:19.760] speaker_0: Okey.
+[00:04:20.209] speaker_1: Este, eh... Ya es información.
+[00:04:23.460] speaker_0: Mi pregunta. E-entra una orden, está en la aplicación, digamos una tableta o, o lo que sea.
+[00:04:37.400] speaker_0: A veces las personas no están ahí y va un alarma y la neta que son bien descuidados para atender mensajes.
+[00:04:46.920] speaker_1: O sea, ya veo el...
+[00:04:48.400] speaker_0: Mande.
+[00:04:49.120] speaker_1: La parte del, del empleado, yo creo que a lo mejor ahí van sus dudas. Este,
+[00:04:53.680] speaker_1: de hecho, lo instalé en el quiosco, pero creo que tiene más uso si se instala en la tableta, este, si ya que ya que la tengan. Este, la idea es que la ta-la tableta, o sea, mande notificación.
+[00:05:03.360] speaker_0: Okey.
+[00:05:03.600] speaker_1: Es otra página web, Robert. Nada más. Este, tiene su shell antiguo, entonces es una, la descargas como aplicación.
+[00:05:09.850] speaker_0: ¿Saben de alguna impresora térmica pequeña que se pueda conectar a una tableta y me imprima un ticket?
+[00:05:20.760] speaker_1: He conocido, este, impresoras tipo Bluetooth.
+[00:05:24.500] speaker_0: Sí, como tipo Bluetooth. No, no, no tiene que ser USB-C, ¿verdad? Pero, pero te digo, porque a veces están de entrega, hay un evento, tenemos cincuenta personas y ya se... la maquinita esa, pip, no la van a pelar. La neta es que no la van a pelar. Van a estar enfocados en los cincuenta clientes que tienen ahí arriba. O a veces hay una filota aquí de quince y empiezan a salir las órdenes, pip, pip, pip, y no la van a pelar.
+[00:05:49.720] speaker_0: Pero si sale un ticket, como cuando salen los de Rappi, que ahí están los tickets.
+[00:05:55.570] speaker_1: ¿A poco Rappi cuando mandan algo sale el ticket ahí?
+[00:05:58.000] speaker_0: Sí, por eso, por, por eso te preguntaba de si había... si Rappi tiene ese acceso a través de Parrot, porque nosotros...Independientemente con un servicio poder hacerlo.
+[00:06:09.980] speaker_1: Se puede.
+[00:06:10.760] speaker_0: Sí, sí, sí.
+[00:06:11.500] speaker_1: Lo que se necesite, este...
+[00:06:12.820] speaker_0: Pero digo, digamos que en una etapa posterior. [ríe] Ahori- ahorita nada, lo eh, enfocémonos a los que esperan. Una tableta va a estar sonando cuando, cuando llegue la...
+[00:06:25.820] speaker_1: Si estaba prendido, okey.
+[00:06:29.180] speaker_0: Eh, el... es que tenemos otro punto de venta acá, Padel Club.
+[00:06:33.090] speaker_1: ¿Eh?
+[00:06:34.460] speaker_0: Padel Club, donde están unas raquetas aquí de...
+[00:06:37.420] speaker_1: Ah, aquí.
+[00:06:38.360] speaker_0: Ah, okey. Eh, bueno, entonces...
+[00:06:40.770] speaker_1: Ustedes se dan una idea, el único tema es de que como le vamos a mover a Parrot, Parrot data sí queda aparte.
+[00:06:46.300] speaker_0: Sí, así es. Pero si ellos ven que están saliendo piques, eso no lo van a poder ignorar.
+[00:06:52.860] speaker_1: Claro que sí.
+[00:06:53.400] speaker_0: Un ¡ping! que suene de vez en cuando, ¡ping!
+[00:06:57.070] speaker_0: Lo van a ignorar, porque tienen gente aquí en fila y a quién le hago caso primero, ¿verdad? Entonces, salir aquí es una orden y,
+[00:07:04.840] speaker_0: y se tiene que... Así le hacen, aunque haya gente en fila, exa-- al-arroja...
+[00:07:09.780] speaker_1: El ticket, ajá.
+[00:07:10.280] speaker_0: El ticket de Rappi y ya es una orden y lo tiene que atender. Entonces, para mí sería...
+[00:07:16.460] speaker_1: Sí
+[00:07:16.700] speaker_0: ...mejor que tuvieran un ticketcito que le saliera ahí, ¿verdad? No es como idea.
+[00:07:22.720] speaker_1: No, no, o sea, sí. O sea, el, el punto es de que ahorita ven: "Ah, no, o sea, no pasa nada". Mucha gente.
+[00:07:28.080] speaker_0: Sí.
+[00:07:28.210] speaker_1: O sea, tiene sen-- o sea, tiene, tiene sentido.
+[00:07:29.940] speaker_0: Okey. El chiste es que necesita algo palpable, desde mi punto de vista, ¿verdad?
+[00:07:34.180] speaker_1: Ah, sí.
+[00:07:34.880] speaker_0: Okey. Eh...
+[00:07:37.110] speaker_1: De hecho, está mejor, porque en caso de que le muevas la conversa por accidente o lo que sea, y ya. Aunque los datos están ahí, que algo pasó operativamente, pues el ticket ahí lo tienes.
+[00:07:45.280] speaker_0: El, el ticket, exacto.
+[00:07:46.000] speaker_1: Más fácil que no te pase.
+[00:07:47.540] speaker_0: Ah, okey.
+[00:07:48.180] speaker_1: Este... Ah, bueno. Pues sería que viera... Se puede, el, el sistema. Ahí lo tiene, allá. Aquí también lo puedo checar.
+[00:07:54.770] speaker_0: Si quieres vamos allá.
+[00:07:55.640] speaker_1: Sí, vamos. Aunque no sea la tableta que termine siendo usada...
+[00:07:58.880] speaker_0: Okey. Otra cosa, Salty no está ahí.
+[00:08:01.380] speaker_1: Ah, pues sí, mejoramos.
+[00:08:12.660] speaker_2: Hola, buenos días.
+[00:08:14.100] speaker_0: Buenos días.
+[00:08:19.280] speaker_0: Por ahorita se ve calmado, pero en realidad los fines de semana y desde el viernes... Oye, es que martes, martes en la tarde se pone pesado, miércoles no tanto.
+[00:08:30.040] speaker_0: Jueves más o menos, pero viernes, sábado y domingo en la tarde sí está,
+[00:08:34.180] speaker_0: sí está pesadito.
+[00:08:37.260] speaker_0: Y en el caso particular de este turno es que estamos reducidos de personal. Pero el fin de semana viene otro chico a apoyar. Ahora, no estamos hablando, como digo, no estamos hablando de un picandón. Estamos hablando que el cliente en vez de pararse, ahí lo va a hacer desde aquí, no está cambiando tanto.
+[00:08:56.660] speaker_1: Sí. La idea es de que... pues que traspase, no, no haya tanto peso aquí, tanta persona acá, y ahora se pase al sistema, se pone más automatizado, más sencillo.
+[00:09:06.170] speaker_0: Okey.
+[00:09:06.860] speaker_1: Y la ventaja es que se le puede avisar para que pase por sus malteadas o se le avisa que ya, ya está cocinando su comida o algo por el estilo.
+[00:09:15.360] speaker_0: De hecho, yo quiero usar de esos vibradores,
+[00:09:19.040] speaker_0: pero no va con la idea.
+[00:09:22.020] speaker_0: Eh...
+[00:09:22.589] speaker_1: ¿Cuál es? Eso no, no realmente.
+[00:09:24.420] speaker_0: Cuando vas al Super Sarath, por ejemplo, te dicen: "Aquí está", y ya cuando vibra es cuando...
+[00:09:28.720] speaker_1: Ah, ya, ya, ya, pero sí. Ah, está, están chidos esos.
+[00:09:31.900] speaker_0: Pero no va con que lo pidas desde aquí, no te van a traer tu... ¿Hay manera de que el cliente reciba un mensaje de que su orden está lista?
+[00:09:40.180] speaker_1: Lo que estamos-
+[00:09:40.720] speaker_2: Se puede con WhatsApp.
+[00:09:42.380] speaker_1: Lo que estamos viendo es de que la página a fuerza va a salir, pero lo que sí es de que quiere una notificación. Lo que vimos en el momento era que, bueno, que te mande WhatsApp, una cuenta que de ahí tengan ellos, este, te mande el estatus. Ah, cambia algo y ya quedó.
+[00:09:56.960] speaker_0: Sí, pero eso sería dar de alta el número del, de los clientes y esos cuestiones de privacidad ahí.
+[00:10:03.800] speaker_1: Okey.
+[00:10:04.220] speaker_0: No, está bien.
+[00:10:05.480] speaker_1: Pero igual, eso todavía está en...
+[00:10:08.000] speaker_0: Bueno, hasta ahorita me gusta. Cada mesa tiene uno, estamos seguros, ellos van a poder validar. Porque si no hay gente aquí, no voy a, voy a ignorar esa orden. Digo, la van, la van a tener que ignorar. Que llegó una orden de la mesa uno y no hay nadie en mesa uno, pues es una orden que nada que ver.
+[00:10:22.740] speaker_1: Sí.
+[00:10:23.340] speaker_0: Eh...
+[00:10:24.200] speaker_2: Y los platos.
+[00:10:25.280] speaker_0: Y...
+[00:10:28.760] speaker_0: ellas reciben la notificación, ya sea en la pantalla o ya sea...
+[00:10:36.040] speaker_0: En la pantalla. Ya sea en la pantalla o algo que se oprima.
+[00:10:50.700] speaker_1: [ruido] Ahorita la instalé aquí. Más la versión uno que hicimos, aunque ya vimos que está mal, va a haber muchos cambios.
+[00:11:16.000] speaker_0: Mhm.
+[00:11:16.460] speaker_1: Este, la idea es de que todo lo que se refleja, se refleja acá, básicamente.
+[00:11:20.380] speaker_0: Mhm.
+[00:11:21.100] speaker_1: Ah, esto lo hice antes de ver cómo lo tenían dentro de Parrot.
+[00:11:23.820] speaker_0: Mhm.
+[00:11:24.120] speaker_1: Este, tengo que cambiar el orden para que sea más accesible poniendo en las órdenes. Este, la verdad no sé...
+[00:11:31.890] speaker_0: ¿Qué quieres para el cliente?
+[00:11:34.180] speaker_1: Sí. Me dicen que lo tengan aquí por menú, luego por categoría, luego artículo y luego opción. Voy a organizarlo diferente.
+[00:11:40.920] speaker_0: ¿Mande?
+[00:11:41.400] speaker_1: Voy a organizarlo diferente para que mache, mache más a esa forma.
+[00:11:45.730] speaker_0: Sí.
+[00:11:45.820] speaker_1: Este... No me he dado cuenta al momento.
+[00:11:48.800] speaker_0: Y la, la categoría sí está igualita al menú, ¿verdad? A-ahora...
+[00:11:53.780] speaker_1: Esa es la idea, pero viendo... Tenemos que hacer que esté en la tableta y vayan chequeando si...
+[00:11:58.220] speaker_0: Por ejemplo, el mantenimiento de, de precios, ¿habría un módulo para nosotros de actualizar precios?
+[00:12:04.480] speaker_1: Sí.
+[00:12:04.780] speaker_0: Ah, okey.
+[00:12:05.340] speaker_1: Te digo, nomás que este...Va a haber un módulo para que pongan el Excel, exporten de separo todo lo... ya que cambien el menú-
+[00:12:11.256] speaker_0: Sí.
+[00:12:11.596] speaker_1: Lo exporten, lo metan y ya todo esté listo para el siete y algo así.
+[00:12:15.125] speaker_0: Sí, es que por ejemplo, mira, me, me voy a, me voy a comprar algo que el parro, a mí se, se me hace un poco extraño hacer. Si yo me voy a bebidas, yo agarro un café. Si te fijas, el precio es cero.
+[00:12:27.896] speaker_0: El precio del café es cero.
+[00:12:29.596] speaker_1: Ajá.
+[00:12:30.436] speaker_0: Empiezas a agregar precios cuando es la me-- la bebida o el tipo de carne, la leche o lo que sea, ¿ok?
+[00:12:36.756] speaker_1: Ajá.
+[00:12:37.116] speaker_0: Entonces, ah, aquí va a estar interesante cuando... Lo bueno que no me lo hacemos una vez al año. [risas] Cuando es el mantenimiento, que es, tú, tú estás eligiendo un café,
+[00:12:48.216] speaker_0: ah, ahí lo ves como en tu aplicación, ahí dice ciento sesenta, pero realmente depende de varios factores, de qué tamaño lo quieres,
+[00:12:57.516] speaker_0: eh, la leche que vas a usar, o estás cambiando una bebida que en vez de agua le vas a poner agua mineral de intercambio. Entonces, es otro proceso completo, ¿verdad? Pero en fin, eh, lo vamos viendo, ok. Eh...
+[00:13:11.315] speaker_1: Ya va a tener que resolver, porque vi como-
+[00:13:14.396] speaker_0: Por capturar, dos.
+[00:13:16.216] speaker_1: Sí, sí.
+[00:13:17.196] speaker_0: Ok. Activos, tres. Estos en teoría se están procesando. Ah, está pagado. Demorado tres años. ¿Por qué no lo pones aquí? [risas]
+[00:13:29.196] speaker_1: O sea, ahorita está mucho... este, como era condicional, ese es el que más allá, que más se tiene que cambiar.
+[00:13:34.926] speaker_0: Mhm.
+[00:13:35.996] speaker_1: Y sí, va a tener que cambiarse por completo y ya está.
+[00:13:37.596] speaker_0: Ok, entonces ellos lo van a recibir aquí. Entonces, ¿de aquí no puedes imprimir acá?
+[00:13:44.596] speaker_0: Ay, no sé, a lo mejor se puede. Sí, ¿no?
+[00:13:47.776] speaker_1: Bueno, no, no s-- ahí no sé.
+[00:13:49.296] speaker_0: Pero, pero aquí tiene, aquí tiene que ser claro para ellos, que salga una orden de este sistema. Ese. Ya lo tengo como todo.
+[00:13:57.836] speaker_1: Voy a investigar, la verdad, no sé, pero estaría viendo.
+[00:14:00.716] speaker_0: Yo digo que sí se puede ocupar ese espacio.
+[00:14:03.756] speaker_1: A lo mejor se puede configurar un poquito... No, pues es de aquí.
+[00:14:07.356] speaker_0: Sí, este, este es de, de la terminal seis.
+[00:14:09.076] speaker_1: Sí, sí, sí, esa parte.
+[00:14:09.936] speaker_0: Y esta, aquí es otra,
+[00:14:12.896] speaker_0: ot-ot-otro-
+[00:14:13.726] speaker_1: Voy a investigar. Eh, no le, no le pon-- no le he puesto nada, a lo mejor nomás Parro puede, pero a lo mejor sí se puede.
+[00:14:19.836] speaker_0: home, Raphi puede. Pero, y, y fíjate que Raphi...
+[00:14:23.996] speaker_1: Voy a checar algo aquí.
+[00:14:24.716] speaker_0: Adelante.
+[00:14:26.916] speaker_1: Sí, creo que usan esta... Si me conecto a esta utilidad de Epson, sí va a dejar unas, eh...
+[00:14:32.876] speaker_0: Sí, para que les arroje el ticket.
+[00:14:34.816] speaker_1: No, que es cierto, qué bueno que vimos aquí. Este...
+[00:14:39.436] speaker_0: Ok.
+[00:14:40.276] speaker_1: Raphi.
+[00:14:41.576] speaker_0: Digo, lo, lo, lo único que está cambiando desde un punto de vista bien arriba es el tres sesenta, no viene, no viene por un menú, lo, lo pide ahí en vez de para hacer.
+[00:14:51.856] speaker_1: Ya, básicamente.
+[00:14:53.216] speaker_0: Y lo único que harían por aquí solo es que lo, lo es para llevar. Y ya. Y,
+[00:15:00.636] speaker_0: y ellas tienen que capturar, tienen que recapturar la orden. Ah,
+[00:15:07.296] speaker_0: ok.
+[00:15:07.396] speaker_1: Me está ayudando. Toda esta claridad les, les ayuda mucho. Creo que no. Bastante.
+[00:15:12.436] speaker_0: Pues, ok, vamos a dejarlo así.
+[00:15:24.796] speaker_1: Sí.
+[00:15:25.846] speaker_0: [ruido] Ok.
+[00:15:34.276] speaker_1: Cada vez eso se puede imprimir.
+[00:15:35.656] speaker_0: Sí, te digo, y también la parte sería de cómo van a ir seleccionando. Ahí sí hay una parte, eso lo maneja mucho mejor Yoyis que yo, que es la parte de los modificadores de los productos, ¿verdad? Si, si estás cambiando algo al momento de seleccionar cómo te está cambiando el precio, porque aquí en la aplicación... A ver, ese no es el mío.
+[00:15:54.996] speaker_1: Se parece. [risas]
+[00:15:55.466] speaker_0: Pero no es. Eh,
+[00:15:58.936] speaker_0: yo veo que ya, ya les pones el precio, ¿verdad? Pero por ejemplo, un, un, un waffle le puedes poner distintos toppings y va a ir aumentando el precio.
+[00:16:07.416] speaker_1: Sí, va a ocupar. Ahorita no creo que los modificadores, porque ocupa el menú real para ver qué onda en la cabeza ya cómo se va a ver en la realidad.
+[00:16:14.076] speaker_0: El menú real, el menú real, ok. Yo sí te puedo descargar un Excel, todos los artículos y todo. Sí, sí tengo manera de hacerlo. Pásame tu celular o pásame... Ah, no, me van a agregar al grupo, ya me dijeron.
+[00:16:26.236] speaker_1: A lo mejor ya está adentro.
+[00:16:28.316] speaker_0: No, no, no estoy todavía. Eh, pero ya me dijeron que, que me van a agregar.
+[00:16:33.096] speaker_1: Su número no es ocho, siete, uno, cuatro, ocho, nueve, cuatro...
+[00:16:36.606] speaker_0: ¿Nueve, tres?
+[00:16:37.216] speaker_1: Nueve, tres. Creo que lo acaban de agregar.
+[00:16:38.856] speaker_0: Ah, ok. Bueno, ah, ahí, ah,
+[00:16:44.516] speaker_0: sí tenemos un...
+[00:16:47.276] speaker_0: Sí, sí tenemos manera de, de, de, de descargar, eh, menús, artículos, modificadores y todo eso. Por ejemplo,
+[00:16:58.916] speaker_0: ahí, cuando yo saco ventas, de repente me sale un concepto, orden de integraciones. Bueno, eso es rápida, entonces. Ah...
+[00:17:09.256] speaker_0: Todo lo que es categorías y productos de las categorías, sí, sí se puede descargar en Excel. [carraspeo] Nada más dime cuál es la información que, que necesitas de cada uno para no mandarte todo el...
+[00:17:23.936] speaker_1: O bueno, pues el registro.
+[00:17:25.156] speaker_0: Este, este.
+[00:17:25.766] speaker_1: O como, como usted vea, no, este.
+[00:17:27.216] speaker_0: Es que depende, porque no sé, porque ahora todo mundo se manda por WhatsApp en vez de por correo y de repente me quieren aventar archivos de veinte megas por WhatsApp. Yo no me eches inglés, ¿verdad? [risas]
+[00:17:36.516] speaker_1: O le paso mi correo si quiere. Aunque le advierto, está muy, muy, [risas] muy tonto mi correo.
+[00:17:43.736] speaker_0: A ver, me dijiste que me agregaron en WhatsApp, ¿verdad?
+[00:17:46.076] speaker_1: Sí, aquí les tengo un mensaje de mi correo.
+[00:17:54.916] speaker_0: [ruido] Ok.
+[00:18:04.456] speaker_0: Pedro, ¿verdad? Pedro ABJ. OkFarro. Entiendo lo de lo que... Farro nos tiene que dar acceso para poder ordenar ahí directamente, ¿verdad? Pero Rappi, si Rappi puede estar en persona, ¿por qué nosotros no?
+[00:18:27.712] speaker_2: En cierto cerrado, pero era por algo de la API, ¿no? Que no-
+[00:18:31.732] speaker_0: No, pero en, en teoría a lo mejor sí puede.
+[00:18:34.742] speaker_1: Ando, ando checando porque no sé qué tanto.
+[00:18:37.122] speaker_0: A lo mejor.
+[00:18:38.292] speaker_2: Sí, porque en mi cabeza al inicio-
+[00:18:40.022] speaker_1: Cincuenta, cincuenta.
+[00:18:41.152] speaker_2: En mi cabeza al inicio planteaba de que ah, pues se puede pasar a Rappi y luego de Rappi ya pues ahí. Pero dice que cobra tarifa.
+[00:18:48.612] speaker_0: Sí, Rappi cobra tarifa.
+[00:18:49.712] speaker_2: Así que por eso no se puede.
+[00:18:55.942] speaker_2: ¿A Rappi?
+[00:18:57.092] speaker_0: No, no, es sobre lo que yo les decía ahorita de que si era con la tableta, que imprimiera un ticket. Luego ya lo capturaba.
+[00:19:04.572] speaker_2: Sí, lo vi hace poco, así de repente en Instagram o en TikTok, de que si hay, eh, impresoras así chiquitas. Así que pues sí puede imprimir tickets.
+[00:19:14.332] speaker_0: Es que Parrot ya... Mira, esa, esa puede... Rappi imprime ahí, así. Entonces-
+[00:19:19.812] speaker_2: Pero no, no, no puede vincularse de la tableta.
+[00:19:23.072] speaker_0: Tiene un... No, no, no. Pero si ya tienes la aplicación ahí en el Android,
+[00:19:28.152] speaker_0: el mismo Android.
+[00:19:28.932] speaker_2: Ah, ya. Ah, ya entendí.
+[00:19:31.652] speaker_0: Ahí está una utilidad de eso, ¿no?
+[00:19:33.192] speaker_1: Sí, es lo que estaba viendo. Por eso digo que-
+[00:19:34.772] speaker_0: Pero ahorita eso investígalo después. Tú me dices nada más, eh, qué necesitas. Ya me mandaste tu correo, ¿verdad?
+[00:19:42.492] speaker_1: Sí.
+[00:19:42.832] speaker_0: Okey.
+[00:19:44.952] speaker_0: Está largo.
+[00:19:46.892] speaker_1: Sí, disculpe. [risas]
+[00:19:48.432] speaker_0: No, está bien.
+[00:19:52.772] speaker_0: Bueno, eh, ya entendí la idea. Ya, ah...
+[00:20:01.872] speaker_0: Ya te doy información. Eh...
+[00:20:09.792] speaker_0: Nomás el, la aplic-- la parte de mantenimiento de nosotros cuando cambian precios por X o por Y. Por ejemplo, ahorita ya queremos cambiar el precio del matcha.
+[00:20:19.812] speaker_0: Ay, se me olvidó eso. Okey, eh...
+[00:20:22.442] speaker_1: Ah, cambia entonces porque el producto que están pidiendo cambia de precio, ¿o cómo?
+[00:20:26.552] speaker_0: Cómo, a ver.
+[00:20:27.362] speaker_1: ¿Eso de los matchas o...?
+[00:20:28.702] speaker_0: No, lo que pasa es, por ejemplo, el precio del matcha este año se ha estado subiendo mucho. Y estamos considerando a lo mejor cambiar el precio del matcha.
+[00:20:36.312] speaker_1: Le advierto, uso la todo persona para preguntarle bebidas que no sé ni qué es. [risas]
+[00:20:40.532] speaker_0: No, es una cosa asquerosa que la gente compra mucho. Es, es un polvo... Es una hierba que hace polvo japonés-
+[00:20:48.512] speaker_2: Un polvo en pasta.
+[00:20:48.952] speaker_0: Japonesa.
+[00:20:49.812] speaker_1: Ah, okey, okey.
+[00:20:50.552] speaker_0: Y la compran un chorro. Está carísima, la madre esa.
+[00:20:54.212] speaker_0: El gramo, el gramo cuesta seis pesos.
+[00:20:58.012] speaker_1: ¿El gramo?
+[00:20:59.912] speaker_0: El gramo cuesta seis pesos. Costaba cinco pesos el año pasado y ya me lo aumentaron a seis.
+[00:21:08.972] speaker_0: Compras seis kilos y son como quince mil pesos. Y de repente... Y aquí nos lo aumentamos y yo: «Caray».
+[00:21:16.272] speaker_0: Eh,
+[00:21:18.732] speaker_0: entonces, a mí la parte de, de cómo actualizar nosotros los precios o si los van a contratar ustedes como que le van a dar servicio a eso, pues aquí está. Estos son los nuevos precios. Ahí aviéntenselo. Eh,
+[00:21:32.772] speaker_0: pero por lo general Yoyi y Luis, que son los hijos de la dueña, actualizan todos los precios.
+[00:21:39.192] speaker_1: Okey, esto es para darles el, el módulo, eh, ya que cambien en Parrot, pues que ellos...
+[00:21:44.012] speaker_0: Y, y la chica, bueno, no sé dónde está.
+[00:21:47.932] speaker_0: Pero lo que te digo, por ejemplo, pasa y hay una... algo que dice pin y nadie lo oyó.
+[00:21:52.892] speaker_1: Sí, no, sí, cierto, sí, cierto, cierto.
+[00:21:54.672] speaker_0: Por eso yo quiero algo...
+[00:21:56.202] speaker_1: Que se puede ver. Ah, quedó toda la pila.
+[00:21:58.192] speaker_0: Sí, sí, sí. Fueron quince.
+[00:22:01.332] speaker_0: Eh...
+[00:22:02.352] speaker_1: Sí, sí, sí.
+[00:22:06.092] speaker_1: Voy a checarlo.
+[00:22:08.812] speaker_2: Tu-- por eso de la notificación no lo tiene con Rappi, ¿verdad? Dijo.
+[00:22:12.412] speaker_0: Notifica... Rappi imprime.
+[00:22:14.372] speaker_2: Ah, por imprimía, me olvidé de eso.
+[00:22:16.062] speaker_0: Sí.
+[00:22:16.432] speaker_2: No, entonces, eh, dijiste que habías checado algo, ¿no?
+[00:22:19.932] speaker_1: Claro.
+[00:22:20.332] speaker_2: Eh...
+[00:22:22.132] speaker_2: En la aplicación que ahorita está metida en Parrot no puede imprimir.
+[00:22:25.172] speaker_1: No, no, yo digo que sí, estoy checando.
+[00:22:27.532] speaker_2: No, sí, es que estoy checando, pero no lo veo. Estoy checando con...
+[00:22:32.032] speaker_1: Lo estoy checando. Yo digo que sí se puede, pero, ah...
+[00:22:37.592] speaker_1: Puedo checar aquí
+[00:22:39.732] speaker_1: físicamente. Quisiera checarlo una vez porque sí afecta mucho lo que vamos a hacer.
+[00:22:51.022] speaker_1: Ay, disculpe. Gracias.
+[00:23:19.292] speaker_0: [ruido] Ay, perdón. Disculpe.
+[00:23:39.212] speaker_0: ¿Es Miriam? ¿Christopher?
+[00:23:42.852] speaker_1: Christopher.
+[00:23:44.202] speaker_0: Christopher. Okey.
+[00:23:44.892] speaker_1: Permítame.
+[00:23:46.312] speaker_0: Ella hubo un tiempo que era aquí de las personas, entonces tiene, tiene experiencia en barra.
+[00:23:50.952] speaker_1: Ajá.
+[00:23:51.152] speaker_0: Y en manejo de Parrot también.
+[00:23:53.172] speaker_1: Okey. Excelente.
+[00:23:53.972] speaker_0: La idea ahorita es que en cada mesa va a haber un QR específico de la mesa, donde el cliente va a llegar, va a ordenar
+[00:24:05.052] speaker_0: y a través de una... Va a ordenar a través de una...
+[00:24:14.512] speaker_0: a través de una aplicación que ya, que ya se está desarrollando. Y va a haber otra aplicación que va a recibir una comaEl detalle aquí, Tomás, que yo estoy viendo es que, eh, ellos reciben la comanda y la tienen que capturar.
+[00:24:32.924] speaker_0: ¿Okey? Eh,
+[00:24:35.624] speaker_0: la idea es tener una tableta o a lo mejor el mismo Parrot, eso no se ha definido todavía. Y-
+[00:24:41.084] speaker_1: Ahorita estoy noventa por ciento seguro de que sí se puede imprimir.
+[00:24:44.504] speaker_0: Yo, yo les digo que a veces están muy ocupados atendiendo una fila de clientes o se movieron y si hay, si la alarma solamente es un clin en una aplicación, pues ni se van a dar cuenta que hubo un clin. Entonces, le digo que sí puede haber manera, si la aplicación es con Parrot, que imprima las órdenes y ellos nada más lo recapturen en Parrot, porque no tienen integración con Parrot ahorita, ¿okey? Eh,
+[00:25:13.024] speaker_0: entonces, eso es lo que estamos hablando.
+[00:25:18.924] speaker_0: Y ahorita les dije que sí pueden imprimir utilizando la misma terminal y ya.
+[00:25:24.104] speaker_1: Yo estoy creando una prueba, creo que sí se puede.
+[00:25:25.854] speaker_0: Porque si les sale un papelito, no lo van a poder ignorar.
+[00:25:29.444] speaker_2: Sí.
+[00:25:29.984] speaker_1: Sí está mejor un papelito en vez de una notificación, de preferencia.
+[00:25:34.434] speaker_2: Sí.
+[00:25:34.444] speaker_1: Aunque tengan que volver a meterla a Parrot. Aun así, es más fácil tener física...
+[00:25:38.684] speaker_0: Mhm, sí, sí, sí. Y luego estaría la de descarte, ¿no? Eh,
+[00:25:44.104] speaker_0: ahora al cliente le sale un número de orden, ¿verdad? En la, en su... aquí.
+[00:25:48.584] speaker_1: Sí.
+[00:25:48.704] speaker_0: Ese número de orden no va a ser más con Parrot.
+[00:25:51.244] speaker_1: No.
+[00:25:51.664] speaker_0: No. Entonces, ellos en las notas que ponen, pueden poner el número de orden de la cosa esta.
+[00:25:58.244] speaker_0: Perdón, ¿cómo se llama la aplicación? La cosa esta. [risas]
+[00:26:01.524] speaker_1: No tiene nombre. Ahorita no tiene nombre. Esta es mesa virtual, pero... Sí, mesa virtual, realmente.
+[00:26:06.464] speaker_0: Okey.
+[00:26:06.524] speaker_2: Es que de hecho no es aplicación, ¿verdad? Es página.
+[00:26:09.204] speaker_1: Ah, bueno, sí, sí, pero, este, mesa virtual vamos a llamarle. Ni modo. Quería checar el nombre de cómo se iba a llamar, pero ya ni modo, ya quedó mesa virtual. Así pasan las cosas.
+[00:26:19.464] speaker_0: Sí, y, y por ejemplo, que si alguien se lleva el QR, le toma una foto y desde su casa empieza a hacerlo, lo que van a hacer es: «Oye, esto me...» Y esto viene de la mesa uno, cada QR es único. Entonces, pues tú no... uno, tres o lo que sea, no hay nadie. Entonces, tú no... esa orden la voy a ignorar.
+[00:26:40.404] speaker_0: Porque no es un pick and go. Es, es, es...
+[00:26:43.624] speaker_1: Aunque eventualmente la idea es que se pueda.
+[00:26:45.064] speaker_0: Sí, yo sé que eventualmente quiere...
+[00:26:48.174] speaker_0: ¿Qué más necesita? Ah, hay que ver cómo de Parrot sacar el reporte de productos con precios y con modificadores para que se pueda alinear.
+[00:27:00.584] speaker_1: Tratando... cambiar el código para que se corra una prueba. Este, a ver si puede imprimir, digo que sí. Luego veo cómo se puede imprimir de manera que sea automática, ¿no?
+[00:27:09.844] speaker_0: Mhm, sí, porque imprime desde la-
+[00:27:11.664] speaker_1: Aunque hay un, hay un tema que quiero tocar, este, porque pueden agregar más a su, a su orden. Este, siempre mira tu ticket.
+[00:27:21.024] speaker_0: Ah, la orden siempre queda abierta. Okey.
+[00:27:24.724] speaker_1: Okey, bueno, hay como un... ¿Dicen que tienen órdenes abiertas en Parrot?
+[00:27:27.444] speaker_0: Sí, por, por, por lo general es: el cliente llega, le da la orden, paga ahí y ya.
+[00:27:32.544] speaker_1: Imagino, ahorita con parrot restaurando el sistema, me imagino que piden, no sé, una malteada. Es orden abierta, todavía no pagan. Imprimen el ticket, hacen la malteada. Luego piden otra malteada distinta. Imprimen otro ticket, o...
+[00:27:45.454] speaker_2: Sí.
+[00:27:45.454] speaker_1: Aunque sale una orden, pero es otro ticket.
+[00:27:47.104] speaker_0: Es otra comanda.
+[00:27:48.084] speaker_1: Otra comanda, dices que la palabra correcta es-
+[00:27:49.684] speaker_0: Bueno, yo también aprendo el lenguaje de ellos a diario, no te preocupes.
+[00:27:52.424] speaker_1: La palabra esa la aprendí hace una semana.
+[00:27:54.024] speaker_0: Sí, okey.
+[00:27:55.064] speaker_1: Este...
+[00:27:55.624] speaker_0: Y hoy, y hoy aprendí la palabra macha.
+[00:27:57.624] speaker_1: Macha, sí. [risas] Entonces, me imagino que al final, ya que van a, a cobrarle, pues tienen las dos comandas y eso, porque se todo...
+[00:28:05.434] speaker_0: Todo se compare contra el ticket. Ajá.
+[00:28:07.144] speaker_1: Okey, entonces no hay problema que hayan varios tickets, eh, varios comandas, perdón, realmente.
+[00:28:11.884] speaker_0: Ahí, ahí sí estaría interesante
+[00:28:15.984] speaker_0: cómo saber si ya cerraron
+[00:28:18.884] speaker_0: la... todo el ticket de la mesa.
+[00:28:23.084] speaker_0: Bueno, hay que analizarlo.
+[00:28:30.544] speaker_0: Es que si la mesa uno ya pidió, ¿okey? Y ya pagó,
+[00:28:35.464] speaker_0: y luego vuelve a escanear porque se le antojó otra cosa, va a ser
+[00:28:39.524] speaker_0: otro ticket.
+[00:28:40.884] speaker_1: Va a ser una orden, pero va a ser otra comanda distinta.
+[00:28:46.764] speaker_0: Es que de, de alguna manera el cliente debe de poder decir si la orden está abierta, se quede, la dejen abierta o la cierren.
+[00:28:57.224] speaker_1: Mmm,
+[00:28:58.964] speaker_1: yo digo más bien que la única persona que puede cerrar la orden sea el empleado, porque si van a cerrarla es que ya pagaron, me imagino.
+[00:29:05.084] speaker_0: Sí, el... ah, ok, la mecánica ahorita es: voy ahí y pago.
+[00:29:11.084] speaker_1: Sí.
+[00:29:11.454] speaker_0: ¿Okey? Entonces, si yo ordeno desde aquí, yo voy a preparar algo y el cliente puede decir: «¿Sabes qué? Siempre me voy, ahí nos vemos», y te quedas con el producto.
+[00:29:21.084] speaker_1: Mmm.
+[00:29:21.954] speaker_0: ¿Okey? Porque si de repente cancela y pues te quedas y el pobre chavo se fue, ¿verdad? Eh, por lo general es: te pago ahí, te doy tu orden, el total es tanto, pago y ya empiezo a, a, a procesarlo. ¿La comanda sale después del ticket o sale junto? Si en caso de una orden que estaba cerrada.
+[00:29:43.944] speaker_0: Que llego, llego ahí, pido mi American waffle y un café,
+[00:29:49.324] speaker_0: ya pago, ¿sale la comanda hasta que pague? ¿O sale la comanda desde ahí?
+[00:29:53.124] speaker_2: Sale la comanda primero y luego ya sale el ticket.
+[00:29:56.164] speaker_0: Porque la dejas abierta. Okey.
+[00:29:57.884] speaker_1: Hay que platicar más de eso.
+[00:29:59.364] speaker_0: Sí, pero si, si el cliente empieza a ordenar, salen las comandas,
+[00:30:05.164] speaker_0: pero la orden está abierta, eh...
+[00:30:09.424] speaker_1: Ahorita cómo la cierran.
+[00:30:10.324] speaker_0: Digo, el riesgo es mínimo, ¿verdad? Digo.
+[00:30:12.144] speaker_1: Sí, sí, pero igual es bueno platicarlo. O sea, el trato de compararlo con-
+[00:30:15.464] speaker_0: Ahorita el, el, el cliente llega, está ahí, le, le dan la orden, él ve en esta pantalla lo, de este lado lo que está pidiendo. ¿Gusta algo más? No. Es tanto. Pago y sale.
+[00:30:29.428] speaker_1: Ah, okey, okey. Entonces, a lo mejor lo que se puede hacer es de que ordenen desde aquí, sí, pero no se empieza a cocinar hasta que luego tengas para-- que pagar, pero pues ya. Bueno, va a estar-
+[00:30:38.228] speaker_0: Pero, pero hay que preguntarle a la señora qué opina de eso, ¿verdad?
+[00:30:41.398] speaker_1: Sí, sí, sí.
+[00:30:42.188] speaker_0: Si todo lo que hagan por el QR se considera orden abierta.
+[00:30:46.898] speaker_1: Tengo entendido-
+[00:30:47.348] speaker_0: Y hasta el final se le cobra o qué va a pasar.
+[00:30:50.208] speaker_1: Está bien que lo tocamos en un cierto. Según yo, va a quedar como orden abierta.
+[00:30:54.968] speaker_0: Ah, okey.
+[00:30:55.138] speaker_1: Pienso que es lo razonable.
+[00:30:55.938] speaker_0: Entonces, por default van a quedar or-órdenes abiertas.
+[00:30:59.268] speaker_1: Dejen que intente imprimir, a ver si, si se me deja.
+[00:31:06.448] speaker_1: Ay, disculpe, ¿puede abrir el sistema?
+[00:31:10.568] speaker_3: Bueno.
+[00:31:12.288] speaker_1: El nuestro.
+[00:31:14.008] speaker_3: Ah, okey.
+[00:31:14.728] speaker_1: No se preocupe.
+[00:31:26.768] speaker_1: Justo que ahí.
+[00:32:04.748] speaker_3: Sí.
+[00:32:05.088] speaker_1: Como lo usa él, no quiero yo. [se ríe]
+[00:32:10.748] speaker_3: A ver cómo se.
+[00:32:16.668] speaker_0: Bueno, si quieres programar sesiones, nada más mándame mensaje: «Puede tal día, a tal hora», y yo lo cubro.
+[00:32:23.808] speaker_1: Ah, okey.
+[00:32:31.188] speaker_1: Sí, eso es, eh... Y de hecho, hay más. O sea, está lo del pickup y vamos a terminar la página, va a tener, este-
+[00:32:37.218] speaker_0: ¿Pero lo del pickup mode dices?
+[00:32:38.968] speaker_1: Sí, eventualmente, eso después.
+[00:32:40.378] speaker_0: No, no, es que primero resolvamos esto.
+[00:32:42.168] speaker_1: Sí, vamos a enfocarnos ahorita en lo del Mr. Burrito primero.
+[00:32:45.888] speaker_1: [ruido] Este...
+[00:32:54.888] speaker_1: Pero sí. Entonces, eso es todo lo que tenemos.
+[00:32:58.008] speaker_0: Okey, está bien. La impresora ahorita no funcionó, ¿verdad?
+[00:33:00.768] speaker_1: Sigo checando.
+[00:33:01.608] speaker_0: No, sin problema, no te preocupes. Llévatela.
+[00:33:04.848] speaker_1: Pero sí tiene razón, lo ideal es que sea así. Voy a...
+[00:33:09.728] speaker_1: a revisarlo.
+[00:33:11.728] speaker_1: Este, una pregunta, justamente aparte, ¿por qué la tableta ya no la tenían ahí y la cambiaron?
+[00:33:16.388] speaker_0: Ah, es que era el sistema anterior.
+[00:33:18.228] speaker_1: Ah, okey, okey.
+[00:33:19.088] speaker_0: Eh, ¿cómo se llamaba el sistema anterior? ¿Te acuerdas? Era un iPad, ¿verdad?
+[00:33:23.348] speaker_3: Era con Serel.
+[00:33:26.068] speaker_0: Seru, Serel se llamaba, sí.
+[00:33:28.448] speaker_1: No me suena, pero...
+[00:33:29.648] speaker_0: Es eso.
+[00:33:30.098] speaker_1: Pero ahí tienen también las-
+[00:33:30.948] speaker_3: Es que tiene ahí también para cobrar con tarjeta, te trae el, la pantallita.
+[00:33:36.248] speaker_1: Oh.
+[00:33:37.328] speaker_3: Este.
+[00:33:37.378] speaker_0: Un lector.
+[00:33:38.488] speaker_3: Sí, un lector.
+[00:33:41.228] speaker_3: Y ahí mismo puedes...
+[00:33:45.888] speaker_0: Ahora tenemos un año apenas, ¿verdad? Más o menos.
+[00:33:49.988] speaker_0: Sí, porque entraste igual que yo.
+[00:33:57.908] speaker_1: Oh, es una chiquitaza.
+[00:33:59.788] speaker_3: Ajá. Y en el iPad estaba la aplicación y...
+[00:34:05.908] speaker_1: Lo digo, como ahí tenían las cámaras que me comentaban. Entonces, ahorita ya no está.
+[00:34:10.648] speaker_0: No, las cámaras ahorita las movimos a la cocina, pero ya, ya, ya las vamos a, a regresar acá enfrente.
+[00:34:21.508] speaker_0: Nada más necesito que me la sustituyan el aparato.
+[00:34:31.208] speaker_0: Quitaron el cable de red para un aparato que no tenía wifi. Lo tuve que llevar cerca del router.
+[00:34:38.288] speaker_0: [risas] Y ya. Bueno, ¿algo más por el momento?
+[00:34:40.868] speaker_1: Eh, no, yo nomás quisiera quedarme a tratar de verificar que se pueda imprimir.
+[00:34:44.348] speaker_0: Adelante.
+[00:34:44.368] speaker_1: Pero ya no ocuparía, no va a ser necesario.
+[00:34:46.098] speaker_0: Okey, bueno.
+[00:34:46.608] speaker_1: Muchísimas gracias por tu tiempo.
+[00:34:48.288] speaker_0: Hasta luego.
+[00:34:59.708] speaker_0: [ruido]

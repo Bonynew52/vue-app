@@ -1,0 +1,43 @@
+[00:00:02.040] speaker_0: Sí.
+[00:00:02.340] speaker_1: Okey. Parece un riesgo ahí también.
+[00:00:05.900] speaker_0: Ah. ¿Es un riesgo?
+[00:00:08.040] speaker_1: Cómo, cómo decir, al, al meter humanos la información...
+[00:00:15.620] speaker_1: Eh,
+[00:00:17.180] speaker_1: hay, hay riesgo, ¿no?
+[00:00:19.680] speaker_1: Lo que-- no, no quise decir problema, es un riesgo, es...
+[00:00:26.480] speaker_0: Ahorita que chequé con ellos, por eso quiero checar cómo estaba Parrot, para ver cómo mostrar la información para evitar la mínima cantidad de eso, de, de tener papeleo.
+[00:00:35.020] speaker_1: Sí, tienes que ver que... si tienes que tener acceso [sonido de mensaje] a lo que est-- a lo que estás viendo aquí.
+[00:00:40.200] speaker_0: Sí.
+[00:00:41.900] speaker_1: Bueno.
+[00:00:44.540] speaker_1: [ruido]
+[00:00:44.550] speaker_0: ¿Qué onda? [ruido]
+[00:00:58.960] speaker_1: Oh, hay un glitch.
+[00:01:14.660] speaker_1: [ruido]
+[00:01:25.140] speaker_0: Oye, si quieres interrumpirme o si sientes que estoy yendo muy justo.
+[00:01:28.000] speaker_1: No, es que no sé cómo abordar esto.
+[00:01:33.800] speaker_0: Así son todos los clientes, o sea, es, es alguien.
+[00:01:37.520] speaker_1: No, lo digo porque no sé qué... cómo comentar, no sé, es como...
+[00:01:43.180] speaker_1: es difícil de explicar.
+[00:01:44.040] speaker_0: Digo, como esto no es tanto la parte del diseño, este...
+[00:01:47.960] speaker_1: No, ah, ya sé. Es que no, no contemplo completamente bien qué problemas están habiendo y...
+[00:01:56.860] speaker_1: cuál es el acercamiento para la solución. No es que sea malo resolviendo problemas, pero no, no me está quedando muy claro cómo resolvemos este, estos problemas de, de Parrot no está conectando y es algo que tiene que ser a mano y quiere reducir el error humano. Sabes que a veces el problema ya está siendo Parrot, entonces no está colaborando.
+[00:02:19.960] speaker_0: Ah, okey. No, eso no me preocupa mucho. O sea, sí y no.
+[00:02:25.660] speaker_0: Ah, yo sé que eventualmente sí va a funcionar todo esto. La única forma de iterar es haciendo esto, te sientas con un cliente, ves las opciones y lo vas, vas iterando.
+[00:02:46.480] speaker_0: Lo que sí estoy viendo es de que sí vamos a tener que correr. Porque si-
+[00:02:49.910] speaker_1: ¿Por qué?
+[00:02:51.120] speaker_0: Son muchos... O sea, no me había cuenta que era mucho, este-
+[00:02:54.040] speaker_1: ¿Muchas integraciones?
+[00:02:55.300] speaker_0: Ah...
+[00:02:57.780] speaker_0: Va-- vamos a tener que hacer mucho trabajo manual, digamos, aquí, estar presentes.
+[00:03:00.740] speaker_1: Ah.
+[00:03:01.020] speaker_0: Sí, sí.
+[00:03:02.380] speaker_1: Pues vamos el viernes. Me aterran para checar lo que dijiste de la hora pico o yo entendí mal.
+[00:03:08.049] speaker_0: ¿Qué te pareció la hora pico?
+[00:03:10.280] speaker_1: O sea, de que se está poniendo difícil. Eso, eso lo comentaba yo. De lo-
+[00:03:14.590] speaker_0: No, difícil no, diferente tiempo.
+[00:03:17.680] speaker_0: [risas] O sea, que va a tomarnos tiempo de lo que pensaba.
+[00:03:19.240] speaker_1: No, eso, eso entiendo, pero digo... Entonces, ahorita, ¿qué es lo que es pendiente? Sin contar lo de terminar lo de diseño de páginas, ahí de parte.
+[00:03:28.960] speaker_0: Pendiente, muchas cosas. Lo tengo en las... No, no sé, lo estoy escribiendo, pero no te preocupes.
+[00:03:34.680] speaker_1: Ah, está.
+[00:03:40.380] speaker_0: Oh, it got refreshed or something.
+[00:03:46.080] speaker_0: [ruido]
