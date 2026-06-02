@@ -9,7 +9,9 @@ const patternModules = import.meta.glob('../assets/background/background_pattern
   import: 'default',
 })
 
-const patternImages = Object.values(patternModules)
+const patternImages = Object.entries(patternModules)
+  .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath))
+  .map(([, image]) => image)
 const patternSpriteCount = 30
 const rotationLimit = 60
 const patternSpeed = 42
@@ -19,9 +21,9 @@ const patternSeed =
     : Math.floor(Math.random() * 100000)
 const introContent = {
   eyebrow: 'Belly Monster Bites',
-  title: 'Postres con presencia',
+  title: 'El origen de Belly Monster',
   body:
-    'Este bloque funciona como un espacio principal para presentar la marca, destacar una campana activa o dejar un mensaje temporal mientras se define el contenido final. La idea es que tome bastante espacio visual en la parte superior del Home y sirva como entrada antes de mostrar las campanas.',
+    'Este bloque funciona como un espacio principal para presentar la marca, destacar una campaña activa o dejar un mensaje temporal mientras se define el contenido final. La idea es que tome bastante espacio visual en la parte superior del Home y sirva como entrada antes de mostrar las campañas.',
 }
 
 function randomFromSeed(seed) {
@@ -36,9 +38,12 @@ function randomRange(seed, min, max) {
 
 const activeSection = ref('')
 const selectedSection = ref('')
+const selectedOrderCampaign = ref(null)
 const sectionElements = ref([])
 const selectedImageRatio = ref(0.8)
+const isLogoIntroVisible = ref(true)
 const isHomeReady = ref(false)
+const arePatternsReady = ref(false)
 const viewportSize = ref({
   width: typeof window === 'undefined' ? 1440 : window.innerWidth,
   height: typeof window === 'undefined' ? 900 : window.innerHeight,
@@ -47,6 +52,7 @@ const selectedCampaign = computed(() =>
   campaigns.find((campaign) => campaign.id === selectedSection.value),
 )
 const isIntroSelected = computed(() => selectedSection.value === 'home-intro')
+const hasOrderDialog = computed(() => Boolean(selectedOrderCampaign.value))
 const patternSprites = computed(() => {
   if (!patternImages.length) {
     return []
@@ -56,7 +62,7 @@ const patternSprites = computed(() => {
 
   return Array.from({ length: patternSpriteCount }, (_, spriteIndex) => {
     const seed = patternSeed + spriteIndex + 1
-    const image = patternImages[Math.floor(randomFromSeed(seed * 3) * patternImages.length)]
+    const image = patternImages[spriteIndex % patternImages.length]
     const size = Math.round(randomRange(seed * 5, 118, 230))
     const startOffset = size * randomRange(seed * 7, 1.1, 2.2)
     const endOffset = size * randomRange(seed * 11, 1.1, 2.2)
@@ -89,7 +95,8 @@ const patternSprites = computed(() => {
 })
 
 let observer
-let homeIntroTimeout = 0
+const homeIntroTimeouts = []
+const homeIntroFrames = []
 
 function getPatternEdgePoint(edge, offset, width, height, seed) {
   const x = randomRange(seed, 0.04, 0.96) * width
@@ -131,6 +138,25 @@ function clearSelectedSection() {
   selectedSection.value = ''
 }
 
+function openOrderDialog(campaign) {
+  selectedOrderCampaign.value = campaign
+  clearSelectedSection()
+}
+
+function closeOrderDialog() {
+  selectedOrderCampaign.value = null
+}
+
+function confirmOrderDialog() {
+  // Placeholder: the real ordering flow lives in /ordenar and needs table/item mapping.
+}
+
+function closeOrderDialogOnScroll() {
+  if (selectedOrderCampaign.value) {
+    closeOrderDialog()
+  }
+}
+
 function updateSelectedImageRatio(event) {
   const { naturalWidth, naturalHeight } = event.target
 
@@ -140,11 +166,29 @@ function updateSelectedImageRatio(event) {
 }
 
 onMounted(() => {
+  if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual'
+  }
+
+  window.scrollTo(0, 0)
   updateViewportSize()
   window.addEventListener('resize', updateViewportSize)
-  homeIntroTimeout = window.setTimeout(() => {
+  window.addEventListener('scroll', closeOrderDialogOnScroll, { passive: true })
+  homeIntroTimeouts.push(window.setTimeout(() => {
+    isLogoIntroVisible.value = false
+  }, 1000))
+  homeIntroTimeouts.push(window.setTimeout(() => {
     isHomeReady.value = true
-  }, 1000)
+  }, 1520))
+  homeIntroTimeouts.push(window.setTimeout(() => {
+    const firstFrame = window.requestAnimationFrame(() => {
+      const secondFrame = window.requestAnimationFrame(() => {
+        arePatternsReady.value = true
+      })
+      homeIntroFrames.push(secondFrame)
+    })
+    homeIntroFrames.push(firstFrame)
+  }, 2300))
 
   observer = new IntersectionObserver(
     (entries) => {
@@ -176,7 +220,9 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateViewportSize)
-  window.clearTimeout(homeIntroTimeout)
+  window.removeEventListener('scroll', closeOrderDialogOnScroll)
+  homeIntroTimeouts.forEach((timeout) => window.clearTimeout(timeout))
+  homeIntroFrames.forEach((frame) => window.cancelAnimationFrame(frame))
   observer?.disconnect()
 })
 </script>
@@ -184,62 +230,57 @@ onBeforeUnmount(() => {
 <template>
   <main
     class="home-view"
-    :class="{ 'is-ready': isHomeReady }"
+    :class="{ 'is-ready': isHomeReady, 'patterns-ready': arePatternsReady }"
     :style="{ '--home-background-logo': `url(${backgroundLogo})` }"
   >
     <Transition name="home-logo-intro">
-      <section v-if="!isHomeReady" class="home-logo-intro" aria-label="Belly Monster Bites">
+      <section v-if="isLogoIntroVisible" class="home-logo-intro" aria-label="Belly Monster Bites">
         <div class="home-logo-intro__card">
           <img :src="backgroundLogo" alt="Belly Monster Bites" />
         </div>
       </section>
     </Transition>
 
-    <Transition name="zoom-fade">
+    <div class="home-watermark-pattern" aria-hidden="true">
+      <div class="home-watermark-pattern__lines">
+        <div v-for="line in 34" :key="line" class="home-watermark-pattern__line">
+          <span v-for="item in 48" :key="item">Belly Monster Bites</span>
+        </div>
+      </div>
+    </div>
+
+    <Transition name="order-dismiss">
       <button
-        v-if="selectedSection"
-        class="section-focus-backdrop"
+        v-if="hasOrderDialog"
+        class="order-dialog-backdrop"
         type="button"
-        aria-label="Cerrar enfoque"
-        @click="clearSelectedSection"
+        aria-label="Cerrar orden"
+        @click="closeOrderDialog"
       ></button>
     </Transition>
 
-    <Transition name="zoom-fade">
-      <section
-        v-if="isIntroSelected"
-        class="focus-preview home-intro"
-        aria-label="Presentacion principal seleccionada"
-        @click.stop="clearSelectedSection"
-      >
-        <div class="intro-title">
-          <p class="eyebrow">{{ introContent.eyebrow }}</p>
-          <h1>{{ introContent.title }}</h1>
-        </div>
-
-        <div class="intro-text">
-          <p>{{ introContent.body }}</p>
-        </div>
-      </section>
-
+    <Transition name="order-dismiss">
       <article
-        v-else-if="selectedCampaign"
-        class="focus-preview focus-campaign-preview"
-        :style="{ '--preview-image-ratio': selectedImageRatio }"
-        @click.stop="clearSelectedSection"
+        v-if="selectedOrderCampaign"
+        class="order-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="order-dialog-title"
+        @click.stop
       >
-        <div class="campaign-media">
-          <img
-            :src="selectedCampaign.image"
-            :alt="selectedCampaign.name"
-            @load="updateSelectedImageRatio"
-          />
+        <div class="order-dialog__media">
+          <img :src="selectedOrderCampaign.image" :alt="selectedOrderCampaign.name" />
         </div>
 
-        <div class="campaign-copy">
-          <p class="eyebrow">{{ selectedCampaign.eyebrow }}</p>
-          <h1>{{ selectedCampaign.name }}</h1>
-          <p class="description">{{ selectedCampaign.description }}</p>
+        <div class="order-dialog__content">
+          <p class="eyebrow">{{ selectedOrderCampaign.eyebrow }}</p>
+          <h2 id="order-dialog-title">Quieres ordenar este articulo?</h2>
+          <p>{{ selectedOrderCampaign.name }}</p>
+
+          <div class="order-dialog__actions">
+            <button type="button" @click="confirmOrderDialog">Si</button>
+            <button type="button" @click="closeOrderDialog">No</button>
+          </div>
         </div>
       </article>
     </Transition>
@@ -266,7 +307,6 @@ onBeforeUnmount(() => {
             'in-view': activeSection === 'home-intro',
           }"
           aria-label="Presentacion principal"
-          @click.stop="selectSection('home-intro')"
         >
           <div class="intro-title">
             <p class="eyebrow">{{ introContent.eyebrow }}</p>
@@ -278,6 +318,8 @@ onBeforeUnmount(() => {
           </div>
         </section>
 
+        <h2 class="monthly-dishes-title">Platillos del mes</h2>
+
         <section class="campaign-list" aria-label="Campanas">
           <article
             v-for="campaign in campaigns"
@@ -287,7 +329,7 @@ onBeforeUnmount(() => {
             :class="{
               'in-view': activeSection === campaign.id,
             }"
-            @click.stop="selectSection(campaign.id)"
+            @click.stop="openOrderDialog(campaign)"
           >
             <div class="campaign-media">
               <img :src="campaign.image" :alt="campaign.name" />
@@ -335,6 +377,14 @@ onBeforeUnmount(() => {
   opacity: 1;
 }
 
+.home-view .background-patterns {
+  opacity: 0;
+}
+
+.home-view.patterns-ready .background-patterns {
+  opacity: 1;
+}
+
 .home-logo-intro {
   position: fixed;
   inset: var(--app-header-height) 0 0;
@@ -376,13 +426,54 @@ onBeforeUnmount(() => {
   filter: blur(0);
 }
 
+.home-watermark-pattern {
+  position: fixed;
+  inset: var(--app-header-height) 0 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.home-watermark-pattern__lines {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  gap: clamp(18px, 2.4vmax, 38px);
+  width: 300vmax;
+  min-width: 300vmax;
+  transform: translate(-50%, -50%) rotate(45deg);
+  transform-origin: center;
+}
+
+.home-watermark-pattern__line {
+  display: flex;
+  gap: clamp(18px, 2.6vmax, 44px);
+  width: max-content;
+  white-space: nowrap;
+}
+
+.home-watermark-pattern__line:nth-child(even) {
+  transform: translateX(clamp(54px, 8vmax, 180px));
+}
+
+.home-watermark-pattern__line span {
+  color: rgb(255 255 255 / 10%);
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: clamp(0.5rem, 0.85vw, 0.76rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
 .background-patterns {
   position: fixed;
   inset: var(--app-header-height) 0 0;
   z-index: 1;
   overflow: hidden;
-  opacity: 0.18;
   pointer-events: none;
+  transition: opacity 520ms ease;
 }
 
 .background-pattern {
@@ -398,7 +489,8 @@ onBeforeUnmount(() => {
   will-change: transform;
 }
 
-.section-focus-backdrop {
+.section-focus-backdrop,
+.order-dialog-backdrop {
   position: fixed;
   inset: 0;
   z-index: 40;
@@ -409,6 +501,84 @@ onBeforeUnmount(() => {
     radial-gradient(ellipse at 50% 46%, rgb(143 211 255 / 24%), transparent 42%),
     rgb(7 16 28 / 30%);
   backdrop-filter: blur(10px);
+}
+
+.order-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 41;
+  display: grid;
+  grid-template-columns: minmax(160px, 0.72fr) minmax(220px, 1fr);
+  gap: clamp(16px, 4vw, 34px);
+  align-items: center;
+  width: min(calc(100vw - 32px), 720px);
+  padding: clamp(16px, 3vw, 28px);
+  border: 2px solid var(--stage-blue);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-third);
+  box-shadow:
+    0 0 22px rgb(143 211 255 / 58%),
+    0 0 76px rgb(143 211 255 / 32%),
+    var(--shadow-panel);
+  transform: translate(-50%, -50%);
+}
+
+.order-dialog__media {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: #0f1115;
+  overflow: hidden;
+}
+
+.order-dialog__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-dialog__content {
+  display: grid;
+  gap: clamp(10px, 2vw, 16px);
+}
+
+.order-dialog__content h2 {
+  margin: 0;
+  color: var(--color-third);
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  line-height: 0.98;
+}
+
+.order-dialog__content p {
+  margin: 0;
+  color: var(--color-third);
+  font-weight: 900;
+}
+
+.order-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.order-dialog__actions button {
+  min-width: 92px;
+  min-height: 44px;
+  border: 2px solid var(--stage-blue);
+  border-radius: 6px;
+  background: #0f1115;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.order-dialog__actions button:last-child {
+  background: var(--color-surface);
+  color: var(--color-third);
 }
 
 .zoom-fade-enter-active,
@@ -428,6 +598,42 @@ onBeforeUnmount(() => {
 .zoom-fade-leave-from {
   opacity: 1;
   filter: blur(0);
+}
+
+.order-dismiss-enter-active {
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease,
+    filter 160ms ease;
+}
+
+.order-dismiss-leave-active {
+  transition:
+    opacity 90ms ease,
+    transform 90ms ease,
+    filter 90ms ease;
+}
+
+.order-dismiss-enter-from,
+.order-dismiss-leave-to {
+  opacity: 0;
+  filter: blur(4px);
+}
+
+.order-dialog.order-dismiss-enter-from,
+.order-dialog.order-dismiss-leave-to {
+  transform: translate(-50%, -48%) scale(0.98);
+}
+
+.order-dismiss-enter-to,
+.order-dismiss-leave-from {
+  opacity: 1;
+  filter: blur(0);
+}
+
+.order-dialog.order-dismiss-enter-to,
+.order-dialog.order-dismiss-leave-from {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .focus-preview {
@@ -567,7 +773,8 @@ onBeforeUnmount(() => {
 .home-shell {
   position: relative;
   grid-column: 2;
-  width: 100%;
+  width: min(100% - 32px, 1180px);
+  margin: 0 auto;
   background: transparent;
   box-shadow: var(--shadow-panel);
   overflow: visible;
@@ -576,10 +783,12 @@ onBeforeUnmount(() => {
 .focus-section {
   position: relative;
   z-index: 2;
-  cursor: pointer;
+  cursor: default;
   overflow: visible;
+  opacity: 1;
   transform: scale(1);
   transition:
+    opacity 260ms ease,
     transform 280ms ease,
     box-shadow 280ms ease,
     filter 280ms ease;
@@ -625,6 +834,11 @@ onBeforeUnmount(() => {
   transform: scale(1.025);
 }
 
+.focus-section.is-selected {
+  opacity: 0;
+  filter: blur(8px);
+}
+
 .focus-section > * {
   position: relative;
   z-index: 1;
@@ -640,18 +854,19 @@ onBeforeUnmount(() => {
   display: grid;
   gap: clamp(22px, 4vw, 38px);
   width: 100%;
-  padding: clamp(22px, 4vw, 52px);
+  padding: clamp(20px, 4vw, 46px) 0;
 }
 
 .home-intro {
-  --intro-gap: clamp(20px, 4vw, 48px);
+  --intro-gap: clamp(12px, 2.5vw, 24px);
 
   display: grid;
-  grid-template-columns: minmax(280px, 0.9fr) minmax(280px, 1.1fr);
+  grid-template-columns: 1fr;
   gap: var(--intro-gap);
-  align-items: stretch;
+  align-items: start;
+  justify-items: center;
   width: 100%;
-  min-height: clamp(360px, 45vw, 560px);
+  min-height: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -664,7 +879,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100%;
+  min-height: 0;
   border: 2px solid var(--stage-blue);
   border-radius: 6px;
   padding: clamp(22px, 4vw, 44px);
@@ -675,8 +890,10 @@ onBeforeUnmount(() => {
 }
 
 .intro-title {
+  width: min(100%, 620px);
   background: #0f1115;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .intro-title h1 {
@@ -684,17 +901,27 @@ onBeforeUnmount(() => {
 }
 
 .intro-text {
+  width: min(100%, 760px);
   background: #f6f2ee;
   color: #0f1115;
+  cursor: pointer;
 }
 
 .intro-text p {
-  max-width: 46rem;
+  max-width: none;
   margin: 0;
   color: #0f1115;
   font-size: clamp(1.15rem, 2vw, 1.65rem);
   font-weight: 800;
   line-height: 1.35;
+}
+
+.monthly-dishes-title {
+  width: min(100%, 760px);
+  margin: clamp(4px, 1vw, 10px) auto 0;
+  color: #ffffff;
+  font-size: clamp(2.3rem, 7vw, 5.5rem);
+  line-height: 0.9;
 }
 
 .campaign-list {
@@ -718,6 +945,7 @@ onBeforeUnmount(() => {
   color: var(--color-third);
   box-shadow: var(--shadow-panel);
   overflow: visible;
+  cursor: pointer;
 }
 
 .campaign-media {
@@ -772,6 +1000,17 @@ h1 {
 }
 
 @media (max-width: 820px) {
+  .order-dialog {
+    grid-template-columns: 1fr;
+    width: min(calc(100vw - 28px), 460px);
+    max-height: calc(100svh - var(--app-header-height) - 28px);
+    overflow: auto;
+  }
+
+  .order-dialog__media {
+    max-height: 42svh;
+  }
+
   .focus-preview {
     --focus-preview-inset: clamp(14px, 4vw, 28px);
     --focus-preview-top-inset: calc(var(--app-header-height) + clamp(14px, 4vw, 28px));
