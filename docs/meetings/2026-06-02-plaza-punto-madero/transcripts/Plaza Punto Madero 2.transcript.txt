@@ -1,0 +1,2 @@
+[00:00:01.679] speaker_0: It is auto stopped. That is not good.
+[00:00:10.859] speaker_0: [ruido]

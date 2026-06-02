@@ -1,0 +1,487 @@
+[00:00:00.060] speaker_0: Estoy viendo.
+[00:00:01.050] speaker_1: ¿Cómo?
+[00:00:01.470] speaker_0: De repente se ocupan bastante en si de aquí en el quiosco, ¿verdad?
+[00:00:03.570] speaker_1: Sí, de repente sí llega gente y... Pero a veces sí estamos aquí.
+[00:00:07.920] speaker_0: Porque ustedes hacen las malteadas, ¿no?
+[00:00:09.450] speaker_1: Ajá.
+[00:00:10.240] speaker_0: Okay, no todo lo hace el cocinero.
+[00:00:11.980] speaker_1: No, en la cocina nada más se encarga de la pura comida. Nosotras nos encargamos todo del lado.
+[00:00:18.460] speaker_0: Este nada más, digo, para avisar, para comentarles.
+[00:00:21.000] speaker_1: Okey.
+[00:00:21.040] speaker_0: Vamos a estar desarrollando un sistema de mesero virtual para que en vez de que tengan que ir a tomar la orden necesariamente, este, pueda la persona irlo pidiendo desde Internet y les vaya apareciendo acá. No va a salir directamente en Parrot, no tenemos manera de comunicarnos, entonces sería como que usar otra aplicación ahí, pero quiero ver es algo que con ustedes, que me imagino son los que usan este quiosco, ¿no? Realmente.
+[00:00:43.880] speaker_1: Sí, pero en realidad nosotras no vamos a tomar la orden. La orden siempre la persona la pide aquí.
+[00:00:50.020] speaker_0: Ah, okay, bueno, vamos a empezar con eso. ¿Aquí viene y la pide la persona?
+[00:00:53.620] speaker_1: Sí, la persona tiene que venir, nosotras no podemos ir a tomar orden. Al menos que sí nos ha tocado de que alguien está incapacitado o algo así, entonces sí.
+[00:01:01.340] speaker_0: Sí he vis-- sí, es cierto, es que he venido aquí muchas veces, pero se me olvida. Este, nunca. ¿Hay un mesero que viene allá a pedir, no?
+[00:01:07.760] speaker_1: No, nada más le entregamos la comida, en realidad es lo único que…
+[00:01:11.460] speaker_0: Y la persona viene y pide aquí en persona, ¿no?
+[00:01:13.520] speaker_1: Ajá.
+[00:01:13.940] speaker_0: Les dice aquí. No lo ponen aquí, lo ponen acá ustedes.
+[00:01:16.740] speaker_1: Sí.
+[00:01:17.500] speaker_0: Okey. Esto es nada más para ver lo que sale, ¿no?
+[00:01:20.120] speaker_1: Mande.
+[00:01:20.420] speaker_0: Este nada más es para ver lo que va saliendo, ¿verdad?
+[00:01:23.400] speaker_1: Ajá. Sí, sí.
+[00:01:24.150] speaker_0: Ah, entonces realmente es para ahorrarle la vuelta a la persona.
+[00:01:27.260] speaker_1: Sí, sería así para la persona.
+[00:01:29.100] speaker_0: Normalmente digamos que están haciendo un, este, malteadas, ¿no? La persona que se espera hasta que terminen y luego ya...
+[00:01:36.760] speaker_1: Sí, sí. O a veces sí vamos a entregar las bebidas, pero usualmente si tenemos mucho trabajo, como los fines de semana, las personas sí se tienen que esperar aquí.
+[00:01:44.620] speaker_0: Ah, sí, sí, cierto, me acuerdo cuando vine aquí. De hecho, a lo mejor ya te reconocía de cuando venía antes. Este, ¿la comida se deja aquí, tienes que ir por ella o las malteadas no?
+[00:01:52.260] speaker_1: No, la comida sí la vamos a dejar a la mesa.
+[00:01:54.120] speaker_0: Esas malteadas, ¿las que tienes que bajar o algo así?
+[00:01:56.600] speaker_1: Es que lo que pasa es que por ejemplo, en fin de semana, este, a veces se llena, entonces tenemos que sacar los pedidos. Entonces la gente es mejor que se espere aquí. O si están en mesas cercanas como aquí, este, pues en una chance vamos y les damos las bebidas. Ya si están arriba, pues realmente pues nos...
+[00:02:14.280] speaker_2: Tienen que esperar aquí.
+[00:02:15.040] speaker_1: Es un poquito más difícil, porque pues tenemos que seguir haciendo las bebidas o algo.
+[00:02:19.520] speaker_0: Es que nunca había visto eso en otro restaurante y no me había dado cuenta que aquí era distinto.
+[00:02:23.700] speaker_1: Sí, es que realmente está un poquito como difícil y así, porque pues, este, yo sé que hay mucha gente que se molesta de que es que por qué no vienes y me traes todo completo de una vez. Este, pero o es eso o también nos atrasamos en la comida y así, porque los tres hacemos las bebidas, este, o atendemos o vamos y venimos.
+[00:02:40.580] speaker_0: Ah, como ustedes hacen las bebidas también. Ah, okey, okey. Me figura como en Tibora, de hecho, que a veces tardan mucho en dar la comida porque también están haciendo las cosas ellas.
+[00:02:48.760] speaker_1: Sí, ajá. Ahí sí, este, creo que en Tibora es más como de que te espera lo que tengas que esperar.
+[00:02:55.850] speaker_0: [ríe] Sí.
+[00:02:56.260] speaker_1: Realmente. Yo me, me ha tocado que me tengo que esperar como por una vida treinta minutos. Entonces, este, pues aquí como en Tibora a lo mejor hay poquitos días donde se llena. Este, no es como aquí de que usualmente sí se llena, este, o no que se llene todo el local, pero sí hay a gran cantidad de personas, este, como para, este, no tardarnos, este, bueno, para tar-- como para tardarnos en alguna bebida.
+[00:03:22.680] speaker_0: Qué fue lo que decí-- qué fue lo... ¿Qué, qué les parece si les muestro ahorita lo que llevo? Tienen ahí un navegador, ¿no? Porque...
+[00:03:27.940] speaker_1: Sí.
+[00:03:28.290] speaker_0: ¿Está bien si...?
+[00:03:29.060] speaker_1: Sí, sí, claro que sí.
+[00:03:30.400] speaker_0: Ah, bueno, sí, bueno, está bien.
+[00:03:33.160] speaker_0: Ah, está bien raro este...
+[00:03:39.769] speaker_0: Ah, okey.
+[00:03:44.900] speaker_2: Entonces, ¿sería como un tipo Rappi?
+[00:03:48.180] speaker_0: Ah, de cuenta sí, pero no va a estar integrado a Parrot. Eso es, eso es lo que quiero ver con ustedes.
+[00:03:53.510] speaker_2: ¿Es como un iPod?
+[00:03:55.020] speaker_0: Es, es un quiosco, sí, es doble pantalla. Es para que vean el menú también. Slash orders, order, orders, okay.
+[00:04:08.600] speaker_0: Belly Monster. ¿Les digo su correo? No, nada más me meto una vez aquí.
+[00:04:21.420] speaker_0: Ah… Cuál era el, la contraseña.
+[00:04:32.540] speaker_0: Ah, puedes levantar.
+[00:04:46.120] speaker_0: Ah, un
+[00:04:55.320] speaker_0: segundo.
+[00:04:58.219] speaker_0: [pausa]. Ah, Belly Mesas.
+[00:05:08.440] speaker_0: Qué horrible es picarle aquí.
+[00:05:12.580] speaker_1: Sí, se traba mucho.
+[00:05:13.740] speaker_0: Belly Mesas dos.
+[00:05:19.940] speaker_0: A ver si no me equivoqué.
+[00:05:26.140] speaker_0: No me equivoqué. Ah, igual.
+[00:05:38.460] speaker_0: Okey, ah...
+[00:05:43.020] speaker_0: Aquí está. Así es como va a tener el sistema, es lo que se me ocurría.
+[00:05:54.300] speaker_0: Básicamente, me imagino que aquí tienen el, la aplicación, ¿no?
+[00:05:58.310] speaker_1: Bueno, sí, aquí está.
+[00:05:58.960] speaker_0: Parrot Connect. Bueno, que el nuevo sistema va a ser aquí, eh, como un iPhone, como una aplicación.Este, la contraseña. ¿Usan contraseña para Parrot también?
+[00:06:10.580] speaker_2: Ah, sí, pero eso depende de la, ah, de la encargada, porque en la tarde está otra encargada. Entonces-
+[00:06:18.760] speaker_0: Ahorita iniciaron sesión con su cuenta, que son de la mañana y luego cambia el turno, es otra persona, ¿no? Imagino que a ti también te va a ocupar que...
+[00:06:26.400] speaker_0: ¿A qué horas cambia el turno? ¿A las doce?
+[00:06:28.380] speaker_2: A las tres y media.
+[00:06:30.080] speaker_0: A las tres y media. Okey, es distinto. Ah. Ahorita, ¿está, está haciendo otra comida o...?
+[00:06:35.300] speaker_2: No, está... ¿Quieres que dejes de medir?
+[00:06:37.520] speaker_0: No, no, nada más, nada más para saber qué estaba haciendo para agarrar mi mental.
+[00:06:41.140] speaker_2: Ah, no, está lavando las cucharas.
+[00:06:42.430] speaker_0: Ah, tienes que lavar. [risas]
+[00:06:43.000] speaker_2: Sí.
+[00:06:43.529] speaker_0: Ah, okey. Ah. Ay, disculpe. ¿Usted es el cocinero o...? ¿Cuál es su nombre?
+[00:06:49.500] speaker_3: Santiago.
+[00:06:49.910] speaker_0: Santiago, mucho gusto. Este...
+[00:06:54.060] speaker_0: No, no, si quieres lava nomás. [risas] Nada más quería saber, para entender tus responsabilidades. Discúlpame. Este, ¿Belly, estás...?
+[00:07:05.470] speaker_0: [pausa] Okey. La voy a... ¿Guardas las contraseñas en Parrot o no?
+[00:07:26.640] speaker_2: No.
+[00:07:26.680] speaker_0: No, ¿verdad? Bueno, porque no las guardan.
+[00:07:30.920] speaker_0: Este, bueno, eso es lo que ahorita tenía. No sé exactamente qué van a ocupar.
+[00:07:33.890] speaker_2: Okey.
+[00:07:33.940] speaker_0: Esta es versión cero, ni siquiera uno, porque no, no sé cómo les vaya a ser útil. Este, se les hace muy confuso, digamos,
+[00:07:42.500] speaker_0: porque están ocupadas, ¿no? Siempre tienen Parrot abierto, imagino.
+[00:07:45.180] speaker_2: Mhm.
+[00:07:45.400] speaker_0: Y de repente tener que checar. Ah, dejé el chico caído ahorita.
+[00:07:48.780] speaker_2: Okey, si no tiene notificación, sí.
+[00:07:51.660] speaker_0: Y si mando notificación, ¿no hay problema?
+[00:07:54.020] speaker_2: Yo digo que sí, no hubiera tanto problema.
+[00:07:55.520] speaker_0: Lo digo porque he visto que de repente se ponen allá y si llega notificación y no la ven, se guardan aquí, ¿no? ¿Aquí salen notificaciones?
+[00:08:04.270] speaker_2: Sí.
+[00:08:04.280] speaker_0: Ah, okey. Entonces, si digo que todo esto lo voy a ir mandando por notificación.
+[00:08:07.320] speaker_2: Sí, pero si tiene como el sonidito así. Por ejemplo, Rappi nos damos cuenta que llega porque tiene sonido, ¿sabes?
+[00:08:13.840] speaker_0: Okey.
+[00:08:14.120] speaker_2: Entonces...
+[00:08:17.480] speaker_0: Ah, va, eso sí, ya lo tenía en mente. Este,
+[00:08:22.580] speaker_0: ahora para meter órdenes en Parrot. Este, ahorita no tienen un cliente real. ¿Cómo los meten en Parrot? Quisiera ver cómo lo hacen. Este...
+[00:08:31.080] speaker_2: Tenemos Parrot y por ejemplo, aquí está pues todo lo, lo que tenemos, las comidas, bebidas.
+[00:08:35.420] speaker_0: Ahí, ahí buscan. Ah, es-eso es el menú de la orden, ¿no? Que es una orden nueva. Ahorita está vacía.
+[00:08:39.300] speaker_2: Aquí está saliendo la orden. ¿Okey? Por ejemplo, digamos que la persona quiere un frappé helado.
+[00:08:44.860] speaker_0: Ay, disculpa si le interrumpo. ¿Eso es todo lo que hay? ¿Son todas las categorías?
+[00:08:48.220] speaker_2: Sí.
+[00:08:48.509] speaker_0: ¿Todo está bajo ahí?
+[00:08:50.500] speaker_2: Ajá.
+[00:08:50.520] speaker_0: Ya, como dicen, sale en memoria, pues le pican aquí, luego...
+[00:08:52.860] speaker_2: Ajá. Por ejemplo, digamos que la persona quiere un frappé de matcha. Entonces, bueno, aquí está por ejemplo el matcha, pero-
+[00:09:00.700] speaker_0: Otra interrumpción, disculpe. Este, ¿son menús distintos estos?
+[00:09:04.020] speaker_2: Sí.
+[00:09:04.600] speaker_0: Es ahí, o que si es de la mañana, si es de la tarde. Bebida siempre hay.
+[00:09:08.280] speaker_2: Sí, eso es bebida siempre.
+[00:09:08.840] speaker_0: Repostería, ¿eso es lo de allá o...?
+[00:09:11.040] speaker_2: La repostería es lo mismo, ya sea lo, las galletas, los brownies, los cheesecake, los de canela.
+[00:09:15.520] speaker_0: Siempre hay eso.
+[00:09:17.080] speaker_2: Sí.
+[00:09:17.240] speaker_0: Estoy viendo un poco.
+[00:09:18.660] speaker_3: Pero obviamente van a tener limitaciones dependiendo de la hora del día.
+[00:09:23.580] speaker_2: Sí, claro.
+[00:09:24.540] speaker_0: Ah, okey, okey. ¿Eventos especiales aquí son, se usa o...?
+[00:09:27.760] speaker_2: Sí, esos usualmente los usamos cuando es una, una fiesta que nos, nos... ¿Cómo se dice?
+[00:09:34.480] speaker_3: Reserva.
+[00:09:35.490] speaker_2: La reserva, ajá. La reserva, ¿no? También a veces traen, por ejemplo, estos bitters, que son los que están ahí en el refri o cositas así que traen de temporada.
+[00:09:46.200] speaker_0: Este, ¿por qué tiene una blanquita acá? ¿Cómo?
+[00:09:48.710] speaker_2: Este no sé qué decirte.
+[00:09:50.840] speaker_0: [risas] Está bien.
+[00:09:53.380] speaker_2: No, no sé.
+[00:09:53.470] speaker_0: Okey, no, no se preocupe. Okey, entonces se me hace que cuando les muestre, digamos, tal persona pidió tales órdenes.
+[00:09:58.870] speaker_2: Okey.
+[00:09:58.880] speaker_0: Mostrarles qué menú es, qué categoría es y luego el artículo. O sea, porque ya así trabajan ustedes.
+[00:10:04.540] speaker_2: Sí, por ejemplo-
+[00:10:05.940] speaker_3: Ah, ¿y eso puede acceder a las notificaciones de ahí?
+[00:10:09.260] speaker_0: Sí, sí, sí, es, es-
+[00:10:10.800] speaker_3: ¿Y entonces no se puede hacer que la notificación diga exactamente estas categorías?
+[00:10:16.160] speaker_0: O sea, que te diga de una vez-
+[00:10:17.020] speaker_3: Para no tener que cambiar de pantalla.
+[00:10:18.700] speaker_0: Pero luego, si es una orden muy grande, no va a caber toda la notificación.
+[00:10:22.890] speaker_3: ¿Y si lo codificas?
+[00:10:25.160] speaker_0: Ah, ¿cómo?
+[00:10:27.390] speaker_0: O sea, sí te entiendo. O sea, no me expliquen, lo copien o algo así, o...
+[00:10:32.650] speaker_0: ¿Cómo? Van uno por uno, ¿sí, no?
+[00:10:35.280] speaker_2: ¿Cómo?
+[00:10:35.720] speaker_0: Van uno por uno por cada cosa.
+[00:10:37.180] speaker_2: Sí, por cada cosa, sí. Y por ejemplo, tenemos dos men-menús distintos. Este es el de la tarde y este es el de la mañana, que viene siendo el de desayunos y la comida. ¿Okey? Entonces, por ejemplo, la persona quiere un frappé de moca, entonces tenemos que venir acá.
+[00:10:52.820] speaker_0: Ah, son varios distintos bajo lo mismo.
+[00:10:54.980] speaker_2: Sí. Tenemos que escoger el tamaño, chico, mediano, grande, digamos, y el tipo de leche. A veces la persona quiere un shot, un shot extra o algo así, entonces le tenemos que poner shot de espresso extra porque se cobra como extra.
+[00:11:08.180] speaker_0: Ah.
+[00:11:09.100] speaker_2: Entonces, ya que está lista esta orden, le ponemos en agregar artículo.
+[00:11:12.460] speaker_0: Y va uno y va más.
+[00:11:14.620] speaker_2: Sí, se va acumulando.
+[00:11:15.220] speaker_0: Ya veo por qué quieren integración, es un show. Este, entonces el problema ahorita que veo no es tanto que la información les venga bien, es, okey,
+[00:11:23.340] speaker_0: la tienes en la mente y luego pues quieres verla aquí y vas.
+[00:11:26.060] speaker_2: Ah, okey.
+[00:11:26.320] speaker_0: O sea, va a estar feo, porque no va a caber, depende del tamaño de la orden, no va a caber una notificación. O sea, te puede salir que hay algo nuevo, pero luego sería, pues...
+[00:11:33.580] speaker_2: Entonces tenemos que estar viendo como lo que está en la aplicación y pasarlo nosotros a Parrot.
+[00:11:37.980] speaker_0: Sí, porque ahorita... Digo, yo no creo que Parrot nos conteste para integrarlo, eh, nosotros, pero sí me hace mala onda dejarlos con mucho jale manual.
+[00:11:47.180] speaker_2: Y no se puede, por ejemplo, aquí en Parrot sale cuando hay una, un pedido de Rappi. Este, se viene, está, eh, en la aplicación de Rappi está el pedido y también aquí en el mismo Parrot sale también el pedido de Rappi.
+[00:12:01.840] speaker_0: Es por la integración que tiene.
+[00:12:03.250] speaker_2: ¿No se puede hacer eso también?
+[00:12:05.020] speaker_3: La Rappi tiene IP, ¿verdad? Que se puede conectar con Parrot.
+[00:12:08.520] speaker_0: Ajá.
+[00:12:09.550] speaker_3: ¿No se puede mandarle estas cosas a Rappi y de Rappi a Parrot?
+[00:12:13.440] speaker_0: No, porque luego lo hacen en Rappi, Rappi con a Fis.Aparte tienen su propia autenticación, no te va a permitir. Este, sí, está muy chido, ¿no? Eh, voy a inten-- bueno, no creo que me pelen. Voy a pedirle a ver que a ver si nos mandan acceso, pero es lo primero que noté de que va a ser un show tener que-
+[00:12:31.604] speaker_1: Y todo lo quieren tener aquí, no se puede tener, o sea, no sé si hablaron de alguna otra pantalla como para estar viendo eso. A lo mejor eso sería otra pantalla, por ejemplo, de que tenerla acá y ya no estar de que viniendo acá.
+[00:12:43.334] speaker_0: ¿Qué es un show por acaso?
+[00:12:44.524] speaker_1: Y así. ¿Me entiendes?
+[00:12:46.584] speaker_0: A ver, repite, perdón.
+[00:12:47.484] speaker_1: Usaban un iPad, por ejemplo. Sí, antes usábamos un iPad.
+[00:12:51.624] speaker_0: Ah, okey.
+[00:12:52.324] speaker_1: Se cambió a esto.
+[00:12:53.464] speaker_0: Para que fácilmente vean la orden, ah, okey.
+[00:12:55.164] speaker_1: Ajá. Ajá, sí, por ejemplo, si la tenemos acá o así.
+[00:12:58.704] speaker_0: Ah, okey.
+[00:12:59.484] speaker_1: O sea, de igual forma tenemos como que más o menos poquito espacio, tampoco es como si tuviéramos mucho para ponerlo, pero todavía se puede ocupar espacio para poner alguna otra pantalla.
+[00:13:10.084] speaker_0: Siento que ya querían una tableta de esas.
+[00:13:13.924] speaker_0: [ríe] ¿Para qué? ¿Para hablar rápido o para qué onda?
+[00:13:16.204] speaker_1: Este, la tableta la querían usar, bueno, la usábamos para las, las órdenes y luego la querían volver a poner. Ajá, sí, para la querían volver a poner, este, la tableta como para las cámaras o algo así, no sé. Este...
+[00:13:28.854] speaker_0: ¿Ustedes ven las cámaras ahí? De repente para ver quién llega.
+[00:13:32.804] speaker_1: Antes teníamos, este, acceso a las cámaras aquí en otra pantalla. La verdad la pantalla está allá atrás, este, pero algo así como que querían volver a poner la, el iPad, este, para también-
+[00:13:42.894] speaker_0: ¿Para, para qué eran las pantallas ahí? O sea, ¿quién veía ahí las cámaras?
+[00:13:46.104] speaker_1: Ah, pues nosotros.
+[00:13:47.364] speaker_0: Pero para ver, o sea, digo, una cámara así es para ver que no te roben, ¿no? Es para ver si llegó alguien o no.
+[00:13:51.744] speaker_1: Es para ver más o menos, pues qué onda, por ejemplo, de que-
+[00:13:54.594] speaker_0: Bueno, no sé si.
+[00:13:55.204] speaker_1: De que, por ejemplo, a veces sale platillos y la persona se va para arriba. Entonces, para saber ya en qué mesa están, si ya bajaron.
+[00:14:02.684] speaker_0: Ah, sí, es cierto, porque vienen acá y luego se van.
+[00:14:05.364] speaker_1: Ah, sí, exacto. Es más que nada como para monitorear dónde están los, eh, los clientes. O también a veces de que, pues está, este, la gente se va para arriba y nosotros no vemos fácilmente lo que está pasando arriba.
+[00:14:14.554] speaker_0: No, ocupan una, una tableta.
+[00:14:15.944] speaker_1: Ajá, tenemos que ver, este... O sea, tenemos las cámaras de aquel lado.
+[00:14:20.504] speaker_0: No, pero lo ocupan aquí porque está sentado aquí.
+[00:14:22.184] speaker_1: Sí, ajá, sí, nosotros somos los que estamos, este, viendo, este, más o menos lo que está haciendo la gente.
+[00:14:26.544] speaker_0: No, sí, les voy a decir. Entonces que el sistema lo tengan realmente, o sea, va a ser lo mismo, ¿no? Pero una tableta nada más la checan porque es el de las órdenes o lo que sea y ya, okey.
+[00:14:34.384] speaker_1: Sí, de que eso nos haría como que más fácil.
+[00:14:36.144] speaker_0: Y fácilmente, no, o sea, digamos, y es en la tableta que comida, vaina y ya, siguiente. Mmm, comida tal, siguiente. Y, y que ya esté por categoría también para que fácilmente lo metan todo de una vez.
+[00:14:45.304] speaker_1: Sí, exacto.
+[00:14:46.624] speaker_0: No creo que les consiga un iPad, pero sí una tableta. [ríe]
+[00:14:48.964] speaker_1: Okey, sí, sí, sí, está bien. No pasa nada.
+[00:14:51.404] speaker_0: Este...
+[00:14:52.184] speaker_1: Okey, y por ejemplo, lo que nosotros estamos acostumbradas en los fines de semana que está muy lleno, que las personas esperen por su bebida aquí. Digamos que una persona mete un pedido ahí, entonces la persona tendría que venir o ya ahora sí nosotros tendríamos que ir a entregar. Porque también para conocer a la persona.
+[00:15:08.784] speaker_0: No, no, no, este, lo que yo decía es como ya está el sistema, pues bien fácil. Si ya sabes que ya se terminó.
+[00:15:15.404] speaker_0: O sea, la idea es de que se le notifique, ¿no?
+[00:15:17.684] speaker_1: Como pedido listo.
+[00:15:18.524] speaker_0: Ya está listo, ve. El tema es de que imagino que es que necesito ver con Parrot. Aquí, cuando el cocinero termina, ¿aquí van a Parrot y lo ponen ya listo, no, o no?
+[00:15:27.704] speaker_1: No, aquí no.
+[00:15:28.584] speaker_0: Esto solo es, la orden se hizo y es nada más para al final contar que...
+[00:15:31.824] speaker_1: Mjm, sí.
+[00:15:32.724] speaker_0: Entonces, realmente el nuevo sistema va a ser para todo ese seguimiento que ahorita no tienen. Imagino de notificar ya está listo, no está listo. Entonces, todo eso va a ser el nuevo sistema.
+[00:15:39.774] speaker_1: Entonces, ¿la persona tendría que venir a pagar acá o sería como ellos mismos pagan desde la aplicación?
+[00:15:45.284] speaker_0: La idea es de que el tema con pagar es de que, eh, Olga quiere que el pago se haga directamente con Parrot.
+[00:15:50.764] speaker_1: Ah, okey.
+[00:15:50.944] speaker_0: Pero no tiene integración. Entonces, pa' mí es tienes que venir a bajar a pagar.
+[00:15:54.054] speaker_1: A pagar, okey.
+[00:15:54.764] speaker_0: Sí, ya sabes lo que tienes, ya ves la orden, ves la mesa, eh, la persona.
+[00:15:59.984] speaker_1: ¿Sin pick up?
+[00:16:00.214] speaker_0: Sí, eventualmente, de hecho, también va a ser como pick up, ¿verdad?
+[00:16:02.584] speaker_1: Se dejaría como que la cuenta abierta aquí
+[00:16:05.624] speaker_1: hasta que vengan y paguen.
+[00:16:06.584] speaker_0: Ah, a poco las órdenes tienen que dejar abiertas.
+[00:16:08.104] speaker_1: Se pueden dejar abiertas, abiertas.
+[00:16:10.574] speaker_0: [ríe]
+[00:16:11.484] speaker_1: Por si hay otras, otro pedido. Por ejemplo, guardar un pago faltante. Ahí se queda, sale la comanda y nos vamos a pedidos y ahí se queda abierto.
+[00:16:19.734] speaker_0: ¿Si, si saben la palabra comanda ustedes? Porque cuando aprendí esa palabra el otro día es que estaba haciendo el sistema y dije: "Vaya, va a saber qué es una comanda".
+[00:16:26.964] speaker_1: No, sí.
+[00:16:27.384] speaker_0: Vamos a ponerle pedido.
+[00:16:28.484] speaker_1: No, sí, sí, sí.
+[00:16:29.224] speaker_0: Tú sabías que era comanda. Bueno. Ah, bueno, eso lo hace más complicado. Digamos que alguien pide, ahorita siempre les dan el tick que, bueno.
+[00:16:37.464] speaker_1: El ticket que sale así del, de este, este, con estos otros, eso lo damos, esto lo que damos nosotros.
+[00:16:42.084] speaker_0: Sí, es que luego sería raro. Bueno, no sé si ahora mismo es lo correcto. Alguien pide, ¿no? Pues lo metes a Parrot, te imprime, pero bueno, a ti te lo quedas, está bien.
+[00:16:50.544] speaker_1: Ajá.
+[00:16:52.544] speaker_0: Es como, realmente los tickets sí hay que dejarlos para saber qué tienes ahorita pendiente, ¿no?
+[00:16:56.544] speaker_1: Ajá, sí.
+[00:16:58.344] speaker_0: Creo que sí, tenía que ser así.
+[00:17:00.224] speaker_1: Okey. Entonces también el suyo también tendría que sacar comanda.
+[00:17:06.564] speaker_0: Ah...
+[00:17:08.504] speaker_1: Porque lo que pasa es de que, okey, está el pedido.
+[00:17:11.974] speaker_0: Pick up ahorita no va a haber, ahorita va a ser puro mensaje virtual.
+[00:17:14.744] speaker_1: Okey, sí, pero por ejemplo, a la hora de nosotros hacerlo, el pedido que se está, este, poniendo en la tablet o lo que sea, este, ¿va a sacar comanda o no va a sacar comanda?
+[00:17:25.144] speaker_0: No, porque la idea es que Parrot es el que lo maneja.
+[00:17:26.824] speaker_1: Ah, okey.
+[00:17:27.404] speaker_0: Sí, ya que lo pases, ahora sí genera comanda.
+[00:17:29.244] speaker_1: Directamente este va a sacar comanda.
+[00:17:31.084] speaker_0: Sí.
+[00:17:32.344] speaker_1: Okey, okey.
+[00:17:32.444] speaker_0: Este, la idea es de que recojan aquí las cosas, desmantelar. Este, la otra idea es de que paguen aquí. Va a tener que todo ser cuenta abierta. Entonces, como funciona, este...
+[00:17:42.934] speaker_1: Okey, entonces supongo que igual vendrían así como con numeración y todo para ustedes ya saber cuál es la cuenta de cada cliente. Entonces, eso es lo que nos dicen. Sí, eso también tendríamos que ver, este, como no sabemos muy bien. O sea, tendría que ser este en qué mesa están.
+[00:17:57.244] speaker_0: Sí, o sea, esa es la liga al revés. No, no tanto okay, mesas tales, es okay, tengo ticket tal, qué mesa es.
+[00:18:02.584] speaker_1: Mjm, sí.
+[00:18:03.184] speaker_0: Sino, mmm...
+[00:18:04.744] speaker_1: O que pueda ser con el nombre, no sé, que pongan su nombre y nosotros ya buscamos, este, quién es el nombre de, de cada quien. Este, pero también, mmm, no sé si eso sería muy práctico cuando tenemos mucha gente, porque sería estar como que llamándolos.
+[00:18:20.684] speaker_0: Yo creo que lo ideal es que el sistema funcione cuando hay mucha gente. O sea, es como de acuerdo a los casos, ¿no?
+[00:18:24.744] speaker_1: Okey, okey.
+[00:18:25.504] speaker_0: Este, la verdad, imagino los días muy pesados son ¿qué? ¿Domingo o sábado?
+[00:18:30.964] speaker_1: Sábado y domingo y los viernes en la tarde.
+[00:18:34.580] speaker_0: Vienes en la tarde. Ah, pues sí, cierto. Ah.
+[00:18:40.220] speaker_0: No, el problema es de que ahorita es bien fácil imaginar cómo va a ser. Ah, va a ser fácil, pues pásalo para acá, no más copia y pégalo. Okay, luego llega un sábado y domingo, imagínate tiempo para estudiar.
+[00:18:49.360] speaker_1: Sí, este pues ahí sí es el antes y el después. Espérame, voy a revisar la orden. Entonces como que...
+[00:18:56.340] speaker_2: Sí, ahí o sería de que todos pidan por la aplicación para no tener de que la fila acá y estar de que no, todavía no le puedo atender porque tengo un trabajo en acá o algo así.
+[00:19:06.740] speaker_0: Mhm.
+[00:19:09.080] speaker_3: Para esos días necesitarías estar uno de nosotros aquí para checar eso o...
+[00:19:12.550] speaker_0: Sí, esa es la idea. Pues voy a estar el viernes, sábado. Pues sí, pues [ríe] am...
+[00:19:18.820] speaker_1: Y luego-- y de igual forma, pues podemos checar, este, con mi gerente para ver cómo cambiamos la dinámica de cómo se van a estar llevando los pedidos-
+[00:19:26.760] speaker_0: Sí.
+[00:19:26.870] speaker_1: De cómo se van a estar, este, registrando también esto de que las, las órdenes o saber de quién es qué o cómo nos vamos a manejar también los fines de semana.
+[00:19:37.870] speaker_0: ¿A qué hora llega el gerente o gerente?
+[00:19:41.820] speaker_2: Llega tarde.
+[00:19:42.230] speaker_0: Llega tarde, es lo que decía, llega tarde.
+[00:19:44.680] speaker_2: Usualmente llega a estas horas.
+[00:19:46.320] speaker_0: Ah, okey.
+[00:19:46.840] speaker_2: Para las diez, ya se fue otra vez.
+[00:19:49.660] speaker_1: Sí, este, pero ahorita ya pues debería de llegar. O sea, igual déjeme le mando mensaje.
+[00:19:56.660] speaker_0: Son dos cocineros.
+[00:19:58.160] speaker_1: Sí, son dos cocineros.
+[00:19:58.940] speaker_0: Ah, okey.
+[00:20:02.320] speaker_2: Y en fin de semana somos tres en la tarde. Entre semana nada más estamos nosotros dos en la mañana.
+[00:20:13.840] speaker_0: Yo le voy más a otra tableta, la verdad. Este, lo que me preocupa es esa dinámica de... el fin de semana que hay mucha gente, porque luego lo correcto es de que también puedas pedir aquí sin tener que hacer el, el mensaje, o sea, que sea decisión del usuario. Este, pero luego si hay mucha fila, luego tener que correr entre dos versiones de: "Ah, pero aquí pides, luego Rappi pide y luego acá piden". [música rap] Imagino que esta es la orden que usan para veri-- para relacionar cada...
+[00:20:53.780] speaker_2: Sí, sí. Bueno, usualmente no la usamos porque ya sabemos como más o menos cada quien qué es lo que pide.
+[00:21:00.240] speaker_0: Si hubiera un sistema aparte, tienen que ligarlo con orden básicamente.
+[00:21:03.480] speaker_1: Sí, por ejemplo, esto más o menos el número de las órdenes lo ponemos de que, por ejemplo, a veces las órdenes tanto de cocina como de front viene por separado. O sea, por ejemplo, aquí en esta misma comanda, que es la que nos quedamos nosotros, que son las bebidas, nosotros no vemos, este, lo de cocina. Se imprimen dos tickets, uno de cocina y otro de bebida. Entonces vamos a ponerle de que ah, me dieron un ticket de, de... Me dieron unos platillos, pero no sé de qué comanda es. Entonces checo el número de comanda que tienen ellos y luego ya la ligo con la que tenemos, que tenemos nosotros y luego ya la checo aquí para ver si está completa.
+[00:21:37.900] speaker_0: ¿Porque son dos números de comanda distintos?
+[00:21:40.200] speaker_1: Ah, no, no, no, no son distintos, tienen el mismo número. Lo que es-
+[00:21:44.300] speaker_2: Dos tickets.
+[00:21:44.530] speaker_1: Dos tickets. Ajá, se dividen. Este, por ejemplo, este me lo quedo yo, que es el de front, que son las bebidas que nosotros tocamos y luego el de cocina se lo, se lo damos nosotros a ellos.
+[00:21:53.770] speaker_0: ¿Y ahí por qué nada más quedó uno?
+[00:21:55.240] speaker_2: Porque este es solo una, una bebida.
+[00:21:57.620] speaker_0: Ah, okey, ya que toca cocina. ¿Y por qué imprime dos si fuera comida, comida imprime dos?
+[00:22:01.540] speaker_1: Imprime... No, cuando es nada más comida imprime uno y se lo quedan ellos.
+[00:22:06.960] speaker_0: Ah, okey, porque si se confías ustedes, cocina es porque ya.
+[00:22:09.160] speaker_1: Ajá, sí, exacto. A lo que yo me refería es de que, este, a veces no sabemos de qué platillo me los-- me están dando, entonces les tengo que decir no, este, qué número de comanda es.
+[00:22:19.540] speaker_0: Ah, okey, ya.
+[00:22:19.970] speaker_1: Y me dicen ah, el cero seis.
+[00:22:20.940] speaker_0: Cero seis.
+[00:22:21.420] speaker_1: Y luego ya la ligo con la bebida que tengo aquí y ya digo de que okey, esto va junto. Ahora, ¿para quién es? Eso es lo que, lo que a veces, este, nos...
+[00:22:31.380] speaker_2: Nos vamos con el tema del ticket.
+[00:22:32.910] speaker_0: ¿Mhm?
+[00:22:33.420] speaker_2: Nos vamos con el tema del ticket que no es, este, no es, eh... no es muy práctico.
+[00:22:40.200] speaker_0: O sea, lo que se me ocurre es de que con la tableta escanees aquí o acá y saques el número para que lo ligues en, en el sistema. Así, pues ya. Porque no tienes que teclearlo, porque creo que era teclearlo. Am...
+[00:22:58.100] speaker_0: Pues quieres más, no te quejes. [ríe]
+[00:22:59.400] speaker_1: Está, está difícil, o sea, el tema de que a veces los fines de semana tenemos que ver cómo, pues cómo le hacemos o algo.
+[00:23:06.660] speaker_0: O sea, digo, tampoco la idea es de facturarles más el sistema. O sea, es-eso sí es lo, lo mala onda, ¿no?
+[00:23:13.820] speaker_1: Sí.
+[00:23:14.220] speaker_0: Este, pero pues chale. O sea, digo, le vamos a mandar un correo a Parra a ver qué opinan, ¿no? Creo que nos dejen, aunque nos deje... Bueno, depende.
+[00:23:23.380] speaker_1: Sí.
+[00:23:23.560] speaker_0: Manda un correo.
+[00:23:24.550] speaker_1: De igual forma ya le mandé, este, mensaje a mi gerente y pues me dice que todavía se va a tardar unos veinte minutos para llegar. Como a las diez, diez quince a lo mejor.
+[00:23:38.300] speaker_0: A ver si, si me quedo a esperarlo. Este, pero yo creo que con esa información ya, ya.
+[00:23:43.660] speaker_1: Okey, de igual forma, este, si se ocupa en ir, pues yo le digo todo lo que, lo que él necesite saber para ver qué hacemos.
+[00:23:51.740] speaker_0: Este, ¿y eso que no está...? ¿Y a qué horas?
+[00:23:54.680] speaker_1: Ah, es que él viene a traer, a surtirnos cosas. Este, por eso no teníamos limonada para-
+[00:23:59.320] speaker_0: Ah, okey, okey.
+[00:24:00.440] speaker_1: Entonces él va y compra cosas que nos falten. Este, luego ya como a nueve y media o diez, diez y media más o menos llega y ya nos trae las cosas. Por eso no está aquí.
+[00:24:11.060] speaker_2: Sí, pero no tiene horario fijo para estar aquí.
+[00:24:12.640] speaker_0: Sí, sí, por eso te digo.
+[00:24:13.360] speaker_1: Sí, no tiene horario. Él está en la oficina donde está Joyce y la señora Olga están, este, la que se pone con Johnny. Bueno, él está ahí.
+[00:24:21.180] speaker_0: Ah, bueno, no sé la oficina, de hecho, no sé.
+[00:24:22.680] speaker_1: Ah, bueno, este, tienen otra oficina y, este, donde traen las galletas, las nieves y así. Este...
+[00:24:29.320] speaker_0: Ahí las hacen o las compran.
+[00:24:30.360] speaker_1: Es una-- no, no, no, ahí las hacen. Es que es una oficina casa. Se llama oficina, pero realmente tiene como unUn, una cocina gigante donde hacen todo. Este, y, y pues ya. Entonces, él va, él está ahí y luego ya nos trae las cosas y luego se regresa. Ya él nada más viene cuando le digo: "No, ocupo que venga", o algo así, y ya se viene para acá.
+[00:24:52.448] speaker_0: Ah, okey, okey.
+[00:24:55.088] speaker_0: Ahm .
+[00:24:59.108] speaker_1: Pero si es así, quiere decir, pues, este, si se pone ya, este, o sea, yo le digo todo esto a él y vemos, este, más o menos qué hacemos . Porque siento que es el problema también de que la forma de la dinámica y cómo entregamos las cosas, este, también choca mucho.
+[00:25:15.908] speaker_2: Los de la tarde tienen otra dinámica a veces, entonces-
+[00:25:18.738] speaker_0: Ah, sí. La verdad es que tiene a todas las personas.
+[00:25:21.268] speaker_1: Sí, por ejemplo, ellos, este, nosotras nada más somos dos en la mañana. A veces en la mañana sí llega gente y pues a veces no sabemos, este, eh, qué hacer primero o así, porque también tenemos como de que lista de cosas de limpieza y cosas que hacer. Entonces, ellos en la tarde son tres, siempre van a ser tres. Entonces, ellos sí saben como que administrar un poquito más. Nosotras nada más tenemos en mi turno, nada más estamos tres cuando es fin de semana.
+[00:25:44.088] speaker_0: Ya entendí. Me imagino, digamos, que los de la tarde, no sé qué se vendió más en la tarde. Si es uno que se queda en el caja, otro que se manteadas, otro que no sé.
+[00:25:51.968] speaker_1: Que entrega.
+[00:25:52.508] speaker_0: Y aquí como no hay suficientes cascos, pues se rotan.
+[00:25:55.048] speaker_1: Sí, nos rotamos más.
+[00:25:56.548] speaker_0: Okey, am, otra, otra punt-- otra no-nota. Me di cuenta que sí, lo correcto es de que cuando hagan un pedido pongan el nombre de... ¿Cómo se llama?
+[00:26:06.848] speaker_2: Comenzar, supongo.
+[00:26:08.228] speaker_0: Sí, pa-para estar mejor, pero sí, me doy cuenta, porque sí, luego de que baje. Orden número cero, cero, seis, ¿quién?
+[00:26:15.068] speaker_1: Sí.
+[00:26:15.608] speaker_0: O mesa siete, ocho, ¿cuál es? No.
+[00:26:18.368] speaker_1: Sí, de que...
+[00:26:19.168] speaker_0: A nombre de quién. Tiene más sentido.
+[00:26:20.588] speaker_1: Sí, es mejor a nombre de quién.
+[00:26:22.048] speaker_0: Mesa tal, nombre de quién, no sé, ahí ve cómo lo, lo, lo entruturo. Lo digo porque es sábado, es domingo, tienes la fila aquí de personas, gente pidiendo, preguntando: "Oye, mi orden cómo está" o "Cómo va mi comida" o pidiendo algo más. Y luego aparte tienes que checar la tableta y checar...
+[00:26:36.638] speaker_2: La tableta, sí, exacto.
+[00:26:37.928] speaker_0: Como que...
+[00:26:39.208] speaker_3: No los puedo juzgar y me queda claro por qué dices que hay problema con cuando hay mucho, mucha gente.
+[00:26:45.428] speaker_0: Porque,
+[00:26:47.587] speaker_0: bueno, en mi experiencia de haber sido cajero antes, es que en esas horas así, nadie no sabe ni qué onda y es donde más errores pasan.
+[00:26:54.188] speaker_3: Ah, error humano.
+[00:26:55.808] speaker_0: Es, es, no, no es tanto error humano, es mucha carga. O sea, yo lo he visto.
+[00:26:59.448] speaker_1: Sí.
+[00:26:59.768] speaker_0: Entonces, decirle: "Haz esto y luego haz esto y no te equivoques, y si te equivocas, este, te compro".
+[00:27:04.308] speaker_1: Lo tienes que volver a hacer.
+[00:27:05.008] speaker_0: Sí, o sea, no está chido. En realidad no es solamente que es pa'l us-- o sea, aquí son pa' todos, ¿no?
+[00:27:09.548] speaker_3: O sea, hay que hacer el sistema lo más cómodo posible.
+[00:27:12.328] speaker_0: No solo para el usuario, el cliente, para el empleado también.
+[00:27:15.248] speaker_3: Para el empleado. Mejor dicho, al cómodo del empleado y que pueda manejar errores, ¿no?
+[00:27:21.028] speaker_0: Sí, es... Pues es esta intuición, ¿no? O sea, por ejemplo, el nom-nombre que-- o sea, aunque les cueste más al, al usuario poner el nombre de su pedido, es mejor, porque bajan: "Ah, nombre pedido tal". No tanto decir mesa seis.
+[00:27:33.768] speaker_1: Sí, pues nadie se sabe. O sea, nada más sabemos de que son uno, dos y tres, y ya. Es una de las únicas mesas que nos acordamos.
+[00:27:39.168] speaker_0: Sí.
+[00:27:39.388] speaker_1: Nosotros ya sabemos.
+[00:27:40.688] speaker_0: A lo mucho, si llegan tocayas, pues divides por, por mesa, ¿no?
+[00:27:43.908] speaker_1: Sí, exacto.
+[00:27:44.498] speaker_0: Y ya. Este
+[00:27:48.248] speaker_0: . Ahm.
+[00:27:49.678] speaker_3: ¿Te pasa mucho eso?
+[00:27:50.778] speaker_0: ¿Mmm?
+[00:27:51.058] speaker_3: ¿Te pasa mucho eso?
+[00:27:52.268] speaker_0: No, pero me imagino que va a pasar eventualmente. Este,
+[00:27:57.808] speaker_0: se me hace raro que en Starbucks no, nunca se confundan. Este, ah, tengo otra duda.
+[00:28:04.888] speaker_0: Ahorita habían sugerido de que todos fueran por, por QR, ¿no? Este, ¿era porque es más fácil o si querían que todos los clientes se les, se les haga fácil?
+[00:28:16.328] speaker_2: Por QR supongo que sí, porque pues ya todos estamos familiarizados con eso.
+[00:28:20.348] speaker_0: ¿Sí?
+[00:28:21.728] speaker_2: No sé.
+[00:28:22.118] speaker_0: ¿No les toca gente grande que no carga teléfono?
+[00:28:24.738] speaker_2: La verdad es que sí, pero... Bueno, la gente grande que atendemos nosotras ya son clientes regulares, que los vemos muy seguido y ya nos conocen, entonces ellos ya saben como que pedir.
+[00:28:34.888] speaker_0: Lo digo, lamentablemente, a, este, la dueña contrató a la peor persona y yo casi nunca salgo a fumar [ríe]. Yo ahí, este, no sé exactamente si es ideal QR o no QR. O sea, yo trato de empatizar lo más que se pueda. Este, entonces, sss, entendiendo esa vibra, yo digo que sí hay que empujar a los que-- o sea, no obligarlos, empujarlos a que idealmente pide por QR. Pero va a ser un proceso de que llega alguien, llega aquí a pedir y es como que: "Oye, si quieres pide por QR" o algo así. Porque luego sí, okey, usa el sistema, pero no saben que el sistema está.
+[00:29:08.198] speaker_3: Al inicio nomás sería comentarlo, ¿no? De que se puede, eh, ordenar por QR y ya después con el tiempo dicen: "Ah, voy a probarlo" y después: "Ah, se me hace más cómodo".
+[00:29:18.148] speaker_0: Sí.
+[00:29:18.328] speaker_1: Siento que podría ser una opción poner el QR, porque a veces también, pues hay clientes que, por ejemplo, yo la mera verdad, cuando un, eh, un restaurante tiene QR, yo no lo uso. Yo prefiero ver, yo prefiero ver la carta, la mera verdad. Este, o a veces hay clientes que por ejemplo, son niños chiquitos que pues no traen su, su teléfono o algo, así de que sus papás nomás les dieron dinero y ve a pedirlo, pues pues, este bájate o algo así, no sé. Este, o hay gente que no trae el internet de aquí o algo, este, pues ocupan el internet para el QR y el-- o sea, el internet sí lo tenemos en los billeteros, está en la parte de abajo, pero también es como de que ah, este, para pedir primero pon el internet de aquí, luego ya escanea el QR, luego ahí ves y luego ya vienes y pides. Entonces, es como de que se puede complicar.
+[00:30:01.168] speaker_0: Ah, creo que a lo mejor no han visto el sistema. Este, ¿tienen teléfono para pasarles el QR?
+[00:30:08.268] speaker_1: Sí .
+[00:30:08.278] speaker_3: ¿Se llena todo los fines de semana?
+[00:30:10.588] speaker_1: Totalmente, sí.
+[00:30:11.928] speaker_3: Oh.
+[00:30:12.408] speaker_1: Casi siempre se pone más disruptivo cuando es, este, quincena.
+[00:30:16.948] speaker_3: Quincena.
+[00:30:17.268] speaker_0: Ah, sí, porque les pagan.
+[00:30:19.488] speaker_3: Ah, ya. Mi hermana sí, ¿cierto?
+[00:30:21.888] speaker_0: Sí [ríe].
+[00:30:26.048] speaker_3: Okey.
+[00:30:27.248] speaker_0: Este, digo, yo sé que ustedes son las empleadas, pero a lo mejor se les ocurre algo camino, este...
+[00:30:36.008] speaker_1: Este
+[00:30:37.648] speaker_0: Ah, el menú me lo robé de Rappi. Este, no, no tengo los correctos. Luego los-
+[00:30:41.548] speaker_2: Entonces, por ejemplo, ¿sería lo mismo que con Rappi? Si en este caso tengamos algún producto agotado, ¿nosotros tendríamos que cómo apagar ese producto?
+[00:30:50.648] speaker_1: Ajá, sí.
+[00:30:51.348] speaker_0: Ahorita hacen eso...
+[00:30:52.858] speaker_2: Con Rappi sí lo tenemos.
+[00:30:54.288] speaker_0: No, no, pero directamente en Parrot no te los deja.
+[00:30:56.488] speaker_1: En Parrot no sale como de que el producto, porque como nosotros somos los que estamos hablando con los clientes.
+[00:31:01.688] speaker_0: La idea es de que en esa tableta con el dashboard nuevo tengan una opción de poder deshabilitar o ya sea notificar. A lo mejor hay productos que tiene sentido que aún nos pidas, nada más que te des cuenta que falta tal. Un ejemplo, un biscuit sin tocino y allá: "Ah, me vale, quiero tocino. Quiero... Está bien, no me importa". Este, pero sería el mismo dashboard. Ahorita no hay opción porque no tengo el menú real. Ya después lo vamos a ir tratando para ver qué...
+[00:31:21.828] speaker_2: Okey.
+[00:31:22.528] speaker_3: Este, me estoy planteando si, si eso lo aplico cuando tiene igual aplico, pero cuando corre sí.
+[00:31:27.408] speaker_0: Ah, y sí va a ser. Ahí me lo puedo plantar.
+[00:31:36.528] speaker_1: Okey.
+[00:31:38.268] speaker_0: Sí, no fue lo que pediste. Bueno, sé que fue, pero...
+[00:31:41.868] speaker_1: Entonces, se pone aquí capturar en Parrot y luego se, eso se cobra en Parrot. Ahí es-
+[00:31:46.328] speaker_0: Sí, o sea, eso como no sabía qué iban a hacer, este, o sea, está medio inventado, no sé.
+[00:31:50.228] speaker_1: Okey, está bien, está bien.
+[00:31:51.488] speaker_0: Pero esa es la idea, ¿no? Piden y luego sale acá.
+[00:31:53.778] speaker_1: Okey.
+[00:31:54.328] speaker_0: Nada más que eventualmente luego lo van a checar como por WhatsApp y así. O sea, va a estar mixeado.
+[00:31:59.688] speaker_1: Mixeado, okey.
+[00:32:01.238] speaker_0: ¿Qué decías tú?
+[00:32:02.368] speaker_3: Ay, yo me acordé. No me acuerdo. [risas]
+[00:32:03.758] speaker_2: ¿Qué estaba diciendo?
+[00:32:05.388] speaker_3: No.
+[00:32:05.708] speaker_2: Ah, ya. Si es mucho, mucha gente, va a ser muy complicado darse cuenta de cómo-- es como lo que yo tenía idea de lo de deshabilitar ciertos ingredientes, ¿verdad? Ya no es algo viable.
+[00:32:15.418] speaker_0: ¿Quién se encarga de deshabilitar?
+[00:32:17.048] speaker_1: Eh... Pues el que pueda.
+[00:32:18.238] speaker_2: Quién esté, quién esté. [risas]
+[00:32:20.388] speaker_1: A veces, a veces ya está cobrando y decimos: "Oye, ya no tenemos sino nada, apágale la limonada de, de Rappi", y ella lo tiene que apagar.
+[00:32:29.928] speaker_0: No, no he tomado nada, no manches. Este, realmente se dan cuenta al momento que tratan de hacer algo y...
+[00:32:34.888] speaker_1: Sí, hay veces, es que hay veces-
+[00:32:36.388] speaker_0: Lo piden y luego se dan cuenta y chista, tienen que cambiarle.
+[00:32:39.528] speaker_1: Sí, ajá, exacto. Y luego también hay veces donde si sabemos de que okey, sí lo hacemos para el turno, está bien. Y de la nada cinco personas quieren la misma bebida y ya se nos acabó. O sea, ya, ya se acabó. Porque tampoco es como si tuviéramos mucho...
+[00:32:54.808] speaker_0: Está bien rico. ¿Este es de Roque?
+[00:32:57.408] speaker_1: Este.
+[00:32:58.188] speaker_0: Está muy rico.
+[00:33:00.488] speaker_1: Este, y pues ya con eso ya se nos acabó. Y como tenemos mucha gente, a veces incluso se nos olvida apagar las cosas y nos la tenemos que arreglar de que se nos acabó esto y es de Rappi, ¿cómo le voy a decir al cliente que pues no tengo? A veces les mandamos mensaje, contestan, a veces no contestan y les mandamos lo que podamos.
+[00:33:21.728] speaker_2: O una notita de que oye, no tenía eso, pero te mando esto en su lugar. Al igual también tenemos que apagar o prender el menú dependiendo de la hora. Por ejemplo, a las dos y media este menú cambia, entonces apagamos de Rappi y los desayunos y prendemos la comida.
+[00:33:36.628] speaker_1: Son varias cositas que, que pueden pasar. Este...
+[00:33:40.737] speaker_0: ¿Ustedes creen realmente que si se pide por correo les haga más complicado el trabajo o menos complicado?
+[00:33:46.668] speaker_1: Eh, siento que en cuestión de, de amontonamiento de gente aquí y el estar...
+[00:33:55.138] speaker_0: Les va a ayudar.
+[00:33:55.748] speaker_1: Se nos, se nos puede como facilitar, pero en cuestión de...
+[00:33:59.588] speaker_0: No cambias de esto, ahora esto.
+[00:34:01.048] speaker_1: Ajá. Pero en cuestión de poner la atención acá a la persona que tengo aquí y poner la atención acá, a lo mejor podría haber como una diferencia. Este, lo que yo he visto, este, en,
+[00:34:15.228] speaker_1: pues en como en Starbucks o algo así, este, por-- hay una persona para drive through y hay otra persona en la, la, la caja.
+[00:34:23.688] speaker_0: Ajá.
+[00:34:24.048] speaker_1: Este, que está dentro de, de lugar. Entonces, um, obviamente a ellos se los hace más fácil, porque pues son dos personas diferentes que están haciendo eso. Este, es más, este, se les hace menos car-- carga de trabajo, al menos de que sea nada más uno. Pero pues aquí, pues somos los tres y los tres tenemos que hacer como de que casi todo. Este, y, y ya. Este, pero igual se puede...
+[00:34:48.988] speaker_1: Me gustaría calarlo para ver este, más o menos, este, cómo, cómo se puede ir, ir, este,
+[00:34:57.948] speaker_1: manejando.
+[00:34:59.388] speaker_0: Sí. Este, no, yo digo que sería, este, todo realmente, este...
+[00:35:06.068] speaker_0: Mmm.
+[00:35:09.728] speaker_0: Sí, la verdad son muchas, muchas cuestiones. O sea, todo se puede.
+[00:35:13.188] speaker_1: Ah, sí, sí, sí, todo se puede.
+[00:35:13.758] speaker_0: Lo único es cuestión operativa siempre, ¿verdad? Ya en la práctica cómo funciona, ya en la práctica se hace, se hace.
+[00:35:21.388] speaker_1: Sí, ya de igual forma en la práctica se nos puede ir haciendo casi nosotros podemos encontrar una manera de cómo se hace, este, pero de igual forma, este...
+[00:35:30.588] speaker_0: Una, una pregunta. Este, yo sé que ahorita no hay una tableta, ¿no?
+[00:35:34.598] speaker_1: ¿Mande?
+[00:35:34.628] speaker_0: Yo sé que ahorita no hay una tableta.
+[00:35:36.388] speaker_1: Sí, no.
+[00:35:36.728] speaker_0: Este,
+[00:35:38.608] speaker_0: ¿los gerentes del teléfono? O tal vez no... Digo, o sea.
+[00:35:42.908] speaker_1: Puede ser en el teléfono también.
+[00:35:44.728] speaker_0: Ah, no sé si se haga más fácil en el teléfono.
+[00:35:47.208] speaker_1: Ah.
+[00:35:49.728] speaker_0: Porque puede enviar notificaciones ahí y todo eso, o sea, no...
+[00:35:53.368] speaker_1: Sí.
+[00:35:53.388] speaker_0: Pero y va a ser demasiado porque son muchas personas en los turnos. Tienen que estar tabletas.
+[00:35:57.498] speaker_1: Ajá, sí, aparte que se descarga y por ejemplo, aquí sentados no tenemos un enchufe más que este de acá.
+[00:36:04.468] speaker_0: Ah, ¿no tienen aquí?
+[00:36:05.328] speaker_1: Aquí no, nada más para cargar. Entonces, a lo mejor sería algún... Tenemos uno que está aquí abajo, pero tiene todo el cablerío de esta, también la caja de acá, también los refri, si están los refris.
+[00:36:16.128] speaker_0: Hay como que notificación, ¿verdad?
+[00:36:19.248] speaker_0: En esta no, porque como...
+[00:36:21.168] speaker_3: No, no, de lo de...
+[00:36:22.898] speaker_0: ¿De Chocantes?
+[00:36:24.368] speaker_3: No, es que tal vez me equivoqué o me perdí, pero dijiste que hay un problema de si no llega la notificación correctamente, ¿no?
+[00:36:30.528] speaker_0: No, sí.
+[00:36:30.928] speaker_3: Por no saber.
+[00:36:33.018] speaker_0: ¿O cómo? No, sí llega.
+[00:36:35.988] speaker_3: Entonces, me equivoqué.
+[00:36:37.508] speaker_0: A lo mejor sí, a lo mejor te confundiste con algo. Este...
+[00:36:43.128] speaker_0: Oye, muchas gracias. Este, yo digo que ya con eso es mucha información.
+[00:36:47.108] speaker_1: Sí. [risas]
+[00:36:47.508] speaker_0: No, no, no, no. O sea, no se sabría hasta que ya lo usen y para eso pongan la tableta.
+[00:36:51.928] speaker_1: Sí, exacto.
+[00:36:52.698] speaker_0: Y ya tener los QR ahí para que lo vayan usando ustedes.
+[00:36:55.958] speaker_1: Sí, de igual forma, pues, ah, pues al final lo que cuenta es, este, que el cliente le dé ganas de, este, pedirlo por ahí también.
+[00:37:06.128] speaker_0: No, sí. Este,
+[00:37:10.108] speaker_0: yo estoy pensando si esperarme a la persona que usa.
+[00:37:13.588] speaker_1: Mhm.
+[00:37:15.838] speaker_0: ¿Ya como en qué? ¿Veinte minutos?
+[00:37:18.868] speaker_1: Sí, como en veinte. Me dijo que apenas estaba llegando de Chivi para,
+[00:37:23.488] speaker_1: para comprar las cosas. ¿Vas a quedarte entonces?
+[00:37:34.888] speaker_0: Yo como que hago un poquito más.
+[00:37:36.418] speaker_3: Sí, yo también me quedo un poquito más.
+[00:37:39.408] speaker_0: Este, muchas gracias. Si tengo más dudas, este, les comento.
+[00:37:42.388] speaker_1: Sí, claro.
+[00:37:43.388] speaker_0: Excelente.
+[00:37:44.858] speaker_2: [ruido]
