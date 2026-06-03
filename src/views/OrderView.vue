@@ -162,8 +162,16 @@ function quickAdd(item) {
 }
 
 /* ---- Order submit ---- */
+const customerName = ref('')
+const nameError = ref('')
 const isSubmitting = ref(false)
 const submitError = ref('')
+
+watch(customerName, () => {
+  if (nameError.value) {
+    nameError.value = ''
+  }
+})
 const submittedOrder = ref(null)
 const submittedOrderId = ref(readLastOrderId(tableId.value))
 const liveSubmittedOrder = useConvexQuery(api.orders.get, () => ({
@@ -194,12 +202,19 @@ async function submitOrder() {
     return
   }
 
+  const trimmedName = customerName.value.trim()
+  if (!trimmedName) {
+    nameError.value = 'Agrega tu nombre para identificar el pedido.'
+    return
+  }
+
   isSubmitting.value = true
   submitError.value = ''
 
   try {
     const order = await createOrderMutation.mutate({
       tableId: tableId.value,
+      customerName: trimmedName,
       items: cart.entries.value.map((entry, index) => {
         const unitPriceCents = entry.hasPrice ? Math.round(Number(entry.price || 0) * 100) : null
         return {
@@ -295,6 +310,9 @@ function fulfillmentLabel(item) {
         <div>
           <span>Tu pedido</span>
           <strong>#{{ visibleSubmittedOrder.shortCode }}</strong>
+          <span v-if="visibleSubmittedOrder.customerName" class="active-order__name-tag">
+            {{ visibleSubmittedOrder.customerName }} · {{ tableLabel }}
+          </span>
         </div>
         <button type="button" @click="showConfirmation = true">Ver detalle</button>
       </header>
@@ -578,6 +596,24 @@ function fulfillmentLabel(item) {
               <p v-if="cart.hasUnpriced.value" class="totals__hint">
                 Algunos productos son <strong>precio en tienda</strong>; el total final lo confirma tu mesero.
               </p>
+              <label class="name-field" :class="{ 'is-error': nameError }">
+                <span class="name-field__label">¿A nombre de quién?</span>
+                <input
+                  v-model="customerName"
+                  class="name-field__input"
+                  type="text"
+                  inputmode="text"
+                  autocomplete="name"
+                  maxlength="80"
+                  enterkeyhint="done"
+                  placeholder="Tu nombre"
+                  aria-label="Tu nombre para el pedido"
+                  @keydown.enter.prevent="submitOrder"
+                />
+              </label>
+              <p v-if="nameError" class="totals__hint totals__hint--error">
+                {{ nameError }}
+              </p>
               <p v-if="submitError" class="totals__hint totals__hint--error">
                 {{ submitError }}
               </p>
@@ -610,7 +646,8 @@ function fulfillmentLabel(item) {
                 </span>
                 <h3 class="done__title">Pedido enviado</h3>
                 <p v-if="visibleSubmittedOrder" class="done__line">
-                  {{ tableLabel }} ·
+                  <strong v-if="visibleSubmittedOrder.customerName">{{ visibleSubmittedOrder.customerName }}</strong>
+                  <template v-if="visibleSubmittedOrder.customerName"> · </template>{{ tableLabel }} ·
                   {{ visibleSubmittedOrder.itemCount }} artículo{{ visibleSubmittedOrder.itemCount === 1 ? '' : 's' }}
                 </p>
 
@@ -832,6 +869,14 @@ function fulfillmentLabel(item) {
   font-size: 1.55rem;
   font-weight: 950;
   line-height: 1;
+}
+.active-order__head .active-order__name-tag {
+  margin-top: 4px;
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
 }
 .active-order__head button {
   flex: 0 0 auto;
@@ -1523,6 +1568,34 @@ function fulfillmentLabel(item) {
   color: #b42a2a;
   font-weight: 800;
 }
+.name-field {
+  display: block;
+}
+.name-field__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+.name-field__input {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+  outline: none;
+}
+.name-field__input:focus {
+  border-color: var(--brown);
+}
+.name-field.is-error .name-field__input {
+  border-color: #b42a2a;
+}
 
 /* Confirmation sheet */
 .done {
@@ -1569,6 +1642,10 @@ function fulfillmentLabel(item) {
   color: var(--muted);
   font-size: 0.9rem;
   font-weight: 700;
+}
+.done__line strong {
+  color: var(--ink);
+  font-weight: 900;
 }
 .done__code {
   display: flex;

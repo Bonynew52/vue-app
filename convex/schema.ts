@@ -25,6 +25,7 @@ export default defineSchema({
   orders: defineTable({
     shortCode: v.string(),
     tableId: v.string(),
+    customerName: v.optional(v.string()),
     status: orderStatus,
     customerNote: v.string(),
     subtotalCents: v.number(),
@@ -67,6 +68,7 @@ export default defineSchema({
     orderId: v.id("orders"),
     shortCode: v.string(),
     tableId: v.string(),
+    customerName: v.optional(v.string()),
     destination: printJobDestination,
     destinationLabel: v.string(),
     status: printJobStatus,

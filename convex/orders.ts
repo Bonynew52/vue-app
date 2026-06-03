@@ -110,6 +110,7 @@ async function createPrintJobsForOrder(
     orderId: Id<"orders">;
     shortCode: string;
     tableId: string;
+    customerName: string;
     items: Array<{ id: Id<"orderItems">; item: NormalizedOrderItem }>;
     createdAt: number;
   },
@@ -135,6 +136,7 @@ async function createPrintJobsForOrder(
       orderId: args.orderId,
       shortCode: args.shortCode,
       tableId: args.tableId,
+      customerName: args.customerName,
       destination,
       destinationLabel: destinationLabel(destination),
       status: "pending",
@@ -179,6 +181,7 @@ async function presentOrder(ctx: QueryCtx | MutationCtx, order: Doc<"orders">) {
     id: order._id,
     shortCode: order.shortCode,
     tableId: order.tableId,
+    customerName: order.customerName || "",
     status: order.status,
     customerNote: order.customerNote,
     subtotalCents: order.subtotalCents,
@@ -213,13 +216,18 @@ async function presentOrder(ctx: QueryCtx | MutationCtx, order: Doc<"orders">) {
 export const create = mutation({
   args: {
     tableId: v.string(),
+    customerName: v.string(),
     customerNote: v.optional(v.string()),
     items: v.array(orderItemInput),
   },
   handler: async (ctx, args) => {
     const tableId = cleanText(args.tableId, 32);
+    const customerName = cleanText(args.customerName, 80);
     if (!tableId) {
       throw new Error("Falta el numero de mesa.");
+    }
+    if (!customerName) {
+      throw new Error("Agrega tu nombre para identificar el pedido.");
     }
     if (args.items.length === 0) {
       throw new Error("Agrega al menos un producto.");
@@ -234,6 +242,7 @@ export const create = mutation({
     const orderId = await ctx.db.insert("orders", {
       shortCode: "",
       tableId,
+      customerName,
       status: "new",
       customerNote: cleanText(args.customerNote || "", 300),
       subtotalCents,
@@ -266,6 +275,7 @@ export const create = mutation({
       orderId,
       shortCode,
       tableId,
+      customerName,
       items: storedItems,
       createdAt: now,
     });
@@ -274,7 +284,7 @@ export const create = mutation({
       orderId,
       eventType: "created",
       actor: "customer",
-      detail: { tableId, itemCount, printJobIds },
+      detail: { tableId, customerName, itemCount, printJobIds },
       createdAt: now,
     });
 

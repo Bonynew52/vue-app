@@ -22,6 +22,7 @@ function presentPrintJob(job: Doc<"printJobs">, items: Doc<"printJobItems">[]) {
     orderId: job.orderId,
     shortCode: job.shortCode,
     tableId: job.tableId,
+    customerName: job.customerName || "",
     destination: job.destination,
     destinationLabel: job.destinationLabel,
     status: job.status,

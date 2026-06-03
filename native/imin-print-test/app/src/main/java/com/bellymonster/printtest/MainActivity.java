@@ -193,6 +193,7 @@ public class MainActivity extends Activity {
                 printer.setAlignment(0);
                 printer.printText("--------------------------------\n");
                 printer.printText("MESA 8\n");
+                printer.printText("CLIENTE: PEDRO\n");
                 printer.setTextStyle(Typeface.BOLD);
                 printer.setTextSize(30);
                 printer.printText("#TEST01\n");

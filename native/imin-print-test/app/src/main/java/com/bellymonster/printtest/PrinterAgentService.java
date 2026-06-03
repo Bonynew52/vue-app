@@ -245,6 +245,9 @@ public class PrinterAgentService extends Service {
         printer.setAlignment(0);
         printLine();
         printer.printText("MESA " + safePrinterText(job.tableId).toUpperCase(Locale.US) + "\n");
+        if (!job.customerName.trim().isEmpty()) {
+            printer.printText("CLIENTE: " + safePrinterText(job.customerName).toUpperCase(Locale.US) + "\n");
+        }
         printer.setTextStyle(Typeface.BOLD);
         printer.setTextSize(30);
         printer.printText("#" + safePrinterText(job.shortCode).toUpperCase(Locale.US) + "\n");
@@ -442,13 +445,15 @@ public class PrinterAgentService extends Service {
         final String id;
         final String shortCode;
         final String tableId;
+        final String customerName;
         final String destinationLabel;
         final List<PrintJobItem> items;
 
-        PrintJob(String id, String shortCode, String tableId, String destinationLabel, List<PrintJobItem> items) {
+        PrintJob(String id, String shortCode, String tableId, String customerName, String destinationLabel, List<PrintJobItem> items) {
             this.id = id;
             this.shortCode = shortCode;
             this.tableId = tableId;
+            this.customerName = customerName;
             this.destinationLabel = destinationLabel;
             this.items = items;
         }
@@ -468,6 +473,7 @@ public class PrinterAgentService extends Service {
                     json.optString("id", ""),
                     json.optString("shortCode", ""),
                     json.optString("tableId", ""),
+                    json.optString("customerName", ""),
                     json.optString("destinationLabel", ""),
                     items
             );
