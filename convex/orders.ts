@@ -61,6 +61,14 @@ function fulfillmentForItem(item: { name: string; categoryName: string }) {
   return counterCategory || counterName ? "counter" : "table";
 }
 
+function destinationForItem(item: { fulfillmentType: "table" | "counter" }) {
+  return item.fulfillmentType === "counter" ? "counter" : "kitchen";
+}
+
+function destinationLabel(destination: "kitchen" | "counter") {
+  return destination === "counter" ? "BARRA / PICKUP" : "COCINA / MESA";
+}
+
 function normalizeItem(item: {
   menuItemId: string;
   name: string;
@@ -92,6 +100,72 @@ function normalizeItem(item: {
     pickupReadyAt: null,
     sortIndex: Math.max(0, Math.floor(item.sortIndex) || 0),
   };
+}
+
+type NormalizedOrderItem = ReturnType<typeof normalizeItem>;
+
+async function createPrintJobsForOrder(
+  ctx: MutationCtx,
+  args: {
+    orderId: Id<"orders">;
+    shortCode: string;
+    tableId: string;
+    items: Array<{ id: Id<"orderItems">; item: NormalizedOrderItem }>;
+    createdAt: number;
+  },
+) {
+  const groups: Record<"kitchen" | "counter", Array<{ id: Id<"orderItems">; item: NormalizedOrderItem }>> = {
+    kitchen: [],
+    counter: [],
+  };
+
+  for (const item of args.items) {
+    groups[destinationForItem(item.item)].push(item);
+  }
+
+  const printJobIds: Id<"printJobs">[] = [];
+
+  for (const destination of ["kitchen", "counter"] as const) {
+    const items = groups[destination];
+    if (items.length === 0) {
+      continue;
+    }
+
+    const printJobId = await ctx.db.insert("printJobs", {
+      orderId: args.orderId,
+      shortCode: args.shortCode,
+      tableId: args.tableId,
+      destination,
+      destinationLabel: destinationLabel(destination),
+      status: "pending",
+      attemptCount: 0,
+      lockedBy: null,
+      lockedAt: null,
+      claimToken: null,
+      printedBy: null,
+      printedAt: null,
+      failedAt: null,
+      lastError: null,
+      createdAt: args.createdAt,
+      updatedAt: args.createdAt,
+    });
+    printJobIds.push(printJobId);
+
+    for (const { id, item } of items) {
+      await ctx.db.insert("printJobItems", {
+        printJobId,
+        orderId: args.orderId,
+        orderItemId: id,
+        name: item.name,
+        quantity: item.quantity,
+        note: item.note,
+        fulfillmentType: item.fulfillmentType,
+        sortIndex: item.sortIndex,
+      });
+    }
+  }
+
+  return printJobIds;
 }
 
 async function presentOrder(ctx: QueryCtx | MutationCtx, order: Doc<"orders">) {
@@ -173,25 +247,37 @@ export const create = mutation({
 
     await ctx.db.patch(orderId, { shortCode: makeShortCode(orderId) });
 
+    const storedItems: Array<{ id: Id<"orderItems">; item: NormalizedOrderItem }> = [];
     for (const item of items) {
-      await ctx.db.insert("orderItems", {
+      const orderItemId = await ctx.db.insert("orderItems", {
         orderId,
         ...item,
       });
+      storedItems.push({ id: orderItemId, item });
     }
-
-    await ctx.db.insert("orderEvents", {
-      orderId,
-      eventType: "created",
-      actor: "customer",
-      detail: { tableId, itemCount },
-      createdAt: now,
-    });
 
     const order = await ctx.db.get(orderId);
     if (!order) {
       throw new Error("No se pudo crear el pedido.");
     }
+
+    const shortCode = makeShortCode(orderId);
+    const printJobIds = await createPrintJobsForOrder(ctx, {
+      orderId,
+      shortCode,
+      tableId,
+      items: storedItems,
+      createdAt: now,
+    });
+
+    await ctx.db.insert("orderEvents", {
+      orderId,
+      eventType: "created",
+      actor: "customer",
+      detail: { tableId, itemCount, printJobIds },
+      createdAt: now,
+    });
+
     return await presentOrder(ctx, order);
   },
 });

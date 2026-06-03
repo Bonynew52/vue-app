@@ -8,7 +8,9 @@
  * @module
  */
 
+import type * as http from "../http.js";
 import type * as orders from "../orders.js";
+import type * as printJobs from "../printJobs.js";
 
 import type {
   ApiFromModules,
@@ -17,7 +19,9 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  http: typeof http;
   orders: typeof orders;
+  printJobs: typeof printJobs;
 }>;
 
 /**

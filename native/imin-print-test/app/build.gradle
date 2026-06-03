@@ -31,21 +31,47 @@ def sentryDsn = System.getenv("SENTRY_DSN")
         ?: sentryBuildEnv["SENTRY_DSN"]
         ?: sentryBuildEnv["VITE_SENTRY_DSN"]
         ?: ""
+def convexHttpBaseUrl = System.getenv("CONVEX_HTTP_BASE_URL")
+        ?: System.getenv("VITE_CONVEX_SITE_URL")
+        ?: localEnv["CONVEX_HTTP_BASE_URL"]
+        ?: localEnv["VITE_CONVEX_SITE_URL"]
+        ?: localEnv["VITE_CONVEX_URL"]
+        ?: ""
+def printerAgentToken = System.getenv("PRINTER_AGENT_TOKEN")
+        ?: localEnv["PRINTER_AGENT_TOKEN"]
+        ?: sentryBuildEnv["PRINTER_AGENT_TOKEN"]
+        ?: ""
 
 if (!sentryDsn) {
     throw new GradleException("Sentry DSN is required to build the print-test APK with Sentry Logs. Set SENTRY_DSN or VITE_SENTRY_DSN.")
+}
+if (!convexHttpBaseUrl) {
+    throw new GradleException("Convex HTTP base URL is required. Set CONVEX_HTTP_BASE_URL or VITE_CONVEX_SITE_URL.")
+}
+if (!printerAgentToken) {
+    throw new GradleException("Printer agent token is required. Set PRINTER_AGENT_TOKEN.")
+}
+
+def javaString(String value) {
+    return "\"" + value.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
 }
 
 android {
     namespace "com.bellymonster.printtest"
     compileSdk 35
 
+    buildFeatures {
+        buildConfig true
+    }
+
     defaultConfig {
         applicationId "com.bellymonster.printtest"
         minSdk 23
         targetSdk 30
-        versionCode 2
-        versionName "0.3.0"
+        versionCode 3
+        versionName "0.4.0"
+        buildConfigField "String", "CONVEX_HTTP_BASE_URL", javaString(convexHttpBaseUrl)
+        buildConfigField "String", "PRINTER_AGENT_TOKEN", javaString(printerAgentToken)
         manifestPlaceholders = [
                 sentryDsn: sentryDsn,
         ]

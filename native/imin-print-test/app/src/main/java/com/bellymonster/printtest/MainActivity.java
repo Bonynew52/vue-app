@@ -1,6 +1,7 @@
 package com.bellymonster.printtest;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ public class MainActivity extends Activity {
 
     private TextView statusView;
     private Button printButton;
+    private Button startAgentButton;
+    private Button stopAgentButton;
     private IminPrintUtils printer;
     private boolean printerInitialized;
 
@@ -54,16 +57,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         record(SentryLogLevel.INFO, "app_destroy", "App closing", attrs());
-        try {
-            if (printer != null) {
-                printer.disConnectDevices();
-            }
-        } catch (Exception error) {
-            record(SentryLogLevel.WARN, "printer_disconnect_failed", "Printer disconnect failed", attrs(
-                    "error.type", error.getClass().getSimpleName(),
-                    "error.message", String.valueOf(error.getMessage())
-            ));
-        }
         Sentry.flush(2000);
         super.onDestroy();
     }
@@ -92,11 +85,23 @@ public class MainActivity extends Activity {
         content.addView(subtitle, fullWidth());
 
         printButton = new Button(this);
-        printButton.setText("Print native test");
+        printButton.setText("Print sample comanda");
         printButton.setAllCaps(false);
         printButton.setEnabled(false);
         printButton.setOnClickListener(view -> printNativeTest());
         content.addView(printButton, fullWidth());
+
+        startAgentButton = new Button(this);
+        startAgentButton.setText("Start printer agent");
+        startAgentButton.setAllCaps(false);
+        startAgentButton.setOnClickListener(view -> startPrinterAgent());
+        content.addView(startAgentButton, fullWidth());
+
+        stopAgentButton = new Button(this);
+        stopAgentButton.setText("Stop printer agent");
+        stopAgentButton.setAllCaps(false);
+        stopAgentButton.setOnClickListener(view -> stopPrinterAgent());
+        content.addView(stopAgentButton, fullWidth());
 
         statusView = new TextView(this);
         statusView.setTextSize(15);
@@ -179,21 +184,54 @@ public class MainActivity extends Activity {
                 printer.setPageFormat(0);
                 printer.setAlignment(1);
                 printer.setTextStyle(Typeface.BOLD);
-                printer.setTextSize(30);
-                printer.printText("BELLY MONSTER BITES\n");
                 printer.setTextSize(24);
-                printer.printText("Native iMin V1 USB test\n");
+                printer.printText("BELLY MONSTER BITES\n");
+                printer.setTextSize(28);
+                printer.printText("COMANDA\n");
                 printer.setTextStyle(Typeface.NORMAL);
                 printer.setTextSize(22);
                 printer.setAlignment(0);
                 printer.printText("--------------------------------\n");
-                printer.printText("If this printed, third-party native code can reach the kiosk printer.\n");
+                printer.printText("MESA 8\n");
+                printer.setTextStyle(Typeface.BOLD);
+                printer.setTextSize(30);
+                printer.printText("#TEST01\n");
+                printer.setTextSize(22);
+                printer.setTextStyle(Typeface.NORMAL);
+                printer.printText("--------------------------------\n");
                 printer.printText("Time: " + timestamp + "\n");
-                printer.printText("App: com.bellymonster.printtest\n");
-                printer.printText("Version: " + appVersionName() + "\n");
-                printer.printText("SDK: " + safeSdkVersion() + "\n");
+                printer.printText("DESTINO: BARRA / PICKUP\n");
+                printer.printText("--------------------------------\n");
+                printer.printText("ITEMS\n\n");
+                printer.setTextStyle(Typeface.BOLD);
+                printer.printText("1x ");
+                printer.setTextStyle(Typeface.NORMAL);
+                printer.printText("LAVANDA LATTE\n");
+                printer.setTextStyle(Typeface.BOLD);
+                printer.printText("   * LECHE DESLACTOSADA\n\n");
+                printer.printText("2x ");
+                printer.setTextStyle(Typeface.NORMAL);
+                printer.printText("ROL DE CANELA\n");
+                printer.printText("--------------------------------\n");
+                printer.setAlignment(1);
+                printer.printText("FIN COMANDA\n");
+                printer.setAlignment(0);
                 printer.printText("--------------------------------\n\n");
-                printer.printAndFeedPaper(80);
+                printer.printAndFeedPaper(120);
+                try {
+                    printer.partialCut();
+                    record(SentryLogLevel.INFO, "printer_partial_cut_invoked", "Partial cut invoked in sample print.", attrs(
+                            "printer.connect_type", "USB",
+                            "printer.status", safePrinterStatusCode()
+                    ));
+                } catch (Exception cutError) {
+                    record(SentryLogLevel.WARN, "printer_cut_failed", "Sample printed but cut failed: " + cutError.getMessage(), attrs(
+                            "error.type", cutError.getClass().getSimpleName(),
+                            "error.message", String.valueOf(cutError.getMessage()),
+                            "printer.connect_type", "USB",
+                            "printer.status", safePrinterStatusCode()
+                    ));
+                }
 
                 int afterStatus = safePrinterStatusCode();
                 runOnUiThread(() -> printButton.setEnabled(true));
@@ -214,6 +252,24 @@ public class MainActivity extends Activity {
                 Sentry.flush(2000);
             }
         }, "imin-v1-usb-print-test").start();
+    }
+
+    private void startPrinterAgent() {
+        Intent intent = new Intent(this, PrinterAgentService.class);
+        intent.setAction(PrinterAgentService.ACTION_START);
+        if (Build.VERSION.SDK_INT >= 26) {
+            startForegroundService(intent);
+        } else {
+            startService(intent);
+        }
+        appendLog("Printer agent start requested");
+    }
+
+    private void stopPrinterAgent() {
+        Intent intent = new Intent(this, PrinterAgentService.class);
+        intent.setAction(PrinterAgentService.ACTION_STOP);
+        startService(intent);
+        appendLog("Printer agent stop requested");
     }
 
     private void record(SentryLogLevel level, String event, String message, Map<String, Object> attributes) {

@@ -12,6 +12,14 @@ export const orderStatus = v.union(
 
 export const fulfillmentType = v.union(v.literal("table"), v.literal("counter"));
 export const pickupStatus = v.union(v.literal("pending"), v.literal("ready"));
+export const printJobStatus = v.union(
+  v.literal("pending"),
+  v.literal("printing"),
+  v.literal("printed"),
+  v.literal("failed"),
+  v.literal("cancelled"),
+);
+export const printJobDestination = v.union(v.literal("kitchen"), v.literal("counter"));
 
 export default defineSchema({
   orders: defineTable({
@@ -54,4 +62,37 @@ export default defineSchema({
     detail: v.any(),
     createdAt: v.number(),
   }).index("by_orderId_and_createdAt", ["orderId", "createdAt"]),
+
+  printJobs: defineTable({
+    orderId: v.id("orders"),
+    shortCode: v.string(),
+    tableId: v.string(),
+    destination: printJobDestination,
+    destinationLabel: v.string(),
+    status: printJobStatus,
+    attemptCount: v.number(),
+    lockedBy: v.union(v.string(), v.null()),
+    lockedAt: v.union(v.number(), v.null()),
+    claimToken: v.union(v.string(), v.null()),
+    printedBy: v.union(v.string(), v.null()),
+    printedAt: v.union(v.number(), v.null()),
+    failedAt: v.union(v.number(), v.null()),
+    lastError: v.union(v.string(), v.null()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_status_and_createdAt", ["status", "createdAt"])
+    .index("by_status_and_lockedAt", ["status", "lockedAt"])
+    .index("by_orderId_and_createdAt", ["orderId", "createdAt"]),
+
+  printJobItems: defineTable({
+    printJobId: v.id("printJobs"),
+    orderId: v.id("orders"),
+    orderItemId: v.id("orderItems"),
+    name: v.string(),
+    quantity: v.number(),
+    note: v.string(),
+    fulfillmentType: fulfillmentType,
+    sortIndex: v.number(),
+  }).index("by_printJobId_and_sortIndex", ["printJobId", "sortIndex"]),
 });
