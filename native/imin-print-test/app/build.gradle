@@ -24,20 +24,28 @@ def readEnvFile(File file) {
 
 def localEnv = readEnvFile(rootProject.file("../../.env.local"))
 def sentryBuildEnv = readEnvFile(rootProject.file("../../.env.sentry-build"))
-def sentryDsn = System.getenv("SENTRY_DSN")
+def propValue(String name) {
+    def value = project.findProperty(name)
+    return value == null ? "" : String.valueOf(value)
+}
+
+def sentryDsn = propValue("sentryDsn")
+        ?: System.getenv("SENTRY_DSN")
         ?: System.getenv("VITE_SENTRY_DSN")
         ?: localEnv["SENTRY_DSN"]
         ?: localEnv["VITE_SENTRY_DSN"]
         ?: sentryBuildEnv["SENTRY_DSN"]
         ?: sentryBuildEnv["VITE_SENTRY_DSN"]
         ?: ""
-def convexHttpBaseUrl = System.getenv("CONVEX_HTTP_BASE_URL")
+def convexHttpBaseUrl = propValue("convexHttpBaseUrl")
+        ?: System.getenv("CONVEX_HTTP_BASE_URL")
         ?: System.getenv("VITE_CONVEX_SITE_URL")
         ?: localEnv["CONVEX_HTTP_BASE_URL"]
         ?: localEnv["VITE_CONVEX_SITE_URL"]
         ?: localEnv["VITE_CONVEX_URL"]
         ?: ""
-def printerAgentToken = System.getenv("PRINTER_AGENT_TOKEN")
+def printerAgentToken = propValue("printerAgentToken")
+        ?: System.getenv("PRINTER_AGENT_TOKEN")
         ?: localEnv["PRINTER_AGENT_TOKEN"]
         ?: sentryBuildEnv["PRINTER_AGENT_TOKEN"]
         ?: ""
