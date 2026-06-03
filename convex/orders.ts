@@ -28,6 +28,39 @@ function cleanText(value: string, maxLength: number) {
   return value.trim().slice(0, maxLength);
 }
 
+function plainText(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function fulfillmentForItem(item: { name: string; categoryName: string }) {
+  const category = plainText(item.categoryName);
+  const name = plainText(item.name);
+  const counterCategory =
+    category.includes("cofy") ||
+    category.includes("chiller") ||
+    category.includes("bebida") ||
+    category.includes("te helado") ||
+    category.includes("te caliente") ||
+    category.includes("reposteria") ||
+    category.includes("frappe");
+  const counterName =
+    name.includes("frappe") ||
+    name.includes("latte") ||
+    name.includes("americano") ||
+    name.includes("capuchino") ||
+    name.includes("espresso") ||
+    name.includes("limonada") ||
+    name.includes("agua ") ||
+    name.includes("te helado") ||
+    name.includes("te caliente") ||
+    name.includes("rol de ");
+
+  return counterCategory || counterName ? "counter" : "table";
+}
+
 function normalizeItem(item: {
   menuItemId: string;
   name: string;
@@ -42,6 +75,7 @@ function normalizeItem(item: {
 }) {
   const quantity = Math.max(1, Math.min(99, Math.floor(item.quantity) || 1));
   const unitPriceCents = item.unitPriceCents == null ? null : Math.max(0, Math.round(item.unitPriceCents));
+  const fulfillmentType = fulfillmentForItem(item);
 
   return {
     menuItemId: cleanText(item.menuItemId, 160),
@@ -53,6 +87,9 @@ function normalizeItem(item: {
     lineTotalCents: unitPriceCents == null ? null : unitPriceCents * quantity,
     note: cleanText(item.note, 240),
     imageUrl: cleanText(item.imageUrl, 600),
+    fulfillmentType,
+    pickupStatus: fulfillmentType === "counter" ? "pending" : null,
+    pickupReadyAt: null,
     sortIndex: Math.max(0, Math.floor(item.sortIndex) || 0),
   };
 }
@@ -77,18 +114,25 @@ async function presentOrder(ctx: QueryCtx | MutationCtx, order: Doc<"orders">) {
     createdAt: order.createdAt,
     updatedAt: order.updatedAt,
     closedAt: order.closedAt,
-    items: items.map((item: Doc<"orderItems">) => ({
-      id: item._id,
-      menuItemId: item.menuItemId,
-      name: item.name,
-      sourceName: item.sourceName,
-      categoryName: item.categoryName,
-      quantity: item.quantity,
-      unitPriceCents: item.unitPriceCents,
-      lineTotalCents: item.lineTotalCents,
-      note: item.note,
-      imageUrl: item.imageUrl,
-    })),
+    items: items.map((item: Doc<"orderItems">) => {
+      const fulfillmentType = item.fulfillmentType || fulfillmentForItem(item);
+
+      return {
+        id: item._id,
+        menuItemId: item.menuItemId,
+        name: item.name,
+        sourceName: item.sourceName,
+        categoryName: item.categoryName,
+        quantity: item.quantity,
+        unitPriceCents: item.unitPriceCents,
+        lineTotalCents: item.lineTotalCents,
+        note: item.note,
+        imageUrl: item.imageUrl,
+        fulfillmentType,
+        pickupStatus: item.pickupStatus || (fulfillmentType === "counter" ? "pending" : null),
+        pickupReadyAt: item.pickupReadyAt || null,
+      };
+    }),
   };
 }
 

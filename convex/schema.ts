@@ -10,6 +10,9 @@ export const orderStatus = v.union(
   v.literal("cancelled"),
 );
 
+export const fulfillmentType = v.union(v.literal("table"), v.literal("counter"));
+export const pickupStatus = v.union(v.literal("pending"), v.literal("ready"));
+
 export default defineSchema({
   orders: defineTable({
     shortCode: v.string(),
@@ -38,6 +41,9 @@ export default defineSchema({
     lineTotalCents: v.union(v.number(), v.null()),
     note: v.string(),
     imageUrl: v.string(),
+    fulfillmentType: v.optional(fulfillmentType),
+    pickupStatus: v.optional(v.union(pickupStatus, v.null())),
+    pickupReadyAt: v.optional(v.union(v.number(), v.null())),
     sortIndex: v.number(),
   }).index("by_orderId_and_sortIndex", ["orderId", "sortIndex"]),
 

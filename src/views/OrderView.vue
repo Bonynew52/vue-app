@@ -17,13 +17,20 @@ const tableId = computed(() => {
 })
 const hasTable = computed(() => tableId.value.length > 0)
 const tableLabel = computed(() => (hasTable.value ? `Mesa ${tableId.value}` : 'Sin mesa'))
-const orderStatusLabels = {
-  new: 'Recibido',
-  capturing: 'Capturando',
-  preparing: 'Preparando',
-  ready: 'Listo',
-  served: 'Servido',
-  cancelled: 'Cancelado',
+
+function lastOrderStorageKey(value) {
+  return `belly-monster-last-order:${value || 'sin-mesa'}`
+}
+
+function canUseStorage() {
+  return typeof window !== 'undefined' && window.localStorage
+}
+
+function readLastOrderId(value) {
+  if (!canUseStorage()) {
+    return null
+  }
+  return window.localStorage.getItem(lastOrderStorageKey(value)) || null
 }
 
 const cart = useCart(tableId.value)
@@ -158,11 +165,29 @@ function quickAdd(item) {
 const isSubmitting = ref(false)
 const submitError = ref('')
 const submittedOrder = ref(null)
-const submittedOrderId = computed(() => submittedOrder.value?.id || null)
+const submittedOrderId = ref(readLastOrderId(tableId.value))
 const liveSubmittedOrder = useConvexQuery(api.orders.get, () => ({
   orderId: submittedOrderId.value,
 }))
 const visibleSubmittedOrder = computed(() => liveSubmittedOrder.data.value || submittedOrder.value)
+const submittedOrderItems = computed(() => visibleSubmittedOrder.value?.items || [])
+
+watch(tableId, (value) => {
+  submittedOrder.value = null
+  submittedOrderId.value = readLastOrderId(value)
+})
+
+watch(submittedOrderId, (value) => {
+  if (!canUseStorage()) {
+    return
+  }
+  const key = lastOrderStorageKey(tableId.value)
+  if (value) {
+    window.localStorage.setItem(key, value)
+  } else {
+    window.localStorage.removeItem(key)
+  }
+})
 
 async function submitOrder() {
   if (cart.isEmpty.value || isSubmitting.value) {
@@ -193,6 +218,7 @@ async function submitOrder() {
     })
 
     submittedOrder.value = order
+    submittedOrderId.value = order.id
     showCart.value = false
     showConfirmation.value = true
     cart.clear()
@@ -211,7 +237,6 @@ function clearOrder() {
 
 function closeConfirmation() {
   showConfirmation.value = false
-  submittedOrder.value = null
 }
 
 /* ---- helpers ---- */
@@ -219,9 +244,18 @@ function priceLabel(item) {
   return formatMenuPrice(item)
 }
 
-function orderStatusLabel(order) {
-  return orderStatusLabels[order?.status] || order?.status || 'Recibido'
+/* Fulfillment labels come straight from the backend fields. */
+function isReady(item) {
+  return item.fulfillmentType === 'counter' && item.pickupStatus === 'ready'
 }
+
+function fulfillmentLabel(item) {
+  if (item.fulfillmentType === 'counter') {
+    return item.pickupStatus === 'ready' ? 'Listo para recoger' : 'Recoges en barra'
+  }
+  return 'Se lleva a mesa'
+}
+
 </script>
 
 <template>
@@ -254,6 +288,36 @@ function orderStatusLabel(order) {
           <li>Pagas al final</li>
         </ul>
       </div>
+    </section>
+
+    <section v-if="visibleSubmittedOrder" class="active-order" aria-live="polite">
+      <header class="active-order__head">
+        <div>
+          <span>Tu pedido</span>
+          <strong>#{{ visibleSubmittedOrder.shortCode }}</strong>
+        </div>
+        <button type="button" @click="showConfirmation = true">Ver detalle</button>
+      </header>
+
+      <ul class="active-order__items">
+        <li
+          v-for="item in submittedOrderItems"
+          :key="item.id"
+          :class="{ 'is-ready': isReady(item) }"
+        >
+          <span class="active-order__qty">{{ item.quantity }}</span>
+          <span class="active-order__name">{{ item.name }}</span>
+          <span class="active-order__fulfillment">{{ fulfillmentLabel(item) }}</span>
+        </li>
+      </ul>
+
+      <footer class="active-order__foot">
+        <span>{{ visibleSubmittedOrder.itemCount }} artículo{{ visibleSubmittedOrder.itemCount === 1 ? '' : 's' }}</span>
+        <strong>
+          {{ formatMXN(visibleSubmittedOrder.subtotalCents / 100)
+          }}<template v-if="visibleSubmittedOrder.hasUnpriced">+</template>
+        </strong>
+      </footer>
     </section>
 
     <!-- Sticky: search + category nav -->
@@ -554,11 +618,18 @@ function orderStatusLabel(order) {
                   <span>Código de pedido</span>
                   <strong>#{{ visibleSubmittedOrder.shortCode }}</strong>
                 </div>
-                <div v-if="visibleSubmittedOrder" class="done__code done__code--status">
-                  <span>Estado en vivo</span>
-                  <strong>{{ orderStatusLabel(visibleSubmittedOrder) }}</strong>
-                </div>
-                <p class="done__hint">El personal ya lo recibió en su panel.</p>
+
+                <ul v-if="submittedOrderItems.length" class="done__items">
+                  <li
+                    v-for="item in submittedOrderItems"
+                    :key="item.id"
+                    :class="{ 'is-ready': isReady(item) }"
+                  >
+                    <span class="done__qty">{{ item.quantity }}</span>
+                    <span class="done__name">{{ item.name }}</span>
+                    <span class="done__fulfillment">{{ fulfillmentLabel(item) }}</span>
+                  </li>
+                </ul>
 
                 <div v-if="visibleSubmittedOrder" class="done__total">
                   <span>Subtotal estimado</span>
@@ -726,6 +797,116 @@ function orderStatusLabel(order) {
   color: #b4541f;
   background: #fff1e6;
   border-color: #f6d8c2;
+}
+
+/* ---- Active order status ---- */
+.active-order {
+  margin: 0 16px 14px;
+  padding: 14px;
+  border: 1px solid rgb(111 78 55 / 22%);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgb(42 28 20 / 8%);
+}
+.active-order__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.active-order__head div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.active-order__head span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.active-order__head strong {
+  color: var(--brown);
+  font-size: 1.55rem;
+  font-weight: 950;
+  line-height: 1;
+}
+.active-order__head button {
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--brown);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+.active-order__items {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.active-order__items li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 2px 9px;
+  align-items: center;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fffaf3;
+}
+.active-order__items li.is-ready {
+  border-color: rgb(31 157 87 / 28%);
+  background: rgb(31 157 87 / 8%);
+}
+.active-order__qty {
+  display: grid;
+  grid-row: span 2;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #f0e7da;
+  color: var(--brown);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+.active-order__name {
+  min-width: 0;
+  font-size: 0.92rem;
+  font-weight: 900;
+  line-height: 1.18;
+}
+.active-order__fulfillment {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+.active-order__items li.is-ready .active-order__fulfillment {
+  color: var(--accent);
+}
+.active-order__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+.active-order__foot strong {
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 950;
 }
 
 /* ---- Sticky search + cats ---- */
@@ -1389,12 +1570,6 @@ function orderStatusLabel(order) {
   font-size: 0.9rem;
   font-weight: 700;
 }
-.done__hint {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 0.84rem;
-  font-weight: 700;
-}
 .done__code {
   display: flex;
   flex-direction: column;
@@ -1418,14 +1593,54 @@ function orderStatusLabel(order) {
   line-height: 1.05;
   letter-spacing: 0.5px;
 }
-.done__code--status {
-  margin-top: 10px;
-  border-color: rgb(31 157 87 / 24%);
+.done__items {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+.done__items li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 2px 9px;
+  align-items: center;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+}
+.done__items li.is-ready {
+  border-color: rgb(31 157 87 / 28%);
   background: rgb(31 157 87 / 8%);
 }
-.done__code--status strong {
+.done__qty {
+  display: grid;
+  grid-row: span 2;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #f0e7da;
+  color: var(--brown);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+.done__name {
+  min-width: 0;
+  font-size: 0.92rem;
+  font-weight: 900;
+  line-height: 1.18;
+}
+.done__fulfillment {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+.done__items li.is-ready .done__fulfillment {
   color: var(--accent);
-  font-size: 1.3rem;
 }
 .done__total {
   display: flex;
