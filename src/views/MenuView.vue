@@ -630,7 +630,7 @@ onBeforeUnmount(() => {
   padding: 0;
   background: transparent;
   color: inherit;
-  font-family: 'Robust', 'Arial Black', Impact, Haettenschweiler, sans-serif;
+  font-family: var(--font-display);
   font-size: inherit;
   font-weight: 900;
   font-stretch: expanded;

@@ -459,7 +459,7 @@ onBeforeUnmount(() => {
 
 .home-watermark-pattern__line span {
   color: rgb(255 255 255 / 10%);
-  font-family: "Arial Black", Arial, sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(0.5rem, 0.85vw, 0.76rem);
   font-weight: 900;
   letter-spacing: 0.08em;

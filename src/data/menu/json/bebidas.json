@@ -1,0 +1,5268 @@
+{
+  "id": "bebidas",
+  "name": "Bebidas",
+  "sourceFile": "Bebidas - 2026-06-03 17_23_23.xlsx",
+  "products": [
+    {
+      "name": "Agua Mineral",
+      "price": 34,
+      "description": "Agua Mineral Topo Chico 600 ml",
+      "sku": "BO-00000001",
+      "categories": [
+        "Otras Bebidas..."
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Agua Natural",
+      "price": 27,
+      "description": "Agua embotellada ciel 500 ml",
+      "sku": "BO-00000002",
+      "categories": [
+        "Otras Bebidas..."
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Arnie (Limonada Te Negro)",
+      "price": 0,
+      "description": "Limonada con te negro",
+      "sku": "BCH-00000003",
+      "categories": [
+        "Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Special Lemonades)"
+      ]
+    },
+    {
+      "name": "Blackberry Basil Lemonade",
+      "price": 0,
+      "description": "Limonada con zarzamora y albahaca",
+      "sku": "BCH-00000008",
+      "categories": [
+        "Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Special Lemonades)"
+      ]
+    },
+    {
+      "name": "Capuchino (Capuccino) Caliente",
+      "price": 0,
+      "description": "Capuccino caliente",
+      "sku": "BCO-00000004-C",
+      "categories": [
+        "Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Caliente (Tamaño)"
+      ]
+    },
+    {
+      "name": "Capuchino (Capuccino) Frappe",
+      "price": 0,
+      "description": "Espresso con Leche frapeado",
+      "sku": "BCO-00000004-F",
+      "categories": [
+        "Cofy (Frappe)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Frappe (Tamaño)"
+      ]
+    },
+    {
+      "name": "Capuchino (Capuccino) Helado",
+      "price": 0,
+      "description": "Espresso helado con tu leche favorita",
+      "sku": "BCO-00000004-H",
+      "categories": [
+        "Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "Caramelo Latte (Caliente)",
+      "price": 0,
+      "description": "Latte con nuestro jarabe de Caramelo",
+      "sku": "BSC-00000001-C",
+      "categories": [
+        "Specialty Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Caliente (Tamaño)"
+      ]
+    },
+    {
+      "name": "Caramelo Latte (Frappe)",
+      "price": 0,
+      "description": "Latte con nuestro jarabe de Caramelo",
+      "sku": "BSC-00000001-F",
+      "categories": [
+        "Specialty Cofy (Frappe)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Frappe (Tamaño)"
+      ]
+    },
+    {
+      "name": "Caramelo Latte (Helado)",
+      "price": 0,
+      "description": "Latte con nuestro jarabe de Caramelo",
+      "sku": "BSC-00000001-H",
+      "categories": [
+        "Specialty Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "Chai Latte (Caliente)",
+      "price": 0,
+      "description": "Latte de Chai",
+      "sku": "BSC-00000006-C",
+      "categories": [
+        "Specialty Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Caliente (Tamaño)"
+      ]
+    },
+    {
+      "name": "Chai Latte (Frappe)",
+      "price": 0,
+      "description": "Latte de Chai",
+      "sku": "BSC-00000006-F",
+      "categories": [
+        "Specialty Cofy (Frappe)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Frappe (Tamaño)"
+      ]
+    },
+    {
+      "name": "Chai Latte (Helado)",
+      "price": 0,
+      "description": "Latte de Chai",
+      "sku": "BSC-00000006-H",
+      "categories": [
+        "Specialty Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "Choco",
+      "price": 49,
+      "description": "Nesquik de tu sabor favorito",
+      "sku": "BO-00000006",
+      "categories": [
+        "Otras Bebidas..."
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tipo de Leche (milky)"
+      ]
+    },
+    {
+      "name": "Coconut Mint Lemonade",
+      "price": 0,
+      "description": "Limonada con Agua de coco y menta",
+      "sku": "BCH-00000007",
+      "categories": [
+        "Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Special Lemonades)"
+      ]
+    },
+    {
+      "name": "Cortado",
+      "price": 50,
+      "description": "Shot de espresso con 2 oz de leche",
+      "sku": "BCO-00000002-C",
+      "categories": [
+        "Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tipo de Leche"
+      ]
+    },
+    {
+      "name": "Daily Cofy (Americano) Caliente",
+      "price": 0,
+      "description": "Cafe Americano de Chiapas",
+      "sku": "BCO-00000001-C",
+      "categories": [
+        "Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Caliente (Tamaño)"
+      ]
+    },
+    {
+      "name": "Daily Cofy (Americano) Helado",
+      "price": 0,
+      "description": "Cafe Americano de Chiapas helado",
+      "sku": "BCO-00000001-H",
+      "categories": [
+        "Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "Durazno (Te Negro) Caliente",
+      "price": 0,
+      "description": "Te Negro con Durazno",
+      "sku": "BTC-00000006-1",
+      "categories": [
+        "Té Caliente"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Durazno (Te Negro) Helado",
+      "price": 0,
+      "description": "Te Negro con Durazno",
+      "sku": "BTC-00000006-2",
+      "categories": [
+        "Té Helado"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Earl Grey (Te Negro) Caliente",
+      "price": 0,
+      "description": "Te negro",
+      "sku": "BTC-00000001-1",
+      "categories": [
+        "Té Caliente"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Earl Grey (Te Negro) Helado",
+      "price": 0,
+      "description": "Te negro",
+      "sku": "BTC-00000001-2",
+      "categories": [
+        "Té Helado"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Espresso",
+      "price": 0,
+      "description": "Shot de espresso",
+      "sku": "BCO-00000005-C",
+      "categories": [
+        "Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Espresso"
+      ]
+    },
+    {
+      "name": "Espresso Tonic",
+      "price": 0,
+      "description": "Shot de espresso con agua tonica",
+      "sku": "BCH-00000010",
+      "categories": [
+        "Cofy Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Special Lemonades)"
+      ]
+    },
+    {
+      "name": "Fresa Miguelito",
+      "price": 0,
+      "description": "Frappe de Fresa con miguelito",
+      "sku": "BCH-00000016",
+      "categories": [
+        "Frappe Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Frappe Chillers)"
+      ]
+    },
+    {
+      "name": "Frutos Rojos (Te Negro) Caliente",
+      "price": 0,
+      "description": "Te negro con Frutos rojos",
+      "sku": "BTC-00000005-1",
+      "categories": [
+        "Té Caliente"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Frutos Rojos (Te Negro) Helado",
+      "price": 0,
+      "description": "Te negro con Frutos rojos",
+      "sku": "BTC-00000005-2",
+      "categories": [
+        "Té Helado"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Godlatte (Latte) Caliente",
+      "price": 0,
+      "description": "Latte",
+      "sku": "BCO-00000003-C",
+      "categories": [
+        "Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Caliente (Tamaño)"
+      ]
+    },
+    {
+      "name": "Godlatte (Latte) Frappe",
+      "price": 0,
+      "description": "Espresso con Leche frapeado",
+      "sku": "BCO-00000003-F",
+      "categories": [
+        "Cofy (Frappe)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Frappe (Tamaño)"
+      ]
+    },
+    {
+      "name": "Godlatte (Latte) Helado",
+      "price": 0,
+      "description": "Espresso con tu leche favorita",
+      "sku": "BCO-00000003-H",
+      "categories": [
+        "Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "Hot Chocolate (Caliente)",
+      "price": 0,
+      "description": "Chocolate mexicano",
+      "sku": "BSC-00000007-C",
+      "categories": [
+        "Specialty Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Caliente (Tamaño)"
+      ]
+    },
+    {
+      "name": "Hot Chocolate (Frappe)",
+      "price": 0,
+      "description": "Chocolate mexicano",
+      "sku": "BSC-00000007-F",
+      "categories": [
+        "Specialty Cofy (Frappe)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Frappe (Tamaño)"
+      ]
+    },
+    {
+      "name": "Hot Chocolate (Helado)",
+      "price": 0,
+      "description": "Chocolate mexicano",
+      "sku": "BSC-00000007-H",
+      "categories": [
+        "Specialty Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "Jamaiquina",
+      "price": 0,
+      "description": "Frappe de Jamaica con chamoy",
+      "sku": "BCH-00000013",
+      "categories": [
+        "Frappe Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Frappe Chillers)"
+      ]
+    },
+    {
+      "name": "Jugo del Valle",
+      "price": 0,
+      "description": "Jugos del Valle",
+      "sku": "BO-00000004",
+      "categories": [
+        "Otras Bebidas..."
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Jugo del Valle"
+      ]
+    },
+    {
+      "name": "Lavanda Latte (Caliente)",
+      "price": 0,
+      "description": "Latte con nuestro jarabe de lavanda natural",
+      "sku": "BSC-00000004-C",
+      "categories": [
+        "Specialty Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tipo de Leche"
+      ]
+    },
+    {
+      "name": "Lavanda Latte (Frappe)",
+      "price": 0,
+      "description": "Latte con nuestro jarabe de lavanda natural",
+      "sku": "BSC-00000004-F",
+      "categories": [
+        "Specialty Cofy (Frappe)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Frappe (Tamaño)"
+      ]
+    },
+    {
+      "name": "Lavanda Latte (Helado)",
+      "price": 0,
+      "description": "Latte con nuestro jarabe de lavanda natural",
+      "sku": "BSC-00000004-H",
+      "categories": [
+        "Specialty Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "Lemonade",
+      "price": 0,
+      "description": "Limonada natural",
+      "sku": "BCH-00000001",
+      "categories": [
+        "Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Limonada)"
+      ]
+    },
+    {
+      "name": "Mango Chamoy",
+      "price": 0,
+      "description": "Frappe de mango con chamoy",
+      "sku": "BCH-00000014",
+      "categories": [
+        "Frappe Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Frappe Chillers)"
+      ]
+    },
+    {
+      "name": "Mango Lemonade",
+      "price": 0,
+      "description": "Limonada con Mango y Te de mango",
+      "sku": "BCH-00000005",
+      "categories": [
+        "Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Special Lemonades)"
+      ]
+    },
+    {
+      "name": "Mango (Roiboos) Caliente",
+      "price": 0,
+      "description": "Te Roiboos con Mango",
+      "sku": "BTC-00000004-1",
+      "categories": [
+        "Té Caliente"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Mango (Roiboos) Helado",
+      "price": 0,
+      "description": "Te Roiboos con Mango",
+      "sku": "BTC-00000004-2",
+      "categories": [
+        "Té Helado"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Manzanilla Lavanda Caliente",
+      "price": 0,
+      "description": "Te de Manzanilla Lavanda",
+      "sku": "BTC-00000007-1",
+      "categories": [
+        "Té Caliente"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Manzanilla Lavanda Helado",
+      "price": 0,
+      "description": "Te de Manzanilla Lavanda",
+      "sku": "BTC-00000007-2",
+      "categories": [
+        "Té Helado"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Matcha Latte (Caliente)",
+      "price": 0,
+      "description": "Matcha Latte",
+      "sku": "BSC-00000005-C",
+      "categories": [
+        "Specialty Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Caliente (Tamaño)"
+      ]
+    },
+    {
+      "name": "Matcha Latte (Frappe)",
+      "price": 0,
+      "description": "Matcha Latte",
+      "sku": "BSC-00000005-F",
+      "categories": [
+        "Specialty Cofy (Frappe)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Frappe (Tamaño)"
+      ]
+    },
+    {
+      "name": "Matcha Latte (Helado)",
+      "price": 0,
+      "description": "Matcha Latte",
+      "sku": "BSC-00000005-H",
+      "categories": [
+        "Specialty Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "Matcha Lemonade",
+      "price": 0,
+      "description": "Limonada con Matcha",
+      "sku": "BCH-00000004",
+      "categories": [
+        "Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Special Lemonades)"
+      ]
+    },
+    {
+      "name": "Matcha Pistache",
+      "price": 0,
+      "description": "Bebida de Matcha con Coal Foam de pistache",
+      "sku": "BSC-00000012-H",
+      "categories": [
+        "Specialty Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "Milky (Leche)",
+      "price": 39,
+      "description": "Vaso de leche",
+      "sku": "BO-00000005",
+      "categories": [
+        "Otras Bebidas..."
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tipo de Leche (milky)"
+      ]
+    },
+    {
+      "name": "Mintha (Menta) Caliente",
+      "price": 0,
+      "description": "Te de menta",
+      "sku": "BTC-00000003-1",
+      "categories": [
+        "Té Caliente"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Mintha (Menta) Helado",
+      "price": 0,
+      "description": "Te de menta",
+      "sku": "BTC-00000003-2",
+      "categories": [
+        "Té Helado"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Mocha Latte (Caliente)",
+      "price": 0,
+      "description": "Latte con nuestro jarade de Mocha",
+      "sku": "BSC-00000003-C",
+      "categories": [
+        "Specialty Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tipo de Leche"
+      ]
+    },
+    {
+      "name": "Mocha Latte (Frappe)",
+      "price": 0,
+      "description": "Latte con nuestro jarade de Mocha",
+      "sku": "BSC-00000003-F",
+      "categories": [
+        "Specialty Cofy (Frappe)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Frappe (Tamaño)"
+      ]
+    },
+    {
+      "name": "Mocha Latte (Helado)",
+      "price": 0,
+      "description": "Latte con nuestro jarade de Mocha",
+      "sku": "BSC-00000003-H",
+      "categories": [
+        "Specialty Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "Peach Tea Lemonade (Durazno)",
+      "price": 0,
+      "description": "Limonada con Durazno y te de durazno",
+      "sku": "BCH-00000006",
+      "categories": [
+        "Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Special Lemonades)"
+      ]
+    },
+    {
+      "name": "Pepino Menta",
+      "price": 0,
+      "description": "Frappe de pepino menta",
+      "sku": "BCH-00000012",
+      "categories": [
+        "Frappe Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Frappe Chillers)"
+      ]
+    },
+    {
+      "name": "Refrescos",
+      "price": 0,
+      "description": "Refrescos de 355 ml",
+      "sku": "BO-00000003",
+      "categories": [
+        "Otras Bebidas..."
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Refrescos"
+      ]
+    },
+    {
+      "name": "Rosa (Limonada Fresa)",
+      "price": 0,
+      "description": "Limonada con fresa natural",
+      "sku": "BCH-00000002",
+      "categories": [
+        "Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Special Lemonades)"
+      ]
+    },
+    {
+      "name": "Sencha (Te verde) Caliente",
+      "price": 0,
+      "description": "Te verde con toques de limon",
+      "sku": "BTC-00000002-1",
+      "categories": [
+        "Té Caliente"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Sencha (Te verde) Helado",
+      "price": 0,
+      "description": "Te verde con toques de limon",
+      "sku": "BTC-00000002-2",
+      "categories": [
+        "Té Helado"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Te y Coldbrew)"
+      ]
+    },
+    {
+      "name": "Sparkling Americano",
+      "price": 0,
+      "description": "Shot de espresso con agua mineral y un toque de naranja",
+      "sku": "BCH-00000011",
+      "categories": [
+        "Cofy Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Special Lemonades)"
+      ]
+    },
+    {
+      "name": "Sparkling Mojito",
+      "price": 0,
+      "description": "Limonada con agua mineral y menta",
+      "sku": "BCH-00000009",
+      "categories": [
+        "Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Special Lemonades)"
+      ]
+    },
+    {
+      "name": "Strawberry Matcha (Helado) (Julio)",
+      "price": 0,
+      "description": "matcha helado con Coldfoam de Fresa",
+      "sku": "BSC-00000014-H",
+      "categories": [
+        "Specialty Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "Tamarindo Chamoy",
+      "price": 0,
+      "description": "Frappe de Tamarindo con Chamoy",
+      "sku": "BCH-00000015",
+      "categories": [
+        "Frappe Chillers"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Tamaño (Frappe Chillers)"
+      ]
+    },
+    {
+      "name": "Vainilla Latte (Caliente)",
+      "price": 0,
+      "description": "Latte con nuestro jarabe de Vainilla",
+      "sku": "BSC-00000002-C",
+      "categories": [
+        "Specialty Cofy (Caliente)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Caliente (Tamaño)"
+      ]
+    },
+    {
+      "name": "Vainilla Latte (Frappe)",
+      "price": 0,
+      "description": "Latte con nuestro jarabe de Vainilla",
+      "sku": "BSC-00000002-F",
+      "categories": [
+        "Specialty Cofy (Frappe)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Frappe (Tamaño)"
+      ]
+    },
+    {
+      "name": "Vainilla Latte (Helado)",
+      "price": 0,
+      "description": "Latte con nuestro jarabe de Vainilla",
+      "sku": "BSC-00000002-H",
+      "categories": [
+        "Specialty Cofy (Helado)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Helado (Tamaño)"
+      ]
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 65,
+      "description": null,
+      "sku": "AR-1731708939779",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 65,
+      "description": null,
+      "sku": "AR-1731708992872",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 68,
+      "description": null,
+      "sku": "AR-1731709034179",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 46,
+      "description": null,
+      "sku": "AR-1732131607306",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 46,
+      "description": null,
+      "sku": "AR-1732131650951",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 50,
+      "description": null,
+      "sku": "AR-1732397261734",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 73,
+      "description": null,
+      "sku": "AR-1732398269960",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 74,
+      "description": null,
+      "sku": "AR-1732828540623",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 73,
+      "description": null,
+      "sku": "AR-1732832462377",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 78,
+      "description": null,
+      "sku": "AR-1733869862359",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 78,
+      "description": null,
+      "sku": "AR-1733869902025",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "12 oz (Chico)",
+      "price": 82,
+      "description": null,
+      "sku": "AR-1733869957073",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 75,
+      "description": null,
+      "sku": "AR-1731708939816",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 75,
+      "description": null,
+      "sku": "AR-1731708992895",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 78,
+      "description": null,
+      "sku": "AR-1731709034198",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 52,
+      "description": null,
+      "sku": "AR-1732131607331",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 52,
+      "description": null,
+      "sku": "AR-1732131650970",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 56,
+      "description": null,
+      "sku": "AR-1732397261761",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 80,
+      "description": null,
+      "sku": "AR-1732398269979",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 83,
+      "description": null,
+      "sku": "AR-1732828540663",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 80,
+      "description": null,
+      "sku": "AR-1732832462400",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 86,
+      "description": null,
+      "sku": "AR-1733869862397",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 86,
+      "description": null,
+      "sku": "AR-1733869902041",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "16 oz (Mediano)",
+      "price": 89,
+      "description": null,
+      "sku": "AR-1733869957089",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 80,
+      "description": null,
+      "sku": "AR-1731708939830",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 80,
+      "description": null,
+      "sku": "AR-1731708992910",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 83,
+      "description": null,
+      "sku": "AR-1731709034213",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 56,
+      "description": null,
+      "sku": "AR-1732131607345",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 0,
+      "description": null,
+      "sku": "AR-1732131650985",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 63,
+      "description": null,
+      "sku": "AR-1732397261779",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 89,
+      "description": null,
+      "sku": "AR-1732398269995",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 90,
+      "description": null,
+      "sku": "AR-1732828540683",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 89,
+      "description": null,
+      "sku": "AR-1732832462419",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 94,
+      "description": null,
+      "sku": "AR-1733869862412",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 94,
+      "description": null,
+      "sku": "AR-1733869902058",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "20 oz (Grande)",
+      "price": 97,
+      "description": null,
+      "sku": "AR-1733869957105",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Agua Mineral",
+      "price": 12,
+      "description": null,
+      "sku": "AR-1738462098169",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Coca Cola",
+      "price": 34,
+      "description": null,
+      "sku": "BOR-00000007",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Coca Cola Light",
+      "price": 34,
+      "description": null,
+      "sku": "BOR-00000006",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Coca Cola Sin Azucar",
+      "price": 34,
+      "description": null,
+      "sku": "BOR-00000005",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Doble",
+      "price": 50,
+      "description": null,
+      "sku": "AR-1732132475714",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Durazno (Del Valle)",
+      "price": 34,
+      "description": null,
+      "sku": "BOJ-00000004",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Fanta",
+      "price": 34,
+      "description": null,
+      "sku": "BOR-00000003",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Fuze Tea Limon",
+      "price": 38,
+      "description": null,
+      "sku": "BOR-00000001",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Joya de Manzana",
+      "price": 34,
+      "description": null,
+      "sku": "BOR-00000002",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Leche de Almendra",
+      "price": 12,
+      "description": null,
+      "sku": "AR-1728323887678",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Leche de Avena",
+      "price": 12,
+      "description": null,
+      "sku": "AR-1728323887700",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Leche de Coco",
+      "price": 12,
+      "description": null,
+      "sku": "AR-1728323887729",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Leche Deslactosada",
+      "price": 0,
+      "description": null,
+      "sku": "AR-1728323887613",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Leche Deslactosada Light",
+      "price": 0,
+      "description": null,
+      "sku": "AR-1728323887628",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Leche de Soya",
+      "price": 12,
+      "description": null,
+      "sku": "AR-1728323887714",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Leche Entera",
+      "price": 0,
+      "description": null,
+      "sku": "AR-1728323887580",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Leche Light",
+      "price": 0,
+      "description": null,
+      "sku": "AR-1728323887598",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Mango (Del Valle)",
+      "price": 34,
+      "description": null,
+      "sku": "BOJ-00000003",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Manzana (Del Valle)",
+      "price": 34,
+      "description": null,
+      "sku": "BOJ-00000002",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Naranja (Del Valle)",
+      "price": 34,
+      "description": null,
+      "sku": "BOJ-00000001",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Sencillo",
+      "price": 32,
+      "description": null,
+      "sku": "AR-1732132475694",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Shot espresso",
+      "price": 20,
+      "description": null,
+      "sku": "AR-1738462098145",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Sprite",
+      "price": 34,
+      "description": null,
+      "sku": "BOR-00000004",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    }
+  ],
+  "modifierGroups": [
+    {
+      "name": "Adicionales",
+      "selectionType": "SIN_DEFINIR",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 0,
+      "max": 3,
+      "repetitionsPerOption": 3,
+      "options": [
+        {
+          "name": "Shot espresso",
+          "additionalPrice": 20
+        },
+        {
+          "name": "Agua Mineral",
+          "additionalPrice": 12
+        }
+      ]
+    },
+    {
+      "name": "Caliente (Tamaño)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 80
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 89
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 97
+        }
+      ]
+    },
+    {
+      "name": "Caliente (Tamaño)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 68
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 78
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 82
+        }
+      ]
+    },
+    {
+      "name": "Caliente (Tamaño)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 46
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 54
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 58
+        }
+      ]
+    },
+    {
+      "name": "Cambio por Agua Mineral",
+      "selectionType": "SIN_DEFINIR",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 0,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": []
+    },
+    {
+      "name": "Espresso",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "Sencillo",
+          "additionalPrice": 33
+        },
+        {
+          "name": "Doble",
+          "additionalPrice": 50
+        }
+      ]
+    },
+    {
+      "name": "Frappe (Tamaño)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 83
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 92
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 99
+        }
+      ]
+    },
+    {
+      "name": "Frappe (Tamaño)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 71
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 81
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 85
+        }
+      ]
+    },
+    {
+      "name": "Helado (Tamaño)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 46
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 54
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 58
+        }
+      ]
+    },
+    {
+      "name": "Helado (Tamaño)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 80
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 89
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 97
+        }
+      ]
+    },
+    {
+      "name": "Helado (Tamaño)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 68
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 78
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 82
+        }
+      ]
+    },
+    {
+      "name": "Jugo del Valle",
+      "selectionType": "SIN_DEFINIR",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 0,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "Naranja (Del Valle)",
+          "additionalPrice": 36
+        },
+        {
+          "name": "Manzana (Del Valle)",
+          "additionalPrice": 36
+        },
+        {
+          "name": "Mango (Del Valle)",
+          "additionalPrice": 36
+        },
+        {
+          "name": "Durazno (Del Valle)",
+          "additionalPrice": 36
+        }
+      ]
+    },
+    {
+      "name": "Refrescos",
+      "selectionType": "SIN_DEFINIR",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "Coca Cola",
+          "additionalPrice": 36
+        },
+        {
+          "name": "Coca Cola Light",
+          "additionalPrice": 36
+        },
+        {
+          "name": "Coca Cola Sin Azucar",
+          "additionalPrice": 36
+        },
+        {
+          "name": "Sprite",
+          "additionalPrice": 36
+        },
+        {
+          "name": "Fanta",
+          "additionalPrice": 36
+        },
+        {
+          "name": "Joya de Manzana",
+          "additionalPrice": 36
+        },
+        {
+          "name": "Fuze Tea Limon",
+          "additionalPrice": 40
+        }
+      ]
+    },
+    {
+      "name": "Tamaño (Frappe Chillers)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 77
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 85
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 92
+        }
+      ]
+    },
+    {
+      "name": "Tamaño (Limonada)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 52
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 59
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 66
+        }
+      ]
+    },
+    {
+      "name": "Tamaño (Special Lemonades)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 76
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 83
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 90
+        }
+      ]
+    },
+    {
+      "name": "Tamaño (Te y Coldbrew)",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "12 oz (Chico)",
+          "additionalPrice": 76
+        },
+        {
+          "name": "16 oz (Mediano)",
+          "additionalPrice": 83
+        },
+        {
+          "name": "20 oz (Grande)",
+          "additionalPrice": 92
+        }
+      ]
+    },
+    {
+      "name": "Tipo de Leche",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "Leche Entera",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Leche Light",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Leche Deslactosada",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Leche Deslactosada Light",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Leche de Almendra",
+          "additionalPrice": 12
+        },
+        {
+          "name": "Leche de Avena",
+          "additionalPrice": 12
+        },
+        {
+          "name": "Leche de Soya",
+          "additionalPrice": 12
+        },
+        {
+          "name": "Leche de Coco",
+          "additionalPrice": 12
+        }
+      ]
+    },
+    {
+      "name": "Tipo de Leche (milky)",
+      "selectionType": "SIN_DEFINIR",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 0,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "Leche Entera",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Leche Light",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Leche Deslactosada",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Leche Deslactosada Light",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Leche de Almendra",
+          "additionalPrice": 12
+        },
+        {
+          "name": "Leche de Avena",
+          "additionalPrice": 12
+        },
+        {
+          "name": "Leche de Coco",
+          "additionalPrice": 12
+        },
+        {
+          "name": "Leche de Soya",
+          "additionalPrice": 12
+        }
+      ]
+    }
+  ],
+  "menuPrices": [
+    {
+      "item": "Agua Mineral",
+      "basePrice": 34,
+      "menuPrice": 34
+    },
+    {
+      "item": "Agua Natural",
+      "basePrice": 27,
+      "menuPrice": 27
+    },
+    {
+      "item": "Arnie (Limonada Te Negro)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Blackberry Basil Lemonade",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Capuchino (Capuccino) Caliente",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Capuchino (Capuccino) Frappe",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Capuchino (Capuccino) Helado",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Caramelo Latte (Caliente)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Caramelo Latte (Frappe)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Caramelo Latte (Helado)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Chai Latte (Caliente)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Chai Latte (Frappe)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Chai Latte (Helado)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Choco",
+      "basePrice": 49,
+      "menuPrice": 49
+    },
+    {
+      "item": "Coconut Mint Lemonade",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Cortado",
+      "basePrice": 50,
+      "menuPrice": 50
+    },
+    {
+      "item": "Daily Cofy (Americano) Caliente",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Daily Cofy (Americano) Helado",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Durazno (Te Negro) Caliente",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Durazno (Te Negro) Helado",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Earl Grey (Te Negro) Caliente",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Earl Grey (Te Negro) Helado",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Espresso",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Espresso Tonic",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Fresa Miguelito",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Frutos Rojos (Te Negro) Caliente",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Frutos Rojos (Te Negro) Helado",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Godlatte (Latte) Caliente",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Godlatte (Latte) Frappe",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Godlatte (Latte) Helado",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Hot Chocolate (Caliente)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Hot Chocolate (Frappe)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Hot Chocolate (Helado)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Jamaiquina",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Jugo del Valle",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Lavanda Latte (Caliente)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Lavanda Latte (Frappe)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Lavanda Latte (Helado)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Lemonade",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Mango Chamoy",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Mango Lemonade",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Mango (Roiboos) Caliente",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Mango (Roiboos) Helado",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Manzanilla Lavanda Caliente",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Manzanilla Lavanda Helado",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Matcha Latte (Caliente)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Matcha Latte (Frappe)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Matcha Latte (Helado)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Matcha Lemonade",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Matcha Pistache",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Milky (Leche)",
+      "basePrice": 39,
+      "menuPrice": 39
+    },
+    {
+      "item": "Mintha (Menta) Caliente",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Mintha (Menta) Helado",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Mocha Latte (Caliente)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Mocha Latte (Frappe)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Mocha Latte (Helado)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Peach Tea Lemonade (Durazno)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Pepino Menta",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Refrescos",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Rosa (Limonada Fresa)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Sencha (Te verde) Caliente",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Sencha (Te verde) Helado",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Sparkling Americano",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Sparkling Mojito",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Strawberry Matcha (Helado) (Julio)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Tamarindo Chamoy",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Vainilla Latte (Caliente)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Vainilla Latte (Frappe)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Vainilla Latte (Helado)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 65,
+      "menuPrice": 65
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 65,
+      "menuPrice": 65
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 68,
+      "menuPrice": 68
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 46,
+      "menuPrice": 46
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 46,
+      "menuPrice": 46
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 50,
+      "menuPrice": 50
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 73,
+      "menuPrice": 73
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 74,
+      "menuPrice": 74
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 73,
+      "menuPrice": 73
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 78,
+      "menuPrice": 78
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 78,
+      "menuPrice": 78
+    },
+    {
+      "item": "12 oz (Chico)",
+      "basePrice": 82,
+      "menuPrice": 82
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 75,
+      "menuPrice": 75
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 75,
+      "menuPrice": 75
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 78,
+      "menuPrice": 78
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 52,
+      "menuPrice": 52
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 52,
+      "menuPrice": 52
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 56,
+      "menuPrice": 56
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 80,
+      "menuPrice": 80
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 83,
+      "menuPrice": 83
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 80,
+      "menuPrice": 80
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 86,
+      "menuPrice": 86
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 86,
+      "menuPrice": 86
+    },
+    {
+      "item": "16 oz (Mediano)",
+      "basePrice": 89,
+      "menuPrice": 89
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 80,
+      "menuPrice": 80
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 80,
+      "menuPrice": 80
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 83,
+      "menuPrice": 83
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 56,
+      "menuPrice": 56
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 63,
+      "menuPrice": 63
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 89,
+      "menuPrice": 89
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 90,
+      "menuPrice": 90
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 89,
+      "menuPrice": 89
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 94,
+      "menuPrice": 94
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 94,
+      "menuPrice": 94
+    },
+    {
+      "item": "20 oz (Grande)",
+      "basePrice": 97,
+      "menuPrice": 97
+    },
+    {
+      "item": "Agua Mineral",
+      "basePrice": 12,
+      "menuPrice": 12
+    },
+    {
+      "item": "Coca Cola",
+      "basePrice": 34,
+      "menuPrice": 34
+    },
+    {
+      "item": "Coca Cola Light",
+      "basePrice": 34,
+      "menuPrice": 34
+    },
+    {
+      "item": "Coca Cola Sin Azucar",
+      "basePrice": 34,
+      "menuPrice": 34
+    },
+    {
+      "item": "Doble",
+      "basePrice": 50,
+      "menuPrice": 50
+    },
+    {
+      "item": "Durazno (Del Valle)",
+      "basePrice": 34,
+      "menuPrice": 34
+    },
+    {
+      "item": "Fanta",
+      "basePrice": 34,
+      "menuPrice": 34
+    },
+    {
+      "item": "Fuze Tea Limon",
+      "basePrice": 38,
+      "menuPrice": 38
+    },
+    {
+      "item": "Joya de Manzana",
+      "basePrice": 34,
+      "menuPrice": 34
+    },
+    {
+      "item": "Leche de Almendra",
+      "basePrice": 12,
+      "menuPrice": 12
+    },
+    {
+      "item": "Leche de Avena",
+      "basePrice": 12,
+      "menuPrice": 12
+    },
+    {
+      "item": "Leche de Coco",
+      "basePrice": 12,
+      "menuPrice": 12
+    },
+    {
+      "item": "Leche Deslactosada",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Leche Deslactosada Light",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Leche de Soya",
+      "basePrice": 12,
+      "menuPrice": 12
+    },
+    {
+      "item": "Leche Entera",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Leche Light",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Mango (Del Valle)",
+      "basePrice": 34,
+      "menuPrice": 34
+    },
+    {
+      "item": "Manzana (Del Valle)",
+      "basePrice": 34,
+      "menuPrice": 34
+    },
+    {
+      "item": "Naranja (Del Valle)",
+      "basePrice": 34,
+      "menuPrice": 34
+    },
+    {
+      "item": "Sencillo",
+      "basePrice": 32,
+      "menuPrice": 32
+    },
+    {
+      "item": "Shot espresso",
+      "basePrice": 20,
+      "menuPrice": 20
+    },
+    {
+      "item": "Sprite",
+      "basePrice": 34,
+      "menuPrice": 34
+    }
+  ],
+  "raw": {
+    "products": [
+      {
+        "name": "Agua Mineral",
+        "price": 34,
+        "description": "Agua Mineral Topo Chico 600 ml",
+        "sku": "BO-00000001",
+        "categories": "Otras Bebidas...",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Agua Natural",
+        "price": 27,
+        "description": "Agua embotellada ciel 500 ml",
+        "sku": "BO-00000002",
+        "categories": "Otras Bebidas...",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Arnie (Limonada Te Negro)",
+        "price": 0,
+        "description": "Limonada con te negro",
+        "sku": "BCH-00000003",
+        "categories": "Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Special Lemonades)",
+        "grupo_modificador_1": "Cambio por Agua Mineral",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Blackberry Basil Lemonade",
+        "price": 0,
+        "description": "Limonada con zarzamora y albahaca",
+        "sku": "BCH-00000008",
+        "categories": "Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Special Lemonades)",
+        "grupo_modificador_1": "Cambio por Agua Mineral",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Capuchino (Capuccino) Caliente",
+        "price": 0,
+        "description": "Capuccino caliente",
+        "sku": "BCO-00000004-C",
+        "categories": "Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Caliente (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Capuchino (Capuccino) Frappe",
+        "price": 0,
+        "description": "Espresso con Leche frapeado",
+        "sku": "BCO-00000004-F",
+        "categories": "Cofy (Frappe)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Frappe (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Capuchino (Capuccino) Helado",
+        "price": 0,
+        "description": "Espresso helado con tu leche favorita",
+        "sku": "BCO-00000004-H",
+        "categories": "Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Caramelo Latte (Caliente)",
+        "price": 0,
+        "description": "Latte con nuestro jarabe de Caramelo",
+        "sku": "BSC-00000001-C",
+        "categories": "Specialty Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Caliente (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Caramelo Latte (Frappe)",
+        "price": 0,
+        "description": "Latte con nuestro jarabe de Caramelo",
+        "sku": "BSC-00000001-F",
+        "categories": "Specialty Cofy (Frappe)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Frappe (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Caramelo Latte (Helado)",
+        "price": 0,
+        "description": "Latte con nuestro jarabe de Caramelo",
+        "sku": "BSC-00000001-H",
+        "categories": "Specialty Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Chai Latte (Caliente)",
+        "price": 0,
+        "description": "Latte de Chai",
+        "sku": "BSC-00000006-C",
+        "categories": "Specialty Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Caliente (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Chai Latte (Frappe)",
+        "price": 0,
+        "description": "Latte de Chai",
+        "sku": "BSC-00000006-F",
+        "categories": "Specialty Cofy (Frappe)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Frappe (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Chai Latte (Helado)",
+        "price": 0,
+        "description": "Latte de Chai",
+        "sku": "BSC-00000006-H",
+        "categories": "Specialty Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Choco",
+        "price": 49,
+        "description": "Nesquik de tu sabor favorito",
+        "sku": "BO-00000006",
+        "categories": "Otras Bebidas...",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tipo de Leche (milky)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Coconut Mint Lemonade",
+        "price": 0,
+        "description": "Limonada con Agua de coco y menta",
+        "sku": "BCH-00000007",
+        "categories": "Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Special Lemonades)",
+        "grupo_modificador_1": "Cambio por Agua Mineral",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Cortado",
+        "price": 50,
+        "description": "Shot de espresso con 2 oz de leche",
+        "sku": "BCO-00000002-C",
+        "categories": "Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tipo de Leche",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Daily Cofy (Americano) Caliente",
+        "price": 0,
+        "description": "Cafe Americano de Chiapas",
+        "sku": "BCO-00000001-C",
+        "categories": "Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Caliente (Tamaño)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Daily Cofy (Americano) Helado",
+        "price": 0,
+        "description": "Cafe Americano de Chiapas helado",
+        "sku": "BCO-00000001-H",
+        "categories": "Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Durazno (Te Negro) Caliente",
+        "price": 0,
+        "description": "Te Negro con Durazno",
+        "sku": "BTC-00000006-1",
+        "categories": "Té Caliente",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Durazno (Te Negro) Helado",
+        "price": 0,
+        "description": "Te Negro con Durazno",
+        "sku": "BTC-00000006-2",
+        "categories": "Té Helado",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Earl Grey (Te Negro) Caliente",
+        "price": 0,
+        "description": "Te negro",
+        "sku": "BTC-00000001-1",
+        "categories": "Té Caliente",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Earl Grey (Te Negro) Helado",
+        "price": 0,
+        "description": "Te negro",
+        "sku": "BTC-00000001-2",
+        "categories": "Té Helado",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Espresso",
+        "price": 0,
+        "description": "Shot de espresso",
+        "sku": "BCO-00000005-C",
+        "categories": "Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Espresso",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Espresso Tonic",
+        "price": 0,
+        "description": "Shot de espresso con agua tonica",
+        "sku": "BCH-00000010",
+        "categories": "Cofy Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Special Lemonades)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Fresa Miguelito",
+        "price": 0,
+        "description": "Frappe de Fresa con miguelito",
+        "sku": "BCH-00000016",
+        "categories": "Frappe Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Frappe Chillers)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Frutos Rojos (Te Negro) Caliente",
+        "price": 0,
+        "description": "Te negro con Frutos rojos",
+        "sku": "BTC-00000005-1",
+        "categories": "Té Caliente",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Frutos Rojos (Te Negro) Helado",
+        "price": 0,
+        "description": "Te negro con Frutos rojos",
+        "sku": "BTC-00000005-2",
+        "categories": "Té Helado",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Godlatte (Latte) Caliente",
+        "price": 0,
+        "description": "Latte",
+        "sku": "BCO-00000003-C",
+        "categories": "Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Caliente (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Godlatte (Latte) Frappe",
+        "price": 0,
+        "description": "Espresso con Leche frapeado",
+        "sku": "BCO-00000003-F",
+        "categories": "Cofy (Frappe)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Frappe (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Godlatte (Latte) Helado",
+        "price": 0,
+        "description": "Espresso con tu leche favorita",
+        "sku": "BCO-00000003-H",
+        "categories": "Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Hot Chocolate (Caliente)",
+        "price": 0,
+        "description": "Chocolate mexicano",
+        "sku": "BSC-00000007-C",
+        "categories": "Specialty Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Caliente (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Hot Chocolate (Frappe)",
+        "price": 0,
+        "description": "Chocolate mexicano",
+        "sku": "BSC-00000007-F",
+        "categories": "Specialty Cofy (Frappe)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Frappe (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Hot Chocolate (Helado)",
+        "price": 0,
+        "description": "Chocolate mexicano",
+        "sku": "BSC-00000007-H",
+        "categories": "Specialty Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Jamaiquina",
+        "price": 0,
+        "description": "Frappe de Jamaica con chamoy",
+        "sku": "BCH-00000013",
+        "categories": "Frappe Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Frappe Chillers)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Jugo del Valle",
+        "price": 0,
+        "description": "Jugos del Valle",
+        "sku": "BO-00000004",
+        "categories": "Otras Bebidas...",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Jugo del Valle",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Lavanda Latte (Caliente)",
+        "price": 0,
+        "description": "Latte con nuestro jarabe de lavanda natural",
+        "sku": "BSC-00000004-C",
+        "categories": "Specialty Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tipo de Leche",
+        "grupo_modificador_1": "Caliente (Tamaño)",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Lavanda Latte (Frappe)",
+        "price": 0,
+        "description": "Latte con nuestro jarabe de lavanda natural",
+        "sku": "BSC-00000004-F",
+        "categories": "Specialty Cofy (Frappe)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Frappe (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Lavanda Latte (Helado)",
+        "price": 0,
+        "description": "Latte con nuestro jarabe de lavanda natural",
+        "sku": "BSC-00000004-H",
+        "categories": "Specialty Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Lemonade",
+        "price": 0,
+        "description": "Limonada natural",
+        "sku": "BCH-00000001",
+        "categories": "Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Limonada)",
+        "grupo_modificador_1": "Cambio por Agua Mineral",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Mango Chamoy",
+        "price": 0,
+        "description": "Frappe de mango con chamoy",
+        "sku": "BCH-00000014",
+        "categories": "Frappe Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Frappe Chillers)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Mango Lemonade",
+        "price": 0,
+        "description": "Limonada con Mango y Te de mango",
+        "sku": "BCH-00000005",
+        "categories": "Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Special Lemonades)",
+        "grupo_modificador_1": "Cambio por Agua Mineral",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Mango (Roiboos) Caliente",
+        "price": 0,
+        "description": "Te Roiboos con Mango",
+        "sku": "BTC-00000004-1",
+        "categories": "Té Caliente",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Mango (Roiboos) Helado",
+        "price": 0,
+        "description": "Te Roiboos con Mango",
+        "sku": "BTC-00000004-2",
+        "categories": "Té Helado",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Manzanilla Lavanda Caliente",
+        "price": 0,
+        "description": "Te de Manzanilla Lavanda",
+        "sku": "BTC-00000007-1",
+        "categories": "Té Caliente",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Manzanilla Lavanda Helado",
+        "price": 0,
+        "description": "Te de Manzanilla Lavanda",
+        "sku": "BTC-00000007-2",
+        "categories": "Té Helado",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Matcha Latte (Caliente)",
+        "price": 0,
+        "description": "Matcha Latte",
+        "sku": "BSC-00000005-C",
+        "categories": "Specialty Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Caliente (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Matcha Latte (Frappe)",
+        "price": 0,
+        "description": "Matcha Latte",
+        "sku": "BSC-00000005-F",
+        "categories": "Specialty Cofy (Frappe)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Frappe (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Matcha Latte (Helado)",
+        "price": 0,
+        "description": "Matcha Latte",
+        "sku": "BSC-00000005-H",
+        "categories": "Specialty Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Matcha Lemonade",
+        "price": 0,
+        "description": "Limonada con Matcha",
+        "sku": "BCH-00000004",
+        "categories": "Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Special Lemonades)",
+        "grupo_modificador_1": "Cambio por Agua Mineral",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Matcha Pistache",
+        "price": 0,
+        "description": "Bebida de Matcha con Coal Foam de pistache",
+        "sku": "BSC-00000012-H",
+        "categories": "Specialty Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Milky (Leche)",
+        "price": 39,
+        "description": "Vaso de leche",
+        "sku": "BO-00000005",
+        "categories": "Otras Bebidas...",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tipo de Leche (milky)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Mintha (Menta) Caliente",
+        "price": 0,
+        "description": "Te de menta",
+        "sku": "BTC-00000003-1",
+        "categories": "Té Caliente",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Mintha (Menta) Helado",
+        "price": 0,
+        "description": "Te de menta",
+        "sku": "BTC-00000003-2",
+        "categories": "Té Helado",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Mocha Latte (Caliente)",
+        "price": 0,
+        "description": "Latte con nuestro jarade de Mocha",
+        "sku": "BSC-00000003-C",
+        "categories": "Specialty Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tipo de Leche",
+        "grupo_modificador_1": "Caliente (Tamaño)",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Mocha Latte (Frappe)",
+        "price": 0,
+        "description": "Latte con nuestro jarade de Mocha",
+        "sku": "BSC-00000003-F",
+        "categories": "Specialty Cofy (Frappe)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Frappe (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Mocha Latte (Helado)",
+        "price": 0,
+        "description": "Latte con nuestro jarade de Mocha",
+        "sku": "BSC-00000003-H",
+        "categories": "Specialty Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Peach Tea Lemonade (Durazno)",
+        "price": 0,
+        "description": "Limonada con Durazno y te de durazno",
+        "sku": "BCH-00000006",
+        "categories": "Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Special Lemonades)",
+        "grupo_modificador_1": "Cambio por Agua Mineral",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Pepino Menta",
+        "price": 0,
+        "description": "Frappe de pepino menta",
+        "sku": "BCH-00000012",
+        "categories": "Frappe Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Frappe Chillers)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Refrescos",
+        "price": 0,
+        "description": "Refrescos de 355 ml",
+        "sku": "BO-00000003",
+        "categories": "Otras Bebidas...",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Refrescos",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Rosa (Limonada Fresa)",
+        "price": 0,
+        "description": "Limonada con fresa natural",
+        "sku": "BCH-00000002",
+        "categories": "Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Special Lemonades)",
+        "grupo_modificador_1": "Cambio por Agua Mineral",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Sencha (Te verde) Caliente",
+        "price": 0,
+        "description": "Te verde con toques de limon",
+        "sku": "BTC-00000002-1",
+        "categories": "Té Caliente",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Sencha (Te verde) Helado",
+        "price": 0,
+        "description": "Te verde con toques de limon",
+        "sku": "BTC-00000002-2",
+        "categories": "Té Helado",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Te y Coldbrew)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Sparkling Americano",
+        "price": 0,
+        "description": "Shot de espresso con agua mineral y un toque de naranja",
+        "sku": "BCH-00000011",
+        "categories": "Cofy Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Special Lemonades)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Sparkling Mojito",
+        "price": 0,
+        "description": "Limonada con agua mineral y menta",
+        "sku": "BCH-00000009",
+        "categories": "Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Special Lemonades)",
+        "grupo_modificador_1": "Cambio por Agua Mineral",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Strawberry Matcha (Helado) (Julio)",
+        "price": 0,
+        "description": "matcha helado con Coldfoam de Fresa",
+        "sku": "BSC-00000014-H",
+        "categories": "Specialty Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Tamarindo Chamoy",
+        "price": 0,
+        "description": "Frappe de Tamarindo con Chamoy",
+        "sku": "BCH-00000015",
+        "categories": "Frappe Chillers",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Tamaño (Frappe Chillers)",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Vainilla Latte (Caliente)",
+        "price": 0,
+        "description": "Latte con nuestro jarabe de Vainilla",
+        "sku": "BSC-00000002-C",
+        "categories": "Specialty Cofy (Caliente)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Caliente (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Vainilla Latte (Frappe)",
+        "price": 0,
+        "description": "Latte con nuestro jarabe de Vainilla",
+        "sku": "BSC-00000002-F",
+        "categories": "Specialty Cofy (Frappe)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Frappe (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "Vainilla Latte (Helado)",
+        "price": 0,
+        "description": "Latte con nuestro jarabe de Vainilla",
+        "sku": "BSC-00000002-H",
+        "categories": "Specialty Cofy (Helado)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Helado (Tamaño)",
+        "grupo_modificador_1": "Tipo de Leche",
+        "grupo_modificador_2": "Adicionales"
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 65,
+        "description": null,
+        "sku": "AR-1731708939779",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 65,
+        "description": null,
+        "sku": "AR-1731708992872",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 68,
+        "description": null,
+        "sku": "AR-1731709034179",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 46,
+        "description": null,
+        "sku": "AR-1732131607306",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 46,
+        "description": null,
+        "sku": "AR-1732131650951",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 50,
+        "description": null,
+        "sku": "AR-1732397261734",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 73,
+        "description": null,
+        "sku": "AR-1732398269960",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 74,
+        "description": null,
+        "sku": "AR-1732828540623",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 73,
+        "description": null,
+        "sku": "AR-1732832462377",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 78,
+        "description": null,
+        "sku": "AR-1733869862359",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 78,
+        "description": null,
+        "sku": "AR-1733869902025",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "12 oz (Chico)",
+        "price": 82,
+        "description": null,
+        "sku": "AR-1733869957073",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 75,
+        "description": null,
+        "sku": "AR-1731708939816",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 75,
+        "description": null,
+        "sku": "AR-1731708992895",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 78,
+        "description": null,
+        "sku": "AR-1731709034198",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 52,
+        "description": null,
+        "sku": "AR-1732131607331",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 52,
+        "description": null,
+        "sku": "AR-1732131650970",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 56,
+        "description": null,
+        "sku": "AR-1732397261761",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 80,
+        "description": null,
+        "sku": "AR-1732398269979",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 83,
+        "description": null,
+        "sku": "AR-1732828540663",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 80,
+        "description": null,
+        "sku": "AR-1732832462400",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 86,
+        "description": null,
+        "sku": "AR-1733869862397",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 86,
+        "description": null,
+        "sku": "AR-1733869902041",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "16 oz (Mediano)",
+        "price": 89,
+        "description": null,
+        "sku": "AR-1733869957089",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 80,
+        "description": null,
+        "sku": "AR-1731708939830",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 80,
+        "description": null,
+        "sku": "AR-1731708992910",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 83,
+        "description": null,
+        "sku": "AR-1731709034213",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 56,
+        "description": null,
+        "sku": "AR-1732131607345",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 0,
+        "description": null,
+        "sku": "AR-1732131650985",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 63,
+        "description": null,
+        "sku": "AR-1732397261779",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 89,
+        "description": null,
+        "sku": "AR-1732398269995",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 90,
+        "description": null,
+        "sku": "AR-1732828540683",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 89,
+        "description": null,
+        "sku": "AR-1732832462419",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 94,
+        "description": null,
+        "sku": "AR-1733869862412",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 94,
+        "description": null,
+        "sku": "AR-1733869902058",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "20 oz (Grande)",
+        "price": 97,
+        "description": null,
+        "sku": "AR-1733869957105",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Agua Mineral",
+        "price": 12,
+        "description": null,
+        "sku": "AR-1738462098169",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Coca Cola",
+        "price": 34,
+        "description": null,
+        "sku": "BOR-00000007",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Coca Cola Light",
+        "price": 34,
+        "description": null,
+        "sku": "BOR-00000006",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Coca Cola Sin Azucar",
+        "price": 34,
+        "description": null,
+        "sku": "BOR-00000005",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Doble",
+        "price": 50,
+        "description": null,
+        "sku": "AR-1732132475714",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Durazno (Del Valle)",
+        "price": 34,
+        "description": null,
+        "sku": "BOJ-00000004",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Fanta",
+        "price": 34,
+        "description": null,
+        "sku": "BOR-00000003",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Fuze Tea Limon",
+        "price": 38,
+        "description": null,
+        "sku": "BOR-00000001",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Joya de Manzana",
+        "price": 34,
+        "description": null,
+        "sku": "BOR-00000002",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Leche de Almendra",
+        "price": 12,
+        "description": null,
+        "sku": "AR-1728323887678",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Leche de Avena",
+        "price": 12,
+        "description": null,
+        "sku": "AR-1728323887700",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Leche de Coco",
+        "price": 12,
+        "description": null,
+        "sku": "AR-1728323887729",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Leche Deslactosada",
+        "price": 0,
+        "description": null,
+        "sku": "AR-1728323887613",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Leche Deslactosada Light",
+        "price": 0,
+        "description": null,
+        "sku": "AR-1728323887628",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Leche de Soya",
+        "price": 12,
+        "description": null,
+        "sku": "AR-1728323887714",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Leche Entera",
+        "price": 0,
+        "description": null,
+        "sku": "AR-1728323887580",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Leche Light",
+        "price": 0,
+        "description": null,
+        "sku": "AR-1728323887598",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Mango (Del Valle)",
+        "price": 34,
+        "description": null,
+        "sku": "BOJ-00000003",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Manzana (Del Valle)",
+        "price": 34,
+        "description": null,
+        "sku": "BOJ-00000002",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Naranja (Del Valle)",
+        "price": 34,
+        "description": null,
+        "sku": "BOJ-00000001",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Sencillo",
+        "price": 32,
+        "description": null,
+        "sku": "AR-1732132475694",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Shot espresso",
+        "price": 20,
+        "description": null,
+        "sku": "AR-1738462098145",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Sprite",
+        "price": 34,
+        "description": null,
+        "sku": "BOR-00000004",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      }
+    ],
+    "modifiers": [
+      {
+        "name": "Adicionales",
+        "option": "Shot espresso",
+        "additionalPrice": 20,
+        "selectionType": "SIN_DEFINIR",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 0,
+        "max": 3,
+        "repetitionsPerOption": 3
+      },
+      {
+        "name": null,
+        "option": "Agua Mineral",
+        "additionalPrice": 12,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Caliente (Tamaño)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 80,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 89,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 97,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Caliente (Tamaño)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 68,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 78,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 82,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Caliente (Tamaño)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 46,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 54,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 58,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Cambio por Agua Mineral",
+        "option": null,
+        "additionalPrice": null,
+        "selectionType": "SIN_DEFINIR",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 0,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": "Espresso",
+        "option": "Sencillo",
+        "additionalPrice": 33,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "Doble",
+        "additionalPrice": 50,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Frappe (Tamaño)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 83,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 92,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 99,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Frappe (Tamaño)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 71,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 81,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 85,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Helado (Tamaño)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 46,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 54,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 58,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Helado (Tamaño)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 80,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 89,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 97,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Helado (Tamaño)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 68,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 78,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 82,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Jugo del Valle",
+        "option": "Naranja (Del Valle)",
+        "additionalPrice": 36,
+        "selectionType": "SIN_DEFINIR",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 0,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "Manzana (Del Valle)",
+        "additionalPrice": 36,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Mango (Del Valle)",
+        "additionalPrice": 36,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Durazno (Del Valle)",
+        "additionalPrice": 36,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Refrescos",
+        "option": "Coca Cola",
+        "additionalPrice": 36,
+        "selectionType": "SIN_DEFINIR",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "Coca Cola Light",
+        "additionalPrice": 36,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Coca Cola Sin Azucar",
+        "additionalPrice": 36,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Sprite",
+        "additionalPrice": 36,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Fanta",
+        "additionalPrice": 36,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Joya de Manzana",
+        "additionalPrice": 36,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Fuze Tea Limon",
+        "additionalPrice": 40,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Tamaño (Frappe Chillers)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 77,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 85,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 92,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Tamaño (Limonada)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 52,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 59,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 66,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Tamaño (Special Lemonades)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 76,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 83,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 90,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Tamaño (Te y Coldbrew)",
+        "option": "12 oz (Chico)",
+        "additionalPrice": 76,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "16 oz (Mediano)",
+        "additionalPrice": 83,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "20 oz (Grande)",
+        "additionalPrice": 92,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Tipo de Leche",
+        "option": "Leche Entera",
+        "additionalPrice": 0,
+        "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "Leche Light",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche Deslactosada",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche Deslactosada Light",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche de Almendra",
+        "additionalPrice": 12,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche de Avena",
+        "additionalPrice": 12,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche de Soya",
+        "additionalPrice": 12,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche de Coco",
+        "additionalPrice": 12,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Tipo de Leche (milky)",
+        "option": "Leche Entera",
+        "additionalPrice": 0,
+        "selectionType": "SIN_DEFINIR",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 0,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "Leche Light",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche Deslactosada",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche Deslactosada Light",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche de Almendra",
+        "additionalPrice": 12,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche de Avena",
+        "additionalPrice": 12,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche de Coco",
+        "additionalPrice": 12,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Leche de Soya",
+        "additionalPrice": 12,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      }
+    ],
+    "menuPrices": [
+      {
+        "item": "Agua Mineral",
+        "basePrice": 34,
+        "menuPrice": 34
+      },
+      {
+        "item": "Agua Natural",
+        "basePrice": 27,
+        "menuPrice": 27
+      },
+      {
+        "item": "Arnie (Limonada Te Negro)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Blackberry Basil Lemonade",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Capuchino (Capuccino) Caliente",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Capuchino (Capuccino) Frappe",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Capuchino (Capuccino) Helado",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Caramelo Latte (Caliente)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Caramelo Latte (Frappe)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Caramelo Latte (Helado)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Chai Latte (Caliente)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Chai Latte (Frappe)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Chai Latte (Helado)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Choco",
+        "basePrice": 49,
+        "menuPrice": 49
+      },
+      {
+        "item": "Coconut Mint Lemonade",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Cortado",
+        "basePrice": 50,
+        "menuPrice": 50
+      },
+      {
+        "item": "Daily Cofy (Americano) Caliente",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Daily Cofy (Americano) Helado",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Durazno (Te Negro) Caliente",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Durazno (Te Negro) Helado",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Earl Grey (Te Negro) Caliente",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Earl Grey (Te Negro) Helado",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Espresso",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Espresso Tonic",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Fresa Miguelito",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Frutos Rojos (Te Negro) Caliente",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Frutos Rojos (Te Negro) Helado",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Godlatte (Latte) Caliente",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Godlatte (Latte) Frappe",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Godlatte (Latte) Helado",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Hot Chocolate (Caliente)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Hot Chocolate (Frappe)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Hot Chocolate (Helado)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Jamaiquina",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Jugo del Valle",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Lavanda Latte (Caliente)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Lavanda Latte (Frappe)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Lavanda Latte (Helado)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Lemonade",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Mango Chamoy",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Mango Lemonade",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Mango (Roiboos) Caliente",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Mango (Roiboos) Helado",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Manzanilla Lavanda Caliente",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Manzanilla Lavanda Helado",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Matcha Latte (Caliente)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Matcha Latte (Frappe)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Matcha Latte (Helado)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Matcha Lemonade",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Matcha Pistache",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Milky (Leche)",
+        "basePrice": 39,
+        "menuPrice": 39
+      },
+      {
+        "item": "Mintha (Menta) Caliente",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Mintha (Menta) Helado",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Mocha Latte (Caliente)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Mocha Latte (Frappe)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Mocha Latte (Helado)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Peach Tea Lemonade (Durazno)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Pepino Menta",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Refrescos",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Rosa (Limonada Fresa)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Sencha (Te verde) Caliente",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Sencha (Te verde) Helado",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Sparkling Americano",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Sparkling Mojito",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Strawberry Matcha (Helado) (Julio)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Tamarindo Chamoy",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Vainilla Latte (Caliente)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Vainilla Latte (Frappe)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Vainilla Latte (Helado)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 65,
+        "menuPrice": 65
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 65,
+        "menuPrice": 65
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 68,
+        "menuPrice": 68
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 46,
+        "menuPrice": 46
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 46,
+        "menuPrice": 46
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 50,
+        "menuPrice": 50
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 73,
+        "menuPrice": 73
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 74,
+        "menuPrice": 74
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 73,
+        "menuPrice": 73
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 78,
+        "menuPrice": 78
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 78,
+        "menuPrice": 78
+      },
+      {
+        "item": "12 oz (Chico)",
+        "basePrice": 82,
+        "menuPrice": 82
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 75,
+        "menuPrice": 75
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 75,
+        "menuPrice": 75
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 78,
+        "menuPrice": 78
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 52,
+        "menuPrice": 52
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 52,
+        "menuPrice": 52
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 56,
+        "menuPrice": 56
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 80,
+        "menuPrice": 80
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 83,
+        "menuPrice": 83
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 80,
+        "menuPrice": 80
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 86,
+        "menuPrice": 86
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 86,
+        "menuPrice": 86
+      },
+      {
+        "item": "16 oz (Mediano)",
+        "basePrice": 89,
+        "menuPrice": 89
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 80,
+        "menuPrice": 80
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 80,
+        "menuPrice": 80
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 83,
+        "menuPrice": 83
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 56,
+        "menuPrice": 56
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 63,
+        "menuPrice": 63
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 89,
+        "menuPrice": 89
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 90,
+        "menuPrice": 90
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 89,
+        "menuPrice": 89
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 94,
+        "menuPrice": 94
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 94,
+        "menuPrice": 94
+      },
+      {
+        "item": "20 oz (Grande)",
+        "basePrice": 97,
+        "menuPrice": 97
+      },
+      {
+        "item": "Agua Mineral",
+        "basePrice": 12,
+        "menuPrice": 12
+      },
+      {
+        "item": "Coca Cola",
+        "basePrice": 34,
+        "menuPrice": 34
+      },
+      {
+        "item": "Coca Cola Light",
+        "basePrice": 34,
+        "menuPrice": 34
+      },
+      {
+        "item": "Coca Cola Sin Azucar",
+        "basePrice": 34,
+        "menuPrice": 34
+      },
+      {
+        "item": "Doble",
+        "basePrice": 50,
+        "menuPrice": 50
+      },
+      {
+        "item": "Durazno (Del Valle)",
+        "basePrice": 34,
+        "menuPrice": 34
+      },
+      {
+        "item": "Fanta",
+        "basePrice": 34,
+        "menuPrice": 34
+      },
+      {
+        "item": "Fuze Tea Limon",
+        "basePrice": 38,
+        "menuPrice": 38
+      },
+      {
+        "item": "Joya de Manzana",
+        "basePrice": 34,
+        "menuPrice": 34
+      },
+      {
+        "item": "Leche de Almendra",
+        "basePrice": 12,
+        "menuPrice": 12
+      },
+      {
+        "item": "Leche de Avena",
+        "basePrice": 12,
+        "menuPrice": 12
+      },
+      {
+        "item": "Leche de Coco",
+        "basePrice": 12,
+        "menuPrice": 12
+      },
+      {
+        "item": "Leche Deslactosada",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Leche Deslactosada Light",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Leche de Soya",
+        "basePrice": 12,
+        "menuPrice": 12
+      },
+      {
+        "item": "Leche Entera",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Leche Light",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Mango (Del Valle)",
+        "basePrice": 34,
+        "menuPrice": 34
+      },
+      {
+        "item": "Manzana (Del Valle)",
+        "basePrice": 34,
+        "menuPrice": 34
+      },
+      {
+        "item": "Naranja (Del Valle)",
+        "basePrice": 34,
+        "menuPrice": 34
+      },
+      {
+        "item": "Sencillo",
+        "basePrice": 32,
+        "menuPrice": 32
+      },
+      {
+        "item": "Shot espresso",
+        "basePrice": 20,
+        "menuPrice": 20
+      },
+      {
+        "item": "Sprite",
+        "basePrice": 34,
+        "menuPrice": 34
+      }
+    ]
+  }
+}

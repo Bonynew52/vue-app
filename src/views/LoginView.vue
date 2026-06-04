@@ -118,7 +118,7 @@ async function signIn() {
     radial-gradient(120% 70% at 50% -8%, rgb(248 217 74 / 28%) 0%, rgb(248 217 74 / 0%) 55%),
     var(--bg);
   color: var(--ink);
-  font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
 }
 
 .login-card {

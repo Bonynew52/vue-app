@@ -1,0 +1,2947 @@
+{
+  "id": "comidas",
+  "name": "Comidas",
+  "sourceFile": "Comidas - 2026-06-03 17_23_09.xlsx",
+  "products": [
+    {
+      "name": "American Breakfast Waffle (Waffle)",
+      "price": 195,
+      "description": "Waffle sandwich con huevo, tocino, jamón, queso cheddar y aderezo chipotle",
+      "sku": "PFWP-000004",
+      "categories": [
+        "Waffles y Pan Frances"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Avocado Panela (Toast)",
+      "price": 123,
+      "description": "Rebanada de pan rústico con queso panela a la plancha, laminas de aguacate y chile quebrado",
+      "sku": "PFT-000001",
+      "categories": [
+        "Toast (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "BBQ Burger",
+      "price": 195,
+      "description": null,
+      "sku": "PFB-000004",
+      "categories": [
+        "Burgers (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "BBQ Sandwich (Sandwich)",
+      "price": 178,
+      "description": "Sandwich de brisket, salsa BBQ, ensalada de col y pepinillos",
+      "sku": "PFS-000004",
+      "categories": [
+        "Sandwiches (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Belly Burger (Burger)",
+      "price": 198,
+      "description": "Carne de res, Aguacate, Tomate, Lechuga, Queso Cheddar, Tocino, Pepinillos, Aderezo de la Casa",
+      "sku": "PFB-000001",
+      "categories": [
+        "Burgers (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Brisket Jalapeño (Abril)",
+      "price": 188,
+      "description": null,
+      "sku": "AR-1775677525302",
+      "categories": [
+        "Sandwiches (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Buffalo Chicken (Sandwich)",
+      "price": 180,
+      "description": "Sandwich con pollo buffalo, tomate, lechuga y aderezo ranch",
+      "sku": "PFS-000002",
+      "categories": [
+        "Sandwiches (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Buffalo Chick'n Salad (Ensalada)",
+      "price": 165,
+      "description": null,
+      "sku": "PFE-000004",
+      "categories": [
+        "Ensaladas (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Camote Fries (Sides)",
+      "price": 42,
+      "description": "Camote fritos",
+      "sku": "PFSI-000002",
+      "categories": [
+        "Sides (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Cesar Salad (Ensalada)",
+      "price": 155,
+      "description": "Mezcla de lechugas con pollo a la parrilla, queso parmesano, aderezo cesar de la casa y croutones",
+      "sku": "PFE-000001",
+      "categories": [
+        "Ensaladas (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Extras"
+      ]
+    },
+    {
+      "name": "Chicken BLT (Sandwich)",
+      "price": 197,
+      "description": "Sandwich de pollo a la parrilla, jamón de pavo, tocino, queso cheddar, aguacate, tomate, lechuga y aderezo chipotle",
+      "sku": "PFS-000006",
+      "categories": [
+        "Sandwiches (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Chicken Jalapeño (Sandwich)",
+      "price": 175,
+      "description": "Sandwich con pollo empanizado, lechuga, tomate y aderezo jalapeño",
+      "sku": "PFS-000003",
+      "categories": [
+        "Sandwiches (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Chicken n Fries (Kids)",
+      "price": 120,
+      "description": "Plato de pollo empanizado y papas a la francesa",
+      "sku": "PFKMC-000003",
+      "categories": [
+        "Kids Menu (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Chicken Orange (Ensalada)",
+      "price": 178,
+      "description": "Mezclas de lechuga, kale y espinaca con pollo a la parrilla, tomate cherry, cacahuate y aderezo naranja",
+      "sku": "PFE-000003",
+      "categories": [
+        "Ensaladas (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Extras"
+      ]
+    },
+    {
+      "name": "Cream Corn (Sides)",
+      "price": 47,
+      "description": "Elotes dulces con crema",
+      "sku": "PFSI-000004",
+      "categories": [
+        "Sides (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Crema de Champiñones",
+      "price": 118,
+      "description": null,
+      "sku": "PFSO-0000007",
+      "categories": [
+        "Sopas (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Crema de Coliflor cargada (Abril)",
+      "price": 118,
+      "description": null,
+      "sku": "AR-1775677668880",
+      "categories": [
+        "Sopas (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Crema de Tomate Cheddar",
+      "price": 118,
+      "description": null,
+      "sku": "PFSO-0000006",
+      "categories": [
+        "Sopas (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "French Fries (Sides)",
+      "price": 42,
+      "description": "Papas a la francesa",
+      "sku": "PFSI-000001",
+      "categories": [
+        "Sides (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "French Toast (Pan Frances)",
+      "price": 118,
+      "description": "Pan frances con tus topping a elegir",
+      "sku": "PFWP-000002",
+      "categories": [
+        "Waffles y Pan Frances"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Topping"
+      ]
+    },
+    {
+      "name": "Goat Cheese Mango (Ensalada)",
+      "price": 186,
+      "description": "Mezcla de lechugas y kale con pollo a la parrilla, queso de cabra, durazno, blueberry y Aderezo Spicy Mango",
+      "sku": "PFE-000002",
+      "categories": [
+        "Ensaladas (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Extras"
+      ]
+    },
+    {
+      "name": "Grilled Cheese (Sandwich)",
+      "price": 140,
+      "description": "Sandwich de 3 quesos",
+      "sku": "PFS-000005",
+      "categories": [
+        "Sandwiches (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Jalapeño Burger (Burger)",
+      "price": 198,
+      "description": "Carne de res, Queso Suizo, Chile Jalapeño, Cebolla Caramelizada,Tocino, Aderezo Jalapeño",
+      "sku": "PFB-000003",
+      "categories": [
+        "Burgers (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Juicy Lucy (Burger)(Mayo)",
+      "price": 198,
+      "description": null,
+      "sku": "AR-1777915680328",
+      "categories": [
+        "Burgers (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Just a Waffle (Waffle)",
+      "price": 118,
+      "description": "Haz la combinación perfecta de waffle o pan frances",
+      "sku": "PFWP-000001",
+      "categories": [
+        "Waffles y Pan Frances"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Topping"
+      ]
+    },
+    {
+      "name": "Kids Burger",
+      "price": 155,
+      "description": "Hamburguesa simple con solo carne y queso y una porcion de papas a la francesa",
+      "sku": "PFKMC-000006",
+      "categories": [
+        "Kids Menu (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Mac'n Cheese (Sides)",
+      "price": 47,
+      "description": "Macarrones con queso",
+      "sku": "PFSI-000003",
+      "categories": [
+        "Sides (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Mac N Chicken (Kids)",
+      "price": 125,
+      "description": "Plato de pollo empanizado y mac n'cheese",
+      "sku": "PFKMC-000004",
+      "categories": [
+        "Kids Menu (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Milanesa Sandwich (Junio)",
+      "price": 182,
+      "description": null,
+      "sku": "AR-1780336997448",
+      "categories": [
+        "Sandwiches (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Party Melt (Burger)",
+      "price": 195,
+      "description": "Carne de res, Queso Cheddar, Queso Suizo, Tocino, CebollaCaramelizada, Aderezo de la Casa",
+      "sku": "PFB-000002",
+      "categories": [
+        "Burgers (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Pepperoni Toast (Kids)",
+      "price": 110,
+      "description": "Toast con salsa de tomate, queso mozzarella y pepperoni",
+      "sku": "PFKMC-000005",
+      "categories": [
+        "Kids Menu (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Phily Cheese Brisket (Sandwich)",
+      "price": 182,
+      "description": "Sandwich de brisket, queso mozzarella, lechuga y aderezo jalapeño.",
+      "sku": "PFS-000001",
+      "categories": [
+        "Sandwiches (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Pizza Deluxe (Toast)",
+      "price": 118,
+      "description": "Rebanada de pan rústico con  salsa de tomate, pepperoni, queso mozzarella, cebolla, pimiento y aceitunas",
+      "sku": "PFT-000007",
+      "categories": [
+        "Toast (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Pozole Verde",
+      "price": 118,
+      "description": null,
+      "sku": "PFSO-0000005",
+      "categories": [
+        "Sopas (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Serrano Caprese (Toast)",
+      "price": 150,
+      "description": "Rebanada de pan rústico con jamón serrano, tomate cherry, queso mozzarella, espinacas y vinagre balsamico",
+      "sku": "PFT-000002",
+      "categories": [
+        "Toast (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "S'mores French Toast (PF)",
+      "price": 160,
+      "description": "Pan frances con chocoalte, bombon y Graham crackers",
+      "sku": "PFWP-000006",
+      "categories": [
+        "Waffles y Pan Frances"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Spicy Chick'n'Waffle (Waffle)",
+      "price": 198,
+      "description": "Waffle con pollo empanizado bañado en sriracha maple syrup",
+      "sku": "PFWP-000005",
+      "categories": [
+        "Waffles y Pan Frances"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Taco Salad (Ensalada)",
+      "price": 178,
+      "description": null,
+      "sku": "PFE-000005",
+      "categories": [
+        "Ensaladas (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Extras"
+      ]
+    },
+    {
+      "name": "Tuna Melt (Sandwich)",
+      "price": 170,
+      "description": "Sandwich de atún, queso suizo, aderezo de albahaca, cebolla y apio",
+      "sku": "PFS-000007",
+      "categories": [
+        "Sandwiches (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Wafflete (Waffle)",
+      "price": 165,
+      "description": "Tradicional mollete en waffle, frijoles, chorizo y queso",
+      "sku": "PFWP-000003",
+      "categories": [
+        "Waffles y Pan Frances"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Xmas Ham Toast",
+      "price": 155,
+      "description": null,
+      "sku": "PFT-0000011",
+      "categories": [
+        "Toast (Comida)"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [
+        "Combo Side"
+      ]
+    },
+    {
+      "name": "Agregar Pollo a la parrilla",
+      "price": 40,
+      "description": null,
+      "sku": "PFMO-000001",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Aguacate",
+      "price": 0,
+      "description": null,
+      "sku": "AR-1728011040524",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Cajeta",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000005-S",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Chispas de Chocolate",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000005-T",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Cookies n Cream (Gelato)",
+      "price": 0,
+      "description": "Gelato de oreo",
+      "sku": "PFRG-00000003",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Crema de Oreo",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000007-S",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Durazno",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000004-T",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "French Coffee (Cafe)",
+      "price": 0,
+      "description": "Gelato de cafe, kahlua, baileys y toffee",
+      "sku": "PFRG-00000004",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Fresa Oreo y Nutella (Abril)",
+      "price": 0,
+      "description": null,
+      "sku": "AR-1775574345033",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Fresa Oreo y Nutella (Abril)",
+      "price": 0,
+      "description": null,
+      "sku": "AR-1775589850817",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Fresas",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000001-T",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Frutos Rojos",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000002-T",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Galletas con Leche (Abril)",
+      "price": 0,
+      "description": null,
+      "sku": "AR-1775574484169",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Jamaica y Naranja (Abril)",
+      "price": 0,
+      "description": null,
+      "sku": "AR-1775574298656",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Jarabe de Chocolate",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000004-S",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Lechera",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000008-S",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Lotus",
+      "price": 18,
+      "description": null,
+      "sku": "PFWT-000007-T",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Lotus Biscoff (Gelato)",
+      "price": 0,
+      "description": "Gelato de galleta lotus biscoff",
+      "sku": "PFRG-00000005",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Mango (Sorbetto)",
+      "price": 0,
+      "description": "Sorbetto de Mango",
+      "sku": "PFRG-00000009",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Matcha Strawberry (Abril)",
+      "price": 0,
+      "description": null,
+      "sku": "AR-1775574571874",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Media Ensalada Cesar",
+      "price": 0,
+      "description": "Mezcla de lechugas con queso parmesano y aderezo cesar de la casa",
+      "sku": "PFE-000001C",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Media Ensalada Chicken Orange",
+      "price": 0,
+      "description": "Mezcla de lechugas, kale y espinacas con tomate cherry, cacahuate y aderezo oriental de naranja",
+      "sku": "PFE-000003C",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Media Ensalada Goat Cheese",
+      "price": 0,
+      "description": "Mezcla de Lechugas y Kale con queso de cabra, durazno y blueberries",
+      "sku": "PFE-000002C",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Miel de Abeja",
+      "price": 0,
+      "description": null,
+      "sku": "PFWT-000002-S",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Miel de Maple",
+      "price": 0,
+      "description": null,
+      "sku": "PFWT-000001-S",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Milk Chocolate (Gelato)",
+      "price": 0,
+      "description": "Gelato de chocolate",
+      "sku": "PFRG-00000002",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    },
+    {
+      "name": "Nueces Caramelizadas",
+      "price": 18,
+      "description": null,
+      "sku": "PFWT-000008-T",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Nutella",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000003-S",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Oreos",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000006-T",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Peanut Butter",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000006-S",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Plátano",
+      "price": 15,
+      "description": null,
+      "sku": "PFWT-000003-T",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Pollo",
+      "price": 40,
+      "description": null,
+      "sku": "AR-1728011040500",
+      "categories": [],
+      "saleType": "Opción de modificador",
+      "modifierGroups": []
+    },
+    {
+      "name": "Vainilla (Gelato)",
+      "price": 0,
+      "description": "Gelato de vainilla",
+      "sku": "PFRG-00000001",
+      "categories": [],
+      "saleType": "Precio Fijo",
+      "modifierGroups": []
+    }
+  ],
+  "modifierGroups": [
+    {
+      "name": "Bolita Nieve Extra",
+      "selectionType": "SIN_DEFINIR",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 0,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "Vainilla (Gelato)",
+          "additionalPrice": 27
+        },
+        {
+          "name": "Milk Chocolate (Gelato)",
+          "additionalPrice": 27
+        },
+        {
+          "name": "Cookies n Cream (Gelato)",
+          "additionalPrice": 27
+        },
+        {
+          "name": "French Coffee (Cafe)",
+          "additionalPrice": 27
+        },
+        {
+          "name": "Lotus Biscoff (Gelato)",
+          "additionalPrice": 27
+        },
+        {
+          "name": "Mango (Sorbetto)",
+          "additionalPrice": 27
+        },
+        {
+          "name": "Jamaica y Naranja (Abril)",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Fresa Oreo y Nutella (Abril)",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Matcha Strawberry (Abril)",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Galletas con Leche (Abril)",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Fresa Oreo y Nutella (Abril)",
+          "additionalPrice": 0
+        }
+      ]
+    },
+    {
+      "name": "Combo Media Ensalada Sin Pollo",
+      "selectionType": "SIN_DEFINIR",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 2,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "Media Ensalada Cesar",
+          "additionalPrice": 65
+        },
+        {
+          "name": "Media Ensalada Goat Cheese",
+          "additionalPrice": 65
+        },
+        {
+          "name": "Media Ensalada Chicken Orange",
+          "additionalPrice": 65
+        },
+        {
+          "name": "Agregar Pollo a la parrilla",
+          "additionalPrice": 40
+        }
+      ]
+    },
+    {
+      "name": "Combo Side",
+      "selectionType": "SIN_DEFINIR",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 0,
+      "max": 1,
+      "repetitionsPerOption": 1,
+      "options": [
+        {
+          "name": "French Fries (Sides)",
+          "additionalPrice": 35
+        },
+        {
+          "name": "Camote Fries (Sides)",
+          "additionalPrice": 35
+        },
+        {
+          "name": "Cream Corn (Sides)",
+          "additionalPrice": 35
+        },
+        {
+          "name": "Mac'n Cheese (Sides)",
+          "additionalPrice": 35
+        }
+      ]
+    },
+    {
+      "name": "Extras",
+      "selectionType": "SIN_DEFINIR",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 0,
+      "max": 2,
+      "repetitionsPerOption": 2,
+      "options": [
+        {
+          "name": "Pollo",
+          "additionalPrice": 40
+        },
+        {
+          "name": "Aguacate",
+          "additionalPrice": 20
+        }
+      ]
+    },
+    {
+      "name": "Syrups",
+      "selectionType": "SIN_DEFINIR",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 0,
+      "max": 4,
+      "repetitionsPerOption": 4,
+      "options": [
+        {
+          "name": "Miel de Maple",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Miel de Abeja",
+          "additionalPrice": 0
+        },
+        {
+          "name": "Nutella",
+          "additionalPrice": 15
+        },
+        {
+          "name": "Jarabe de Chocolate",
+          "additionalPrice": 15
+        },
+        {
+          "name": "Cajeta",
+          "additionalPrice": 15
+        },
+        {
+          "name": "Peanut Butter",
+          "additionalPrice": 15
+        },
+        {
+          "name": "Crema de Oreo",
+          "additionalPrice": 15
+        },
+        {
+          "name": "Lechera",
+          "additionalPrice": 15
+        }
+      ]
+    },
+    {
+      "name": "Topping",
+      "selectionType": "SIN_DEFINIR",
+      "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 0,
+      "max": 4,
+      "repetitionsPerOption": 4,
+      "options": [
+        {
+          "name": "Fresas",
+          "additionalPrice": 15
+        },
+        {
+          "name": "Frutos Rojos",
+          "additionalPrice": 15
+        },
+        {
+          "name": "Plátano",
+          "additionalPrice": 15
+        },
+        {
+          "name": "Durazno",
+          "additionalPrice": 15
+        },
+        {
+          "name": "Chispas de Chocolate",
+          "additionalPrice": 15
+        },
+        {
+          "name": "Oreos",
+          "additionalPrice": 15
+        },
+        {
+          "name": "Lotus",
+          "additionalPrice": 18
+        },
+        {
+          "name": "Nueces Caramelizadas",
+          "additionalPrice": 18
+        }
+      ]
+    }
+  ],
+  "menuPrices": [
+    {
+      "item": "American Breakfast Waffle (Waffle)",
+      "basePrice": 195,
+      "menuPrice": 195
+    },
+    {
+      "item": "Avocado Panela (Toast)",
+      "basePrice": 123,
+      "menuPrice": 123
+    },
+    {
+      "item": "BBQ Burger",
+      "basePrice": 195,
+      "menuPrice": 195
+    },
+    {
+      "item": "BBQ Sandwich (Sandwich)",
+      "basePrice": 178,
+      "menuPrice": 178
+    },
+    {
+      "item": "Belly Burger (Burger)",
+      "basePrice": 198,
+      "menuPrice": 198
+    },
+    {
+      "item": "Brisket Jalapeño (Abril)",
+      "basePrice": 188,
+      "menuPrice": 188
+    },
+    {
+      "item": "Buffalo Chicken (Sandwich)",
+      "basePrice": 180,
+      "menuPrice": 180
+    },
+    {
+      "item": "Buffalo Chick'n Salad (Ensalada)",
+      "basePrice": 165,
+      "menuPrice": 165
+    },
+    {
+      "item": "Camote Fries (Sides)",
+      "basePrice": 42,
+      "menuPrice": 42
+    },
+    {
+      "item": "Cesar Salad (Ensalada)",
+      "basePrice": 155,
+      "menuPrice": 155
+    },
+    {
+      "item": "Chicken BLT (Sandwich)",
+      "basePrice": 197,
+      "menuPrice": 197
+    },
+    {
+      "item": "Chicken Jalapeño (Sandwich)",
+      "basePrice": 175,
+      "menuPrice": 175
+    },
+    {
+      "item": "Chicken n Fries (Kids)",
+      "basePrice": 120,
+      "menuPrice": 120
+    },
+    {
+      "item": "Chicken Orange (Ensalada)",
+      "basePrice": 178,
+      "menuPrice": 178
+    },
+    {
+      "item": "Cream Corn (Sides)",
+      "basePrice": 47,
+      "menuPrice": 47
+    },
+    {
+      "item": "Crema de Champiñones",
+      "basePrice": 118,
+      "menuPrice": 118
+    },
+    {
+      "item": "Crema de Coliflor cargada (Abril)",
+      "basePrice": 118,
+      "menuPrice": 118
+    },
+    {
+      "item": "Crema de Tomate Cheddar",
+      "basePrice": 118,
+      "menuPrice": 118
+    },
+    {
+      "item": "French Fries (Sides)",
+      "basePrice": 42,
+      "menuPrice": 42
+    },
+    {
+      "item": "French Toast (Pan Frances)",
+      "basePrice": 118,
+      "menuPrice": 118
+    },
+    {
+      "item": "Goat Cheese Mango (Ensalada)",
+      "basePrice": 186,
+      "menuPrice": 186
+    },
+    {
+      "item": "Grilled Cheese (Sandwich)",
+      "basePrice": 140,
+      "menuPrice": 140
+    },
+    {
+      "item": "Jalapeño Burger (Burger)",
+      "basePrice": 198,
+      "menuPrice": 198
+    },
+    {
+      "item": "Juicy Lucy (Burger)(Mayo)",
+      "basePrice": 198,
+      "menuPrice": 198
+    },
+    {
+      "item": "Just a Waffle (Waffle)",
+      "basePrice": 118,
+      "menuPrice": 118
+    },
+    {
+      "item": "Kids Burger",
+      "basePrice": 155,
+      "menuPrice": 155
+    },
+    {
+      "item": "Mac'n Cheese (Sides)",
+      "basePrice": 47,
+      "menuPrice": 47
+    },
+    {
+      "item": "Mac N Chicken (Kids)",
+      "basePrice": 125,
+      "menuPrice": 125
+    },
+    {
+      "item": "Milanesa Sandwich (Junio)",
+      "basePrice": 182,
+      "menuPrice": 182
+    },
+    {
+      "item": "Party Melt (Burger)",
+      "basePrice": 195,
+      "menuPrice": 195
+    },
+    {
+      "item": "Pepperoni Toast (Kids)",
+      "basePrice": 110,
+      "menuPrice": 110
+    },
+    {
+      "item": "Phily Cheese Brisket (Sandwich)",
+      "basePrice": 182,
+      "menuPrice": 182
+    },
+    {
+      "item": "Pizza Deluxe (Toast)",
+      "basePrice": 118,
+      "menuPrice": 118
+    },
+    {
+      "item": "Pozole Verde",
+      "basePrice": 118,
+      "menuPrice": 118
+    },
+    {
+      "item": "Serrano Caprese (Toast)",
+      "basePrice": 150,
+      "menuPrice": 150
+    },
+    {
+      "item": "S'mores French Toast (PF)",
+      "basePrice": 160,
+      "menuPrice": 160
+    },
+    {
+      "item": "Spicy Chick'n'Waffle (Waffle)",
+      "basePrice": 198,
+      "menuPrice": 198
+    },
+    {
+      "item": "Taco Salad (Ensalada)",
+      "basePrice": 178,
+      "menuPrice": 178
+    },
+    {
+      "item": "Tuna Melt (Sandwich)",
+      "basePrice": 170,
+      "menuPrice": 170
+    },
+    {
+      "item": "Wafflete (Waffle)",
+      "basePrice": 165,
+      "menuPrice": 165
+    },
+    {
+      "item": "Xmas Ham Toast",
+      "basePrice": 155,
+      "menuPrice": 155
+    },
+    {
+      "item": "Agregar Pollo a la parrilla",
+      "basePrice": 40,
+      "menuPrice": 40
+    },
+    {
+      "item": "Aguacate",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Cajeta",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "Chispas de Chocolate",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "Cookies n Cream (Gelato)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Crema de Oreo",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "Durazno",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "French Coffee (Cafe)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Fresa Oreo y Nutella (Abril)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Fresa Oreo y Nutella (Abril)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Fresas",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "Frutos Rojos",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "Galletas con Leche (Abril)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Jamaica y Naranja (Abril)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Jarabe de Chocolate",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "Lechera",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "Lotus",
+      "basePrice": 18,
+      "menuPrice": 18
+    },
+    {
+      "item": "Lotus Biscoff (Gelato)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Mango (Sorbetto)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Matcha Strawberry (Abril)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Media Ensalada Cesar",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Media Ensalada Chicken Orange",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Media Ensalada Goat Cheese",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Miel de Abeja",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Miel de Maple",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Milk Chocolate (Gelato)",
+      "basePrice": 0,
+      "menuPrice": 0
+    },
+    {
+      "item": "Nueces Caramelizadas",
+      "basePrice": 18,
+      "menuPrice": 18
+    },
+    {
+      "item": "Nutella",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "Oreos",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "Peanut Butter",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "Plátano",
+      "basePrice": 15,
+      "menuPrice": 15
+    },
+    {
+      "item": "Pollo",
+      "basePrice": 40,
+      "menuPrice": 40
+    },
+    {
+      "item": "Vainilla (Gelato)",
+      "basePrice": 0,
+      "menuPrice": 0
+    }
+  ],
+  "raw": {
+    "products": [
+      {
+        "name": "American Breakfast Waffle (Waffle)",
+        "price": 195,
+        "description": "Waffle sandwich con huevo, tocino, jamón, queso cheddar y aderezo chipotle",
+        "sku": "PFWP-000004",
+        "categories": "Waffles y Pan Frances",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Avocado Panela (Toast)",
+        "price": 123,
+        "description": "Rebanada de pan rústico con queso panela a la plancha, laminas de aguacate y chile quebrado",
+        "sku": "PFT-000001",
+        "categories": "Toast (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "BBQ Burger",
+        "price": 195,
+        "description": null,
+        "sku": "PFB-000004",
+        "categories": "Burgers (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "BBQ Sandwich (Sandwich)",
+        "price": 178,
+        "description": "Sandwich de brisket, salsa BBQ, ensalada de col y pepinillos",
+        "sku": "PFS-000004",
+        "categories": "Sandwiches (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Belly Burger (Burger)",
+        "price": 198,
+        "description": "Carne de res, Aguacate, Tomate, Lechuga, Queso Cheddar, Tocino, Pepinillos, Aderezo de la Casa",
+        "sku": "PFB-000001",
+        "categories": "Burgers (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Brisket Jalapeño (Abril)",
+        "price": 188,
+        "description": null,
+        "sku": "AR-1775677525302",
+        "categories": "Sandwiches (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Buffalo Chicken (Sandwich)",
+        "price": 180,
+        "description": "Sandwich con pollo buffalo, tomate, lechuga y aderezo ranch",
+        "sku": "PFS-000002",
+        "categories": "Sandwiches (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Buffalo Chick'n Salad (Ensalada)",
+        "price": 165,
+        "description": null,
+        "sku": "PFE-000004",
+        "categories": "Ensaladas (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Camote Fries (Sides)",
+        "price": 42,
+        "description": "Camote fritos",
+        "sku": "PFSI-000002",
+        "categories": "Sides (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Cesar Salad (Ensalada)",
+        "price": 155,
+        "description": "Mezcla de lechugas con pollo a la parrilla, queso parmesano, aderezo cesar de la casa y croutones",
+        "sku": "PFE-000001",
+        "categories": "Ensaladas (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Extras",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Chicken BLT (Sandwich)",
+        "price": 197,
+        "description": "Sandwich de pollo a la parrilla, jamón de pavo, tocino, queso cheddar, aguacate, tomate, lechuga y aderezo chipotle",
+        "sku": "PFS-000006",
+        "categories": "Sandwiches (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Chicken Jalapeño (Sandwich)",
+        "price": 175,
+        "description": "Sandwich con pollo empanizado, lechuga, tomate y aderezo jalapeño",
+        "sku": "PFS-000003",
+        "categories": "Sandwiches (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Chicken n Fries (Kids)",
+        "price": 120,
+        "description": "Plato de pollo empanizado y papas a la francesa",
+        "sku": "PFKMC-000003",
+        "categories": "Kids Menu (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Chicken Orange (Ensalada)",
+        "price": 178,
+        "description": "Mezclas de lechuga, kale y espinaca con pollo a la parrilla, tomate cherry, cacahuate y aderezo naranja",
+        "sku": "PFE-000003",
+        "categories": "Ensaladas (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Extras",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Cream Corn (Sides)",
+        "price": 47,
+        "description": "Elotes dulces con crema",
+        "sku": "PFSI-000004",
+        "categories": "Sides (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Crema de Champiñones",
+        "price": 118,
+        "description": null,
+        "sku": "PFSO-0000007",
+        "categories": "Sopas (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Crema de Coliflor cargada (Abril)",
+        "price": 118,
+        "description": null,
+        "sku": "AR-1775677668880",
+        "categories": "Sopas (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Crema de Tomate Cheddar",
+        "price": 118,
+        "description": null,
+        "sku": "PFSO-0000006",
+        "categories": "Sopas (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "French Fries (Sides)",
+        "price": 42,
+        "description": "Papas a la francesa",
+        "sku": "PFSI-000001",
+        "categories": "Sides (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "French Toast (Pan Frances)",
+        "price": 118,
+        "description": "Pan frances con tus topping a elegir",
+        "sku": "PFWP-000002",
+        "categories": "Waffles y Pan Frances",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Topping",
+        "grupo_modificador_1": "Syrups",
+        "grupo_modificador_2": "Bolita Nieve Extra"
+      },
+      {
+        "name": "Goat Cheese Mango (Ensalada)",
+        "price": 186,
+        "description": "Mezcla de lechugas y kale con pollo a la parrilla, queso de cabra, durazno, blueberry y Aderezo Spicy Mango",
+        "sku": "PFE-000002",
+        "categories": "Ensaladas (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Extras",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Grilled Cheese (Sandwich)",
+        "price": 140,
+        "description": "Sandwich de 3 quesos",
+        "sku": "PFS-000005",
+        "categories": "Sandwiches (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Jalapeño Burger (Burger)",
+        "price": 198,
+        "description": "Carne de res, Queso Suizo, Chile Jalapeño, Cebolla Caramelizada,Tocino, Aderezo Jalapeño",
+        "sku": "PFB-000003",
+        "categories": "Burgers (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Juicy Lucy (Burger)(Mayo)",
+        "price": 198,
+        "description": null,
+        "sku": "AR-1777915680328",
+        "categories": "Burgers (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Just a Waffle (Waffle)",
+        "price": 118,
+        "description": "Haz la combinación perfecta de waffle o pan frances",
+        "sku": "PFWP-000001",
+        "categories": "Waffles y Pan Frances",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Topping",
+        "grupo_modificador_1": "Syrups",
+        "grupo_modificador_2": "Bolita Nieve Extra"
+      },
+      {
+        "name": "Kids Burger",
+        "price": 155,
+        "description": "Hamburguesa simple con solo carne y queso y una porcion de papas a la francesa",
+        "sku": "PFKMC-000006",
+        "categories": "Kids Menu (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Mac'n Cheese (Sides)",
+        "price": 47,
+        "description": "Macarrones con queso",
+        "sku": "PFSI-000003",
+        "categories": "Sides (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Mac N Chicken (Kids)",
+        "price": 125,
+        "description": "Plato de pollo empanizado y mac n'cheese",
+        "sku": "PFKMC-000004",
+        "categories": "Kids Menu (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Milanesa Sandwich (Junio)",
+        "price": 182,
+        "description": null,
+        "sku": "AR-1780336997448",
+        "categories": "Sandwiches (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Party Melt (Burger)",
+        "price": 195,
+        "description": "Carne de res, Queso Cheddar, Queso Suizo, Tocino, CebollaCaramelizada, Aderezo de la Casa",
+        "sku": "PFB-000002",
+        "categories": "Burgers (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Pepperoni Toast (Kids)",
+        "price": 110,
+        "description": "Toast con salsa de tomate, queso mozzarella y pepperoni",
+        "sku": "PFKMC-000005",
+        "categories": "Kids Menu (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Phily Cheese Brisket (Sandwich)",
+        "price": 182,
+        "description": "Sandwich de brisket, queso mozzarella, lechuga y aderezo jalapeño.",
+        "sku": "PFS-000001",
+        "categories": "Sandwiches (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Pizza Deluxe (Toast)",
+        "price": 118,
+        "description": "Rebanada de pan rústico con  salsa de tomate, pepperoni, queso mozzarella, cebolla, pimiento y aceitunas",
+        "sku": "PFT-000007",
+        "categories": "Toast (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Pozole Verde",
+        "price": 118,
+        "description": null,
+        "sku": "PFSO-0000005",
+        "categories": "Sopas (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Serrano Caprese (Toast)",
+        "price": 150,
+        "description": "Rebanada de pan rústico con jamón serrano, tomate cherry, queso mozzarella, espinacas y vinagre balsamico",
+        "sku": "PFT-000002",
+        "categories": "Toast (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "S'mores French Toast (PF)",
+        "price": 160,
+        "description": "Pan frances con chocoalte, bombon y Graham crackers",
+        "sku": "PFWP-000006",
+        "categories": "Waffles y Pan Frances",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Spicy Chick'n'Waffle (Waffle)",
+        "price": 198,
+        "description": "Waffle con pollo empanizado bañado en sriracha maple syrup",
+        "sku": "PFWP-000005",
+        "categories": "Waffles y Pan Frances",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Taco Salad (Ensalada)",
+        "price": 178,
+        "description": null,
+        "sku": "PFE-000005",
+        "categories": "Ensaladas (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Extras",
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Tuna Melt (Sandwich)",
+        "price": 170,
+        "description": "Sandwich de atún, queso suizo, aderezo de albahaca, cebolla y apio",
+        "sku": "PFS-000007",
+        "categories": "Sandwiches (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Wafflete (Waffle)",
+        "price": 165,
+        "description": "Tradicional mollete en waffle, frijoles, chorizo y queso",
+        "sku": "PFWP-000003",
+        "categories": "Waffles y Pan Frances",
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Xmas Ham Toast",
+        "price": 155,
+        "description": null,
+        "sku": "PFT-0000011",
+        "categories": "Toast (Comida)",
+        "saleType": "Precio Fijo",
+        "modifierGroup": "Combo Side",
+        "grupo_modificador_1": "Combo Media Ensalada Sin Pollo",
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Agregar Pollo a la parrilla",
+        "price": 40,
+        "description": null,
+        "sku": "PFMO-000001",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Aguacate",
+        "price": 0,
+        "description": null,
+        "sku": "AR-1728011040524",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Cajeta",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000005-S",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Chispas de Chocolate",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000005-T",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Cookies n Cream (Gelato)",
+        "price": 0,
+        "description": "Gelato de oreo",
+        "sku": "PFRG-00000003",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Crema de Oreo",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000007-S",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Durazno",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000004-T",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "French Coffee (Cafe)",
+        "price": 0,
+        "description": "Gelato de cafe, kahlua, baileys y toffee",
+        "sku": "PFRG-00000004",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Fresa Oreo y Nutella (Abril)",
+        "price": 0,
+        "description": null,
+        "sku": "AR-1775574345033",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Fresa Oreo y Nutella (Abril)",
+        "price": 0,
+        "description": null,
+        "sku": "AR-1775589850817",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Fresas",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000001-T",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Frutos Rojos",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000002-T",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Galletas con Leche (Abril)",
+        "price": 0,
+        "description": null,
+        "sku": "AR-1775574484169",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Jamaica y Naranja (Abril)",
+        "price": 0,
+        "description": null,
+        "sku": "AR-1775574298656",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Jarabe de Chocolate",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000004-S",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Lechera",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000008-S",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Lotus",
+        "price": 18,
+        "description": null,
+        "sku": "PFWT-000007-T",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Lotus Biscoff (Gelato)",
+        "price": 0,
+        "description": "Gelato de galleta lotus biscoff",
+        "sku": "PFRG-00000005",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Mango (Sorbetto)",
+        "price": 0,
+        "description": "Sorbetto de Mango",
+        "sku": "PFRG-00000009",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Matcha Strawberry (Abril)",
+        "price": 0,
+        "description": null,
+        "sku": "AR-1775574571874",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Media Ensalada Cesar",
+        "price": 0,
+        "description": "Mezcla de lechugas con queso parmesano y aderezo cesar de la casa",
+        "sku": "PFE-000001C",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Media Ensalada Chicken Orange",
+        "price": 0,
+        "description": "Mezcla de lechugas, kale y espinacas con tomate cherry, cacahuate y aderezo oriental de naranja",
+        "sku": "PFE-000003C",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Media Ensalada Goat Cheese",
+        "price": 0,
+        "description": "Mezcla de Lechugas y Kale con queso de cabra, durazno y blueberries",
+        "sku": "PFE-000002C",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Miel de Abeja",
+        "price": 0,
+        "description": null,
+        "sku": "PFWT-000002-S",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Miel de Maple",
+        "price": 0,
+        "description": null,
+        "sku": "PFWT-000001-S",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Milk Chocolate (Gelato)",
+        "price": 0,
+        "description": "Gelato de chocolate",
+        "sku": "PFRG-00000002",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Nueces Caramelizadas",
+        "price": 18,
+        "description": null,
+        "sku": "PFWT-000008-T",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Nutella",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000003-S",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Oreos",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000006-T",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Peanut Butter",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000006-S",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Plátano",
+        "price": 15,
+        "description": null,
+        "sku": "PFWT-000003-T",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Pollo",
+        "price": 40,
+        "description": null,
+        "sku": "AR-1728011040500",
+        "categories": null,
+        "saleType": "Opción de modificador",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      },
+      {
+        "name": "Vainilla (Gelato)",
+        "price": 0,
+        "description": "Gelato de vainilla",
+        "sku": "PFRG-00000001",
+        "categories": null,
+        "saleType": "Precio Fijo",
+        "modifierGroup": null,
+        "grupo_modificador_1": null,
+        "grupo_modificador_2": null
+      }
+    ],
+    "modifiers": [
+      {
+        "name": "Bolita Nieve Extra",
+        "option": "Vainilla (Gelato)",
+        "additionalPrice": 27,
+        "selectionType": "SIN_DEFINIR",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 0,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "Milk Chocolate (Gelato)",
+        "additionalPrice": 27,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Cookies n Cream (Gelato)",
+        "additionalPrice": 27,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "French Coffee (Cafe)",
+        "additionalPrice": 27,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Lotus Biscoff (Gelato)",
+        "additionalPrice": 27,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Mango (Sorbetto)",
+        "additionalPrice": 27,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Jamaica y Naranja (Abril)",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Fresa Oreo y Nutella (Abril)",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Matcha Strawberry (Abril)",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Galletas con Leche (Abril)",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Fresa Oreo y Nutella (Abril)",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Combo Media Ensalada Sin Pollo",
+        "option": "Media Ensalada Cesar",
+        "additionalPrice": 65,
+        "selectionType": "SIN_DEFINIR",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 1,
+        "max": 2,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "Media Ensalada Goat Cheese",
+        "additionalPrice": 65,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Media Ensalada Chicken Orange",
+        "additionalPrice": 65,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Agregar Pollo a la parrilla",
+        "additionalPrice": 40,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Combo Side",
+        "option": "French Fries (Sides)",
+        "additionalPrice": 35,
+        "selectionType": "SIN_DEFINIR",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 0,
+        "max": 1,
+        "repetitionsPerOption": 1
+      },
+      {
+        "name": null,
+        "option": "Camote Fries (Sides)",
+        "additionalPrice": 35,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Cream Corn (Sides)",
+        "additionalPrice": 35,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Mac'n Cheese (Sides)",
+        "additionalPrice": 35,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Extras",
+        "option": "Pollo",
+        "additionalPrice": 40,
+        "selectionType": "SIN_DEFINIR",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 0,
+        "max": 2,
+        "repetitionsPerOption": 2
+      },
+      {
+        "name": null,
+        "option": "Aguacate",
+        "additionalPrice": 20,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Syrups",
+        "option": "Miel de Maple",
+        "additionalPrice": 0,
+        "selectionType": "SIN_DEFINIR",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 0,
+        "max": 4,
+        "repetitionsPerOption": 4
+      },
+      {
+        "name": null,
+        "option": "Miel de Abeja",
+        "additionalPrice": 0,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Nutella",
+        "additionalPrice": 15,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Jarabe de Chocolate",
+        "additionalPrice": 15,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Cajeta",
+        "additionalPrice": 15,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Peanut Butter",
+        "additionalPrice": 15,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Crema de Oreo",
+        "additionalPrice": 15,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Lechera",
+        "additionalPrice": 15,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": "Topping",
+        "option": "Fresas",
+        "additionalPrice": 15,
+        "selectionType": "SIN_DEFINIR",
+        "requiredValueType": "USAR_RANGO_ENTRE_MIN_MAX",
+        "min": 0,
+        "max": 4,
+        "repetitionsPerOption": 4
+      },
+      {
+        "name": null,
+        "option": "Frutos Rojos",
+        "additionalPrice": 15,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Plátano",
+        "additionalPrice": 15,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Durazno",
+        "additionalPrice": 15,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Chispas de Chocolate",
+        "additionalPrice": 15,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Oreos",
+        "additionalPrice": 15,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Lotus",
+        "additionalPrice": 18,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      },
+      {
+        "name": null,
+        "option": "Nueces Caramelizadas",
+        "additionalPrice": 18,
+        "selectionType": null,
+        "requiredValueType": null,
+        "min": null,
+        "max": null,
+        "repetitionsPerOption": null
+      }
+    ],
+    "menuPrices": [
+      {
+        "item": "American Breakfast Waffle (Waffle)",
+        "basePrice": 195,
+        "menuPrice": 195
+      },
+      {
+        "item": "Avocado Panela (Toast)",
+        "basePrice": 123,
+        "menuPrice": 123
+      },
+      {
+        "item": "BBQ Burger",
+        "basePrice": 195,
+        "menuPrice": 195
+      },
+      {
+        "item": "BBQ Sandwich (Sandwich)",
+        "basePrice": 178,
+        "menuPrice": 178
+      },
+      {
+        "item": "Belly Burger (Burger)",
+        "basePrice": 198,
+        "menuPrice": 198
+      },
+      {
+        "item": "Brisket Jalapeño (Abril)",
+        "basePrice": 188,
+        "menuPrice": 188
+      },
+      {
+        "item": "Buffalo Chicken (Sandwich)",
+        "basePrice": 180,
+        "menuPrice": 180
+      },
+      {
+        "item": "Buffalo Chick'n Salad (Ensalada)",
+        "basePrice": 165,
+        "menuPrice": 165
+      },
+      {
+        "item": "Camote Fries (Sides)",
+        "basePrice": 42,
+        "menuPrice": 42
+      },
+      {
+        "item": "Cesar Salad (Ensalada)",
+        "basePrice": 155,
+        "menuPrice": 155
+      },
+      {
+        "item": "Chicken BLT (Sandwich)",
+        "basePrice": 197,
+        "menuPrice": 197
+      },
+      {
+        "item": "Chicken Jalapeño (Sandwich)",
+        "basePrice": 175,
+        "menuPrice": 175
+      },
+      {
+        "item": "Chicken n Fries (Kids)",
+        "basePrice": 120,
+        "menuPrice": 120
+      },
+      {
+        "item": "Chicken Orange (Ensalada)",
+        "basePrice": 178,
+        "menuPrice": 178
+      },
+      {
+        "item": "Cream Corn (Sides)",
+        "basePrice": 47,
+        "menuPrice": 47
+      },
+      {
+        "item": "Crema de Champiñones",
+        "basePrice": 118,
+        "menuPrice": 118
+      },
+      {
+        "item": "Crema de Coliflor cargada (Abril)",
+        "basePrice": 118,
+        "menuPrice": 118
+      },
+      {
+        "item": "Crema de Tomate Cheddar",
+        "basePrice": 118,
+        "menuPrice": 118
+      },
+      {
+        "item": "French Fries (Sides)",
+        "basePrice": 42,
+        "menuPrice": 42
+      },
+      {
+        "item": "French Toast (Pan Frances)",
+        "basePrice": 118,
+        "menuPrice": 118
+      },
+      {
+        "item": "Goat Cheese Mango (Ensalada)",
+        "basePrice": 186,
+        "menuPrice": 186
+      },
+      {
+        "item": "Grilled Cheese (Sandwich)",
+        "basePrice": 140,
+        "menuPrice": 140
+      },
+      {
+        "item": "Jalapeño Burger (Burger)",
+        "basePrice": 198,
+        "menuPrice": 198
+      },
+      {
+        "item": "Juicy Lucy (Burger)(Mayo)",
+        "basePrice": 198,
+        "menuPrice": 198
+      },
+      {
+        "item": "Just a Waffle (Waffle)",
+        "basePrice": 118,
+        "menuPrice": 118
+      },
+      {
+        "item": "Kids Burger",
+        "basePrice": 155,
+        "menuPrice": 155
+      },
+      {
+        "item": "Mac'n Cheese (Sides)",
+        "basePrice": 47,
+        "menuPrice": 47
+      },
+      {
+        "item": "Mac N Chicken (Kids)",
+        "basePrice": 125,
+        "menuPrice": 125
+      },
+      {
+        "item": "Milanesa Sandwich (Junio)",
+        "basePrice": 182,
+        "menuPrice": 182
+      },
+      {
+        "item": "Party Melt (Burger)",
+        "basePrice": 195,
+        "menuPrice": 195
+      },
+      {
+        "item": "Pepperoni Toast (Kids)",
+        "basePrice": 110,
+        "menuPrice": 110
+      },
+      {
+        "item": "Phily Cheese Brisket (Sandwich)",
+        "basePrice": 182,
+        "menuPrice": 182
+      },
+      {
+        "item": "Pizza Deluxe (Toast)",
+        "basePrice": 118,
+        "menuPrice": 118
+      },
+      {
+        "item": "Pozole Verde",
+        "basePrice": 118,
+        "menuPrice": 118
+      },
+      {
+        "item": "Serrano Caprese (Toast)",
+        "basePrice": 150,
+        "menuPrice": 150
+      },
+      {
+        "item": "S'mores French Toast (PF)",
+        "basePrice": 160,
+        "menuPrice": 160
+      },
+      {
+        "item": "Spicy Chick'n'Waffle (Waffle)",
+        "basePrice": 198,
+        "menuPrice": 198
+      },
+      {
+        "item": "Taco Salad (Ensalada)",
+        "basePrice": 178,
+        "menuPrice": 178
+      },
+      {
+        "item": "Tuna Melt (Sandwich)",
+        "basePrice": 170,
+        "menuPrice": 170
+      },
+      {
+        "item": "Wafflete (Waffle)",
+        "basePrice": 165,
+        "menuPrice": 165
+      },
+      {
+        "item": "Xmas Ham Toast",
+        "basePrice": 155,
+        "menuPrice": 155
+      },
+      {
+        "item": "Agregar Pollo a la parrilla",
+        "basePrice": 40,
+        "menuPrice": 40
+      },
+      {
+        "item": "Aguacate",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Cajeta",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "Chispas de Chocolate",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "Cookies n Cream (Gelato)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Crema de Oreo",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "Durazno",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "French Coffee (Cafe)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Fresa Oreo y Nutella (Abril)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Fresa Oreo y Nutella (Abril)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Fresas",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "Frutos Rojos",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "Galletas con Leche (Abril)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Jamaica y Naranja (Abril)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Jarabe de Chocolate",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "Lechera",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "Lotus",
+        "basePrice": 18,
+        "menuPrice": 18
+      },
+      {
+        "item": "Lotus Biscoff (Gelato)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Mango (Sorbetto)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Matcha Strawberry (Abril)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Media Ensalada Cesar",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Media Ensalada Chicken Orange",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Media Ensalada Goat Cheese",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Miel de Abeja",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Miel de Maple",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Milk Chocolate (Gelato)",
+        "basePrice": 0,
+        "menuPrice": 0
+      },
+      {
+        "item": "Nueces Caramelizadas",
+        "basePrice": 18,
+        "menuPrice": 18
+      },
+      {
+        "item": "Nutella",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "Oreos",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "Peanut Butter",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "Plátano",
+        "basePrice": 15,
+        "menuPrice": 15
+      },
+      {
+        "item": "Pollo",
+        "basePrice": 40,
+        "menuPrice": 40
+      },
+      {
+        "item": "Vainilla (Gelato)",
+        "basePrice": 0,
+        "menuPrice": 0
+      }
+    ]
+  }
+}

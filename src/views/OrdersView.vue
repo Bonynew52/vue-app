@@ -661,7 +661,7 @@ onBeforeUnmount(() => {
     radial-gradient(140% 80% at 88% -20%, rgb(248 217 74 / 22%) 0%, rgb(248 217 74 / 0%) 46%),
     var(--bg);
   color: var(--ink);
-  font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
 }
 
 /* ---------- Top bar ---------- */
