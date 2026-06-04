@@ -406,6 +406,7 @@ watch(customerName, () => {
     nameError.value = ''
   }
 })
+const activeOrderStatuses = ['new', 'capturing', 'preparing', 'ready']
 const submittedOrder = ref(null)
 const submittedOrderId = ref(readLastOrderId(tableId.value))
 const liveSubmittedOrder = useConvexQuery(api.orders.get, () => ({
@@ -430,6 +431,23 @@ watch(submittedOrderId, (value) => {
     window.localStorage.removeItem(key)
   }
 })
+
+// Drop a stored order once Convex confirms it is gone or no longer active
+// (cancelled/served), so a stale card doesn't linger after a refresh. `undefined`
+// means the query is still loading, so we wait before clearing.
+watch(
+  () => liveSubmittedOrder.data.value,
+  (order) => {
+    if (!submittedOrderId.value || order === undefined) {
+      return
+    }
+    if (order === null || !activeOrderStatuses.includes(order.status)) {
+      submittedOrder.value = null
+      submittedOrderId.value = null
+      showConfirmation.value = false
+    }
+  },
+)
 
 async function submitOrder() {
   if (cart.isEmpty.value || isSubmitting.value) {

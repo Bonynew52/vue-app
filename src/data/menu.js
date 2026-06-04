@@ -18,17 +18,7 @@ function minutesFromTime(value) {
   return (Number.isFinite(hours) ? hours : 0) * 60 + (Number.isFinite(minutes) ? minutes : 0)
 }
 
-// TEMPORARY (remove after June 4 breakfast demo): force the customer ordering
-// menu to always show the breakfast daypart in production, ignoring the clock.
-// Set back to null to restore normal time-based daypart resolution.
-const FORCED_DAYPART_ID = 'breakfast'
-
 export function resolveCurrentDaypartId(date = new Date()) {
-  // TEMPORARY: breakfast demo override. Delete this block after June 4.
-  if (FORCED_DAYPART_ID) {
-    return FORCED_DAYPART_ID
-  }
-
   const minutes = date.getHours() * 60 + date.getMinutes()
   const match = menuDayparts.find((daypart) => {
     const start = minutesFromTime(daypart.startsAt)
