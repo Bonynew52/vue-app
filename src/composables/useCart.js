@@ -8,6 +8,23 @@ function canUseStorage() {
   return typeof window !== 'undefined' && window.sessionStorage
 }
 
+// A cart line is identified by the menu item plus the exact set of selected
+// modifier options. Two adds of the same dish with different modifiers become
+// two lines; the same dish with the same modifiers stacks onto one line.
+function variantKeyFromModifiers(modifiers) {
+  if (!Array.isArray(modifiers) || modifiers.length === 0) {
+    return ''
+  }
+  return modifiers
+    .map((modifier) => modifier.optionId)
+    .sort()
+    .join('|')
+}
+
+function lineKey(menuItemId, variantKey) {
+  return variantKey ? `${menuItemId}::${variantKey}` : menuItemId
+}
+
 // Cart state stays local until the diner submits the order to the staff board.
 export function useCart(tableId) {
   const items = ref({})
@@ -55,11 +72,17 @@ export function useCart(tableId) {
   function snapshot(item, extra) {
     return {
       id: item.id,
+      menuItemId: item.id,
       name: item.name,
       sourceName: item.sourceName || item.name,
       categoryName: item.categoryName || '',
       price: item.price,
       hasPrice: item.hasPrice,
+      priceMode: item.priceMode || 'fixed',
+      requiresConfiguration: Boolean(item.requiresConfiguration),
+      modifierGroupNames: Array.isArray(item.modifierGroupNames) ? item.modifierGroupNames : [],
+      modifiers: [],
+      fulfillmentType: item.fulfillmentType || '',
       image: item.image || '',
       note: '',
       quantity: 1,
@@ -68,12 +91,14 @@ export function useCart(tableId) {
     }
   }
 
-  function add(item, { quantity = 1, note } = {}) {
-    const current = items.value[item.id]
+  function add(item, { quantity = 1, note, modifiers = [], price, hasPrice } = {}) {
+    const variantKey = variantKeyFromModifiers(modifiers)
+    const id = lineKey(item.id, variantKey)
+    const current = items.value[id]
     if (current) {
       items.value = {
         ...items.value,
-        [item.id]: {
+        [id]: {
           ...current,
           quantity: current.quantity + quantity,
           note: note === undefined ? current.note : note,
@@ -83,7 +108,18 @@ export function useCart(tableId) {
     }
     items.value = {
       ...items.value,
-      [item.id]: snapshot(item, { quantity: Math.max(1, quantity), note: note || '' }),
+      [id]: snapshot(item, {
+        id,
+        menuItemId: item.id,
+        variantKey,
+        quantity: Math.max(1, quantity),
+        note: note || '',
+        modifiers: Array.isArray(modifiers) ? modifiers : [],
+        // Configured/modifier lines carry their own resolved unit price so the
+        // base price + selected deltas survive into review and submission.
+        price: price === undefined ? item.price : price,
+        hasPrice: hasPrice === undefined ? item.hasPrice : hasPrice,
+      }),
     }
   }
 
@@ -153,6 +189,14 @@ export function useCart(tableId) {
     return items.value[itemId]?.quantity || 0
   }
 
+  // Total across every variant line for a menu item (used by the menu list
+  // badge, where one dish can now span several configured lines).
+  function quantityForMenuItem(menuItemId) {
+    return entries.value
+      .filter((entry) => (entry.menuItemId || entry.id) === menuItemId)
+      .reduce((total, entry) => total + Number(entry.quantity || 0), 0)
+  }
+
   function noteFor(itemId) {
     return items.value[itemId]?.note || ''
   }
@@ -173,6 +217,7 @@ export function useCart(tableId) {
     remove,
     clear,
     quantityFor,
+    quantityForMenuItem,
     noteFor,
   }
 }

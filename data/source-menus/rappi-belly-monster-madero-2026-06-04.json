@@ -1,0 +1,1166 @@
+{
+  "source": "https://www.rappi.com.mx/restaurantes/1930084023-belly-monster-bites",
+  "sourceName": "Rappi restaurant page __NEXT_DATA__",
+  "extractedAt": "2026-06-04T02:38:39.000Z",
+  "restaurantName": "Belly Monster Bites - Madero",
+  "rappiTitle": "Belly Monster Bites - Madero Precios y Menú a Domicilio - Rappi",
+  "status": "closed_after_hours",
+  "notes": [
+    "Snapshot captured from live Rappi page while store was closed after hours.",
+    "Product cards were visible but marked No disponible in the rendered UI.",
+    "Use this file only for product image enrichment; Excel/Parrot export is canonical for menu data."
+  ],
+  "categories": [
+    {
+      "name": "Specialty Cofy (Caliente)",
+      "items": [
+        {
+          "id": 7659559,
+          "name": "Lavanda Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659594,
+          "name": "Mocha Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659543,
+          "name": "Caramelo Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659600,
+          "name": "Vainilla Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659498,
+          "name": "Hot Chocolate",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659525,
+          "name": "Chai Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659576,
+          "name": "Matcha Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Specialty Cofy (Helado)",
+      "items": [
+        {
+          "id": 7659499,
+          "name": "Caramelo Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "05087ebf-ad0a-4c87-bf12-d2af45d36ea4.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659483,
+          "name": "Chai Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "821b1cfc-c6d3-49eb-be63-9b1c18ea9f3c.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659500,
+          "name": "Hot Chocolate",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "e141d502-2540-4d6d-9de8-f806df93f9db.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659601,
+          "name": "Mocha Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "3476be4e-46f9-4a35-8ae5-a4bfca65a8e6.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659505,
+          "name": "Vainilla Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "743626cc-ea72-4770-b36e-c6af0c1fb720.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659591,
+          "name": "Lavanda Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "92d102cc-ffb8-4742-997e-79adb8818075.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659565,
+          "name": "Matcha Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "14d2a7de-b8bf-4fcc-8888-f545b2458d18.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Specialty Cofy (Frappe)",
+      "items": [
+        {
+          "id": 7659569,
+          "name": "Frappe Lavanda Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "992e5c8a-8bb5-40a1-8852-d6d12fd244c2.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659484,
+          "name": "Frappe Matcha Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "2eef7e6f-9455-446e-a59e-455065228c21.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659592,
+          "name": "Frappe de Chai Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "17e4682f-5864-4b98-a093-9426d002a1ca.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659570,
+          "name": "Frappe de Hot Chocolate",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "0e85fdb0-1619-483a-bef3-eebdff642265.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659547,
+          "name": "Frappe de Caramelo Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "7ac94cd8-b01c-4a5a-a1e6-303c211b01b1.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659571,
+          "name": "Frappe de Vainilla Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "81700ff7-c4b5-4cd1-9a90-78528a685477.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659556,
+          "name": "Frappe Mocha Latte",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "bb55afc1-7ce2-4d88-a714-9a1e4874e8d4.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Cofy (caliente)",
+      "items": [
+        {
+          "id": 7659485,
+          "name": "Capuchino (Capuccino)",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "2fe7a9b5-f69d-4dc1-a68d-02a466cae342.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659593,
+          "name": "Daily Cofy (Americano)",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "0acd03fe-5e4d-4d0c-9e7d-614c52a85538.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659566,
+          "name": "Godlatte (Latte)",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "8d1c2183-b547-4c31-9d35-e230080be618.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659587,
+          "name": "Cortado",
+          "description": "",
+          "price": 50,
+          "realPrice": 50,
+          "currency": "MXN",
+          "image": "eaf6456f-1142-404c-b3b7-9955e1f10489.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659531,
+          "name": "Espresso",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "bd527594-c6e0-432a-a48b-424515ecbd89.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Cofy (Helado)",
+      "items": [
+        {
+          "id": 7659508,
+          "name": "Helado Godlatte (Latte)",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "b96c3b72-0956-4842-84dd-0e182a7dc9eb.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659563,
+          "name": "Helado Daily Cofy (Americano)",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "c74bd44e-d6b1-4f2a-b072-322a7c8489bd.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659486,
+          "name": "Helado de Capuchino",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "ccf4dca4-1279-4540-ba06-61419a38c0cb.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Cofy Chillers",
+      "items": [
+        {
+          "id": 7659581,
+          "name": "Espresso Tonic",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "72dd36aa-2df6-48c7-bc8e-712d2df5ce49.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659536,
+          "name": "Sparkling Americano",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "32b62ada-70e0-4810-8cbb-b81b0ccbcf7d.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Cofy (frappe)",
+      "items": [
+        {
+          "id": 7659582,
+          "name": "Frappe de Capuchino (Capuccino)",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "bbe7833e-0a6a-4388-9bc8-4275bff9de93.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659479,
+          "name": "Frappe de Godlatte (Latte)",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "83729ebf-3313-4749-8d27-0d83a49ea097.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Chillers",
+      "items": [
+        {
+          "id": 7659506,
+          "name": "Limonada Peach Tea Lemonade",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "4830ab16-c8a0-448c-8ce2-0d0e10454d1c.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659588,
+          "name": "Limonada Matcha",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "ad586e6f-1667-4028-a81a-8068b229dcc5.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659572,
+          "name": "Limonada Blackberry Basil",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "e551f97a-b05a-42ee-aa87-1c13b1ab6ecf.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659548,
+          "name": "Limonada Mango",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "ec217985-06e4-4350-953b-1b2226b4a5f7.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659561,
+          "name": "Limonada",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "70cbbd76-3d40-4207-a6d2-380e989ff13f.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659480,
+          "name": "Limonada Arnie",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "389cc814-77a2-4f8a-b6e6-4bb47e3af3c5.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659553,
+          "name": "Limonada Rosa",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "774f4490-e5a0-4537-aee7-0617b81ed04e.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Frappe Chillers",
+      "items": [
+        {
+          "id": 7659526,
+          "name": "Frappe Tamarindo Chamoy",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "5d8ceeea-728a-466b-b670-f8766490b415.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659564,
+          "name": "Frappe Fresa Miguelito",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "9411bb00-6167-4104-8e32-3aae417440a5.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659496,
+          "name": "Frappe Mango Chamoy",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "23e7cd9e-0066-4abe-bb5c-f80232f6d760.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659521,
+          "name": "Frappe Jamaiquina",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "a1d54127-07e3-401c-9d7c-d1117d9f0fdd.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Otras Bebidas...",
+      "items": [
+        {
+          "id": 7659567,
+          "name": "Leche Milky",
+          "description": "",
+          "price": 38,
+          "realPrice": 38,
+          "currency": "MXN",
+          "image": "b2cec478-97de-41cd-a36d-9b2a198b0076.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659557,
+          "name": "Agua Natural",
+          "description": "",
+          "price": 25,
+          "realPrice": 25,
+          "currency": "MXN",
+          "image": "26dc8683-e3fa-4bcf-a6c7-9be858185294.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659507,
+          "name": "Agua Mineral",
+          "description": "",
+          "price": 32,
+          "realPrice": 32,
+          "currency": "MXN",
+          "image": "c2874246-9a56-4fa7-a980-b34352aada67.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659522,
+          "name": "Choco",
+          "description": "",
+          "price": 47,
+          "realPrice": 47,
+          "currency": "MXN",
+          "image": "1e599a84-20b0-4cfa-886f-54705f1d2db7.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Té Helado",
+      "items": [
+        {
+          "id": 7659510,
+          "name": "Té Helado Earl Grey",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "c388078d-5f14-4a24-9806-ac06a3e44357.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659533,
+          "name": "Té Helado Mintha",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "4bc4b297-b8d1-4722-8e8f-35b80385b4ba.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659523,
+          "name": "Té Helado Durazno",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "48fe442d-4ed5-49ce-9056-418ed1060838.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659577,
+          "name": "Té Helado Sencha",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "30770f17-fe8d-4535-9fb1-031e6e01a92a.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Té Caliente",
+      "items": [
+        {
+          "id": 7659488,
+          "name": "Té Caliente Earl Grey",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "7d05b7bb-096c-4e7d-8bc7-7084c6b2d68f.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659481,
+          "name": "Té Caliente Manzanilla Lavanda",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "b747b602-b451-48a3-a569-38ab715e3457.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659534,
+          "name": "Té Caliente Frutos Rojos",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "f6804a0f-a0df-484b-b86e-61148cc54ac6.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659573,
+          "name": "Té Caliente Durazno",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "0316a788-108f-46fc-b9f5-7ffadf18d9a0.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659540,
+          "name": "Té Caliente Mango",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "a264adda-a3e4-4ce7-8a06-3e9746c14a05.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659583,
+          "name": "Té Caliente Sencha",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "1d4f3e89-a7eb-4af4-8608-b94324845bc4.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659517,
+          "name": "Té Caliente Mintha",
+          "description": "",
+          "price": 0,
+          "realPrice": 0,
+          "currency": "MXN",
+          "image": "18925a27-ad93-4f71-a0e4-d89e57447437.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Waffles Y Pan Frances",
+      "items": [
+        {
+          "id": 7659513,
+          "name": "Wafflete (waffle)",
+          "description": "",
+          "price": 180,
+          "realPrice": 180,
+          "currency": "MXN",
+          "image": "6a0bcbf5-6597-4fa8-8f03-49b215f129e6.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659541,
+          "name": "American Breakfast Waffle (waffle)",
+          "description": "",
+          "price": 210,
+          "realPrice": 210,
+          "currency": "MXN",
+          "image": "e2a2806d-399d-498f-a575-6abe466b1c28.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659542,
+          "name": "Spicy Chick'n'waffle (waffle)",
+          "description": "",
+          "price": 215,
+          "realPrice": 215,
+          "currency": "MXN",
+          "image": "d28d85cc-1169-42b2-94b4-bd68a031f898.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659514,
+          "name": "Just A Waffle (waffle)",
+          "description": "",
+          "price": 135,
+          "realPrice": 135,
+          "currency": "MXN",
+          "image": "01a00bca-96ca-423a-b1d0-6bfc81814d3a.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659511,
+          "name": "French Toast (pan Frances)",
+          "description": "",
+          "price": 135,
+          "realPrice": 135,
+          "currency": "MXN",
+          "image": "f45ffaf9-a52d-4e9e-99a3-f37812147bef.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659602,
+          "name": "S'mores French Toast (pf)",
+          "description": "",
+          "price": 175,
+          "realPrice": 175,
+          "currency": "MXN",
+          "image": "64d98348-f32a-4d85-9b3a-ff2439188dd7.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        }
+      ]
+    },
+    {
+      "name": "Sandwiches (rappi)",
+      "items": [
+        {
+          "id": 7659518,
+          "name": "Sandwich Buffalo Chicken",
+          "description": "",
+          "price": 195,
+          "realPrice": 195,
+          "currency": "MXN",
+          "image": "09a6a945-3a33-4911-a202-8ceca526920b.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659515,
+          "name": "Sandwich Chicken Jalapeño",
+          "description": "",
+          "price": 185,
+          "realPrice": 185,
+          "currency": "MXN",
+          "image": "f5887672-2597-46b2-b5b0-637996711b56.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659596,
+          "name": "Sandwich Phily Cheese Brisket",
+          "description": "",
+          "price": 195,
+          "realPrice": 195,
+          "currency": "MXN",
+          "image": "f25df145-e855-40d5-a2b5-854bd9bd5ba6.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659549,
+          "name": "Bbq Sandwich (sandwich)",
+          "description": "",
+          "price": 190,
+          "realPrice": 190,
+          "currency": "MXN",
+          "image": "d560d198-5e9f-4080-bebc-c71edbb54075.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659512,
+          "name": "Grilled Cheese (sandwich)",
+          "description": "",
+          "price": 150,
+          "realPrice": 150,
+          "currency": "MXN",
+          "image": "4def93a6-897c-47b8-8abf-8dbbc9bbf527.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659476,
+          "name": "Chicken Blt (sandwich)",
+          "description": "",
+          "price": 210,
+          "realPrice": 210,
+          "currency": "MXN",
+          "image": "d4c5e28f-bb1f-478f-865c-aa9269301d04.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659528,
+          "name": "Tuna Melt (sandwich)",
+          "description": "",
+          "price": 190,
+          "realPrice": 190,
+          "currency": "MXN",
+          "image": "5f7fb062-9efb-4258-8f49-f98c9f7a8a57.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Toast (rappi)",
+      "items": [
+        {
+          "id": 7659597,
+          "name": "Serrano Caprese (toast)",
+          "description": "",
+          "price": 160,
+          "realPrice": 160,
+          "currency": "MXN",
+          "image": "f1456be7-7d71-4e30-96e0-321ea070f0be.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659503,
+          "name": "Avocado Panela (toast)",
+          "description": "",
+          "price": 140,
+          "realPrice": 140,
+          "currency": "MXN",
+          "image": "5d76d6fe-10d4-4f49-9edc-80391730cc85.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659530,
+          "name": "Pizza Deluxe (toast)",
+          "description": "",
+          "price": 135,
+          "realPrice": 135,
+          "currency": "MXN",
+          "image": "6103e0fb-61b6-465d-a993-e611c001e616.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Ensaladas (rappi)",
+      "items": [
+        {
+          "id": 7659509,
+          "name": "Cesar Salad (ensalada)",
+          "description": "",
+          "price": 160,
+          "realPrice": 160,
+          "currency": "MXN",
+          "image": "031fb907-b802-4454-a237-b4aa9ebb6b9e.png",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659532,
+          "name": "Jamon Serrano Y Parmesano (ensalada) (n)",
+          "description": "",
+          "price": 175,
+          "realPrice": 175,
+          "currency": "MXN",
+          "image": "26d487fe-a787-4d50-baf9-4f7be66a7589.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        },
+        {
+          "id": 7659537,
+          "name": "Chicken Orange (ensalada)",
+          "description": "",
+          "price": 190,
+          "realPrice": 190,
+          "currency": "MXN",
+          "image": "1ef3bb15-e541-4998-a6c0-eef6efddc808.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": true
+        }
+      ]
+    },
+    {
+      "name": "Sides (rappi)",
+      "items": [
+        {
+          "id": 7659482,
+          "name": "Sweet Potato Fries (sides)",
+          "description": "",
+          "price": 50,
+          "realPrice": 50,
+          "currency": "MXN",
+          "image": "d6e52603-2713-47da-ba58-ee31bfa982c7.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659590,
+          "name": "French Fries (sides)",
+          "description": "",
+          "price": 50,
+          "realPrice": 50,
+          "currency": "MXN",
+          "image": "c57ac894-12c7-4c8a-ab58-635eacb66044.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659598,
+          "name": "Mac'n Cheese (sides)",
+          "description": "",
+          "price": 55,
+          "realPrice": 55,
+          "currency": "MXN",
+          "image": "0fdac128-27d0-470f-b796-5ad0be40f84e.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659558,
+          "name": "Cream Corn (sides)",
+          "description": "",
+          "price": 55,
+          "realPrice": 55,
+          "currency": "MXN",
+          "image": "93ece4a1-25d0-4aa5-b87c-a8112bc861cc.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        }
+      ]
+    },
+    {
+      "name": "Kids Menu (rappi)",
+      "items": [
+        {
+          "id": 7659504,
+          "name": "Chicken N Fries (kids)",
+          "description": "",
+          "price": 135,
+          "realPrice": 135,
+          "currency": "MXN",
+          "image": "b047ca24-517e-446b-98f5-f4bee7133995.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659538,
+          "name": "Pepperoni Toast (kids)",
+          "description": "",
+          "price": 125,
+          "realPrice": 125,
+          "currency": "MXN",
+          "image": "5dc4348a-c500-4830-b29c-ccbd515de198.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659555,
+          "name": "Mac N Chicken (kids)",
+          "description": "",
+          "price": 140,
+          "realPrice": 140,
+          "currency": "MXN",
+          "image": "f6e24fcf-a8b5-4a1d-9f14-69c08f897e08.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        }
+      ]
+    },
+    {
+      "name": "Reposteria (rappi)",
+      "items": [
+        {
+          "id": 7659585,
+          "name": "Rol De Chocolate (rc)",
+          "description": "",
+          "price": 85,
+          "realPrice": 85,
+          "currency": "MXN",
+          "image": "e192f2ed-ccac-466e-8a42-f1f12e4edc59.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659478,
+          "name": "Rol De Lotus Biscoff (rc)",
+          "description": "",
+          "price": 85,
+          "realPrice": 85,
+          "currency": "MXN",
+          "image": "30896088-2e81-4314-9209-46be7385583b.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        },
+        {
+          "id": 7659574,
+          "name": "Rol De Canela (rc)",
+          "description": "",
+          "price": 75,
+          "realPrice": 75,
+          "currency": "MXN",
+          "image": "e243873a-dc37-4725-a9ad-4f9e66ee7e79.jpeg",
+          "isAvailable": true,
+          "isPopular": false,
+          "hasToppings": false
+        }
+      ]
+    }
+  ]
+}

@@ -270,6 +270,14 @@ onBeforeUnmount(() => {
                 <span class="qty">{{ item.quantity }}</span>
                 <span class="items__body">
                   <strong>{{ item.name }}</strong>
+                  <span
+                    v-for="(modifier, mIndex) in item.modifiers"
+                    :key="`${item.id}-mod-${mIndex}`"
+                    class="items__mod"
+                  >
+                    {{ modifier.optionName }}
+                    <em v-if="modifier.priceDeltaCents > 0">+{{ money(modifier.priceDeltaCents) }}</em>
+                  </span>
                   <small v-if="item.note">{{ item.note }}</small>
                 </span>
                 <span class="items__line">
@@ -404,12 +412,19 @@ onBeforeUnmount(() => {
     <ul class="print-ticket__items">
       <li>
         <span>1</span>
-        <strong>Cookie demo</strong>
+        <div class="print-ticket__item">
+          <strong>Cookie demo</strong>
+          <span class="print-ticket__mod">Extra chispas +$0.00</span>
+        </div>
         <em>$0.00</em>
       </li>
       <li>
         <span>1</span>
-        <strong>Cafe demo</strong>
+        <div class="print-ticket__item">
+          <strong>Cafe demo</strong>
+          <span class="print-ticket__mod">Leche de almendra</span>
+          <span class="print-ticket__mod">Sin azucar</span>
+        </div>
         <em>$0.00</em>
       </li>
     </ul>
@@ -853,9 +868,26 @@ onBeforeUnmount(() => {
   line-height: 1.25;
 }
 
-.items__body small {
+.items__mod {
   display: block;
   margin-top: 2px;
+  padding-left: 11px;
+  border-left: 2px solid var(--line);
+  color: var(--coffee);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.items__mod em {
+  font-style: normal;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.items__body small {
+  display: block;
+  margin-top: 3px;
   color: var(--orange);
   font-size: 0.82rem;
   font-weight: 600;
@@ -1285,6 +1317,20 @@ onBeforeUnmount(() => {
 
   .print-ticket__items strong {
     font-weight: 700;
+  }
+
+  .print-ticket__item {
+    display: block;
+  }
+
+  .print-ticket__mod {
+    display: block;
+    padding-left: 4mm;
+    font-size: 9pt;
+  }
+
+  .print-ticket__mod::before {
+    content: "› ";
   }
 
   .print-ticket__items em {

@@ -265,6 +265,10 @@ public class PrinterAgentService extends Service {
             printer.printText(item.quantity + "x ");
             printer.setTextStyle(Typeface.NORMAL);
             printWrapped(safePrinterText(item.name).toUpperCase(Locale.US), 3);
+            for (PrintJobModifier modifier : item.modifiers) {
+                printer.setTextStyle(Typeface.NORMAL);
+                printWrapped("- " + printableModifierLabel(modifier), 5);
+            }
             if (!item.note.trim().isEmpty()) {
                 printer.setTextStyle(Typeface.BOLD);
                 printWrapped("* " + safePrinterText(item.note), 3);
@@ -312,6 +316,16 @@ public class PrinterAgentService extends Service {
 
     private void printLine() {
         printer.printText("--------------------------------\n");
+    }
+
+    private String printableModifierLabel(PrintJobModifier modifier) {
+        String group = safePrinterText(modifier.groupName);
+        String option = safePrinterText(modifier.optionName);
+        String normalizedGroup = group.toLowerCase(Locale.US);
+        if (group.isEmpty() || normalizedGroup.contains("tamano") || normalizedGroup.contains("tamaño")) {
+            return option;
+        }
+        return group + ": " + option;
     }
 
     private String safePrinterText(String value) {
@@ -483,19 +497,49 @@ public class PrinterAgentService extends Service {
     private static class PrintJobItem {
         final String name;
         final int quantity;
+        final List<PrintJobModifier> modifiers;
         final String note;
 
-        PrintJobItem(String name, int quantity, String note) {
+        PrintJobItem(String name, int quantity, List<PrintJobModifier> modifiers, String note) {
             this.name = name;
             this.quantity = quantity;
+            this.modifiers = modifiers;
             this.note = note;
         }
 
         static PrintJobItem fromJson(JSONObject json) {
+            List<PrintJobModifier> modifiers = new ArrayList<>();
+            JSONArray array = json.optJSONArray("modifiers");
+            if (array != null) {
+                for (int i = 0; i < array.length(); i += 1) {
+                    JSONObject modifier = array.optJSONObject(i);
+                    if (modifier != null) {
+                        modifiers.add(PrintJobModifier.fromJson(modifier));
+                    }
+                }
+            }
             return new PrintJobItem(
                     json.optString("name", ""),
                     Math.max(1, json.optInt("quantity", 1)),
+                    modifiers,
                     json.optString("note", "")
+            );
+        }
+    }
+
+    private static class PrintJobModifier {
+        final String groupName;
+        final String optionName;
+
+        PrintJobModifier(String groupName, String optionName) {
+            this.groupName = groupName;
+            this.optionName = optionName;
+        }
+
+        static PrintJobModifier fromJson(JSONObject json) {
+            return new PrintJobModifier(
+                    json.optString("groupName", ""),
+                    json.optString("optionName", "")
             );
         }
     }

@@ -1,10 +1,16 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useConvexMutation, useConvexQuery } from 'convex-vue'
 import { api } from '../../convex/_generated/api'
 import { useCart } from '../composables/useCart'
-import { coverImage, featuredItems, menuCategories } from '../data/menu'
+import {
+  categoriesForDaypart,
+  coverImage,
+  getDaypartLabel,
+  menuDayparts,
+  resolveCurrentDaypartId,
+} from '../data/menu'
 import { formatMenuPrice, formatMXN } from '../utils/formatPrice'
 import mascot from '../assets/brand/mascot.svg'
 
@@ -36,7 +42,63 @@ function readLastOrderId(value) {
 const cart = useCart(tableId.value)
 const createOrderMutation = useConvexMutation(api.orders.create)
 
-const allItems = menuCategories.flatMap((category) => category.items)
+/* ---- Current orderable menu ---- */
+const activeDaypartId = ref(resolveCurrentDaypartId())
+const currentDaypart = computed(
+  () => menuDayparts.find((daypart) => daypart.id === activeDaypartId.value) || null,
+)
+const categories = computed(() => categoriesForDaypart(activeDaypartId.value))
+const daypartItemCount = computed(() =>
+  categories.value.reduce((total, category) => total + category.items.length, 0),
+)
+
+const allItems = computed(() => categories.value.flatMap((category) => category.items))
+
+/* Broken/missing remote images fall back to the mascot, never a fake remote placeholder. */
+const failedImages = reactive({})
+function onImageError(id) {
+  failedImages[id] = true
+}
+function showImage(item) {
+  return Boolean(item.image) && !failedImages[item.id]
+}
+
+const coverFailed = ref(false)
+
+/* ---- Modifiers / sub-products ---- */
+function itemGroups(item) {
+  return Array.isArray(item?.modifierGroups) ? item.modifierGroups : []
+}
+function hasModifiers(item) {
+  return itemGroups(item).length > 0
+}
+
+/* A configured item with no base price (e.g. Jugo del Valle) needs a priced
+   option chosen even when the exported group min is 0, otherwise it would add
+   at $0. Size pickers (group.min >= 1) are required by definition. */
+function decorateGroup(group, item) {
+  const baseMin = Number(group.min) || 0
+  const pricedOptions = group.options.some((option) => Number(option.priceDelta) > 0)
+  const configuredZeroBase = item.priceMode === 'configured' && !item.hasPrice
+  const min = baseMin >= 1 ? baseMin : configuredZeroBase && pricedOptions ? 1 : 0
+  const max = Number(group.max) || group.options.length
+  return {
+    ...group,
+    min,
+    max,
+    required: min >= 1,
+    multiple: max > 1,
+  }
+}
+
+/* Opens the configuration sheet for anything that needs a choice: configured
+   pricing, flagged required modifiers, or any group with a hard minimum. */
+function requiresChoice(item) {
+  if (item?.priceMode === 'configured' || item?.hasRequiredModifiers) {
+    return true
+  }
+  return itemGroups(item).some((group) => (Number(group.min) || 0) >= 1)
+}
 
 /* ---- Search ---- */
 const query = ref('')
@@ -47,7 +109,7 @@ const searchResults = computed(() => {
     return []
   }
   const q = normalizedQuery.value
-  return allItems.filter(
+  return allItems.value.filter(
     (item) =>
       item.name.toLowerCase().includes(q) ||
       item.categoryName.toLowerCase().includes(q) ||
@@ -56,22 +118,30 @@ const searchResults = computed(() => {
 })
 
 /* ---- Category nav + scroll spy ---- */
-const activeCategory = ref(menuCategories[0]?.id || '')
+const activeCategory = ref(categories.value[0]?.id || '')
 const sectionEls = {}
 const chipEls = {}
 const setSectionRef = (id) => (el) => {
   if (el) {
     sectionEls[id] = el
+  } else {
+    delete sectionEls[id]
   }
 }
 const setChipRef = (id) => (el) => {
   if (el) {
     chipEls[id] = el
+  } else {
+    delete chipEls[id]
   }
 }
 
 let observer = null
-onMounted(() => {
+let daypartTimer = 0
+function setupObserver() {
+  if (observer) {
+    observer.disconnect()
+  }
   observer = new IntersectionObserver(
     (entries) => {
       const visible = entries
@@ -84,6 +154,24 @@ onMounted(() => {
     { rootMargin: '-128px 0px -68% 0px', threshold: 0 },
   )
   Object.values(sectionEls).forEach((el) => observer.observe(el))
+}
+onMounted(setupObserver)
+
+function refreshCurrentDaypart() {
+  activeDaypartId.value = resolveCurrentDaypartId()
+}
+
+onMounted(() => {
+  daypartTimer = window.setInterval(refreshCurrentDaypart, 60_000)
+})
+
+/* When the active menu changes by time, the sections swap out, so rewire the scroll spy. */
+watch(activeDaypartId, () => {
+  activeCategory.value = categories.value[0]?.id || ''
+  if (typeof window !== 'undefined') {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+  nextTick(setupObserver)
 })
 
 watch(activeCategory, (id) => {
@@ -120,21 +208,150 @@ onBeforeUnmount(() => {
   if (observer) {
     observer.disconnect()
   }
+  if (typeof window !== 'undefined') {
+    window.clearInterval(daypartTimer)
+  }
   if (typeof document !== 'undefined') {
     document.body.style.overflow = ''
   }
 })
 
 /* ---- Item detail sheet ---- */
-const editingExisting = computed(
-  () => Boolean(activeItem.value) && cart.quantityFor(activeItem.value.id) > 0,
+// group.id -> optionId (single) | optionId[] (multi)
+const sheetSelections = reactive({})
+
+const sheetGroups = computed(() => {
+  const item = activeItem.value
+  if (!item) {
+    return []
+  }
+  return itemGroups(item).map((group) => decorateGroup(group, item))
+})
+
+function resetSelections(item) {
+  Object.keys(sheetSelections).forEach((key) => delete sheetSelections[key])
+  if (!item) {
+    return
+  }
+  sheetGroups.value.forEach((group) => {
+    sheetSelections[group.id] = group.multiple ? [] : ''
+  })
+}
+
+function isOptionOn(group, option) {
+  const selected = sheetSelections[group.id]
+  return group.multiple
+    ? Array.isArray(selected) && selected.includes(option.id)
+    : selected === option.id
+}
+
+function chooseSingle(group, option) {
+  // Optional single-choice groups can be cleared by tapping the active option.
+  if (sheetSelections[group.id] === option.id && !group.required) {
+    sheetSelections[group.id] = ''
+  } else {
+    sheetSelections[group.id] = option.id
+  }
+}
+
+function toggleMulti(group, option) {
+  const current = Array.isArray(sheetSelections[group.id]) ? [...sheetSelections[group.id]] : []
+  const index = current.indexOf(option.id)
+  if (index >= 0) {
+    current.splice(index, 1)
+  } else if (current.length < group.max) {
+    current.push(option.id)
+  }
+  sheetSelections[group.id] = current
+}
+
+function optionAtCap(group, option) {
+  if (!group.multiple || isOptionOn(group, option)) {
+    return false
+  }
+  const selected = sheetSelections[group.id]
+  return Array.isArray(selected) && selected.length >= group.max
+}
+
+const selectedModifiers = computed(() => {
+  const result = []
+  sheetGroups.value.forEach((group, groupIndex) => {
+    const selected = sheetSelections[group.id]
+    const ids = group.multiple
+      ? Array.isArray(selected)
+        ? selected
+        : []
+      : selected
+        ? [selected]
+        : []
+    ids.forEach((optionId, optionIndex) => {
+      const option = group.options.find((candidate) => candidate.id === optionId)
+      if (option) {
+        result.push({
+          groupId: group.id,
+          groupName: group.name,
+          optionId: option.id,
+          optionName: option.name,
+          priceDelta: Number(option.priceDelta) || 0,
+          sortIndex: groupIndex * 100 + optionIndex,
+        })
+      }
+    })
+  })
+  return result
+})
+
+const modifiersTotal = computed(() =>
+  selectedModifiers.value.reduce((total, modifier) => total + modifier.priceDelta, 0),
 )
+const sheetHasPrice = computed(
+  () => Boolean(activeItem.value?.hasPrice) || modifiersTotal.value > 0,
+)
+const sheetUnitPrice = computed(
+  () => (activeItem.value?.hasPrice ? Number(activeItem.value.price || 0) : 0) + modifiersTotal.value,
+)
+const unmetGroups = computed(() =>
+  sheetGroups.value.filter((group) => {
+    const selected = sheetSelections[group.id]
+    const count = group.multiple
+      ? Array.isArray(selected)
+        ? selected.length
+        : 0
+      : selected
+        ? 1
+        : 0
+    return group.required && count < Math.max(1, group.min)
+  }),
+)
+const canAddItem = computed(() => unmetGroups.value.length === 0)
+const addButtonLabel = computed(() => {
+  if (sheetGroups.value.length && !canAddItem.value) {
+    return 'Elige opciones'
+  }
+  return editingExisting.value ? 'Actualizar' : 'Agregar'
+})
+
+// Variant lines make "editing" ambiguous, so only no-modifier items reopen in
+// edit mode; configured items always start a fresh selection.
+const editingExisting = computed(() => {
+  const item = activeItem.value
+  if (!item || hasModifiers(item)) {
+    return false
+  }
+  return cart.quantityFor(item.id) > 0
+})
 
 function openItem(item) {
   activeItem.value = item
-  const inCart = cart.quantityFor(item.id)
-  sheetQty.value = inCart > 0 ? inCart : 1
-  sheetNote.value = cart.noteFor(item.id)
+  if (hasModifiers(item)) {
+    sheetQty.value = 1
+    sheetNote.value = ''
+  } else {
+    const inCart = cart.quantityFor(item.id)
+    sheetQty.value = inCart > 0 ? inCart : 1
+    sheetNote.value = cart.noteFor(item.id)
+  }
+  resetSelections(item)
 }
 function closeItem() {
   activeItem.value = null
@@ -147,6 +364,20 @@ function confirmItem() {
   if (!item) {
     return
   }
+  if (hasModifiers(item)) {
+    if (!canAddItem.value) {
+      return
+    }
+    cart.add(item, {
+      quantity: sheetQty.value,
+      note: sheetNote.value.trim(),
+      modifiers: selectedModifiers.value,
+      price: sheetUnitPrice.value,
+      hasPrice: sheetHasPrice.value,
+    })
+    closeItem()
+    return
+  }
   if (editingExisting.value) {
     cart.setQuantity(item.id, sheetQty.value)
     cart.setNote(item.id, sheetNote.value.trim())
@@ -156,8 +387,11 @@ function confirmItem() {
   closeItem()
 }
 
-/* Quick-add straight from the list, no sheet. */
 function quickAdd(item) {
+  if (requiresChoice(item) || hasModifiers(item)) {
+    openItem(item)
+    return
+  }
   cart.add(item, { quantity: 1 })
 }
 
@@ -218,13 +452,21 @@ async function submitOrder() {
       items: cart.entries.value.map((entry, index) => {
         const unitPriceCents = entry.hasPrice ? Math.round(Number(entry.price || 0) * 100) : null
         return {
-          menuItemId: entry.id,
+          menuItemId: entry.menuItemId || entry.id,
           name: entry.name,
           sourceName: entry.sourceName || entry.name,
           categoryName: entry.categoryName || '',
           quantity: entry.quantity,
           unitPriceCents,
           lineTotalCents: unitPriceCents == null ? null : unitPriceCents * entry.quantity,
+          modifiers: (entry.modifiers || []).map((modifier, modifierIndex) => ({
+            groupId: modifier.groupId || '',
+            groupName: modifier.groupName || '',
+            optionId: modifier.optionId || '',
+            optionName: modifier.optionName || '',
+            priceDeltaCents: Math.max(0, Math.round(Number(modifier.priceDelta || 0) * 100)),
+            sortIndex: Number.isFinite(modifier.sortIndex) ? modifier.sortIndex : modifierIndex,
+          })),
           note: entry.note || '',
           imageUrl: entry.image || '',
           sortIndex: index,
@@ -277,7 +519,13 @@ function fulfillmentLabel(item) {
   <main class="order" aria-label="Ordenar en mesa">
     <!-- Cover -->
     <header class="cover">
-      <img class="cover__img" :src="coverImage" alt="" />
+      <img
+        v-if="coverImage && !coverFailed"
+        class="cover__img"
+        :src="coverImage"
+        alt=""
+        @error="coverFailed = true"
+      />
       <div class="cover__scrim"></div>
       <div class="cover__top">
         <RouterLink class="round-btn" :to="{ name: 'home' }" aria-label="Volver al inicio">
@@ -305,6 +553,18 @@ function fulfillmentLabel(item) {
       </div>
     </section>
 
+    <!-- Current orderable menu -->
+    <section class="daypart" aria-label="Menú disponible ahora" aria-live="polite">
+      <span class="daypart__eyebrow">Disponible ahora</span>
+      <p class="daypart__meta">
+        <span class="daypart__now">{{ getDaypartLabel(activeDaypartId) }}</span>
+        <span v-if="currentDaypart" class="daypart__hours">
+          {{ currentDaypart.startsAt }}–{{ currentDaypart.endsAt }}
+        </span>
+        <span class="daypart__count">{{ daypartItemCount }} productos</span>
+      </p>
+    </section>
+
     <section v-if="visibleSubmittedOrder" class="active-order" aria-live="polite">
       <header class="active-order__head">
         <div>
@@ -324,7 +584,16 @@ function fulfillmentLabel(item) {
           :class="{ 'is-ready': isReady(item) }"
         >
           <span class="active-order__qty">{{ item.quantity }}</span>
-          <span class="active-order__name">{{ item.name }}</span>
+          <span class="active-order__body">
+            <span class="active-order__name">{{ item.name }}</span>
+            <span
+              v-for="modifier in item.modifiers || []"
+              :key="modifier.optionId"
+              class="active-order__mod"
+            >
+              {{ modifier.optionName }}
+            </span>
+          </span>
           <span class="active-order__fulfillment">{{ fulfillmentLabel(item) }}</span>
         </li>
       </ul>
@@ -366,7 +635,7 @@ function fulfillmentLabel(item) {
 
       <nav v-show="!isSearching" class="cats" aria-label="Categorías del menú">
         <button
-          v-for="category in menuCategories"
+          v-for="category in categories"
           :key="category.id"
           :ref="setChipRef(category.id)"
           class="cats__chip"
@@ -393,21 +662,30 @@ function fulfillmentLabel(item) {
             <span class="row__body">
               <span class="row__name">{{ item.name }}</span>
               <span v-if="item.description" class="row__desc">{{ item.description }}</span>
-              <span class="row__price" :class="{ 'is-soft': !item.hasPrice }">
-                {{ priceLabel(item) }}
+              <span class="row__tags">
+                <span class="row__price" :class="{ 'is-soft': !item.hasPrice }">
+                  {{ priceLabel(item) }}
+                </span>
+                <span v-if="hasModifiers(item)" class="row__opt">Por opciones</span>
               </span>
             </span>
             <span class="row__media">
-              <img v-if="item.image" :src="item.image" alt="" loading="lazy" />
+              <img
+                v-if="showImage(item)"
+                :src="item.image"
+                alt=""
+                loading="lazy"
+                @error="onImageError(item.id)"
+              />
               <span v-else class="row__placeholder"><img :src="mascot" alt="" /></span>
               <span
                 class="row__add"
-                :class="{ 'is-in': cart.quantityFor(item.id) > 0 }"
+                :class="{ 'is-in': cart.quantityForMenuItem(item.id) > 0 }"
                 @click.stop="quickAdd(item)"
                 role="button"
                 :aria-label="`Agregar ${item.name}`"
               >
-                <template v-if="cart.quantityFor(item.id) > 0">{{ cart.quantityFor(item.id) }}</template>
+                <template v-if="cart.quantityForMenuItem(item.id) > 0">{{ cart.quantityForMenuItem(item.id) }}</template>
                 <template v-else>+</template>
               </span>
             </span>
@@ -416,41 +694,10 @@ function fulfillmentLabel(item) {
       </ul>
     </section>
 
-    <!-- Menu -->
+    <!-- Menu: single vertical section list, one sticky category rail above -->
     <template v-else>
-      <!-- Featured rail -->
-      <section v-if="featuredItems.length" class="featured">
-        <h2 class="section__title">Más pedidos</h2>
-        <div class="featured__rail">
-          <button
-            v-for="item in featuredItems"
-            :key="item.id"
-            class="fcard"
-            type="button"
-            @click="openItem(item)"
-          >
-            <span class="fcard__media">
-              <img :src="item.image" alt="" loading="lazy" />
-              <span
-                class="fcard__add"
-                :class="{ 'is-in': cart.quantityFor(item.id) > 0 }"
-                @click.stop="quickAdd(item)"
-                role="button"
-                :aria-label="`Agregar ${item.name}`"
-              >
-                <template v-if="cart.quantityFor(item.id) > 0">{{ cart.quantityFor(item.id) }}</template>
-                <template v-else>+</template>
-              </span>
-            </span>
-            <span class="fcard__price">{{ priceLabel(item) }}</span>
-            <span class="fcard__name">{{ item.name }}</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- Category sections -->
       <section
-        v-for="category in menuCategories"
+        v-for="category in categories"
         :key="category.id"
         :ref="setSectionRef(category.id)"
         :data-cat-id="category.id"
@@ -463,21 +710,30 @@ function fulfillmentLabel(item) {
               <span class="row__body">
                 <span class="row__name">{{ item.name }}</span>
                 <span v-if="item.description" class="row__desc">{{ item.description }}</span>
-                <span class="row__price" :class="{ 'is-soft': !item.hasPrice }">
-                  {{ priceLabel(item) }}
+                <span class="row__tags">
+                  <span class="row__price" :class="{ 'is-soft': !item.hasPrice }">
+                    {{ priceLabel(item) }}
+                  </span>
+                <span v-if="hasModifiers(item)" class="row__opt">Por opciones</span>
                 </span>
               </span>
               <span class="row__media">
-                <img v-if="item.image" :src="item.image" alt="" loading="lazy" />
+                <img
+                  v-if="showImage(item)"
+                  :src="item.image"
+                  alt=""
+                  loading="lazy"
+                  @error="onImageError(item.id)"
+                />
                 <span v-else class="row__placeholder"><img :src="mascot" alt="" /></span>
                 <span
                   class="row__add"
-                  :class="{ 'is-in': cart.quantityFor(item.id) > 0 }"
+                  :class="{ 'is-in': cart.quantityForMenuItem(item.id) > 0 }"
                   @click.stop="quickAdd(item)"
                   role="button"
                   :aria-label="`Agregar ${item.name}`"
                 >
-                  <template v-if="cart.quantityFor(item.id) > 0">{{ cart.quantityFor(item.id) }}</template>
+                  <template v-if="cart.quantityForMenuItem(item.id) > 0">{{ cart.quantityForMenuItem(item.id) }}</template>
                   <template v-else>+</template>
                 </span>
               </span>
@@ -514,8 +770,8 @@ function fulfillmentLabel(item) {
           <div class="sheet sheet--item" role="dialog" aria-modal="true">
             <button class="sheet__close" type="button" aria-label="Cerrar" @click="closeItem">×</button>
             <div class="sheet__scroll">
-              <div v-if="activeItem.image" class="isheet__photo">
-                <img :src="activeItem.image" alt="" />
+              <div v-if="showImage(activeItem)" class="isheet__photo">
+                <img :src="activeItem.image" alt="" @error="onImageError(activeItem.id)" />
               </div>
               <div class="isheet__head">
                 <h3 class="isheet__name">{{ activeItem.name }}</h3>
@@ -526,12 +782,49 @@ function fulfillmentLabel(item) {
               <p v-if="activeItem.description" class="isheet__desc">
                 {{ activeItem.description }}
               </p>
+              <div v-if="sheetGroups.length" class="isheet__groups">
+                <section v-for="group in sheetGroups" :key="group.id" class="optgroup">
+                  <header class="optgroup__head">
+                    <span class="optgroup__name">{{ group.name }}</span>
+                    <span class="optgroup__hint" :class="{ 'is-req': group.required }">
+                      {{
+                        group.required
+                          ? 'Obligatorio'
+                          : group.multiple
+                            ? `Hasta ${group.max}`
+                            : 'Opcional'
+                      }}
+                    </span>
+                  </header>
+                  <ul class="optgroup__list">
+                    <li v-for="option in group.options" :key="option.id">
+                      <button
+                        type="button"
+                        class="optcard"
+                        :class="{
+                          'is-on': isOptionOn(group, option),
+                          'is-multi': group.multiple,
+                          'is-disabled': optionAtCap(group, option),
+                        }"
+                        :aria-pressed="isOptionOn(group, option)"
+                        @click="group.multiple ? toggleMulti(group, option) : chooseSingle(group, option)"
+                      >
+                        <span class="optcard__mark" aria-hidden="true"></span>
+                        <span class="optcard__name">{{ option.name }}</span>
+                        <span v-if="option.priceDelta" class="optcard__delta">
+                          +{{ formatMXN(option.priceDelta) }}
+                        </span>
+                      </button>
+                    </li>
+                  </ul>
+                </section>
+              </div>
               <label class="isheet__field">
                 <span>Nota para la cocina</span>
                 <textarea
                   v-model="sheetNote"
                   rows="2"
-                  placeholder="Ej. sin cebolla, leche deslactosada, término…"
+                  placeholder="Ej. sin cebolla, término…"
                 ></textarea>
               </label>
             </div>
@@ -541,10 +834,15 @@ function fulfillmentLabel(item) {
                 <span>{{ sheetQty }}</span>
                 <button type="button" aria-label="Agregar uno" @click="bumpSheet(1)">+</button>
               </div>
-              <button class="btn-primary" type="button" @click="confirmItem">
-                <span>{{ editingExisting ? 'Actualizar' : 'Agregar' }}</span>
-                <span v-if="activeItem.hasPrice" class="btn-primary__amt">
-                  {{ formatMXN(activeItem.price * sheetQty) }}
+              <button
+                class="btn-primary"
+                type="button"
+                :disabled="sheetGroups.length > 0 && !canAddItem"
+                @click="confirmItem"
+              >
+                <span>{{ addButtonLabel }}</span>
+                <span v-if="sheetHasPrice" class="btn-primary__amt">
+                  {{ formatMXN(sheetUnitPrice * sheetQty) }}
                 </span>
               </button>
             </div>
@@ -569,13 +867,27 @@ function fulfillmentLabel(item) {
               <ul class="cart-list">
                 <li v-for="entry in cart.entries.value" :key="entry.id" class="cart-line">
                   <span class="cart-line__media">
-                    <img v-if="entry.image" :src="entry.image" alt="" loading="lazy" />
+                    <img
+                      v-if="showImage(entry)"
+                      :src="entry.image"
+                      alt=""
+                      loading="lazy"
+                      @error="onImageError(entry.id)"
+                    />
                     <span v-else class="row__placeholder"><img :src="mascot" alt="" /></span>
                   </span>
                   <div class="cart-line__body">
                     <span class="cart-line__name">{{ entry.name }}</span>
+                    <ul v-if="entry.modifiers && entry.modifiers.length" class="cart-line__mods">
+                      <li v-for="modifier in entry.modifiers" :key="modifier.optionId">
+                        <span class="cart-line__mod-name">{{ modifier.optionName }}</span>
+                        <span v-if="modifier.priceDelta" class="cart-line__mod-delta">
+                          +{{ formatMXN(modifier.priceDelta) }}
+                        </span>
+                      </li>
+                    </ul>
                     <span class="cart-line__price" :class="{ 'is-soft': !entry.hasPrice }">
-                      {{ entry.hasPrice ? formatMXN(entry.price * entry.quantity) : 'Precio en tienda' }}
+                      {{ entry.hasPrice ? formatMXN(entry.price * entry.quantity) : priceLabel(entry) }}
                     </span>
                     <span v-if="entry.note" class="cart-line__note">“{{ entry.note }}”</span>
                   </div>
@@ -594,7 +906,7 @@ function fulfillmentLabel(item) {
                 <span class="totals__amt">{{ formatMXN(cart.estimatedTotal.value) }}</span>
               </div>
               <p v-if="cart.hasUnpriced.value" class="totals__hint">
-                Algunos productos son <strong>precio en tienda</strong>; el total final lo confirma tu mesero.
+                Algunos productos dependen de <strong>opciones o disponibilidad</strong>; el total final lo confirma tu mesero.
               </p>
               <label class="name-field" :class="{ 'is-error': nameError }">
                 <span class="name-field__label">¿A nombre de quién?</span>
@@ -663,7 +975,16 @@ function fulfillmentLabel(item) {
                     :class="{ 'is-ready': isReady(item) }"
                   >
                     <span class="done__qty">{{ item.quantity }}</span>
-                    <span class="done__name">{{ item.name }}</span>
+                    <span class="done__body">
+                      <span class="done__name">{{ item.name }}</span>
+                      <span
+                        v-for="modifier in item.modifiers || []"
+                        :key="modifier.optionId"
+                        class="done__mod"
+                      >
+                        {{ modifier.optionName }}
+                      </span>
+                    </span>
                     <span class="done__fulfillment">{{ fulfillmentLabel(item) }}</span>
                   </li>
                 </ul>
@@ -836,6 +1157,39 @@ function fulfillmentLabel(item) {
   border-color: #f6d8c2;
 }
 
+/* ---- Disponible ahora (passive label) ---- */
+.daypart {
+  margin: 0 16px 14px;
+}
+.daypart__eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.daypart__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 8px 2px 0;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+.daypart__now {
+  color: var(--ink);
+  font-weight: 900;
+}
+.daypart__hours::before,
+.daypart__count::before {
+  content: '·';
+  margin-right: 10px;
+  color: var(--line);
+}
+
 /* ---- Active order status ---- */
 .active-order {
   margin: 0 16px 14px;
@@ -922,11 +1276,27 @@ function fulfillmentLabel(item) {
   font-size: 0.86rem;
   font-weight: 900;
 }
+.active-order__body,
+.done__body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 .active-order__name {
   min-width: 0;
   font-size: 0.92rem;
   font-weight: 900;
   line-height: 1.18;
+}
+.active-order__mod,
+.done__mod {
+  padding-left: 9px;
+  border-left: 2px solid var(--line);
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1.25;
 }
 .active-order__fulfillment {
   color: var(--muted);
@@ -1043,59 +1413,13 @@ function fulfillmentLabel(item) {
   font-weight: 900;
   letter-spacing: 0;
 }
+/* Larger catalog: keep offscreen sections cheap for iOS WebKit (see
+   docs/mobile-safari-menu-crash.md). content-visibility skips paint/layout
+   for sections the user hasn't scrolled to yet. */
 .menu-section {
   scroll-margin-top: 124px;
-}
-
-/* ---- Featured rail ---- */
-.featured__rail {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding: 2px 16px 6px;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-.featured__rail::-webkit-scrollbar {
-  display: none;
-}
-.fcard {
-  flex: 0 0 auto;
-  width: 150px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  text-align: left;
-  cursor: pointer;
-  scroll-snap-align: start;
-}
-.fcard__media {
-  position: relative;
-  display: block;
-  width: 150px;
-  height: 150px;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: #f0e7da;
-}
-.fcard__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.fcard__price {
-  display: block;
-  margin: 8px 2px 2px;
-  font-size: 0.95rem;
-  font-weight: 900;
-}
-.fcard__name {
-  display: block;
-  margin: 0 2px;
-  font-size: 0.86rem;
-  font-weight: 600;
-  color: var(--ink);
-  line-height: 1.2;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 480px;
 }
 
 /* ---- List rows ---- */
@@ -1143,18 +1467,32 @@ function fulfillmentLabel(item) {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.row__price {
+.row__tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
   margin-top: 2px;
+}
+.row__price {
   font-size: 0.92rem;
   font-weight: 800;
 }
 .row__price.is-soft,
-.fcard__price.is-soft,
 .isheet__price.is-soft,
 .cart-line__price.is-soft {
   font-size: 0.8rem;
   font-weight: 700;
   color: var(--muted);
+}
+.row__opt {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f3ece1;
+  color: var(--brown);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
 }
 .row__media {
   position: relative;
@@ -1182,8 +1520,7 @@ function fulfillmentLabel(item) {
   border-radius: 0;
   background: transparent;
 }
-.row__add,
-.fcard__add {
+.row__add {
   position: absolute;
   right: -6px;
   bottom: -6px;
@@ -1202,13 +1539,7 @@ function fulfillmentLabel(item) {
   border: 2px solid var(--cream);
   cursor: pointer;
 }
-.fcard__add {
-  right: 8px;
-  bottom: 8px;
-  border-color: #fff;
-}
-.row__add.is-in,
-.fcard__add.is-in {
+.row__add.is-in {
   font-size: 0.92rem;
 }
 
@@ -1378,6 +1709,112 @@ function fulfillmentLabel(item) {
   color: var(--muted);
   line-height: 1.4;
 }
+/* Modifier / sub-product controls */
+.isheet__groups {
+  margin: 14px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.optgroup {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fffaf3;
+  padding: 12px 12px 8px;
+}
+.optgroup__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 0 2px;
+}
+.optgroup__name {
+  font-size: 0.88rem;
+  font-weight: 900;
+  color: var(--ink);
+}
+.optgroup__hint {
+  flex: 0 0 auto;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.optgroup__hint.is-req {
+  color: var(--orange);
+}
+.optgroup__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.optcard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.optcard.is-on {
+  border-color: var(--accent);
+  background: rgb(31 157 87 / 8%);
+}
+.optcard.is-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.optcard__mark {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d6c8b8;
+  border-radius: 50%;
+  background: #fff;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.optcard.is-multi .optcard__mark {
+  border-radius: 7px;
+}
+.optcard.is-on .optcard__mark {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.optcard.is-on .optcard__mark::after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  margin-top: -2px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+}
+.optcard__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.optcard__delta {
+  flex: 0 0 auto;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--brown);
+}
 .isheet__field {
   display: block;
   margin: 16px 16px 18px;
@@ -1539,6 +1976,30 @@ function fulfillmentLabel(item) {
   font-size: 0.92rem;
   font-weight: 700;
   line-height: 1.2;
+}
+.cart-line__mods {
+  margin: 3px 0 1px;
+  padding: 0 0 0 10px;
+  border-left: 2px solid var(--line);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.cart-line__mods li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  line-height: 1.3;
+}
+.cart-line__mod-delta {
+  flex: 0 0 auto;
+  color: var(--brown);
+  font-weight: 800;
 }
 .cart-line__price {
   font-size: 0.88rem;

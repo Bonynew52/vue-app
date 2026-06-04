@@ -20,6 +20,14 @@ export const printJobStatus = v.union(
   v.literal("cancelled"),
 );
 export const printJobDestination = v.union(v.literal("kitchen"), v.literal("counter"));
+const orderItemModifier = v.object({
+  groupId: v.string(),
+  groupName: v.string(),
+  optionId: v.string(),
+  optionName: v.string(),
+  priceDeltaCents: v.number(),
+  sortIndex: v.number(),
+});
 
 export default defineSchema({
   orders: defineTable({
@@ -48,6 +56,7 @@ export default defineSchema({
     quantity: v.number(),
     unitPriceCents: v.union(v.number(), v.null()),
     lineTotalCents: v.union(v.number(), v.null()),
+    modifiers: v.optional(v.array(orderItemModifier)),
     note: v.string(),
     imageUrl: v.string(),
     fulfillmentType: v.optional(fulfillmentType),
@@ -93,8 +102,15 @@ export default defineSchema({
     orderItemId: v.id("orderItems"),
     name: v.string(),
     quantity: v.number(),
+    modifiers: v.optional(v.array(orderItemModifier)),
     note: v.string(),
     fulfillmentType: fulfillmentType,
     sortIndex: v.number(),
   }).index("by_printJobId_and_sortIndex", ["printJobId", "sortIndex"]),
+
+  menuCatalogSnapshots: defineTable({
+    key: v.string(),
+    catalog: v.any(),
+    updatedAt: v.number(),
+  }).index("by_key", ["key"]),
 });

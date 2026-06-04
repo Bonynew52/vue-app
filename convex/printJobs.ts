@@ -39,6 +39,7 @@ function presentPrintJob(job: Doc<"printJobs">, items: Doc<"printJobItems">[]) {
       orderItemId: item.orderItemId,
       name: item.name,
       quantity: item.quantity,
+      modifiers: item.modifiers || [],
       note: item.note,
       fulfillmentType: item.fulfillmentType,
       sortIndex: item.sortIndex,

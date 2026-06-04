@@ -15,6 +15,18 @@ const orderItemInput = v.object({
   quantity: v.number(),
   unitPriceCents: v.union(v.number(), v.null()),
   lineTotalCents: v.union(v.number(), v.null()),
+  modifiers: v.optional(
+    v.array(
+      v.object({
+        groupId: v.string(),
+        groupName: v.string(),
+        optionId: v.string(),
+        optionName: v.string(),
+        priceDeltaCents: v.number(),
+        sortIndex: v.number(),
+      }),
+    ),
+  ),
   note: v.string(),
   imageUrl: v.string(),
   sortIndex: v.number(),
@@ -61,6 +73,32 @@ function fulfillmentForItem(item: { name: string; categoryName: string }) {
   return counterCategory || counterName ? "counter" : "table";
 }
 
+function normalizeModifiers(
+  modifiers:
+    | Array<{
+        groupId: string;
+        groupName: string;
+        optionId: string;
+        optionName: string;
+        priceDeltaCents: number;
+        sortIndex: number;
+      }>
+    | undefined,
+) {
+  return (modifiers || [])
+    .slice(0, 24)
+    .map((modifier, index) => ({
+      groupId: cleanText(modifier.groupId, 160),
+      groupName: cleanText(modifier.groupName, 120),
+      optionId: cleanText(modifier.optionId, 180),
+      optionName: cleanText(modifier.optionName, 160),
+      priceDeltaCents: Math.max(0, Math.round(modifier.priceDeltaCents) || 0),
+      sortIndex: Math.max(0, Math.floor(modifier.sortIndex) || index),
+    }))
+    .filter((modifier) => modifier.groupName && modifier.optionName)
+    .sort((a, b) => a.sortIndex - b.sortIndex);
+}
+
 function destinationForItem(item: { fulfillmentType: "table" | "counter" }) {
   return item.fulfillmentType === "counter" ? "counter" : "kitchen";
 }
@@ -77,6 +115,14 @@ function normalizeItem(item: {
   quantity: number;
   unitPriceCents: number | null;
   lineTotalCents: number | null;
+  modifiers?: Array<{
+    groupId: string;
+    groupName: string;
+    optionId: string;
+    optionName: string;
+    priceDeltaCents: number;
+    sortIndex: number;
+  }>;
   note: string;
   imageUrl: string;
   sortIndex: number;
@@ -84,6 +130,7 @@ function normalizeItem(item: {
   const quantity = Math.max(1, Math.min(99, Math.floor(item.quantity) || 1));
   const unitPriceCents = item.unitPriceCents == null ? null : Math.max(0, Math.round(item.unitPriceCents));
   const fulfillmentType = fulfillmentForItem(item);
+  const modifiers = normalizeModifiers(item.modifiers);
 
   return {
     menuItemId: cleanText(item.menuItemId, 160),
@@ -93,6 +140,7 @@ function normalizeItem(item: {
     quantity,
     unitPriceCents,
     lineTotalCents: unitPriceCents == null ? null : unitPriceCents * quantity,
+    modifiers,
     note: cleanText(item.note, 240),
     imageUrl: cleanText(item.imageUrl, 600),
     fulfillmentType,
@@ -160,6 +208,7 @@ async function createPrintJobsForOrder(
         orderItemId: id,
         name: item.name,
         quantity: item.quantity,
+        modifiers: item.modifiers,
         note: item.note,
         fulfillmentType: item.fulfillmentType,
         sortIndex: item.sortIndex,
@@ -203,6 +252,7 @@ async function presentOrder(ctx: QueryCtx | MutationCtx, order: Doc<"orders">) {
         quantity: item.quantity,
         unitPriceCents: item.unitPriceCents,
         lineTotalCents: item.lineTotalCents,
+        modifiers: item.modifiers || [],
         note: item.note,
         imageUrl: item.imageUrl,
         fulfillmentType,

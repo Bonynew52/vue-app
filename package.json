@@ -9,6 +9,8 @@
     "dev:full": "vercel dev",
     "build": "vite build",
     "preview": "vite preview",
+    "menu:build": "node scripts/build-menu-catalog.mjs",
+    "menu:import": "node scripts/import-menu-catalog.mjs",
     "staff:create": "node scripts/create-staff-user.mjs"
   },
   "dependencies": {
@@ -22,6 +24,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.7",
+    "exceljs": "^4.4.0",
     "vite": "^8.0.13"
   }
 }
