@@ -1,4 +1,5 @@
 import bebidasMenu from './menu/json/bebidas.json'
+import catalog from './menuCatalog.generated.json'
 import comidasMenu from './menu/json/comidas.json'
 import desayunosMenu from './menu/json/desayunos.json'
 import coverFallback from '../assets/campaigns/jucy lucy.png'
@@ -21,6 +22,17 @@ function slugify(value) {
 
 function cleanDisplayName(value) {
   return String(value || '').replace(DISPLAY_SUFFIX_PATTERN, ' ').replace(/\s+/g, ' ').trim()
+}
+
+const catalogImageByMenuSku = new Map(
+  (catalog.categories || [])
+    .flatMap((category) => category.items || [])
+    .filter((item) => item.menuKey && item.sku && item.image)
+    .map((item) => [`${item.menuKey}:${item.sku}`, item.image]),
+)
+
+function imageForProduct(product, menuId) {
+  return product.image || catalogImageByMenuSku.get(`${menuId}:${product.sku}`) || ''
 }
 
 function currentMenuPeriod(date = new Date()) {
@@ -64,7 +76,7 @@ function productToItem(product, menuId, categoryName, categoryIndex, itemIndex) 
     realPrice: price,
     currency: 'MXN',
     hasPrice: price > 0,
-    image: product.image || '',
+    image: imageForProduct(product, menuId),
     isAvailable: true,
     isPopular: false,
     hasToppings: product.modifierGroups?.length > 0,
