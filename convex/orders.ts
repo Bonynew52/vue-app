@@ -414,6 +414,36 @@ export const updateStatus = mutation({
       createdAt: now,
     });
 
+    if (args.status === "cancelled") {
+      const printJobs = await ctx.db
+        .query("printJobs")
+        .withIndex("by_orderId_and_createdAt", (q) => q.eq("orderId", args.orderId))
+        .collect();
+      const cancellableStatuses = new Set<string>(["pending", "printing", "failed"]);
+
+      for (const job of printJobs) {
+        if (!cancellableStatuses.has(job.status)) {
+          continue;
+        }
+        await ctx.db.patch(job._id, {
+          status: "cancelled",
+          lockedBy: null,
+          lockedAt: null,
+          claimToken: null,
+          failedAt: null,
+          lastError: null,
+          updatedAt: now,
+        });
+        await ctx.db.insert("orderEvents", {
+          orderId: args.orderId,
+          eventType: "print_cancelled",
+          actor: "staff",
+          detail: { printJobId: job._id, destination: job.destination, source: "order_cancelled" },
+          createdAt: now,
+        });
+      }
+    }
+
     const updated = await ctx.db.get(args.orderId);
     if (!updated) {
       throw new Error("Pedido no encontrado.");
