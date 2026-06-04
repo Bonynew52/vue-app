@@ -1,6 +1,6 @@
 {
   "version": "2026-06-03-parrot-excel-rappi-images-v1",
-  "generatedAt": "2026-06-04T05:08:48.180Z",
+  "generatedAt": "2026-06-04T12:42:09.235Z",
   "restaurantName": "Belly Monster Bites",
   "currency": "MXN",
   "sourceFiles": [
@@ -30,7 +30,7 @@
   "imageSource": {
     "kind": "rappi",
     "source": "https://www.rappi.com.mx/restaurantes/1930084023-belly-monster-bites",
-    "extractedAt": "2026-06-04T02:38:39.000Z",
+    "extractedAt": "2026-06-04T12:37:11.051Z",
     "note": "Rappi is used only for product image enrichment; Excel/Parrot remains canonical for menu data."
   },
   "schedule": {
@@ -149,9 +149,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/c96b3879-cf23-4719-a15d-c33c7cebe617.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659595,
+            "rappiName": "Acai Bowl (bowl)",
+            "rappiCategoryName": "Bowl (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100000
@@ -470,9 +475,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/b86a1876-3ecc-4026-8c54-481cd9af9d97.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659589,
+            "rappiName": "Avocado Scramble (toast)",
+            "rappiCategoryName": "Toast (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100201
@@ -500,9 +510,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/54e5dc72-1281-49cf-8048-ae771eeff2ab.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659568,
+            "rappiName": "Bacon Spinach (toast)",
+            "rappiCategoryName": "Toast (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100202
@@ -530,9 +545,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/993bf098-3f4e-493e-84b2-288edc3bf296.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659492,
+            "rappiName": "Mollete Con Huevo (toast)",
+            "rappiCategoryName": "Toast (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100203
@@ -601,9 +621,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/43fdcad1-558c-4328-9a3a-082f6d16187f.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659554,
+            "rappiName": "Serrano Parmesano (toast)",
+            "rappiCategoryName": "Toast (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100205
@@ -643,9 +668,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/e11011da-719a-4f52-b5ce-6d7338e027a4.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659578,
+            "rappiName": "Bacon Egg Drop (sandwich)",
+            "rappiCategoryName": "Sandwiches (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100300
@@ -673,9 +703,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/d3d83ff6-a301-440d-8326-7692d51a4429.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659529,
+            "rappiName": "Egg Drop Deluxe (sandwich)",
+            "rappiCategoryName": "Sandwiches (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100301
@@ -744,9 +779,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/489c2dd0-7344-4e24-9a01-402591df0ba2.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659490,
+            "rappiName": "Ham N Cheese E.d. (sandwich)",
+            "rappiCategoryName": "Sandwiches (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100303
@@ -774,9 +814,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/0acf40ad-64b7-4cff-8964-d9dc91e66f5c.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659489,
+            "rappiName": "Machaca Egg Drop (sandwich)",
+            "rappiCategoryName": "Sandwiches (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100304
@@ -804,9 +849,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/6cc6d53f-1861-4897-a625-eb7b2b02875f.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659580,
+            "rappiName": "Pavo Y Panela (sandwich)",
+            "rappiCategoryName": "Sandwiches (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100305
@@ -834,9 +884,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/6cc6d53f-1861-4897-a625-eb7b2b02875f.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659502,
+            "rappiName": "Simple Egg Drop (sandwich)",
+            "rappiCategoryName": "Sandwiches (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100306
@@ -864,9 +919,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/cfc2280e-9ab6-4c88-b420-8979cf57fd66.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659535,
+            "rappiName": "The Sandwich (sandwich)",
+            "rappiCategoryName": "Sandwiches (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100307
@@ -910,9 +970,14 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/23fe42f0-a0c1-429c-b3d8-19132315130a.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659551,
+            "rappiName": "Chilaquiles Con Brisket",
+            "rappiCategoryName": "Chilaquiles (Desayuno)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100400
@@ -944,9 +1009,14 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/480b946f-08a2-4f86-92c0-f73d93c201f6.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659550,
+            "rappiName": "Chilaquiles Con Huevo",
+            "rappiCategoryName": "Chilaquiles (Desayuno)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100401
@@ -978,9 +1048,14 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/d044b092-d23b-47ab-9dcd-f82ab52a193f.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659524,
+            "rappiName": "Chilaquiles Con Pollo",
+            "rappiCategoryName": "Chilaquiles (Desayuno)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100402
@@ -1012,9 +1087,14 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/f7de6334-f69e-4837-b1a5-76e052a2cfd9.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659546,
+            "rappiName": "Chilaquiles Solos",
+            "rappiCategoryName": "Chilaquiles (Desayuno)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100403
@@ -1054,9 +1134,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/89e2dfa2-790f-44a3-b974-4e1cca883841.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659584,
+            "rappiName": "Egg Drop Kids (kids)",
+            "rappiCategoryName": "Kids Menu (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100500
@@ -1084,9 +1169,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/e03ae527-745c-4d2b-8b42-9365e1ae1412.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659493,
+            "rappiName": "Sandwichito (kids)",
+            "rappiCategoryName": "Kids Menu (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100501
@@ -1126,9 +1216,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/4c338f91-40ea-4a58-adbc-9467318b54d1.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659579,
+            "rappiName": "Smash Hashbrown (sides)",
+            "rappiCategoryName": "Sides (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100600
@@ -1156,9 +1251,14 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/aab84ed6-c281-4467-baf9-4e2a1b9ca1d5.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659599,
+            "rappiName": "Special Bacon (sides)",
+            "rappiCategoryName": "Sides (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 100601
@@ -2287,9 +2387,14 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/25dc1cb7-c223-4e13-8695-39f13dfdb104.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659497,
+            "rappiName": "Goat Cheese Mango (ensalada)",
+            "rappiCategoryName": "Ensaladas (rappi)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 200403
@@ -2892,9 +2997,14 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/79cf9b89-3657-41b2-9786-4082f754ff82.png?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659491,
+            "rappiName": "Limonada Coconut Mint",
+            "rappiCategoryName": "Chillers"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 102
@@ -3149,9 +3259,14 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/1f0908a1-ccd9-4356-96fd-e282224540c1.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659495,
+            "rappiName": "Limonada Sparkling Mojito",
+            "rappiCategoryName": "Chillers"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 108
@@ -4526,9 +4641,14 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/9a7d65bb-473e-494c-bcab-a1157444c694.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659501,
+            "rappiName": "Matcha Pistache",
+            "rappiCategoryName": "Specialty Cofy (Helado)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 705
@@ -4607,9 +4727,14 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/360bf213-ca8f-49a1-9d9f-b8e677b3cd6f.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659552,
+            "rappiName": "Strawberry Matcha (Julio)",
+            "rappiCategoryName": "Specialty Cofy (Helado)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 707
@@ -5488,9 +5613,14 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "https://images.rappi.com.mx/products/45d9e2d1-e048-40ba-91b1-3eb38fa56a96.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659520,
+            "rappiName": "Frappe Pepino Menta",
+            "rappiCategoryName": "Frappe Chillers"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 1103
@@ -6989,12 +7119,12 @@
     "itemCount": 139,
     "categoryCount": 27,
     "modifierGroupCount": 31,
-    "imageMatchedCount": 95,
-    "imageMissingCount": 44,
+    "imageMatchedCount": 121,
+    "imageMissingCount": 18,
     "imageMissingByMenu": {
-      "bebidas": 9,
-      "desayunos": 20,
-      "comidas": 15
+      "bebidas": 4,
+      "desayunos": 0,
+      "comidas": 14
     }
   }
 }

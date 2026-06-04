@@ -218,6 +218,9 @@ function withAliasesForRappi(name, category) {
       ['blackberry basil', 'Blackberry Basil Lemonade'],
       ['peach tea lemonade', 'Peach Tea Lemonade Durazno'],
     ])
+    if (rest) {
+      candidates.add(rest)
+    }
     candidates.add(aliases.get(normalizeName(rest)) || `${rest} Lemonade`)
   }
 
