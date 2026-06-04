@@ -4,26 +4,31 @@ import { useConvexMutation, useConvexQuery } from 'convex-vue'
 import { api } from '../../convex/_generated/api'
 import { useRouter } from 'vue-router'
 import { authClient } from '../lib/auth-client'
+import {
+  currentShift,
+  formatShiftTime,
+  nextShiftChange,
+  shiftLabel,
+  shiftStart,
+} from '../lib/shift'
+import { menuKeyRank, menuMetaForOrderItem } from '../data/menu'
 import { formatMXN } from '../utils/formatPrice'
 import mascotIcon from '../assets/brand/mascot.svg'
 
 const router = useRouter()
 
-/* Pipeline metadata: label + the one-tap forward move for each state. */
-const flow = {
-  new: { label: 'Nuevos', next: 'capturing', nextLabel: 'Capturar en Parrot' },
-  capturing: { label: 'En Parrot', next: 'preparing', nextLabel: 'A preparar' },
-  preparing: { label: 'Preparando', next: 'ready', nextLabel: 'Marcar listo' },
-  ready: { label: 'Listos', next: 'served', nextLabel: 'Entregado' },
-  served: { label: 'Servidos', next: null, nextLabel: '' },
-  cancelled: { label: 'Cancelados', next: null, nextLabel: '' },
-}
-
-const prevState = {
-  capturing: 'new',
-  preparing: 'capturing',
-  ready: 'preparing',
-  served: 'ready',
+/* Status labels. The pipeline is intentionally flat now: a table order is
+   captured into Parrot and then closed when paid/served. Per-item counter
+   pickup readiness is handled separately in the Barra panel, not as an
+   order-wide stage. preparing/ready may still appear on legacy orders, so they
+   are folded into the "en captura" treatment. */
+const statusLabel = {
+  new: 'Nuevo',
+  capturing: 'En captura',
+  preparing: 'En captura',
+  ready: 'En captura',
+  served: 'Cerrado',
+  cancelled: 'Cancelado',
 }
 
 const session = ref(null)
@@ -33,54 +38,157 @@ const statusError = ref('')
 const now = ref(Date.now())
 const printRequestedAt = ref(null)
 let clockTimer = null
+
 const orderQuery = useConvexQuery(api.orders.list, () => ({ status: filter.value }))
 const updateOrderStatus = useConvexMutation(api.orders.updateStatus)
+const updatePickup = useConvexMutation(api.orders.updatePickupStatus)
 const orders = computed(() => orderQuery.data.value || [])
-const isLoading = computed(() => orderQuery.isPending.value || updateOrderStatus.isPending.value)
+const isLoading = computed(
+  () =>
+    orderQuery.isPending.value ||
+    updateOrderStatus.isPending.value ||
+    updatePickup.isPending.value,
+)
 const error = computed(() => statusError.value || orderQuery.error.value?.message || '')
 
+/* ---------- Shift awareness ---------- */
+const shift = computed(() => currentShift(new Date(now.value)))
+const shiftBadge = computed(() => ({
+  label: shiftLabel(shift.value),
+  changeAt: formatShiftTime(nextShiftChange(new Date(now.value))),
+}))
+
+function sessionCreatedAt() {
+  // Better Auth normally nests the session record under `session`, but be
+  // tolerant of a flatter shape too. createdAt may be a Date or ISO string.
+  const raw = session.value?.session?.createdAt ?? session.value?.createdAt
+  if (!raw) {
+    return null
+  }
+  const ms = new Date(raw).getTime()
+  return Number.isFinite(ms) ? ms : null
+}
+
+// If the signed-in session predates the current shift, the previous shift is
+// still logged in: sign them out and send the incoming shift to the login.
+// Guard on a known createdAt so a missing timestamp can't cause a sign-out loop
+// (a fresh login always has createdAt >= the shift start).
+async function enforceShift() {
+  const created = sessionCreatedAt()
+  if (created == null) {
+    return false
+  }
+  if (created < shiftStart(new Date(now.value)).getTime()) {
+    await authClient.signOut()
+    await router.replace({ name: 'login', query: { reason: 'shift' } })
+    return true
+  }
+  return false
+}
+
+/* ---------- Order buckets ---------- */
 const activeOrders = computed(() =>
   orders.value.filter((order) => order.status !== 'served' && order.status !== 'cancelled'),
-)
-const readyCount = computed(() => orders.value.filter((order) => order.status === 'ready').length)
-const lateCount = computed(
-  () => activeOrders.value.filter((order) => ageTier(order) === 'late').length,
 )
 
 function byOldest(list) {
   return list.slice().sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
 }
-
-function ordersOf(status) {
-  return byOldest(orders.value.filter((order) => order.status === status))
+function byNewest(list) {
+  return list.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 }
 
-/* New orders are the job: they dominate the main column. */
-const newOrders = computed(() => ordersOf('new'))
-
-const railStatuses = computed(() =>
-  filter.value === 'all'
-    ? ['capturing', 'preparing', 'ready', 'served', 'cancelled']
-    : ['capturing', 'preparing', 'ready'],
+// New orders lead (they need Parrot entry first), then in-capture orders, each
+// oldest-first so nothing waits too long.
+const captureOrders = computed(() => {
+  const rank = (status) => (status === 'new' ? 0 : 1)
+  return activeOrders.value
+    .slice()
+    .sort(
+      (a, b) =>
+        rank(a.status) - rank(b.status) || new Date(a.createdAt) - new Date(b.createdAt),
+    )
+})
+const newCount = computed(() => activeOrders.value.filter((o) => o.status === 'new').length)
+const capturingCount = computed(() => activeOrders.value.filter((o) => o.status !== 'new').length)
+const closedOrders = computed(() =>
+  byNewest(orders.value.filter((o) => o.status === 'served' || o.status === 'cancelled')),
 )
 
-const railGroups = computed(() =>
-  railStatuses.value.map((status) => ({
-    status,
-    label: flow[status].label,
-    orders: ordersOf(status),
-  })),
+/* ---------- Barra / Pickup (counter items) ---------- */
+const barraItems = computed(() => {
+  const list = []
+  byOldest(activeOrders.value).forEach((order) => {
+    order.items.forEach((item) => {
+      if (item.fulfillmentType === 'counter') {
+        list.push({ order, item })
+      }
+    })
+  })
+  return list
+})
+const barraPending = computed(() =>
+  barraItems.value.filter(({ item }) => item.pickupStatus !== 'ready'),
+)
+const barraReady = computed(() =>
+  barraItems.value.filter(({ item }) => item.pickupStatus === 'ready'),
 )
 
+/* ---------- Parrot routing: group an order's lines by menu -> category ----------
+   Order items only store a menuItemId + category name; the menu label and
+   catalog ordering come from the generated catalog (legacy ids fall back to the
+   id prefix). This mirrors how staff navigate Parrot to copy the order. */
+function parrotGroupsFor(order) {
+  const byMenu = new Map()
+
+  order.items.forEach((item) => {
+    const meta = menuMetaForOrderItem(item.menuItemId, item.categoryName)
+    const menuKey = meta.menuKey || 'otros'
+
+    if (!byMenu.has(menuKey)) {
+      byMenu.set(menuKey, {
+        menuKey,
+        menuLabel: meta.menuLabel,
+        rank: menuKeyRank(meta.menuKey),
+        categories: new Map(),
+      })
+    }
+    const menuGroup = byMenu.get(menuKey)
+    const categoryName = meta.categoryName || 'Sin categoría'
+
+    if (!menuGroup.categories.has(categoryName)) {
+      menuGroup.categories.set(categoryName, {
+        categoryName,
+        sort: meta.categorySortIndex,
+        items: [],
+      })
+    }
+    menuGroup.categories.get(categoryName).items.push({ ...item, _sort: meta.itemSortIndex })
+  })
+
+  return [...byMenu.values()]
+    .sort((a, b) => a.rank - b.rank || a.menuLabel.localeCompare(b.menuLabel))
+    .map((menuGroup) => ({
+      menuKey: menuGroup.menuKey,
+      menuLabel: menuGroup.menuLabel,
+      categories: [...menuGroup.categories.values()]
+        .sort((a, b) => a.sort - b.sort || a.categoryName.localeCompare(b.categoryName))
+        .map((category) => ({
+          categoryName: category.categoryName,
+          items: category.items.slice().sort((a, b) => a._sort - b._sort),
+        })),
+    }))
+}
+
+/* ---------- Formatting ---------- */
 function money(cents, hasUnpriced = false) {
   return `${formatMXN((Number(cents) || 0) / 100)}${hasUnpriced ? '+' : ''}`
 }
 
 function timeLabel(value) {
-  return new Intl.DateTimeFormat('es-MX', {
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(new Date(value))
+  return new Intl.DateTimeFormat('es-MX', { hour: '2-digit', minute: '2-digit' }).format(
+    new Date(value),
+  )
 }
 
 function minutesSince(value) {
@@ -100,16 +208,9 @@ function elapsedLabel(value) {
 }
 
 function printTimestamp(value) {
-  return new Intl.DateTimeFormat('es-MX', {
-    dateStyle: 'short',
-    timeStyle: 'short',
-  }).format(new Date(value))
-}
-
-async function printDemoTicket() {
-  printRequestedAt.value = Date.now()
-  await nextTick()
-  window.print()
+  return new Intl.DateTimeFormat('es-MX', { dateStyle: 'short', timeStyle: 'short' }).format(
+    new Date(value),
+  )
 }
 
 /* Aging tiers drive the urgency accent on open tickets. */
@@ -126,28 +227,51 @@ function ageTier(order) {
   }
   return 'fresh'
 }
+const lateCount = computed(
+  () => activeOrders.value.filter((order) => ageTier(order) === 'late').length,
+)
 
-async function loadSession() {
-  const result = await authClient.getSession()
-  session.value = result?.data || null
-
-  if (!session.value) {
-    await router.replace({ name: 'login' })
-  }
+function isCounter(item) {
+  return item.fulfillmentType === 'counter'
 }
 
-async function setFilter(nextFilter) {
+/* ---------- Actions ---------- */
+async function printDemoTicket() {
+  printRequestedAt.value = Date.now()
+  await nextTick()
+  window.print()
+}
+
+function setFilter(nextFilter) {
   filter.value = nextFilter
 }
 
 async function updateStatus(order, status) {
   statusError.value = ''
-
   try {
     await updateOrderStatus.mutate({ orderId: order.id, status })
   } catch (updateError) {
     statusError.value = updateError.message
   }
+}
+
+async function setPickup(item, status) {
+  statusError.value = ''
+  try {
+    await updatePickup.mutate({ orderItemId: item.id, status })
+  } catch (pickupError) {
+    statusError.value = pickupError.message
+  }
+}
+
+async function loadSession() {
+  const result = await authClient.getSession()
+  session.value = result?.data || null
+  if (!session.value) {
+    await router.replace({ name: 'login' })
+    return false
+  }
+  return true
 }
 
 async function signOut() {
@@ -156,11 +280,15 @@ async function signOut() {
 }
 
 onMounted(async () => {
-  await loadSession()
-  if (session.value) {
-    clockTimer = window.setInterval(() => {
-      now.value = Date.now()
-    }, 15000)
+  const signedIn = await loadSession()
+  if (signedIn) {
+    const kicked = await enforceShift()
+    if (!kicked) {
+      clockTimer = window.setInterval(() => {
+        now.value = Date.now()
+        enforceShift()
+      }, 15000)
+    }
   }
   isBooting.value = false
 })
@@ -179,22 +307,30 @@ onBeforeUnmount(() => {
         <img class="brand__mark" :src="mascotIcon" alt="" />
         <div class="brand__text">
           <h1 class="brand__title">Pedidos de mesa</h1>
-          <span class="sync" :class="{ 'is-busy': isLoading }">
-            <i class="sync__dot" aria-hidden="true"></i>
-            {{ isLoading ? 'Sincronizando' : 'En vivo' }}
-          </span>
+          <div class="brand__meta">
+            <span class="sync" :class="{ 'is-busy': isLoading }">
+              <i class="sync__dot" aria-hidden="true"></i>
+              {{ isLoading ? 'Sincronizando' : 'En vivo' }}
+            </span>
+            <span class="shift" :class="`shift--${shift}`">
+              {{ shiftBadge.label }} · cambia {{ shiftBadge.changeAt }}
+            </span>
+          </div>
         </div>
       </div>
 
       <div class="stats" aria-label="Resumen de pedidos">
         <span class="stat stat--new">
-          <b>{{ newOrders.length }}</b><span>Por capturar</span>
+          <b>{{ newCount }}</b><span>Por capturar</span>
         </span>
         <span class="stat">
-          <b>{{ activeOrders.length }}</b><span>Activos</span>
+          <b>{{ capturingCount }}</b><span>En captura</span>
+        </span>
+        <span class="stat stat--barra">
+          <b>{{ barraPending.length }}</b><span>Barra pend.</span>
         </span>
         <span class="stat stat--ready">
-          <b>{{ readyCount }}</b><span>Listos</span>
+          <b>{{ barraReady.length }}</b><span>Listos barra</span>
         </span>
         <span v-if="lateCount > 0" class="stat stat--late">
           <b>{{ lateCount }}</b><span>Demorados</span>
@@ -210,9 +346,7 @@ onBeforeUnmount(() => {
             Todos
           </button>
         </div>
-        <button class="print-demo" type="button" @click="printDemoTicket">
-          Imprimir prueba
-        </button>
+        <button class="print-demo" type="button" @click="printDemoTicket">Imprimir prueba</button>
         <a
           class="apk-download"
           href="/downloads/belly-imin-print-test.apk"
@@ -228,7 +362,7 @@ onBeforeUnmount(() => {
 
     <section v-if="isBooting" class="board__boot">Cargando tablero…</section>
 
-    <!-- Calm shift: nothing active. One intentional, branded rest state. -->
+    <!-- Nothing active: one calm, branded rest state. -->
     <section
       v-else-if="activeOrders.length === 0 && filter === 'active'"
       class="rest rest--full"
@@ -239,63 +373,104 @@ onBeforeUnmount(() => {
     </section>
 
     <div v-else class="board__body">
-      <!-- HERO: new orders that need capturing into Parrot -->
-      <section class="queue">
+      <!-- MAIN: orders to copy into Parrot, grouped by menu -> category -> item -->
+      <section class="capture">
         <header class="section-head">
-          <h2 class="section-head__title">Por capturar</h2>
-          <span class="section-head__badge" :class="{ 'is-hot': newOrders.length > 0 }">
-            {{ newOrders.length }}
-          </span>
+          <h2 class="section-head__title">Pasar a Parrot</h2>
+          <span class="section-head__hint">menú → categoría → producto → modificadores</span>
         </header>
 
-        <div v-if="newOrders.length > 0" class="queue__grid">
+        <div v-if="captureOrders.length > 0" class="capture__grid">
           <article
-            v-for="order in newOrders"
+            v-for="order in captureOrders"
             :key="order.id"
-            class="card"
-            :class="`age-${ageTier(order)}`"
+            class="ticket"
+            :class="[`age-${ageTier(order)}`, `is-${order.status}`]"
           >
-            <header class="card__head">
-              <span class="card__mesa">Mesa {{ order.tableId }}</span>
-              <span class="card__code">#{{ order.shortCode }}</span>
+            <header class="ticket__head">
+              <div class="ticket__id">
+                <span class="ticket__mesa">Mesa {{ order.tableId }}</span>
+                <span v-if="order.customerName" class="ticket__name">{{ order.customerName }}</span>
+              </div>
+              <div class="ticket__tags">
+                <span class="ticket__status" :class="`status-${order.status}`">
+                  {{ statusLabel[order.status] || order.status }}
+                </span>
+                <span class="ticket__code">#{{ order.shortCode }}</span>
+              </div>
             </header>
 
-            <div class="card__meta">
-              <span class="card__clock">{{ timeLabel(order.createdAt) }}</span>
+            <div class="ticket__meta">
+              <span class="ticket__clock">{{ timeLabel(order.createdAt) }}</span>
               <span class="age" :class="`age-${ageTier(order)}`">{{ elapsedLabel(order.createdAt) }}</span>
             </div>
 
-            <ul class="items">
-              <li v-for="item in order.items" :key="item.id">
-                <span class="qty">{{ item.quantity }}</span>
-                <span class="items__body">
-                  <strong>{{ item.name }}</strong>
-                  <span
-                    v-for="(modifier, mIndex) in item.modifiers"
-                    :key="`${item.id}-mod-${mIndex}`"
-                    class="items__mod"
-                  >
-                    {{ modifier.optionName }}
-                    <em v-if="modifier.priceDeltaCents > 0">+{{ money(modifier.priceDeltaCents) }}</em>
-                  </span>
-                  <small v-if="item.note">{{ item.note }}</small>
-                </span>
-                <span class="items__line">
-                  {{ item.lineTotalCents == null ? 'Tienda' : money(item.lineTotalCents) }}
-                </span>
-              </li>
-            </ul>
+            <div class="parrot">
+              <section v-for="menu in parrotGroupsFor(order)" :key="menu.menuKey" class="parrot__menu">
+                <h3 class="parrot__menu-name">{{ menu.menuLabel }}</h3>
+                <div v-for="cat in menu.categories" :key="cat.categoryName" class="parrot__cat">
+                  <span class="parrot__cat-name">{{ cat.categoryName }}</span>
+                  <ul class="lines">
+                    <li v-for="item in cat.items" :key="item.id" class="line">
+                      <span class="qty">{{ item.quantity }}</span>
+                      <div class="line__body">
+                        <span class="line__name">
+                          {{ item.name }}
+                          <span v-if="isCounter(item)" class="line__pill">Barra</span>
+                        </span>
+                        <span
+                          v-for="(modifier, mIndex) in item.modifiers"
+                          :key="`${item.id}-mod-${mIndex}`"
+                          class="line__mod"
+                        >
+                          <em class="line__mod-group">{{ modifier.groupName }}:</em>
+                          {{ modifier.optionName }}
+                          <b v-if="modifier.priceDeltaCents > 0">+{{ money(modifier.priceDeltaCents) }}</b>
+                        </span>
+                        <small v-if="item.note" class="line__note">“{{ item.note }}”</small>
+                      </div>
+                      <span class="line__price">
+                        {{ item.lineTotalCents == null ? 'Tienda' : money(item.lineTotalCents) }}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+            </div>
 
-            <div class="card__foot">
+            <div class="ticket__foot">
               <span>{{ order.itemCount }} artículo{{ order.itemCount === 1 ? '' : 's' }}</span>
               <strong>{{ money(order.subtotalCents, order.hasUnpriced) }}</strong>
             </div>
 
-            <div class="card__actions">
-              <button type="button" class="capture" @click="updateStatus(order, 'capturing')">
+            <div class="ticket__actions">
+              <button
+                v-if="order.status === 'new'"
+                type="button"
+                class="btn btn--capture"
+                @click="updateStatus(order, 'capturing')"
+              >
                 Capturar en Parrot
               </button>
-              <button type="button" class="ghost ghost--danger" @click="updateStatus(order, 'cancelled')">
+              <template v-else>
+                <button type="button" class="btn btn--close" @click="updateStatus(order, 'served')">
+                  Cerrar · pagado
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--ghost"
+                  title="Regresar a nuevo"
+                  @click="updateStatus(order, 'new')"
+                >
+                  ← Nuevo
+                </button>
+              </template>
+              <button
+                type="button"
+                class="btn btn--ghost btn--danger"
+                title="Cancelar pedido"
+                @click="updateStatus(order, 'cancelled')"
+              >
                 Cancelar
               </button>
             </div>
@@ -304,82 +479,101 @@ onBeforeUnmount(() => {
 
         <div v-else class="rest rest--inline">
           <img class="rest__mascot rest__mascot--sm" :src="mascotIcon" alt="" />
-          <p>Sin pedidos nuevos por capturar.</p>
+          <p>Sin pedidos por capturar.</p>
         </div>
-      </section>
 
-      <!-- RAIL: everything already in motion, compact -->
-      <aside class="rail" aria-label="Pedidos en proceso">
-        <section
-          v-for="group in railGroups"
-          :key="group.status"
-          class="rail__group"
-          :class="`lane--${group.status}`"
-        >
-          <header class="section-head section-head--rail">
-            <span class="section-head__title">
-              <i class="lane__dot" aria-hidden="true"></i>
-              {{ group.label }}
-            </span>
-            <span class="section-head__count">{{ group.orders.length }}</span>
+        <!-- Closed orders, only in the "Todos" filter, de-emphasized. -->
+        <section v-if="filter === 'all' && closedOrders.length > 0" class="closed">
+          <header class="section-head section-head--sub">
+            <h3 class="section-head__title">Cerrados / cancelados</h3>
+            <span class="section-head__count">{{ closedOrders.length }}</span>
           </header>
-
-          <article
-            v-for="order in group.orders"
-            :key="order.id"
-            class="chip"
-            :class="`age-${ageTier(order)}`"
-          >
-            <div class="chip__top">
-              <span class="chip__mesa">Mesa {{ order.tableId }}</span>
-              <span class="age age--sm" :class="`age-${ageTier(order)}`">
-                {{ elapsedLabel(order.createdAt) }}
+          <div class="closed__grid">
+            <article v-for="order in closedOrders" :key="order.id" class="closed-row" :class="`is-${order.status}`">
+              <div class="closed-row__id">
+                <span class="closed-row__mesa">Mesa {{ order.tableId }}</span>
+                <span class="closed-row__code">#{{ order.shortCode }}</span>
+              </div>
+              <span class="closed-row__status" :class="`status-${order.status}`">
+                {{ statusLabel[order.status] || order.status }}
               </span>
-            </div>
-            <div class="chip__sub">
-              <span class="chip__code">#{{ order.shortCode }}</span>
-              <span>{{ order.itemCount }} art · {{ money(order.subtotalCents, order.hasUnpriced) }}</span>
-            </div>
-            <div class="chip__actions">
-              <button
-                v-if="flow[order.status].next"
-                type="button"
-                class="advance"
-                @click="updateStatus(order, flow[order.status].next)"
-              >
-                {{ flow[order.status].nextLabel }}
-              </button>
-              <button
-                v-if="order.status === 'served' || order.status === 'cancelled'"
-                type="button"
-                class="ghost ghost--sm"
-                @click="updateStatus(order, 'new')"
-              >
+              <span class="closed-row__total">{{ money(order.subtotalCents, order.hasUnpriced) }}</span>
+              <button type="button" class="btn btn--ghost btn--sm" @click="updateStatus(order, 'new')">
                 Reabrir
               </button>
-              <button
-                v-if="prevState[order.status]"
-                type="button"
-                class="ghost ghost--sm"
-                @click="updateStatus(order, prevState[order.status])"
-                aria-label="Regresar al estado anterior"
-                title="Regresar"
-              >
-                ←
-              </button>
-              <button
-                v-if="order.status !== 'cancelled' && order.status !== 'served'"
-                type="button"
-                class="ghost ghost--sm ghost--danger"
-                @click="updateStatus(order, 'cancelled')"
-                aria-label="Cancelar pedido"
-                title="Cancelar"
-              >
-                ✕
-              </button>
-            </div>
-          </article>
+            </article>
+          </div>
         </section>
+      </section>
+
+      <!-- SIDE: Barra / Pickup counter items -->
+      <aside class="barra" aria-label="Barra y pickup">
+        <header class="section-head">
+          <h2 class="section-head__title">
+            <i class="barra__dot" aria-hidden="true"></i>
+            Barra / Pickup
+          </h2>
+          <span class="section-head__count">{{ barraItems.length }}</span>
+        </header>
+
+        <p class="barra__hint">Bebidas, shakes y repostería que el cliente recoge en barra.</p>
+
+        <div v-if="barraItems.length === 0" class="barra__empty">
+          Sin artículos de barra en pedidos activos.
+        </div>
+
+        <template v-else>
+          <h3 v-if="barraPending.length > 0" class="barra__group-title">Pendientes</h3>
+          <article
+            v-for="{ order, item } in barraPending"
+            :key="item.id"
+            class="pickup"
+          >
+            <div class="pickup__head">
+              <span class="pickup__where">Mesa {{ order.tableId }} · #{{ order.shortCode }}</span>
+              <span class="age age--sm" :class="`age-${ageTier(order)}`">{{ elapsedLabel(order.createdAt) }}</span>
+            </div>
+            <div class="pickup__line">
+              <span class="qty qty--sm">{{ item.quantity }}</span>
+              <div class="pickup__body">
+                <span class="pickup__name">{{ item.name }}</span>
+                <span
+                  v-for="(modifier, mIndex) in item.modifiers"
+                  :key="`${item.id}-bmod-${mIndex}`"
+                  class="pickup__mod"
+                >
+                  {{ modifier.optionName }}
+                </span>
+              </div>
+            </div>
+            <button type="button" class="btn btn--ready" @click="setPickup(item, 'ready')">
+              Listo para recoger
+            </button>
+          </article>
+
+          <h3 v-if="barraReady.length > 0" class="barra__group-title barra__group-title--ready">
+            Listos para recoger
+          </h3>
+          <article
+            v-for="{ order, item } in barraReady"
+            :key="`ready-${item.id}`"
+            class="pickup pickup--ready"
+          >
+            <div class="pickup__head">
+              <span class="pickup__where">Mesa {{ order.tableId }} · #{{ order.shortCode }}</span>
+              <span class="pickup__ready-tag">Listo</span>
+            </div>
+            <div class="pickup__line">
+              <span class="qty qty--sm">{{ item.quantity }}</span>
+              <div class="pickup__body">
+                <span class="pickup__name">{{ item.name }}</span>
+              </div>
+            </div>
+            <button type="button" class="btn btn--ghost btn--sm" @click="setPickup(item, 'pending')">
+              Deshacer
+            </button>
+          </article>
+        </template>
       </aside>
     </div>
   </main>
@@ -454,11 +648,8 @@ onBeforeUnmount(() => {
   --yellow: #f8d94a;
   --danger: #c0392b;
 
-  /* Status hues */
   --c-new: #d36c00;
   --c-capturing: #7e4743;
-  --c-preparing: #c6850a;
-  --c-ready: #1f9d57;
   --c-served: #9c8473;
   --c-cancelled: #c0392b;
 
@@ -500,10 +691,18 @@ onBeforeUnmount(() => {
 
 .brand__title {
   margin: 0;
-  font-size: clamp(1.2rem, 1.9vw, 1.45rem);
+  font-size: 1.35rem;
   font-weight: 800;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   line-height: 1.05;
+}
+
+.brand__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin-top: 3px;
 }
 
 .sync {
@@ -530,6 +729,31 @@ onBeforeUnmount(() => {
   animation: pulse 1.2s ease-in-out infinite;
 }
 
+.shift {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--coffee);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.shift--morning {
+  border-color: rgb(198 133 10 / 36%);
+  background: rgb(248 217 74 / 20%);
+  color: #8a5e06;
+}
+
+.shift--afternoon {
+  border-color: rgb(126 71 67 / 32%);
+  background: rgb(126 71 67 / 9%);
+  color: var(--coffee);
+}
+
 /* ---------- Stats ---------- */
 .stats {
   display: flex;
@@ -551,6 +775,7 @@ onBeforeUnmount(() => {
   letter-spacing: 0.02em;
   text-transform: uppercase;
   line-height: 1.2;
+  text-align: center;
 }
 
 .stat b {
@@ -567,6 +792,10 @@ onBeforeUnmount(() => {
 
 .stat--new b {
   color: var(--orange);
+}
+
+.stat--barra b {
+  color: var(--coffee);
 }
 
 .stat--ready b {
@@ -677,14 +906,14 @@ onBeforeUnmount(() => {
   font-weight: 600;
 }
 
-/* ---------- Body: focus + rail ---------- */
+/* ---------- Body: capture column + barra panel ---------- */
 .board__body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(300px, 28vw, 380px);
+  grid-template-columns: minmax(0, 1fr) clamp(300px, 26vw, 360px);
   gap: clamp(16px, 2.2vw, 28px);
   flex: 1 1 auto;
   min-height: 0;
-  padding: clamp(16px, 2vw, 24px) clamp(16px, 2.4vw, 28px) max(18px, env(safe-area-inset-bottom));
+  padding: clamp(14px, 1.8vw, 22px) clamp(16px, 2.4vw, 28px) max(18px, env(safe-area-inset-bottom));
 }
 
 .section-head {
@@ -692,6 +921,10 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 10px;
   margin-bottom: 12px;
+}
+
+.section-head--sub {
+  margin-top: 18px;
 }
 
 .section-head__title {
@@ -706,43 +939,37 @@ onBeforeUnmount(() => {
   color: var(--coffee);
 }
 
-.section-head__badge {
-  display: grid;
-  place-items: center;
-  min-width: 28px;
-  height: 28px;
-  padding: 0 8px;
-  border-radius: 9px;
-  background: var(--cream-2);
-  color: var(--muted);
-  font-size: 0.95rem;
+.section-head__hint {
+  color: var(--faint);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.section-head__count {
+  margin-left: auto;
+  color: var(--faint);
+  font-size: 0.85rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
-.section-head__badge.is-hot {
-  background: var(--orange);
-  color: #fff;
-  box-shadow: 0 3px 10px rgb(211 108 0 / 32%);
-}
-
-/* ---------- Queue (hero cards) ---------- */
-.queue {
+/* ---------- Capture column ---------- */
+.capture {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  overflow-y: auto;
 }
 
-.queue__grid {
+.capture__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 14px;
   align-content: start;
-  overflow-y: auto;
-  padding-bottom: 4px;
 }
 
-.card {
+.ticket {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--line);
@@ -752,53 +979,105 @@ onBeforeUnmount(() => {
   box-shadow: 0 2px 4px rgb(46 28 18 / 5%), 0 10px 26px rgb(46 28 18 / 6%);
 }
 
-.card.age-warn {
-  border-top-color: var(--c-preparing);
+.ticket.is-capturing,
+.ticket.is-preparing,
+.ticket.is-ready {
+  border-top-color: var(--c-capturing);
 }
 
-.card.age-late {
-  border-top-color: var(--danger);
+.ticket.age-late {
   box-shadow: 0 2px 4px rgb(46 28 18 / 5%), 0 0 0 2px rgb(192 57 43 / 22%);
 }
 
-.card__head {
+.ticket__head {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
-  padding: 13px 15px 4px;
+  padding: 12px 15px 6px;
 }
 
-.card__mesa {
-  font-size: 1.55rem;
+.ticket__id {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ticket__mesa {
+  font-size: 1.5rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1;
 }
 
-.card__code {
+.ticket__name {
+  margin-top: 3px;
+  color: var(--coffee);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ticket__tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+
+.ticket__status {
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.status-new {
+  background: rgb(211 108 0 / 12%);
+  color: var(--orange);
+}
+
+.status-capturing,
+.status-preparing,
+.status-ready {
+  background: rgb(126 71 67 / 12%);
+  color: var(--coffee);
+}
+
+.status-served {
+  background: rgb(31 157 87 / 12%);
+  color: var(--green-press);
+}
+
+.status-cancelled {
+  background: rgb(192 57 43 / 12%);
+  color: var(--danger);
+}
+
+.ticket__code {
   color: var(--faint);
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 0.86rem;
+  font-size: 0.82rem;
   font-weight: 600;
 }
 
-.card__meta {
+.ticket__meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 0 15px 10px;
+  padding: 0 15px 8px;
 }
 
-.card__clock {
+.ticket__clock {
   color: var(--faint);
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.78rem;
   font-weight: 600;
 }
 
-/* Age badge */
 .age {
   display: inline-flex;
   align-items: center;
@@ -827,24 +1106,53 @@ onBeforeUnmount(() => {
   animation: pulse 1.6s ease-in-out infinite;
 }
 
-.items {
-  margin: 0;
-  padding: 4px 15px;
-  list-style: none;
+/* ---------- Parrot path ---------- */
+.parrot {
   border-top: 1px solid var(--line-soft);
 }
 
-.items li {
-  display: grid;
-  grid-template-columns: 30px 1fr auto;
-  gap: 11px;
-  align-items: start;
-  padding: 8px 0;
+.parrot__menu {
+  padding: 8px 15px 4px;
   border-bottom: 1px solid var(--line-soft);
 }
 
-.items li:last-child {
+.parrot__menu:last-child {
   border-bottom: 0;
+}
+
+.parrot__menu-name {
+  margin: 0 0 4px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.parrot__cat {
+  margin-bottom: 6px;
+}
+
+.parrot__cat-name {
+  display: block;
+  margin: 4px 0 2px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.lines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 10px;
+  align-items: start;
+  padding: 5px 0;
 }
 
 .qty {
@@ -861,31 +1169,57 @@ onBeforeUnmount(() => {
   font-variant-numeric: tabular-nums;
 }
 
-.items__body strong {
+.qty--sm {
+  min-width: 24px;
+  height: 22px;
+  font-size: 0.82rem;
+}
+
+.line__name {
   display: block;
-  font-size: 0.98rem;
+  font-size: 0.96rem;
   font-weight: 700;
   line-height: 1.25;
 }
 
-.items__mod {
+.line__pill {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgb(126 71 67 / 12%);
+  color: var(--coffee);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.line__mod {
   display: block;
   margin-top: 2px;
   padding-left: 11px;
   border-left: 2px solid var(--line);
-  color: var(--coffee);
+  color: var(--ink);
   font-size: 0.84rem;
   font-weight: 600;
   line-height: 1.3;
 }
 
-.items__mod em {
+.line__mod-group {
   font-style: normal;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.line__mod b {
+  font-weight: 700;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
 
-.items__body small {
+.line__note {
   display: block;
   margin-top: 3px;
   color: var(--orange);
@@ -893,15 +1227,15 @@ onBeforeUnmount(() => {
   font-weight: 600;
 }
 
-.items__line {
+.line__price {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   font-weight: 600;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
 
-.card__foot {
+.ticket__foot {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -913,190 +1247,272 @@ onBeforeUnmount(() => {
   font-weight: 700;
 }
 
-.card__foot strong {
+.ticket__foot strong {
   color: var(--ink);
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 1.05rem;
 }
 
-.card__actions {
+.ticket__actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   padding: 2px 13px 13px;
 }
 
-.capture {
-  flex: 1 1 auto;
-  min-height: 52px;
-  border: 0;
+/* ---------- Buttons ---------- */
+.btn {
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid transparent;
   border-radius: 12px;
-  background: var(--orange);
-  color: #fff;
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 800;
-  letter-spacing: 0.01em;
-  box-shadow: 0 4px 14px rgb(211 108 0 / 28%);
+  cursor: pointer;
   transition: background-color 120ms ease, transform 80ms ease;
 }
 
-.capture:hover {
-  background: var(--orange-press);
-}
-
-.capture:active {
+.btn:active {
   transform: translateY(1px);
 }
 
-/* ---------- Rail (compact, in motion) ---------- */
-.rail {
+.btn--capture {
+  flex: 1 1 auto;
+  min-height: 52px;
+  border: 0;
+  background: var(--orange);
+  color: #fff;
+  font-size: 1rem;
+  box-shadow: 0 4px 14px rgb(211 108 0 / 28%);
+}
+
+.btn--capture:hover {
+  background: var(--orange-press);
+}
+
+.btn--close {
+  flex: 1 1 auto;
+  border: 0;
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 4px 12px rgb(31 157 87 / 26%);
+}
+
+.btn--close:hover {
+  background: var(--green-press);
+}
+
+.btn--ready {
+  width: 100%;
+  border: 0;
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 3px 10px rgb(31 157 87 / 24%);
+}
+
+.btn--ready:hover {
+  background: var(--green-press);
+}
+
+.btn--ghost {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.btn--ghost:hover {
+  background: var(--cream-2);
+  color: var(--ink);
+}
+
+.btn--sm {
+  min-height: 38px;
+  padding: 0 12px;
+  font-size: 0.84rem;
+}
+
+.btn--danger {
+  color: var(--danger);
+}
+
+.btn--danger:hover {
+  border-color: rgb(192 57 43 / 42%);
+  background: rgb(192 57 43 / 7%);
+  color: var(--danger);
+}
+
+/* ---------- Closed orders ---------- */
+.closed {
+  margin-top: 6px;
+}
+
+.closed__grid {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 7px;
+}
+
+.closed-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 13px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: rgb(253 243 226 / 55%);
+}
+
+.closed-row__id {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.closed-row__mesa {
+  font-weight: 800;
+}
+
+.closed-row__code {
+  color: var(--faint);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.8rem;
+}
+
+.closed-row__status {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.closed-row__total {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* ---------- Barra panel ---------- */
+.barra {
+  display: flex;
+  flex-direction: column;
   min-height: 0;
   padding-left: clamp(16px, 2.2vw, 28px);
   border-left: 1px solid var(--line);
   overflow-y: auto;
 }
 
-.section-head--rail {
-  margin-bottom: 8px;
-}
-
-.section-head__count {
-  margin-left: auto;
-  color: var(--faint);
-  font-size: 0.85rem;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-}
-
-.lane__dot {
+.barra__dot {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--lane-hue, var(--muted));
+  background: var(--green);
 }
 
-.lane--capturing {
-  --lane-hue: var(--c-capturing);
-}
-.lane--preparing {
-  --lane-hue: var(--c-preparing);
-}
-.lane--ready {
-  --lane-hue: var(--c-ready);
-}
-.lane--served {
-  --lane-hue: var(--c-served);
-}
-.lane--cancelled {
-  --lane-hue: var(--c-cancelled);
+.barra__hint {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
-.rail__group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.barra__empty {
+  padding: 22px 16px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: rgb(253 243 226 / 60%);
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-align: center;
 }
 
-.chip {
+.barra__group-title {
+  margin: 14px 0 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.barra__group-title:first-child {
+  margin-top: 0;
+}
+
+.barra__group-title--ready {
+  color: var(--green-press);
+}
+
+.pickup {
+  margin-bottom: 8px;
+  padding: 11px 12px;
   border: 1px solid var(--line);
-  border-left: 3px solid var(--lane-hue, var(--muted));
+  border-left: 3px solid var(--green);
   border-radius: 12px;
   background: var(--surface);
-  padding: 10px 12px;
   box-shadow: 0 1px 2px rgb(46 28 18 / 4%);
 }
 
-.chip.age-late {
-  border-color: rgb(192 57 43 / 38%);
+.pickup--ready {
+  border-left-color: var(--c-served);
+  background: rgb(31 157 87 / 5%);
 }
 
-.chip__top {
+.pickup__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  margin-bottom: 7px;
 }
 
-.chip__mesa {
-  font-size: 1.05rem;
+.pickup__where {
+  font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: -0.01em;
+  color: var(--coffee);
 }
 
-.chip__sub {
+.pickup__ready-tag {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: rgb(31 157 87 / 14%);
+  color: var(--green-press);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.pickup__line {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: 2px;
+  gap: 9px;
+  align-items: start;
+  margin-bottom: 9px;
+}
+
+.pickup__body {
+  min-width: 0;
+}
+
+.pickup__name {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.pickup__mod {
+  display: block;
+  margin-top: 1px;
   color: var(--muted);
   font-size: 0.78rem;
   font-weight: 600;
 }
 
-.chip__code {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  color: var(--faint);
-}
-
-.chip__actions {
-  display: flex;
-  gap: 6px;
-  margin-top: 9px;
-}
-
-.advance {
-  flex: 1 1 auto;
-  min-height: 40px;
-  border: 0;
-  border-radius: 9px;
-  background: var(--green);
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 800;
-  transition: background-color 120ms ease, transform 80ms ease;
-}
-
-.advance:hover {
-  background: var(--green-press);
-}
-
-.advance:active {
-  transform: translateY(1px);
-}
-
-/* ---------- Ghost buttons ---------- */
-.ghost {
-  min-height: 40px;
-  padding: 0 14px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--muted);
-  font-size: 0.86rem;
-  font-weight: 700;
-}
-
-.ghost:hover {
-  background: var(--cream-2);
-  color: var(--ink);
-}
-
-.ghost--sm {
-  min-height: 40px;
-  min-width: 40px;
-  padding: 0 11px;
-}
-
-.ghost--danger:hover {
-  border-color: rgb(192 57 43 / 42%);
-  background: rgb(192 57 43 / 7%);
-  color: var(--danger);
-}
-
-/* ---------- Rest / empty states (branded) ---------- */
+/* ---------- Rest / empty states ---------- */
 .rest {
   display: flex;
   flex-direction: column;
@@ -1169,8 +1585,8 @@ onBeforeUnmount(() => {
   }
 }
 
-/* ---------- Responsive: stack rail under the queue ---------- */
-@media (max-width: 860px) {
+/* ---------- Responsive: stack barra under the capture column ---------- */
+@media (max-width: 920px) {
   .board {
     max-height: none;
   }
@@ -1180,11 +1596,11 @@ onBeforeUnmount(() => {
     gap: 22px;
   }
 
-  .queue__grid {
+  .capture {
     overflow-y: visible;
   }
 
-  .rail {
+  .barra {
     padding-left: 0;
     border-left: 0;
     border-top: 1px solid var(--line);
@@ -1225,7 +1641,7 @@ onBeforeUnmount(() => {
     flex: 1 1 0;
   }
 
-  .queue__grid {
+  .capture__grid {
     grid-template-columns: 1fr;
   }
 }

@@ -2,7 +2,7 @@ import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
-import { orderStatus } from "./schema";
+import { orderStatus, pickupStatus } from "./schema";
 
 const activeStatuses = ["new", "capturing", "preparing", "ready"] as const;
 const allStatuses = [...activeStatuses, "served", "cancelled"] as const;
@@ -449,5 +449,47 @@ export const updateStatus = mutation({
       throw new Error("Pedido no encontrado.");
     }
     return await presentOrder(ctx, updated);
+  },
+});
+
+export const updatePickupStatus = mutation({
+  args: {
+    orderItemId: v.id("orderItems"),
+    status: pickupStatus,
+  },
+  handler: async (ctx, args) => {
+    const item = await ctx.db.get(args.orderItemId);
+    if (!item) {
+      throw new Error("Artículo no encontrado.");
+    }
+
+    const fulfillmentType = item.fulfillmentType || fulfillmentForItem(item);
+    if (fulfillmentType !== "counter") {
+      throw new Error("Solo los artículos de barra se pueden marcar para recoger.");
+    }
+
+    const now = Date.now();
+    await ctx.db.patch(args.orderItemId, {
+      pickupStatus: args.status,
+      pickupReadyAt: args.status === "ready" ? now : null,
+    });
+    await ctx.db.insert("orderEvents", {
+      orderId: item.orderId,
+      eventType: "pickup_status_changed",
+      actor: "staff",
+      detail: {
+        orderItemId: args.orderItemId,
+        itemName: item.name,
+        status: args.status,
+        source: "staff-dashboard",
+      },
+      createdAt: now,
+    });
+
+    const order = await ctx.db.get(item.orderId);
+    if (!order) {
+      throw new Error("Pedido no encontrado.");
+    }
+    return await presentOrder(ctx, order);
   },
 });

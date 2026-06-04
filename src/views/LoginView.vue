@@ -1,15 +1,24 @@
 <script setup>
-import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, reactive, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { authClient } from '../lib/auth-client'
+import { currentShift, shiftLabel, shiftStaffEmail } from '../lib/shift'
 import brandLogo from '../assets/background/belly_monster_logo.png'
 
 const router = useRouter()
+const route = useRoute()
+
+// Prefill the email for whoever's shift it is now, but keep it editable so the
+// other account can still sign in.
+const shift = currentShift()
 
 const form = reactive({
-  email: 'staff@bellymonsterbites.com',
+  email: shiftStaffEmail(shift),
   password: '',
 })
+
+// Surfaced when the dashboard kicked someone out because the shift changed.
+const shiftChange = computed(() => route.query.reason === 'shift')
 
 const isSubmitting = ref(false)
 const error = ref('')
@@ -45,6 +54,10 @@ async function signIn() {
 
       <h1 class="login-title">Acceso del personal</h1>
       <p class="login-sub">Tablero de pedidos de mesa · uso interno</p>
+
+      <p v-if="shiftChange" class="login-shift" role="status">
+        Cambio de turno ({{ shiftLabel(shift) }}). Inicia sesión con la cuenta de este turno.
+      </p>
 
       <form class="login-form" name="staff-login" @submit.prevent="signIn">
         <div class="field">
@@ -135,7 +148,7 @@ async function signIn() {
   margin: 0 0 5px;
   font-size: 1.55rem;
   font-weight: 800;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   line-height: 1.1;
 }
 
@@ -144,6 +157,19 @@ async function signIn() {
   color: var(--muted);
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+.login-shift {
+  margin: 0 0 20px;
+  padding: 11px 13px;
+  border: 1px solid rgb(211 108 0 / 28%);
+  border-radius: 11px;
+  background: rgb(211 108 0 / 8%);
+  color: var(--orange-press);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: left;
 }
 
 .login-form {

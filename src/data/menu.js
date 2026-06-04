@@ -94,6 +94,66 @@ export const menuItemsById = Object.fromEntries(
   allMenuCategories.flatMap((category) => category.items.map((item) => [item.id, item])),
 )
 
+/* ---- Parrot routing metadata (used by the staff dashboard) ----
+   Parrot is navigated Menu -> category -> item -> modifiers, so the staff
+   board groups each order's lines along that path. Order items only persist a
+   menuItemId + category name, so the menu label and catalog ordering are
+   resolved here from the generated catalog. Legacy/unknown ids fall back to the
+   id prefix (e.g. "desayunos:PFBO-000001") and the stored category name. */
+const menuLabelByKey = {
+  desayunos: 'Desayunos',
+  comidas: 'Comidas',
+  bebidas: 'Bebidas',
+}
+const menuKeyOrder = ['desayunos', 'comidas', 'bebidas']
+
+export function menuLabelForKey(key) {
+  if (!key) {
+    return 'Otros'
+  }
+  return menuLabelByKey[key] || key.charAt(0).toUpperCase() + key.slice(1)
+}
+
+export function menuKeyRank(key) {
+  const index = menuKeyOrder.indexOf(key)
+  return index === -1 ? menuKeyOrder.length : index
+}
+
+const categorySortById = Object.fromEntries(
+  catalog.categories.map((category) => [category.id, category.sortIndex ?? 0]),
+)
+
+const orderItemMetaById = Object.fromEntries(
+  allMenuCategories.flatMap((category) =>
+    category.items.map((item) => [
+      item.id,
+      {
+        menuKey: item.menuKey || null,
+        menuLabel: menuLabelForKey(item.menuKey),
+        categoryName: item.categoryName || category.name || '',
+        categorySortIndex: categorySortById[item.categoryId] ?? category.sortIndex ?? 0,
+        itemSortIndex: item.sortIndex ?? 0,
+      },
+    ]),
+  ),
+)
+
+export function menuMetaForOrderItem(menuItemId, fallbackCategoryName = '') {
+  const meta = orderItemMetaById[menuItemId]
+  if (meta) {
+    return meta
+  }
+  const prefix =
+    typeof menuItemId === 'string' && menuItemId.includes(':') ? menuItemId.split(':')[0] : null
+  return {
+    menuKey: prefix,
+    menuLabel: menuLabelForKey(prefix),
+    categoryName: fallbackCategoryName || '',
+    categorySortIndex: Number.MAX_SAFE_INTEGER,
+    itemSortIndex: Number.MAX_SAFE_INTEGER,
+  }
+}
+
 export const imageBackedItems = allMenuCategories
   .flatMap((category) => category.items)
   .filter((item) => item.image)

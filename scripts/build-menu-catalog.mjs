@@ -40,7 +40,7 @@ const DAYPARTS = [
   {
     id: 'breakfast',
     label: 'Desayuno',
-    startsAt: '09:00',
+    startsAt: '08:00',
     endsAt: '12:30',
     menuKeys: ['bebidas', 'desayunos'],
   },
@@ -48,9 +48,19 @@ const DAYPARTS = [
     id: 'lunch',
     label: 'Comida',
     startsAt: '12:30',
-    endsAt: '21:00',
+    endsAt: '22:00',
     menuKeys: ['bebidas', 'comidas'],
   },
+]
+
+const BUSINESS_HOURS = [
+  { day: 'monday', label: 'Lunes', closed: true, opensAt: null, closesAt: null },
+  { day: 'tuesday', label: 'Martes', closed: false, opensAt: '08:00', closesAt: '22:00' },
+  { day: 'wednesday', label: 'Miércoles', closed: false, opensAt: '08:00', closesAt: '22:00' },
+  { day: 'thursday', label: 'Jueves', closed: false, opensAt: '08:00', closesAt: '22:00' },
+  { day: 'friday', label: 'Viernes', closed: false, opensAt: '08:00', closesAt: '22:00' },
+  { day: 'saturday', label: 'Sábado', closed: false, opensAt: '08:00', closesAt: '22:00' },
+  { day: 'sunday', label: 'Domingo', closed: false, opensAt: '08:00', closesAt: '21:00' },
 ]
 
 const CATEGORY_ALIASES = new Map([
@@ -789,9 +799,11 @@ async function main() {
     schedule: {
       defaultDaypart: 'lunch',
       switchAt: '12:30',
+      businessHours: BUSINESS_HOURS,
       transcriptNotes: [
         'Menu rotation is at 12:30 based on the direct day/night menu question.',
         'Employee shift change is separate and happens at 15:30.',
+        'Public physical-hours listings checked on 2026-06-04 show 08:00 opening, 22:00 close Tuesday-Saturday, 21:00 close Sunday, and Monday closed; Rappi delivery hours differ.',
       ],
       dayparts: DAYPARTS,
     },

@@ -24,21 +24,6 @@ const tableId = computed(() => {
 const hasTable = computed(() => tableId.value.length > 0)
 const tableLabel = computed(() => (hasTable.value ? `Mesa ${tableId.value}` : 'Sin mesa'))
 
-function lastOrderStorageKey(value) {
-  return `belly-monster-last-order:${value || 'sin-mesa'}`
-}
-
-function canUseStorage() {
-  return typeof window !== 'undefined' && window.localStorage
-}
-
-function readLastOrderId(value) {
-  if (!canUseStorage()) {
-    return null
-  }
-  return window.localStorage.getItem(lastOrderStorageKey(value)) || null
-}
-
 const cart = useCart(tableId.value)
 const createOrderMutation = useConvexMutation(api.orders.create)
 
@@ -407,34 +392,26 @@ watch(customerName, () => {
   }
 })
 const activeOrderStatuses = ['new', 'capturing', 'preparing', 'ready']
+// Submitted orders are NOT persisted locally: once an order exists Convex is the
+// source of truth. submittedOrderId lives in memory only — null on page load,
+// set after submit, cleared on table change or when the order closes. The cart
+// draft (useCart) keeps its own sessionStorage because it is unsent local data.
 const submittedOrder = ref(null)
-const submittedOrderId = ref(readLastOrderId(tableId.value))
+const submittedOrderId = ref(null)
 const liveSubmittedOrder = useConvexQuery(api.orders.get, () => ({
   orderId: submittedOrderId.value,
 }))
 const visibleSubmittedOrder = computed(() => liveSubmittedOrder.data.value || submittedOrder.value)
 const submittedOrderItems = computed(() => visibleSubmittedOrder.value?.items || [])
 
-watch(tableId, (value) => {
+watch(tableId, () => {
   submittedOrder.value = null
-  submittedOrderId.value = readLastOrderId(value)
+  submittedOrderId.value = null
 })
 
-watch(submittedOrderId, (value) => {
-  if (!canUseStorage()) {
-    return
-  }
-  const key = lastOrderStorageKey(tableId.value)
-  if (value) {
-    window.localStorage.setItem(key, value)
-  } else {
-    window.localStorage.removeItem(key)
-  }
-})
-
-// Drop a stored order once Convex confirms it is gone or no longer active
-// (cancelled/served), so a stale card doesn't linger after a refresh. `undefined`
-// means the query is still loading, so we wait before clearing.
+// Drop the in-memory order once Convex confirms it is gone or no longer active
+// (cancelled/served), so a stale card doesn't linger while the tab stays open.
+// `undefined` means the query is still loading, so we wait before clearing.
 watch(
   () => liveSubmittedOrder.data.value,
   (order) => {
