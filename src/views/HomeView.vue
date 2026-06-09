@@ -44,6 +44,7 @@ const selectedImageRatio = ref(0.8)
 const isLogoIntroVisible = ref(true)
 const isHomeReady = ref(false)
 const arePatternsReady = ref(false)
+const isWatermarkReady = ref(false)
 const viewportSize = ref({
   width: typeof window === 'undefined' ? 1440 : window.innerWidth,
   height: typeof window === 'undefined' ? 900 : window.innerHeight,
@@ -176,10 +177,10 @@ onMounted(() => {
   window.addEventListener('scroll', closeOrderDialogOnScroll, { passive: true })
   homeIntroTimeouts.push(window.setTimeout(() => {
     isLogoIntroVisible.value = false
-  }, 1000))
+  }, 1500))
   homeIntroTimeouts.push(window.setTimeout(() => {
     isHomeReady.value = true
-  }, 1520))
+  }, 2500))
   homeIntroTimeouts.push(window.setTimeout(() => {
     const firstFrame = window.requestAnimationFrame(() => {
       const secondFrame = window.requestAnimationFrame(() => {
@@ -188,7 +189,10 @@ onMounted(() => {
       homeIntroFrames.push(secondFrame)
     })
     homeIntroFrames.push(firstFrame)
-  }, 2300))
+  }, 3250))
+  homeIntroTimeouts.push(window.setTimeout(() => {
+    isWatermarkReady.value = true
+  }, 3900))
 
   observer = new IntersectionObserver(
     (entries) => {
@@ -230,7 +234,7 @@ onBeforeUnmount(() => {
 <template>
   <main
     class="home-view"
-    :class="{ 'is-ready': isHomeReady, 'patterns-ready': arePatternsReady }"
+    :class="{ 'is-ready': isHomeReady, 'patterns-ready': arePatternsReady, 'watermark-ready': isWatermarkReady }"
     :style="{ '--home-background-logo': `url(${backgroundLogo})` }"
   >
     <Transition name="home-logo-intro">
@@ -242,11 +246,7 @@ onBeforeUnmount(() => {
     </Transition>
 
     <div class="home-watermark-pattern" aria-hidden="true">
-      <div class="home-watermark-pattern__lines">
-        <div v-for="line in 34" :key="line" class="home-watermark-pattern__line">
-          <span v-for="item in 48" :key="item">Belly Monster Bites</span>
-        </div>
-      </div>
+      <div class="home-watermark-pattern__texture"></div>
     </div>
 
     <Transition name="order-dismiss">
@@ -352,7 +352,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .home-view {
   --logo-size: min(78vw, 760px);
-  --stage-blue: #8fd3ff;
+  --stage-blue: var(--color-border);
 
   position: relative;
   isolation: isolate;
@@ -368,16 +368,17 @@ onBeforeUnmount(() => {
   overflow-x: clip;
 }
 
-.home-view > :not(.home-logo-intro) {
+.home-view > :not(.home-logo-intro, .home-watermark-pattern, .background-patterns) {
   opacity: 0;
   transition: opacity 520ms ease;
 }
 
-.home-view.is-ready > :not(.home-logo-intro) {
+.home-view.is-ready > :not(.home-logo-intro, .home-watermark-pattern, .background-patterns) {
   opacity: 1;
 }
 
-.home-view .background-patterns {
+.home-view .background-patterns,
+.home-view .home-watermark-pattern {
   opacity: 0;
 }
 
@@ -385,10 +386,14 @@ onBeforeUnmount(() => {
   opacity: 1;
 }
 
+.home-view.watermark-ready .home-watermark-pattern {
+  opacity: 1;
+}
+
 .home-logo-intro {
   position: fixed;
-  inset: var(--app-header-height) 0 0;
-  z-index: 60;
+  inset: 0;
+  z-index: 100;
   display: grid;
   place-items: center;
   background: var(--color-background);
@@ -410,8 +415,8 @@ onBeforeUnmount(() => {
 .home-logo-intro-enter-active,
 .home-logo-intro-leave-active {
   transition:
-    opacity 520ms ease,
-    filter 520ms ease;
+    opacity 700ms ease,
+    filter 700ms ease;
 }
 
 .home-logo-intro-enter-from,
@@ -427,53 +432,37 @@ onBeforeUnmount(() => {
 }
 
 .home-watermark-pattern {
-  position: fixed;
-  inset: var(--app-header-height) 0 0;
+  position: absolute;
+  inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  transition: opacity 720ms ease;
 }
 
-.home-watermark-pattern__lines {
+.home-watermark-pattern__texture {
   position: absolute;
   top: 50%;
   left: 50%;
-  display: grid;
-  gap: clamp(18px, 2.4vmax, 38px);
-  width: 300vmax;
-  min-width: 300vmax;
+  width: max(180vmax, 180vw, 180vh);
+  height: max(180vmax, 180vw, 180vh);
+  background-image: url("data:image/svg+xml,%3Csvg width='1080' height='180' viewBox='0 0 1080 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' font-family='Arial Black, Impact, sans-serif' font-size='13' font-weight='900' letter-spacing='1.2'%3E%3Ctext x='0' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='0' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: clamp(620px, 68vmax, 1080px) auto;
   transform: translate(-50%, -50%) rotate(45deg);
   transform-origin: center;
-}
-
-.home-watermark-pattern__line {
-  display: flex;
-  gap: clamp(18px, 2.6vmax, 44px);
-  width: max-content;
-  white-space: nowrap;
-}
-
-.home-watermark-pattern__line:nth-child(even) {
-  transform: translateX(clamp(54px, 8vmax, 180px));
-}
-
-.home-watermark-pattern__line span {
-  color: rgb(255 255 255 / 10%);
-  font-family: var(--font-display);
-  font-size: clamp(0.5rem, 0.85vw, 0.76rem);
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  text-transform: uppercase;
+  animation: watermark-texture-drift 26s linear infinite;
+  will-change: background-position;
 }
 
 .background-patterns {
-  position: fixed;
-  inset: var(--app-header-height) 0 0;
+  position: absolute;
+  inset: 0;
   z-index: 1;
   overflow: hidden;
   pointer-events: none;
-  transition: opacity 520ms ease;
+  transition: opacity 720ms ease;
 }
 
 .background-pattern {
@@ -767,6 +756,16 @@ onBeforeUnmount(() => {
     transform:
       translate3d(var(--pattern-end-x), var(--pattern-end-y), 0)
       rotate(var(--pattern-rotation-end));
+  }
+}
+
+@keyframes watermark-texture-drift {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: clamp(620px, 68vmax, 1080px) 180px;
   }
 }
 

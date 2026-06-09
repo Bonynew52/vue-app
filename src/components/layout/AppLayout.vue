@@ -100,6 +100,8 @@ function closeMenu() {
   --app-footer-min-height: clamp(220px, 35svh, 520px);
   --stage-blue: #8fd3ff;
 
+  position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -107,6 +109,7 @@ function closeMenu() {
 }
 
 .app-layout.home-layout,
+.app-layout.menu-layout,
 .app-layout.orders-layout,
 .app-layout.login-layout,
 .app-layout.order-layout {
@@ -128,10 +131,55 @@ function closeMenu() {
   background: #0f1115;
 }
 
+.app-layout.home-layout {
+  --color-third: #8a6044;
+  --color-primary: #8a6044;
+  --color-accent: #8a6044;
+  --color-border: #8a6044;
+  --stage-blue: #8a6044;
+}
+
+.app-layout.menu-layout {
+  --color-third: #8fd3ff;
+  --color-primary: #8fd3ff;
+  --color-accent: #8fd3ff;
+  --color-border: #8fd3ff;
+  --color-surface-muted: #eef8ff;
+  --stage-blue: #8fd3ff;
+}
+
 .app-layout.order-layout {
+  --color-third: #4fb78d;
+  --color-primary: #4fb78d;
+  --color-accent: #8fe5bf;
+  --color-border: #9fe8c8;
+  --stage-blue: #9fe8c8;
+}
+
+.app-layout.home-layout,
+.app-layout.menu-layout {
+  --public-frame-width: 520px;
+  --app-side-background: #090a0c;
+  --app-side-pattern: url("data:image/svg+xml,%3Csvg width='1080' height='180' viewBox='0 0 1080 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' font-family='Arial Black, Impact, sans-serif' font-size='13' font-weight='900' letter-spacing='1.2'%3E%3Ctext x='0' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='0' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3C/g%3E%3C/svg%3E");
+  align-items: center;
+  background: var(--app-side-background);
+}
+
+.app-layout.home-layout {
+  --app-frame-border: rgb(138 96 68 / 40%);
+}
+
+.app-layout.menu-layout {
+  --app-frame-border: rgb(143 211 255 / 40%);
+}
+
+.app-layout.order-layout {
+  --app-side-background: #090a0c;
+  --app-frame-border: rgb(159 232 200 / 34%);
+  --app-side-pattern: url("data:image/svg+xml,%3Csvg width='1080' height='180' viewBox='0 0 1080 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' font-family='Arial Black, Impact, sans-serif' font-size='13' font-weight='900' letter-spacing='1.2'%3E%3Ctext x='0' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='0' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3C/g%3E%3C/svg%3E");
   --app-header-height: 0px;
   --app-footer-min-height: 0px;
-  background: #fffaf3;
+  background: var(--app-side-background);
 }
 
 .app-layout.orders-layout,
@@ -139,6 +187,33 @@ function closeMenu() {
   --app-header-height: 0px;
   --app-footer-min-height: 0px;
   background: #fff8ef;
+}
+
+.home-layout::before,
+.menu-layout::before,
+.order-layout::before {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: var(--app-side-pattern);
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: clamp(620px, 68vmax, 1080px) auto;
+  content: "";
+  transform: rotate(45deg) scale(1.8);
+  animation: app-side-watermark-drift 26s linear infinite;
+  opacity: 1;
+  transition: opacity 720ms ease;
+  will-change: background-position;
+}
+
+.home-layout::before {
+  opacity: 0;
+}
+
+.home-layout:has(.home-view.watermark-ready)::before {
+  opacity: 1;
 }
 
 .app-header {
@@ -160,6 +235,7 @@ function closeMenu() {
 }
 
 .home-layout .app-header,
+.menu-layout .app-header,
 .orders-layout .app-header,
 .login-layout .app-header,
 .order-layout .app-header {
@@ -209,8 +285,53 @@ function closeMenu() {
 }
 
 .app-content {
+  position: relative;
+  z-index: 1;
   flex: 1 0 auto;
   min-width: 0;
+}
+
+.home-layout .app-header,
+.menu-layout .app-header,
+.home-layout .app-content,
+.menu-layout .app-content,
+.home-layout .app-footer,
+.menu-layout .app-footer {
+  width: min(100%, var(--public-frame-width));
+  border-right: 1px solid var(--app-frame-border);
+  border-left: 1px solid var(--app-frame-border);
+}
+
+.home-layout .app-content,
+.menu-layout .app-content {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  background: #0f1115;
+}
+
+.home-layout .app-content {
+  z-index: 11;
+}
+
+.home-layout .app-content :deep(.home-view),
+.menu-layout .app-content :deep(.menu-view) {
+  width: 100%;
+}
+
+.menu-layout .app-content :deep(.menu-decoration) {
+  display: none;
+}
+
+.order-layout .app-content {
+  display: flex;
+  justify-content: center;
+  background: transparent;
+}
+
+.order-layout .app-content :deep(.order) {
+  border-right: 1px solid var(--app-frame-border);
+  border-left: 1px solid var(--app-frame-border);
 }
 
 .app-footer {
@@ -223,6 +344,16 @@ function closeMenu() {
   padding: clamp(34px, 7vw, 72px) clamp(20px, 5vw, 56px);
   border-top: 2px solid var(--stage-blue, var(--color-border));
   background: #0f1115;
+}
+
+@keyframes app-side-watermark-drift {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: clamp(620px, 68vmax, 1080px) 180px;
+  }
 }
 
 .menu-layout .app-footer {

@@ -14,7 +14,7 @@ const sectionPalettes = [
 
 const fallbackSections = Array.from({ length: 6 }, (_, index) => ({
   id: `placeholder-${index + 1}`,
-  name: `Seccion ${index + 1}`,
+  name: `Sección ${index + 1}`,
   items: Array.from({ length: 8 }, (__, itemIndex) => ({
     id: `placeholder-${index + 1}-${itemIndex + 1}`,
     name: `Producto ${itemIndex + 1}`,
@@ -115,6 +115,20 @@ function priceLabel(item) {
   return item.hasPrice ? formatMXN(item.price) : 'Precio por confirmar'
 }
 
+function displayMenuText(value) {
+  const text = String(value || '')
+  const normalized = text.trim().toLowerCase()
+  const replacements = {
+    cafes: 'Cafés',
+    cafe: 'Café',
+    menu: 'Menú',
+    seccion: 'Sección',
+    descripcion: 'Descripción',
+  }
+
+  return replacements[normalized] || text
+}
+
 const selectedPreviewStyle = computed(() => ({
   '--preview-x': `${selectedPreviewPosition.value.x}px`,
   '--preview-y': `${selectedPreviewPosition.value.y}px`,
@@ -130,7 +144,7 @@ const cartelSections = computed(() => {
     renderedPlaceholderGroups.value.map((section, index) => [section.name.toLowerCase(), index]),
   )
   const targetFor = (name) => {
-    if (name === 'Cafes') {
+    if (name === 'Cafés') {
       return 0
     }
 
@@ -139,7 +153,7 @@ const cartelSections = computed(() => {
 
   return {
     left: [
-      { index: 0, name: 'Cafes', targetIndex: targetFor('Cafes') },
+      { index: 0, name: 'Cafés', targetIndex: targetFor('Cafés') },
       { index: 1, name: 'Bebidas', targetIndex: targetFor('Bebidas') },
       { index: 5, name: 'Postres', targetIndex: targetFor('Postres') },
     ],
@@ -388,12 +402,12 @@ onBeforeUnmount(() => {
     </Teleport>
 
     <header class="menu-page-title">
-      <h1>Menu</h1>
+      <h1>Menú</h1>
     </header>
 
-    <section class="menu-group" aria-label="Cafes">
+    <section class="menu-group" aria-label="Cafés">
       <header class="menu-group-header">
-        <h2>Cafes</h2>
+        <h2>Cafés</h2>
       </header>
 
       <section
@@ -401,16 +415,16 @@ onBeforeUnmount(() => {
         :key="section.id"
         :ref="(element) => setSectionElement(element, sectionIndex)"
         class="menu-section"
-        :aria-label="section.name"
+        :aria-label="displayMenuText(section.name)"
       >
         <header class="section-header">
-          <h1>{{ section.name }}</h1>
+          <h1>{{ displayMenuText(section.name) }}</h1>
         </header>
 
         <div
           class="section-rail"
           tabindex="0"
-          :aria-label="`Productos de ${section.name}`"
+          :aria-label="`Productos de ${displayMenuText(section.name)}`"
           @scroll.passive="clearSelectedItem"
         >
           <article
@@ -437,7 +451,7 @@ onBeforeUnmount(() => {
 
             <div class="menu-card__copy">
               <h2>{{ item.name }}</h2>
-              <p>{{ item.description || 'Descripcion temporal del producto.' }}</p>
+              <p>{{ item.description || 'Descripción temporal del producto.' }}</p>
               <strong>{{ priceLabel(item) }}</strong>
             </div>
           </article>
@@ -450,10 +464,10 @@ onBeforeUnmount(() => {
       :key="section.id"
       :ref="(element) => setSectionElement(element, sectionIndex + displayedMenuSections.length)"
       class="menu-section"
-      :aria-label="section.name"
+      :aria-label="displayMenuText(section.name)"
     >
       <header class="section-header">
-        <h1>{{ section.name }}</h1>
+        <h1>{{ displayMenuText(section.name) }}</h1>
       </header>
 
       <div class="placeholder-subsections">
@@ -461,14 +475,14 @@ onBeforeUnmount(() => {
           v-for="subsection in section.subsections"
           :key="subsection.id"
           class="placeholder-subsection"
-          :aria-label="`${section.name}: ${subsection.name}`"
+          :aria-label="`${displayMenuText(section.name)}: ${displayMenuText(subsection.name)}`"
         >
-          <h2>{{ subsection.name }}</h2>
+          <h2>{{ displayMenuText(subsection.name) }}</h2>
 
           <div
             class="section-rail section-rail--placeholder"
             tabindex="0"
-            :aria-label="`Productos de ${section.name}, ${subsection.name}`"
+            :aria-label="`Productos de ${displayMenuText(section.name)}, ${displayMenuText(subsection.name)}`"
             @scroll.passive="clearSelectedItem"
           >
             <article
@@ -495,7 +509,7 @@ onBeforeUnmount(() => {
 
               <div class="menu-card__copy">
                 <h2>{{ item.name }}</h2>
-                <p>{{ item.description || 'Descripcion temporal del producto.' }}</p>
+                <p>{{ item.description || 'Descripción temporal del producto.' }}</p>
                 <strong>{{ priceLabel(item) }}</strong>
               </div>
             </article>
@@ -522,7 +536,7 @@ onBeforeUnmount(() => {
 .menu-group-header {
   width: min(100% - 32px, 1180px);
   margin: 0 auto;
-  color: var(--color-text);
+  color: var(--color-border);
   transition: color 520ms ease;
 }
 
@@ -741,13 +755,13 @@ onBeforeUnmount(() => {
 .section-header {
   width: min(100% - 32px, 1180px);
   margin: 0 auto;
-  color: var(--color-text);
+  color: var(--color-border);
   transition: color 520ms ease;
 }
 
 .section-header h1 {
   margin: 0;
-  color: var(--color-text);
+  color: var(--color-border);
   font-size: clamp(2rem, 6vw, 4.75rem);
   line-height: 0.95;
   transition: color 520ms ease;
@@ -793,7 +807,7 @@ onBeforeUnmount(() => {
 .placeholder-subsection h2 {
   width: min(100% - 32px, 1180px);
   margin: 0 auto;
-  color: var(--color-text);
+  color: var(--color-border);
   font-size: clamp(1.35rem, 3.6vw, 2.45rem);
   line-height: 1;
   transition: color 520ms ease;
@@ -826,7 +840,7 @@ onBeforeUnmount(() => {
   border: 2px solid var(--color-border);
   border-radius: 8px;
   background: var(--color-surface);
-  color: var(--color-text);
+  color: #0f1115;
   box-shadow: var(--shadow-panel);
   overflow: hidden;
   scroll-snap-align: start;
@@ -893,7 +907,7 @@ onBeforeUnmount(() => {
 
 .menu-card__copy h2 {
   margin: 0;
-  color: var(--color-text);
+  color: #0f1115;
   font-size: 1.35rem;
   line-height: 1.05;
   transition: color 520ms ease;
@@ -904,7 +918,7 @@ onBeforeUnmount(() => {
   min-height: 3.6em;
   margin: 0;
   overflow: hidden;
-  color: var(--color-text);
+  color: color-mix(in srgb, #0f1115 78%, var(--color-border));
   font-weight: 700;
   line-height: 1.2;
   -webkit-box-orient: vertical;
@@ -914,7 +928,7 @@ onBeforeUnmount(() => {
 
 .menu-card__copy strong {
   margin-top: 4px;
-  color: var(--color-text);
+  color: var(--color-border);
   font-size: 1.05rem;
   font-weight: 900;
   transition: color 520ms ease;
