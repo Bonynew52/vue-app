@@ -1,0 +1,573 @@
+[00:00:00.860] speaker_0: Y me dijo: "Sí, estoy encargado". Okey, entonces me dijo que yo me encargara de, de coordinarme con ustedes y con Miriam para-
+[00:00:09.140] speaker_1: Ah, okey
+[00:00:09.640] speaker_0: ...para llevar esto a cabo.
+[00:00:10.740] speaker_1: Okey.
+[00:00:12.480] speaker_0: [carraspeo]
+[00:00:21.060] speaker_0: [murmullo] [ruido]
+[00:00:30.280] speaker_0: Galleta Olga.
+[00:00:33.440] speaker_0: [risas]
+[00:00:47.060] speaker_0: Eh... Okey. Ah, la, la otra es...
+[00:00:53.100] speaker_0: A ver, a ver.
+[00:01:07.940] speaker_0: Sobre los días que s-sí nos vamos a estar reuniendo con la señora una vez a la semana, puede ser en martes o puede ser en jueves, que es cuando ella tiene disponible temprano. Nada más sé que la última semana de junio se va a Canadá.
+[00:01:20.820] speaker_1: Sí, sí me comentó.
+[00:01:21.640] speaker_0: Ajá. Entonces, y espera que el alcance que tenemos ahorita se complete más o menos dentro de un mes a partir de hoy. Pero ustedes ya van a estar un poquito avanzados. Bueno, entonces, ¿se acuerdan de los tres, de los-- ella dice-- o yo digo tres, tres, ah,
+[00:01:41.000] speaker_0: tracks, ella les llamó tracks, yo les digo milestones. Uno es la página con el look and feel de Belly.
+[00:01:48.960] speaker_0: Para eso está, ah, M-Miriam, eh, para que puedan trabajar. Eh, yo sé que ustedes son los que cargan la página.
+[00:01:56.740] speaker_1: Ajá.
+[00:01:57.200] speaker_0: Sí, ¿no? Ajá. Entonces, ella puede trabajar con ustedes en, en el diseño. Ella tiene acceso para todo lo que es font, mascotas, eh, eh, logo, eh...
+[00:02:10.250] speaker_1: ¿Eh? Ah, un gato.
+[00:02:11.780] speaker_0: Sí.
+[00:02:13.160] speaker_2: Seguramente.
+[00:02:15.260] speaker_0: El, ah,
+[00:02:17.740] speaker_0: para darle el, el look and feel de, de Belly. Ahorita nos estamos enfocando en Belly. No nos estamos, no nos vamos a enfocar en Amelia, no nos vamos a enfocar en Milk Stache. Sea lo que sea, eso que se piensan arrancarle en diciembre, más o menos. Ah,
+[00:02:33.560] speaker_0: [carraspeo] la manera en que yo me gustaría manejarlo es que, eh, vamos a establecer, ah, metas casi diarias para el siguiente día. Cualquier reto, cualquier, ah,
+[00:02:50.140] speaker_0: cosa que necesiten para completar lo que vayan a hacer,
+[00:02:56.020] speaker_0: necesito saberlo porque tengo que facilitarles lo que tengan. Ella ya me pidió, ¿cómo se llama? Illustrator. Eh, Il-illustrator. Tengo que asegurarme de que el que tiene, el que tiene el control de la marca, que es Luis, pues le dé: "Claro, este es mi esquema de colores, este es, eh, aquí tengo almacenado eso" Para que... Lo de la historia ya más o menos lo, lo, lo sabe ella. Eh, y misión y visión la desarrollamos hace poco. Entonces, todo eso lo tiene ella.
+[00:03:28.860] speaker_0: Ustedes, pues claro, trabajarían con, con ella para nada más esa parte del front-end. El back-end son ustedes, ¿okey?
+[00:03:38.000] speaker_1: Sí, sí.
+[00:03:38.880] speaker_0: Y a lo que yo tengo entendido por parte de la señora es que ustedes están trabajando en el motor de pedidos Pick&Go. No ahorita, todavía no aquí. Eh, algo que yo le comentaba a ella ayer es que, eh, ya se les dio el menú. Creo que se les debe una parte del menú, ¿no? Las galletas.
+[00:03:58.890] speaker_1: Sí, postres.
+[00:03:59.300] speaker_0: Eh, po-postres, okey. Es-eso se los podemos conseguir hoy. Eh,
+[00:04:04.820] speaker_0: el, los postres, pero tenemos que tener la habilidad. En Rappi, por ejemplo, en la mañana está el menú de desayunos. A las doce y media se da de baja ese menú de desayunos y inicia el menú de comidas, ¿okey? Pero las personas aquí tienen la capacidad de desactivar productos que no estén disponibles en ese día, en ese momento o, o, o lo que sea. Entonces, eso es algo que tenemos que poder hacer en el, en el-
+[00:04:32.640] speaker_1: Sí, nada más ahí, espéreme. Disculpe, este, que está, este, mucho que platicar. Rappi tiene para hacer pick ups, que le hable de eso el miércoles o el jueves que viera Olga, pero si ahora va a hablar con usted, ¿por qué no usan el de Rappi? Que tiene pick up.
+[00:04:44.120] speaker_0: Porque acuérdate que también quiere, ah...
+[00:04:46.840] speaker_2: Conocer.
+[00:04:47.660] speaker_0: El, sí, re-reducir su comisión.
+[00:04:50.080] speaker_1: Ah, pero es eso, o sea, pero ¿sí saben que existe? Porque yo pen-- yo nunca sabía que existía Rappi.
+[00:04:54.920] speaker_0: No, yo tampoco. No, como yo no uso, yo prefiero ir, manejar, pedir, esperarme, ver, leer. [risas] En lo que espera. ¿Tú sabías de eso? Ya haces el pedido y ya haces el, el pick up aquí. No lo sabíamos.
+[00:05:07.660] speaker_1: Sí, yo tampoco sabía. En lo que estuve investigando fue por qué no lo tenían, Rappi, y me di cuenta que sí, sí tiene. Obviamente, tiene que activarlo el, el negocio, ¿verdad? Pero no sabía.
+[00:05:15.560] speaker_0: Ah, okey. Eh, ahí no sé cómo esté muy bien la relación con Rappi, porque por ejemplo, somos frontera y tenemos que capturar un horario distinto para que funcione nuestro horario. Tenemos que decir que empezamos a las diez para que arranque a las nueve y ese tipo de cosas.
+[00:05:33.560] speaker_1: Sí.
+[00:05:33.940] speaker_0: Eh, y creo que lo que es cuestión de Rappi, yo no puedo configurar el menú directamente ahí en la página de Rappi, la tengo que configurar desde Parrot. Entonces, habría que ver si Parrot tiene la opción de habilitar el, el Pick&Go de-
+[00:05:52.080] speaker_1: Ah, no
+[00:05:52.680] speaker_0: ...de Rappi. No, yo tampoco, créeme. Yo de, de Parrot no... Me doy de topes. No, no, no, no, no me he metido en, en, en eso al cien, pero qué bueno saber eso.Entonces, pero e-ella lo que quiere es tener su, su propio motor, eh, quiere tener el motor que le ayude en las tres empresas.
+[00:06:12.868] speaker_0: Entonces, si mal no recuerdo
+[00:06:16.268] speaker_0: era... ¿Qué cosa?
+[00:06:19.548] speaker_0: Ah, el, el...
+[00:06:22.908] speaker_0: Es que las personas entren a la página,
+[00:06:27.768] speaker_0: hagan su pedido, me llega aquí la orden. No me han dicho qué avances ha habido con lo de Parrot y el API.
+[00:06:35.708] speaker_1: Todavía no hay avances. Ya vamos a verlo el jueves o el miércoles. De hecho-
+[00:06:38.428] speaker_0: Mande.
+[00:06:38.788] speaker_1: Ya vamos a verlos el jueves o el miércoles.
+[00:06:40.038] speaker_0: ¿Pero con-- directamente con Parrot?
+[00:06:41.968] speaker_1: Ah, no, de Parrot no sé.
+[00:06:42.988] speaker_0: No, no por eso. El, el avance con, con Parrot, la compañía Parrot Software y que nos den el API para nosotros interactuar y hacer los pedidos directamente ahí.
+[00:06:54.078] speaker_1: Ah, no sé, ahorita lo estoy checando.
+[00:06:55.068] speaker_0: Sí, sí, no te digo. Ho-horita-- ayer que pregunté no, no había novedad, pero vamos a asumir que no nos lo van a dar. [golpe] ¿Okey? Eh, ¿tienen ustedes cita con Olga el jueves? No.
+[00:07:06.548] speaker_1: Ah, le había comentado yo que posiblemente le íbamos a-
+[00:07:09.328] speaker_0: Okey
+[00:07:09.368] speaker_1: ... hacer un punto test con ella el jueves o el miércoles para checar, este, qué hacer.
+[00:07:13.108] speaker_0: Vamos a ponerla para el jueves, ocho de la mañana.
+[00:07:16.408] speaker_1: Ah, voy a checar qué día le ponemos. Disculpe. [risas]
+[00:07:19.288] speaker_0: Ah, okey. Está bien, está bien, está bien.
+[00:07:20.728] speaker_1: Este... No, es que no pensé que íbamos a hacer requerimientos ahorita, porque yo, pues ahorita estaba ocupado.
+[00:07:25.808] speaker_0: ¿Qué re-- qué es lo que requieres ahorita?
+[00:07:27.768] speaker_1: No, no, es que pensé que nada más ibas a comentar algo light y estábamos-
+[00:07:30.448] speaker_0: No, es-estamos comentando algo light.
+[00:07:32.028] speaker_1: Este...
+[00:07:33.428] speaker_0: [risas] Es, es nada más es ponernos de acuerdo de que la coordinación, sus requerimientos, pueden venir a través de mí. Yo estaría un poco más disponible, pueden ir a, a, a través de Miriam y trabajamos.
+[00:07:45.018] speaker_1: Más que nada quería checar eso de Pickngo porque se me hace... Bueno, a lo mejor ni sabían y digo: ¿Para qué hacer un sistema nuevo si ya se existe lo de Rappi? Este...
+[00:07:54.928] speaker_1: Digo-
+[00:07:55.388] speaker_0: No, no, se, se lo, se lo puedes comentar
+[00:07:57.328] speaker_1: ... este, porque al final de cuentas lo que sí se hace por Rappi, este, ya sea integrar con Parrot, integrar con los pagos de Parrot, porque Rappi pide que pagues ya antes de, de-
+[00:08:06.858] speaker_0: De acuerdo
+[00:08:07.448] speaker_1: ... de llegar. Si nosotros vamos a hacer un sistema aparte, como tenemos integración con Parrot, pos sí, podemos imprimir la comanda, pero no se puede agregar la orden, no se-- lo del pago no se estaría ejecutando correctamente.
+[00:08:16.557] speaker_0: Como te, como te comentó la señora la otra vez, realmente ahorita nuestro Pickngo es que nos mandan DMs por WhatsApp, Facebook
+[00:08:28.128] speaker_0: y la transcriben de todas maneras.
+[00:08:33.208] speaker_0: No es, no es lo ideal. En el mundo ideal es nuestro motor imprimiendo, interactuando directamente con Parrot y ya. Eh, yo no sabía esa opción de Rappi. La pueden explorar. Eh, lo que ella quiere es quitarse la comisión de Rappi al cien por ciento.
+[00:08:51.408] speaker_1: Ah, okey.
+[00:08:52.748] speaker_0: Sí, y no, incluso-
+[00:08:53.878] speaker_1: Bueno, entonces voy a tener que checar eso con, con Olga, porque el tipo de acuerdo que estamos teniendo es-- se está aplazando mucho lo que es el scope y el tiempo-
+[00:09:01.738] speaker_0: ¿Aplazando?
+[00:09:02.178] speaker_1: Aplazando mucho lo que es el scope y las cantidades de cosas que se van a ocupar. Este, entonces voy a tener que echarle un ojo.
+[00:09:06.528] speaker_0: A ver, me, me, me, me, me estoy confundiendo. ¿En qué está cambiando ahorita?
+[00:09:10.308] speaker_1: No, o sea, bueno, eso ya es interno. Yo lo platico con Olga.
+[00:09:14.288] speaker_0: Ah, okey. Ah, bueno, entonces no quieres trabajar conmigo, quieres trabajar directamente con Olga.
+[00:09:19.198] speaker_1: No, por supuesto.
+[00:09:19.248] speaker_0: Ah, bueno, entonces es que no entiendo por qué no puedes hablar conmigo lo que quisieras hablar con ella.
+[00:09:23.688] speaker_1: No, dizque, pues por ejemplo, yo ya tenía, a este, hablado con Olga que iba a verla ya sea el jueves o el miércoles.
+[00:09:28.798] speaker_0: Está bien, eso no cambia.
+[00:09:29.258] speaker_1: Como tenemos... Sí, le digo, como usted me citó el martes aparte, este, yo pensé que a lo mejor nomás es algo como light que tocar o algo que me quería comentar. Este, lo digo por el acuerdo que tuvimos con Olga.
+[00:09:42.468] speaker_0: Mhm.
+[00:09:42.688] speaker_1: Este, fue una remuneración mucho más baja que la que pensamos.
+[00:09:45.728] speaker_0: Mhm.
+[00:09:45.828] speaker_1: Entonces, las horas que podemos meterles no son tantas como las que podríamos planear.
+[00:09:50.288] speaker_0: Okey.
+[00:09:50.588] speaker_1: Este, era por eso. No es como que no lo quiera-
+[00:09:53.148] speaker_0: Sí, sí, no, sí, sí sé del acuerdo económico, ¿verdad? Y sé que no puedo pedirles ocho horas de esto porque tú tienes otro trabajo y tú también tienes otras actividades.
+[00:10:00.948] speaker_1: Este... No, no, pero adelante. Lo digo porque me está comentando más que nada a mí. Yo soy el que tengo mi, mi trabajo también aparte.
+[00:10:07.648] speaker_0: No, no, yo lo sé. Yo lo sé.
+[00:10:08.978] speaker_3: ¿A qué te refieres? Porque yo soy teóricamente, pues el...
+[00:10:13.068] speaker_1: Sí, el que puede estar tiempo completo es mi hermano. Lo digo porque ahorita estoy hablando y tengo mi teléfono también en la cabeza ahorita. [risas]
+[00:10:17.788] speaker_0: No, yo sé.
+[00:10:18.308] speaker_1: O sea, estoy aquí tratando de, de modificar y me está haciendo las preguntas de lo de la cuestión del backend. Este, yo por eso quería hacerlas como a su tiempo, en lo que se me libere el tiempo. Este, digo, está bien que Miriam hable eso de lo que pasa con mi hermano. Él tiene un tiempo completo, no hay problema.
+[00:10:31.858] speaker_0: Mhm, sí.
+[00:10:32.168] speaker_1: Este, má-más que nada eso, ¿verdad? Este, por eso primero quería checar eso del, del Pickngo.
+[00:10:39.348] speaker_0: De Rappi.
+[00:10:40.128] speaker_1: Sí, eso digo.
+[00:10:43.928] speaker_1: Este...
+[00:10:45.328] speaker_0: Sí, bueno, entonces, pues si quieres me dirijo a él. No, no, no hay problema.
+[00:10:48.388] speaker_1: Sí, sí, no.
+[00:10:48.738] speaker_0: Entonces, te digo, hay que trabajar con ella, con, con lo del-- ella va a se-empezar a hacer la página. La página ya recuerdo las, las opciones es un acceso al menú, un, un-
+[00:11:00.278] speaker_3: La página principal.
+[00:11:01.488] speaker_0: Sí.
+[00:11:01.628] speaker_3: Ya vio.
+[00:11:02.388] speaker_0: Mhm.
+[00:11:02.608] speaker_3: Y la... Bueno, yo pu-- eh, técnicamente puedes acceder a órdenes, pero supongo que nomás es para los, ¿cómo se dice? Los empleados y luego la que se ocurre, que técnicamente puede acceder, pero pues no se debería. Por eso, pues está lo de los sistemas para bloquear que la gente ajena acceda a, a, al menú y empezar a ordenar.
+[00:11:25.308] speaker_0: De acuerdo. Eh, ahí sí no sé todavía qué mecánica quiere. Por eso, eh, esperaba primero el look and feel de la página principal, establecer los menús.
+[00:11:37.608] speaker_3: O sea, lo ideal para mí es el di-- el-- la vista principal.
+[00:11:40.508] speaker_0: Mhm.
+[00:11:40.828] speaker_3: El menú. El, el-
+[00:11:42.988] speaker_0: El me-el menú lo quieres manejar... Pregunta: ¿Lo quieres manejar como simplemente visualizar al principio?
+[00:11:49.518] speaker_3: Sí, son dos partes.
+[00:11:50.028] speaker_0: O, o sea, se-- porque están los menús en PDF, en la nube, ¿verdad?
+[00:11:54.148] speaker_3: O sea, yo lo veo, tal vez aquí me pueden corregir, que primero alguien quiere solo ver el menú.
+[00:11:58.948] speaker_0: Mhm.
+[00:11:59.788] speaker_3: Eh, lo de estar aquí o a gente es más normal que lo...
+[00:12:03.828] speaker_0: Lo, lo toma, ¿verdad? Sí, sí.
+[00:12:05.368] speaker_3: Y luego pedir, o es ahí o con el menú de-- no, que se va a poner deDe QR. Por eso tengo las dos separadas para que no haya problemas entre ellos.
+[00:12:17.428] speaker_0: Okey.
+[00:12:17.748] speaker_3: Pero es, okey, es algo de visión. Como yo no manejo un restaurante ni he visto cómo se desarrolla, pues ahí ya se cambia dependiendo de cómo, cómo sale correcto.
+[00:12:27.308] speaker_0: Okey. Ahmm, de entrada, yo pienso que lo más sencillo en la página es poner una-- el menú, una liga que me abra el PDF que tenemos en el drive. Luego ya nos vamos... Porque una cosa es el menú que quieres ver nada más por consultar. Y otra cosa sería el menú que sería para-
+[00:12:48.948] speaker_3: Ordenar.
+[00:12:48.968] speaker_0: Para ordenar, ¿verdad? Porque el que consultar te va a sacar todo siempre. Pero en el otro podría estar qué cosas están disponibles en ese momento. O sea, me acabo el matcha, pues no tengo maneras de prepararte una bebida de matcha y debo de prevenir que no pidas matcha, pero eso es más adelante.
+[00:13:04.328] speaker_3: Mmm.
+[00:13:04.998] speaker_0: ¿Okey? Eso ya es con el motor. Ahmm, ¿qué otras opciones les dijeron? Porque yo sí recuerdo lo del menú, recuerdo lo de la historia. Eh, está la opción de,
+[00:13:23.548] speaker_0: del mesero virtual,
+[00:13:26.648] speaker_0: que es el de Pick&Go, para empezar.
+[00:13:28.948] speaker_3: No, porque son diferentes.
+[00:13:30.188] speaker_1: No, mesero virtual creo que es el que está aquí en la mesa y el Pick&Go es externo.
+[00:13:35.708] speaker_0: Okey, le, le llaman Pick&Go.
+[00:13:37.128] speaker_3: Es el de ordenar.
+[00:13:38.268] speaker_1: Sí, ordenar desde aquí, pero en la mesa, sí.
+[00:13:40.508] speaker_3: Sí.
+[00:13:41.068] speaker_0: Entonces, le están manejando dos conceptos. Uno es Pick&Go y otro es-
+[00:13:45.508] speaker_3: Pick&Go.
+[00:13:45.608] speaker_0: El mesero virtual.
+[00:13:46.728] speaker_3: Sí, el Pick&Go y el mesero virtual son los dos ahorita.
+[00:13:49.528] speaker_0: Mhm.
+[00:13:50.608] speaker_3: Luego ya más adelante, tal vez otro poco más. Yo porque, otra vez, yo no he hecho muchas páginas, por lo que yo no tengo una idea clara de qué quiere que haga la página completamente. Por ahorita mi vista es la principal, el menú o el mesero virtual, ahorita ver si se combinan o no.
+[00:14:07.858] speaker_0: Mhm.
+[00:14:08.428] speaker_3: Porque es que tú tienes ya dos cosas.
+[00:14:10.688] speaker_0: Sí, ahí, ahí donde-- ahí viene donde la experiencia de ella, que fue front, puede entender cómo el cliente interactúa. Eso es parte de la experiencia que ella puede dar. Entonces, si tienes ideas, hay que agregarte al grupo. ¿No, no te agregaron al grupo? Ah, okey. Hay que agregarte al grupo y se pueden comunicar directamente si no quieren hacer como que mucho ruido capaz que con confianza se pueden comunicar directamente desde que trabajamos. Ah,
+[00:14:41.628] speaker_0: hoy te consigo la licencia, ¿okey? Y no sé cuánto tiempo estimas o qué necesitas para decir: «Ah, para el jueves o viernes ya tengo un esquema
+[00:14:56.148] speaker_0: básico de página para que ustedes carguen».
+[00:15:00.718] speaker_0: ¿En qué formato se les tiene que entregar la página para cargarla?
+[00:15:04.728] speaker_1: Formato.
+[00:15:05.968] speaker_0: Sí, bueno, le-- qué, qué es el archivo que les debe entregar, el HTML o...
+[00:15:10.828] speaker_1: Para los diseños mencioné.
+[00:15:12.458] speaker_0: Sí.
+[00:15:12.548] speaker_1: Ah, que depende qué software sería el que usar. ¿Il-- el de Adobe?
+[00:15:15.828] speaker_0: Mhm.
+[00:15:16.248] speaker_1: No sé qué exporten, no sé si pasan las-
+[00:15:18.718] speaker_3: Pasan PNG, PDF.
+[00:15:20.708] speaker_1: Van a ser las como los monitos. ¿Cuáles?
+[00:15:24.537] speaker_3: ¿Formato de página significas o qué, qué formato tienen los elementos?
+[00:15:28.628] speaker_1: Sí, o sea, digamos, es una imagen de un monito.
+[00:15:30.708] speaker_3: Ah, generalmente uso PNG cuando ocupo que se pueda ver el fondo.
+[00:15:34.828] speaker_0: Mhm.
+[00:15:35.968] speaker_3: O también... Yo he usado bastante ya PDF cuando es, tiene que ser estático.
+[00:15:41.528] speaker_0: Mhm.
+[00:15:42.168] speaker_3: Pero sí, normalmente lo--
+[00:15:46.608] speaker_3: usualmente PNG porque pues un PNG se puede transformar fácilmente
+[00:15:52.388] speaker_3: a PDF o cualquier otra cosa.
+[00:15:54.168] speaker_0: Ah, okey. Entonces, para que sepas cómo, cómo entregas el paquete. Y una vez...
+[00:16:03.208] speaker_0: Yo estaba pensando,
+[00:16:05.608] speaker_0: digamos, el próximo martes
+[00:16:09.248] speaker_0: ya estar con
+[00:16:13.168] speaker_0: que te gusta el ochenta por ciento de la página. Ya las ligas, las ligas de la misión, quiénes somos, eh, preguntas frecuentes y el esqueleto de aquí estaría las órdenes, aquí estaría el menú.
+[00:16:30.068] speaker_0: Si tienes los... Bueno, pues agarra de aquí a dónde va cada uno de los menús que te ponen ahí en PDF a la red en el drive. ¿Convendría usar el drive que tienen ahorita? Porque tú estás ahí, te lleva un drive, ¿verdad? En el QR este.
+[00:16:44.218] speaker_3: ¿El drive es en Workspace actual o cómo?
+[00:16:47.468] speaker_0: Sí, es el Google Workspace.
+[00:16:49.848] speaker_3: ¿Para que me lleven los archivos?
+[00:16:51.328] speaker_0: Mmm.
+[00:16:54.048] speaker_0: No son tan abiertos esos, es solamente un PDF que ves ahí.
+[00:17:00.248] speaker_0: Podemos empezar con ese.
+[00:17:02.248] speaker_3: No, es que nunca he usado... Casi siempre solo uso WhatsApp o, o cosas así, porque-
+[00:17:08.808] speaker_0: ¿Has escaneado este?
+[00:17:11.448] speaker_3: No.
+[00:17:12.568] speaker_0: Escanea.
+[00:17:15.648] speaker_1: Creo que ese no funciona, el QR de-
+[00:17:17.828] speaker_0: No, hay, hay, hay uno que sí funciona. ¿Cuál es el que sí funciona? Hay uno que no... Creo que el de desayuno, pero te llevan las dos.
+[00:17:29.068] speaker_0: Este no sé qué es, es el de arriba.
+[00:17:33.188] speaker_3: No, ahora sí.
+[00:17:34.548] speaker_0: Okey.
+[00:17:35.108] speaker_3: Ese no.
+[00:17:36.268] speaker_0: Entonces, agarra este de arriba.
+[00:17:49.088] speaker_3: Ni siquiera funciona de verse.
+[00:17:51.568] speaker_0: Ninguno, órale.
+[00:17:53.208] speaker_3: El de abajo, ¿modado es el mismo o...?
+[00:17:55.408] speaker_0: No, es otro.
+[00:18:00.348] speaker_0: Ya se acostumbra uno.
+[00:18:03.968] speaker_3: ¿Por qué se me escapa?
+[00:18:05.588] speaker_0: No te preocupes.
+[00:18:10.948] speaker_0: Okey. EntoncesEmpezando con, con diseño de páginas con ustedes dos. Y lo del motor, tú citarías a la señora Olga, ¿verdad?
+[00:18:21.676] speaker_1: Este, sí, yo digo. Más que nada, el tema de hacerlo externo es con quién lo pongamos. Yo no sé qué-- o sea, yo sé que les mandan de repente mensaje por Instagram.
+[00:18:33.296] speaker_0: Mhm.
+[00:18:33.916] speaker_1: Este, según yo era a Georgis-
+[00:18:36.076] speaker_0: Georgi
+[00:18:36.156] speaker_1: ... a veces se los envían. El tema es, o sea, ¿cómo van a saber que ahora existe un nuevo motor? Sea, sea Rappi o sea el Interrapp. Este, imagino que sea la persona. No, no sé por qué les hablan ahí por Instagram, me imagino que ven los posts o algo así.
+[00:18:51.176] speaker_0: Mhm.
+[00:18:51.356] speaker_1: Y ahí se debe decir que si quieres ordenar o que salga ahí, no sé, porque el menú de aquí para ordenar, pues aquí mismo lo ven, aquí mismo se enteran. Pero si es algo por Twitter, ¿cómo se va a enterar la gente de afuera o la que queremos para pidiendo por acá?
+[00:19:05.956] speaker_2: Pero por eso no hay problema, se puede publicar un post en Instagram para eso.
+[00:19:09.356] speaker_1: Ah, ¿sí?
+[00:19:10.016] speaker_0: Se, se, se, se usa, se usa marketing, se pone en Instagram o la respuesta de Georgis: «Por favor, tu pedido, hazlo a través de aquí». En un momento. Se ve muy frío eso, ¿verdad?
+[00:19:20.036] speaker_1: [ríendo] Sí, bueno.
+[00:19:20.306] speaker_0: Sí, pero se ve muy frío, pero...
+[00:19:21.936] speaker_1: Pues lo imagino en mi mente cómo ha de ser, que ahora vete para acá. Ah, okey.
+[00:19:26.076] speaker_0: Es que mira, te voy a decir algo. Eh, el...
+[00:19:30.816] speaker_0: La mayoría que piden directamente son amigos o parientes de los dueños, la mayoría. Pero sí hay uno que otro que es gente, eh, que nada más puso un DM: «¿Tienen picacos?», y, «Quiero ordenar esto», y llegan y, y pagan aquí. La verdad que aquí es mucho de confianza nuestros clientes, ¿eh? Es mucho y hasta la fecha no nos quedan mal. Nos... Por ejemplo, una persona que reservó aquí arriba como con un mes de anticipación.
+[00:20:03.016] speaker_1: Ah, qué onda.
+[00:20:03.816] speaker_0: Y una semana antes dijo: «No voy a poder asistir, eh, falleció un-una persona y listo», ¿no? Pero me lo reserva y no cobramos ni un depósito, no tienen que venir, nada más cobramos el consumo. Es mucho de confianza entre que nuestros clientes: «Yo voy a venir, sepárame tres mesas», se les separan tres mesas.
+[00:20:31.876] speaker_0: Y si llegan, llegan. Y nada más me ha tocado una vez que ni llegaron ni nada y: «¿Qué onda, Georgi? No han llegado». «No, en media hora liberan las mesas si no llegan». Pero nada más, yo tengo año y medio aquí, nada más una vez ha pasado que, que alguien no llegue. Eh, pero te digo, ahorita yo pienso que como dijo la señora, trabajar con el cinco por ciento.
+[00:20:53.516] speaker_1: Tengo entendido que cuando hablé con, con Olga mencionó que lo que ella quiere antes de que se llegue a usar, sí esté ligado con Parrot para que no tengan que reteclear. Este, [tos] la parte externa, lo que a mí me preocupó, pues eso que dice del, del posible, no, no fraude, nada más que no, no se presente, ¿no? Este, en teoría lo fácil es que paguen primero antes de venir. El problema es de que la señora Olga no quiere que se pague con una cuenta externa, porque Parrot no sé si pueda ligar la cuenta para un proveedor de software. O sea, no creo que te permita poder, este, con tu propio código, pedir pagos aparte. Para eso tengo...
+[00:21:30.556] speaker_0: Sí, yo creo que no se puede, verdad.
+[00:21:32.496] speaker_1: Si no se puede, sería que vienen aquí y confiar.
+[00:21:36.036] speaker_0: Sí, esa cuenta es, es...
+[00:21:39.256] speaker_0: Sería lo mismo, pero utilizando otras herramientas, ¿verdad? Eh, ahora, creo que sí. A mí me dijo que sí les comentó que también quiere de, de desarrollo para WhatsApp de negocios, igual, en etapas futuras.
+[00:21:51.496] speaker_1: E-es lo que se me ocurrió para evitar ese, digamos, no fraude, ¿verdad? Pero para saber quién es quién, ¿no? De que oye-
+[00:21:56.956] speaker_0: Sí
+[00:21:57.656] speaker_1: ...este,
+[00:21:59.776] speaker_1: si es número que ni es de aquí. Uno texano, pues.
+[00:22:02.356] speaker_0: Sí, sí. Desde Ohio. [ríen]
+[00:22:04.896] speaker_1: No, no. O sea, tampoco es como que americano, pues obvio, va a haber de acá de la Texas, ¿verdad? Pero, este, mínimo para saber de duplicar, ¿no? De que oye, tú siempre pides y nunca llegas.
+[00:22:14.476] speaker_0: Sí, ah, y lo otro es,
+[00:22:18.436] speaker_0: no sabría si para poder pedir en la cuenta, registrarlo.
+[00:22:23.436] speaker_1: Sí.
+[00:22:24.036] speaker_0: Si tú quieres pedir, te tienes que registrar.
+[00:22:26.616] speaker_1: Sí, verdad.
+[00:22:27.266] speaker_0: No me tienes que dar número de cuenta, nada más, sino simplemente yo tengo que avisarte de que tu orden está lista mandándote un mensaje a tu celular.
+[00:22:37.196] speaker_1: El número me lo vas a tener que registrar.
+[00:22:38.596] speaker_0: Sí, sí. Entonces, te, te tengo que es cómo te llamas, cuál es, cuál es tu celular y nos comunicamos, ¿verdad? Y, eh, no, no tengo idea, la mera verdad, cuál es el requerimiento de la señora con respecto a cómo lo quiere manejar. Ella lo ve como muy sencillo, como que pide, sale a-aquí la, la comanda, la recapturan ahorita, porque depende si, si Parrot no, no apreja.
+[00:23:06.816] speaker_0: Y empiezan a... Y una vez listo, de alguna manera las chicas deben tener una manera de decir, de notificarle al cliente: «Tu pedido está listo». Y ya. Ahora, también ha habido, te digo, Rappi. Piden, nos llega, empezamos a preparar, ningún repartidor la toma.
+[00:23:25.856] speaker_1: Ah, verdad, lo del gato. [ríe]
+[00:23:28.386] speaker_0: ¿Qué?
+[00:23:28.416] speaker_1: La de tu foto verdadera es un gato.
+[00:23:29.886] speaker_0: Ah, sí.
+[00:23:30.966] speaker_1: Sí.
+[00:23:31.016] speaker_0: Sí, eh, ningún repartidor la toma.
+[00:23:34.086] speaker_1: ¿No?
+[00:23:34.596] speaker_0: No, no.
+[00:23:37.396] speaker_0: Piden, te digo, y preparan la ensalada, lo que sea. Una hora después, sigue esperando el repartidor. Y ya se hizo.
+[00:23:44.336] speaker_2: Lo que ocupé de la computadora.
+[00:23:46.296] speaker_0: Eh...
+[00:23:47.496] speaker_1: También por eso quieren tener su propio repartidor para no-- evitar esos desastres o...
+[00:23:51.936] speaker_0: Ahí se me hace que es la señora acelerándose ahorita, ¿okey?
+[00:23:54.516] speaker_1: Okey.
+[00:23:54.836] speaker_0: Porque, porque le estaba platicando con ella ayer: «Oye, tienes que acotar el área donde puedes dar servicio». Porque si te dicen: «Estoy en la Buena Vista», pues oye... [ríen]
+[00:24:05.676] speaker_1: No, no sé.
+[00:24:06.556] speaker_0: Como que tienes que, que acotar el, el sector. Ah, Linda, ¿como cuántas veces te ha pasado aquí que pidan por Rappi y que ningún repartidor lo tome?Pero sí sucede, mmm.
+[00:24:23.808] speaker_4: Sí,
+[00:24:25.288] speaker_4: de hecho-
+[00:24:25.318] speaker_0: En las noches, sobre todo
+[00:24:26.308] speaker_4: ...ha habido veces donde el cliente ha cancelado el pedido porque no tarda [ruido]. Entonces, hubo como que se tarda mucho, porque hay veces donde Rappi tarda una hora. Este, y ellos como que porque no ven, pues, no, no hay quien recoja. Entonces, sí, pasa mucho que no, que normalmente se activan-
+[00:24:50.188] speaker_0: Y el platillo, pues se merma, ¿no?
+[00:24:51.968] speaker_1: Sí, eso es.
+[00:24:52.728] speaker_0: Pues ni modo. Gracias, Linda. Entonces, te digo, ese riesgo exista o no hoy en día.
+[00:24:58.448] speaker_1: Sí.
+[00:24:58.948] speaker_0: Y pues claro, pues no se te paga ni la comida y se queda y se va feliz alguien con un platillo a su casa. [risas]
+[00:25:05.288] speaker_1: [risas] Pues sí.
+[00:25:05.438] speaker_0: Pues sí, porque a perderla, no lo tiramos, ¿verdad? Repártanse y listo. Entonces, [carraspeo] esos son riesgos que tenemos que tener. Entonces, pero yo pienso mejor es empecemos, eh, si te tienes que-- para poderme pedir, me tienes que dar info y te tengo que registrar, ¿verdad? Te, te tengo. Eh, sí les vamos a poner su clave, no su clave de acceso para hacer pedidos, es-- digo, Rappi te pide una clave de acceso, ¿por qué yo no, verdad? Eh,
+[00:25:34.548] speaker_0: no sé cómo esté la seguridad del Workflex que tengan, la mera verdad, eso lo maneja más Luis, que es el hijo de la señora, él es, él es el que controla accesos y cosas así. Entonces-
+[00:25:44.488] speaker_1: El Workflex, eh...
+[00:25:45.748] speaker_0: Bueno, todo-
+[00:25:46.278] speaker_3: Sí, para pasar archivos, dice.
+[00:25:47.848] speaker_0: Mhm. Sí, por ejemplo, [risas] todo lo que es si queremos una cuenta para alguien, la-
+[00:25:54.288] speaker_1: Ah.
+[00:25:54.528] speaker_0: La generamos.
+[00:25:55.028] speaker_1: Ah, sí, sí.
+[00:25:55.548] speaker_0: Si, si queremos crear un correo, ya es que cada ID te cuesta, es-- lo, lo, lo tiene que generar Luis, él es el que está administrando.
+[00:26:02.588] speaker_1: Ah, okey, okey.
+[00:26:04.428] speaker_0: Entonces, si vamos a empezar a registrar usuarios,
+[00:26:08.848] speaker_0: ¿en dónde estaría?, ¿en dónde estaría almacenada esa información? Que al final de cuentas tiene que tener seguridad.
+[00:26:13.718] speaker_1: Usuarios, pero, o sea, de...
+[00:26:15.078] speaker_0: De, de gente que vaya a pedir. [carraspeo] O, o tú crees-
+[00:26:18.448] speaker_1: Ah, okey, ya entendí, ya entendí.
+[00:26:20.478] speaker_0: O tú crees que no, etcétera. O, o tú crees que solo
+[00:26:25.588] speaker_0: pidiéndole información cada vez-
+[00:26:27.828] speaker_1: No, no, o sea-
+[00:26:28.468] speaker_0: Me olvido.
+[00:26:29.028] speaker_1: No, no, se guarda.
+[00:26:30.028] speaker_0: Que tiene que haber un ID para cada usuario, ¿no?
+[00:26:32.448] speaker_1: Sí, sí. Este, ya te di-
+[00:26:34.158] speaker_0: Si no, si no, ¿cómo llevas la estadística?
+[00:26:36.648] speaker_0: [carraspeo] Entonces-- pero
+[00:26:40.088] speaker_0: digo, a mí sí me gustaría que la página estuviera-- la parte estática-
+[00:26:44.988] speaker_3: Sí.
+[00:26:45.348] speaker_0: En una semana.
+[00:26:47.228] speaker_3: Sí, es que según yo ya está casi todo. O sea, ¿hiciste el último push?
+[00:26:52.148] speaker_0: No.
+[00:26:52.828] speaker_3: ¿Le puedo hacer otra?
+[00:26:54.198] speaker_0: Sí. No, de volada.
+[00:26:55.128] speaker_3: Como cinco minutos.
+[00:26:57.608] speaker_3: Pero según yo hice-
+[00:26:58.968] speaker_1: En cinco minutos se refleja en la página.
+[00:27:01.138] speaker_3: Mhm. [sonido agudo] Eh, ¿te enseño yo o el chico en la computadora?
+[00:27:07.368] speaker_0: Ah, te enteramos.
+[00:27:09.548] speaker_3: Bueno, yo tendría que ser,
+[00:27:13.108] speaker_3: eh, en teléfono, porque según yo está-- la diseñé para teléfono.
+[00:27:17.628] speaker_1: Sí.
+[00:27:18.268] speaker_0: Ah, okey. Esa, esa es otra cosa que, que dijo la señora, que lo quiere que funcione para, para tú. En teléfono se veía muy bien. Yo, yo vi la...
+[00:27:28.038] speaker_3: Sí, hice unos cuantos cambios que son un poquito más, pero es lo que a mí se me hace medio complicado entender, porque eso me salió en mi mente, na' más. Lo hice-
+[00:27:37.128] speaker_0: Sí.
+[00:27:37.388] speaker_3: Lo que yo pude, pero por eso tenía que comunicarme por saber si eso estaba bien o si quería un último cambio o algo así.
+[00:27:43.948] speaker_0: Primero, nada está mal, ¿okey? Primero, para mi punto de vista, nada está mal nunca. Vamos aprendiendo, vamos solucionando, va-vamos creciendo, eh, no hay errores, digo, y todo tiene reversa. Otra vez, como les digo aquí a los chicos, no estamos curando el cáncer, no se preocupen. [risas] No, no, no ha hecho. Es ahí donde, donde entra ella. Eh, como les comentamos, ella estudió innovación de negocios y mercadotecnia. Sabe bastante de diseño. Entonces, eh, incluso ya nos ha, nos ha diseñado un logo. Entonces, esa es la experiencia que ella puede aportar, aparte de que ha estado allí. Ella era la supervisora en el turno de las mañanas. ¿Cuánto tiempo fuiste? Más o menos.
+[00:28:27.268] speaker_4: No, casi nada.
+[00:28:28.508] speaker_0: Casi, casi nada. Pero luego quiso oír y le dije: «No,
+[00:28:33.708] speaker_0: la experiencia, [risas] la experiencia no la voy a dejar ir así nomás de, de gratis, ¿qué te pasa?» Primero que-
+[00:28:38.967] speaker_4: Belly Monster Bike punto com.
+[00:28:41.228] speaker_3: Ah, es, eh... Belly Mon-- se escribe, digo otra vez.
+[00:28:46.648] speaker_1: Belly Monster Bikes.
+[00:28:49.348] speaker_3: Belly Monster... Ya, bueno.
+[00:28:58.908] speaker_0: Oh, cómo está el wifi.
+[00:29:02.268] speaker_1: Ya debió vernos. Quedó.
+[00:29:09.768] speaker_1: Mire yo, que siempre iba a comanda.
+[00:29:13.408] speaker_1: No sé si que sea página web o aplicación móvil. Yo lo veo y que sea página web.
+[00:29:18.328] speaker_0: Eh, la señora ya me dijo que quería las dos, pero yo digo que empecemos por web, por página web.
+[00:29:22.548] speaker_1: Ah, ¿quería móvil también?
+[00:29:23.868] speaker_0: Sí, pero-
+[00:29:25.368] speaker_1: El, el tema de la página móvil versus web es notificaciones. Ese siempre fue el, el problema número uno. Si es pági-- si es, este, aplicación móvil, pues de volada ahí se mandan las notificaciones.
+[00:29:35.828] speaker_0: Mhm.
+[00:29:36.288] speaker_1: Lo único que no sé si es mucho chupón que te descarguen una aplicación móvil para pedir. De verdad-
+[00:29:41.028] speaker_0: Y por el tamaño de la pantallita y-
+[00:29:42.208] speaker_1: No, no, no, no tanto de: «Ah, tengo que descargar algo para pedir algo».
+[00:29:47.268] speaker_1: Ahí sí no sé, este, pero pues no hay diferencia de aplicación móvil versus... ¿Sí me explico? Aquí tiene que ser web, porque en el momento lo escaneas, en el momento lo pides.
+[00:29:54.528] speaker_0: Si tú dices que sea una app, una app.
+[00:29:57.088] speaker_1: Sí, no, que descargues.
+[00:29:58.548] speaker_0: Como la que pusiste acá.
+[00:29:59.388] speaker_1: Sí, nada, es que también para iPhone, ¿verdad? Pues al final cross-platform.
+[00:30:02.508] speaker_0: Sí.
+[00:30:03.248] speaker_1: En mi mente es mejor, pero como yo n-- ay, yo ni voy a restaurantes, yo ni siquiera tengo carro para hacer PinkGo. [risas] Entonces, no sé qué es lo que se le facilita al usuario, ¿no? O sea, porque todo se puede, nomás cuestión de que sea, este...
+[00:30:17.348] speaker_0: Yo luego más en ese, desde tu punto de vista lo veo más a web.
+[00:30:20.338] speaker_1: ¿Web?Sí. Igual empezamos y si está pues se cambia. Este-
+[00:30:25.912] speaker_0: Yo pienso que el app sería después, en un momento dado.
+[00:30:29.752] speaker_1: Web, este, que tengan se cuenta como Rappi, Google, teléfono, como sea.
+[00:30:34.902] speaker_0: Mhm.
+[00:30:35.612] speaker_1: Este, lo único que no sé es notificaciones.
+[00:30:38.632] speaker_0: Sí, ¿y acaso?
+[00:30:41.532] speaker_1: Notificaciones es lo único que no sé...
+[00:30:44.922] speaker_0: Digo yo ayer a la señora la tuve que frenar, ¿eh? Porque decía: "No, que haga satisfacción al cliente, que me haga cha, cha, cha, cha". Pero bájele eso sin duda, porque yo sé que el, el tiempo que les está dando es muy corto para mi punto de vista. Un, un, un mes apenas estarías terminando pruebas con em-- con gente real, ¿verdad? Eh, como para decir: "Ah, esto ya tiene que estar listo". Eh, pero en fin. Entonces, no-notificaciones, digo.
+[00:31:09.852] speaker_1: Sí, o sea, en teoría hay dos. Web no puedes enviar notificaciones. No, no se puede. O sea, eso es un inconveniente para el usuario, tener que descargarse una aplicación. Se puede, como dice usted, por correo, por mensaje, por email. Este, no sé qué tan chido sea. O sea, digo, uno está acostumbrado a todo, este, notificación de Rappi, notificación de Didi Food, ¿verdad?
+[00:31:33.932] speaker_0: Sí, sí que te salen ahí.
+[00:31:34.932] speaker_1: Sí, bonitas, digamos, no tanto un SMS o un correo, pero se puede. Eso que por WhatsApp te estén mandando notificación, pero se me hace como que lo ideal es una notificación normal, real. Es lo que siempre pensé. Este, lo raro es que
+[00:31:52.492] speaker_1: en teoría la persona que decide es un usuario. [se ríe] El usuario, el que vaya a usar un pick-- el sistema pick and go es el que va a decidir si quiere notificación nativa o quiere...
+[00:32:01.752] speaker_0: Yo sé que yo me la veo mucho más sencilla para empezar por SMS.
+[00:32:07.002] speaker_1: ¿SMS?
+[00:32:07.712] speaker_0: Envío un SMS, digo. Porque en teoría hay un teléfono de nosotros que es business, o sea, hay un celular, eh, que puede la, la página estar encadenado con un celular y que envíe un SMS.
+[00:32:22.072] speaker_1: Okey, empezamos con, con eso.
+[00:32:24.032] speaker_0: Em-em-vamos a empezar y subimos. Yo sé que la señora ya quiere, ¿no? Me había olvidado. [se ríe]
+[00:32:27.812] speaker_1: No, sí, está bien. Voy a investigar las opciones para lo de SMS, este, nada más. Es que tiene un tele-- pero es línea, ¿no? El que tiene.
+[00:32:33.292] speaker_0: No, no, no. Ah, ella me, me estaba comentando ayer que hay un celular que es de Belly, pero ella lo tiene, porque donde está, donde quería ver lo de WhatsApp Web.
+[00:32:40.872] speaker_1: Pero un celular, o sea, ¿celular físico o el número del celular?
+[00:32:43.912] speaker_0: Pues...
+[00:32:44.872] speaker_1: O sea, físico, o sea-
+[00:32:45.612] speaker_0: Dependiendo de la pregunta, yo pienso que se refiere físico y si no lo consigue de volada, digo. Siempre digo: "¿Cómo está esto?" "Ay, mañana lo tienes". [se ríen]
+[00:32:54.722] speaker_1: No, sí, SMS. O sea, para notificaciones, en vez de correo, tiene más sentido SMS.
+[00:32:58.652] speaker_0: Mhm. Sí, y eso es yéndonos bajito. Ya después, si es la app, ya que la app notifique, pero yo no me iría-
+[00:33:04.912] speaker_1: Okey.
+[00:33:05.052] speaker_0: Por desarro-- estarías desarrollando dos cosas al mismo tiempo y no te va...
+[00:33:10.632] speaker_1: O sea, casi, casi como-
+[00:33:11.832] speaker_0: Au-aunque sea el mismo motor, desarrollar dos cosas al mismo tiempo, eh...
+[00:33:18.452] speaker_1: Se sorprende.
+[00:33:20.102] speaker_0: ¿Mmm?
+[00:33:20.392] speaker_1: No, pero sí.
+[00:33:21.152] speaker_0: No, no, claro que me sorprendo. [se ríe]
+[00:33:25.372] speaker_1: Okey, okey.
+[00:33:26.232] speaker_0: Bueno, entonces, eh, ya pusimos la otra semana. Eso no significa que, mira, hoy, ah, hicimos esto, logramos esto, pa-para estar seguros de que vamos en, en-
+[00:33:38.972] speaker_1: Ya se publicó, creo.
+[00:33:40.132] speaker_0: En los tiempos. ¿Ya se publicó?
+[00:33:42.612] speaker_1: Ah, bueno, no sé si hubo... Bueno, es para imaginarte. Ya hice el push para que-
+[00:33:45.532] speaker_3: Sí, o sea, ya se actualizó.
+[00:33:47.322] speaker_1: ¿Sí vieron lo que he realizado?
+[00:33:49.012] speaker_3: Sí.
+[00:33:49.272] speaker_1: Okey, okey, no. No, nada.
+[00:33:50.812] speaker_3: Ah, le digo porque también es que de hecho lo que hice no servía para nada.
+[00:33:54.972] speaker_3: O puede que se veía cuando era la página en computadora. Sé que está diseñada para teléfono, pero se veía muy raro, no sé, en computadora. Ya, pues la reviero.
+[00:34:02.892] speaker_0: O sea que así se ve muy, muy-
+[00:34:04.412] speaker_3: Sí, los lados, ¿no?
+[00:34:05.372] speaker_0: Muy, sí, muy, muy, muy angostita.
+[00:34:08.232] speaker_0: Fíjate, por ejemplo, cuando vi-- dijeron esto, pla-platillos del mes, el juicy look. To-to-todo eso está padre, ¿no? Porque es algo que estamos viendo.
+[00:34:14.512] speaker_3: Digo, yo quisiera probar porque es lo primero que se debería ver al inicio.
+[00:34:17.932] speaker_0: Mhm, sí. Y por ejemplo, eso me dio la idea de que podríamos tener como una galería de eventos pasados. Nomás es, es como una galería, haz de cuenta, lo de, lo de Taylor, los de Harry...
+[00:34:31.652] speaker_0: Co-co-cosas de productos que, que se han hecho, ¿verdad? Eh, y la parte de servicios. Por ejemplo, otra cosa que me ha comentado ella, que pudieran reservar el local desde-
+[00:34:42.932] speaker_3: La página.
+[00:34:43.292] speaker_0: Desde la página. Haz de cuenta, necesito diez mesas, mesa mine o cierra para arriba, somos como treinta personas, tal es el tipo de...
+[00:34:52.052] speaker_0: Esa es otra opción.
+[00:34:53.932] speaker_1: Sí está mejor, entonces, que todo quede único en la página. Sí, es cierto.
+[00:34:56.752] speaker_0: Mhm. Bueno, pero digo, es-esa galería se me antojó cuando vi... Y esto ya la había visto lo del: "Ah, ven", pon-pon-poner eso.
+[00:35:07.132] speaker_0: A ver si el marketing se pone las pilas, ¿no? [se ríe] Bueno, digo, eh, sí, sí lo quería hacer corto. Eh, cualquier cosa que necesiten, cualquier retraso, pueden ir directo con la señora. Digo, ya hasta ese canal es-- está abierto, ¿verdad? Pero-
+[00:35:20.552] speaker_1: No, no, adelante.
+[00:35:21.352] speaker_0: A veces ella está de junta en junta en tu otro trabajo y...
+[00:35:25.612] speaker_1: Y sí, pues-
+[00:35:26.072] speaker_0: Y lo único que va, lo único que va a hacer es estrangularme.
+[00:35:28.512] speaker_1: Sí.
+[00:35:28.601] speaker_0: Carlos, ¿estás mirando esto? [se ríe] Y ya vemos. Entonces...
+[00:35:33.312] speaker_1: Bien, nomás, este, lo único que le diría es lo que mencionaba de seguridad de Luis, de dónde se han guardado los datos de los clientes. Eso me gustaría verlo ya que tengamos... Pues no me voy a tardar mucho en hacer esa versión que acabamos de discutir. De lo que tengo, este, ya digamos, vemos eso del-
+[00:35:50.272] speaker_0: Sí, claro.
+[00:35:50.512] speaker_1: Del governance, ¿no? O sea, pues que él tenga acceso, que él pueda ver la seguridad, todo eso.
+[00:35:54.172] speaker_0: Mhm.
+[00:35:54.372] speaker_1: O sea, primero tener algo que todavía no estás usando y luego ya vemos, este, lo de la seguridad.
+[00:35:59.992] speaker_0: Sí, porque sí son datos críticos. Digo, sí es importante tener eso. Es que política de privacidad-
+[00:36:07.272] speaker_1: No, no, o sea, independientemente de eso también es, pues, este, que ustedes tengan esa seguridad, ¿no? Bueno, pues ya lo comenté con Luis, básicamente.
+[00:36:15.092] speaker_0: Sí, sí, sí.
+[00:36:15.482] speaker_1: Pero no, o sea, ahorita no como que jalarnos con eso.
+[00:36:18.822] speaker_0: No.
+[00:36:18.852] speaker_1: Ya que vayamos a necesitar una-- si lo llevamos-
+[00:36:21.272] speaker_0: Exacto.
+[00:36:21.532] speaker_1: No es estrés, poco a poco, mordi-mordisquear. EsteYa está.
+[00:36:26.704] speaker_0: Bueno.
+[00:36:26.964] speaker_1: Este.
+[00:36:27.364] speaker_0: Entonces, el apoyo que requieran me dicen.
+[00:36:30.424] speaker_1: Eso.
+[00:36:31.524] speaker_0: A la orden, chicos.
+[00:36:33.944] speaker_0: ¿Preguntas, Miriam? No.
+[00:36:36.034] speaker_1: Ah, una pregunta. Este-
+[00:36:39.164] speaker_2: O sea, hay que ver otros diseños. Pero o sea, si así le gusta, pues.
+[00:36:45.644] speaker_0: No, eh, eh, ok. Aquí el mensaje es: el negro no es un color bello, por ejemplo, ¿verdad? Me gusta el... esto que esté arriba de las redes, a mí sí me gusta que no tengan-- que a veces los ponen muy chiquitos abajo para otras formas de contacto. Eh, y aquí pues nada más es el, el puro Top Flex.
+[00:37:05.224] speaker_1: Eh, los colores son más como esos.
+[00:37:07.434] speaker_0: Que, que están ahí. El font sí es, sí es el que se está usando más o menos, ¿no? El, el, el Ayla. Y el, eh...
+[00:37:16.644] speaker_2: Se me hace parecido.
+[00:37:17.824] speaker_0: Bueno, se parece. Es-estás hablando con un hombre: «¿Qué color es?», «Es azul». «No, es celeste». «No, es azul» [ríe].
+[00:37:25.364] speaker_0: Eh, el, yo estoy limitado en esto, Miro, tú me conoces. Entonces, am, el, el tipo de font y eso es lo que-
+[00:37:33.304] speaker_1: Sí, yo me he decepcionado por lo que yo vi, pero sí, sí he visto que era como más chillón el color, pero no sé cuál es en exactamente. Nomás con que-
+[00:37:41.144] speaker_0: Bueno-
+[00:37:42.004] speaker_1: Pongan que llama el color esponja y ya.
+[00:37:45.184] speaker_0: Mira, eh, ok, creo que aquí hay un hueco. Ella va a diseñar-
+[00:37:50.544] speaker_1: Ah.
+[00:37:51.084] speaker_0: Eh, la página front.
+[00:37:52.744] speaker_1: Ah, ya.
+[00:37:53.324] speaker_0: Eh, las sugerencias-
+[00:37:55.354] speaker_1: Oh, ok.
+[00:37:56.104] speaker_0: Sí, la, la, la, las sugerencias de ustedes en, en, en esa parte son bienvenidas.
+[00:38:03.064] speaker_1: Es que te puedo, puedo interrumpir. Sí, ya entendí, ya entendí. Este grupo... Ayer platiqué con... ¿Nunca te enseñé los diseños que me creó mi trabajo de implementarlos yo nomás? Haz de cuenta que-
+[00:38:12.624] speaker_2: Sí.
+[00:38:14.144] speaker_1: Vas a implementar lo del diseño que te pasa, porque el diseño canónico lo va a diseñar la empresa. O sea, de cómo hacerlos bonitos, de todo eso, y vas a implementarlo solamente. Y las ideas que tengas van a ser sobre ese material. Este, básicamente, imagínate como si yo, que no sé pintar, te digo: «Tú pinta por mí, pero lo que vas a pintar lo voy a hacer yo», básicamente. Obviamente, va a haber cosas que como sabes pintar físicamente, a mí no se me va a ocurrir. Eso es lo que tú vas a hacer tu rol con, con Miriam y creo que también Yoyis es la que ve lo de diseño, ¿no?
+[00:38:42.044] speaker_0: Sí, bueno-
+[00:38:42.684] speaker_1: Este.
+[00:38:43.064] speaker_0: Yo, por ejemplo, para estar quitándonos eso, ella está con lo de-- con front y le va a estar diciendo a Yoyis: «Eh, ¿cómo ves esto?». Ya que está: «Oye,
+[00:38:53.924] speaker_0: vamos a trabajar sobre esto», ¿verdad? Es-este es, digamos, esto es lo que empujas y, pero-
+[00:39:00.324] speaker_1: Sí, sí.
+[00:39:00.464] speaker_0: Sus comentarios son bienvenidos, porque un-- puede estar el front muy bonito, pero si no es funcional pa-pal back-end-
+[00:39:06.284] speaker_1: Sí, sí.
+[00:39:06.684] speaker_0: Tenemos que-- se debe negociar y ver, ¿no? Entonces...
+[00:39:11.084] speaker_1: Y después lo platicamos, pero-
+[00:39:12.084] speaker_2: Sí.
+[00:39:12.444] speaker_0: Sí, pero no, es, es, es, es trabajar en equipo.
+[00:39:17.464] speaker_1: Sí.
+[00:39:17.554] speaker_0: Haz de cuenta, no hay llanero solitario. [ríen] Eh, no sé, no sé si sepan qué es el llanero solitario, pero-
+[00:39:23.404] speaker_1: Sí, lo sé, lo sé.
+[00:39:24.644] speaker_0: Sí, eh, y te digo, nada para mí, que ellos me conocen, nada de eso está mal, es un avance. Vamos evolucionando poco a poco. Vamos a llegar a donde tengan que llegar, ¿verdad? Eh, por eso yo, e-era la pregunta al principio: ¿qué paquete te tengo que entregar yo para que tú lo hagas el push?
+[00:39:45.593] speaker_0: ¿Y qué, verdad? Previa revisión. Previa revisión.
+[00:39:48.844] speaker_1: Paquete, o sea...
+[00:39:50.244] speaker_2: El artefacto que se genera del diseño. Una pregunta, ¿no usa-- has usado Figma antes? ¿Canva, algo así, no? Canva sí, Figma no.
+[00:39:59.313] speaker_1: Figma no. Ah... Y tenemos cómoda con Illustrator.
+[00:40:03.864] speaker_2: Ajá.
+[00:40:03.914] speaker_1: Ah, ok. No, está bien.
+[00:40:06.344] speaker_1: Este,
+[00:40:08.824] speaker_1: paquete es más el exporte del diseño. Este, te tengo entendido. ¿Sí, no?
+[00:40:13.254] speaker_0: ¿Eh?
+[00:40:13.724] speaker_1: El paquete de lo que se revisa es el exporte de diseño de lo que generas.
+[00:40:16.134] speaker_0: Ah, ya. Ok, entiendo.
+[00:40:17.484] speaker_1: Sí, o sea, como digamos, cuando tú saques tu mail de verdad, pero bueno, vio. Este, aquí no, no sé cuál va a ser el tipo de artefacto, pero no va a ser mucho show.
+[00:40:26.744] speaker_0: Sí, ya. Es que son términos y condiciones que yo no he manejado. Sí, no, no. Vas a aprender, lo bueno. Eh, Miriam está acá, no creo, hablando de otros diseños.
+[00:40:37.754] speaker_1: Ah, yo te pregunto otra. Ay, sí, disculpe. ¿Es su hija? [ríe]
+[00:40:41.744] speaker_0: No.
+[00:40:42.614] speaker_1: ¿No?
+[00:40:42.623] speaker_0: Tengo dos hijas, solo con mis hijas son así.
+[00:40:44.664] speaker_1: No, ajá. Pensé que era su hija, no sé por qué. [ríen]
+[00:40:48.764] speaker_0: Oye, mira, te lo agradezco porque es una persona muy linda y hace buen trabajo con ella.
+[00:40:53.534] speaker_1: Ok.
+[00:40:53.564] speaker_0: Cuando-- ¿te acuerdas cuando a Erika se le cayó el, el, la espátula en el pie y que la llevé? El doctor le dijo, me, me dijo: «¿Aquí su esposa lo recibió?». [ríen] Y yo como: «Eso, pa llevar». No, no, no. Todos son niños.
+[00:41:10.574] speaker_1: Ah, ok.
+[00:41:10.584] speaker_2: Compañeros de trabajo.
+[00:41:11.504] speaker_0: Sí.
+[00:41:12.024] speaker_1: Ah, ok, ok.
+[00:41:12.704] speaker_0: Sí, somos compañeros. Soy el nuevo hasta eso, ella tiene más tiempo que yo en la empresa.
+[00:41:16.904] speaker_1: Ah, bueno. [ríen] Entonces-
+[00:41:18.834] speaker_0: Es al revés. Yo la sigo. Entonces, eh,
+[00:41:25.824] speaker_0: ¿qué más, chicos?
+[00:41:27.744] speaker_0: Digo, no los quiero entretener de más. La idea no es llenarlos de juntas todos los días de na, na, na.
+[00:41:32.554] speaker_1: Sí, nada.
+[00:41:33.344] speaker_2: Sí, ahí está, pues.
+[00:41:34.574] speaker_0: ¿Eh?
+[00:41:35.144] speaker_2: Porque pues yo soy el que más ocupa comunicación.
+[00:41:36.844] speaker_1: Lo que decía-
+[00:41:37.874] speaker_0: Ah, no, por eso, está comunicación. Ese canal es abierto, lo tienen que aprovechar-
+[00:41:40.314] speaker_1: Como nuestros tracks son distintos, o sea, el pace de él es distinto a mi pace, van a haber como que distintos. Por el tipo de... como el mío es más back-end heavy y el de él va a ser más diseño heavy, este, van a haber, eh, situaciones en las que él va a pedir junta y yo no va a estar, o yo voy a pedir junta y no va a estar, o ambos vamos a estar. Y aprovechamos. Este, vamos a estar como que escalados varios días.
+[00:41:58.244] speaker_0: De que esto es importante para hacer, la tengo que dar prioridad. No se preocupen, yo me acomodo a lo que-
+[00:42:03.144] speaker_1: En serio que descanso.
+[00:42:04.314] speaker_0: ¿Eh?
+[00:42:05.024] speaker_1: Descanso un poco.
+[00:42:05.984] speaker_0: Y, y...
+[00:42:08.164] speaker_0: Oye, a lo mejor a veces reuniones en las que ni yo voy a ser necesario y ustedes dos...
+[00:42:14.004] speaker_1: Este, no, no. ¿Está bien? ¿Tú tienes otra cosa?
+[00:42:16.584] speaker_2: No, nomás lo de...
+[00:42:19.294] speaker_2: que me van a pasar lo de qué tengo que hacer con el diseño y ya.
+[00:42:22.424] speaker_0: Sí, ya, ya lo verías con, con, con Miriam.Sí, va, tú vas a decir: "Oye, pues si nada más voy a estar empujando esto que voy a estar haciendo aquí, no te preocupes, trabajo va a salir, [risas] tra-trabajo va a salir".
+[00:42:36.708] speaker_1: Me alivia de la carga porque nada más he estado usando lo primero que se me ocurría.
+[00:42:41.448] speaker_0: Bueno, sí, es que es la parte de diseño que a veces los ingenieros no tenemos... los desarrolladores, los programadores.
+[00:42:50.568] speaker_0: Bueno, si esto es todo, quedo a la orden, chicos.
+[00:42:55.208] speaker_0: Eh, si quieren escribir en el grupo, escriban en el grupo. Si quieren escribir directamente, escríbanse directamente. Yo a ella la-- es-- literalmente se sienta a un lado mío,
+[00:43:06.088] speaker_0: me va a estar compartiendo. Yoyi se sienta atrás de, atrás de nosotros. Entonces-
+[00:43:11.398] speaker_1: ¿En la oficina ya?
+[00:43:12.468] speaker_0: Sí, entonces, te-- incluso tenemos una pantalla grandota mira para... [risas] Eh, entonces, está...
+[00:43:17.958] speaker_1: Ah, okey.
+[00:43:19.148] speaker_0: Claro. Quiero que, que fluya mucho eso, que no, no
+[00:43:24.188] speaker_5: [murmullo]
+[00:43:26.728] speaker_0: Bueno, okey, chicos. Ahí, ahí estamos. Cuídense.
+[00:43:36.388] speaker_1: Él me mandó mensaje en WhatsApp.
+[00:43:37.468] speaker_0: Sí.
+[00:43:50.608] speaker_1: Bueno, le puedes escribir tú, no me contestó a mí. Por favor.
+[00:43:58.918] speaker_5: [murmullo]
+[00:44:24.158] speaker_0: No te está contestando.
+[00:44:25.488] speaker_1: Ah, no me vio el mensaje.
+[00:44:27.288] speaker_0: Ah. Entonces, voy a ponerlo aquí en el grupo.
+[00:44:30.408] speaker_1: Okey.
+[00:44:39.567] speaker_1: Ah, ¿te platico del cambio que tuvo?
+[00:44:42.178] speaker_0: ¿Cambio? Ah, ¿qué cambio?
+[00:44:44.288] speaker_0: Ahí en el
+[00:44:45.888] speaker_1: Sí, de que va a estar mucho más ale-- más sencillo tu trabajo, pero no sé si te moleste ese cambio de dirección.
+[00:44:52.218] speaker_0: Que, de que no haga el diseño.
+[00:44:53.688] speaker_1: Bás-básicamente, el diseño lo van a hacer ellos.
+[00:44:56.448] speaker_0: Pues sí, ahora-
+[00:44:57.008] speaker_1: Y lo vas a implementar tú.
+[00:44:58.248] speaker_0: Sí, sí, qué bonito que yo hiciera cosas, pero pues sería mejor hacer menos, trabajar menos.
+[00:45:02.508] speaker_1: Ah, bueno, [risas] eso es diferente a mí. Está bien. Pensé que te iba a molestar ese cambio de, de enfoque.
+[00:45:07.788] speaker_0: No, porque eso es lo que, lo que a mí se me estaba medio ocurriendo. O sea, era cosas a la marcha y aportaban a algunas cosas, pero es mejor que pues alguien-
+[00:45:16.268] speaker_1: Básicamente, sí.
+[00:45:17.468] speaker_0: Sí. No, te iba a decir otra cosa. O sea, entonces, a ver, ¿no te ayudo yo también con lo más técnico? O...
+[00:45:23.288] speaker_1: Sí, de hecho sí.
+[00:45:24.338] speaker_0: Digo, porque dices que tienes mucho trabajo.
+[00:45:29.308] speaker_1: [risas] Nada más. Es que... No, me mo-- no me molesta eso, me molesta el que nos pidan juntos. O sea, yo soy muy de trabajar en lapsos enormes.
+[00:45:37.618] speaker_0: A mí ya me, a mí me joden el día.
+[00:45:39.328] speaker_1: De que puedo concentrarme.
+[00:45:41.428] speaker_0: Es mío.
+[00:45:44.028] speaker_0: Pero no te molesta que entonces yo haga las juntas y las grabe y te las pase y te las quite.
+[00:45:49.368] speaker_1: Ta bien, perfecto. Este, hay veces que sí tengo que venir aquí, pero-
+[00:45:53.968] speaker_0: O sea, cuando sea medio relleno.
+[00:45:56.208] speaker_1: Sí, sí.
+[00:45:58.848] speaker_1: ¿Qué venía,
+[00:46:02.608] speaker_1: papá?
+[00:46:02.648] speaker_0: Ah, te iba a contar algo.
+[00:46:04.008] speaker_1: ¿Qué onda?
+[00:46:04.528] speaker_0: Eeeh, de dónde... Tú dijiste que sacaste una página para comprar cosas más baratas, ¿no? Hoy en día segunda mano.
+[00:46:11.228] speaker_1: Como por... Ah, en Amazon. O sea, dices como los teléfonos estos o como-
+[00:46:14.308] speaker_0: Sí.
+[00:46:14.828] speaker_1: No, pues Amazon, Amazon vende reacondicionados.
+[00:46:17.368] speaker_0: Ah, pensé que era un sitio aparte o así.
+[00:46:20.268] speaker_1: No, es que están, están muy buenos porque, este... ¿Cómo se llama? Ah...
+[00:46:30.417] speaker_1: ¿Cómo se llama?
+[00:46:33.368] speaker_1: [timbre de teléfono] O sea, son de buena, o sea, son de buena calidad.
+[00:46:38.128] speaker_0: Sí.
+[00:46:38.628] speaker_1: Este...
+[00:46:48.667] speaker_1: Son las once.
+[00:46:58.268] speaker_1: Pero sí está bien tu idea de lo que dices.
+[00:47:00.308] speaker_0: ¿De grabar?
+[00:47:01.238] speaker_1: ¿Mmm?
+[00:47:01.818] speaker_0: ¿De grabar?
+[00:47:03.228] speaker_1: O sea, sí, de que te puedas encargar.
+[00:47:06.628] speaker_1: Ah.
+[00:47:06.988] speaker_0: Es que mi teléfono está algo... medio golpeado, o sea, no se grababa bien.
+[00:47:14.108] speaker_1: Sí.
+[00:47:14.448] speaker_0: Pero...
+[00:47:51.548] speaker_5: [ruidos]
