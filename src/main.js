@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import { convexVue } from 'convex-vue'
 import { clerkPlugin } from '@clerk/vue'
+import { esMX } from '@clerk/localizations'
 import App from './App.vue'
 import { router } from './router'
 import { setupSentry } from './lib/sentry'
@@ -21,7 +22,7 @@ if (convexUrl) {
 // entirely so /, /menu, /ordenar and the staff flows keep working.
 const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 if (clerkPublishableKey) {
-  app.use(clerkPlugin, { publishableKey: clerkPublishableKey })
+  app.use(clerkPlugin, { publishableKey: clerkPublishableKey, localization: esMX })
 }
 
 app.mount('#app')

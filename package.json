@@ -14,6 +14,7 @@
     "staff:create": "node scripts/create-staff-user.mjs"
   },
   "dependencies": {
+    "@clerk/localizations": "^4.8.1",
     "@clerk/vue": "^2.4.1",
     "@sentry/vue": "^10.55.0",
     "better-auth": "^1.6.11",
