@@ -274,7 +274,7 @@ const userButtonAppearance = {
   max-width: 520px;
   margin: 0 auto;
   min-height: 100svh;
-  background: #0f1114;
+  background: #fff8ef;
 }
 
 /* ---- Signed-in top bar ---- */
@@ -285,8 +285,8 @@ const userButtonAppearance = {
   gap: 12px;
   min-height: 48px;
   padding: calc(8px + env(safe-area-inset-top)) 16px 8px;
-  background: #0f1114;
-  color: #fff;
+  background: #fff8ef;
+  color: #2a1c14;
 }
 
 .pickup-bar__hello {
@@ -294,7 +294,7 @@ const userButtonAppearance = {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #8fe5bf;
+  color: #6f4e37;
   font-size: 0.88rem;
   font-weight: 800;
 }
@@ -433,7 +433,7 @@ const userButtonAppearance = {
   min-height: 48px;
   border: none;
   border-radius: 8px;
-  background: #2f7f57;
+  background: #1f9d57;
   color: #fff;
   font-family: var(--font-body);
   font-size: 1rem;

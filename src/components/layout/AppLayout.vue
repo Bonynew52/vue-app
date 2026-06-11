@@ -151,11 +151,11 @@ function closeMenu() {
 
 .app-layout.order-layout,
 .app-layout.pickup-layout {
-  --color-third: #4fb78d;
-  --color-primary: #4fb78d;
-  --color-accent: #8fe5bf;
-  --color-border: #9fe8c8;
-  --stage-blue: #9fe8c8;
+  --color-third: #6f4e37;
+  --color-primary: #6f4e37;
+  --color-accent: #1f9d57;
+  --color-border: #e6d8c4;
+  --stage-blue: #8a6044;
 }
 
 .app-layout.home-layout,

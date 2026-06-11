@@ -1027,14 +1027,14 @@ function fulfillmentLabel(item) {
 
 <style scoped>
 .order {
-  --ink: #111316;
-  --muted: #4fb78d;
-  --cream: #0f1114;
+  --ink: #2a1c14;
+  --muted: #8b7a6d;
+  --cream: #fff8ef;
   --surface: #ffffff;
-  --brown: #4fb78d;
-  --accent: #8fe5bf;
-  --accent-press: #6fd5a6;
-  --line: #9fe8c8;
+  --brown: #6f4e37;
+  --accent: #1f9d57;
+  --accent-press: #18854a;
+  --line: #efe5d8;
   --soft-surface: #f8f3ec;
   --radius: 18px;
 
@@ -1101,7 +1101,7 @@ function fulfillmentLabel(item) {
 .cover__table {
   padding: 7px 14px;
   border-radius: 999px;
-  background: rgb(15 17 20 / 82%);
+  background: rgb(42 28 20 / 82%);
   color: #fff;
   font-size: 0.82rem;
   font-weight: 800;
@@ -1169,19 +1169,19 @@ function fulfillmentLabel(item) {
   border-color: var(--accent);
 }
 .identity__meta li.is-warn {
-  color: #26845f;
-  background: rgb(143 229 191 / 14%);
-  border-color: rgb(143 229 191 / 46%);
+  color: #b4541f;
+  background: #fff1e6;
+  border-color: #f6d8c2;
 }
 
 /* ---- Active order status ---- */
 .active-order {
   margin: 0 16px 14px;
   padding: 14px;
-  border: 1px solid rgb(143 229 191 / 38%);
+  border: 1px solid rgb(111 78 55 / 38%);
   border-radius: 18px;
   background: #fff;
-  box-shadow: 0 8px 20px rgb(15 17 20 / 18%);
+  box-shadow: 0 8px 20px rgb(42 28 20 / 18%);
 }
 .active-order__head {
   display: flex;
@@ -1255,7 +1255,7 @@ function fulfillmentLabel(item) {
   min-width: 26px;
   height: 26px;
   border-radius: 8px;
-  background: rgb(143 229 191 / 18%);
+  background: rgb(111 78 55 / 18%);
   color: var(--brown);
   font-size: 0.86rem;
   font-weight: 900;
@@ -1299,7 +1299,7 @@ function fulfillmentLabel(item) {
   z-index: 5;
   background: var(--cream);
   padding: 8px 0 4px;
-  box-shadow: 0 10px 20px -14px rgb(143 229 191 / 50%);
+  box-shadow: 0 10px 20px -14px rgb(111 78 55 / 50%);
 }
 .search {
   position: relative;
@@ -1339,7 +1339,7 @@ function fulfillmentLabel(item) {
   height: 26px;
   border: 0;
   border-radius: 50%;
-  background: rgb(143 229 191 / 18%);
+  background: rgb(111 78 55 / 18%);
   color: var(--ink);
   font-size: 1.1rem;
   line-height: 1;
@@ -1354,7 +1354,7 @@ function fulfillmentLabel(item) {
   padding: 2px 16px 8px;
   cursor: grab;
   scrollbar-width: thin;
-  scrollbar-color: rgb(143 229 191 / 72%) transparent;
+  scrollbar-color: rgb(111 78 55 / 72%) transparent;
   touch-action: pan-x;
   user-select: none;
 }
@@ -1366,16 +1366,16 @@ function fulfillmentLabel(item) {
 }
 .menu-groups::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgb(143 229 191 / 68%);
+  background: rgb(111 78 55 / 68%);
 }
 .menu-groups__button {
   flex: 0 0 min(34vw, 156px);
   min-height: 40px;
   padding: 0 8px;
-  border: 1px solid rgb(143 229 191 / 64%);
+  border: 1px solid rgb(111 78 55 / 64%);
   border-radius: 14px;
   background: #fff;
-  color: #4fb78d;
+  color: #1f9d57;
   font-size: 0.82rem;
   font-weight: 900;
   line-height: 1.05;
@@ -1396,7 +1396,7 @@ function fulfillmentLabel(item) {
   padding: 0 16px 7px;
   cursor: grab;
   scrollbar-width: thin;
-  scrollbar-color: rgb(143 229 191 / 62%) transparent;
+  scrollbar-color: rgb(111 78 55 / 62%) transparent;
   touch-action: pan-x;
   user-select: none;
 }
@@ -1408,7 +1408,7 @@ function fulfillmentLabel(item) {
 }
 .subgroups::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgb(143 229 191 / 55%);
+  background: rgb(111 78 55 / 55%);
 }
 .subgroups__chip {
   flex: 0 0 auto;
@@ -1417,7 +1417,7 @@ function fulfillmentLabel(item) {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: #fff;
-  color: #4fb78d;
+  color: #1f9d57;
   font-size: 0.78rem;
   font-weight: 800;
   white-space: nowrap;
@@ -1425,7 +1425,7 @@ function fulfillmentLabel(item) {
   transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
 .subgroups__chip.is-active {
-  background: rgb(143 229 191 / 24%);
+  background: rgb(111 78 55 / 24%);
   border-color: var(--accent);
   color: #fff;
 }
@@ -1438,7 +1438,7 @@ function fulfillmentLabel(item) {
   padding: 2px 16px 6px;
   cursor: grab;
   scrollbar-width: thin;
-  scrollbar-color: rgb(143 229 191 / 72%) transparent;
+  scrollbar-color: rgb(111 78 55 / 72%) transparent;
   touch-action: pan-x;
   user-select: none;
 }
@@ -1450,7 +1450,7 @@ function fulfillmentLabel(item) {
 }
 .cats::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgb(143 229 191 / 68%);
+  background: rgb(111 78 55 / 68%);
 }
 .cats__chip {
   flex: 0 0 auto;
@@ -1459,7 +1459,7 @@ function fulfillmentLabel(item) {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: #fff;
-  color: #4fb78d;
+  color: #1f9d57;
   font-size: 0.82rem;
   font-weight: 700;
   white-space: nowrap;
@@ -1483,7 +1483,7 @@ function fulfillmentLabel(item) {
 .menu-section {
   scroll-margin-top: 124px;
   margin: 12px 16px 0;
-  border: 1px solid rgb(143 229 191 / 48%);
+  border: 1px solid rgb(111 78 55 / 48%);
   border-radius: 18px;
   background: var(--surface);
   overflow: hidden;
@@ -1519,7 +1519,7 @@ function fulfillmentLabel(item) {
   height: 150px;
   border-radius: var(--radius);
   overflow: hidden;
-  background: rgb(143 229 191 / 16%);
+  background: rgb(111 78 55 / 16%);
 }
 .fcard__media img {
   width: 100%;
@@ -1548,7 +1548,7 @@ function fulfillmentLabel(item) {
   list-style: none;
 }
 .rows > li {
-  border-bottom: 1px solid rgb(143 229 191 / 52%);
+  border-bottom: 1px solid rgb(111 78 55 / 52%);
 }
 .rows > li:last-child {
   border-bottom: 0;
@@ -1579,7 +1579,7 @@ function fulfillmentLabel(item) {
 }
 .row__desc {
   font-size: 0.8rem;
-  color: #4fb78d;
+  color: var(--muted);
   line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1612,7 +1612,7 @@ function fulfillmentLabel(item) {
   border-radius: 14px;
   object-fit: cover;
   display: block;
-  background: rgb(143 229 191 / 16%);
+  background: rgb(111 78 55 / 16%);
 }
 .row__placeholder {
   display: grid;
@@ -1660,7 +1660,7 @@ function fulfillmentLabel(item) {
 .foot-note {
   margin: 12px 16px;
   font-size: 0.84rem;
-  color: #8fe5bf;
+  color: #1f9d57;
 }
 .foot-note {
   margin-top: 24px;
@@ -1712,15 +1712,15 @@ function fulfillmentLabel(item) {
 
 /* ---- Sheets ---- */
 .sheet-root {
-  --ink: #111316;
-  --muted: #4fb78d;
-  --cream: #0f1114;
+  --ink: #2a1c14;
+  --muted: #8b7a6d;
+  --cream: #fff8ef;
   --surface: #ffffff;
-  --brown: #4fb78d;
-  --accent: #8fe5bf;
-  --accent-press: #6fd5a6;
-  --line: #9fe8c8;
-  --orange: #4fb78d;
+  --brown: #6f4e37;
+  --accent: #1f9d57;
+  --accent-press: #18854a;
+  --line: #efe5d8;
+  --orange: #d36c00;
 
   position: fixed;
   inset: 0;
@@ -1747,7 +1747,7 @@ function fulfillmentLabel(item) {
   height: 4px;
   margin: 8px auto 0;
   border-radius: 999px;
-  background: rgb(143 229 191 / 42%);
+  background: rgb(111 78 55 / 42%);
 }
 .sheet__close {
   position: absolute;
@@ -1789,7 +1789,7 @@ function fulfillmentLabel(item) {
 .isheet__photo {
   width: 100%;
   height: 220px;
-  background: rgb(143 229 191 / 16%);
+  background: rgb(111 78 55 / 16%);
 }
 .isheet__photo img {
   width: 100%;
@@ -1864,7 +1864,7 @@ function fulfillmentLabel(item) {
   height: 30px;
   border: 0;
   border-radius: 50%;
-  background: rgb(143 229 191 / 16%);
+  background: rgb(111 78 55 / 16%);
   color: var(--ink);
   font-size: 1.25rem;
   line-height: 1;
@@ -2143,7 +2143,7 @@ function fulfillmentLabel(item) {
   min-width: 26px;
   height: 26px;
   border-radius: 8px;
-  background: rgb(143 229 191 / 16%);
+  background: rgb(111 78 55 / 16%);
   color: var(--brown);
   font-size: 0.86rem;
   font-weight: 900;
