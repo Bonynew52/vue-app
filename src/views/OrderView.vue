@@ -10,6 +10,17 @@ import mascot from '../assets/brand/mascot.svg'
 
 const route = useRoute()
 
+const props = defineProps({
+  mode: { type: String, default: '' },
+  prefillName: { type: String, default: '' },
+  customerPhone: { type: String, default: '' },
+})
+
+// Fixed for the lifetime of the view: '/ordenar' mounts the table flow,
+// '/recoger' mounts this component in pickup mode (via PickupView).
+const mode = props.mode || route.meta.orderMode || 'table'
+const isPickup = mode === 'pickup'
+
 const tableId = computed(() => {
   const raw = route.query.mesa
   const value = Array.isArray(raw) ? raw[0] : raw
@@ -17,6 +28,7 @@ const tableId = computed(() => {
 })
 const hasTable = computed(() => tableId.value.length > 0)
 const tableLabel = computed(() => (hasTable.value ? `Mesa ${tableId.value}` : 'Sin mesa'))
+const contextLabel = computed(() => (isPickup ? 'Pick&Go' : tableLabel.value))
 const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL)
 
 function lastOrderStorageKey(value) {
@@ -34,8 +46,13 @@ function readLastOrderId(value) {
   return window.localStorage.getItem(lastOrderStorageKey(value)) || null
 }
 
-const cart = useCart(tableId.value)
-const createOrderMutation = hasConvex ? useConvexMutation(api.orders.create) : null
+// Mode-namespaced cart keys: table ids come straight from the `?mesa=` query,
+// so without the `mesa-` prefix a table literally named "pickup-mode" would
+// share sessionStorage with the /recoger cart.
+const cart = useCart(isPickup ? 'pickup-mode' : tableId.value ? `mesa-${tableId.value}` : '')
+const createOrderMutation = hasConvex
+  ? useConvexMutation(isPickup ? api.orders.createPickup : api.orders.create)
+  : null
 
 const mealGroupId = menuSource.activeMeal
 const activeMenuGroup = ref('meal')
@@ -339,7 +356,12 @@ function quickAdd(item) {
 }
 
 /* ---- Order submit ---- */
-const customerName = ref('')
+const customerName = ref(props.prefillName || '')
+// Staff call Pick&Go customers to hand off the order, but most Clerk
+// sign-ups (email/Google) carry no phone. When the profile has none, capture
+// one in the cart sheet so the staff affordance has a number to dial.
+const needsPhoneInput = computed(() => isPickup && !props.customerPhone)
+const phoneInput = ref('')
 const nameError = ref('')
 const isSubmitting = ref(false)
 const submitError = ref('')
@@ -349,23 +371,60 @@ watch(customerName, () => {
     nameError.value = ''
   }
 })
+
+// Prefill the diner's name from Clerk once it loads, but never overwrite what
+// they typed.
+watch(
+  () => props.prefillName,
+  (value) => {
+    if (value && !customerName.value.trim()) {
+      customerName.value = value
+    }
+  },
+)
 const submittedOrder = ref(null)
-const submittedOrderId = ref(readLastOrderId(tableId.value))
-const liveSubmittedOrder = hasConvex
-  ? useConvexQuery(api.orders.get, () => ({
-      orderId: submittedOrderId.value,
-    }))
-  : { data: ref(null) }
-const visibleSubmittedOrder = computed(() => liveSubmittedOrder.data.value || submittedOrder.value)
+const submittedOrderId = ref(isPickup ? null : readLastOrderId(tableId.value))
+const liveSubmittedOrder =
+  hasConvex && !isPickup
+    ? useConvexQuery(api.orders.get, () => ({
+        orderId: submittedOrderId.value,
+      }))
+    : { data: ref(null) }
+// Pickup orders belong to the signed-in Clerk user, so the live status comes
+// from the identity-gated `mine` query instead of a localStorage order id.
+const myOrdersQuery = hasConvex && isPickup ? useConvexQuery(api.orders.mine, {}) : { data: ref(null) }
+const activePickupOrder = computed(() => {
+  const orders = myOrdersQuery.data.value || []
+  return orders.find((order) => order.status !== 'served' && order.status !== 'cancelled') || null
+})
+const visibleSubmittedOrder = computed(() => {
+  if (!isPickup) {
+    return liveSubmittedOrder.data.value || submittedOrder.value
+  }
+  if (activePickupOrder.value) {
+    return activePickupOrder.value
+  }
+  const local = submittedOrder.value
+  if (!local) {
+    return null
+  }
+  // Keep the just-submitted snapshot until the live list confirms it (or shows
+  // it was closed by staff).
+  const live = (myOrdersQuery.data.value || []).find((order) => order.id === local.id)
+  return live ? null : local
+})
 const submittedOrderItems = computed(() => visibleSubmittedOrder.value?.items || [])
 
 watch(tableId, (value) => {
+  if (isPickup) {
+    return
+  }
   submittedOrder.value = null
   submittedOrderId.value = readLastOrderId(value)
 })
 
 watch(submittedOrderId, (value) => {
-  if (!canUseStorage()) {
+  if (isPickup || !canUseStorage()) {
     return
   }
   const key = lastOrderStorageKey(tableId.value)
@@ -397,25 +456,36 @@ async function submitOrder() {
       )
     }
 
-    const order = await createOrderMutation.mutate({
-      tableId: tableId.value,
-      customerName: trimmedName,
-      items: cart.entries.value.map((entry, index) => {
-        const unitPriceCents = entry.hasPrice ? Math.round(Number(entry.price || 0) * 100) : null
-        return {
-          menuItemId: entry.id,
-          name: entry.name,
-          sourceName: entry.sourceName || entry.name,
-          categoryName: entry.categoryName || '',
-          quantity: entry.quantity,
-          unitPriceCents,
-          lineTotalCents: unitPriceCents == null ? null : unitPriceCents * entry.quantity,
-          note: entry.note || '',
-          imageUrl: entry.image || '',
-          sortIndex: index,
-        }
-      }),
+    const items = cart.entries.value.map((entry, index) => {
+      const unitPriceCents = entry.hasPrice ? Math.round(Number(entry.price || 0) * 100) : null
+      return {
+        menuItemId: entry.id,
+        name: entry.name,
+        sourceName: entry.sourceName || entry.name,
+        categoryName: entry.categoryName || '',
+        quantity: entry.quantity,
+        unitPriceCents,
+        lineTotalCents: unitPriceCents == null ? null : unitPriceCents * entry.quantity,
+        note: entry.note || '',
+        imageUrl: entry.image || '',
+        sortIndex: index,
+      }
     })
+
+    const pickupPhone = (props.customerPhone || phoneInput.value).trim()
+    const order = await createOrderMutation.mutate(
+      isPickup
+        ? {
+            customerName: trimmedName,
+            ...(pickupPhone ? { customerPhone: pickupPhone } : {}),
+            items,
+          }
+        : {
+            tableId: tableId.value,
+            customerName: trimmedName,
+            items,
+          },
+    )
 
     submittedOrder.value = order
     submittedOrderId.value = order.id
@@ -453,13 +523,13 @@ function fulfillmentLabel(item) {
   if (item.fulfillmentType === 'counter') {
     return item.pickupStatus === 'ready' ? 'Listo para recoger' : 'Recoges en barra'
   }
-  return 'Se lleva a mesa'
+  return isPickup ? 'Para recoger' : 'Se lleva a mesa'
 }
 
 </script>
 
 <template>
-  <main class="order" aria-label="Ordenar en mesa">
+  <main class="order" :aria-label="isPickup ? 'Ordenar para recoger' : 'Ordenar en mesa'">
     <!-- Cover -->
     <header class="cover">
       <img class="cover__img" :src="coverImage" alt="" />
@@ -470,7 +540,7 @@ function fulfillmentLabel(item) {
             <path d="M15 5l-7 7 7 7" />
           </svg>
         </RouterLink>
-        <span class="cover__table">{{ tableLabel }}</span>
+        <span class="cover__table">{{ contextLabel }}</span>
       </div>
     </header>
 
@@ -482,10 +552,11 @@ function fulfillmentLabel(item) {
       <div class="identity__text">
         <h1 class="identity__name">Belly Monster Bites</h1>
         <ul class="identity__meta">
-          <li>Servicio en mesa</li>
-          <li v-if="hasTable" class="is-strong">{{ tableLabel }}</li>
+          <li>{{ isPickup ? 'Pide y pasa a recoger' : 'Servicio en mesa' }}</li>
+          <li v-if="isPickup" class="is-strong">Pick&amp;Go</li>
+          <li v-else-if="hasTable" class="is-strong">{{ tableLabel }}</li>
           <li v-else class="is-warn">Escanea el QR de tu mesa</li>
-          <li>Pagas al final</li>
+          <li>{{ isPickup ? 'Pagas al recoger' : 'Pagas al final' }}</li>
         </ul>
       </div>
     </section>
@@ -496,7 +567,7 @@ function fulfillmentLabel(item) {
           <span>Tu pedido</span>
           <strong>#{{ visibleSubmittedOrder.shortCode }}</strong>
           <span v-if="visibleSubmittedOrder.customerName" class="active-order__name-tag">
-            {{ visibleSubmittedOrder.customerName }} · {{ tableLabel }}
+            {{ visibleSubmittedOrder.customerName }} · {{ contextLabel }}
           </span>
         </div>
         <button type="button" @click="showConfirmation = true">Ver detalle</button>
@@ -735,7 +806,8 @@ function fulfillmentLabel(item) {
       </section>
 
       <p class="foot-note">
-        Menú de referencia. Confirma disponibilidad y precios con tu mesero.
+        Menú de referencia. Confirma disponibilidad y precios
+        {{ isPickup ? 'al recoger tu pedido' : 'con tu mesero' }}.
       </p>
     </template>
 
@@ -809,7 +881,7 @@ function fulfillmentLabel(item) {
             <div class="sheet__grab"></div>
             <div class="csheet__top">
               <h3>Tu pedido</h3>
-              <span class="csheet__table">{{ tableLabel }}</span>
+              <span class="csheet__table">{{ contextLabel }}</span>
             </div>
             <button class="sheet__close" type="button" aria-label="Cerrar" @click="showCart = false">×</button>
 
@@ -842,7 +914,8 @@ function fulfillmentLabel(item) {
                 <span class="totals__amt">{{ formatMXN(cart.estimatedTotal.value) }}</span>
               </div>
               <p v-if="cart.hasUnpriced.value" class="totals__hint">
-                Algunos productos son <strong>precio en tienda</strong>; el total final lo confirma tu mesero.
+                Algunos productos son <strong>precio en tienda</strong>; el total final
+                {{ isPickup ? 'se confirma al recoger' : 'lo confirma tu mesero' }}.
               </p>
               <label class="name-field" :class="{ 'is-error': nameError }">
                 <span class="name-field__label">¿A nombre de quién?</span>
@@ -856,6 +929,21 @@ function fulfillmentLabel(item) {
                   enterkeyhint="done"
                   placeholder="Tu nombre"
                   aria-label="Tu nombre para el pedido"
+                  @keydown.enter.prevent="submitOrder"
+                />
+              </label>
+              <label v-if="needsPhoneInput" class="name-field">
+                <span class="name-field__label">Teléfono (para avisarte)</span>
+                <input
+                  v-model="phoneInput"
+                  class="name-field__input"
+                  type="tel"
+                  inputmode="tel"
+                  autocomplete="tel"
+                  maxlength="20"
+                  enterkeyhint="done"
+                  placeholder="Tu celular o WhatsApp"
+                  aria-label="Tu teléfono para avisarte del pedido"
                   @keydown.enter.prevent="submitOrder"
                 />
               </label>
@@ -895,12 +983,12 @@ function fulfillmentLabel(item) {
                 <h3 class="done__title">Pedido enviado</h3>
                 <p v-if="visibleSubmittedOrder" class="done__line">
                   <strong v-if="visibleSubmittedOrder.customerName">{{ visibleSubmittedOrder.customerName }}</strong>
-                  <template v-if="visibleSubmittedOrder.customerName"> · </template>{{ tableLabel }} ·
+                  <template v-if="visibleSubmittedOrder.customerName"> · </template>{{ contextLabel }} ·
                   {{ visibleSubmittedOrder.itemCount }} artículo{{ visibleSubmittedOrder.itemCount === 1 ? '' : 's' }}
                 </p>
 
                 <div v-if="visibleSubmittedOrder" class="done__code">
-                  <span>Código de pedido</span>
+                  <span>{{ isPickup ? 'Muestra este código al recoger' : 'Código de pedido' }}</span>
                   <strong>#{{ visibleSubmittedOrder.shortCode }}</strong>
                 </div>
 

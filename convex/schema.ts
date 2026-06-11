@@ -32,8 +32,11 @@ const orderItemModifier = v.object({
 export default defineSchema({
   orders: defineTable({
     shortCode: v.string(),
-    tableId: v.string(),
+    tableId: v.optional(v.string()),
+    orderType: v.optional(v.union(v.literal("table"), v.literal("pickup"))),
     customerName: v.optional(v.string()),
+    customerUserId: v.optional(v.string()),
+    customerPhone: v.optional(v.string()),
     status: orderStatus,
     customerNote: v.string(),
     subtotalCents: v.number(),
@@ -45,7 +48,8 @@ export default defineSchema({
     closedAt: v.union(v.number(), v.null()),
   })
     .index("by_status_and_createdAt", ["status", "createdAt"])
-    .index("by_createdAt", ["createdAt"]),
+    .index("by_createdAt", ["createdAt"])
+    .index("by_customerUserId_and_createdAt", ["customerUserId", "createdAt"]),
 
   orderItems: defineTable({
     orderId: v.id("orders"),

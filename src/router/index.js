@@ -4,6 +4,7 @@ import LoginView from '../views/LoginView.vue'
 import MenuView from '../views/MenuView.vue'
 import OrderView from '../views/OrderView.vue'
 import OrdersView from '../views/OrdersView.vue'
+import PickupView from '../views/PickupView.vue'
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -22,6 +23,12 @@ export const router = createRouter({
       path: '/ordenar',
       name: 'order',
       component: OrderView,
+    },
+    {
+      path: '/recoger',
+      name: 'pickup',
+      component: PickupView,
+      meta: { orderMode: 'pickup' },
     },
     {
       path: '/ordenes',

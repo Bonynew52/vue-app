@@ -133,7 +133,8 @@ public class PrinterAgentService extends Service {
                 }
 
                 log(SentryLogLevel.INFO, "print_job_claimed", "Claimed comanda " + claim.job.id + " for " + claim.job.destinationLabel);
-                updateNotification("Printing comanda", "Mesa " + claim.job.tableId + " · #" + claim.job.shortCode);
+                // tableId arrives as a full label ("Mesa 4" / "Pick&Go"); no prefix here.
+                updateNotification("Printing comanda", claim.job.tableId + " · #" + claim.job.shortCode);
 
                 boolean paperWasPrinted = false;
                 try {
@@ -244,7 +245,8 @@ public class PrinterAgentService extends Service {
         printer.setTextStyle(Typeface.NORMAL);
         printer.setAlignment(0);
         printLine();
-        printer.printText("MESA " + safePrinterText(job.tableId).toUpperCase(Locale.US) + "\n");
+        // tableId is the full header label from the server ("Mesa 4" / "Pick&Go").
+        printer.printText(safePrinterText(job.tableId).toUpperCase(Locale.US) + "\n");
         if (!job.customerName.trim().isEmpty()) {
             printer.printText("CLIENTE: " + safePrinterText(job.customerName).toUpperCase(Locale.US) + "\n");
         }
