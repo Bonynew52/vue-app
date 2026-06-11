@@ -1,5 +1,8 @@
 <script setup>
 import AppLayout from './components/layout/AppLayout.vue'
+import { useClerkConvexBridge } from './composables/useClerkConvexBridge'
+
+useClerkConvexBridge()
 </script>
 
 <template>
@@ -7,4 +10,3 @@ import AppLayout from './components/layout/AppLayout.vue'
     <RouterView />
   </AppLayout>
 </template>
- 

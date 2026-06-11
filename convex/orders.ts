@@ -1,4 +1,4 @@
-import { v } from "convex/values";
+import { v, type Infer } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
@@ -31,6 +31,8 @@ const orderItemInput = v.object({
   imageUrl: v.string(),
   sortIndex: v.number(),
 });
+
+type OrderItemInput = Infer<typeof orderItemInput>;
 
 function makeShortCode(orderId: Id<"orders">) {
   return orderId.replace(/[^a-z0-9]/gi, "").slice(-6).toUpperCase();
@@ -219,7 +221,20 @@ async function createPrintJobsForOrder(
   return printJobIds;
 }
 
-async function presentOrder(ctx: QueryCtx | MutationCtx, order: Doc<"orders">) {
+async function presentOrder(
+  ctx: QueryCtx | MutationCtx,
+  order: Doc<"orders">,
+  options?: {
+    /**
+     * The phone number is PII. `list` and `get` are public, unauthenticated
+     * queries, so they must never expose it; only owner-facing results (the
+     * identity-gated `mine` query and the creator's own mutation return)
+     * opt in. Staff surfaces get the phone back once they have an
+     * authenticated path into Convex.
+     */
+    includePhone?: boolean;
+  },
+) {
   const items = await ctx.db
     .query("orderItems")
     .withIndex("by_orderId_and_sortIndex", (q) => q.eq("orderId", order._id))
@@ -229,8 +244,10 @@ async function presentOrder(ctx: QueryCtx | MutationCtx, order: Doc<"orders">) {
   return {
     id: order._id,
     shortCode: order.shortCode,
-    tableId: order.tableId,
+    tableId: order.tableId ?? "",
+    orderType: order.orderType ?? "table",
     customerName: order.customerName || "",
+    customerPhone: options?.includePhone ? order.customerPhone ?? "" : "",
     status: order.status,
     customerNote: order.customerNote,
     subtotalCents: order.subtotalCents,
@@ -263,6 +280,90 @@ async function presentOrder(ctx: QueryCtx | MutationCtx, order: Doc<"orders">) {
   };
 }
 
+async function createOrderWithItems(
+  ctx: MutationCtx,
+  params: {
+    orderType: "table" | "pickup";
+    tableId?: string;
+    /** Label used where the printed ticket shows the table. */
+    printTableLabel: string;
+    customerName: string;
+    customerNote: string;
+    customerUserId?: string;
+    customerPhone?: string;
+    source: string;
+    items: OrderItemInput[];
+  },
+) {
+  const items = params.items.slice(0, 100).map(normalizeItem);
+  const now = Date.now();
+  const subtotalCents = items.reduce((total, item) => total + (item.lineTotalCents || 0), 0);
+  const itemCount = items.reduce((total, item) => total + item.quantity, 0);
+  const hasUnpriced = items.some((item) => item.unitPriceCents == null);
+
+  const orderId = await ctx.db.insert("orders", {
+    shortCode: "",
+    tableId: params.tableId,
+    orderType: params.orderType,
+    customerName: params.customerName,
+    customerUserId: params.customerUserId,
+    customerPhone: params.customerPhone,
+    status: "new",
+    customerNote: params.customerNote,
+    subtotalCents,
+    hasUnpriced,
+    itemCount,
+    source: params.source,
+    createdAt: now,
+    updatedAt: now,
+    closedAt: null,
+  });
+
+  await ctx.db.patch(orderId, { shortCode: makeShortCode(orderId) });
+
+  const storedItems: Array<{ id: Id<"orderItems">; item: NormalizedOrderItem }> = [];
+  for (const item of items) {
+    const orderItemId = await ctx.db.insert("orderItems", {
+      orderId,
+      ...item,
+    });
+    storedItems.push({ id: orderItemId, item });
+  }
+
+  const order = await ctx.db.get(orderId);
+  if (!order) {
+    throw new Error("No se pudo crear el pedido.");
+  }
+
+  const shortCode = makeShortCode(orderId);
+  const printJobIds = await createPrintJobsForOrder(ctx, {
+    orderId,
+    shortCode,
+    tableId: params.printTableLabel,
+    customerName: params.customerName,
+    items: storedItems,
+    createdAt: now,
+  });
+
+  await ctx.db.insert("orderEvents", {
+    orderId,
+    eventType: "created",
+    actor: "customer",
+    detail: {
+      tableId: params.tableId ?? null,
+      orderType: params.orderType,
+      customerName: params.customerName,
+      itemCount,
+      printJobIds,
+    },
+    createdAt: now,
+  });
+
+  // The creator supplied the contact data, so returning the phone to them
+  // is safe. Public queries (`list`/`get`) redact it.
+  return await presentOrder(ctx, order, { includePhone: true });
+}
+
 export const create = mutation({
   args: {
     tableId: v.string(),
@@ -283,62 +384,80 @@ export const create = mutation({
       throw new Error("Agrega al menos un producto.");
     }
 
-    const items = args.items.slice(0, 100).map(normalizeItem);
-    const now = Date.now();
-    const subtotalCents = items.reduce((total, item) => total + (item.lineTotalCents || 0), 0);
-    const itemCount = items.reduce((total, item) => total + item.quantity, 0);
-    const hasUnpriced = items.some((item) => item.unitPriceCents == null);
-
-    const orderId = await ctx.db.insert("orders", {
-      shortCode: "",
+    return await createOrderWithItems(ctx, {
+      orderType: "table",
       tableId,
+      // The printer agent prints this label verbatim (no "MESA " prefix of
+      // its own), so table orders bake it in and pickups stay "Pick&Go".
+      printTableLabel: `Mesa ${tableId}`,
       customerName,
-      status: "new",
       customerNote: cleanText(args.customerNote || "", 300),
-      subtotalCents,
-      hasUnpriced,
-      itemCount,
       source: "qr-table",
-      createdAt: now,
-      updatedAt: now,
-      closedAt: null,
+      items: args.items,
     });
+  },
+});
 
-    await ctx.db.patch(orderId, { shortCode: makeShortCode(orderId) });
-
-    const storedItems: Array<{ id: Id<"orderItems">; item: NormalizedOrderItem }> = [];
-    for (const item of items) {
-      const orderItemId = await ctx.db.insert("orderItems", {
-        orderId,
-        ...item,
-      });
-      storedItems.push({ id: orderItemId, item });
+export const createPickup = mutation({
+  args: {
+    customerName: v.optional(v.string()),
+    customerPhone: v.optional(v.string()),
+    items: v.array(orderItemInput),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Inicia sesión para ordenar");
+    }
+    if (args.items.length === 0) {
+      throw new Error("Agrega al menos un producto.");
     }
 
-    const order = await ctx.db.get(orderId);
-    if (!order) {
-      throw new Error("No se pudo crear el pedido.");
-    }
+    // Identity (who the order belongs to) always comes from the verified JWT.
+    // Name/phone are contact data: client-supplied values are acceptable, with
+    // the token claims as fallback.
+    const identityName =
+      (typeof identity.name === "string" && identity.name) ||
+      (typeof identity.givenName === "string" && identity.givenName) ||
+      "Cliente";
+    const customerName = cleanText(args.customerName || "", 80) || cleanText(identityName, 80) || "Cliente";
+    const identityPhone = typeof identity.phoneNumber === "string" ? identity.phoneNumber : "";
+    const customerPhone = cleanText(args.customerPhone || identityPhone, 32) || undefined;
 
-    const shortCode = makeShortCode(orderId);
-    const printJobIds = await createPrintJobsForOrder(ctx, {
-      orderId,
-      shortCode,
-      tableId,
+    return await createOrderWithItems(ctx, {
+      orderType: "pickup",
+      printTableLabel: "Pick&Go",
       customerName,
-      items: storedItems,
-      createdAt: now,
+      customerNote: "",
+      customerUserId: identity.tokenIdentifier,
+      customerPhone,
+      source: "pickup-web",
+      items: args.items,
     });
+  },
+});
 
-    await ctx.db.insert("orderEvents", {
-      orderId,
-      eventType: "created",
-      actor: "customer",
-      detail: { tableId, customerName, itemCount, printJobIds },
-      createdAt: now,
-    });
+export const mine = query({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      return [];
+    }
 
-    return await presentOrder(ctx, order);
+    const orders = await ctx.db
+      .query("orders")
+      .withIndex("by_customerUserId_and_createdAt", (q) =>
+        q.eq("customerUserId", identity.tokenIdentifier),
+      )
+      .order("desc")
+      .take(10);
+
+    // Identity-gated: the caller only ever sees their own orders, so the
+    // phone they registered can be echoed back.
+    return await Promise.all(
+      orders.map((order) => presentOrder(ctx, order, { includePhone: true })),
+    );
   },
 });
 

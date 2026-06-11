@@ -235,6 +235,15 @@ function isCounter(item) {
   return item.fulfillmentType === 'counter'
 }
 
+/* Pick&Go (customer pickup) orders have no mesa: badge + name + phone instead. */
+function isPickupOrder(order) {
+  return order.orderType === 'pickup'
+}
+
+function whereLabel(order) {
+  return isPickupOrder(order) ? 'Pick&Go' : `Mesa ${order.tableId}`
+}
+
 /* ---------- Actions ---------- */
 async function printDemoTicket() {
   printRequestedAt.value = Date.now()
@@ -389,8 +398,16 @@ onBeforeUnmount(() => {
           >
             <header class="ticket__head">
               <div class="ticket__id">
-                <span class="ticket__mesa">Mesa {{ order.tableId }}</span>
+                <span v-if="isPickupOrder(order)" class="ticket__mesa ticket__mesa--pickgo">Pick&amp;Go</span>
+                <span v-else class="ticket__mesa">Mesa {{ order.tableId }}</span>
                 <span v-if="order.customerName" class="ticket__name">{{ order.customerName }}</span>
+                <a
+                  v-if="isPickupOrder(order) && order.customerPhone"
+                  class="ticket__phone"
+                  :href="`tel:${order.customerPhone}`"
+                >
+                  {{ order.customerPhone }}
+                </a>
               </div>
               <div class="ticket__tags">
                 <span class="ticket__status" :class="`status-${order.status}`">
@@ -491,7 +508,7 @@ onBeforeUnmount(() => {
           <div class="closed__grid">
             <article v-for="order in closedOrders" :key="order.id" class="closed-row" :class="`is-${order.status}`">
               <div class="closed-row__id">
-                <span class="closed-row__mesa">Mesa {{ order.tableId }}</span>
+                <span class="closed-row__mesa">{{ whereLabel(order) }}</span>
                 <span class="closed-row__code">#{{ order.shortCode }}</span>
               </div>
               <span class="closed-row__status" :class="`status-${order.status}`">
@@ -530,7 +547,7 @@ onBeforeUnmount(() => {
             class="pickup"
           >
             <div class="pickup__head">
-              <span class="pickup__where">Mesa {{ order.tableId }} · #{{ order.shortCode }}</span>
+              <span class="pickup__where">{{ whereLabel(order) }} · #{{ order.shortCode }}</span>
               <span class="age age--sm" :class="`age-${ageTier(order)}`">{{ elapsedLabel(order.createdAt) }}</span>
             </div>
             <div class="pickup__line">
@@ -560,7 +577,7 @@ onBeforeUnmount(() => {
             class="pickup pickup--ready"
           >
             <div class="pickup__head">
-              <span class="pickup__where">Mesa {{ order.tableId }} · #{{ order.shortCode }}</span>
+              <span class="pickup__where">{{ whereLabel(order) }} · #{{ order.shortCode }}</span>
               <span class="pickup__ready-tag">Listo</span>
             </div>
             <div class="pickup__line">
@@ -1015,6 +1032,33 @@ onBeforeUnmount(() => {
   color: var(--coffee);
   font-size: 0.9rem;
   font-weight: 700;
+}
+
+.ticket__mesa--pickgo {
+  align-self: flex-start;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: rgb(211 108 0 / 14%);
+  color: var(--orange);
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+
+.ticket__phone {
+  /* tel: link is the only way staff dials a Pick&Go customer; keep it >=44px. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 2px;
+  color: var(--orange);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+}
+
+.ticket__phone:hover {
+  text-decoration: underline;
 }
 
 .ticket__tags {

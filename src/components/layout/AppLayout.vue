@@ -112,7 +112,8 @@ function closeMenu() {
 .app-layout.menu-layout,
 .app-layout.orders-layout,
 .app-layout.login-layout,
-.app-layout.order-layout {
+.app-layout.order-layout,
+.app-layout.pickup-layout {
   --color-first: #0f1115;
   --color-second: #ffffff;
   --color-third: #6f4e37;
@@ -148,7 +149,8 @@ function closeMenu() {
   --stage-blue: #8fd3ff;
 }
 
-.app-layout.order-layout {
+.app-layout.order-layout,
+.app-layout.pickup-layout {
   --color-third: #4fb78d;
   --color-primary: #4fb78d;
   --color-accent: #8fe5bf;
@@ -173,7 +175,8 @@ function closeMenu() {
   --app-frame-border: rgb(143 211 255 / 40%);
 }
 
-.app-layout.order-layout {
+.app-layout.order-layout,
+.app-layout.pickup-layout {
   --app-side-background: #090a0c;
   --app-frame-border: rgb(159 232 200 / 34%);
   --app-side-pattern: url("data:image/svg+xml,%3Csvg width='1080' height='180' viewBox='0 0 1080 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' font-family='Arial Black, Impact, sans-serif' font-size='13' font-weight='900' letter-spacing='1.2'%3E%3Ctext x='0' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='0' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3C/g%3E%3C/svg%3E");
@@ -191,7 +194,8 @@ function closeMenu() {
 
 .home-layout::before,
 .menu-layout::before,
-.order-layout::before {
+.order-layout::before,
+.pickup-layout::before {
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -245,6 +249,8 @@ function closeMenu() {
 
 .order-layout .app-header,
 .order-layout .app-footer,
+.pickup-layout .app-header,
+.pickup-layout .app-footer,
 .orders-layout .app-header,
 .orders-layout .app-footer,
 .login-layout .app-header,
@@ -323,13 +329,15 @@ function closeMenu() {
   display: none;
 }
 
-.order-layout .app-content {
+.order-layout .app-content,
+.pickup-layout .app-content {
   display: flex;
   justify-content: center;
   background: transparent;
 }
 
-.order-layout .app-content :deep(.order) {
+.order-layout .app-content :deep(.order),
+.pickup-layout .app-content :deep(.pickup-shell) {
   border-right: 1px solid var(--app-frame-border);
   border-left: 1px solid var(--app-frame-border);
 }
