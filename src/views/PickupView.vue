@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
-import { RouterLink, useRoute } from 'vue-router'
-import { SignIn, SignUp, UserButton, useAuth, useUser } from '@clerk/vue'
+import { RouterLink } from 'vue-router'
+import { SignIn, UserButton, useAuth, useUser } from '@clerk/vue'
 import OrderView from './OrderView.vue'
 import brandLogo from '../assets/background/belly_monster_logo.png'
 
@@ -11,11 +11,6 @@ import brandLogo from '../assets/background/belly_monster_logo.png'
 const hasClerk = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY)
 const auth = hasClerk ? useAuth() : null
 const userCtx = hasClerk ? useUser() : null
-const route = useRoute()
-
-// "Registrarse" stays on this page: ?registro=1 swaps the mounted component
-// instead of letting Clerk send people to its hosted accounts.dev pages.
-const showSignUp = computed(() => route.query.registro === '1')
 
 const isLoaded = computed(() => Boolean(auth?.isLoaded.value))
 const isSignedIn = computed(() => Boolean(auth?.isSignedIn.value))
@@ -135,18 +130,13 @@ const userButtonAppearance = {
       </p>
       <p v-else-if="!isLoaded" class="gate__notice" role="status">Cargando...</p>
       <div v-else class="gate__signin">
-        <SignUp
-          v-if="showSignUp"
-          routing="hash"
-          :appearance="signInAppearance"
-          sign-in-url="/recoger"
-          force-redirect-url="/recoger"
-        />
+        <!-- Combined sign-in-or-up: unknown numbers transfer inline to account
+             creation. NOTE: the prop must be camelCase — the @clerk/vue wrapper
+             checks `"withSignUp" in vnode.props`, so kebab-case silently no-ops. -->
         <SignIn
-          v-else
           routing="hash"
+          :withSignUp="true"
           :appearance="signInAppearance"
-          sign-up-url="/recoger?registro=1"
           force-redirect-url="/recoger"
           sign-up-force-redirect-url="/recoger"
         />
