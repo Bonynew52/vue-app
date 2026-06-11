@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { SignIn, UserButton, useAuth, useUser } from '@clerk/vue'
 import OrderView from './OrderView.vue'
@@ -27,6 +27,70 @@ const firstName = computed(() => {
   const user = userCtx?.user.value
   return user?.firstName || user?.fullName || ''
 })
+
+// App-level invariant: no verified phone, no ordering. Clerk only enforces
+// "phone required" at sign-up, so a pre-existing (e.g. Google) account can
+// arrive here phone-less — this gate closes that hole.
+const hasVerifiedPhone = computed(() => {
+  const user = userCtx?.user.value
+  return Boolean(user?.phoneNumbers?.some((p) => p.verification?.status === 'verified'))
+})
+
+// --- Add-phone mini flow (verified against @clerk/shared types:
+// user.createPhoneNumber -> phone.prepareVerification -> attemptVerification) ---
+const phoneStep = ref('phone') // 'phone' | 'code'
+const phoneInput = ref('')
+const phoneCode = ref('')
+const phoneError = ref('')
+const phoneBusy = ref(false)
+let pendingPhone = null
+
+function normalizePhone(value) {
+  const compact = value.trim().replace(/[\s().-]/g, '')
+  if (!compact) return ''
+  if (compact.startsWith('+')) return compact
+  if (/^\d{10}$/.test(compact)) return `+52${compact}`
+  if (/^52\d{10}$/.test(compact)) return `+${compact}`
+  if (/^1\d{10}$/.test(compact)) return `+${compact}`
+  return compact
+}
+
+async function submitPhone() {
+  const user = userCtx?.user.value
+  if (!user || phoneBusy.value) return
+  phoneError.value = ''
+  const phoneNumber = normalizePhone(phoneInput.value)
+  if (!/^\+[1-9]\d{7,14}$/.test(phoneNumber)) {
+    phoneError.value = 'Revisa el teléfono. Ejemplo: 867 123 4567.'
+    return
+  }
+  phoneBusy.value = true
+  try {
+    pendingPhone = await user.createPhoneNumber({ phoneNumber })
+    await pendingPhone.prepareVerification()
+    phoneStep.value = 'code'
+  } catch (error) {
+    phoneError.value = error?.errors?.[0]?.longMessage || error?.message || 'No se pudo enviar el código.'
+  } finally {
+    phoneBusy.value = false
+  }
+}
+
+async function submitPhoneCode() {
+  const user = userCtx?.user.value
+  if (!user || !pendingPhone || phoneBusy.value) return
+  phoneError.value = ''
+  phoneBusy.value = true
+  try {
+    const verified = await pendingPhone.attemptVerification({ code: phoneCode.value.trim() })
+    await user.update({ primaryPhoneNumberId: verified.id })
+    await user.reload()
+  } catch (error) {
+    phoneError.value = error?.errors?.[0]?.longMessage || error?.message || 'Ese código no pasó. Inténtalo otra vez.'
+  } finally {
+    phoneBusy.value = false
+  }
+}
 
 const signInAppearance = {
   variables: {
@@ -103,8 +167,65 @@ const userButtonAppearance = {
   <!-- Plain div on purpose: when signed in, OrderView renders the page's
        single <main> landmark inside this shell. -->
   <div class="pickup-shell">
+    <!-- Signed in but phone-less (e.g. legacy Google account): collect and
+         verify a phone before any ordering. -->
+    <main
+      v-if="hasClerk && isLoaded && isSignedIn && !hasVerifiedPhone"
+      class="gate"
+      aria-label="Pick&Go: verifica tu teléfono"
+    >
+      <div class="gate__card">
+        <img class="gate__logo" :src="brandLogo" alt="Belly Monster Bites" />
+        <h1 class="gate__title">Falta tu teléfono</h1>
+        <p class="gate__sub">
+          Te avisamos por mensaje cuando tu pedido esté listo, así que necesitamos verificar tu
+          número antes de ordenar.
+        </p>
+      </div>
+
+      <form v-if="phoneStep === 'phone'" class="gate__form" @submit.prevent="submitPhone">
+        <label class="gate__label" for="pickup-phone">Número de teléfono</label>
+        <input
+          id="pickup-phone"
+          v-model="phoneInput"
+          class="gate__input"
+          type="tel"
+          inputmode="tel"
+          autocomplete="tel"
+          placeholder="867 123 4567"
+        />
+        <p v-if="phoneError" class="gate__error" role="alert">{{ phoneError }}</p>
+        <button class="gate__button" type="submit" :disabled="phoneBusy">
+          {{ phoneBusy ? 'Enviando…' : 'Enviar código' }}
+        </button>
+      </form>
+
+      <form v-else class="gate__form" @submit.prevent="submitPhoneCode">
+        <label class="gate__label" for="pickup-code">Código que te enviamos por SMS</label>
+        <input
+          id="pickup-code"
+          v-model="phoneCode"
+          class="gate__input gate__input--code"
+          type="text"
+          inputmode="numeric"
+          autocomplete="one-time-code"
+          maxlength="6"
+          placeholder="······"
+        />
+        <p v-if="phoneError" class="gate__error" role="alert">{{ phoneError }}</p>
+        <button class="gate__button" type="submit" :disabled="phoneBusy">
+          {{ phoneBusy ? 'Verificando…' : 'Verificar' }}
+        </button>
+        <button class="gate__alt" type="button" :disabled="phoneBusy" @click="phoneStep = 'phone'">
+          Cambiar número
+        </button>
+      </form>
+
+      <RouterLink class="gate__back" :to="{ name: 'home' }">Volver al inicio</RouterLink>
+    </main>
+
     <!-- Signed in: the proven ordering experience, in pickup mode. -->
-    <template v-if="hasClerk && isLoaded && isSignedIn">
+    <template v-else-if="hasClerk && isLoaded && isSignedIn">
       <div class="pickup-bar">
         <span class="pickup-bar__hello">
           Pick&amp;Go<template v-if="firstName"> · Hola, {{ firstName }}</template>
@@ -257,6 +378,83 @@ const userButtonAppearance = {
   display: flex;
   justify-content: center;
   width: min(100%, 390px);
+}
+
+.gate__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(100%, 390px);
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 12px 28px rgb(46 28 18 / 8%);
+}
+
+.gate__label {
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.gate__input {
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid #dfcab0;
+  border-radius: 8px;
+  background: #fffdf9;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.gate__input--code {
+  letter-spacing: 0.4em;
+  text-align: center;
+}
+
+.gate__input:focus {
+  outline: 2px solid var(--orange);
+  outline-offset: 1px;
+}
+
+.gate__error {
+  margin: 0;
+  color: #b3261e;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.gate__button {
+  min-height: 48px;
+  border: none;
+  border-radius: 8px;
+  background: #2f7f57;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.gate__button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.gate__alt {
+  min-height: 44px;
+  border: none;
+  background: none;
+  color: var(--orange);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 .gate__back {
