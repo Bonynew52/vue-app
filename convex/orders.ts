@@ -438,7 +438,7 @@ export const createPickup = mutation({
 
     // Confirmation WhatsApp on creation (no-ops without Twilio env / phone).
     await ctx.scheduler.runAfter(0, internal.notifications.sendOrderReady, {
-      orderId: created.orderId,
+      orderId: created.id,
       kind: "created",
     });
 
