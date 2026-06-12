@@ -162,6 +162,24 @@ function showImage(item) {
 
 const coverFailed = ref(false)
 
+/* ---- Design variant toggle (Pedro's A/B preview; persisted, shows in prod) ---- */
+const DESIGN_KEY = 'bmb-design-variant'
+const designVariant = ref(
+  (canUseStorage() && window.localStorage.getItem(DESIGN_KEY)) || 'compacto',
+)
+const isCompact = computed(() => designVariant.value === 'compacto')
+function toggleDesign() {
+  designVariant.value = isCompact.value ? 'clasico' : 'compacto'
+  if (canUseStorage()) {
+    window.localStorage.setItem(DESIGN_KEY, designVariant.value)
+  }
+}
+const contextLine = computed(() => {
+  if (isPickup) return 'Para recoger · pagas al recoger'
+  if (hasTable.value) return `${tableLabel.value} · pagas al final`
+  return 'Escanea el QR de tu mesa'
+})
+
 /* ---- Modifiers / sub-products ----
    In the new data model a product's `modifierGroups` is a list of group
    NAMES that reference the per-menu modifier catalog in menuSource.menus,
@@ -803,7 +821,7 @@ function fulfillmentLabel(item) {
 <template>
   <main class="order" :aria-label="isPickup ? 'Ordenar para recoger' : 'Ordenar en mesa'">
     <!-- Cover -->
-    <header class="cover">
+    <header class="cover" :class="{ 'cover--compact': isCompact }">
       <img
         v-if="coverImage && !coverFailed"
         class="cover__img"
@@ -813,11 +831,19 @@ function fulfillmentLabel(item) {
       />
       <div class="cover__scrim"></div>
       <div class="cover__top">
-        <RouterLink class="round-btn" :to="{ name: 'home' }" aria-label="Volver al inicio">
+        <!-- Table mode has nowhere sensible to "go back" to mid-order; the
+             arrow was a misclick trap that ejected customers to the homepage. -->
+        <RouterLink
+          v-if="isPickup"
+          class="round-btn"
+          :to="{ name: 'home' }"
+          aria-label="Volver al inicio"
+        >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M15 5l-7 7 7 7" />
           </svg>
         </RouterLink>
+        <span v-else></span>
         <span class="cover__table">{{ contextLabel }}</span>
       </div>
     </header>
@@ -829,7 +855,8 @@ function fulfillmentLabel(item) {
       </span>
       <div class="identity__text">
         <h1 class="identity__name">Belly Monster Bites</h1>
-        <ul class="identity__meta">
+        <p v-if="isCompact" class="identity__line">{{ contextLine }}</p>
+        <ul v-else class="identity__meta">
           <li>{{ isPickup ? 'Pide y pasa a recoger' : 'Servicio en mesa' }}</li>
           <li v-if="isPickup" class="is-strong">Pick&amp;Go</li>
           <li v-else-if="hasTable" class="is-strong">{{ tableLabel }}</li>
@@ -840,7 +867,7 @@ function fulfillmentLabel(item) {
     </section>
 
     <!-- Currently orderable menu -->
-    <section class="daypart" aria-label="Menú disponible ahora" aria-live="polite">
+    <section v-if="!isCompact" class="daypart" aria-label="Menú disponible ahora" aria-live="polite">
       <span class="daypart__eyebrow">Disponible ahora</span>
       <p class="daypart__meta">
         <span class="daypart__now">{{ activeMenuGroupData.name }}</span>
@@ -1386,13 +1413,19 @@ function fulfillmentLabel(item) {
         </div>
       </Transition>
     </Teleport>
+  
+    <!-- Developer design toggle: intentionally visible in production so Pedro
+         can flip variants on his phone. Persisted per device. -->
+    <button class="design-toggle" type="button" @click="toggleDesign">
+      Diseño: {{ isCompact ? 'Compacto' : 'Clásico' }}
+    </button>
   </main>
 </template>
 
 <style scoped>
 .order {
   --ink: #2a1c14;
-  --muted: #8b7a6d;
+  --muted: #7b6a5c;
   --cream: #fff8ef;
   --surface: #ffffff;
   --brown: #6f4e37;
@@ -2101,7 +2134,7 @@ function fulfillmentLabel(item) {
 /* ---- Sheets ---- */
 .sheet-root {
   --ink: #2a1c14;
-  --muted: #8b7a6d;
+  --muted: #7b6a5c;
   --cream: #fff8ef;
   --surface: #ffffff;
   --brown: #6f4e37;
@@ -2738,5 +2771,36 @@ function fulfillmentLabel(item) {
   .sheet-leave-active .sheet {
     transition: none;
   }
+}
+
+/* ---- Design-variant additions ---- */
+.cover--compact {
+  height: 140px;
+  min-height: 140px;
+}
+
+.identity__line {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.design-toggle {
+  position: fixed;
+  bottom: calc(96px + env(safe-area-inset-bottom));
+  left: 12px;
+  z-index: 30;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgb(111 78 55 / 30%);
+  border-radius: 999px;
+  background: rgb(255 248 239 / 92%);
+  color: #6f4e37;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgb(42 28 20 / 14%);
 }
 </style>
