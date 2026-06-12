@@ -635,6 +635,10 @@ const activePickupOrder = computed(() => {
   const orders = myOrdersQuery.data.value || []
   return orders.find((order) => order.status !== 'served' && order.status !== 'cancelled') || null
 })
+// Pedro's rule: a pickup order can't be edited or extended — once placed, the
+// only remaining step is picking it up. While one is active, the menu locks.
+const pickupLocked = computed(() => isPickup && Boolean(visibleSubmittedOrder.value))
+
 const visibleSubmittedOrder = computed(() => {
   if (!isPickup) {
     return liveSubmittedOrder.data.value || submittedOrder.value
@@ -859,7 +863,7 @@ function fulfillmentLabel(item) {
 
     <!-- Sticky bar: search + the single category rail. One slim row of chips,
          horizontally scrollable on every viewport, sticky on mobile too. -->
-    <div class="sticky">
+    <div v-if="!pickupLocked" class="sticky">
       <div class="search">
         <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="11" cy="11" r="7" />
@@ -910,7 +914,7 @@ function fulfillmentLabel(item) {
     </div>
 
     <!-- Search results -->
-    <section v-if="isSearching" class="results">
+    <section v-if="isSearching && !pickupLocked" class="results">
       <h2 class="section__title">
         {{ searchResults.length }} resultado{{ searchResults.length === 1 ? '' : 's' }}
       </h2>
@@ -955,8 +959,9 @@ function fulfillmentLabel(item) {
       </ul>
     </section>
 
-    <!-- Menu: every orderable section in one continuous scroll -->
-    <template v-else>
+    <!-- Menu: every orderable section in one continuous scroll. Hidden while a
+         pickup order is active (no editing/extending an order in flight). -->
+    <template v-else-if="!pickupLocked">
       <!-- Featured rail -->
       <section v-if="featuredItems.length" class="featured">
         <h2 class="section__title">Más pedidos</h2>
@@ -1049,7 +1054,7 @@ function fulfillmentLabel(item) {
     <!-- Floating cart bar -->
     <Transition name="rise">
       <button
-        v-if="!cart.isEmpty.value && !anySheetOpen"
+        v-if="!cart.isEmpty.value && !anySheetOpen && !pickupLocked"
         class="cartbar"
         type="button"
         @click="showCart = true"
@@ -1315,7 +1320,7 @@ function fulfillmentLabel(item) {
             </div>
             <div class="sheet__foot sheet__foot--col">
               <button class="btn-primary btn-primary--full" type="button" @click="closeConfirmation">
-                Seguir pidiendo
+                {{ pickupLocked ? "Entendido" : "Seguir pidiendo" }}
               </button>
             </div>
           </div>
