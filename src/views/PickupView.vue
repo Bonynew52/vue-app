@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import { SignIn, UserButton, useAuth, useUser } from '@clerk/vue'
+import { SignIn, useAuth, useClerk, useUser } from '@clerk/vue'
 import OrderView from './OrderView.vue'
 import brandLogo from '../assets/background/belly_monster_logo.png'
 
@@ -153,13 +153,17 @@ const signInAppearance = {
   },
 }
 
-const userButtonAppearance = {
-  elements: {
-    userButtonAvatarBox: {
-      width: '44px',
-      height: '44px',
-    },
-  },
+const clerk = hasClerk ? useClerk() : null
+const signingOut = ref(false)
+
+async function signOut() {
+  if (!clerk?.value || signingOut.value) return
+  signingOut.value = true
+  try {
+    await clerk.value.signOut({ redirectUrl: '/recoger' })
+  } finally {
+    signingOut.value = false
+  }
 }
 </script>
 
@@ -224,13 +228,17 @@ const userButtonAppearance = {
       <RouterLink class="gate__back" :to="{ name: 'home' }">Volver al inicio</RouterLink>
     </main>
 
-    <!-- Signed in: the proven ordering experience, in pickup mode. -->
+    <!-- Signed in: the proven ordering experience, in pickup mode. The session
+         row is quiet page furniture (no Clerk widgets): greeting + plain exit. -->
     <template v-else-if="hasClerk && isLoaded && isSignedIn">
       <div class="pickup-bar">
         <span class="pickup-bar__hello">
-          Pick&amp;Go<template v-if="firstName"> · Hola, {{ firstName }}</template>
+          <template v-if="firstName">Hola, {{ firstName }}</template>
+          <template v-else>Tu pedido para recoger</template>
         </span>
-        <UserButton after-sign-out-url="/recoger" :appearance="userButtonAppearance" />
+        <button class="pickup-bar__exit" type="button" :disabled="signingOut" @click="signOut">
+          {{ signingOut ? 'Saliendo…' : 'Salir' }}
+        </button>
       </div>
       <OrderView mode="pickup" :prefill-name="prefillName" :customer-phone="customerPhone" />
     </template>
@@ -277,14 +285,15 @@ const userButtonAppearance = {
   background: #fff8ef;
 }
 
-/* ---- Signed-in top bar ---- */
+/* ---- Signed-in session row: quiet furniture above the menu ---- */
 .pickup-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  min-height: 48px;
-  padding: calc(8px + env(safe-area-inset-top)) 16px 8px;
+  min-height: 44px;
+  padding: calc(6px + env(safe-area-inset-top)) 16px 6px;
+  border-bottom: 1px solid rgb(111 78 55 / 14%);
   background: #fff8ef;
   color: #2a1c14;
 }
@@ -294,9 +303,27 @@ const userButtonAppearance = {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #6f4e37;
-  font-size: 0.88rem;
+  color: #8b7a6d;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.pickup-bar__exit {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 0 10px;
+  border: none;
+  background: none;
+  color: #d36c00;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
   font-weight: 800;
+  cursor: pointer;
+}
+
+.pickup-bar__exit:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 
 /* ---- Gate (LoginView-style card) ---- */
