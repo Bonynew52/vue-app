@@ -1,5 +1,6 @@
 import { v, type Infer } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { internal } from "./_generated/api";
 import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
 import { orderStatus, pickupStatus } from "./schema";
@@ -532,6 +533,14 @@ export const updateStatus = mutation({
       detail: { status: args.status, source: "staff-dashboard" },
       createdAt: now,
     });
+
+    // Pickup orders: tell the customer their order is ready. The action
+    // no-ops without Twilio env vars and skips non-pickup/phone-less orders.
+    if (args.status === "ready") {
+      await ctx.scheduler.runAfter(0, internal.notifications.sendOrderReady, {
+        orderId: args.orderId,
+      });
+    }
 
     if (args.status === "cancelled") {
       const printJobs = await ctx.db
