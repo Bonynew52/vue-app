@@ -425,7 +425,7 @@ export const createPickup = mutation({
     const identityPhone = typeof identity.phoneNumber === "string" ? identity.phoneNumber : "";
     const customerPhone = cleanText(args.customerPhone || identityPhone, 32) || undefined;
 
-    return await createOrderWithItems(ctx, {
+    const created = await createOrderWithItems(ctx, {
       orderType: "pickup",
       printTableLabel: "Pick&Go",
       customerName,
@@ -435,6 +435,14 @@ export const createPickup = mutation({
       source: "pickup-web",
       items: args.items,
     });
+
+    // Confirmation WhatsApp on creation (no-ops without Twilio env / phone).
+    await ctx.scheduler.runAfter(0, internal.notifications.sendOrderReady, {
+      orderId: created.orderId,
+      kind: "created",
+    });
+
+    return created;
   },
 });
 
@@ -539,6 +547,7 @@ export const updateStatus = mutation({
     if (args.status === "ready") {
       await ctx.scheduler.runAfter(0, internal.notifications.sendOrderReady, {
         orderId: args.orderId,
+        kind: "ready",
       });
     }
 

@@ -46,7 +46,10 @@ export const recordNotificationEvent = internalMutation({
 });
 
 export const sendOrderReady = internalAction({
-  args: { orderId: v.id("orders") },
+  args: {
+    orderId: v.id("orders"),
+    kind: v.optional(v.union(v.literal("created"), v.literal("ready"))),
+  },
   handler: async (ctx, args) => {
     const accountSid = process.env.TWILIO_ACCOUNT_SID;
     const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -63,7 +66,11 @@ export const sendOrderReady = internalAction({
       return null;
     }
 
-    const body = `¡Tu pedido${order.shortCode ? ` #${order.shortCode}` : ""} está listo! \u{1F389} Puedes pasar a recogerlo en Belly Monster Bites. Muestra este mensaje al recoger.`;
+    const code = order.shortCode ? ` #${order.shortCode}` : "";
+    const body =
+      args.kind === "created"
+        ? `¡Recibimos tu pedido${code}! \u{1F44D} Te avisamos por aquí cuando esté listo para recoger. — Belly Monster Bites`
+        : `¡Tu pedido${code} está listo! \u{1F389} Puedes pasar a recogerlo en Belly Monster Bites. Muestra este mensaje al recoger.`;
 
     // Mexican WhatsApp identities keep the legacy mobile prefix: +52XXXXXXXXXX
     // must be sent as +521XXXXXXXXXX or Twilio treats it as a different user
