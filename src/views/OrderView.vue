@@ -54,35 +54,13 @@ const createOrderMutation = hasConvex
   ? useConvexMutation(isPickup ? api.orders.createPickup : api.orders.create)
   : null
 
-/* ---- Menu groups (Comidas|Desayunos / Bebidas / Postres) ---- */
+/* ---- Flat category list (Rappi/DoorDash pattern) ----
+   One chip rail, one continuous scroll: the active meal menu (Comidas or
+   Desayunos depending on time of day) first, then Bebidas, then Postres once
+   that menu exports products. The old Comidas/Bebidas/Postres group row is
+   gone; subgroups survive only as the ordering of this single list. */
 const mealGroupId = menuSource.activeMeal
-const activeMenuGroup = ref('meal')
 const activeCategory = ref('')
-const menuGroups = computed(() => {
-  const mealLabel = menuSource.activeMeal === 'desayunos' ? 'Desayunos' : 'Comidas'
-
-  return [
-    {
-      id: 'meal',
-      name: mealLabel,
-      categories: menuCategories.filter((category) => category.menuId === mealGroupId),
-    },
-    {
-      id: 'bebidas',
-      name: 'Bebidas',
-      categories: menuCategories.filter((category) => category.menuId === 'bebidas'),
-    },
-    {
-      id: 'postres',
-      name: 'Postres',
-      categories: [],
-      isPlaceholder: true,
-    },
-  ]
-})
-const activeMenuGroupData = computed(
-  () => menuGroups.value.find((group) => group.id === activeMenuGroup.value) || menuGroups.value[0],
-)
 
 function normalizeMenuText(value) {
   return String(value || '')
@@ -119,36 +97,43 @@ function mealSubgroupForCategory(category) {
   return 'fuertes'
 }
 
-// Subgroups survive as ordering, not as a third chip rail: the original
-// design had exactly one category row, so cofy → refreshers → otros (and
-// fuertes → ligeros → extras) become the order of that single row.
+// Subgroups survive as ordering, not as another chip rail: cofy → refreshers
+// → otros (and fuertes → ligeros → extras) become the order within each
+// menu's slice of the single flat row.
 const beverageSubgroupRank = { cofy: 0, refreshers: 1, otros: 2 }
 const mealSubgroupRank = { fuertes: 0, ligeros: 1, extras: 2 }
 
-const visibleCategories = computed(() => {
-  const categories = [...(activeMenuGroupData.value?.categories || [])]
+const mealCategoriesOrdered = menuCategories
+  .filter((category) => category.menuId === mealGroupId)
+  .sort(
+    (a, b) =>
+      mealSubgroupRank[mealSubgroupForCategory(a)] - mealSubgroupRank[mealSubgroupForCategory(b)],
+  )
 
-  if (activeMenuGroup.value === 'bebidas') {
-    categories.sort(
-      (a, b) =>
-        beverageSubgroupRank[beverageSubgroupForCategory(a)] -
-        beverageSubgroupRank[beverageSubgroupForCategory(b)],
-    )
-  } else if (activeMenuGroup.value === 'meal') {
-    categories.sort(
-      (a, b) =>
-        mealSubgroupRank[mealSubgroupForCategory(a)] - mealSubgroupRank[mealSubgroupForCategory(b)],
-    )
-  }
+const beverageCategoriesOrdered = menuCategories
+  .filter((category) => category.menuId === 'bebidas')
+  .sort(
+    (a, b) =>
+      beverageSubgroupRank[beverageSubgroupForCategory(a)] -
+      beverageSubgroupRank[beverageSubgroupForCategory(b)],
+  )
 
-  return categories
-})
-const groupItemCount = computed(() =>
-  visibleCategories.value.reduce((total, category) => total + category.items.length, 0),
+// Postres has no exported menu yet, so this is empty today: no chips, no
+// sections, no placeholder. When postres products land in menuCategories
+// they slot in at the end automatically.
+const dessertCategoriesOrdered = menuCategories.filter(
+  (category) => category.menuId === 'postres',
 )
 
+const orderableCategories = [
+  ...mealCategoriesOrdered,
+  ...beverageCategoriesOrdered,
+  ...dessertCategoriesOrdered,
+]
+activeCategory.value = orderableCategories[0]?.id || ''
+
 // Everything orderable right now (active meal menu + beverages), so search
-// finds a latte even while the Comidas group is selected.
+// spans the whole flat list.
 const allItems = computed(() => menuCategories.flatMap((category) => category.items))
 
 /* Broken/missing remote images fall back to the mascot, never a fake remote placeholder. */
@@ -162,18 +147,8 @@ function showImage(item) {
 
 const coverFailed = ref(false)
 
-/* ---- Design variant toggle (Pedro's A/B preview; persisted, shows in prod) ---- */
-const DESIGN_KEY = 'bmb-design-variant'
-const designVariant = ref(
-  (canUseStorage() && window.localStorage.getItem(DESIGN_KEY)) || 'compacto',
-)
-const isCompact = computed(() => designVariant.value === 'compacto')
-function toggleDesign() {
-  designVariant.value = isCompact.value ? 'clasico' : 'compacto'
-  if (canUseStorage()) {
-    window.localStorage.setItem(DESIGN_KEY, designVariant.value)
-  }
-}
+/* Single context line under the brand name (the "compacto" header Pedro
+   picked permanently over the pills/daypart "clásico" variant). */
 const contextLine = computed(() => {
   if (isPickup) return 'Para recoger · pagas al recoger'
   if (hasTable.value) return `${tableLabel.value} · pagas al final`
@@ -323,16 +298,13 @@ function setupObserver() {
         activeCategory.value = visible[0].target.dataset.catId
       }
     },
-    { rootMargin: '-150px 0px -62% 0px', threshold: 0 },
+    { rootMargin: '-110px 0px -62% 0px', threshold: 0 },
   )
   Object.values(sectionEls).forEach((el) => observer.observe(el))
 }
 onMounted(setupObserver)
 
-/* When the group changes the sections swap out, so rewire the scroll spy. */
-watch(activeMenuGroup, () => {
-  nextTick(setupObserver)
-})
+/* Search unmounts the sections, so rewire the scroll spy when it clears. */
 watch(isSearching, (searching) => {
   if (!searching) {
     nextTick(setupObserver)
@@ -342,30 +314,13 @@ watch(isSearching, (searching) => {
 watch(activeCategory, (id) => {
   const chip = chipEls[id]
   const rail = categoryRail.value
-  // Only auto-center the active chip while the row actually scrolls
-  // horizontally (desktop). On mobile the chips wrap in normal flow, where
-  // scrollIntoView would hijack the page's vertical scroll.
+  // Auto-center the active chip, but only while the rail actually overflows
+  // horizontally — scrollIntoView on a non-overflowing rail would hijack the
+  // page's vertical scroll instead.
   if (chip && rail && rail.scrollWidth > rail.clientWidth) {
     chip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
   }
 })
-
-watch(
-  visibleCategories,
-  (categories) => {
-    activeCategory.value = categories[0]?.id || ''
-    query.value = ''
-  },
-  { immediate: true },
-)
-
-function selectMenuGroup(id) {
-  activeMenuGroup.value = id
-  nextTick(() => {
-    const sticky = document.querySelector('.sticky')
-    sticky?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  })
-}
 
 function goToCategory(id) {
   activeCategory.value = id
@@ -375,9 +330,10 @@ function goToCategory(id) {
   }
 }
 
-/* Desktop-only affordances for the chip rows: drag-to-scroll and wheel
-   scrolling. On ≤640px viewports the rows wrap instead of scrolling (see
-   docs/mobile-safari-menu-crash.md), so these become no-ops there. */
+/* Pointer affordances for the chip rail: drag-to-scroll and wheel scrolling
+   for desktop; touch scrolling on mobile is native overflow-x. This rail is
+   the single permitted horizontal scroller on this view (see
+   docs/mobile-safari-menu-crash.md before adding more). */
 const railDrag = {
   el: null,
   pointerId: null,
@@ -821,7 +777,7 @@ function fulfillmentLabel(item) {
 <template>
   <main class="order" :aria-label="isPickup ? 'Ordenar para recoger' : 'Ordenar en mesa'">
     <!-- Cover -->
-    <header class="cover" :class="{ 'cover--compact': isCompact }">
+    <header class="cover">
       <img
         v-if="coverImage && !coverFailed"
         class="cover__img"
@@ -855,24 +811,8 @@ function fulfillmentLabel(item) {
       </span>
       <div class="identity__text">
         <h1 class="identity__name">Belly Monster Bites</h1>
-        <p v-if="isCompact" class="identity__line">{{ contextLine }}</p>
-        <ul v-else class="identity__meta">
-          <li>{{ isPickup ? 'Pide y pasa a recoger' : 'Servicio en mesa' }}</li>
-          <li v-if="isPickup" class="is-strong">Pick&amp;Go</li>
-          <li v-else-if="hasTable" class="is-strong">{{ tableLabel }}</li>
-          <li v-else class="is-warn">Escanea el QR de tu mesa</li>
-          <li>{{ isPickup ? 'Pagas al recoger' : 'Pagas al final' }}</li>
-        </ul>
+        <p class="identity__line">{{ contextLine }}</p>
       </div>
-    </section>
-
-    <!-- Currently orderable menu -->
-    <section v-if="!isCompact" class="daypart" aria-label="Menú disponible ahora" aria-live="polite">
-      <span class="daypart__eyebrow">Disponible ahora</span>
-      <p class="daypart__meta">
-        <span class="daypart__now">{{ activeMenuGroupData.name }}</span>
-        <span class="daypart__count">{{ groupItemCount }} productos</span>
-      </p>
     </section>
 
     <section v-if="visibleSubmittedOrder" class="active-order" aria-live="polite">
@@ -917,9 +857,8 @@ function fulfillmentLabel(item) {
       </footer>
     </section>
 
-    <!-- Sticky: search + menu group chips. The category row lives just below
-         so it can wrap (and scroll away) on small screens without bloating
-         the sticky header. -->
+    <!-- Sticky bar: search + the single category rail. One slim row of chips,
+         horizontally scrollable on every viewport, sticky on mobile too. -->
     <div class="sticky">
       <div class="search">
         <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -946,9 +885,10 @@ function fulfillmentLabel(item) {
       </div>
 
       <nav
-        v-show="!isSearching"
-        class="groups"
-        aria-label="Bloques del menú"
+        v-show="!isSearching && orderableCategories.length"
+        ref="categoryRail"
+        class="cats"
+        aria-label="Categorías del menú"
         @pointerdown="startRailDrag"
         @pointermove="moveRailDrag"
         @pointerup="endRailDrag"
@@ -956,41 +896,18 @@ function fulfillmentLabel(item) {
         @wheel="scrollRailWithWheel"
       >
         <button
-          v-for="group in menuGroups"
-          :key="group.id"
-          class="groups__chip"
-          :class="{ 'is-active': activeMenuGroup === group.id }"
+          v-for="category in orderableCategories"
+          :key="category.id"
+          :ref="setChipRef(category.id)"
+          class="cats__chip"
+          :class="{ 'is-active': activeCategory === category.id }"
           type="button"
-          @click="selectMenuGroup(group.id)"
+          @click="goToCategory(category.id)"
         >
-          {{ group.name }}
+          {{ category.name }}
         </button>
       </nav>
     </div>
-
-    <nav
-      v-show="!isSearching && visibleCategories.length"
-      ref="categoryRail"
-      class="cats"
-      aria-label="Categorías del menú"
-      @pointerdown="startRailDrag"
-      @pointermove="moveRailDrag"
-      @pointerup="endRailDrag"
-      @pointercancel="endRailDrag"
-      @wheel="scrollRailWithWheel"
-    >
-      <button
-        v-for="category in visibleCategories"
-        :key="category.id"
-        :ref="setChipRef(category.id)"
-        class="cats__chip"
-        :class="{ 'is-active': activeCategory === category.id }"
-        type="button"
-        @click="goToCategory(category.id)"
-      >
-        {{ category.name }}
-      </button>
-    </nav>
 
     <!-- Search results -->
     <section v-if="isSearching" class="results">
@@ -1038,7 +955,7 @@ function fulfillmentLabel(item) {
       </ul>
     </section>
 
-    <!-- Menu: vertical section list for the active group -->
+    <!-- Menu: every orderable section in one continuous scroll -->
     <template v-else>
       <!-- Featured rail -->
       <section v-if="featuredItems.length" class="featured">
@@ -1078,7 +995,7 @@ function fulfillmentLabel(item) {
       </section>
 
       <section
-        v-for="category in visibleCategories"
+        v-for="category in orderableCategories"
         :key="category.id"
         :ref="setSectionRef(category.id)"
         :data-cat-id="category.id"
@@ -1121,14 +1038,6 @@ function fulfillmentLabel(item) {
             </button>
           </li>
         </ul>
-      </section>
-
-      <section v-if="!visibleCategories.length" class="menu-section menu-section--empty">
-        <h2 class="section__title">{{ activeMenuGroupData.name }}</h2>
-        <p class="empty-hint">
-          Esta sección está provisional. Cuando agregues el archivo o productos de
-          {{ activeMenuGroupData.name.toLowerCase() }}, aparecerán aquí.
-        </p>
       </section>
 
       <p class="foot-note">
@@ -1413,12 +1322,6 @@ function fulfillmentLabel(item) {
         </div>
       </Transition>
     </Teleport>
-  
-    <!-- Developer design toggle: intentionally visible in production so Pedro
-         can flip variants on his phone. Persisted per device. -->
-    <button class="design-toggle" type="button" @click="toggleDesign">
-      Diseño: {{ isCompact ? 'Compacto' : 'Clásico' }}
-    </button>
   </main>
 </template>
 
@@ -1446,10 +1349,11 @@ function fulfillmentLabel(item) {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ---- Cover ---- */
+/* ---- Cover (compact: a slim 140px band) ---- */
 .cover {
   position: relative;
-  height: 210px;
+  height: 140px;
+  min-height: 140px;
   overflow: hidden;
 }
 .cover__img {
@@ -1541,65 +1445,11 @@ function fulfillmentLabel(item) {
   letter-spacing: 0;
   line-height: 1.05;
 }
-.identity__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 8px;
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.identity__meta li {
-  font-size: 0.74rem;
-  font-weight: 700;
+.identity__line {
+  margin: 2px 0 0;
   color: var(--muted);
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: #fff;
-  border: 1px solid var(--line);
-}
-.identity__meta li.is-strong {
-  color: #fff;
-  background: var(--brown);
-  border-color: var(--brown);
-}
-.identity__meta li.is-warn {
-  color: #b4541f;
-  background: #fff1e6;
-  border-color: #f6d8c2;
-}
-
-/* ---- Disponible ahora (passive label) ---- */
-.daypart {
-  margin: 0 16px 14px;
-}
-.daypart__eyebrow {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.daypart__meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 4px 10px;
-  margin: 8px 2px 0;
-  font-size: 0.76rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  color: var(--muted);
-}
-.daypart__now {
-  color: var(--ink);
-  font-weight: 900;
-}
-.daypart__hours::before,
-.daypart__count::before {
-  content: '·';
-  margin-right: 10px;
-  color: var(--line);
 }
 
 /* ---- Active order status ---- */
@@ -1736,9 +1586,9 @@ function fulfillmentLabel(item) {
   font-weight: 950;
 }
 
-/* ---- Sticky search + group chips, category row below ---- */
-/* Heights here are deliberately fixed so .cats can stick right under the
-   .sticky bar on desktop: 8 + 42 + 8 + 36 + 8 = 102px. */
+/* ---- Sticky bar: search + the single category rail ---- */
+/* One slim bar (~102px: 8 + 42 + 8 + chip row 44) that stays sticky on every
+   viewport; .menu-section scroll-margin-top below must clear it. */
 .sticky {
   position: sticky;
   top: 0;
@@ -1790,48 +1640,14 @@ function fulfillmentLabel(item) {
   line-height: 1;
   cursor: pointer;
 }
-.groups {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 0 16px 8px;
-  scrollbar-width: none;
-  cursor: grab;
-  user-select: none;
-}
-.groups::-webkit-scrollbar {
-  display: none;
-}
-.groups__chip {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  height: 36px;
-  padding: 0 16px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: #fff;
-  color: var(--ink);
-  font-size: 0.84rem;
-  font-weight: 800;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
-}
-.groups__chip.is-active {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
-}
+/* The single permitted horizontal scroller on this view (see
+   docs/mobile-safari-menu-crash.md): scrolls on every viewport, scrollbars
+   hidden, drag/wheel-assisted on desktop. */
 .cats {
-  position: sticky;
-  top: 102px;
-  z-index: 5;
   display: flex;
   gap: 8px;
   overflow-x: auto;
   padding: 2px 16px 8px;
-  background: var(--cream);
   box-shadow: 0 8px 12px -10px rgb(42 28 20 / 28%);
   scrollbar-width: none;
   cursor: grab;
@@ -1870,7 +1686,7 @@ function fulfillmentLabel(item) {
    docs/mobile-safari-menu-crash.md). content-visibility skips paint/layout
    for sections the user hasn't scrolled to yet. */
 .menu-section {
-  scroll-margin-top: 158px;
+  scroll-margin-top: 112px;
   content-visibility: auto;
   contain-intrinsic-size: auto 480px;
 }
@@ -2053,26 +1869,13 @@ function fulfillmentLabel(item) {
   font-size: 0.92rem;
 }
 
-/* ---- Mobile: no horizontal scroll rails (see
-   docs/mobile-safari-menu-crash.md). Chip rows wrap in normal flow and the
-   category block scrolls away instead of sticking. ---- */
+/* ---- Mobile: the category rail above stays the ONLY horizontal scroller
+   (see docs/mobile-safari-menu-crash.md). The featured rail wraps in normal
+   flow instead of scrolling. ---- */
 @media (max-width: 640px) {
-  .groups,
-  .cats {
-    flex-wrap: wrap;
-    overflow-x: visible;
-    cursor: default;
-  }
-  .cats {
-    position: static;
-    box-shadow: none;
-  }
   .featured__rail {
     flex-wrap: wrap;
     overflow-x: visible;
-  }
-  .menu-section {
-    scroll-margin-top: 112px;
   }
 }
 
@@ -2771,36 +2574,5 @@ function fulfillmentLabel(item) {
   .sheet-leave-active .sheet {
     transition: none;
   }
-}
-
-/* ---- Design-variant additions ---- */
-.cover--compact {
-  height: 140px;
-  min-height: 140px;
-}
-
-.identity__line {
-  margin: 2px 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.design-toggle {
-  position: fixed;
-  bottom: calc(96px + env(safe-area-inset-bottom));
-  left: 12px;
-  z-index: 30;
-  min-height: 34px;
-  padding: 0 12px;
-  border: 1px solid rgb(111 78 55 / 30%);
-  border-radius: 999px;
-  background: rgb(255 248 239 / 92%);
-  color: #6f4e37;
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgb(42 28 20 / 14%);
 }
 </style>
