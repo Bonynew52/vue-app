@@ -657,6 +657,68 @@ const visibleSubmittedOrder = computed(() => {
 })
 const submittedOrderItems = computed(() => visibleSubmittedOrder.value?.items || [])
 
+/* ---- Pickup status tracker (Rappi/DoorDash pattern) ----
+   While an order is active the page is a tracker, not a menu. Internal
+   statuses collapse to the three moments a customer cares about; `capturing`
+   (staff re-keying into Parrot) reads as "Recibido". */
+const trackerSteps = [
+  { key: 'received', label: 'Recibido' },
+  { key: 'preparing', label: 'Preparando' },
+  { key: 'ready', label: 'Listo' },
+]
+const trackerIndex = computed(() => {
+  const status = visibleSubmittedOrder.value?.status
+  if (status === 'ready') {
+    return 2
+  }
+  if (status === 'preparing') {
+    return 1
+  }
+  return 0
+})
+const trackerCopy = computed(() => {
+  if (trackerIndex.value === 2) {
+    return {
+      title: '¡Tu pedido está listo!',
+      sub: 'Pasa al mostrador y muestra tu código. Pagas al recoger.',
+    }
+  }
+  if (trackerIndex.value === 1) {
+    return {
+      title: 'Preparando tu pedido',
+      sub: 'La cocina ya está en ello. Te avisamos por WhatsApp cuando esté listo.',
+    }
+  }
+  return {
+    title: 'Recibimos tu pedido',
+    sub: 'En un momento la cocina empieza a prepararlo. Te avisamos por WhatsApp.',
+  }
+})
+
+// DEMO-ONLY: the demo has no staff surface, so the order is driven through
+// its states from these on-page controls. Remove for real customers.
+const devPanelOpen = ref(false)
+const devStatusMutation = hasConvex ? useConvexMutation(api.orders.updateStatus) : null
+const devStatusOptions = [
+  { status: 'new', label: 'Recibido' },
+  { status: 'preparing', label: 'Preparando' },
+  { status: 'ready', label: 'Listo · manda WhatsApp' },
+  { status: 'served', label: 'Entregado · cierra el pedido' },
+  { status: 'cancelled', label: 'Cancelar pedido' },
+]
+async function devSetStatus(status) {
+  const order = visibleSubmittedOrder.value
+  if (!order || !devStatusMutation) {
+    return
+  }
+  try {
+    await devStatusMutation.mutate({ orderId: order.id, status })
+  } catch (error) {
+    console.error('devSetStatus failed', error)
+  }
+  devPanelOpen.value = false
+}
+
 watch(tableId, (value) => {
   if (isPickup) {
     return
@@ -819,7 +881,67 @@ function fulfillmentLabel(item) {
       </div>
     </section>
 
-    <section v-if="visibleSubmittedOrder" class="active-order" aria-live="polite">
+    <!-- Pickup tracker: the whole page is the order status while one is
+         active (no editing, no second order). Table mode keeps the card. -->
+    <section v-if="visibleSubmittedOrder && isPickup" class="tracker" aria-live="polite">
+      <header class="tracker__head">
+        <span class="tracker__eyebrow">Pedido #{{ visibleSubmittedOrder.shortCode }}</span>
+        <h2 class="tracker__title">{{ trackerCopy.title }}</h2>
+        <p class="tracker__sub">{{ trackerCopy.sub }}</p>
+      </header>
+
+      <ol class="tracker__steps">
+        <li
+          v-for="(step, i) in trackerSteps"
+          :key="step.key"
+          class="tracker__step"
+          :class="{ 'is-done': i < trackerIndex, 'is-current': i === trackerIndex }"
+        >
+          <span class="tracker__dot">
+            <svg v-if="i < trackerIndex" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 13l4 4 10-10" />
+            </svg>
+          </span>
+          <span class="tracker__label">{{ step.label }}</span>
+        </li>
+      </ol>
+
+      <div class="tracker__code" :class="{ 'is-ready': trackerIndex === 2 }">
+        <span>Muestra este código al recoger</span>
+        <strong>#{{ visibleSubmittedOrder.shortCode }}</strong>
+      </div>
+
+      <ul class="active-order__items">
+        <li
+          v-for="item in submittedOrderItems"
+          :key="item.id"
+          :class="{ 'is-ready': isReady(item) }"
+        >
+          <span class="active-order__qty">{{ item.quantity }}</span>
+          <span class="active-order__body">
+            <span class="active-order__name">{{ item.name }}</span>
+            <span
+              v-for="modifier in item.modifiers || []"
+              :key="modifier.optionId"
+              class="active-order__mod"
+            >
+              {{ modifier.optionName }}
+            </span>
+          </span>
+          <span class="active-order__fulfillment">{{ fulfillmentLabel(item) }}</span>
+        </li>
+      </ul>
+
+      <footer class="active-order__foot">
+        <span>{{ visibleSubmittedOrder.itemCount }} artículo{{ visibleSubmittedOrder.itemCount === 1 ? '' : 's' }}</span>
+        <strong>
+          {{ formatMXN(visibleSubmittedOrder.subtotalCents / 100)
+          }}<template v-if="visibleSubmittedOrder.hasUnpriced">+</template>
+        </strong>
+      </footer>
+    </section>
+
+    <section v-if="visibleSubmittedOrder && !isPickup" class="active-order" aria-live="polite">
       <header class="active-order__head">
         <div>
           <span>Tu pedido</span>
@@ -1326,6 +1448,31 @@ function fulfillmentLabel(item) {
           </div>
         </div>
       </Transition>
+    </Teleport>
+
+    <!-- DEMO-ONLY: drives the active order through its states (no staff
+         surface in the demo). Remove for real customers. -->
+    <Teleport to="body">
+      <div v-if="isPickup && visibleSubmittedOrder && devStatusMutation" class="devtools">
+        <Transition name="devpop">
+          <div v-if="devPanelOpen" class="devtools__panel">
+            <p class="devtools__hint">Demo · estado del pedido</p>
+            <button
+              v-for="opt in devStatusOptions"
+              :key="opt.status"
+              type="button"
+              class="devtools__option"
+              :class="{ 'is-active': visibleSubmittedOrder.status === opt.status }"
+              @click="devSetStatus(opt.status)"
+            >
+              {{ opt.label }}
+            </button>
+          </div>
+        </Transition>
+        <button class="devtools__fab" type="button" @click="devPanelOpen = !devPanelOpen">
+          DEV
+        </button>
+      </div>
     </Teleport>
   </main>
 </template>
@@ -2579,5 +2726,232 @@ function fulfillmentLabel(item) {
   .sheet-leave-active .sheet {
     transition: none;
   }
+}
+
+/* ---- Pickup status tracker ---- */
+.tracker {
+  margin: 0 16px 14px;
+  padding: 18px 16px 16px;
+  border: 1px solid rgb(111 78 55 / 22%);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgb(42 28 20 / 8%);
+}
+.tracker__head {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: center;
+}
+.tracker__eyebrow {
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.tracker__title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.35rem;
+  font-weight: 950;
+  line-height: 1.15;
+}
+.tracker__sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.tracker__steps {
+  display: flex;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tracker__step {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.tracker__step::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  right: 50%;
+  width: 100%;
+  height: 3px;
+  background: var(--line);
+}
+.tracker__step:first-child::before {
+  display: none;
+}
+.tracker__step.is-done::before,
+.tracker__step.is-current::before {
+  background: var(--accent);
+}
+.tracker__dot {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--line);
+  border-radius: 50%;
+  background: #fff;
+}
+.tracker__dot svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tracker__step.is-done .tracker__dot {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.tracker__step.is-current .tracker__dot {
+  border-color: var(--accent);
+  animation: tracker-pulse 1.6s ease-out infinite;
+}
+.tracker__step.is-current .tracker__dot::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+@keyframes tracker-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(31 157 87 / 35%);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgb(31 157 87 / 0%);
+  }
+}
+.tracker__label {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+.tracker__step.is-done .tracker__label,
+.tracker__step.is-current .tracker__label {
+  color: var(--ink);
+  font-weight: 900;
+}
+.tracker__code {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  margin: 16px 0 0;
+  padding: 12px;
+  border: 1px dashed rgb(111 78 55 / 35%);
+  border-radius: 14px;
+  background: #fffaf3;
+  text-align: center;
+}
+.tracker__code span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+.tracker__code strong {
+  color: var(--brown);
+  font-size: 1.9rem;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+.tracker__code.is-ready {
+  border-color: rgb(31 157 87 / 45%);
+  background: rgb(31 157 87 / 8%);
+}
+.tracker__code.is-ready strong {
+  color: var(--accent);
+}
+.tracker .active-order__items {
+  margin-top: 14px;
+}
+.tracker .active-order__foot {
+  margin-top: 12px;
+}
+
+/* ---- DEMO-ONLY dev controls ---- */
+.devtools {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.devtools__fab {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgb(111 78 55 / 35%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 88%);
+  color: var(--brown);
+  font-family: monospace;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  box-shadow: 0 4px 12px rgb(42 28 20 / 14%);
+  backdrop-filter: blur(6px);
+}
+.devtools__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 220px;
+  padding: 12px;
+  border: 1px solid rgb(111 78 55 / 25%);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 14px 34px rgb(42 28 20 / 22%);
+}
+.devtools__hint {
+  margin: 0 0 2px;
+  color: var(--muted);
+  font-family: monospace;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.devtools__option {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: #fffaf3;
+  color: var(--ink);
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-align: left;
+}
+.devtools__option.is-active {
+  border-color: var(--brown);
+  background: var(--brown);
+  color: #fff;
+}
+.devpop-enter-active,
+.devpop-leave-active {
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+.devpop-enter-from,
+.devpop-leave-to {
+  opacity: 0;
+  transform: translateY(6px) scale(0.97);
 }
 </style>
