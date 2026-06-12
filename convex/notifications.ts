@@ -62,9 +62,14 @@ export const sendOrderReady = internalAction({
     const order = await ctx.runQuery(internal.notifications.orderForNotification, {
       orderId: args.orderId,
     });
-    if (!order || order.orderType !== "pickup" || !order.customerPhone) {
+    // TEMP demo hardcode (Pedro): when set, every notification goes to this
+    // number regardless of the order's phone. Remove once Clerk can verify
+    // real +52 numbers at sign-up (Tier-D enablement).
+    const overridePhone = process.env.DEMO_NOTIFY_OVERRIDE_PHONE;
+    if (!order || order.orderType !== "pickup" || (!order.customerPhone && !overridePhone)) {
       return null;
     }
+    const targetPhone = overridePhone || order.customerPhone;
 
     const code = order.shortCode ? ` #${order.shortCode}` : "";
     const body =
@@ -75,9 +80,9 @@ export const sendOrderReady = internalAction({
     // Mexican WhatsApp identities keep the legacy mobile prefix: +52XXXXXXXXXX
     // must be sent as +521XXXXXXXXXX or Twilio treats it as a different user
     // (verified empirically: error 63015 on +52, delivered on +521).
-    const whatsappPhone = /^\+52\d{10}$/.test(order.customerPhone)
-      ? order.customerPhone.replace(/^\+52/, "+521")
-      : order.customerPhone;
+    const whatsappPhone = /^\+52\d{10}$/.test(targetPhone)
+      ? targetPhone.replace(/^\+52/, "+521")
+      : targetPhone;
 
     const params = new URLSearchParams({
       From: from,
