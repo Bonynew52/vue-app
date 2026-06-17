@@ -118,9 +118,7 @@ const beverageCategoriesOrdered = menuCategories
       beverageSubgroupRank[beverageSubgroupForCategory(b)],
   )
 
-// Postres has no exported menu yet, so this is empty today: no chips, no
-// sections, no placeholder. When postres products land in menuCategories
-// they slot in at the end automatically.
+// Postres slots in at the end when the exported dessert menu is present.
 const dessertCategoriesOrdered = menuCategories.filter(
   (category) => category.menuId === 'postres',
 )
@@ -343,6 +341,10 @@ const railDrag = {
 }
 
 function startRailDrag(event) {
+  if (event.pointerType === 'mouse') {
+    return
+  }
+
   if (event.button != null && event.button !== 0) {
     return
   }

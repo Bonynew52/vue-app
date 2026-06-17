@@ -34,6 +34,13 @@ const SOURCE_MENUS = [
     dayparts: ['lunch'],
     categoryOffset: 2000,
   },
+  {
+    key: 'postres',
+    file: 'reposteria-2026-06-12.xlsx',
+    label: 'Postres',
+    dayparts: ['breakfast', 'lunch'],
+    categoryOffset: 3000,
+  },
 ]
 
 const DAYPARTS = [
@@ -42,14 +49,14 @@ const DAYPARTS = [
     label: 'Desayuno',
     startsAt: '08:00',
     endsAt: '12:30',
-    menuKeys: ['bebidas', 'desayunos'],
+    menuKeys: ['bebidas', 'desayunos', 'postres'],
   },
   {
     id: 'lunch',
     label: 'Comida',
     startsAt: '12:30',
     endsAt: '22:00',
-    menuKeys: ['bebidas', 'comidas'],
+    menuKeys: ['bebidas', 'comidas', 'postres'],
   },
 ]
 

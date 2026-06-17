@@ -3,6 +3,7 @@ import catalog from './menuCatalog.generated.json'
 import comidasMenu from './menu/json/comidas.json'
 import desayunosMenu from './menu/json/desayunos.json'
 import coverFallback from '../assets/campaigns/chilaquiles-promotion.jpg'
+import postresMenu from './menu/json/postres.json'
 
 const BREAKFAST_START_MINUTES = 6 * 60
 const BREAKFAST_END_MINUTES = 12 * 60 + 30
@@ -143,8 +144,9 @@ function buildActiveMenuCategories() {
   const mealMenu = currentMenuPeriod() === 'desayunos' ? desayunosMenu : comidasMenu
   const mealCategories = buildCategories(mealMenu, 0)
   const beverageCategories = buildCategories(bebidasMenu, mealCategories.length)
+  const dessertCategories = buildCategories(postresMenu, mealCategories.length + beverageCategories.length)
 
-  return [...mealCategories, ...beverageCategories]
+  return [...mealCategories, ...beverageCategories, ...dessertCategories]
 }
 
 export const menuSource = {
@@ -153,6 +155,7 @@ export const menuSource = {
     bebidas: bebidasMenu,
     comidas: comidasMenu,
     desayunos: desayunosMenu,
+    postres: postresMenu,
   },
 }
 

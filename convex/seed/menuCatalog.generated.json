@@ -1,6 +1,6 @@
 {
   "version": "2026-06-03-parrot-excel-rappi-images-v1",
-  "generatedAt": "2026-06-04T12:42:09.235Z",
+  "generatedAt": "2026-06-17T03:26:00.695Z",
   "restaurantName": "Belly Monster Bites",
   "currency": "MXN",
   "sourceFiles": [
@@ -23,6 +23,14 @@
       "menuKey": "comidas",
       "file": "data/source-menus/comidas-2026-06-03.xlsx",
       "dayparts": [
+        "lunch"
+      ]
+    },
+    {
+      "menuKey": "postres",
+      "file": "data/source-menus/reposteria-2026-06-12.xlsx",
+      "dayparts": [
+        "breakfast",
         "lunch"
       ]
     }
@@ -100,7 +108,8 @@
         "endsAt": "12:30",
         "menuKeys": [
           "bebidas",
-          "desayunos"
+          "desayunos",
+          "postres"
         ]
       },
       {
@@ -110,7 +119,8 @@
         "endsAt": "22:00",
         "menuKeys": [
           "bebidas",
-          "comidas"
+          "comidas",
+          "postres"
         ]
       }
     ]
@@ -2863,6 +2873,2272 @@
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 200703
+        }
+      ]
+    },
+    {
+      "id": "postres:gelly",
+      "menuKey": "postres",
+      "name": "Gelly",
+      "sourceName": "Gelly",
+      "dayparts": [
+        "breakfast",
+        "lunch"
+      ],
+      "sortIndex": 3000,
+      "items": [
+        {
+          "id": "postres:PFRGA-00000001",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Affogato",
+          "sourceName": "Affogato",
+          "description": "",
+          "sku": "PFRGA-00000001",
+          "price": 50,
+          "priceCents": 5000,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300000
+        },
+        {
+          "id": "postres:AR-1780337831125",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Banana y Dulce de Leche (junio)",
+          "sourceName": "Banana y Dulce de Leche (junio)",
+          "description": "",
+          "sku": "AR-1780337831125",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300001
+        },
+        {
+          "id": "postres:AR-1777915978769",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Blueberry, Blackberry y Lotus (Mayo)",
+          "sourceName": "Blueberry, Blackberry y Lotus (Mayo)",
+          "description": "",
+          "sku": "AR-1777915978769",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300002
+        },
+        {
+          "id": "postres:AR-1780337754291",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Cheesecake Fresa y Chocolate (junio)",
+          "sourceName": "Cheesecake Fresa y Chocolate (junio)",
+          "description": "",
+          "sku": "AR-1780337754291",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300003
+        },
+        {
+          "id": "postres:AR-1777916126904",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Coco, Frambuesa, Chocolate (Mayo)",
+          "sourceName": "Coco, Frambuesa, Chocolate (Mayo)",
+          "description": "",
+          "sku": "AR-1777916126904",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300004
+        },
+        {
+          "id": "postres:PFRG-00000003",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Cookies n Cream (Gelato)",
+          "sourceName": "Cookies n Cream (Gelato)",
+          "description": "Gelato de oreo",
+          "sku": "PFRG-00000003",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300005
+        },
+        {
+          "id": "postres:PFGE-00000001",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Esquimales",
+          "sourceName": "Esquimales",
+          "description": "",
+          "sku": "PFGE-00000001",
+          "price": 55,
+          "priceCents": 5500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Esquimales Sabores"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:0:esquimales-sabores"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300006
+        },
+        {
+          "id": "postres:PFRG-00001",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Litro Gelato",
+          "sourceName": "Litro Gelato",
+          "description": "",
+          "sku": "PFRG-00001",
+          "price": 300,
+          "priceCents": 30000,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300007
+        },
+        {
+          "id": "postres:PFRG-00000005",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Lotus Biscoff (Gelato)",
+          "sourceName": "Lotus Biscoff (Gelato)",
+          "description": "Gelato de galleta lotus biscoff",
+          "sku": "PFRG-00000005",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300008
+        },
+        {
+          "id": "postres:PFRG-00000009",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Mango (Sorbetto)",
+          "sourceName": "Mango (Sorbetto)",
+          "description": "Sorbetto de Mango",
+          "sku": "PFRG-00000009",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300009
+        },
+        {
+          "id": "postres:AR-1780337794319",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Matcha y Coco (junio)",
+          "sourceName": "Matcha y Coco (junio)",
+          "description": "",
+          "sku": "AR-1780337794319",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300010
+        },
+        {
+          "id": "postres:PFRG-00000002",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Milk Chocolate (Gelato)",
+          "sourceName": "Milk Chocolate (Gelato)",
+          "description": "Gelato de chocolate",
+          "sku": "PFRG-00000002",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300011
+        },
+        {
+          "id": "postres:AR-1777915837377",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Mocha Oreo (Mayo)",
+          "sourceName": "Mocha Oreo (Mayo)",
+          "description": "",
+          "sku": "AR-1777915837377",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300012
+        },
+        {
+          "id": "postres:AR-1780337875554",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Piña, Mango y Coco (junio)",
+          "sourceName": "Piña, Mango y Coco (junio)",
+          "description": "",
+          "sku": "AR-1780337875554",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300013
+        },
+        {
+          "id": "postres:AR-1780337915276",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Sandia Menta Limon (junio)",
+          "sourceName": "Sandia Menta Limon  (junio)",
+          "description": "",
+          "sku": "AR-1780337915276",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300014
+        },
+        {
+          "id": "postres:AR-1777916071128",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "S'mores (Mayo)",
+          "sourceName": "S'mores (Mayo)",
+          "description": "",
+          "sku": "AR-1777916071128",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300015
+        },
+        {
+          "id": "postres:AR-1777916177670",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Strawberry Lemonade (Mayo)",
+          "sourceName": "Strawberry Lemonade (Mayo)",
+          "description": "",
+          "sku": "AR-1777916177670",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300016
+        },
+        {
+          "id": "postres:PFRG-00000001",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:gelly",
+          "categoryName": "Gelly",
+          "sourceCategoryName": "Gelly",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Vainilla (Gelato)",
+          "sourceName": "Vainilla (Gelato)",
+          "description": "Gelato de vainilla",
+          "sku": "PFRG-00000001",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Gelly",
+            "Sabor extra"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:2:tamano-gelly",
+            "postres:modifier:1:sabor-extra"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300017
+        }
+      ]
+    },
+    {
+      "id": "postres:kuky",
+      "menuKey": "postres",
+      "name": "Kuky",
+      "sourceName": "Kuky",
+      "dayparts": [
+        "breakfast",
+        "lunch"
+      ],
+      "sortIndex": 3001,
+      "items": [
+        {
+          "id": "postres:AR-1777928057003",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Apple Crumble (Mayo)",
+          "sourceName": "Apple Crumble (Mayo)",
+          "description": "",
+          "sku": "AR-1777928057003",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300100
+        },
+        {
+          "id": "postres:PFRK-00000030",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Birthday Cake (Abril)",
+          "sourceName": "Birthday Cake (Abril)",
+          "description": "",
+          "sku": "PFRK-00000030",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300101
+        },
+        {
+          "id": "postres:PFRK-00000007",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Campfire (Smores)",
+          "sourceName": "Campfire (Smores)",
+          "description": "S'mores, bombon, chocolate y graham crackers",
+          "sku": "PFRK-00000007",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300102
+        },
+        {
+          "id": "postres:PFRK-00000062",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Caramel Popcorn (Junio)",
+          "sourceName": "Caramel Popcorn (Junio)",
+          "description": "Galleta de caramelo con betun de caramelo y palomitas caramelizadas.",
+          "sku": "PFRK-00000062",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300103
+        },
+        {
+          "id": "postres:AR-1777928106448",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Chocolate Strawberry (Mayo)",
+          "sourceName": "Chocolate Strawberry (Mayo)",
+          "description": "",
+          "sku": "AR-1777928106448",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300104
+        },
+        {
+          "id": "postres:PFRK-00000061",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Dubai (Junio)",
+          "sourceName": "Dubai (Junio)",
+          "description": "Galleta de chocolate con relleno de pistache.",
+          "sku": "PFRK-00000061",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300105
+        },
+        {
+          "id": "postres:PFRK-00000003",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Lotus Monk",
+          "sourceName": "Lotus Monk",
+          "description": "Galleta de vainilla con galletas y spread lotus biscoff con chocolate blanco",
+          "sku": "PFRK-00000003",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300106
+        },
+        {
+          "id": "postres:PFRK-00000005",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Macadamia",
+          "sourceName": "Macadamia",
+          "description": "Galleta de vainilla con macadamia y chocolate blanco",
+          "sku": "PFRK-00000005",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300107
+        },
+        {
+          "id": "postres:PFRK-00000002",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Oreo",
+          "sourceName": "Oreo",
+          "description": "Galleta de vainilla con trozos de oreo y chocolate blanco",
+          "sku": "PFRK-00000002",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300108
+        },
+        {
+          "id": "postres:PFRK-00000013",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Pinguino",
+          "sourceName": "Pinguino",
+          "description": "Galleta con relleno de bombon y chocolate",
+          "sku": "PFRK-00000013",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300109
+        },
+        {
+          "id": "postres:PFRK-00000009",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Red Velvet",
+          "sourceName": "Red Velvet",
+          "description": "Galleta de Red Velvet con queso crema",
+          "sku": "PFRK-00000009",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300110
+        },
+        {
+          "id": "postres:AR-1777928004304",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Tiramisu (Mayo)",
+          "sourceName": "Tiramisu (Mayo)",
+          "description": "",
+          "sku": "AR-1777928004304",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300111
+        },
+        {
+          "id": "postres:PFRK-00000017",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:kuky",
+          "categoryName": "Kuky",
+          "sourceCategoryName": "Kuky",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Triple Chocolate",
+          "sourceName": "Triple Chocolate",
+          "description": "Galleta de vainilla con chocolate blanco, leche y semiamargo",
+          "sku": "PFRK-00000017",
+          "price": 41,
+          "priceCents": 4100,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300112
+        }
+      ]
+    },
+    {
+      "id": "postres:malteadas",
+      "menuKey": "postres",
+      "name": "Malteadas",
+      "sourceName": "Malteadas",
+      "dayparts": [
+        "breakfast",
+        "lunch"
+      ],
+      "sortIndex": 3002,
+      "items": [
+        {
+          "id": "postres:AR-1780338354002",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Banana y Dulce de Leche (malteada)(junio",
+          "sourceName": "Banana y Dulce de Leche (malteada)(junio",
+          "description": "",
+          "sku": "AR-1780338354002",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300200
+        },
+        {
+          "id": "postres:AR-1777916326825",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Blueberry, Blackberry y Lotus (Malteada)",
+          "sourceName": "Blueberry, Blackberry y Lotus (Malteada)",
+          "description": "",
+          "sku": "AR-1777916326825",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300201
+        },
+        {
+          "id": "postres:AR-1780338236102",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Cheesecake Fresa y Chocolate (malteada)",
+          "sourceName": "Cheesecake Fresa y Chocolate (malteada)",
+          "description": "",
+          "sku": "AR-1780338236102",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300202
+        },
+        {
+          "id": "postres:AR-1777916468970",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Coco, Frambuesa, Chocolate (Malteada)",
+          "sourceName": "Coco, Frambuesa, Chocolate (Malteada)",
+          "description": "",
+          "sku": "AR-1777916468970",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300203
+        },
+        {
+          "id": "postres:PFRGM-00000003",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Cookies n Cream (Malteada)",
+          "sourceName": "Cookies n Cream (Malteada)",
+          "description": "Gelato de oreo",
+          "sku": "PFRGM-00000003",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300204
+        },
+        {
+          "id": "postres:PFRGM-00000005",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Lotus Biscoff (Malteada)",
+          "sourceName": "Lotus Biscoff (Malteada)",
+          "description": "Gelato de galleta lotus biscoff",
+          "sku": "PFRGM-00000005",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300205
+        },
+        {
+          "id": "postres:PFRGM-00000009",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Mango (Malteada)",
+          "sourceName": "Mango (Malteada)",
+          "description": "Sorbetto de Mango",
+          "sku": "PFRGM-00000009",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300206
+        },
+        {
+          "id": "postres:AR-1780338277263",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Matcha y Coco (malteada)(junio)",
+          "sourceName": "Matcha y Coco (malteada)(junio)",
+          "description": "",
+          "sku": "AR-1780338277263",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300207
+        },
+        {
+          "id": "postres:PFRGM-00000002",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Milk Chocolate (Malteada)",
+          "sourceName": "Milk Chocolate (Malteada)",
+          "description": "Gelato de chocolate",
+          "sku": "PFRGM-00000002",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300208
+        },
+        {
+          "id": "postres:AR-1777916254845",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Mocha Oreo (Mayo)(Malteada)",
+          "sourceName": "Mocha Oreo (Mayo)(Malteada)",
+          "description": "",
+          "sku": "AR-1777916254845",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300209
+        },
+        {
+          "id": "postres:AR-1780338424168",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Piña, Mango y Coco (malteada)(agua)",
+          "sourceName": "Piña, Mango y Coco (malteada)(agua)",
+          "description": "",
+          "sku": "AR-1780338424168",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "counter",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300210
+        },
+        {
+          "id": "postres:AR-1780338469368",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Sandia Menta Limon (malteada)(agua)",
+          "sourceName": "Sandia Menta Limon (malteada)(agua)",
+          "description": "",
+          "sku": "AR-1780338469368",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "counter",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300211
+        },
+        {
+          "id": "postres:AR-1777916392711",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "S'mores (Mayo)(Malteada)",
+          "sourceName": "S'mores (Mayo)(Malteada)",
+          "description": "",
+          "sku": "AR-1777916392711",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300212
+        },
+        {
+          "id": "postres:AR-1777916522510",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Strawberry Lemonade (Mayo)(Malteada)",
+          "sourceName": "Strawberry Lemonade (Mayo)(Malteada)",
+          "description": "",
+          "sku": "AR-1777916522510",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300213
+        },
+        {
+          "id": "postres:PFRGM-00000001",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:malteadas",
+          "categoryName": "Malteadas",
+          "sourceCategoryName": "Malteadas",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Vainilla (Malteada)",
+          "sourceName": "Vainilla (Malteada)",
+          "description": "Gelato de vainilla",
+          "sku": "PFRGM-00000001",
+          "price": 0,
+          "priceCents": 0,
+          "hasPrice": false,
+          "priceMode": "configured",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [
+            "Tamaño Malteada"
+          ],
+          "modifierGroupIds": [
+            "postres:modifier:3:tamano-malteada"
+          ],
+          "hasRequiredModifiers": true,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300214
+        }
+      ]
+    },
+    {
+      "id": "postres:chiskay",
+      "menuKey": "postres",
+      "name": "Chiskay",
+      "sourceName": "Chiskay",
+      "dayparts": [
+        "breakfast",
+        "lunch"
+      ],
+      "sortIndex": 3003,
+      "items": [
+        {
+          "id": "postres:PFRC-00000011",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:chiskay",
+          "categoryName": "Chiskay",
+          "sourceCategoryName": "Chiskay",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Biscoff",
+          "sourceName": "Biscoff",
+          "description": "Cheesecake de crema de lotus biscoff con chispas de chocolate blanco",
+          "sku": "PFRC-00000011",
+          "price": 65,
+          "priceCents": 6500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300300
+        },
+        {
+          "id": "postres:PFRC-00000013",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:chiskay",
+          "categoryName": "Chiskay",
+          "sourceCategoryName": "Chiskay",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Coffee (Julio)",
+          "sourceName": "Coffee (Julio)",
+          "description": "Cheesecake sabor cafe con cubierta de chocolate",
+          "sku": "PFRC-00000013",
+          "price": 65,
+          "priceCents": 6500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300301
+        },
+        {
+          "id": "postres:PFRC-00000009",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:chiskay",
+          "categoryName": "Chiskay",
+          "sourceCategoryName": "Chiskay",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Frutos Rojos (Red Hoodie)",
+          "sourceName": "Frutos Rojos (Red Hoodie)",
+          "description": "Cheesecake con mermelada de fresa, fresa y mezcla de frutos rojos",
+          "sku": "PFRC-00000009",
+          "price": 65,
+          "priceCents": 6500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300302
+        },
+        {
+          "id": "postres:PFRC-00000002",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:chiskay",
+          "categoryName": "Chiskay",
+          "sourceCategoryName": "Chiskay",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Oreo Chiskay (Midnight Treat)",
+          "sourceName": "Oreo Chiskay (Midnight Treat)",
+          "description": "Cheesecake con oreo, chocolate y chocolate blanco",
+          "sku": "PFRC-00000002",
+          "price": 65,
+          "priceCents": 6500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300303
+        },
+        {
+          "id": "postres:PFRC-00000005",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:chiskay",
+          "categoryName": "Chiskay",
+          "sourceCategoryName": "Chiskay",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Platano Chiskay (Nanas)",
+          "sourceName": "Platano Chiskay (Nanas)",
+          "description": "Cheesecake de platano, cajeta y nuez",
+          "sku": "PFRC-00000005",
+          "price": 65,
+          "priceCents": 6500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300304
+        },
+        {
+          "id": "postres:PFRC-00000012",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:chiskay",
+          "categoryName": "Chiskay",
+          "sourceCategoryName": "Chiskay",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Tortuga (Junio)",
+          "sourceName": "Tortuga (Junio)",
+          "description": "Cheesecake con caramelo, chocolate y nuez.",
+          "sku": "PFRC-00000012",
+          "price": 65,
+          "priceCents": 6500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300305
+        },
+        {
+          "id": "postres:PFRC-00000003",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:chiskay",
+          "categoryName": "Chiskay",
+          "sourceCategoryName": "Chiskay",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Tropical Guayaba",
+          "sourceName": "Tropical Guayaba",
+          "description": "Cheesecake de Guayaba con ate de guayaba y nuez",
+          "sku": "PFRC-00000003",
+          "price": 65,
+          "priceCents": 6500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300306
+        }
+      ]
+    },
+    {
+      "id": "postres:brauny",
+      "menuKey": "postres",
+      "name": "Brauny",
+      "sourceName": "Brauny",
+      "dayparts": [
+        "breakfast",
+        "lunch"
+      ],
+      "sortIndex": 3004,
+      "items": [
+        {
+          "id": "postres:PFRB-00000009",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:brauny",
+          "categoryName": "Brauny",
+          "sourceCategoryName": "Brauny",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Cinnamon Blondie",
+          "sourceName": "Cinnamon Blondie",
+          "description": "",
+          "sku": "PFRB-00000009",
+          "price": 58,
+          "priceCents": 5800,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300400
+        },
+        {
+          "id": "postres:PFRB-00000001",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:brauny",
+          "categoryName": "Brauny",
+          "sourceCategoryName": "Brauny",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Clasico Brownie",
+          "sourceName": "Clasico Brownie",
+          "description": "Clasico brownie de chocolate",
+          "sku": "PFRB-00000001",
+          "price": 58,
+          "priceCents": 5800,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300401
+        },
+        {
+          "id": "postres:PFRB-00000003",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:brauny",
+          "categoryName": "Brauny",
+          "sourceCategoryName": "Brauny",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Ferrero Brownie (Mr. Rocher)",
+          "sourceName": "Ferrero Brownie (Mr. Rocher)",
+          "description": "Brownie de avellana, ferrero rocher y nutella",
+          "sku": "PFRB-00000003",
+          "price": 58,
+          "priceCents": 5800,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300402
+        },
+        {
+          "id": "postres:PFRB-00000005",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:brauny",
+          "categoryName": "Brauny",
+          "sourceCategoryName": "Brauny",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Forest Ranger (V)",
+          "sourceName": "Forest Ranger (V)",
+          "description": "Blondie de s'mores, bombon, chocolate y graham crackers",
+          "sku": "PFRB-00000005",
+          "price": 58,
+          "priceCents": 5800,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300403
+        },
+        {
+          "id": "postres:PFRB-00000004",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:brauny",
+          "categoryName": "Brauny",
+          "sourceCategoryName": "Brauny",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Love's Secret (V)",
+          "sourceName": "Love's Secret (V)",
+          "description": "Blondie con glorias, obleas y dulce de leche",
+          "sku": "PFRB-00000004",
+          "price": 58,
+          "priceCents": 5800,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300404
+        },
+        {
+          "id": "postres:PFRB-00000006",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:brauny",
+          "categoryName": "Brauny",
+          "sourceCategoryName": "Brauny",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Oreo Blondie (Blond Cowkie)",
+          "sourceName": "Oreo Blondie (Blond Cowkie)",
+          "description": "Blondie de oreo, chocolate blanco y Hershey's cookies and cream",
+          "sku": "PFRB-00000006",
+          "price": 58,
+          "priceCents": 5800,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300405
+        },
+        {
+          "id": "postres:PFRB-00000002",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:brauny",
+          "categoryName": "Brauny",
+          "sourceCategoryName": "Brauny",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Oreo Brownie (Brown Cowkie)",
+          "sourceName": "Oreo Brownie (Brown Cowkie)",
+          "description": "Brownie con oreo, chocolate blanco y hershey's cookies and cream",
+          "sku": "PFRB-00000002",
+          "price": 58,
+          "priceCents": 5800,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300406
+        },
+        {
+          "id": "postres:PFRB-00000007",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:brauny",
+          "categoryName": "Brauny",
+          "sourceCategoryName": "Brauny",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Sweet Yogui (Lotus) (V)",
+          "sourceName": "Sweet Yogui (Lotus) (V)",
+          "description": "Blondie, galleta de lotus biscoff, chocolate blanco y spread de Lotus",
+          "sku": "PFRB-00000007",
+          "price": 58,
+          "priceCents": 5800,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300407
+        }
+      ]
+    },
+    {
+      "id": "postres:roles-de-canela",
+      "menuKey": "postres",
+      "name": "Roles de Canela",
+      "sourceName": "Roles de Canela",
+      "dayparts": [
+        "breakfast",
+        "lunch"
+      ],
+      "sortIndex": 3005,
+      "items": [
+        {
+          "id": "postres:PFBE-00000061",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:roles-de-canela",
+          "categoryName": "Roles de Canela",
+          "sourceCategoryName": "Roles de Canela",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Cinnamon Peach (Junio)",
+          "sourceName": "Cinnamon Peach (RC) (Junio)",
+          "description": "Rol de canela con durazno.",
+          "sku": "PFBE-00000061",
+          "price": 85,
+          "priceCents": 8500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "table",
+          "image": "",
+          "imageSource": null,
+          "imageMatch": null,
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300500
+        },
+        {
+          "id": "postres:PFBE-00000005",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:roles-de-canela",
+          "categoryName": "Roles de Canela",
+          "sourceCategoryName": "Roles de Canela",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Rol de Canela",
+          "sourceName": "Rol de Canela (RC)",
+          "description": "Rol relleno de canela y glaseado de vainilla",
+          "sku": "PFBE-00000005",
+          "price": 75,
+          "priceCents": 7500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "counter",
+          "image": "https://images.rappi.com.mx/products/e243873a-dc37-4725-a9ad-4f9e66ee7e79.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659574,
+            "rappiName": "Rol De Canela (rc)",
+            "rappiCategoryName": "Reposteria (rappi)"
+          },
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300501
+        },
+        {
+          "id": "postres:PFBE-00000007",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:roles-de-canela",
+          "categoryName": "Roles de Canela",
+          "sourceCategoryName": "Roles de Canela",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Rol de Chocolate",
+          "sourceName": "Rol de Chocolate (RC)",
+          "description": "Rol relleno de chocolate con glaseado de vainilla y nutella",
+          "sku": "PFBE-00000007",
+          "price": 85,
+          "priceCents": 8500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "counter",
+          "image": "https://images.rappi.com.mx/products/e192f2ed-ccac-466e-8a42-f1f12e4edc59.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659585,
+            "rappiName": "Rol De Chocolate (rc)",
+            "rappiCategoryName": "Reposteria (rappi)"
+          },
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300502
+        },
+        {
+          "id": "postres:PFBE-00000006",
+          "menuKey": "postres",
+          "sourceMenuName": "Postres",
+          "categoryId": "postres:roles-de-canela",
+          "categoryName": "Roles de Canela",
+          "sourceCategoryName": "Roles de Canela",
+          "dayparts": [
+            "breakfast",
+            "lunch"
+          ],
+          "name": "Rol de Lotus Biscoff",
+          "sourceName": "Rol de Lotus Biscoff (RC)",
+          "description": "Rol relleno de Lotus Biscoff y glaseado de vainilla",
+          "sku": "PFBE-00000006",
+          "price": 85,
+          "priceCents": 8500,
+          "hasPrice": true,
+          "priceMode": "fixed",
+          "typeOfSale": "Precio Fijo",
+          "modifierGroupNames": [],
+          "modifierGroupIds": [],
+          "hasRequiredModifiers": false,
+          "fulfillmentType": "counter",
+          "image": "https://images.rappi.com.mx/products/30896088-2e81-4314-9209-46be7385583b.jpeg?d=300x300&e=webp&q=75",
+          "imageSource": "rappi",
+          "imageMatch": {
+            "method": "rule-exact",
+            "rappiProductId": 7659478,
+            "rappiName": "Rol De Lotus Biscoff (rc)",
+            "rappiCategoryName": "Reposteria (rappi)"
+          },
+          "isAvailable": true,
+          "isPopular": false,
+          "sortIndex": 300503
         }
       ]
     },
@@ -7113,18 +9389,177 @@
           "repetitions": 1
         }
       ]
+    },
+    {
+      "id": "postres:modifier:0:esquimales-sabores",
+      "menuKey": "postres",
+      "name": "Esquimales Sabores",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "valueRequirement": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "options": [
+        {
+          "id": "postres:modifier:0:esquimales-sabores:option:0:vainilla",
+          "name": "Vainilla",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:0:esquimales-sabores:option:1:chocolate",
+          "name": "Chocolate",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:0:esquimales-sabores:option:2:oreo",
+          "name": "Oreo",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:0:esquimales-sabores:option:3:mango-chamoy",
+          "name": "Mango Chamoy",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:0:esquimales-sabores:option:4:lotus-biscoff",
+          "name": "Lotus Biscoff",
+          "priceDelta": 0,
+          "repetitions": 1
+        }
+      ]
+    },
+    {
+      "id": "postres:modifier:1:sabor-extra",
+      "menuKey": "postres",
+      "name": "Sabor extra",
+      "selectionType": "SIN_DEFINIR",
+      "valueRequirement": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 0,
+      "max": 1,
+      "options": [
+        {
+          "id": "postres:modifier:1:sabor-extra:option:0:vainilla-gelato",
+          "name": "Vainilla (Gelato)",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:1:sabor-extra:option:1:milk-chocolate-gelato",
+          "name": "Milk Chocolate (Gelato)",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:1:sabor-extra:option:2:cookies-n-cream-gelato",
+          "name": "Cookies n Cream (Gelato)",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:1:sabor-extra:option:3:lotus-biscoff-gelato",
+          "name": "Lotus Biscoff (Gelato)",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:1:sabor-extra:option:4:mango-sorbetto",
+          "name": "Mango (Sorbetto)",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:1:sabor-extra:option:5:cheesecake-fresa-y-chocolate-junio",
+          "name": "Cheesecake Fresa y Chocolate (junio)",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:1:sabor-extra:option:6:matcha-y-coco-junio",
+          "name": "Matcha y Coco (junio)",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:1:sabor-extra:option:7:banana-y-dulce-de-leche-junio",
+          "name": "Banana y Dulce de Leche (junio)",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:1:sabor-extra:option:8:pina-mango-y-coco-junio",
+          "name": "Piña, Mango y Coco (junio)",
+          "priceDelta": 0,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:1:sabor-extra:option:9:sandia-menta-limon-junio",
+          "name": "Sandia Menta Limon  (junio)",
+          "priceDelta": 0,
+          "repetitions": 1
+        }
+      ]
+    },
+    {
+      "id": "postres:modifier:2:tamano-gelly",
+      "menuKey": "postres",
+      "name": "Tamaño Gelly",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "valueRequirement": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "options": [
+        {
+          "id": "postres:modifier:2:tamano-gelly:option:0:4-oz-chico",
+          "name": "4 oz (Chico)",
+          "priceDelta": 60,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:2:tamano-gelly:option:1:6-oz-mediano",
+          "name": "6 oz (Mediano)",
+          "priceDelta": 80,
+          "repetitions": 1
+        }
+      ]
+    },
+    {
+      "id": "postres:modifier:3:tamano-malteada",
+      "menuKey": "postres",
+      "name": "Tamaño Malteada",
+      "selectionType": "FORZAR_SELECCION_DE_PRODUCTOS",
+      "valueRequirement": "USAR_RANGO_ENTRE_MIN_MAX",
+      "min": 1,
+      "max": 1,
+      "options": [
+        {
+          "id": "postres:modifier:3:tamano-malteada:option:0:12-oz-chico",
+          "name": "12 oz (Chico)",
+          "priceDelta": 98,
+          "repetitions": 1
+        },
+        {
+          "id": "postres:modifier:3:tamano-malteada:option:1:16-oz-mediano",
+          "name": "16 oz (Mediano)",
+          "priceDelta": 108,
+          "repetitions": 1
+        }
+      ]
     }
   ],
   "stats": {
-    "itemCount": 139,
-    "categoryCount": 27,
-    "modifierGroupCount": 31,
-    "imageMatchedCount": 121,
-    "imageMissingCount": 18,
+    "itemCount": 204,
+    "categoryCount": 33,
+    "modifierGroupCount": 35,
+    "imageMatchedCount": 124,
+    "imageMissingCount": 80,
     "imageMissingByMenu": {
       "bebidas": 4,
       "desayunos": 0,
-      "comidas": 14
+      "comidas": 14,
+      "postres": 62
     }
   }
 }
