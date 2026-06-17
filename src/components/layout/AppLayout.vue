@@ -1,10 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { RouterLink, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 import mascotIcon from '../../assets/brand/mascot.svg'
-import facebookLogo from '../../assets/social_media/facebook.svg'
-import instagramLogo from '../../assets/social_media/instagram.svg'
-import whatsappLogo from '../../assets/social_media/Whatsapp.png'
 
 const isMenuOpen = ref(false)
 const route = useRoute()
@@ -21,32 +18,13 @@ function closeMenu() {
 <template>
   <div class="app-layout" :class="`${route.name || 'home'}-layout`">
     <header class="app-header">
-      <RouterLink class="brand" :to="{ name: 'home' }" aria-label="Ir a Home" @click="closeMenu">
+      <div class="brand" aria-label="Belly Monster Bites">
         <span class="brand-mark">
           <img :src="mascotIcon" alt="" />
         </span>
-        <span>Home</span>
-      </RouterLink>
+      </div>
 
-      <nav class="header-actions" aria-label="Redes sociales y menu">
-        <a class="icon-button" href="/" aria-label="WhatsApp">
-          <img :src="whatsappLogo" alt="" />
-        </a>
-
-        <a
-          class="icon-button"
-          href="https://www.instagram.com/bellymonsterbites/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Instagram"
-        >
-          <img :src="instagramLogo" alt="" />
-        </a>
-
-        <a class="icon-button" href="/" aria-label="Facebook">
-          <img :src="facebookLogo" alt="" />
-        </a>
-
+      <nav class="header-actions" aria-label="Menu">
         <button
           class="menu-button"
           :class="{ open: isMenuOpen }"
@@ -72,11 +50,6 @@ function closeMenu() {
     ></button>
 
     <aside id="side-menu" class="side-menu" :class="{ open: isMenuOpen }" aria-label="Menu lateral">
-      <RouterLink :to="{ name: 'home' }" @click="closeMenu">Home</RouterLink>
-      <RouterLink :to="{ name: 'menu' }" @click="closeMenu">Menu</RouterLink>
-      <RouterLink :to="{ name: 'orders' }" @click="closeMenu">Ordenes</RouterLink>
-      <RouterLink :to="{ name: 'login' }" @click="closeMenu">Login</RouterLink>
-      <RouterLink :to="{ name: 'home' }" @click="closeMenu">Contacto</RouterLink>
     </aside>
 
     <div class="app-content">
@@ -133,11 +106,22 @@ function closeMenu() {
 }
 
 .app-layout.home-layout {
-  --color-third: #8a6044;
-  --color-primary: #8a6044;
-  --color-accent: #8a6044;
-  --color-border: #8a6044;
-  --stage-blue: #8a6044;
+  --color-first: #458753;
+  --color-second: #e4cfaa;
+  --color-third: #71451f;
+  --color-background: #e4cfaa;
+  --color-surface: #d9c8a9;
+  --color-surface-muted: #f3e4c7;
+  --color-primary: #71451f;
+  --color-secondary: #e4cfaa;
+  --color-secondary-dark: #458753;
+  --color-accent: #d97858;
+  --color-highlight: #c0a55d;
+  --color-text: #fff3d7;
+  --color-text-muted: #d9c8a9;
+  --color-border: #c0a55d;
+  --stage-blue: #d97858;
+  --shadow-panel: 0 18px 48px rgb(65 36 15 / 30%);
 }
 
 .app-layout.menu-layout {
@@ -160,7 +144,7 @@ function closeMenu() {
 
 .app-layout.home-layout,
 .app-layout.menu-layout {
-  --public-frame-width: 520px;
+  --public-frame-width: 560px;
   --app-side-background: #090a0c;
   --app-side-pattern: url("data:image/svg+xml,%3Csvg width='1080' height='180' viewBox='0 0 1080 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' font-family='Arial Black, Impact, sans-serif' font-size='13' font-weight='900' letter-spacing='1.2'%3E%3Ctext x='0' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='0' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3C/g%3E%3C/svg%3E");
   align-items: center;
@@ -168,7 +152,8 @@ function closeMenu() {
 }
 
 .app-layout.home-layout {
-  --app-frame-border: rgb(138 96 68 / 40%);
+  --app-side-background: #2f6f3b;
+  --app-frame-border: #0f1115;
 }
 
 .app-layout.menu-layout {
@@ -247,6 +232,10 @@ function closeMenu() {
   transition: none;
 }
 
+.home-layout .app-header {
+  background: #458753;
+}
+
 .order-layout .app-header,
 .order-layout .app-footer,
 .pickup-layout .app-header,
@@ -317,7 +306,11 @@ function closeMenu() {
 }
 
 .home-layout .app-content {
-  z-index: 11;
+  background: #458753;
+}
+
+.home-layout .app-content {
+  z-index: 1;
 }
 
 .home-layout .app-content :deep(.home-view),
@@ -352,6 +345,12 @@ function closeMenu() {
   padding: clamp(34px, 7vw, 72px) clamp(20px, 5vw, 56px);
   border-top: 2px solid var(--stage-blue, var(--color-border));
   background: #0f1115;
+}
+
+.home-layout .app-footer {
+  display: none;
+  border-top-color: #d97858;
+  background: #458753;
 }
 
 @keyframes app-side-watermark-drift {
@@ -456,7 +455,7 @@ function closeMenu() {
 .header-actions {
   display: inline-flex;
   align-items: center;
-  gap: 24px;
+  gap: 0;
   margin-left: auto;
 }
 
@@ -525,7 +524,6 @@ function closeMenu() {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 16px;
   min-height: 80px;
   padding: 0 4px;
   color: var(--color-text);

@@ -1,35 +1,35 @@
-import appleCrumbleImage from '../assets/campaigns/apple crumble cookie.png'
-import jucyLucyImage from '../assets/campaigns/jucy lucy.png'
-import strawberryCookieImage from '../assets/campaigns/Strawberry cookie.png'
-import tiramisuCookieImage from '../assets/campaigns/tiramisu cookie.png'
+import chilaquilesImage from '../assets/campaigns/belly monster chilaquiles.jpg'
+import dubaiCaramelPopcornImage from '../assets/campaigns/belly monster dubai caramel popcorn.jpg'
+import tortugaCheesecakeImage from '../assets/campaigns/belly monster tortuga cheesecake.jpg'
+import worldCupImage from '../assets/campaigns/belly monster world cup.jpg'
 
 export const campaigns = [
   {
-    id: 'apple-crumble',
-    name: 'Apple Crumble Cookie',
-    image: appleCrumbleImage,
+    id: 'chilaquiles',
+    name: 'Belly Monster Chilaquiles',
+    image: chilaquilesImage,
     eyebrow: 'Campaign',
-    description: 'Una pieza suave, dulce y lista para ocupar el primer lugar de la vitrina.',
+    description: 'Especial del mes con el estilo de Belly Monster.',
   },
   {
-    id: 'jucy-lucy',
-    name: 'Jucy Lucy',
-    image: jucyLucyImage,
+    id: 'world-cup',
+    name: 'Belly Monster World Cup',
+    image: worldCupImage,
     eyebrow: 'Campaign',
-    description: 'Una campana con sabor protagonista, pensada para antojos grandes.',
+    description: 'Promocion especial para temporada.',
   },
   {
-    id: 'strawberry-cookie',
-    name: 'Strawberry Cookie',
-    image: strawberryCookieImage,
+    id: 'dubai-caramel-popcorn',
+    name: 'Belly Monster Dubai Caramel Popcorn',
+    image: dubaiCaramelPopcornImage,
     eyebrow: 'Campaign',
-    description: 'Fresa brillante, textura suave y una presencia dulce para temporada.',
+    description: 'Dulce, crujiente y listo para destacar.',
   },
   {
-    id: 'tiramisu-cookie',
-    name: 'Tiramisu Cookie',
-    image: tiramisuCookieImage,
+    id: 'tortuga-cheesecake',
+    name: 'Belly Monster Tortuga Cheesecake',
+    image: tortugaCheesecakeImage,
     eyebrow: 'Campaign',
-    description: 'Cafe, crema y galleta en una campana con vibra de postre clasico.',
+    description: 'Especial cremoso para el carrusel del mes.',
   },
 ]
