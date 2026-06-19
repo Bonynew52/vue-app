@@ -2,7 +2,7 @@ import bebidasMenu from './menu/json/bebidas.json'
 import catalog from './menuCatalog.generated.json'
 import comidasMenu from './menu/json/comidas.json'
 import desayunosMenu from './menu/json/desayunos.json'
-import coverFallback from '../assets/campaigns/jucy lucy.png'
+import coverFallback from '../assets/campaigns/chilaquiles-promotion.jpg'
 
 const BREAKFAST_START_MINUTES = 6 * 60
 const BREAKFAST_END_MINUTES = 12 * 60 + 30

@@ -1,525 +1,351 @@
 <script setup>
-import { onBeforeUnmount, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import facebookLogo from '../assets/social_media/facebook.svg'
-import instagramLogo from '../assets/social_media/instagram.svg'
+import assortedCookies from '../assets/campaigns/belly-cookie-selection.jpg'
+import brandLogo from '../assets/campaigns/belly-monster-logo-white.png'
+import storefrontImage from '../assets/campaigns/belly-storefront.jpg'
+import cateringEvent from '../assets/campaigns/belly-event-catering.jpg'
+import candyCaneLatte from '../assets/campaigns/candy-cane-iced-latte.jpg'
+import chessCustomers from '../assets/campaigns/belly-chess-table.jpg'
+import cinnamonRaspberry from '../assets/campaigns/cinnamon-roll-raspberry.png'
+import customersAtTable from '../assets/campaigns/belly-cafe-customers.jpg'
+import goldenWorldCupAward from '../assets/campaigns/monster-world-cup-award.png'
+import icedCoffeeHandoff from '../assets/campaigns/belly-iced-coffee-service.jpeg'
 import { campaigns } from '../data/campaigns'
 
-const conveyorCampaigns = [...campaigns, ...campaigns]
-const conveyorViewport = ref(null)
-const isDraggingConveyor = ref(false)
-const isConveyorPaused = ref(false)
-
-let dragStartX = 0
-let dragStartScrollLeft = 0
-let resumeConveyorTimeout
-
-function beginConveyorDrag(clientX) {
-  const viewport = conveyorViewport.value
-
-  if (!viewport) {
-    return
+const isLogoIntroVisible = ref(true)
+const latestRow = ref(null)
+const isDraggingLatest = ref(false)
+const [chilaquiles] = campaigns
+const imageVersion = 'home-20260619-3'
+const selectedMenuCategory = ref('postres')
+const menuCategories = [
+  { id: 'postres', label: 'Postres' },
+  { id: 'frappes', label: 'Frappes' },
+  { id: 'comidas', label: 'Comidas' },
+  { id: 'matcha', label: 'Matcha' },
+  { id: 'desayunos', label: 'Desayunos' },
+  { id: 'hamburguesas', label: 'Hamburguesas' },
+  { id: 'americanos', label: 'Americanos' },
+]
+const latestItems = [
+  { title: 'Belly en tu evento', image: cateringEvent, to: 'order' },
+  { title: 'Monster World Cup', image: goldenWorldCupAward, to: 'menu' },
+]
+const menuCategoryCards = computed(() => {
+  const category = menuCategories.find((item) => item.id === selectedMenuCategory.value)
+  const title = category?.label || 'Menu'
+  const placeholderImages = {
+    postres: [assortedCookies, candyCaneLatte, cinnamonRaspberry],
+    frappes: [icedCoffeeHandoff, candyCaneLatte, customersAtTable],
+    comidas: [chilaquiles.image, cateringEvent, goldenWorldCupAward],
+    matcha: [icedCoffeeHandoff, customersAtTable, candyCaneLatte],
+    desayunos: [chilaquiles.image, assortedCookies, icedCoffeeHandoff],
+    hamburguesas: [goldenWorldCupAward, cateringEvent, chilaquiles.image],
+    americanos: [candyCaneLatte, icedCoffeeHandoff, customersAtTable],
   }
+  const images = placeholderImages[selectedMenuCategory.value] || [icedCoffeeHandoff]
 
-  window.clearTimeout(resumeConveyorTimeout)
-  isDraggingConveyor.value = true
-  isConveyorPaused.value = true
-  dragStartX = clientX
-  dragStartScrollLeft = viewport.scrollLeft
+  return images.map((image, index) => ({
+    id: `${selectedMenuCategory.value}-${index}`,
+    image,
+    title,
+    description: `Proximamente en ${title.toLowerCase()}.`,
+  }))
+})
+
+function refreshedImage(src) {
+  return `${src}${src.includes('?') ? '&' : '?'}v=${imageVersion}`
 }
 
-function moveConveyorDrag(clientX) {
-  const viewport = conveyorViewport.value
+let logoIntroTimeout
+let latestDragStartX = 0
+let latestDragStartScrollLeft = 0
 
-  if (!isDraggingConveyor.value || !viewport) {
-    return
-  }
-
-  viewport.scrollLeft = dragStartScrollLeft - (clientX - dragStartX)
-}
-
-function endConveyorDrag() {
-  const viewport = conveyorViewport.value
-
-  if (!isDraggingConveyor.value) {
-    return
-  }
-
-  isDraggingConveyor.value = false
-  resumeConveyorTimeout = window.setTimeout(() => {
-    isConveyorPaused.value = false
-  }, 1500)
-
-  return viewport
-}
-
-function startConveyorDrag(event) {
+function startLatestDrag(event) {
   if (event.pointerType === 'mouse' && event.button !== 0) {
     return
   }
 
-  beginConveyorDrag(event.clientX)
-  conveyorViewport.value?.setPointerCapture?.(event.pointerId)
+  const row = latestRow.value
+
+  if (!row) {
+    return
+  }
+
+  isDraggingLatest.value = true
+  latestDragStartX = event.clientX
+  latestDragStartScrollLeft = row.scrollLeft
+  row.setPointerCapture?.(event.pointerId)
 }
 
-function dragConveyor(event) {
-  if (!isDraggingConveyor.value) {
+function moveLatestDrag(event) {
+  const row = latestRow.value
+
+  if (!isDraggingLatest.value || !row) {
     return
   }
 
   event.preventDefault()
-  moveConveyorDrag(event.clientX)
+  row.scrollLeft = latestDragStartScrollLeft - (event.clientX - latestDragStartX)
 }
 
-function stopConveyorDrag(event) {
-  const viewport = endConveyorDrag()
+function endLatestDrag(event) {
+  const row = latestRow.value
+
+  if (!isDraggingLatest.value) {
+    return
+  }
+
+  isDraggingLatest.value = false
 
   try {
-    viewport?.releasePointerCapture?.(event.pointerId)
+    row?.releasePointerCapture?.(event.pointerId)
   } catch {
-    // The pointer can already be released when the drag ends outside the band.
+    // The pointer can be released outside the scroll area.
   }
 }
 
-function startConveyorTouch(event) {
-  const touch = event.touches[0]
-
-  if (!touch) {
-    return
-  }
-
-  beginConveyorDrag(touch.clientX)
-}
-
-function dragConveyorTouch(event) {
-  const touch = event.touches[0]
-
-  if (!touch || !isDraggingConveyor.value) {
-    return
-  }
-
-  event.preventDefault()
-  moveConveyorDrag(touch.clientX)
-}
-
-function stopConveyorTouch() {
-  endConveyorDrag()
-}
+onMounted(() => {
+  logoIntroTimeout = window.setTimeout(() => {
+    isLogoIntroVisible.value = false
+  }, 1800)
+})
 
 onBeforeUnmount(() => {
-  window.clearTimeout(resumeConveyorTimeout)
+  window.clearTimeout(logoIntroTimeout)
 })
 </script>
 
 <template>
   <main class="home-view">
-    <section class="home-top-container" aria-label="Contenido principal">
-      <span class="home-top-container__bar-label home-top-container__bar-label--top">
-        Promociones/especiales del mes
-      </span>
-      <div
-        ref="conveyorViewport"
-        class="campaign-conveyor-viewport"
-        :class="{ 'is-dragging': isDraggingConveyor, 'is-paused': isConveyorPaused }"
-        aria-label="Carrusel de campanas"
-        @pointerdown="startConveyorDrag"
-        @pointermove="dragConveyor"
-        @pointerup="stopConveyorDrag"
-        @pointercancel="stopConveyorDrag"
-        @pointerleave="stopConveyorDrag"
-        @touchstart="startConveyorTouch"
-        @touchmove="dragConveyorTouch"
-        @touchend="stopConveyorTouch"
-        @touchcancel="stopConveyorTouch"
-      >
-        <div class="campaign-conveyor">
-          <div
-            v-for="(campaign, index) in conveyorCampaigns"
-            :key="`${campaign.id}-${index}`"
-            class="campaign-conveyor__item"
-          >
-            <img :src="campaign.image" :alt="campaign.name" />
+    <Teleport to="body">
+      <Transition name="home-logo-intro">
+        <section v-if="isLogoIntroVisible" class="home-logo-intro" aria-label="Belly Monster Bites">
+          <div class="home-logo-intro__wordmark" aria-hidden="true">
+            <span>Belly</span>
+            <span>Monster</span>
           </div>
-        </div>
+        </section>
+      </Transition>
+    </Teleport>
+
+    <section class="home-hero" :style="{ '--hero-image': `url(${refreshedImage(icedCoffeeHandoff)})` }">
+      <div class="home-hero__shade"></div>
+      <div class="home-hero__content">
+        <p>To eat to share to enjoy</p>
+        <RouterLink :to="{ name: 'order' }">Ordena ahora</RouterLink>
       </div>
     </section>
 
-    <section class="home-empty-container" aria-label="Acciones principales">
-      <p class="home-action-eyebrow">To eat to share to enjoy</p>
-      <div class="home-action-buttons">
-        <RouterLink class="home-action-button home-action-button--menu" :to="{ name: 'menu' }">
-          Menu digital
-        </RouterLink>
-        <button class="home-action-button home-action-button--order" type="button" disabled>
-          Ordena ahora
+    <section class="home-section home-section--latest" aria-labelledby="latest-title">
+      <h1 id="latest-title">Lo nuevo</h1>
+      <div
+        ref="latestRow"
+        class="home-card-row"
+        :class="{ 'is-dragging': isDraggingLatest }"
+        @pointerdown="startLatestDrag"
+        @pointermove="moveLatestDrag"
+        @pointerup="endLatestDrag"
+        @pointercancel="endLatestDrag"
+        @pointerleave="endLatestDrag"
+      >
+        <article v-for="item in latestItems" :key="item.title" class="promo-card">
+          <img :src="refreshedImage(item.image)" :alt="item.title" />
+          <div class="promo-card__content">
+            <h2>{{ item.title }}</h2>
+            <RouterLink :to="{ name: item.to }">Ver mas</RouterLink>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-section home-section--menu" aria-labelledby="menu-title">
+      <h1 id="menu-title">Explora nuestro menú</h1>
+      <TransitionGroup name="menu-card-fade" tag="div" class="home-menu-row">
+        <article v-for="card in menuCategoryCards" :key="card.id" class="menu-card">
+          <img :src="refreshedImage(card.image)" :alt="card.title" />
+          <div>
+            <h2>{{ card.title }}</h2>
+            <p>{{ card.description }}</p>
+            <RouterLink :to="{ name: 'menu' }">Ver mas</RouterLink>
+          </div>
+        </article>
+      </TransitionGroup>
+      <div class="home-menu-tags" aria-label="Categorias de menu">
+        <button
+          v-for="category in menuCategories"
+          :key="category.id"
+          type="button"
+          :class="{ active: selectedMenuCategory === category.id }"
+          @click="selectedMenuCategory = category.id"
+        >
+          {{ category.label }}
         </button>
       </div>
     </section>
 
-    <section class="home-secondary-container" aria-label="Ubicacion">
-      <iframe
-        class="home-map"
-        title="Ubicacion Belly Monster Bites"
-        src="https://www.google.com/maps?q=C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps.&output=embed"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-      <a
-        class="home-map-link"
-        href="https://www.google.com/maps/search/?api=1&query=C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps."
-        target="_blank"
-        rel="noreferrer"
-      >
-        Abrir mapa
-      </a>
+    <section class="home-history" :style="{ '--history-image': `url(${refreshedImage(storefrontImage)})` }">
+      <div class="home-history__shade"></div>
+      <h1>Nuestra historia</h1>
     </section>
 
-    <section class="home-reservations-container" aria-label="Reservaciones">
-      <span class="home-reservations-container__bar-label">Reservaciones</span>
-      <nav class="home-reservations-social" aria-label="Redes sociales">
-        <a
-          class="home-reservations-social__link"
-          href="https://www.instagram.com/bellymonsterbites/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Instagram"
-        >
-          <img :src="instagramLogo" alt="" />
-        </a>
-        <a
-          class="home-reservations-social__link"
-          href="/"
-          aria-label="Facebook"
-        >
-          <img :src="facebookLogo" alt="" />
-        </a>
+    <section class="home-section home-section--mood" aria-labelledby="mood-title">
+      <h1 id="mood-title"><span>Belly</span> un <span>mood</span> completo</h1>
+      <div class="home-mood-grid">
+        <img :src="refreshedImage(chessCustomers)" alt="Clientes jugando ajedrez en Belly Monster" />
+        <img :src="refreshedImage(customersAtTable)" alt="Clientes en Belly Monster" />
+      </div>
+      <RouterLink class="home-order-link" :to="{ name: 'order' }">Ordena ahora</RouterLink>
+    </section>
+
+    <footer class="home-footer">
+      <img class="home-footer__logo" :src="refreshedImage(brandLogo)" alt="Belly Monster" />
+      <strong>To eat to share to enjoy</strong>
+      <nav aria-label="Enlaces del sitio">
+        <RouterLink :to="{ name: 'order' }">Ordena ahora</RouterLink>
+        <RouterLink :to="{ name: 'menu' }">Menú</RouterLink>
+        <a href="#latest-title">Lo nuevo</a>
+        <a href="#mood-title">Contacto</a>
       </nav>
-    </section>
-
-    <section class="home-legal-container" aria-label="Informacion legal">
-      <span>&copy; 2026 Belly Monster Bites</span>
-      <a href="/">Terminos y condiciones</a>
-      <a href="/">Privacidad</a>
-      <a href="/">Contacto</a>
-    </section>
+      <small>Terminos y condiciones</small>
+    </footer>
   </main>
 </template>
 
 <style scoped>
 .home-view {
-  --home-verde-seco: #458753;
-  --home-caqui: #c0a55d;
-  --home-beige-arena: #e4cfaa;
-  --home-terracota: #d97858;
-  --home-cafe-claro: #71451f;
-
   width: 100%;
-  min-height: 0;
-  align-self: flex-start;
-  margin: 0;
-  padding: 0;
-  line-height: 0;
-  background:
-    linear-gradient(180deg, var(--home-verde-seco) 0%, #3d794a 100%);
+  background: #ffffff;
+  color: #101114;
   font-family: var(--font-display);
 }
 
-.home-top-container {
-  position: relative;
-  width: 100%;
-  min-height: clamp(250px, 50svh, 460px);
-  border: 0;
-  border-radius: 0;
-  background:
-    radial-gradient(circle at 92% 12%, rgb(217 120 88 / 18%), transparent 30%),
-    var(--home-beige-arena);
-  box-shadow: 0 18px 42px rgb(65 36 15 / 20%);
-  overflow: hidden;
-  line-height: normal;
-}
-
-.home-secondary-container {
-  position: relative;
-  width: 100%;
-  min-height: clamp(240px, 42svh, 420px);
-  background:
-    radial-gradient(circle at 12% 18%, rgb(217 120 88 / 16%), transparent 32%),
-    var(--home-beige-arena);
-  box-shadow: 0 18px 42px rgb(65 36 15 / 14%);
-  overflow: hidden;
-  line-height: normal;
-}
-
-.home-empty-container {
+.home-logo-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
   display: grid;
-  gap: clamp(22px, 4vw, 36px);
-  align-content: center;
-  width: 100%;
-  min-height: clamp(210px, 34svh, 310px);
-  padding: clamp(18px, 4vw, 28px) clamp(28px, 7vw, 56px);
-  background: var(--home-beige-arena);
-  line-height: normal;
+  place-items: center;
+  padding: 28px;
+  background: #419ea5;
 }
 
-.home-action-eyebrow {
-  margin: 0;
-  color: #76a1c8;
-  font-size: clamp(1.1rem, 3.8vw, 1.55rem);
+.home-logo-intro__wordmark,
+.home-footer__logo {
+  display: grid;
+  justify-items: center;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 21vw, 10rem);
   font-weight: 900;
-  line-height: 1;
+  line-height: 0.62;
   text-align: center;
+  text-transform: uppercase;
+  transform: rotate(-1.5deg) skewX(-4deg);
+}
+
+.home-logo-intro__wordmark span:last-child,
+.home-footer__logo span:last-child {
+  margin-top: 0.2em;
+  transform: scaleX(0.92);
+}
+
+.home-logo-intro-enter-active,
+.home-logo-intro-leave-active {
+  transition: opacity 420ms ease;
+}
+
+.home-logo-intro-enter-from,
+.home-logo-intro-leave-to {
+  opacity: 0;
+}
+
+.home-hero,
+.home-history {
+  position: relative;
+  min-height: clamp(330px, 78svh, 560px);
+  background-image: var(--hero-image);
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.home-hero__shade,
+.home-history__shade {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 28%);
+}
+
+.home-hero__content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 28px;
+  padding: 28px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.home-hero__content p,
+.home-history h1 {
+  margin: 0;
+  font-size: clamp(1.65rem, 7vw, 3.5rem);
+  line-height: 0.9;
   text-transform: uppercase;
 }
 
-.home-action-buttons {
+.home-hero__content a,
+.home-order-link {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border-radius: 9px;
+  background: #52ae70;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.home-section {
+  padding: 34px 28px;
+}
+
+.home-section h1 {
+  margin: 0 0 18px;
+  color: #b47bb9;
+  font-size: clamp(1.45rem, 6vw, 2.2rem);
+  line-height: 0.95;
+}
+
+.home-card-row,
+.home-menu-row,
+.home-mood-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(22px, 6vw, 36px);
+  gap: 22px;
 }
 
-.home-action-button {
-  display: grid;
-  aspect-ratio: 1;
-  min-height: 0;
-  place-items: center;
-  border: 0;
-  border-radius: clamp(34px, 8vw, 50px);
-  color: #ffffff;
-  font: inherit;
-  font-size: clamp(1.25rem, 4.8vw, 1.65rem);
-  font-weight: 900;
-  line-height: 1;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
+.home-section--latest {
+  padding-right: 0;
 }
 
-.home-action-button--menu {
-  background: #ef8fa0;
-}
-
-.home-action-button--order {
-  background: #d4687d;
-  cursor: default;
-}
-
-.home-map {
-  display: block;
-  width: 100%;
-  min-height: clamp(240px, 42svh, 420px);
-  border: 0;
-}
-
-.home-map-link {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  z-index: 2;
-  display: inline-flex;
-  min-height: 44px;
-  align-items: center;
-  justify-content: center;
-  padding: 0 16px;
-  border: 2px solid #0f1115;
-  border-radius: 6px;
-  background: #fff3d7;
-  color: #0f1115;
-  font-size: 0.95rem;
-  font-weight: 900;
-  line-height: 1;
-  text-decoration: none;
-}
-
-.home-reservations-container {
-  position: relative;
-  width: 100%;
-  min-height: clamp(220px, 34svh, 360px);
-  background: #ffffff;
-  line-height: normal;
-  overflow: hidden;
-}
-
-.home-reservations-container::before,
-.home-reservations-container::after {
-  position: absolute;
-  right: 0;
-  left: 0;
-  z-index: 1;
-  height: 54px;
-  background: var(--home-verde-seco);
-  content: "";
-}
-
-.home-reservations-container::before {
-  top: 0;
-}
-
-.home-reservations-container::after {
-  bottom: 0;
-}
-
-.home-reservations-container__bar-label {
-  position: absolute;
-  top: 0;
-  right: 16px;
-  left: 16px;
-  z-index: 2;
-  display: grid;
-  height: 54px;
-  place-items: center;
-  color: #fff3d7;
-  font-size: clamp(1.1rem, 3.8vw, 1.65rem);
-  font-weight: 900;
-  line-height: 1;
-  text-align: center;
-  text-transform: uppercase;
-  pointer-events: none;
-}
-
-.home-reservations-social {
-  position: absolute;
-  right: 16px;
-  bottom: 0;
-  left: 16px;
-  z-index: 2;
+.home-card-row {
   display: flex;
-  height: 54px;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-}
-
-.home-reservations-social__link {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border-radius: 6px;
-  background: #fff3d7;
-  text-decoration: none;
-}
-
-.home-reservations-social__link img {
-  display: block;
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-}
-
-.home-legal-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 18px;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 22px 18px 26px;
-  background: #0f1115;
-  color: #fff3d7;
-  font-size: clamp(0.78rem, 2.4vw, 0.95rem);
-  font-weight: 900;
-  line-height: 1.2;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.home-legal-container a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.home-legal-container a:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 520px) {
-  .home-empty-container {
-    min-height: 0;
-    padding: 18px 24px;
-  }
-
-  .home-action-buttons {
-    gap: 22px;
-  }
-
-  .home-action-button {
-    border-radius: 34px;
-    font-size: 1.18rem;
-  }
-
-  .home-action-eyebrow {
-    font-size: 1.28rem;
-  }
-
-  .home-secondary-container,
-  .home-map {
-    min-height: 360px;
-  }
-
-  .home-map-link {
-    right: 10px;
-    bottom: 10px;
-    min-height: 46px;
-    padding: 0 18px;
-    font-size: 1rem;
-  }
-}
-
-.home-top-container::before,
-.home-top-container::after {
-  position: absolute;
-  right: 0;
-  left: 0;
-  z-index: 2;
-  height: 54px;
-  background: #0f1115;
-  content: "";
-}
-
-.home-top-container::before {
-  top: 0;
-}
-
-.home-top-container::after {
-  bottom: 0;
-}
-
-.home-top-container__bar-label {
-  position: absolute;
-  right: 16px;
-  left: 16px;
-  z-index: 3;
-  display: grid;
-  height: 54px;
-  place-items: center;
-  color: #fff3d7;
-  font-size: clamp(1rem, 3.4vw, 1.65rem);
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 1;
-  text-align: center;
-  text-transform: uppercase;
-  pointer-events: none;
-}
-
-.home-top-container__bar-label--top {
-  top: 0;
-}
-
-.home-top-container__bar-label--bottom {
-  bottom: 0;
-}
-
-.campaign-conveyor-viewport {
-  position: absolute;
-  top: 54px;
-  right: 0;
-  bottom: 54px;
-  left: 0;
+  gap: 16px;
   overflow-x: auto;
-  overflow-y: hidden;
   overscroll-behavior-x: contain;
+  padding: 0 28px 14px 0;
+  scroll-snap-type: x proximity;
   scrollbar-width: none;
   touch-action: pan-x;
   -webkit-overflow-scrolling: touch;
@@ -527,60 +353,249 @@ onBeforeUnmount(() => {
   user-select: none;
 }
 
-.campaign-conveyor-viewport.is-dragging {
-  cursor: grabbing;
-}
-
-.campaign-conveyor-viewport::-webkit-scrollbar {
+.home-card-row::-webkit-scrollbar {
   display: none;
 }
 
-.campaign-conveyor {
-  height: 100%;
-  display: flex;
-  align-items: stretch;
-  gap: 2px;
-  width: max-content;
-  padding: 0;
-  background: #0f1115;
-  animation: campaign-conveyor-slide 22s linear infinite;
-  will-change: transform;
+.home-card-row.is-dragging {
+  cursor: grabbing;
 }
 
-.campaign-conveyor-viewport.is-paused .campaign-conveyor {
-  animation-play-state: paused;
-}
-
-.campaign-conveyor__item {
+.promo-card,
+.menu-card {
   position: relative;
-  display: grid;
-  width: clamp(190px, 48vw, 300px);
-  height: 100%;
-  place-items: center;
-  flex: 0 0 auto;
-  background: #0f1115;
+  min-height: 220px;
+  border-radius: 14px;
   overflow: hidden;
 }
 
-.campaign-conveyor__item img {
-  position: absolute;
-  inset: 0;
-  display: block;
+.promo-card {
+  width: clamp(210px, 68vw, 290px);
+  min-height: clamp(260px, 72vw, 340px);
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.promo-card img,
+.menu-card img,
+.home-mood-grid img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: drop-shadow(0 16px 20px rgb(65 36 15 / 18%));
-  pointer-events: none;
-  user-select: none;
 }
 
-@keyframes campaign-conveyor-slide {
-  from {
-    transform: translateX(0);
+.promo-card img,
+.menu-card img {
+  position: absolute;
+  inset: 0;
+}
+
+.promo-card::after,
+.menu-card::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgb(0 0 0 / 58%) 100%);
+  content: "";
+}
+
+.promo-card__content,
+.menu-card > div {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  left: 14px;
+  z-index: 1;
+  color: #ffffff;
+}
+
+.promo-card h2,
+.menu-card h2 {
+  margin: 0;
+  font-size: clamp(1rem, 4vw, 1.45rem);
+  line-height: 0.9;
+}
+
+.menu-card p {
+  margin: 8px 0;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  line-height: 1.1;
+}
+
+.promo-card a,
+.menu-card a {
+  display: inline-flex;
+  margin-top: 8px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #333333;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  text-decoration: none;
+}
+
+.home-section--menu {
+  padding-bottom: 0;
+}
+
+.home-menu-row {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding: 0 0 14px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+
+.home-menu-row::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-card {
+  width: min(68vw, 280px);
+  min-height: 260px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.home-menu-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin: 28px -28px 0;
+  padding: 25px 24px;
+  background: #419ea5;
+}
+
+.home-menu-tags button {
+  border: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #101114;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.home-menu-tags button.active {
+  background: #f59aa7;
+}
+
+.menu-card-fade-enter-active,
+.menu-card-fade-leave-active {
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.menu-card-fade-enter-from,
+.menu-card-fade-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.home-history {
+  min-height: clamp(300px, 65svh, 500px);
+  background-image: var(--history-image);
+}
+
+.home-history h1 {
+  position: absolute;
+  right: 24px;
+  bottom: 30px;
+  left: 24px;
+  z-index: 1;
+  color: #ffffff;
+}
+
+.home-section--mood {
+  padding-top: 52px;
+  text-align: center;
+}
+
+.home-section--mood h1 {
+  color: #101114;
+  font-size: clamp(1.45rem, 5.2vw, 2.1rem);
+}
+
+.home-section--mood h1 span:first-child {
+  color: #52ae70;
+}
+
+.home-section--mood h1 span:last-child {
+  color: #6e9dcd;
+}
+
+.home-mood-grid img {
+  aspect-ratio: 1;
+  object-position: center;
+}
+
+.home-order-link {
+  margin-top: 26px;
+}
+
+.home-footer {
+  display: grid;
+  gap: 22px;
+  padding: 34px 28px 30px;
+  background: #419ea5;
+  color: #ffffff;
+}
+
+.home-footer__logo {
+  width: 130px;
+  height: 130px;
+  align-content: center;
+  justify-self: start;
+  border-radius: 50%;
+  background: #f4d852;
+  font-size: 1.7rem;
+  color: #ffffff;
+}
+
+.home-footer strong {
+  color: #74341f;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.home-footer nav {
+  display: grid;
+  gap: 7px;
+}
+
+.home-footer a,
+.home-footer small {
+  color: inherit;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.home-footer small {
+  justify-self: center;
+  font-size: 1rem;
+}
+
+@media (min-width: 560px) {
+  .home-section {
+    padding-right: 44px;
+    padding-left: 44px;
   }
 
-  to {
-    transform: translateX(calc(-50% - 1px));
+  .home-card-row,
+  .home-menu-row,
+  .home-mood-grid {
+    gap: 28px;
   }
 }
 </style>

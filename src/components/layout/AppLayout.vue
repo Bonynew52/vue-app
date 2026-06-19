@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
-import mascotIcon from '../../assets/brand/mascot.svg'
 
 const isMenuOpen = ref(false)
 const route = useRoute()
@@ -17,28 +16,32 @@ function closeMenu() {
 
 <template>
   <div class="app-layout" :class="`${route.name || 'home'}-layout`">
-    <header class="app-header">
-      <div class="brand" aria-label="Belly Monster Bites">
-        <span class="brand-mark">
-          <img :src="mascotIcon" alt="" />
-        </span>
-      </div>
+    <div v-if="route.name === 'home'" class="home-announcement-bar">
+      <span>Todos los martes y miercoles 3x2 en galletas!</span>
+    </div>
 
+    <header class="app-header">
       <nav class="header-actions" aria-label="Menu">
         <button
           class="menu-button"
-          :class="{ open: isMenuOpen }"
           type="button"
-          :aria-expanded="isMenuOpen"
-          aria-controls="side-menu"
-          aria-label="Abrir menu lateral"
-          @click="toggleMenu"
+          disabled
+          aria-label="Menu no disponible"
         >
           <span></span>
           <span></span>
           <span></span>
         </button>
       </nav>
+
+      <span v-if="route.name === 'home'" class="home-header-title" aria-label="Belly Monster">
+        <span>Belly</span>
+        <span>Monster</span>
+      </span>
+
+      <button v-if="route.name === 'home'" class="home-login-button" type="button" disabled>
+        Login
+      </button>
     </header>
 
     <button
@@ -106,7 +109,7 @@ function closeMenu() {
 }
 
 .app-layout.home-layout {
-  --color-first: #458753;
+  --color-first: #ffffff;
   --color-second: #e4cfaa;
   --color-third: #71451f;
   --color-background: #e4cfaa;
@@ -114,7 +117,7 @@ function closeMenu() {
   --color-surface-muted: #f3e4c7;
   --color-primary: #71451f;
   --color-secondary: #e4cfaa;
-  --color-secondary-dark: #458753;
+  --color-secondary-dark: #ffffff;
   --color-accent: #d97858;
   --color-highlight: #c0a55d;
   --color-text: #fff3d7;
@@ -152,7 +155,7 @@ function closeMenu() {
 }
 
 .app-layout.home-layout {
-  --app-side-background: #2f6f3b;
+  --app-side-background: #f1f1ed;
   --app-frame-border: #0f1115;
 }
 
@@ -233,7 +236,96 @@ function closeMenu() {
 }
 
 .home-layout .app-header {
-  background: #458753;
+  background: #ffffff;
+}
+
+.home-announcement-bar {
+  position: relative;
+  z-index: 11;
+  display: grid;
+  width: min(100%, var(--public-frame-width));
+  min-height: 54px;
+  place-items: center;
+  padding: 8px 16px;
+  border-right: 1px solid #0f1115;
+  border-left: 1px solid #0f1115;
+  background: #e4c250;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 3vw, 1.3rem);
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.home-announcement-bar span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: home-announcement-scroll 14s linear infinite;
+  will-change: transform;
+}
+
+@keyframes home-announcement-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.home-header-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  color: #419ea5;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 4.6vw, 2.1rem);
+  font-weight: 900;
+  line-height: 0.62;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%) rotate(-1.5deg) skewX(-4deg);
+  pointer-events: none;
+}
+
+.home-header-title span:last-child {
+  margin-top: 0.18em;
+  transform: scaleX(0.92);
+}
+
+.home-layout .header-actions {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.home-layout .menu-button {
+  color: #0f1115;
+  opacity: 1;
+  cursor: default;
+}
+
+.home-login-button {
+  position: absolute;
+  top: 50%;
+  right: clamp(14px, 4vw, 28px);
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #0f1115;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #0f1115;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 900;
+  line-height: 1;
+  transform: translateY(-50%);
+  cursor: default;
 }
 
 .order-layout .app-header,
@@ -306,7 +398,7 @@ function closeMenu() {
 }
 
 .home-layout .app-content {
-  background: #458753;
+  background: #ffffff;
 }
 
 .home-layout .app-content {

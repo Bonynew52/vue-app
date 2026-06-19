@@ -1,7 +1,7 @@
-import chilaquilesImage from '../assets/campaigns/belly monster chilaquiles.jpg'
-import dubaiCaramelPopcornImage from '../assets/campaigns/belly monster dubai caramel popcorn.jpg'
-import tortugaCheesecakeImage from '../assets/campaigns/belly monster tortuga cheesecake.jpg'
-import worldCupImage from '../assets/campaigns/belly monster world cup.jpg'
+import chilaquilesImage from '../assets/campaigns/chilaquiles-promotion.jpg'
+import dubaiCaramelPopcornImage from '../assets/campaigns/dubai-caramel-popcorn-promotion.jpg'
+import turtleCheesecakeImage from '../assets/campaigns/turtle-cheesecake-promotion.jpg'
+import worldCupImage from '../assets/campaigns/world-cup-promotion.jpg'
 
 export const campaigns = [
   {
@@ -28,7 +28,7 @@ export const campaigns = [
   {
     id: 'tortuga-cheesecake',
     name: 'Belly Monster Tortuga Cheesecake',
-    image: tortugaCheesecakeImage,
+    image: turtleCheesecakeImage,
     eyebrow: 'Campaign',
     description: 'Especial cremoso para el carrusel del mes.',
   },
