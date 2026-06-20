@@ -122,10 +122,11 @@ onBeforeUnmount(() => {
     <Teleport to="body">
       <Transition name="home-logo-intro">
         <section v-if="isLogoIntroVisible" class="home-logo-intro" aria-label="Belly Monster Bites">
-          <div class="home-logo-intro__wordmark" aria-hidden="true">
-            <span>Belly</span>
-            <span>Monster</span>
-          </div>
+          <img
+            class="home-logo-intro__wordmark"
+            :src="refreshedImage(brandLogo)"
+            alt="Belly Monster"
+          />
         </section>
       </Transition>
     </Teleport>
@@ -233,24 +234,11 @@ onBeforeUnmount(() => {
   background: #419ea5;
 }
 
-.home-logo-intro__wordmark,
-.home-footer__logo {
-  display: grid;
-  justify-items: center;
-  color: #ffffff;
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 21vw, 10rem);
-  font-weight: 900;
-  line-height: 0.62;
-  text-align: center;
-  text-transform: uppercase;
+.home-logo-intro__wordmark {
+  width: min(430px, 78vw);
+  height: auto;
   transform: rotate(-1.5deg) skewX(-4deg);
-}
-
-.home-logo-intro__wordmark span:last-child,
-.home-footer__logo span:last-child {
-  margin-top: 0.2em;
-  transform: scaleX(0.92);
+  filter: brightness(0) invert(1);
 }
 
 .home-logo-intro-enter-active,
