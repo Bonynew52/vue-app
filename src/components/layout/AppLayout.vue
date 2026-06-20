@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import wordmarkLogo from '../../assets/brand/belly-monster-wordmark.png'
 
 const isMenuOpen = ref(false)
 const route = useRoute()
@@ -34,10 +35,12 @@ function closeMenu() {
         </button>
       </nav>
 
-      <span v-if="route.name === 'home'" class="home-header-title" aria-label="Belly Monster">
-        <span>Belly</span>
-        <span>Monster</span>
-      </span>
+      <img
+        v-if="route.name === 'home'"
+        class="home-header-wordmark"
+        :src="wordmarkLogo"
+        alt="Belly Monster Bites"
+      />
 
       <button v-if="route.name === 'home'" class="home-login-button" type="button" disabled>
         Login
@@ -278,25 +281,17 @@ function closeMenu() {
   }
 }
 
-.home-header-title {
+.home-header-wordmark {
   position: absolute;
   top: 50%;
   left: 50%;
-  display: grid;
-  justify-items: center;
-  color: #419ea5;
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 4.6vw, 2.1rem);
-  font-weight: 900;
-  line-height: 0.62;
-  text-transform: uppercase;
+  width: min(208px, 44vw);
+  height: 58px;
+  object-fit: contain;
   transform: translate(-50%, -50%) rotate(-1.5deg) skewX(-4deg);
+  filter: brightness(0) saturate(100%) invert(53%) sepia(22%) saturate(1138%) hue-rotate(136deg)
+    brightness(90%) contrast(87%);
   pointer-events: none;
-}
-
-.home-header-title span:last-child {
-  margin-top: 0.18em;
-  transform: scaleX(0.92);
 }
 
 .home-layout .header-actions {
@@ -628,10 +623,9 @@ function closeMenu() {
 
 .brand-mark {
   display: grid;
-  width: 62px;
+  width: 184px;
   height: 62px;
   place-items: center;
-  overflow: hidden;
 }
 
 .brand-mark img {
@@ -639,6 +633,7 @@ function closeMenu() {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(100%);
 }
 
 @media (max-width: 640px) {
@@ -660,7 +655,7 @@ function closeMenu() {
   }
 
   .brand-mark {
-    width: 44px;
+    width: 132px;
     height: 44px;
   }
 

@@ -7,6 +7,7 @@ import { useCart } from '../composables/useCart'
 import { coverImage, featuredItems, menuCategories, menuSource } from '../data/menu'
 import { formatMenuPrice, formatMXN } from '../utils/formatPrice'
 import mascot from '../assets/brand/mascot.svg'
+import wordmarkLogo from '../assets/brand/belly-monster-wordmark.png'
 
 const route = useRoute()
 
@@ -874,13 +875,8 @@ function fulfillmentLabel(item) {
 
     <!-- Identity -->
     <section class="identity">
-      <span class="identity__logo">
-        <img :src="mascot" alt="" />
-      </span>
-      <div class="identity__text">
-        <h1 class="identity__name">Belly Monster Bites</h1>
-        <p class="identity__line">{{ contextLine }}</p>
-      </div>
+      <img class="identity__wordmark" :src="wordmarkLogo" alt="Belly Monster Bites" />
+      <p class="identity__line">{{ contextLine }}</p>
     </section>
 
     <!-- Pickup tracker: the whole page is the order status while one is
@@ -1567,40 +1563,22 @@ function fulfillmentLabel(item) {
 .identity {
   position: relative;
   display: flex;
-  gap: 14px;
-  align-items: center;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-start;
   margin-top: -34px;
   padding: 0 18px 14px;
 }
-.identity__logo {
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  width: 72px;
-  height: 72px;
-  border-radius: 22px;
-  background: #fff;
-  box-shadow: 0 6px 18px rgb(42 28 20 / 16%);
-  overflow: hidden;
-}
-.identity__logo img {
-  width: 60%;
-  height: 60%;
+.identity__wordmark {
+  width: min(240px, 74vw);
+  height: 58px;
   object-fit: contain;
-}
-.identity__text {
-  padding-top: 30px;
-  min-width: 0;
-}
-.identity__name {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 1.05;
+  object-position: left center;
+  filter: brightness(0) saturate(100%) invert(82%) sepia(31%) saturate(591%) hue-rotate(96deg)
+    brightness(94%) contrast(89%);
 }
 .identity__line {
-  margin: 2px 0 0;
+  margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
   font-weight: 700;
