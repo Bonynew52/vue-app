@@ -109,7 +109,7 @@ function endLatestDrag(event) {
 onMounted(() => {
   logoIntroTimeout = window.setTimeout(() => {
     isLogoIntroVisible.value = false
-  }, 1800)
+  }, 900)
 })
 
 onBeforeUnmount(() => {
@@ -134,7 +134,7 @@ onBeforeUnmount(() => {
       <div class="home-hero__shade"></div>
       <div class="home-hero__content">
         <p>To eat to share to enjoy</p>
-        <RouterLink :to="{ name: 'order' }">Ordena ahora</RouterLink>
+        <button type="button" disabled>Pagina en desarrollo</button>
       </div>
     </section>
 
@@ -196,11 +196,13 @@ onBeforeUnmount(() => {
         <img :src="refreshedImage(chessCustomers)" alt="Clientes jugando ajedrez en Belly Monster" />
         <img :src="refreshedImage(customersAtTable)" alt="Clientes en Belly Monster" />
       </div>
-      <RouterLink class="home-order-link" :to="{ name: 'order' }">Ordena ahora</RouterLink>
+      <button class="home-order-link" type="button" disabled>Pagina en desarrollo</button>
     </section>
 
     <footer class="home-footer">
-      <img class="home-footer__logo" :src="refreshedImage(brandLogo)" alt="Belly Monster" />
+      <div class="home-footer__logo">
+        <img :src="refreshedImage(brandLogo)" alt="Belly Monster" />
+      </div>
       <strong>To eat to share to enjoy</strong>
       <nav aria-label="Enlaces del sitio">
         <RouterLink :to="{ name: 'order' }">Ordena ahora</RouterLink>
@@ -253,7 +255,7 @@ onBeforeUnmount(() => {
 
 .home-logo-intro-enter-active,
 .home-logo-intro-leave-active {
-  transition: opacity 420ms ease;
+  transition: opacity 210ms ease;
 }
 
 .home-logo-intro-enter-from,
@@ -300,12 +302,14 @@ onBeforeUnmount(() => {
 }
 
 .home-hero__content a,
+.home-hero__content button,
 .home-order-link {
   display: inline-flex;
   min-height: 42px;
   align-items: center;
   justify-content: center;
   padding: 0 18px;
+  border: 0;
   border-radius: 9px;
   background: #52ae70;
   color: #ffffff;
@@ -314,6 +318,12 @@ onBeforeUnmount(() => {
   font-weight: 900;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+.home-hero__content button:disabled,
+.home-order-link:disabled {
+  opacity: 0.76;
+  cursor: default;
 }
 
 .home-section {
@@ -552,14 +562,20 @@ onBeforeUnmount(() => {
 }
 
 .home-footer__logo {
+  display: grid;
   width: 130px;
   height: 130px;
-  align-content: center;
+  place-items: center;
   justify-self: start;
   border-radius: 50%;
   background: #f4d852;
-  font-size: 1.7rem;
-  color: #ffffff;
+}
+
+.home-footer__logo img {
+  width: 76%;
+  height: 76%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .home-footer strong {
@@ -590,6 +606,13 @@ onBeforeUnmount(() => {
   .home-section {
     padding-right: 44px;
     padding-left: 44px;
+  }
+
+  .home-menu-tags {
+    margin-right: -44px;
+    margin-left: -44px;
+    padding-right: 40px;
+    padding-left: 40px;
   }
 
   .home-card-row,
