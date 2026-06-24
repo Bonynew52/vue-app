@@ -5,27 +5,30 @@ import assortedCookies from '../assets/campaigns/belly-cookie-selection.jpg'
 import brandLogo from '../assets/campaigns/belly-monster-logo-white.png'
 import storefrontImage from '../assets/campaigns/belly-storefront.jpg'
 import cateringEvent from '../assets/campaigns/belly-event-catering.jpg'
-import candyCaneLatte from '../assets/campaigns/candy-cane-iced-latte.jpg'
 import chessCustomers from '../assets/campaigns/belly-chess-table.jpg'
 import customersAtTable from '../assets/campaigns/belly-cafe-customers.jpg'
 import goldenWorldCupAward from '../assets/campaigns/monster-world-cup-award.png'
 import icedCoffeeHandoff from '../assets/campaigns/belly-iced-coffee-service.jpeg'
-import { campaigns } from '../data/campaigns'
 
 const isLogoIntroVisible = ref(true)
 const latestRow = ref(null)
 const isDraggingLatest = ref(false)
-const [chilaquiles] = campaigns
 const imageVersion = 'home-20260619-3'
-const selectedMenuCategory = ref('postres')
+const selectedMenuCategory = ref('waffles-pan-frances')
 const menuCategories = [
+  { id: 'waffles-pan-frances', label: 'Waffles & Pan Frances' },
+  { id: 'chilaquiles', label: 'Chilaquiles' },
+  { id: 'egg-drop', label: 'Egg Drop' },
+  { id: 'toast', label: 'Toast' },
+  { id: 'sandwiches', label: 'Sándwiches' },
+  { id: 'bowl', label: 'Bowl' },
+  { id: 'kids-menu', label: 'Kids menú' },
+  { id: 'burgers', label: 'Burgers' },
+  { id: 'ensaladas', label: 'Ensaladas' },
+  { id: 'sides', label: 'Sides' },
+  { id: 'sopas', label: 'Sopas' },
   { id: 'postres', label: 'Postres' },
-  { id: 'frappes', label: 'Frappes' },
-  { id: 'comidas', label: 'Comidas' },
-  { id: 'matcha', label: 'Matcha' },
-  { id: 'desayunos', label: 'Desayunos' },
-  { id: 'hamburguesas', label: 'Hamburguesas' },
-  { id: 'americanos', label: 'Americanos' },
+  { id: 'bebidas', label: 'Bebidas' },
 ]
 const latestItems = [
   { title: 'Belly en tu evento', image: cateringEvent, to: 'order' },
@@ -34,16 +37,7 @@ const latestItems = [
 const menuCategoryCards = computed(() => {
   const category = menuCategories.find((item) => item.id === selectedMenuCategory.value)
   const title = category?.label || 'Menu'
-  const placeholderImages = {
-    postres: [assortedCookies, candyCaneLatte],
-    frappes: [icedCoffeeHandoff, candyCaneLatte, customersAtTable],
-    comidas: [chilaquiles.image, cateringEvent, goldenWorldCupAward],
-    matcha: [icedCoffeeHandoff, customersAtTable, candyCaneLatte],
-    desayunos: [chilaquiles.image, assortedCookies, icedCoffeeHandoff],
-    hamburguesas: [goldenWorldCupAward, cateringEvent, chilaquiles.image],
-    americanos: [candyCaneLatte, icedCoffeeHandoff, customersAtTable],
-  }
-  const images = placeholderImages[selectedMenuCategory.value] || [icedCoffeeHandoff]
+  const images = [icedCoffeeHandoff, assortedCookies, customersAtTable]
 
   return images.map((image, index) => ({
     id: `${selectedMenuCategory.value}-${index}`,
@@ -464,9 +458,11 @@ onBeforeUnmount(() => {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 9px;
+  align-content: center;
+  min-height: 168px;
+  gap: 12px;
   margin: 28px -28px 0;
-  padding: 25px 24px;
+  padding: 30px 24px;
   background: #419ea5;
 }
 
@@ -484,6 +480,29 @@ onBeforeUnmount(() => {
 
 .home-menu-tags button.active {
   background: #f59aa7;
+}
+
+@media (min-width: 460px) {
+  .home-menu-tags {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    min-height: 272px;
+  }
+
+  .home-menu-tags button {
+    display: grid;
+    width: 100%;
+    min-height: 36px;
+    place-items: center;
+    padding: 5px 8px;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .home-menu-tags button:last-child {
+    grid-column: 2;
+  }
 }
 
 .menu-card-fade-enter-active,
@@ -598,8 +617,8 @@ onBeforeUnmount(() => {
   .home-menu-tags {
     margin-right: -44px;
     margin-left: -44px;
-    padding-right: 40px;
-    padding-left: 40px;
+    padding-right: 48px;
+    padding-left: 48px;
   }
 
   .home-card-row,
