@@ -125,6 +125,69 @@ a {
     --background-right 520ms ease;
 }
 
+/* Reusable restricted-area tape. Add .caution-tape where the barrier belongs. */
+.caution-tape {
+  --caution-yellow: #f7d842;
+  --caution-black: #101114;
+
+  position: relative;
+  display: block;
+  min-height: 38px;
+  overflow: hidden;
+  border-block: 2px solid var(--caution-black);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--caution-yellow) 0 18px,
+    var(--caution-black) 18px 34px
+  );
+  box-shadow: 0 4px 12px rgb(0 0 0 / 22%);
+  isolation: isolate;
+}
+
+.caution-tape::after {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  min-width: 100%;
+  padding-inline: 12px;
+  color: var(--caution-black);
+  content: 'NO PASAR   //   NO PASAR   //   NO PASAR   //   NO PASAR   //   NO PASAR';
+  font-family: var(--font-display);
+  font-size: 0.84rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  text-shadow: 0 1px 0 rgb(255 255 255 / 30%);
+  white-space: nowrap;
+  animation: caution-tape-scroll 12s linear infinite;
+}
+
+.caution-tape--static::after {
+  animation: none;
+}
+
+.caution-tape--compact {
+  min-height: 28px;
+}
+
+.caution-tape--compact::after {
+  font-size: 0.67rem;
+}
+
+@keyframes caution-tape-scroll {
+  to {
+    transform: translateX(-18%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caution-tape::after {
+    animation: none;
+  }
+}
+
 @media (min-width: 980px) {
   :root,
   html,

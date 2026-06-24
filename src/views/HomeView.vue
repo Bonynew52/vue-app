@@ -168,7 +168,7 @@ onBeforeUnmount(() => {
           <div>
             <h2>{{ card.title }}</h2>
             <p>{{ card.description }}</p>
-            <RouterLink :to="{ name: 'order', query: { mesa: 1 } }">Ver mas</RouterLink>
+            <RouterLink :to="{ name: 'menu' }">Ver mas</RouterLink>
           </div>
         </article>
       </TransitionGroup>

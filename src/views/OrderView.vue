@@ -14,6 +14,7 @@ const props = defineProps({
   mode: { type: String, default: '' },
   prefillName: { type: String, default: '' },
   customerPhone: { type: String, default: '' },
+  catalogMode: { type: Boolean, default: false },
 })
 
 // Fixed for the lifetime of the view: '/ordenar' mounts the table flow,
@@ -30,6 +31,12 @@ const hasTable = computed(() => tableId.value.length > 0)
 const tableLabel = computed(() => (hasTable.value ? `Mesa ${tableId.value}` : 'Sin mesa'))
 const contextLabel = computed(() => (isPickup ? 'Pick&Go' : tableLabel.value))
 const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL)
+
+// Temporary catalog-only mode. Prices and ordering data remain available in the source data.
+const showPrices = false
+const isOrderingEnabled = false
+const showTableBadge = false
+const isOrderRouteEnabled = props.catalogMode
 
 function lastOrderStorageKey(value) {
   return `belly-monster-last-order:${value || 'sin-mesa'}`
@@ -560,6 +567,10 @@ function bumpSheet(delta) {
   sheetQty.value = Math.max(1, sheetQty.value + delta)
 }
 function confirmItem() {
+  if (!isOrderingEnabled) {
+    return
+  }
+
   const item = activeItem.value
   if (!item) {
     return
@@ -588,6 +599,11 @@ function confirmItem() {
 }
 
 function quickAdd(item) {
+  if (!isOrderingEnabled) {
+    openItem(item)
+    return
+  }
+
   if (requiresChoice(item) || hasModifiers(item)) {
     openItem(item)
     return
@@ -843,7 +859,24 @@ function fulfillmentLabel(item) {
 </script>
 
 <template>
-  <main class="order" :aria-label="isPickup ? 'Ordenar para recoger' : 'Ordenar en mesa'">
+  <main v-if="!isOrderRouteEnabled" class="order-development" aria-label="Página en desarrollo">
+    <div class="caution-tape caution-tape--static" aria-hidden="true"></div>
+    <section class="order-development__content">
+      <span class="order-development__wordmark" role="img" aria-label="Belly Monster Bites"></span>
+      <p>Página en desarrollo</p>
+    </section>
+    <div class="caution-tape caution-tape--static" aria-hidden="true"></div>
+  </main>
+
+  <main
+    v-else
+    class="order"
+    :class="{
+      'is-pricing-hidden': !showPrices,
+      'is-catalog-mode': catalogMode,
+    }"
+    :aria-label="isPickup ? 'Ordenar para recoger' : 'Ordenar en mesa'"
+  >
     <!-- Cover -->
     <header class="cover">
       <img
@@ -868,7 +901,7 @@ function fulfillmentLabel(item) {
           </svg>
         </RouterLink>
         <span v-else></span>
-        <span class="cover__table">{{ contextLabel }}</span>
+        <span v-if="showTableBadge" class="cover__table">{{ contextLabel }}</span>
       </div>
     </header>
 
@@ -1047,7 +1080,7 @@ function fulfillmentLabel(item) {
               <span class="row__name">{{ item.name }}</span>
               <span v-if="item.description" class="row__desc">{{ item.description }}</span>
               <span class="row__tags">
-                <span class="row__price" :class="{ 'is-soft': !item.hasPrice }">
+                <span v-if="showPrices" class="row__price" :class="{ 'is-soft': !item.hasPrice }">
                   {{ priceLabel(item) }}
                 </span>
                 <span v-if="hasModifiers(item)" class="row__opt">Por opciones</span>
@@ -1063,6 +1096,7 @@ function fulfillmentLabel(item) {
               />
               <span v-else class="row__placeholder"><img :src="mascot" alt="" /></span>
               <span
+                v-if="isOrderingEnabled"
                 class="row__add"
                 :class="{ 'is-in': cart.quantityForMenuItem(item.id) > 0 }"
                 @click.stop="quickAdd(item)"
@@ -1102,6 +1136,7 @@ function fulfillmentLabel(item) {
               />
               <span v-else class="row__placeholder"><img :src="mascot" alt="" /></span>
               <span
+                v-if="isOrderingEnabled"
                 class="fcard__add"
                 :class="{ 'is-in': cart.quantityForMenuItem(item.id) > 0 }"
                 @click.stop="quickAdd(item)"
@@ -1112,7 +1147,7 @@ function fulfillmentLabel(item) {
                 <template v-else>+</template>
               </span>
             </span>
-            <span class="fcard__price" :class="{ 'is-soft': !item.hasPrice }">{{ priceLabel(item) }}</span>
+            <span v-if="showPrices" class="fcard__price" :class="{ 'is-soft': !item.hasPrice }">{{ priceLabel(item) }}</span>
             <span class="fcard__name">{{ item.name }}</span>
           </button>
         </div>
@@ -1133,7 +1168,7 @@ function fulfillmentLabel(item) {
                 <span class="row__name">{{ item.name }}</span>
                 <span v-if="item.description" class="row__desc">{{ item.description }}</span>
                 <span class="row__tags">
-                  <span class="row__price" :class="{ 'is-soft': !item.hasPrice }">
+                  <span v-if="showPrices" class="row__price" :class="{ 'is-soft': !item.hasPrice }">
                     {{ priceLabel(item) }}
                   </span>
                   <span v-if="hasModifiers(item)" class="row__opt">Por opciones</span>
@@ -1149,6 +1184,7 @@ function fulfillmentLabel(item) {
                 />
                 <span v-else class="row__placeholder"><img :src="mascot" alt="" /></span>
                 <span
+                  v-if="isOrderingEnabled"
                   class="row__add"
                   :class="{ 'is-in': cart.quantityForMenuItem(item.id) > 0 }"
                   @click.stop="quickAdd(item)"
@@ -1173,7 +1209,7 @@ function fulfillmentLabel(item) {
     <!-- Floating cart bar -->
     <Transition name="rise">
       <button
-        v-if="!cart.isEmpty.value && !anySheetOpen && !pickupLocked"
+        v-if="isOrderingEnabled && !cart.isEmpty.value && !anySheetOpen && !pickupLocked"
         class="cartbar"
         type="button"
         @click="showCart = true"
@@ -1198,7 +1234,7 @@ function fulfillmentLabel(item) {
               </div>
               <div class="isheet__head">
                 <h3 class="isheet__name">{{ activeItem.name }}</h3>
-                <span class="isheet__price" :class="{ 'is-soft': !activeItem.hasPrice }">
+                <span v-if="showPrices" class="isheet__price" :class="{ 'is-soft': !activeItem.hasPrice }">
                   {{ priceLabel(activeItem) }}
                 </span>
               </div>
@@ -1234,7 +1270,7 @@ function fulfillmentLabel(item) {
                       >
                         <span class="optcard__mark" aria-hidden="true"></span>
                         <span class="optcard__name">{{ option.name }}</span>
-                        <span v-if="option.priceDelta" class="optcard__delta">
+                        <span v-if="showPrices && option.priceDelta" class="optcard__delta">
                           +{{ formatMXN(option.priceDelta) }}
                         </span>
                       </button>
@@ -1242,7 +1278,7 @@ function fulfillmentLabel(item) {
                   </ul>
                 </section>
               </div>
-              <label class="isheet__field">
+              <label v-if="isOrderingEnabled" class="isheet__field">
                 <span>Nota para la cocina</span>
                 <textarea
                   v-model="sheetNote"
@@ -1251,7 +1287,7 @@ function fulfillmentLabel(item) {
                 ></textarea>
               </label>
             </div>
-            <div class="sheet__foot">
+            <div v-if="isOrderingEnabled" class="sheet__foot">
               <div class="stepper" role="group" aria-label="Cantidad">
                 <button type="button" aria-label="Quitar uno" @click="bumpSheet(-1)">−</button>
                 <span>{{ sheetQty }}</span>
@@ -1498,6 +1534,49 @@ function fulfillmentLabel(item) {
   -webkit-tap-highlight-color: transparent;
 }
 
+.order-development {
+  display: grid;
+  min-height: 100svh;
+  grid-template-rows: auto 1fr auto;
+  background: #0f1115;
+}
+
+.order-development__content {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 18px;
+  padding: 32px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.order-development__wordmark {
+  width: min(290px, 74vw);
+  height: 84px;
+  background: #399ba4;
+  -webkit-mask: url('../assets/brand/belly-monster-wordmark.png') center / contain no-repeat;
+  mask: url('../assets/brand/belly-monster-wordmark.png') center / contain no-repeat;
+}
+
+.order-development__content p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 6vw, 2rem);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.order.is-pricing-hidden .active-order__foot strong,
+.order.is-pricing-hidden .cartbar__total,
+.order.is-pricing-hidden .cart-line__price,
+.order.is-pricing-hidden .cart-line__mod-delta,
+.order.is-pricing-hidden .totals,
+.order.is-pricing-hidden .done__total,
+.order.is-pricing-hidden .btn-primary__amt {
+  display: none;
+}
+
 /* ---- Cover (compact: a slim 140px band) ---- */
 .cover {
   position: relative;
@@ -1505,6 +1584,14 @@ function fulfillmentLabel(item) {
   min-height: 140px;
   overflow: hidden;
 }
+
+@media (min-width: 560px) {
+  .order.is-catalog-mode .cover {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+  }
+}
+
 .cover__img {
   width: 100%;
   height: 100%;

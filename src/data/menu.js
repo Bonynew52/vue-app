@@ -2,7 +2,6 @@ import bebidasMenu from './menu/json/bebidas.json'
 import catalog from './menuCatalog.generated.json'
 import comidasMenu from './menu/json/comidas.json'
 import desayunosMenu from './menu/json/desayunos.json'
-import coverFallback from '../assets/campaigns/chilaquiles-promotion.jpg'
 import postresMenu from './menu/json/postres.json'
 
 const BREAKFAST_START_MINUTES = 6 * 60
@@ -222,6 +221,6 @@ export const imageBackedItems = menuCategories
 
 export const featuredItems = []
 
-export const coverImage = imageBackedItems[0]?.image || coverFallback
+export const coverImage = '/menu/banner-menu-digital.png'
 
 export const upsellIds = []

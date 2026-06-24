@@ -131,12 +131,22 @@ function closeMenu() {
 }
 
 .app-layout.menu-layout {
-  --color-third: #8fd3ff;
-  --color-primary: #8fd3ff;
-  --color-accent: #8fd3ff;
-  --color-border: #8fd3ff;
-  --color-surface-muted: #eef8ff;
-  --stage-blue: #8fd3ff;
+  --color-first: #ffffff;
+  --color-second: #ffffff;
+  --color-third: #6f4e37;
+  --color-background: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-muted: #fff8ef;
+  --color-primary: #6f4e37;
+  --color-secondary: #ffffff;
+  --color-secondary-dark: #0f1115;
+  --color-accent: #6f4e37;
+  --color-highlight: #e4c250;
+  --color-text: #0f1115;
+  --color-text-muted: #6f4e37;
+  --color-border: #0f1115;
+  --stage-blue: #e4c250;
+  --shadow-panel: 0 18px 48px rgb(15 17 21 / 14%);
 }
 
 .app-layout.order-layout,
@@ -163,7 +173,9 @@ function closeMenu() {
 }
 
 .app-layout.menu-layout {
-  --app-frame-border: rgb(143 211 255 / 40%);
+  --app-side-background: #f1f1ed;
+  --app-frame-border: #0f1115;
+  --app-side-pattern: none;
 }
 
 .app-layout.order-layout,
@@ -239,6 +251,10 @@ function closeMenu() {
 }
 
 .home-layout .app-header {
+  background: #ffffff;
+}
+
+.menu-layout .app-header {
   background: #ffffff;
 }
 
@@ -393,6 +409,10 @@ function closeMenu() {
 }
 
 .home-layout .app-content {
+  background: #ffffff;
+}
+
+.menu-layout .app-content {
   background: #ffffff;
 }
 
