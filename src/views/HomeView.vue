@@ -7,7 +7,6 @@ import storefrontImage from '../assets/campaigns/belly-storefront.jpg'
 import cateringEvent from '../assets/campaigns/belly-event-catering.jpg'
 import candyCaneLatte from '../assets/campaigns/candy-cane-iced-latte.jpg'
 import chessCustomers from '../assets/campaigns/belly-chess-table.jpg'
-import cinnamonRaspberry from '../assets/campaigns/cinnamon-roll-raspberry.png'
 import customersAtTable from '../assets/campaigns/belly-cafe-customers.jpg'
 import goldenWorldCupAward from '../assets/campaigns/monster-world-cup-award.png'
 import icedCoffeeHandoff from '../assets/campaigns/belly-iced-coffee-service.jpeg'
@@ -36,7 +35,7 @@ const menuCategoryCards = computed(() => {
   const category = menuCategories.find((item) => item.id === selectedMenuCategory.value)
   const title = category?.label || 'Menu'
   const placeholderImages = {
-    postres: [assortedCookies, candyCaneLatte, cinnamonRaspberry],
+    postres: [assortedCookies, candyCaneLatte],
     frappes: [icedCoffeeHandoff, candyCaneLatte, customersAtTable],
     comidas: [chilaquiles.image, cateringEvent, goldenWorldCupAward],
     matcha: [icedCoffeeHandoff, customersAtTable, candyCaneLatte],
@@ -169,7 +168,7 @@ onBeforeUnmount(() => {
           <div>
             <h2>{{ card.title }}</h2>
             <p>{{ card.description }}</p>
-            <RouterLink :to="{ name: 'menu' }">Ver mas</RouterLink>
+            <RouterLink :to="{ name: 'order', query: { mesa: 1 } }">Ver mas</RouterLink>
           </div>
         </article>
       </TransitionGroup>

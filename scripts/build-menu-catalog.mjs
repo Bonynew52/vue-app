@@ -12,6 +12,11 @@ const RAPPI_SNAPSHOT_PATH = path.join(
 const OUTPUT_PATH = path.join(ROOT, 'src', 'data', 'menuCatalog.generated.json')
 const CONVEX_SEED_PATH = path.join(ROOT, 'convex', 'seed', 'menuCatalog.generated.json')
 
+function localRappiImagePath(imageUrl, item) {
+  const imageName = path.posix.basename(new URL(imageUrl).pathname)
+  return `/images/rappi/${item.menuKey}-${slugify(item.name)}-${imageName}`
+}
+
 const SOURCE_MENUS = [
   {
     key: 'bebidas',
@@ -733,6 +738,7 @@ async function main() {
   const modifierGroups = []
   const categories = []
   const items = []
+  const localImagePathsBySourceUrl = new Map()
 
   for (const sourceMenu of SOURCE_MENUS) {
     const filePath = path.join(SOURCE_DIR, sourceMenu.file)
@@ -749,7 +755,10 @@ async function main() {
   for (const item of items) {
     const match = matchRappiImage(item, rappiIndex)
     if (match) {
-      item.image = match.url
+      if (!localImagePathsBySourceUrl.has(match.url)) {
+        localImagePathsBySourceUrl.set(match.url, localRappiImagePath(match.url, item))
+      }
+      item.image = localImagePathsBySourceUrl.get(match.url)
       item.imageSource = match.source
       item.imageMatch = {
         method: match.method,

@@ -10,6 +10,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "menu:build": "node scripts/build-menu-catalog.mjs",
+    "menu:images": "node scripts/download-rappi-images.mjs",
     "menu:import": "node scripts/import-menu-catalog.mjs",
     "staff:create": "node scripts/create-staff-user.mjs"
   },

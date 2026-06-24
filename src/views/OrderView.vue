@@ -7,7 +7,6 @@ import { useCart } from '../composables/useCart'
 import { coverImage, featuredItems, menuCategories, menuSource } from '../data/menu'
 import { formatMenuPrice, formatMXN } from '../utils/formatPrice'
 import mascot from '../assets/brand/mascot.svg'
-import wordmarkLogo from '../assets/brand/belly-monster-wordmark.png'
 
 const route = useRoute()
 
@@ -875,7 +874,7 @@ function fulfillmentLabel(item) {
 
     <!-- Identity -->
     <section class="identity">
-      <img class="identity__wordmark" :src="wordmarkLogo" alt="Belly Monster Bites" />
+      <span class="identity__wordmark" role="img" aria-label="Belly Monster Bites"></span>
       <p class="identity__line">{{ contextLine }}</p>
     </section>
 
@@ -1572,10 +1571,9 @@ function fulfillmentLabel(item) {
 .identity__wordmark {
   width: min(240px, 74vw);
   height: 58px;
-  object-fit: contain;
-  object-position: left center;
-  filter: brightness(0) saturate(100%) invert(82%) sepia(31%) saturate(591%) hue-rotate(96deg)
-    brightness(94%) contrast(89%);
+  background: #399ba4;
+  -webkit-mask: url('../assets/brand/belly-monster-wordmark.png') left center / contain no-repeat;
+  mask: url('../assets/brand/belly-monster-wordmark.png') left center / contain no-repeat;
 }
 .identity__line {
   margin: 0;

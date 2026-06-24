@@ -1,6 +1,6 @@
 {
   "version": "2026-06-03-parrot-excel-rappi-images-v1",
-  "generatedAt": "2026-06-17T03:26:00.695Z",
+  "generatedAt": "2026-06-20T22:15:08.181Z",
   "restaurantName": "Belly Monster Bites",
   "currency": "MXN",
   "sourceFiles": [
@@ -159,7 +159,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/c96b3879-cf23-4719-a15d-c33c7cebe617.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-acai-bowl-c96b3879-cf23-4719-a15d-c33c7cebe617.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -206,7 +206,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/e2a2806d-399d-498f-a575-6abe466b1c28.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-american-breakfast-waffle-e2a2806d-399d-498f-a575-6abe466b1c28.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -249,7 +249,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/f45ffaf9-a52d-4e9e-99a3-f37812147bef.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-french-toast-f45ffaf9-a52d-4e9e-99a3-f37812147bef.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -292,7 +292,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/01a00bca-96ca-423a-b1d0-6bfc81814d3a.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-just-a-waffle-01a00bca-96ca-423a-b1d0-6bfc81814d3a.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -327,7 +327,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/64d98348-f32a-4d85-9b3a-ff2439188dd7.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-s-mores-french-toast-64d98348-f32a-4d85-9b3a-ff2439188dd7.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -362,7 +362,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/d28d85cc-1169-42b2-94b4-bd68a031f898.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-spicy-chick-n-waffle-d28d85cc-1169-42b2-94b4-bd68a031f898.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -397,7 +397,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/6a0bcbf5-6597-4fa8-8f03-49b215f129e6.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-wafflete-6a0bcbf5-6597-4fa8-8f03-49b215f129e6.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -450,7 +450,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/5d76d6fe-10d4-4f49-9edc-80391730cc85.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-avocado-panela-5d76d6fe-10d4-4f49-9edc-80391730cc85.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -485,7 +485,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/b86a1876-3ecc-4026-8c54-481cd9af9d97.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-avocado-scramble-b86a1876-3ecc-4026-8c54-481cd9af9d97.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -520,7 +520,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/54e5dc72-1281-49cf-8048-ae771eeff2ab.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-bacon-spinach-54e5dc72-1281-49cf-8048-ae771eeff2ab.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -555,7 +555,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/993bf098-3f4e-493e-84b2-288edc3bf296.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-mollete-con-huevo-993bf098-3f4e-493e-84b2-288edc3bf296.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -596,7 +596,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/f1456be7-7d71-4e30-96e0-321ea070f0be.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-serrano-caprese-f1456be7-7d71-4e30-96e0-321ea070f0be.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -631,7 +631,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/43fdcad1-558c-4328-9a3a-082f6d16187f.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-serrano-parmesano-43fdcad1-558c-4328-9a3a-082f6d16187f.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -678,7 +678,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/e11011da-719a-4f52-b5ce-6d7338e027a4.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-bacon-egg-drop-e11011da-719a-4f52-b5ce-6d7338e027a4.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -713,7 +713,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/d3d83ff6-a301-440d-8326-7692d51a4429.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-egg-drop-deluxe-d3d83ff6-a301-440d-8326-7692d51a4429.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -754,7 +754,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/4def93a6-897c-47b8-8abf-8dbbc9bbf527.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-grilled-cheese-4def93a6-897c-47b8-8abf-8dbbc9bbf527.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -789,7 +789,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/489c2dd0-7344-4e24-9a01-402591df0ba2.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-ham-n-cheese-e-d-489c2dd0-7344-4e24-9a01-402591df0ba2.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -824,7 +824,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/0acf40ad-64b7-4cff-8964-d9dc91e66f5c.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-machaca-egg-drop-0acf40ad-64b7-4cff-8964-d9dc91e66f5c.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -859,7 +859,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/6cc6d53f-1861-4897-a625-eb7b2b02875f.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-pavo-y-panela-6cc6d53f-1861-4897-a625-eb7b2b02875f.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -894,7 +894,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/6cc6d53f-1861-4897-a625-eb7b2b02875f.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-pavo-y-panela-6cc6d53f-1861-4897-a625-eb7b2b02875f.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -929,7 +929,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/cfc2280e-9ab6-4c88-b420-8979cf57fd66.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-the-sandwich-cfc2280e-9ab6-4c88-b420-8979cf57fd66.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -980,7 +980,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/23fe42f0-a0c1-429c-b3d8-19132315130a.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-chilaquiles-con-brisket-23fe42f0-a0c1-429c-b3d8-19132315130a.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1019,7 +1019,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/480b946f-08a2-4f86-92c0-f73d93c201f6.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-chilaquiles-con-huevo-480b946f-08a2-4f86-92c0-f73d93c201f6.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1058,7 +1058,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/d044b092-d23b-47ab-9dcd-f82ab52a193f.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-chilaquiles-con-pollo-d044b092-d23b-47ab-9dcd-f82ab52a193f.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1097,7 +1097,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/f7de6334-f69e-4837-b1a5-76e052a2cfd9.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-chilaquiles-solos-f7de6334-f69e-4837-b1a5-76e052a2cfd9.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1144,7 +1144,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/89e2dfa2-790f-44a3-b974-4e1cca883841.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-egg-drop-kids-89e2dfa2-790f-44a3-b974-4e1cca883841.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1179,7 +1179,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/e03ae527-745c-4d2b-8b42-9365e1ae1412.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-sandwichito-e03ae527-745c-4d2b-8b42-9365e1ae1412.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1226,7 +1226,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/4c338f91-40ea-4a58-adbc-9467318b54d1.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-smash-hashbrown-4c338f91-40ea-4a58-adbc-9467318b54d1.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1261,7 +1261,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/aab84ed6-c281-4467-baf9-4e2a1b9ca1d5.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-special-bacon-aab84ed6-c281-4467-baf9-4e2a1b9ca1d5.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1308,7 +1308,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/e2a2806d-399d-498f-a575-6abe466b1c28.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-american-breakfast-waffle-e2a2806d-399d-498f-a575-6abe466b1c28.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1351,7 +1351,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/f45ffaf9-a52d-4e9e-99a3-f37812147bef.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-french-toast-f45ffaf9-a52d-4e9e-99a3-f37812147bef.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1394,7 +1394,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/01a00bca-96ca-423a-b1d0-6bfc81814d3a.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-just-a-waffle-01a00bca-96ca-423a-b1d0-6bfc81814d3a.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1429,7 +1429,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/64d98348-f32a-4d85-9b3a-ff2439188dd7.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-s-mores-french-toast-64d98348-f32a-4d85-9b3a-ff2439188dd7.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1464,7 +1464,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/d28d85cc-1169-42b2-94b4-bd68a031f898.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-spicy-chick-n-waffle-d28d85cc-1169-42b2-94b4-bd68a031f898.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1499,7 +1499,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/6a0bcbf5-6597-4fa8-8f03-49b215f129e6.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-wafflete-6a0bcbf5-6597-4fa8-8f03-49b215f129e6.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1552,7 +1552,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/5d76d6fe-10d4-4f49-9edc-80391730cc85.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-avocado-panela-5d76d6fe-10d4-4f49-9edc-80391730cc85.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1593,7 +1593,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/6103e0fb-61b6-465d-a993-e611c001e616.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-pizza-deluxe-6103e0fb-61b6-465d-a993-e611c001e616.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1634,7 +1634,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/f1456be7-7d71-4e30-96e0-321ea070f0be.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-serrano-caprese-f1456be7-7d71-4e30-96e0-321ea070f0be.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1723,7 +1723,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/d560d198-5e9f-4080-bebc-c71edbb54075.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-bbq-burger-d560d198-5e9f-4080-bebc-c71edbb54075.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1920,7 +1920,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/d560d198-5e9f-4080-bebc-c71edbb54075.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-bbq-burger-d560d198-5e9f-4080-bebc-c71edbb54075.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -1997,7 +1997,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/09a6a945-3a33-4911-a202-8ceca526920b.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-buffalo-chicken-09a6a945-3a33-4911-a202-8ceca526920b.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2038,7 +2038,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/d4c5e28f-bb1f-478f-865c-aa9269301d04.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-chicken-blt-d4c5e28f-bb1f-478f-865c-aa9269301d04.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2079,7 +2079,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/f5887672-2597-46b2-b5b0-637996711b56.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-chicken-jalapeno-f5887672-2597-46b2-b5b0-637996711b56.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2120,7 +2120,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/4def93a6-897c-47b8-8abf-8dbbc9bbf527.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/desayunos-grilled-cheese-4def93a6-897c-47b8-8abf-8dbbc9bbf527.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2197,7 +2197,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/f25df145-e855-40d5-a2b5-854bd9bd5ba6.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-phily-cheese-brisket-f25df145-e855-40d5-a2b5-854bd9bd5ba6.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2238,7 +2238,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/5f7fb062-9efb-4258-8f49-f98c9f7a8a57.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-tuna-melt-5f7fb062-9efb-4258-8f49-f98c9f7a8a57.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2319,7 +2319,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/031fb907-b802-4454-a237-b4aa9ebb6b9e.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-cesar-salad-031fb907-b802-4454-a237-b4aa9ebb6b9e.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2358,7 +2358,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/1ef3bb15-e541-4998-a6c0-eef6efddc808.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-chicken-orange-1ef3bb15-e541-4998-a6c0-eef6efddc808.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2397,7 +2397,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/25dc1cb7-c223-4e13-8695-39f13dfdb104.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-goat-cheese-mango-25dc1cb7-c223-4e13-8695-39f13dfdb104.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2478,7 +2478,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/d6e52603-2713-47da-ba58-ee31bfa982c7.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-camote-fries-d6e52603-2713-47da-ba58-ee31bfa982c7.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2513,7 +2513,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/93ece4a1-25d0-4aa5-b87c-a8112bc861cc.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-cream-corn-93ece4a1-25d0-4aa5-b87c-a8112bc861cc.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2548,7 +2548,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/c57ac894-12c7-4c8a-ab58-635eacb66044.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-french-fries-c57ac894-12c7-4c8a-ab58-635eacb66044.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2583,7 +2583,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/0fdac128-27d0-470f-b796-5ad0be40f84e.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-mac-n-cheese-0fdac128-27d0-470f-b796-5ad0be40f84e.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2630,7 +2630,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/b047ca24-517e-446b-98f5-f4bee7133995.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-chicken-n-fries-b047ca24-517e-446b-98f5-f4bee7133995.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2695,7 +2695,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/f6e24fcf-a8b5-4a1d-9f14-69c08f897e08.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-mac-n-chicken-f6e24fcf-a8b5-4a1d-9f14-69c08f897e08.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -2730,7 +2730,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "https://images.rappi.com.mx/products/5dc4348a-c500-4830-b29c-ccbd515de198.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/comidas-pepperoni-toast-5dc4348a-c500-4830-b29c-ccbd515de198.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5056,7 +5056,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/e243873a-dc37-4725-a9ad-4f9e66ee7e79.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/postres-rol-de-canela-e243873a-dc37-4725-a9ad-4f9e66ee7e79.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5092,7 +5092,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/e192f2ed-ccac-466e-8a42-f1f12e4edc59.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/postres-rol-de-chocolate-e192f2ed-ccac-466e-8a42-f1f12e4edc59.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5128,7 +5128,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/30896088-2e81-4314-9209-46be7385583b.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/postres-rol-de-lotus-biscoff-30896088-2e81-4314-9209-46be7385583b.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5185,7 +5185,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/389cc814-77a2-4f8a-b6e6-4bb47e3af3c5.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-arnie-limonada-te-negro-389cc814-77a2-4f8a-b6e6-4bb47e3af3c5.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5229,7 +5229,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/e551f97a-b05a-42ee-aa87-1c13b1ab6ecf.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-blackberry-basil-lemonade-e551f97a-b05a-42ee-aa87-1c13b1ab6ecf.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5273,7 +5273,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/79cf9b89-3657-41b2-9786-4082f754ff82.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-coconut-mint-lemonade-79cf9b89-3657-41b2-9786-4082f754ff82.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5317,7 +5317,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/70cbbd76-3d40-4207-a6d2-380e989ff13f.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-lemonade-70cbbd76-3d40-4207-a6d2-380e989ff13f.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5361,7 +5361,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/ec217985-06e4-4350-953b-1b2226b4a5f7.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-mango-lemonade-ec217985-06e4-4350-953b-1b2226b4a5f7.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5405,7 +5405,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/ad586e6f-1667-4028-a81a-8068b229dcc5.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-matcha-lemonade-ad586e6f-1667-4028-a81a-8068b229dcc5.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5449,7 +5449,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/4830ab16-c8a0-448c-8ce2-0d0e10454d1c.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-peach-tea-lemonade-durazno-4830ab16-c8a0-448c-8ce2-0d0e10454d1c.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5493,7 +5493,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/774f4490-e5a0-4537-aee7-0617b81ed04e.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-rosa-limonada-fresa-774f4490-e5a0-4537-aee7-0617b81ed04e.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5535,7 +5535,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/1f0908a1-ccd9-4356-96fd-e282224540c1.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-sparkling-mojito-1f0908a1-ccd9-4356-96fd-e282224540c1.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5592,7 +5592,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/2fe7a9b5-f69d-4dc1-a68d-02a466cae342.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-capuchino-capuccino-caliente-2fe7a9b5-f69d-4dc1-a68d-02a466cae342.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5632,7 +5632,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/eaf6456f-1142-404c-b3b7-9955e1f10489.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-cortado-eaf6456f-1142-404c-b3b7-9955e1f10489.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5672,7 +5672,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/0acd03fe-5e4d-4d0c-9e7d-614c52a85538.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-daily-cofy-americano-caliente-0acd03fe-5e4d-4d0c-9e7d-614c52a85538.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5712,7 +5712,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/bd527594-c6e0-432a-a48b-424515ecbd89.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-espresso-bd527594-c6e0-432a-a48b-424515ecbd89.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5756,7 +5756,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/8d1c2183-b547-4c31-9d35-e230080be618.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-godlatte-latte-caliente-8d1c2183-b547-4c31-9d35-e230080be618.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5813,7 +5813,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/bbe7833e-0a6a-4388-9bc8-4275bff9de93.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-capuchino-capuccino-frappe-bbe7833e-0a6a-4388-9bc8-4275bff9de93.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5857,7 +5857,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/83729ebf-3313-4749-8d27-0d83a49ea097.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-godlatte-latte-frappe-83729ebf-3313-4749-8d27-0d83a49ea097.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5914,7 +5914,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/ccf4dca4-1279-4540-ba06-61419a38c0cb.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-capuchino-capuccino-helado-ccf4dca4-1279-4540-ba06-61419a38c0cb.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5954,7 +5954,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/c74bd44e-d6b1-4f2a-b072-322a7c8489bd.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-daily-cofy-americano-helado-c74bd44e-d6b1-4f2a-b072-322a7c8489bd.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -5998,7 +5998,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/b96c3b72-0956-4842-84dd-0e182a7dc9eb.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-godlatte-latte-helado-b96c3b72-0956-4842-84dd-0e182a7dc9eb.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6055,7 +6055,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/29c3b4ab-4411-4a62-91fb-28db85acbf23.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-caramelo-latte-caliente-29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6099,7 +6099,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/29c3b4ab-4411-4a62-91fb-28db85acbf23.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-caramelo-latte-caliente-29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6143,7 +6143,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/29c3b4ab-4411-4a62-91fb-28db85acbf23.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-caramelo-latte-caliente-29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6187,7 +6187,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/29c3b4ab-4411-4a62-91fb-28db85acbf23.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-caramelo-latte-caliente-29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6231,7 +6231,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/29c3b4ab-4411-4a62-91fb-28db85acbf23.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-caramelo-latte-caliente-29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6275,7 +6275,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/29c3b4ab-4411-4a62-91fb-28db85acbf23.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-caramelo-latte-caliente-29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6319,7 +6319,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/29c3b4ab-4411-4a62-91fb-28db85acbf23.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-caramelo-latte-caliente-29c3b4ab-4411-4a62-91fb-28db85acbf23.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6376,7 +6376,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/7ac94cd8-b01c-4a5a-a1e6-303c211b01b1.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-caramelo-latte-frappe-7ac94cd8-b01c-4a5a-a1e6-303c211b01b1.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6420,7 +6420,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/17e4682f-5864-4b98-a093-9426d002a1ca.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-chai-latte-frappe-17e4682f-5864-4b98-a093-9426d002a1ca.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6464,7 +6464,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/0e85fdb0-1619-483a-bef3-eebdff642265.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-hot-chocolate-frappe-0e85fdb0-1619-483a-bef3-eebdff642265.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6508,7 +6508,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/992e5c8a-8bb5-40a1-8852-d6d12fd244c2.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-lavanda-latte-frappe-992e5c8a-8bb5-40a1-8852-d6d12fd244c2.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6552,7 +6552,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/2eef7e6f-9455-446e-a59e-455065228c21.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-matcha-latte-frappe-2eef7e6f-9455-446e-a59e-455065228c21.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6596,7 +6596,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/bb55afc1-7ce2-4d88-a714-9a1e4874e8d4.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-mocha-latte-frappe-bb55afc1-7ce2-4d88-a714-9a1e4874e8d4.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6640,7 +6640,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/81700ff7-c4b5-4cd1-9a90-78528a685477.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-vainilla-latte-frappe-81700ff7-c4b5-4cd1-9a90-78528a685477.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6697,7 +6697,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/05087ebf-ad0a-4c87-bf12-d2af45d36ea4.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-caramelo-latte-helado-05087ebf-ad0a-4c87-bf12-d2af45d36ea4.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6741,7 +6741,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/821b1cfc-c6d3-49eb-be63-9b1c18ea9f3c.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-chai-latte-helado-821b1cfc-c6d3-49eb-be63-9b1c18ea9f3c.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6785,7 +6785,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/e141d502-2540-4d6d-9de8-f806df93f9db.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-hot-chocolate-helado-e141d502-2540-4d6d-9de8-f806df93f9db.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6829,7 +6829,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/92d102cc-ffb8-4742-997e-79adb8818075.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-lavanda-latte-helado-92d102cc-ffb8-4742-997e-79adb8818075.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6873,7 +6873,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/14d2a7de-b8bf-4fcc-8888-f545b2458d18.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-matcha-latte-helado-14d2a7de-b8bf-4fcc-8888-f545b2458d18.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6917,7 +6917,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/9a7d65bb-473e-494c-bcab-a1157444c694.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-matcha-pistache-9a7d65bb-473e-494c-bcab-a1157444c694.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -6961,7 +6961,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/3476be4e-46f9-4a35-8ae5-a4bfca65a8e6.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-mocha-latte-helado-3476be4e-46f9-4a35-8ae5-a4bfca65a8e6.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7003,7 +7003,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/360bf213-ca8f-49a1-9d9f-b8e677b3cd6f.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-strawberry-matcha-helado-julio-360bf213-ca8f-49a1-9d9f-b8e677b3cd6f.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7047,7 +7047,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/743626cc-ea72-4770-b36e-c6af0c1fb720.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-vainilla-latte-helado-743626cc-ea72-4770-b36e-c6af0c1fb720.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7100,7 +7100,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/0316a788-108f-46fc-b9f5-7ffadf18d9a0.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-durazno-te-negro-caliente-0316a788-108f-46fc-b9f5-7ffadf18d9a0.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7140,7 +7140,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/7d05b7bb-096c-4e7d-8bc7-7084c6b2d68f.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-earl-grey-te-negro-caliente-7d05b7bb-096c-4e7d-8bc7-7084c6b2d68f.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7180,7 +7180,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/f6804a0f-a0df-484b-b86e-61148cc54ac6.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-frutos-rojos-te-negro-caliente-f6804a0f-a0df-484b-b86e-61148cc54ac6.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7220,7 +7220,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/a264adda-a3e4-4ce7-8a06-3e9746c14a05.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-mango-roiboos-caliente-a264adda-a3e4-4ce7-8a06-3e9746c14a05.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7260,7 +7260,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/b747b602-b451-48a3-a569-38ab715e3457.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-manzanilla-lavanda-caliente-b747b602-b451-48a3-a569-38ab715e3457.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7300,7 +7300,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/18925a27-ad93-4f71-a0e4-d89e57447437.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-mintha-menta-caliente-18925a27-ad93-4f71-a0e4-d89e57447437.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7340,7 +7340,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/1d4f3e89-a7eb-4af4-8608-b94324845bc4.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-sencha-te-verde-caliente-1d4f3e89-a7eb-4af4-8608-b94324845bc4.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7393,7 +7393,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/48fe442d-4ed5-49ce-9056-418ed1060838.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-durazno-te-negro-helado-48fe442d-4ed5-49ce-9056-418ed1060838.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7433,7 +7433,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/c388078d-5f14-4a24-9806-ac06a3e44357.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-earl-grey-te-negro-helado-c388078d-5f14-4a24-9806-ac06a3e44357.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7543,7 +7543,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/b747b602-b451-48a3-a569-38ab715e3457.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-manzanilla-lavanda-caliente-b747b602-b451-48a3-a569-38ab715e3457.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7583,7 +7583,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/4bc4b297-b8d1-4722-8e8f-35b80385b4ba.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-mintha-menta-helado-4bc4b297-b8d1-4722-8e8f-35b80385b4ba.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7623,7 +7623,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/30770f17-fe8d-4535-9fb1-031e6e01a92a.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-sencha-te-verde-helado-30770f17-fe8d-4535-9fb1-031e6e01a92a.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7676,7 +7676,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/72dd36aa-2df6-48c7-bc8e-712d2df5ce49.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-espresso-tonic-72dd36aa-2df6-48c7-bc8e-712d2df5ce49.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7716,7 +7716,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/32b62ada-70e0-4810-8cbb-b81b0ccbcf7d.png?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-sparkling-americano-32b62ada-70e0-4810-8cbb-b81b0ccbcf7d.png",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7769,7 +7769,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/9411bb00-6167-4104-8e32-3aae417440a5.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-fresa-miguelito-9411bb00-6167-4104-8e32-3aae417440a5.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7809,7 +7809,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/a1d54127-07e3-401c-9d7c-d1117d9f0fdd.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-jamaiquina-a1d54127-07e3-401c-9d7c-d1117d9f0fdd.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7849,7 +7849,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/23e7cd9e-0066-4abe-bb5c-f80232f6d760.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-mango-chamoy-23e7cd9e-0066-4abe-bb5c-f80232f6d760.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7889,7 +7889,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/45d9e2d1-e048-40ba-91b1-3eb38fa56a96.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-pepino-menta-45d9e2d1-e048-40ba-91b1-3eb38fa56a96.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7929,7 +7929,7 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/5d8ceeea-728a-466b-b670-f8766490b415.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-tamarindo-chamoy-5d8ceeea-728a-466b-b670-f8766490b415.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -7978,7 +7978,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/c2874246-9a56-4fa7-a980-b34352aada67.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-agua-mineral-c2874246-9a56-4fa7-a980-b34352aada67.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -8014,7 +8014,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/26dc8683-e3fa-4bcf-a6c7-9be858185294.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-agua-natural-26dc8683-e3fa-4bcf-a6c7-9be858185294.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -8054,7 +8054,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/1e599a84-20b0-4cfa-886f-54705f1d2db7.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-choco-1e599a84-20b0-4cfa-886f-54705f1d2db7.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
@@ -8129,7 +8129,7 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "counter",
-          "image": "https://images.rappi.com.mx/products/b2cec478-97de-41cd-a36d-9b2a198b0076.jpeg?d=300x300&e=webp&q=75",
+          "image": "/images/rappi/bebidas-milky-leche-b2cec478-97de-41cd-a36d-9b2a198b0076.jpeg",
           "imageSource": "rappi",
           "imageMatch": {
             "method": "rule-exact",
