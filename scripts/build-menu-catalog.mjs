@@ -17,6 +17,28 @@ function localRappiImagePath(imageUrl, item) {
   return `/images/rappi/${item.menuKey}-${slugify(item.name)}-${imageName}`
 }
 
+const LOCAL_UPDATED_IMAGES = new Map([
+  ['desayunos:Acai Bowl', '/images/menu/nuevo-desayunos-acai-bowl.jpg'],
+  ['desayunos:Egg Drop Kids', '/images/menu/nuevo-desayunos-egg-drop-kids.jpg'],
+  ['desayunos:French Toast', '/images/menu/nuevo-desayunos-french-toast.jpg'],
+  ['desayunos:Grilled Cheese', '/images/menu/nuevo-desayunos-grilled-cheese.jpg'],
+  ['desayunos:Ham N Cheese E.D.', '/images/menu/nuevo-desayunos-ham-n-cheese-e-d.jpg'],
+  ['desayunos:Sandwichito', '/images/menu/nuevo-desayunos-sandwichito.jpg'],
+  ['desayunos:Serrano Caprese', '/images/menu/nuevo-desayunos-serrano-caprese.jpg'],
+  ['desayunos:Serrano Parmesano', '/images/menu/nuevo-desayunos-serrano-parmesano.jpg'],
+  ['desayunos:Smash Hashbrown', '/images/menu/nuevo-desayunos-smash-hashbrown.jpg'],
+  ["desayunos:Spicy Chick'n'Waffle", '/images/menu/nuevo-desayunos-spicy-chick-n-waffle.jpg'],
+  ['desayunos:The Sandwich', '/images/menu/nuevo-desayunos-the-sandwich.jpg'],
+  ['comidas:French Toast', '/images/menu/nuevo-comidas-french-toast.jpg'],
+  ['comidas:Grilled Cheese', '/images/menu/nuevo-comidas-grilled-cheese.jpg'],
+  ['comidas:Serrano Caprese', '/images/menu/nuevo-comidas-serrano-caprese.jpg'],
+  ["comidas:Spicy Chick'n'Waffle", '/images/menu/nuevo-comidas-spicy-chick-n-waffle.jpg'],
+])
+
+function localUpdatedImagePath(item) {
+  return LOCAL_UPDATED_IMAGES.get(`${item.menuKey}:${item.name}`) || ''
+}
+
 const SOURCE_MENUS = [
   {
     key: 'bebidas',
@@ -765,6 +787,16 @@ async function main() {
         rappiProductId: match.rappiProductId,
         rappiName: match.rappiName,
         rappiCategoryName: match.rappiCategoryName,
+      }
+    }
+
+    const updatedImage = localUpdatedImagePath(item)
+    if (updatedImage) {
+      item.image = updatedImage
+      item.imageSource = 'local-updated'
+      item.imageMatch = {
+        method: 'manual-local-update',
+        source: 'FOTOS NUEVAS PLATILLOS',
       }
     }
     delete item.matchKeys

@@ -9,9 +9,11 @@ import chessCustomers from '../assets/campaigns/belly-chess-table.jpg'
 import customersAtTable from '../assets/campaigns/belly-cafe-customers.jpg'
 import goldenWorldCupAward from '../assets/campaigns/monster-world-cup-award.png'
 import icedCoffeeHandoff from '../assets/campaigns/belly-iced-coffee-service.jpeg'
+import catalog from '../data/menuCatalog.generated.json'
 
 const isLogoIntroVisible = ref(true)
 const latestRow = ref(null)
+const menuRow = ref(null)
 const isDraggingLatest = ref(false)
 const imageVersion = 'home-20260619-3'
 const selectedMenuCategory = ref('waffles-pan-frances')
@@ -34,21 +36,82 @@ const latestItems = [
   { title: 'Belly en tu evento', image: cateringEvent, to: 'order' },
   { title: 'Monster World Cup', image: goldenWorldCupAward, to: 'menu' },
 ]
+
+function normalizeText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+}
+
+function catalogItemsForHomeCategory(categoryId) {
+  const categories = catalog.categories || []
+  const byCategory = (menuKey, pattern) =>
+    categories
+      .filter(
+        (category) =>
+          category.menuKey === menuKey && pattern.test(normalizeText(`${category.name} ${category.sourceName}`)),
+      )
+      .flatMap((category) => category.items || [])
+
+  const byMenu = (menuKey) =>
+    categories.filter((category) => category.menuKey === menuKey).flatMap((category) => category.items || [])
+
+  const byItem = (menuKey, pattern) =>
+    byMenu(menuKey).filter((item) => pattern.test(normalizeText(`${item.name} ${item.sourceName}`)))
+
+  const itemsByHomeCategory = {
+    'waffles-pan-frances': byCategory('desayunos', /waffles|pan frances/),
+    chilaquiles: byCategory('desayunos', /chilaquiles/),
+    'egg-drop': byItem('desayunos', /egg drop/),
+    toast: byCategory('desayunos', /toast/),
+    sandwiches: byCategory('desayunos', /sandwiches|sandwich/),
+    bowl: byCategory('desayunos', /bowl|bowls/),
+    'kids-menu': byCategory('desayunos', /kids/),
+    burgers: byCategory('comidas', /burgers|burger/),
+    ensaladas: byCategory('comidas', /ensaladas|ensalada|salad/),
+    sides: [...byCategory('desayunos', /sides/), ...byCategory('comidas', /sides/)],
+    sopas: byCategory('comidas', /sopas|sopa/),
+    postres: byMenu('postres'),
+    bebidas: byMenu('bebidas'),
+  }
+
+  const items = itemsByHomeCategory[categoryId] || []
+  const imageBackedItems = items.filter((item) => item.image)
+
+  return (imageBackedItems.length ? imageBackedItems : items).slice(0, 3)
+}
+
 const menuCategoryCards = computed(() => {
   const category = menuCategories.find((item) => item.id === selectedMenuCategory.value)
   const title = category?.label || 'Menu'
-  const images = [icedCoffeeHandoff, assortedCookies, customersAtTable]
+  const items = catalogItemsForHomeCategory(selectedMenuCategory.value)
 
-  return images.map((image, index) => ({
-    id: `${selectedMenuCategory.value}-${index}`,
-    image,
-    title,
-    description: `Proximamente en ${title.toLowerCase()}.`,
+  return items.map((item, index) => ({
+    id: item.id || `${selectedMenuCategory.value}-${index}`,
+    image: item.image || brandLogo,
+    title: item.name || title,
+    description: item.description || item.categoryName || title,
   }))
 })
 
 function refreshedImage(src) {
   return `${src}${src.includes('?') ? '&' : '?'}v=${imageVersion}`
+}
+
+function scrollRow(rowRef, direction) {
+  const row = rowRef?.value?.$el || rowRef?.value || rowRef?.$el || rowRef
+
+  if (!row) {
+    return
+  }
+
+  const firstCard = row.querySelector('article')
+  const cardWidth = firstCard?.getBoundingClientRect().width || row.clientWidth * 0.82
+  row.scrollBy({
+    left: direction * (cardWidth + 18),
+    behavior: 'smooth',
+  })
 }
 
 let logoIntroTimeout
@@ -134,6 +197,10 @@ onBeforeUnmount(() => {
 
     <section class="home-section home-section--latest" aria-labelledby="latest-title">
       <h1 id="latest-title">Lo nuevo</h1>
+      <div class="scroll-strip">
+        <button class="scroll-strip__button is-left" type="button" aria-label="Ver anteriores" @click="scrollRow(latestRow, -1)">
+          ‹
+        </button>
       <div
         ref="latestRow"
         class="home-card-row"
@@ -152,11 +219,19 @@ onBeforeUnmount(() => {
           </div>
         </article>
       </div>
+        <button class="scroll-strip__button is-right" type="button" aria-label="Ver siguientes" @click="scrollRow(latestRow, 1)">
+          ›
+        </button>
+      </div>
     </section>
 
     <section class="home-section home-section--menu" aria-labelledby="menu-title">
       <h1 id="menu-title">Explora nuestro menú</h1>
-      <TransitionGroup name="menu-card-fade" tag="div" class="home-menu-row">
+      <div class="scroll-strip">
+        <button class="scroll-strip__button is-left" type="button" aria-label="Ver anteriores" @click="scrollRow(menuRow, -1)">
+          ‹
+        </button>
+      <TransitionGroup ref="menuRow" name="menu-card-fade" tag="div" class="home-menu-row">
         <article v-for="card in menuCategoryCards" :key="card.id" class="menu-card">
           <img :src="refreshedImage(card.image)" :alt="card.title" />
           <div>
@@ -166,6 +241,10 @@ onBeforeUnmount(() => {
           </div>
         </article>
       </TransitionGroup>
+        <button class="scroll-strip__button is-right" type="button" aria-label="Ver siguientes" @click="scrollRow(menuRow, 1)">
+          ›
+        </button>
+      </div>
       <div class="home-menu-tags" aria-label="Categorias de menu">
         <button
           v-for="category in menuCategories"
@@ -328,6 +407,45 @@ onBeforeUnmount(() => {
 
 .home-section--latest {
   padding-right: 0;
+}
+
+.scroll-strip {
+  position: relative;
+}
+
+.scroll-strip__button {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 92%);
+  color: #2f241f;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 18%);
+  font-family: var(--font-body);
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: 0;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.scroll-strip__button.is-left {
+  left: -28px;
+}
+
+.scroll-strip__button.is-right {
+  right: -28px;
+}
+
+.home-section--menu .scroll-strip__button.is-right {
+  right: -28px;
 }
 
 .home-card-row {

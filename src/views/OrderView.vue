@@ -109,6 +109,17 @@ function mealSubgroupForCategory(category) {
 // menu's slice of the single flat row.
 const beverageSubgroupRank = { cofy: 0, refreshers: 1, otros: 2 }
 const mealSubgroupRank = { fuertes: 0, ligeros: 1, extras: 2 }
+const temporarilyDisabledCategoryIds = new Set(['bebidas:otras-bebidas'])
+
+function isTemporarilyDisabledCategory(category) {
+  return temporarilyDisabledCategoryIds.has(category.id)
+}
+
+function moveTemporaryDisabledCategoriesLast(categories) {
+  const enabled = categories.filter((category) => !isTemporarilyDisabledCategory(category))
+  const disabled = categories.filter(isTemporarilyDisabledCategory)
+  return [...enabled, ...disabled]
+}
 
 const mealCategoriesOrdered = menuCategories
   .filter((category) => category.menuId === mealGroupId)
@@ -130,11 +141,11 @@ const dessertCategoriesOrdered = menuCategories.filter(
   (category) => category.menuId === 'postres',
 )
 
-const orderableCategories = [
+const orderableCategories = moveTemporaryDisabledCategoriesLast([
   ...mealCategoriesOrdered,
   ...beverageCategoriesOrdered,
   ...dessertCategoriesOrdered,
-]
+])
 activeCategory.value = orderableCategories[0]?.id || ''
 
 // Everything orderable right now (active meal menu + beverages), so search
@@ -273,6 +284,8 @@ const searchResults = computed(() => {
 /* ---- Category nav + scroll spy ---- */
 const sectionEls = {}
 const chipEls = {}
+const categoryNavigationEnabled = true
+const categoryScrollSyncEnabled = false
 const setSectionRef = (id) => (el) => {
   if (el) {
     sectionEls[id] = el
@@ -291,6 +304,9 @@ const categoryRail = ref(null)
 
 let observer = null
 function setupObserver() {
+  if (!categoryScrollSyncEnabled) {
+    return
+  }
   if (observer) {
     observer.disconnect()
   }
@@ -317,6 +333,9 @@ watch(isSearching, (searching) => {
 })
 
 watch(activeCategory, (id) => {
+  if (!categoryScrollSyncEnabled) {
+    return
+  }
   const chip = chipEls[id]
   const rail = categoryRail.value
   // Auto-center the active chip, but only while the rail actually overflows
@@ -328,6 +347,12 @@ watch(activeCategory, (id) => {
 })
 
 function goToCategory(id) {
+  if (!categoryNavigationEnabled) {
+    return
+  }
+  if (temporarilyDisabledCategoryIds.has(id)) {
+    return
+  }
   activeCategory.value = id
   const el = sectionEls[id]
   if (el) {
@@ -1044,6 +1069,7 @@ function fulfillmentLabel(item) {
         v-show="!isSearching && orderableCategories.length"
         ref="categoryRail"
         class="cats"
+        :class="{ 'is-disabled': !categoryNavigationEnabled }"
         aria-label="Categorías del menú"
         @pointerdown="startRailDrag"
         @pointermove="moveRailDrag"
@@ -1056,8 +1082,12 @@ function fulfillmentLabel(item) {
           :key="category.id"
           :ref="setChipRef(category.id)"
           class="cats__chip"
-          :class="{ 'is-active': activeCategory === category.id }"
+          :class="{
+            'is-active': activeCategory === category.id,
+            'is-disabled': !categoryNavigationEnabled || isTemporarilyDisabledCategory(category),
+          }"
           type="button"
+          :aria-disabled="!categoryNavigationEnabled || isTemporarilyDisabledCategory(category)"
           @click="goToCategory(category.id)"
         >
           {{ category.name }}
@@ -1870,6 +1900,9 @@ function fulfillmentLabel(item) {
   cursor: grab;
   user-select: none;
 }
+.cats.is-disabled {
+  cursor: default;
+}
 .cats::-webkit-scrollbar {
   display: none;
 }
@@ -1890,6 +1923,9 @@ function fulfillmentLabel(item) {
   background: var(--brown);
   border-color: var(--brown);
   color: #fff;
+}
+.cats__chip.is-disabled {
+  cursor: default;
 }
 
 /* ---- Sections ---- */

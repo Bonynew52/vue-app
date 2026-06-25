@@ -1,6 +1,6 @@
 {
   "version": "2026-06-03-parrot-excel-rappi-images-v1",
-  "generatedAt": "2026-06-20T22:15:08.181Z",
+  "generatedAt": "2026-06-25T17:07:14.952Z",
   "restaurantName": "Belly Monster Bites",
   "currency": "MXN",
   "sourceFiles": [
@@ -159,13 +159,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-acai-bowl-c96b3879-cf23-4719-a15d-c33c7cebe617.png",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-acai-bowl.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659595,
-            "rappiName": "Acai Bowl (bowl)",
-            "rappiCategoryName": "Bowl (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -249,13 +247,11 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-french-toast-f45ffaf9-a52d-4e9e-99a3-f37812147bef.png",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-french-toast.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659511,
-            "rappiName": "French Toast (pan Frances)",
-            "rappiCategoryName": "Waffles Y Pan Frances"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -362,13 +358,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-spicy-chick-n-waffle-d28d85cc-1169-42b2-94b4-bd68a031f898.png",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-spicy-chick-n-waffle.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659542,
-            "rappiName": "Spicy Chick'n'waffle (waffle)",
-            "rappiCategoryName": "Waffles Y Pan Frances"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -596,13 +590,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-serrano-caprese-f1456be7-7d71-4e30-96e0-321ea070f0be.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-serrano-caprese.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659597,
-            "rappiName": "Serrano Caprese (toast)",
-            "rappiCategoryName": "Toast (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -631,13 +623,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-serrano-parmesano-43fdcad1-558c-4328-9a3a-082f6d16187f.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-serrano-parmesano.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659554,
-            "rappiName": "Serrano Parmesano (toast)",
-            "rappiCategoryName": "Toast (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -754,13 +744,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-grilled-cheese-4def93a6-897c-47b8-8abf-8dbbc9bbf527.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-grilled-cheese.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659512,
-            "rappiName": "Grilled Cheese (sandwich)",
-            "rappiCategoryName": "Sandwiches (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -789,13 +777,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-ham-n-cheese-e-d-489c2dd0-7344-4e24-9a01-402591df0ba2.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-ham-n-cheese-e-d.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659490,
-            "rappiName": "Ham N Cheese E.d. (sandwich)",
-            "rappiCategoryName": "Sandwiches (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -929,13 +915,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-the-sandwich-cfc2280e-9ab6-4c88-b420-8979cf57fd66.png",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-the-sandwich.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659535,
-            "rappiName": "The Sandwich (sandwich)",
-            "rappiCategoryName": "Sandwiches (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -1144,13 +1128,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-egg-drop-kids-89e2dfa2-790f-44a3-b974-4e1cca883841.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-egg-drop-kids.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659584,
-            "rappiName": "Egg Drop Kids (kids)",
-            "rappiCategoryName": "Kids Menu (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -1179,13 +1161,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-sandwichito-e03ae527-745c-4d2b-8b42-9365e1ae1412.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-sandwichito.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659493,
-            "rappiName": "Sandwichito (kids)",
-            "rappiCategoryName": "Kids Menu (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -1226,13 +1206,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-smash-hashbrown-4c338f91-40ea-4a58-adbc-9467318b54d1.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-smash-hashbrown.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659579,
-            "rappiName": "Smash Hashbrown (sides)",
-            "rappiCategoryName": "Sides (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -1351,13 +1329,11 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-french-toast-f45ffaf9-a52d-4e9e-99a3-f37812147bef.png",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-comidas-french-toast.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659511,
-            "rappiName": "French Toast (pan Frances)",
-            "rappiCategoryName": "Waffles Y Pan Frances"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -1464,13 +1440,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-spicy-chick-n-waffle-d28d85cc-1169-42b2-94b4-bd68a031f898.png",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-comidas-spicy-chick-n-waffle.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659542,
-            "rappiName": "Spicy Chick'n'waffle (waffle)",
-            "rappiCategoryName": "Waffles Y Pan Frances"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -1634,13 +1608,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-serrano-caprese-f1456be7-7d71-4e30-96e0-321ea070f0be.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-comidas-serrano-caprese.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659597,
-            "rappiName": "Serrano Caprese (toast)",
-            "rappiCategoryName": "Toast (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2120,13 +2092,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-grilled-cheese-4def93a6-897c-47b8-8abf-8dbbc9bbf527.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-comidas-grilled-cheese.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659512,
-            "rappiName": "Grilled Cheese (sandwich)",
-            "rappiCategoryName": "Sandwiches (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
