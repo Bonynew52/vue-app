@@ -79,39 +79,36 @@ function catalogItemsForHomeCategory(categoryId) {
   const items = itemsByHomeCategory[categoryId] || []
   const imageBackedItems = items.filter((item) => item.image)
 
-  return (imageBackedItems.length ? imageBackedItems : items).slice(0, 3)
+  return imageBackedItems.length ? imageBackedItems : items
 }
 
 const menuCategoryCards = computed(() => {
-  const category = menuCategories.find((item) => item.id === selectedMenuCategory.value)
-  const title = category?.label || 'Menu'
-  const items = catalogItemsForHomeCategory(selectedMenuCategory.value)
+  return menuCategories.map((category) => {
+    const representativeItem = catalogItemsForHomeCategory(category.id)[0]
 
-  return items.map((item, index) => ({
-    id: item.id || `${selectedMenuCategory.value}-${index}`,
-    image: item.image || brandLogo,
-    title: item.name || title,
-    description: item.description || item.categoryName || title,
-  }))
+    return {
+      id: category.id,
+      image: representativeItem?.image || brandLogo,
+      title: category.label,
+      description: representativeItem?.description || representativeItem?.name || 'Categoria del menu Belly Monster.',
+    }
+  })
 })
+
+function selectMenuCategory(categoryId) {
+  selectedMenuCategory.value = categoryId
+  requestAnimationFrame(() => {
+    const row = menuRow.value?.$el || menuRow.value
+    const card = row?.querySelector(`[data-category-id="${categoryId}"]`)
+
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+    }
+  })
+}
 
 function refreshedImage(src) {
   return `${src}${src.includes('?') ? '&' : '?'}v=${imageVersion}`
-}
-
-function scrollRow(rowRef, direction) {
-  const row = rowRef?.value?.$el || rowRef?.value || rowRef?.$el || rowRef
-
-  if (!row) {
-    return
-  }
-
-  const firstCard = row.querySelector('article')
-  const cardWidth = firstCard?.getBoundingClientRect().width || row.clientWidth * 0.82
-  row.scrollBy({
-    left: direction * (cardWidth + 18),
-    behavior: 'smooth',
-  })
 }
 
 let logoIntroTimeout
@@ -197,10 +194,6 @@ onBeforeUnmount(() => {
 
     <section class="home-section home-section--latest" aria-labelledby="latest-title">
       <h1 id="latest-title">Lo nuevo</h1>
-      <div class="scroll-strip">
-        <button class="scroll-strip__button is-left" type="button" aria-label="Ver anteriores" @click="scrollRow(latestRow, -1)">
-          ‹
-        </button>
       <div
         ref="latestRow"
         class="home-card-row"
@@ -219,20 +212,18 @@ onBeforeUnmount(() => {
           </div>
         </article>
       </div>
-        <button class="scroll-strip__button is-right" type="button" aria-label="Ver siguientes" @click="scrollRow(latestRow, 1)">
-          ›
-        </button>
-      </div>
     </section>
 
     <section class="home-section home-section--menu" aria-labelledby="menu-title">
       <h1 id="menu-title">Explora nuestro menú</h1>
-      <div class="scroll-strip">
-        <button class="scroll-strip__button is-left" type="button" aria-label="Ver anteriores" @click="scrollRow(menuRow, -1)">
-          ‹
-        </button>
       <TransitionGroup ref="menuRow" name="menu-card-fade" tag="div" class="home-menu-row">
-        <article v-for="card in menuCategoryCards" :key="card.id" class="menu-card">
+          <article
+            v-for="card in menuCategoryCards"
+            :key="card.id"
+            class="menu-card"
+            :class="{ 'is-active': selectedMenuCategory === card.id }"
+            :data-category-id="card.id"
+          >
           <img :src="refreshedImage(card.image)" :alt="card.title" />
           <div>
             <h2>{{ card.title }}</h2>
@@ -241,17 +232,13 @@ onBeforeUnmount(() => {
           </div>
         </article>
       </TransitionGroup>
-        <button class="scroll-strip__button is-right" type="button" aria-label="Ver siguientes" @click="scrollRow(menuRow, 1)">
-          ›
-        </button>
-      </div>
       <div class="home-menu-tags" aria-label="Categorias de menu">
         <button
           v-for="category in menuCategories"
           :key="category.id"
           type="button"
           :class="{ active: selectedMenuCategory === category.id }"
-          @click="selectedMenuCategory = category.id"
+          @click="selectMenuCategory(category.id)"
         >
           {{ category.label }}
         </button>
@@ -409,45 +396,6 @@ onBeforeUnmount(() => {
   padding-right: 0;
 }
 
-.scroll-strip {
-  position: relative;
-}
-
-.scroll-strip__button {
-  position: absolute;
-  top: 50%;
-  z-index: 3;
-  display: flex;
-  width: 38px;
-  height: 38px;
-  align-items: center;
-  justify-content: center;
-  place-items: center;
-  border: 0;
-  border-radius: 50%;
-  background: rgb(255 255 255 / 92%);
-  color: #2f241f;
-  box-shadow: 0 8px 20px rgb(0 0 0 / 18%);
-  font-family: var(--font-body);
-  font-size: 1.75rem;
-  font-weight: 900;
-  line-height: 0;
-  cursor: pointer;
-  transform: translateY(-50%);
-}
-
-.scroll-strip__button.is-left {
-  left: -28px;
-}
-
-.scroll-strip__button.is-right {
-  right: -28px;
-}
-
-.home-section--menu .scroll-strip__button.is-right {
-  right: -28px;
-}
-
 .home-card-row {
   display: flex;
   gap: 16px;
@@ -570,6 +518,11 @@ onBeforeUnmount(() => {
   min-height: 260px;
   flex: 0 0 auto;
   scroll-snap-align: start;
+}
+
+.menu-card.is-active {
+  outline: 3px solid #f59aa7;
+  outline-offset: 3px;
 }
 
 .home-menu-tags {

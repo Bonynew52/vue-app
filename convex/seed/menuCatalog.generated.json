@@ -1,6 +1,6 @@
 {
   "version": "2026-06-03-parrot-excel-rappi-images-v1",
-  "generatedAt": "2026-06-25T17:07:14.952Z",
+  "generatedAt": "2026-06-25T18:36:30.876Z",
   "restaurantName": "Belly Monster Bites",
   "currency": "MXN",
   "sourceFiles": [
@@ -323,13 +323,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-s-mores-french-toast-64d98348-f32a-4d85-9b3a-ff2439188dd7.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-desayunos-french-toast.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659602,
-            "rappiName": "S'mores French Toast (pf)",
-            "rappiCategoryName": "Waffles Y Pan Frances"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -1405,13 +1403,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/desayunos-s-mores-french-toast-64d98348-f32a-4d85-9b3a-ff2439188dd7.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-comidas-french-toast.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659602,
-            "rappiName": "S'mores French Toast (pf)",
-            "rappiCategoryName": "Waffles Y Pan Frances"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,

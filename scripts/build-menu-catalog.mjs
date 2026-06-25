@@ -27,11 +27,13 @@ const LOCAL_UPDATED_IMAGES = new Map([
   ['desayunos:Serrano Caprese', '/images/menu/nuevo-desayunos-serrano-caprese.jpg'],
   ['desayunos:Serrano Parmesano', '/images/menu/nuevo-desayunos-serrano-parmesano.jpg'],
   ['desayunos:Smash Hashbrown', '/images/menu/nuevo-desayunos-smash-hashbrown.jpg'],
+  ["desayunos:S'mores French Toast", '/images/menu/nuevo-desayunos-french-toast.jpg'],
   ["desayunos:Spicy Chick'n'Waffle", '/images/menu/nuevo-desayunos-spicy-chick-n-waffle.jpg'],
   ['desayunos:The Sandwich', '/images/menu/nuevo-desayunos-the-sandwich.jpg'],
   ['comidas:French Toast', '/images/menu/nuevo-comidas-french-toast.jpg'],
   ['comidas:Grilled Cheese', '/images/menu/nuevo-comidas-grilled-cheese.jpg'],
   ['comidas:Serrano Caprese', '/images/menu/nuevo-comidas-serrano-caprese.jpg'],
+  ["comidas:S'mores French Toast", '/images/menu/nuevo-comidas-french-toast.jpg'],
   ["comidas:Spicy Chick'n'Waffle", '/images/menu/nuevo-comidas-spicy-chick-n-waffle.jpg'],
 ])
 
