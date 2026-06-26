@@ -62,11 +62,8 @@ const createOrderMutation = hasConvex
   : null
 
 /* ---- Flat category list (Rappi/DoorDash pattern) ----
-   One chip rail, one continuous scroll: the active meal menu (Comidas or
-   Desayunos depending on time of day) first, then Bebidas, then Postres once
-   that menu exports products. The old Comidas/Bebidas/Postres group row is
-   gone; subgroups survive only as the ordering of this single list. */
-const mealGroupId = menuSource.activeMeal
+   Breakfast and lunch are intentionally combined into one meal catalog,
+   followed by Bebidas and Postres in the same continuous scroll. */
 const activeCategory = ref('')
 
 function normalizeMenuText(value) {
@@ -122,11 +119,7 @@ function moveTemporaryDisabledCategoriesLast(categories) {
 }
 
 const mealCategoriesOrdered = menuCategories
-  .filter((category) => category.menuId === mealGroupId)
-  .sort(
-    (a, b) =>
-      mealSubgroupRank[mealSubgroupForCategory(a)] - mealSubgroupRank[mealSubgroupForCategory(b)],
-  )
+  .filter((category) => category.menuId === 'comidas')
 
 const beverageCategoriesOrdered = menuCategories
   .filter((category) => category.menuId === 'bebidas')

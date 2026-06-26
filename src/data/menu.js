@@ -8,6 +8,288 @@ const BREAKFAST_START_MINUTES = 6 * 60
 const BREAKFAST_END_MINUTES = 12 * 60 + 30
 const UNCATEGORIZED = 'Sin categoria'
 
+// The digital menu is the visual source of truth for the customer-facing
+// sequence. Product JSON remains the source for SKU, modifiers, and pricing.
+// Entries without a source product intentionally render with the existing
+// branded placeholder until the product table is updated.
+const PDF_MEAL_LAYOUTS = {
+  desayunos: [
+    {
+      name: 'Waffles y Pan Frances',
+      products: [
+        ['Just a Waffle (Waffle)', 'Arma tu Waffle o Pan Frances'],
+        ['Wafflete (Waffle)'],
+        ['American Breakfast Waffle (Waffle)'],
+        ["Spicy Chick'n'Waffle (Waffle)"],
+        ["S'mores French Toast (PF)"],
+      ],
+    },
+    {
+      name: 'Toast',
+      products: [
+        ['Avocado Panela (Toast)'],
+        ['Serrano Caprese (Toast)'],
+        ['Avocado Scramble (Toast)'],
+        ['Mollete con Huevo (Toast)'],
+        ['Serrano Parmesano (Toast)'],
+        ['Bacon Spinach (Toast)'],
+      ],
+    },
+    {
+      name: 'Egg Drop',
+      products: [
+        ['Simple Egg Drop (Sandwich)'],
+        ['Ham N Cheese E.D. (Sandwich)'],
+        ['Bacon Egg Drop (Sandwich)'],
+        ['Machaca Egg Drop (Sandwich)'],
+        ['Egg Drop Deluxe (Sandwich)'],
+      ],
+    },
+    {
+      name: 'Sandwich',
+      products: [
+        ['Pavo y Panela (Sandwich)'],
+        ['The Sandwich (Sandwich)'],
+        ['Grilled Cheese (Sandwich)'],
+      ],
+    },
+    { name: 'Bowl', products: [['Acai Bowl (Bowl)']] },
+    {
+      name: 'Kids Menu',
+      products: [['Egg Drop Kids (Kids)'], ['Sandwichito (Kids)']],
+    },
+    { name: 'Sides', products: [['Smash Hashbrown (Sides)'], ['Special Bacon (Sides)']] },
+    {
+      name: 'Chilaquiles',
+      products: [
+        ['Chilaquiles solos'],
+        ['Chilaquiles con Pollo'],
+        ['Chilaquiles con Huevo'],
+        ['Chilaquiles con Brisket'],
+      ],
+    },
+  ],
+  comidas: [
+    {
+      name: 'Waffles y Pan Frances',
+      products: [
+        ['Just a Waffle (Waffle)', 'Arma tu Waffle o Pan Frances'],
+        ['Wafflete (Waffle)'],
+        ['American Breakfast Waffle (Waffle)'],
+        ["Spicy Chick'n'Waffle (Waffle)"],
+        ["S'mores French Toast (PF)"],
+      ],
+    },
+    {
+      name: 'Sandwich',
+      products: [
+        ['Phily Cheese Brisket (Sandwich)'],
+        ['Buffalo Chicken (Sandwich)'],
+        ['Chicken Jalapeño (Sandwich)'],
+        ['BBQ Sandwich (Sandwich)'],
+        ['Grilled Cheese (Sandwich)'],
+        ['Chicken BLT (Sandwich)'],
+        ['Tuna Melt (Sandwich)'],
+      ],
+    },
+    {
+      name: 'Burgers',
+      products: [
+        ['Belly Burger (Burger)'],
+        ['Party Melt (Burger)'],
+        ['Jalapeño Burger (Burger)'],
+      ],
+    },
+    {
+      name: 'Toast',
+      products: [
+        ['Avocado Panela (Toast)'],
+        ['Serrano Caprese (Toast)'],
+        ['Pizza Deluxe (Toast)'],
+      ],
+    },
+    {
+      name: 'Ensalada',
+      products: [
+        ['Cesar Salad (Ensalada)'],
+        ['Goat Cheese Mango (Ensalada)'],
+        ['Chicken Orange (Ensalada)'],
+        ['Taco Salad (Ensalada)'],
+        ["Buffalo Chick'n Salad (Ensalada)"],
+      ],
+    },
+    {
+      name: 'Sides',
+      products: [
+        ['French Fries (Sides)'],
+        ['Camote Fries (Sides)'],
+        ['Cream Corn (Sides)'],
+        ["Mac'n Cheese (Sides)"],
+      ],
+    },
+    {
+      name: 'Sopas',
+      products: [
+        {
+          name: 'Sopa del mes',
+          description: 'Pregunta por nuestra sopa del mes.',
+          sku: 'pdf-sopa-del-mes',
+        },
+      ],
+    },
+    {
+      name: 'Kids Menu',
+      products: [
+        ['Chicken n Fries (Kids)'],
+        ['Mac N Chicken (Kids)'],
+        ['Pepperoni Toast (Kids)'],
+        ['Kids Burger'],
+      ],
+    },
+  ],
+}
+
+const CATEGORY_ORDERS = {
+  bebidas: [
+    'Cofy (Caliente)',
+    'Cofy (Helado)',
+    'Cofy (Frappe)',
+    'Specialty Cofy (Caliente)',
+    'Specialty Cofy (Helado)',
+    'Specialty Cofy (Frappe)',
+    'Cofy Chillers',
+    'Chillers',
+    'Frappe Chillers',
+    'Té Caliente',
+    'Té Helado',
+    'Otras Bebidas...',
+  ],
+  postres: ['Kuky', 'Brauny', 'Chiskay', 'Roles de Canela', 'Gelly', 'Malteadas'],
+}
+
+const PDF_CATEGORY_PLACEHOLDERS = {
+  bebidas: [
+    {
+      categoryName: 'Specialty Cofy (Caliente)',
+      name: 'Vainilla Latte sin azucar',
+      description: 'Latte de vainilla sin azucar. Descripcion pendiente de confirmar en la tabla de productos.',
+      sku: 'pdf-vainilla-latte-sin-azucar',
+    },
+  ],
+}
+
+// Breakfast and lunch are shown together. This keeps a single catalog without
+// repeated categories or products while retaining each product's availability.
+const PDF_COMBINED_MEAL_LAYOUT = [
+  {
+    name: 'Waffles y Pan Frances',
+    products: [
+      ['Just a Waffle (Waffle)', 'Arma tu Waffle o Pan Frances'],
+      ['French Toast (Pan Frances)'],
+      ['Wafflete (Waffle)'],
+      ['American Breakfast Waffle (Waffle)'],
+      ["Spicy Chick'n'Waffle (Waffle)"],
+      ["S'mores French Toast (PF)"],
+    ],
+  },
+  {
+    name: 'Sandwich',
+    products: [
+      ['Phily Cheese Brisket (Sandwich)'],
+      ['Buffalo Chicken (Sandwich)'],
+      ['Chicken Jalapeño (Sandwich)'],
+      ['BBQ Sandwich (Sandwich)'],
+      ['Grilled Cheese (Sandwich)'],
+      ['Chicken BLT (Sandwich)'],
+      ['Tuna Melt (Sandwich)'],
+      ['Pavo y Panela (Sandwich)'],
+      ['The Sandwich (Sandwich)'],
+    ],
+  },
+  {
+    name: 'Burgers',
+    products: [
+      ['Belly Burger (Burger)'],
+      ['Party Melt (Burger)'],
+      ['Jalapeño Burger (Burger)'],
+    ],
+  },
+  {
+    name: 'Toast',
+    products: [
+      ['Avocado Panela (Toast)'],
+      ['Serrano Caprese (Toast)'],
+      ['Pizza Deluxe (Toast)'],
+      ['Avocado Scramble (Toast)'],
+      ['Mollete con Huevo (Toast)'],
+      ['Serrano Parmesano (Toast)'],
+      ['Bacon Spinach (Toast)'],
+    ],
+  },
+  {
+    name: 'Ensalada',
+    products: [
+      ['Cesar Salad (Ensalada)'],
+      ['Goat Cheese Mango (Ensalada)'],
+      ['Chicken Orange (Ensalada)'],
+      ['Taco Salad (Ensalada)'],
+      ["Buffalo Chick'n Salad (Ensalada)"],
+    ],
+  },
+  {
+    name: 'Sides',
+    products: [
+      ['French Fries (Sides)'],
+      ['Camote Fries (Sides)'],
+      ['Cream Corn (Sides)'],
+      ["Mac'n Cheese (Sides)"],
+      ['Smash Hashbrown (Sides)'],
+      ['Special Bacon (Sides)'],
+    ],
+  },
+  {
+    name: 'Sopas',
+    products: [
+      {
+        name: 'Sopa del mes',
+        description: 'Pregunta por nuestra sopa del mes.',
+        sku: 'pdf-sopa-del-mes',
+      },
+    ],
+  },
+  {
+    name: 'Kids Menu',
+    products: [
+      ['Chicken n Fries (Kids)'],
+      ['Mac N Chicken (Kids)'],
+      ['Pepperoni Toast (Kids)'],
+      ['Kids Burger'],
+      ['Egg Drop Kids (Kids)'],
+      ['Sandwichito (Kids)'],
+    ],
+  },
+  {
+    name: 'Egg Drop',
+    products: [
+      ['Simple Egg Drop (Sandwich)'],
+      ['Ham N Cheese E.D. (Sandwich)'],
+      ['Bacon Egg Drop (Sandwich)'],
+      ['Machaca Egg Drop (Sandwich)'],
+      ['Egg Drop Deluxe (Sandwich)'],
+    ],
+  },
+  { name: 'Bowl', products: [['Acai Bowl (Bowl)']] },
+  {
+    name: 'Chilaquiles',
+    products: [
+      ['Chilaquiles solos'],
+      ['Chilaquiles con Pollo'],
+      ['Chilaquiles con Huevo'],
+      ['Chilaquiles con Brisket'],
+    ],
+  },
+]
+
 const DISPLAY_SUFFIX_PATTERN =
   /\s*\((rappi|waffle|toast|kids|rc|n|pf|pan frances|pan frances|desayuno|comida)\)\s*/gi
 
@@ -57,7 +339,15 @@ function normalizeCategoryName(categoryName, menuId) {
   return cleanName
 }
 
-function productToItem(product, menuId, categoryName, categoryIndex, itemIndex) {
+function productToItem(
+  product,
+  menuId,
+  categoryName,
+  categoryIndex,
+  itemIndex,
+  sourceMenuId = menuId,
+  availability = [sourceMenuId],
+) {
   const displayName = cleanDisplayName(product.name)
   const price = Number(product.price || 0)
   const id = `item-${menuId}-${categoryIndex}-${itemIndex}-${slugify(product.sku || displayName)}`
@@ -76,19 +366,143 @@ function productToItem(product, menuId, categoryName, categoryIndex, itemIndex) 
     realPrice: price,
     currency: 'MXN',
     hasPrice: price > 0,
-    image: imageForProduct(product, menuId),
+    image: imageForProduct(product, sourceMenuId),
     isAvailable: true,
     isPopular: false,
     hasToppings: product.modifierGroups?.length > 0,
     modifierGroups: product.modifierGroups || [],
+    availability,
   }
 }
 
+function buildCombinedMealCategories(categoryOffset = 0) {
+  const sourcesByName = new Map()
+  const availabilityBySku = new Map()
+
+  for (const menu of [desayunosMenu, comidasMenu]) {
+    for (const product of menu.products) {
+      if (!product.categories?.length) continue
+      if (!sourcesByName.has(product.name)) sourcesByName.set(product.name, [])
+      sourcesByName.get(product.name).push({ product, menuId: menu.id })
+      if (!availabilityBySku.has(product.sku)) availabilityBySku.set(product.sku, new Set())
+      availabilityBySku.get(product.sku).add(menu.id)
+    }
+  }
+
+  const renderedSkus = new Set()
+  return PDF_COMBINED_MEAL_LAYOUT.map((section, categoryIndex) => {
+    const finalCategoryIndex = categoryOffset + categoryIndex
+    const items = section.products.flatMap((entry) => {
+      if (!Array.isArray(entry)) return [entry]
+      const [sourceName, displayName] = entry
+      const source = (sourcesByName.get(sourceName) || [])[0]
+      if (!source || renderedSkus.has(source.product.sku)) return []
+      renderedSkus.add(source.product.sku)
+      return [{ ...source, displayName }]
+    }).map((entry, itemIndex) => {
+      if (entry.product) {
+        const item = productToItem(
+          entry.product,
+          'comidas',
+          section.name,
+          finalCategoryIndex,
+          itemIndex,
+          entry.menuId,
+          [...(availabilityBySku.get(entry.product.sku) || [])],
+        )
+        if (entry.displayName) item.name = entry.displayName
+        return item
+      }
+      return placeholderToItem(entry, 'comidas', section.name, finalCategoryIndex, itemIndex)
+    })
+
+    return {
+      id: `cat-comidas-${finalCategoryIndex}-${slugify(section.name)}`,
+      name: section.name,
+      sourceName: section.name,
+      menuId: 'comidas',
+      items,
+    }
+  })
+}
+
+function placeholderToItem(product, menuId, categoryName, categoryIndex, itemIndex) {
+  const id = `item-${menuId}-${categoryIndex}-${itemIndex}-${slugify(product.sku || product.name)}`
+
+  return {
+    id,
+    rappiProductId: product.sku || id,
+    sku: product.sku || '',
+    categoryId: `cat-${menuId}-${categoryIndex}-${slugify(categoryName)}`,
+    categoryName,
+    menuId,
+    sourceName: product.name,
+    name: product.name,
+    description: product.description,
+    price: 0,
+    realPrice: 0,
+    currency: 'MXN',
+    hasPrice: false,
+    image: '',
+    isAvailable: true,
+    isPopular: false,
+    hasToppings: false,
+    modifierGroups: [],
+    isPlaceholder: true,
+  }
+}
+
+function buildPdfMealCategories(menu, categoryOffset = 0) {
+  const layout = PDF_MEAL_LAYOUTS[menu.id]
+  if (!layout) return null
+
+  const productsByName = new Map(menu.products.map((product) => [product.name, product]))
+
+  return layout.map((section, categoryIndex) => {
+    const finalCategoryIndex = categoryOffset + categoryIndex
+    const items = section.products.map((entry, itemIndex) => {
+      if (Array.isArray(entry)) {
+        const [sourceName, displayName] = entry
+        const product = productsByName.get(sourceName)
+        if (!product) {
+          return placeholderToItem(
+            {
+              name: displayName || sourceName,
+              description: 'Descripcion pendiente de confirmar en la tabla de productos.',
+              sku: `pdf-${slugify(sourceName)}`,
+            },
+            menu.id,
+            section.name,
+            finalCategoryIndex,
+            itemIndex,
+          )
+        }
+        const item = productToItem(product, menu.id, section.name, finalCategoryIndex, itemIndex)
+        if (displayName) item.name = displayName
+        return item
+      }
+
+      return placeholderToItem(entry, menu.id, section.name, finalCategoryIndex, itemIndex)
+    })
+
+    return {
+      id: `cat-${menu.id}-${finalCategoryIndex}-${slugify(section.name)}`,
+      name: section.name,
+      sourceName: section.name,
+      menuId: menu.id,
+      items,
+    }
+  })
+}
+
 function buildCategories(menu, categoryOffset = 0) {
+  const pdfCategories = buildPdfMealCategories(menu, categoryOffset)
+  if (pdfCategories) return pdfCategories
+
   const groupedProducts = new Map()
 
   menu.products.forEach((product) => {
-    const sourceCategories = product.categories?.length ? product.categories : [UNCATEGORIZED]
+    const sourceCategories = product.categories?.length ? product.categories : []
 
     sourceCategories.forEach((sourceCategory) => {
       const categoryName = normalizeCategoryName(sourceCategory, menu.id)
@@ -101,9 +515,16 @@ function buildCategories(menu, categoryOffset = 0) {
   })
 
   const categoryEntries = Array.from(groupedProducts.entries())
+  for (const placeholder of PDF_CATEGORY_PLACEHOLDERS[menu.id] || []) {
+    if (!groupedProducts.has(placeholder.categoryName)) {
+      groupedProducts.set(placeholder.categoryName, [])
+      categoryEntries.push([placeholder.categoryName, groupedProducts.get(placeholder.categoryName)])
+    }
+    groupedProducts.get(placeholder.categoryName).push({ ...placeholder, isPlaceholder: true })
+  }
 
-  if (menu.id === 'desayunos') {
-    const categoryOrder = ['Waffles y Pan Frances', 'Chilaquiles', 'Sandwiches', 'Toast', 'Bowl', 'Kids Menu', 'Sides']
+  const categoryOrder = CATEGORY_ORDERS[menu.id]
+  if (categoryOrder) {
     categoryEntries.sort(([nameA], [nameB]) => {
       const indexA = categoryOrder.indexOf(nameA)
       const indexB = categoryOrder.indexOf(nameB)
@@ -133,15 +554,16 @@ function buildCategories(menu, categoryOffset = 0) {
       sourceName: categoryName,
       menuId: menu.id,
       items: products.map((product, itemIndex) =>
-        productToItem(product, menu.id, categoryName, finalCategoryIndex, itemIndex),
+        product.isPlaceholder
+          ? placeholderToItem(product, menu.id, categoryName, finalCategoryIndex, itemIndex)
+          : productToItem(product, menu.id, categoryName, finalCategoryIndex, itemIndex),
       ),
     }
   })
 }
 
 function buildActiveMenuCategories() {
-  const mealMenu = currentMenuPeriod() === 'desayunos' ? desayunosMenu : comidasMenu
-  const mealCategories = buildCategories(mealMenu, 0)
+  const mealCategories = buildCombinedMealCategories(0)
   const beverageCategories = buildCategories(bebidasMenu, mealCategories.length)
   const dessertCategories = buildCategories(postresMenu, mealCategories.length + beverageCategories.length)
 
