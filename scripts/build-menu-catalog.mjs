@@ -30,8 +30,11 @@ const LOCAL_UPDATED_IMAGES = new Map([
   ["desayunos:S'mores French Toast", '/images/menu/nuevo-desayunos-french-toast.jpg'],
   ["desayunos:Spicy Chick'n'Waffle", '/images/menu/nuevo-desayunos-spicy-chick-n-waffle.jpg'],
   ['desayunos:The Sandwich', '/images/menu/nuevo-desayunos-the-sandwich.jpg'],
+  ['comidas:BBQ Sandwich', '/images/menu/nuevo-comidas-bbq-sandwich.jpeg'],
   ['comidas:French Toast', '/images/menu/nuevo-comidas-french-toast.jpg'],
+  ['comidas:Camote Fries', '/images/menu/nuevo-sides-camote-fries.jpeg'],
   ['comidas:Chicken n Fries', '/images/menu/nuevo-kids-chicken-n-fries.jpeg'],
+  ['comidas:Cream Corn', '/images/menu/nuevo-sides-cream-corn.jpeg'],
   ['comidas:Grilled Cheese', '/images/menu/nuevo-comidas-grilled-cheese.jpg'],
   ['comidas:Mac N Chicken', '/images/menu/nuevo-kids-mac-n-chicken.jpeg'],
   ["comidas:Mac'n Cheese", '/images/menu/nuevo-sides-mac-n-cheese.jpeg'],
@@ -40,6 +43,7 @@ const LOCAL_UPDATED_IMAGES = new Map([
   ['comidas:Serrano Caprese', '/images/menu/nuevo-comidas-serrano-caprese.jpg'],
   ["comidas:S'mores French Toast", '/images/menu/nuevo-comidas-french-toast.jpg'],
   ["comidas:Spicy Chick'n'Waffle", '/images/menu/nuevo-comidas-spicy-chick-n-waffle.jpg'],
+  ['comidas:Tuna Melt', '/images/menu/nuevo-comidas-tuna-melt.jpeg'],
 ])
 
 function localUpdatedImagePath(item) {

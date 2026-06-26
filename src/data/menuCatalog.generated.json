@@ -1,6 +1,6 @@
 {
   "version": "2026-06-03-parrot-excel-rappi-images-v1",
-  "generatedAt": "2026-06-26T17:39:46.837Z",
+  "generatedAt": "2026-06-26T20:04:54.813Z",
   "restaurantName": "Belly Monster Bites",
   "currency": "MXN",
   "sourceFiles": [
@@ -1888,13 +1888,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-bbq-burger-d560d198-5e9f-4080-bebc-c71edbb54075.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-comidas-bbq-sandwich.jpeg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659549,
-            "rappiName": "Bbq Sandwich (sandwich)",
-            "rappiCategoryName": "Sandwiches (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2204,13 +2202,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-tuna-melt-5f7fb062-9efb-4258-8f49-f98c9f7a8a57.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-comidas-tuna-melt.jpeg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659528,
-            "rappiName": "Tuna Melt (sandwich)",
-            "rappiCategoryName": "Sandwiches (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2444,13 +2440,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-camote-fries-d6e52603-2713-47da-ba58-ee31bfa982c7.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-sides-camote-fries.jpeg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659482,
-            "rappiName": "Sweet Potato Fries (sides)",
-            "rappiCategoryName": "Sides (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2479,13 +2473,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-cream-corn-93ece4a1-25d0-4aa5-b87c-a8112bc861cc.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-sides-cream-corn.jpeg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659558,
-            "rappiName": "Cream Corn (sides)",
-            "rappiCategoryName": "Sides (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
