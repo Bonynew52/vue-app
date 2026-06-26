@@ -17,7 +17,7 @@ const PDF_MEAL_LAYOUTS = {
     {
       name: 'Waffles y Pan Frances',
       products: [
-        ['Just a Waffle (Waffle)', 'Arma tu Waffle o Pan Frances'],
+        ['Just a Waffle (Waffle)', 'Waffle'],
         ['Wafflete (Waffle)'],
         ['American Breakfast Waffle (Waffle)'],
         ["Spicy Chick'n'Waffle (Waffle)"],
@@ -73,7 +73,7 @@ const PDF_MEAL_LAYOUTS = {
     {
       name: 'Waffles y Pan Frances',
       products: [
-        ['Just a Waffle (Waffle)', 'Arma tu Waffle o Pan Frances'],
+        ['Just a Waffle (Waffle)', 'Waffle'],
         ['Wafflete (Waffle)'],
         ['American Breakfast Waffle (Waffle)'],
         ["Spicy Chick'n'Waffle (Waffle)"],
@@ -178,13 +178,91 @@ const PDF_CATEGORY_PLACEHOLDERS = {
   ],
 }
 
+const DESCRIPTION_OVERRIDES = {
+  'Just a Waffle': 'Haz la combinacion perfecta de waffle con tus toppings a elegir.',
+  'Acai Bowl': 'Acai con platano, fresas, frambuesas, mora azul, zarzamora, almendras y ajonjoli.',
+  'American Breakfast Waffle': 'Waffle con huevo, tocino, jamon, queso cheddar, tomate, arugula y aderezo chipotle.',
+  'Avocado Panela': 'Laminas de aguacate, queso panela y chile quebrado.',
+  'Avocado Scramble': 'Guacamole y huevo cremoso.',
+  'Bacon Egg Drop': 'Huevo cremoso, tocino, queso cheddar, aguacate, aderezo chipotle.',
+  'Bacon Spinach': 'Huevo estrellado, tocino spicy, espinacas y pico de gallo.',
+  'BBQ Sandwich': 'Brisket, salsa BBQ, ensalada de col y pepinillos.',
+  'Belly Burger':
+    'Carne de res, aguacate, tomate, lechuga, queso cheddar, tocino, pepinillos y aderezo de la casa.',
+  'Buffalo Chicken': 'Pollo buffalo, tomate, lechuga, aderezo ranch.',
+  "Buffalo Chick'n Salad":
+    'Pollo buffalo, lechuga, zanahoria, pepino, col morada, elote, tomate y aderezo ranch.',
+  'Camote Fries': 'Camote fries.',
+  'Cesar Salad': 'Pollo a la parrilla, lechuga, queso parmesano, aderezo cesar.',
+  'Chicken BLT':
+    'Pollo, jamon, tocino, queso cheddar, aguacate, tomate, lechuga, aderezo chipotle.',
+  'Chicken Jalapeño': 'Pollo empanizado, lechuga, tomate y aderezo jalapeno.',
+  'Chicken n Fries': 'Pollo empanizado con papas a la francesa.',
+  'Chicken Orange': 'Pollo a la parrilla, lechuga, espinaca, kale, tomate cherry, cacahuate, aderezo oriental de naranja.',
+  'Chilaquiles con Brisket':
+    'Salsa a elegir. Todos vienen con aguacate, queso panela, crema y cebolla morada. Acompanados de frijoles refritos.',
+  'Chilaquiles con Huevo':
+    'Salsa a elegir. Todos vienen con aguacate, queso panela, crema y cebolla morada. Acompanados de frijoles refritos.',
+  'Chilaquiles con Pollo':
+    'Salsa a elegir. Todos vienen con aguacate, queso panela, crema y cebolla morada. Acompanados de frijoles refritos.',
+  'Chilaquiles solos':
+    'Salsa a elegir. Todos vienen con aguacate, queso panela, crema y cebolla morada. Acompanados de frijoles refritos.',
+  'Cream Corn': 'Elotes dulces con crema, queso y cilantro.',
+  'Egg Drop Deluxe': 'Huevo cremoso, jamon de pavo, tocino, queso suizo, tomate, espinaca, aderezo chipotle.',
+  'Egg Drop Kids': 'Sandwich de huevo revuelto con jamon de pavo, queso cheddar.',
+  'French Fries': 'Papas a la francesa.',
+  'French Toast': 'Haz la combinacion perfecta de pan frances con tus toppings a elegir.',
+  'Goat Cheese Mango': 'Pollo a la parrilla, queso de cabra, durazno, blueberry, lechuga, kale y aderezo spicy mango.',
+  'Grilled Cheese': 'Pan de papa dorado con una mezcla de tres quesos.',
+  'Ham N Cheese E.D.': 'Huevo cremoso, jamon de pavo, queso cheddar, aderezo chipotle.',
+  'Jalapeño Burger':
+    'Carne de res, queso suizo, chile jalapeno, cebolla caramelizada, tocino y aderezo jalapeno.',
+  'Kids Burger': 'Hamburguesa simple acompanada con papas a la francesa.',
+  "Mac'n Cheese": 'Macarrones con queso.',
+  'Mac N Chicken': "Mac n' cheese con tiritas de pollo empanizado.",
+  'Machaca Egg Drop': 'Huevo cremoso, brisket, pico de gallo, queso manchego, aderezo jalapeno.',
+  'Mollete con Huevo': 'Frijoles, queso manchego, chorizo de cerdo y 2 huevos estrellados.',
+  'Party Melt': 'Carne de res, queso cheddar, queso suizo, tocino, cebolla caramelizada y aderezo de la casa.',
+  'Pavo y Panela': 'Jamon de pavo, queso panela, espinaca, tomate, aderezo chipotle.',
+  'Pepperoni Toast': 'Toast estilo pizza con pepperoni.',
+  'Phily Cheese Brisket': 'Brisket, queso mozzarella, lechuga, aderezo jalapeno.',
+  'Pizza Deluxe':
+    'Salsa de tomate, pepperoni, queso mozzarella, cebolla, pimiento y aceitunas.',
+  "S'mores French Toast": 'Chocolate, bombon, graham crackers.',
+  'Sandwichito': 'Jamon de pavo, queso cheddar y mayonesa.',
+  'Serrano Caprese': 'Jamon serrano, tomate cherry, queso mozzarella, espinaca, vinagre balsamico.',
+  'Serrano Parmesano': 'Jamon serrano dorado, queso parmesano, huevo cremoso.',
+  'Simple Egg Drop': 'Huevo cremoso, aguacate, aderezo chipotle.',
+  'Smash Hashbrown': 'Hashbrown crujiente de papa rallada.',
+  'Special Bacon': 'Tocino preparado con salsa dulce.',
+  "Spicy Chick'n'Waffle": 'Pollo empanizado banado en sriracha maple syrup.',
+  'Taco Salad': 'Brisket, lechuga, arugula, aguacate, queso cheddar, tomate cherry, elote, jalapeno, cebolla, aceitunas, aderezo de cilantro y jalapeno, tiras de tortilla.',
+  'The Sandwich': 'Jamon de pavo, queso cheddar, tocino, lechuga, tomate, aderezo chipotle.',
+  'Tuna Melt': 'Atun, queso suizo, aderezo de albahaca, cebolla y apio.',
+  Waffle: 'Haz la combinacion perfecta de waffle con tus toppings a elegir.',
+  Wafflete: 'Frijoles, chorizo y queso.',
+}
+
+const CUSTOMER_MENU_COPY = {
+  ...Object.fromEntries(
+    Object.entries(DESCRIPTION_OVERRIDES).map(([name, description]) => [
+      name,
+      { name, description },
+    ]),
+  ),
+  'Just a Waffle': {
+    name: 'Waffle',
+    description: DESCRIPTION_OVERRIDES['Just a Waffle'],
+  },
+}
+
 // Breakfast and lunch are shown together. This keeps a single catalog without
 // repeated categories or products while retaining each product's availability.
 const PDF_COMBINED_MEAL_LAYOUT = [
   {
     name: 'Waffles y Pan Frances',
     products: [
-      ['Just a Waffle (Waffle)', 'Arma tu Waffle o Pan Frances'],
+      ['Just a Waffle (Waffle)', 'Waffle'],
       ['French Toast (Pan Frances)'],
       ['Wafflete (Waffle)'],
       ['American Breakfast Waffle (Waffle)'],
@@ -291,7 +369,7 @@ const PDF_COMBINED_MEAL_LAYOUT = [
 ]
 
 const DISPLAY_SUFFIX_PATTERN =
-  /\s*\((rappi|waffle|toast|kids|rc|n|pf|pan frances|pan frances|desayuno|comida)\)\s*/gi
+  /\s*\((rappi|waffle|toast|kids|rc|n|pf|pan frances|sandwich|burger|ensalada|bowl|sides|desayuno|comida)\)\s*/gi
 
 function slugify(value) {
   return String(value || '')
@@ -304,6 +382,13 @@ function slugify(value) {
 
 function cleanDisplayName(value) {
   return String(value || '').replace(DISPLAY_SUFFIX_PATTERN, ' ').replace(/\s+/g, ' ').trim()
+}
+
+function customerCopyForItem(product, displayName) {
+  const cleanName = cleanDisplayName(displayName || product.name)
+  const cleanSourceName = cleanDisplayName(product.name)
+
+  return CUSTOMER_MENU_COPY[cleanSourceName] || CUSTOMER_MENU_COPY[cleanName] || null
 }
 
 const catalogImageByMenuSku = new Map(
@@ -349,6 +434,7 @@ function productToItem(
   availability = [sourceMenuId],
 ) {
   const displayName = cleanDisplayName(product.name)
+  const customerCopy = customerCopyForItem(product, displayName)
   const price = Number(product.price || 0)
   const id = `item-${menuId}-${categoryIndex}-${itemIndex}-${slugify(product.sku || displayName)}`
 
@@ -360,8 +446,8 @@ function productToItem(
     categoryName,
     menuId,
     sourceName: product.name || displayName,
-    name: displayName,
-    description: product.description || '',
+    name: customerCopy?.name || displayName,
+    description: customerCopy?.description || product.description || '',
     price,
     realPrice: price,
     currency: 'MXN',

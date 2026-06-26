@@ -1,6 +1,6 @@
 {
   "version": "2026-06-03-parrot-excel-rappi-images-v1",
-  "generatedAt": "2026-06-25T18:36:30.876Z",
+  "generatedAt": "2026-06-26T17:39:46.837Z",
   "restaurantName": "Belly Monster Bites",
   "currency": "MXN",
   "sourceFiles": [
@@ -1126,7 +1126,7 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/menu/nuevo-desayunos-egg-drop-kids.jpg",
+          "image": "/images/menu/nuevo-desayunos-egg-drop-kids-alt.jpg",
           "imageSource": "local-updated",
           "imageMatch": {
             "method": "manual-local-update",
@@ -2514,13 +2514,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-french-fries-c57ac894-12c7-4c8a-ab58-635eacb66044.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-sides-french-fries.jpeg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659590,
-            "rappiName": "French Fries (sides)",
-            "rappiCategoryName": "Sides (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2549,13 +2547,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-mac-n-cheese-0fdac128-27d0-470f-b796-5ad0be40f84e.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-sides-mac-n-cheese.jpeg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659598,
-            "rappiName": "Mac'n Cheese (sides)",
-            "rappiCategoryName": "Sides (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2596,13 +2592,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-chicken-n-fries-b047ca24-517e-446b-98f5-f4bee7133995.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-kids-chicken-n-fries.jpeg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659504,
-            "rappiName": "Chicken N Fries (kids)",
-            "rappiCategoryName": "Kids Menu (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2661,13 +2655,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-mac-n-chicken-f6e24fcf-a8b5-4a1d-9f14-69c08f897e08.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-kids-mac-n-chicken.jpeg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659555,
-            "rappiName": "Mac N Chicken (kids)",
-            "rappiCategoryName": "Kids Menu (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2696,13 +2688,11 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-pepperoni-toast-5dc4348a-c500-4830-b29c-ccbd515de198.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-kids-pepperoni-toast.jpeg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659538,
-            "rappiName": "Pepperoni Toast (kids)",
-            "rappiCategoryName": "Kids Menu (rappi)"
+            "method": "manual-local-update",
+            "source": "FOTOS NUEVAS PLATILLOS"
           },
           "isAvailable": true,
           "isPopular": false,

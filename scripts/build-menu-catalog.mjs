@@ -19,7 +19,7 @@ function localRappiImagePath(imageUrl, item) {
 
 const LOCAL_UPDATED_IMAGES = new Map([
   ['desayunos:Acai Bowl', '/images/menu/nuevo-desayunos-acai-bowl.jpg'],
-  ['desayunos:Egg Drop Kids', '/images/menu/nuevo-desayunos-egg-drop-kids.jpg'],
+  ['desayunos:Egg Drop Kids', '/images/menu/nuevo-desayunos-egg-drop-kids-alt.jpg'],
   ['desayunos:French Toast', '/images/menu/nuevo-desayunos-french-toast.jpg'],
   ['desayunos:Grilled Cheese', '/images/menu/nuevo-desayunos-grilled-cheese.jpg'],
   ['desayunos:Ham N Cheese E.D.', '/images/menu/nuevo-desayunos-ham-n-cheese-e-d.jpg'],
@@ -31,7 +31,12 @@ const LOCAL_UPDATED_IMAGES = new Map([
   ["desayunos:Spicy Chick'n'Waffle", '/images/menu/nuevo-desayunos-spicy-chick-n-waffle.jpg'],
   ['desayunos:The Sandwich', '/images/menu/nuevo-desayunos-the-sandwich.jpg'],
   ['comidas:French Toast', '/images/menu/nuevo-comidas-french-toast.jpg'],
+  ['comidas:Chicken n Fries', '/images/menu/nuevo-kids-chicken-n-fries.jpeg'],
   ['comidas:Grilled Cheese', '/images/menu/nuevo-comidas-grilled-cheese.jpg'],
+  ['comidas:Mac N Chicken', '/images/menu/nuevo-kids-mac-n-chicken.jpeg'],
+  ["comidas:Mac'n Cheese", '/images/menu/nuevo-sides-mac-n-cheese.jpeg'],
+  ['comidas:Pepperoni Toast', '/images/menu/nuevo-kids-pepperoni-toast.jpeg'],
+  ['comidas:French Fries', '/images/menu/nuevo-sides-french-fries.jpeg'],
   ['comidas:Serrano Caprese', '/images/menu/nuevo-comidas-serrano-caprese.jpg'],
   ["comidas:S'mores French Toast", '/images/menu/nuevo-comidas-french-toast.jpg'],
   ["comidas:Spicy Chick'n'Waffle", '/images/menu/nuevo-comidas-spicy-chick-n-waffle.jpg'],
