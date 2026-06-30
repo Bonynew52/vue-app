@@ -2004,13 +2004,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-chicken-blt-d4c5e28f-bb1f-478f-865c-aa9269301d04.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-comidas-chicken-blt.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659476,
-            "rappiName": "Chicken Blt (sandwich)",
-            "rappiCategoryName": "Sandwiches (rappi)"
+            "fileName": "IMG_6779 Chicken BLT.JPG",
+            "source": "FOTOS NUEVAS PLATILLOS (3)"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2045,13 +2043,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-chicken-jalapeno-f5887672-2597-46b2-b5b0-637996711b56.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-comidas-chicken-jalapeno.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659515,
-            "rappiName": "Sandwich Chicken Jalapeño",
-            "rappiCategoryName": "Sandwiches (rappi)"
+            "fileName": "IMG_6790 Chicken Jalape?o.JPG",
+            "source": "FOTOS NUEVAS PLATILLOS (3)"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2247,9 +2243,12 @@
           "modifierGroupIds": [],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "/images/menu/nuevo-comidas-buffalo-chickn-salad.jpg",
+          "imageSource": "local-updated",
+          "imageMatch": {
+            "fileName": "IMG_6798 Buffalo Salad.JPG",
+            "source": "FOTOS NUEVAS PLATILLOS (3)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 200400
@@ -2320,13 +2319,11 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-chicken-orange-1ef3bb15-e541-4998-a6c0-eef6efddc808.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-comidas-chicken-orange.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659537,
-            "rappiName": "Chicken Orange (ensalada)",
-            "rappiCategoryName": "Ensaladas (rappi)"
+            "fileName": "IMG_6462 Chicken Orange.JPG",
+            "source": "FOTOS NUEVAS PLATILLOS (3)"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2359,13 +2356,11 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-goat-cheese-mango-25dc1cb7-c223-4e13-8695-39f13dfdb104.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/nuevo-comidas-goat-cheese-mango.jpg",
+          "imageSource": "local-updated",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659497,
-            "rappiName": "Goat Cheese Mango (ensalada)",
-            "rappiCategoryName": "Ensaladas (rappi)"
+            "fileName": "IMG_6450 Goat Cheese and Mango.JPG",
+            "source": "FOTOS NUEVAS PLATILLOS (3)"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -2398,9 +2393,12 @@
           ],
           "hasRequiredModifiers": false,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "/images/menu/nuevo-comidas-taco-salad.jpg",
+          "imageSource": "local-updated",
+          "imageMatch": {
+            "fileName": "IMG_6466 Taco Salad.JPG",
+            "source": "FOTOS NUEVAS PLATILLOS (3)"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 200404
@@ -9501,13 +9499,12 @@
     "itemCount": 204,
     "categoryCount": 33,
     "modifierGroupCount": 35,
-    "imageMatchedCount": 124,
-    "imageMissingCount": 80,
+    "imageMatchedCount": 126,
+    "imageMissingCount": 78,
     "imageMissingByMenu": {
-      "bebidas": 4,
-      "desayunos": 0,
-      "comidas": 14,
-      "postres": 62
+      "comidas": 12,
+      "postres": 62,
+      "bebidas": 4
     }
   }
 }
