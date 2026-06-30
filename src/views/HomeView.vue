@@ -12,6 +12,7 @@ import icedCoffeeHandoff from '../assets/campaigns/belly-iced-coffee-service.jpe
 import catalog from '../data/menuCatalog.generated.json'
 
 const isLogoIntroVisible = ref(true)
+const isDevelopmentNoticeVisible = ref(true)
 const latestRow = ref(null)
 const menuRow = ref(null)
 const isDraggingLatest = ref(false)
@@ -111,6 +112,10 @@ function refreshedImage(src) {
   return `${src}${src.includes('?') ? '&' : '?'}v=${imageVersion}`
 }
 
+function closeDevelopmentNotice() {
+  isDevelopmentNoticeVisible.value = false
+}
+
 let logoIntroTimeout
 let latestDragStartX = 0
 let latestDragStartScrollLeft = 0
@@ -180,6 +185,25 @@ onBeforeUnmount(() => {
             :src="refreshedImage(brandLogo)"
             alt="Belly Monster"
           />
+        </section>
+      </Transition>
+    </Teleport>
+
+    <Teleport to="body">
+      <Transition name="development-notice">
+        <section
+          v-if="isDevelopmentNoticeVisible && !isLogoIntroVisible"
+          class="development-notice"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="development-notice-title"
+        >
+          <article class="development-notice__card">
+            <p>Pagina en desarrollo</p>
+            <h1 id="development-notice-title">La pagina no es funcional de momento</h1>
+            <span>Estamos preparando la experiencia completa.</span>
+            <button type="button" @click="closeDevelopmentNotice">Entendido</button>
+          </article>
         </section>
       </Transition>
     </Teleport>
@@ -270,8 +294,8 @@ onBeforeUnmount(() => {
         <img :src="refreshedImage(chessCustomers)" alt="Clientes jugando ajedrez en Belly Monster" />
         <img :src="refreshedImage(customersAtTable)" alt="Clientes en Belly Monster" />
       </div>
-      <button class="home-order-link" type="button" disabled>Pagina en desarrollo</button>
-      <div class="home-map" aria-label="Ubicacion Belly Monster">
+      <button id="comentarios" class="home-order-link" type="button" disabled>Pagina en desarrollo</button>
+      <div id="ubicacion" class="home-map" aria-label="Ubicacion Belly Monster">
         <iframe
           title="Belly Monster en Google Maps"
           src="https://www.google.com/maps?q=C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps.&output=embed"
@@ -330,6 +354,79 @@ onBeforeUnmount(() => {
 
 .home-logo-intro-enter-from,
 .home-logo-intro-leave-to {
+  opacity: 0;
+}
+
+.development-notice {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgb(16 17 20 / 58%);
+  backdrop-filter: blur(4px);
+}
+
+.development-notice__card {
+  display: grid;
+  width: min(100%, 420px);
+  gap: 14px;
+  padding: 26px 24px 24px;
+  border: 3px solid #101114;
+  background: #399ba4;
+  color: #ffffff;
+  box-shadow: 0 22px 54px rgb(0 0 0 / 28%);
+  text-align: center;
+}
+
+.development-notice__card p {
+  margin: 0;
+  color: #ffe05d;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.development-notice__card h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.55rem, 7vw, 2.55rem);
+  line-height: 0.94;
+  text-transform: uppercase;
+}
+
+.development-notice__card span {
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.development-notice__card button {
+  justify-self: center;
+  min-height: 42px;
+  padding: 0 24px;
+  border: 2px solid #101114;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #101114;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.development-notice-enter-active,
+.development-notice-leave-active {
+  transition: opacity 180ms ease;
+}
+
+.development-notice-enter-from,
+.development-notice-leave-to {
   opacity: 0;
 }
 

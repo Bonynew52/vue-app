@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import wordmarkLogo from '../../assets/brand/belly-monster-wordmark.png'
 
 const isMenuOpen = ref(false)
+const isReservationCardOpen = ref(false)
 const route = useRoute()
 
 function toggleMenu() {
@@ -12,6 +13,15 @@ function toggleMenu() {
 
 function closeMenu() {
   isMenuOpen.value = false
+}
+
+function openReservationCard() {
+  isReservationCardOpen.value = true
+  closeMenu()
+}
+
+function closeReservationCard() {
+  isReservationCardOpen.value = false
 }
 </script>
 
@@ -25,9 +35,12 @@ function closeMenu() {
       <nav class="header-actions" aria-label="Menu">
         <button
           class="menu-button"
+          :class="{ open: isMenuOpen }"
           type="button"
-          disabled
-          aria-label="Menu no disponible"
+          aria-label="Abrir menu"
+          :aria-expanded="isMenuOpen"
+          aria-controls="side-menu"
+          @click="toggleMenu"
         >
           <span></span>
           <span></span>
@@ -56,7 +69,50 @@ function closeMenu() {
     ></button>
 
     <aside id="side-menu" class="side-menu" :class="{ open: isMenuOpen }" aria-label="Menu lateral">
+      <RouterLink :to="{ name: 'login' }" @click="closeMenu">Registrate</RouterLink>
+      <RouterLink :to="{ name: 'menu' }" @click="closeMenu">Menu</RouterLink>
+      <RouterLink :to="{ name: 'history' }" @click="closeMenu">Nuestra historia</RouterLink>
+      <a href="/#mood-title" @click="closeMenu">Contacto</a>
+      <a href="/#comentarios" @click="closeMenu">Comentarios</a>
+      <a
+        href="https://www.google.com/maps?q=C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps."
+        target="_blank"
+        rel="noreferrer"
+        @click="closeMenu"
+      >
+        Ubicacion
+      </a>
+      <button type="button" @click="openReservationCard">Reservaciones</button>
     </aside>
+
+    <Teleport to="body">
+      <Transition name="reservation-card">
+        <section
+          v-if="isReservationCardOpen"
+          class="reservation-card-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="reservation-card-title"
+        >
+          <button
+            class="reservation-card-modal__backdrop"
+            type="button"
+            aria-label="Cerrar reservaciones"
+            @click="closeReservationCard"
+          ></button>
+          <article class="reservation-card-modal__card">
+            <p>TO EAT&nbsp;&nbsp;&nbsp; TO SHARE&nbsp;&nbsp;&nbsp; TO ENJOY</p>
+            <h1 id="reservation-card-title">Reserva tu evento</h1>
+            <div>
+              <span>Nota: sujeto a disponibilidad</span>
+              <a href="/reservar-evento" target="_blank" rel="noreferrer" @click="closeReservationCard">
+                Mas informacion
+              </a>
+            </div>
+          </article>
+        </section>
+      </Transition>
+    </Teleport>
 
     <div class="app-content">
       <slot />
@@ -318,7 +374,7 @@ function closeMenu() {
 .home-layout .menu-button {
   color: #0f1115;
   opacity: 1;
-  cursor: default;
+  cursor: pointer;
 }
 
 .home-login-button {
@@ -362,7 +418,7 @@ function closeMenu() {
 .side-menu {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   z-index: 30;
   display: flex;
   flex-direction: column;
@@ -370,10 +426,10 @@ function closeMenu() {
   width: min(82vw, 320px);
   height: 100vh;
   padding: 124px 28px 28px;
-  background: color-mix(in srgb, var(--color-background) 92%, white);
-  border-left: 1px solid var(--color-border);
-  box-shadow: -18px 0 48px rgb(0 0 0 / 12%);
-  transform: translateX(100%);
+  border-right: 1px solid rgb(255 255 255 / 36%);
+  background: #399ba4;
+  box-shadow: 18px 0 48px rgb(0 0 0 / 18%);
+  transform: translateX(-100%);
   visibility: hidden;
   transition:
     transform 260ms ease,
@@ -530,29 +586,132 @@ function closeMenu() {
     border-color 420ms ease;
 }
 
-.side-menu a {
+.side-menu a,
+.side-menu button {
   display: block;
   padding: 14px 0;
-  color: var(--color-text);
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  font-family: var(--font-body);
   font-size: 1.15rem;
   font-weight: 900;
+  line-height: 1.1;
+  text-align: left;
   text-decoration: none;
   transition: color 420ms ease;
 }
 
+.side-menu a:hover,
+.side-menu button:hover {
+  color: #ffe05d;
+}
+
+.reservation-card-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+}
+
+.reservation-card-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgb(16 17 20 / 58%);
+  backdrop-filter: blur(4px);
+}
+
+.reservation-card-modal__card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(100%, 500px);
+  gap: 16px;
+  place-items: center;
+  padding: 34px 24px 28px;
+  background: #399ba4;
+  color: #ffffff;
+  box-shadow: 0 22px 54px rgb(0 0 0 / 28%);
+  text-align: center;
+}
+
+.reservation-card-modal__card p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.reservation-card-modal__card h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2.1rem, 10vw, 4rem);
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.reservation-card-modal__card div {
+  display: grid;
+  width: min(100%, 340px);
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid rgb(255 255 255 / 48%);
+  background: rgb(255 255 255 / 10%);
+}
+
+.reservation-card-modal__card span {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.reservation-card-modal__card a {
+  justify-self: center;
+  min-height: 42px;
+  padding: 12px 22px;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #101114;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.reservation-card-enter-active,
+.reservation-card-leave-active {
+  transition: opacity 180ms ease;
+}
+
+.reservation-card-enter-from,
+.reservation-card-leave-to {
+  opacity: 0;
+}
+
 .home-layout .side-menu a,
+.home-layout .side-menu button,
 .home-layout .icon-button,
 .home-layout .menu-button,
 .home-layout .brand,
 .orders-layout .side-menu a,
+.orders-layout .side-menu button,
 .orders-layout .icon-button,
 .orders-layout .menu-button,
 .orders-layout .brand,
 .login-layout .side-menu a,
+.login-layout .side-menu button,
 .login-layout .icon-button,
 .login-layout .menu-button,
 .login-layout .brand,
 .order-layout .side-menu a,
+.order-layout .side-menu button,
 .order-layout .icon-button,
 .order-layout .menu-button,
 .order-layout .brand {
