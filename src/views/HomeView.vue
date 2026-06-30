@@ -247,63 +247,9 @@ onBeforeUnmount(() => {
 
     <section class="home-history" :style="{ '--history-image': `url(${refreshedImage(storefrontImage)})` }">
       <div class="home-history__shade"></div>
-      <h1>Nuestra historia</h1>
-    </section>
-
-    <section class="home-section home-history-copy" aria-label="Mision, vision y valores">
-      <div class="home-history-copy__block">
-        <h2>Mision</h2>
-        <p>
-          En Belly Monster Bites ofrecemos un espacio de felicidad libre de estres donde las personas se
-          desconecten de sus preocupaciones diarias a traves de reposteria, gelatos, bebidas y cafes de
-          especialidad excepcionales. Creamos una transicion perfecta entre un mundo divertido y la rutina
-          humana, colocando siempre al cliente al centro de cada experiencia y para el disfrute de nuestros
-          productos que son elaborados con absoluta pasion.
-        </p>
-        <strong>TO EAT, TO SHARE, TO ENJOY</strong>
-      </div>
-
-      <div class="home-history-copy__block">
-        <h2>Vision</h2>
-        <p>
-          Posicionarnos como la marca de reposteria y cafeteria tematica mas querida y reconocida en el
-          noreste de Mexico y el sur de Texas. Buscamos expandir nuestro modelo de franquicia de manera
-          sostenible, llevando innovacion constante a nuestra familia de productos y contagiando la alegria
-          de nuestros personajes a cada nueva comunidad que visitemos.
-        </p>
-      </div>
-
-      <div class="home-history-copy__block">
-        <h2>Valores Corporativos</h2>
-        <ul>
-          <li>
-            <strong>Legado y Union Familiar:</strong>
-            Trabajamos con el mismo carino, confianza y apoyo mutuo con el que jugabamos en nuestra ninez.
-          </li>
-          <li>
-            <strong>Calidez en la Experiencia:</strong>
-            Recibimos a cada cliente como a un invitado de honor en nuestra propia casa.
-          </li>
-          <li>
-            <strong>Pasion Artesanal:</strong>
-            Horneamos y creamos cada producto desde cero con el orgullo y la dedicacion de nuestra receta
-            original.
-          </li>
-          <li>
-            <strong>Transparencia e Integridad:</strong>
-            Actuamos con total honestidad en nuestros procesos, finanzas y relaciones comerciales para
-            generar confianza a largo plazo.
-          </li>
-          <li>
-            <strong>Alegria Colectiva:</strong>
-            Promovemos un ambiente de trabajo divertido donde el exito se comparte y se celebra en equipo.
-          </li>
-          <li>
-            <strong>Innovacion con Identidad:</strong>
-            Buscamos evolucionar y adaptarnos a nuevos mercados sin perder nunca la esencia que nos vio
-            nacer.
-          </li>
-        </ul>
+      <div class="home-history__content">
+        <h1>Nuestra historia</h1>
+        <a href="/nuestra-historia" target="_blank" rel="noreferrer">mas informacion</a>
       </div>
     </section>
 
@@ -325,6 +271,14 @@ onBeforeUnmount(() => {
         <img :src="refreshedImage(customersAtTable)" alt="Clientes en Belly Monster" />
       </div>
       <button class="home-order-link" type="button" disabled>Pagina en desarrollo</button>
+      <div class="home-map" aria-label="Ubicacion Belly Monster">
+        <iframe
+          title="Belly Monster en Google Maps"
+          src="https://www.google.com/maps?q=C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps.&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
     </section>
 
     <footer class="home-footer">
@@ -336,6 +290,7 @@ onBeforeUnmount(() => {
         <RouterLink :to="{ name: 'order' }">Ordena ahora</RouterLink>
         <RouterLink :to="{ name: 'menu' }">Menú</RouterLink>
         <a href="#latest-title">Lo nuevo</a>
+        <RouterLink :to="{ name: 'history' }">Nuestra Historia</RouterLink>
         <a href="#mood-title">Contacto</a>
       </nav>
       <small>Terminos y condiciones</small>
@@ -450,46 +405,6 @@ onBeforeUnmount(() => {
   color: #b47bb9;
   font-size: clamp(1.45rem, 6vw, 2.2rem);
   line-height: 0.95;
-}
-
-.home-history-copy {
-  display: grid;
-  gap: 22px;
-  padding-block: 34px 44px;
-  background: #399ba4;
-  color: #ffffff;
-  font-family: var(--font-body);
-}
-
-.home-history-copy__block {
-  display: grid;
-  gap: 8px;
-}
-
-.home-history-copy h2 {
-  margin: 0;
-  color: #ffffff;
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  line-height: 1;
-}
-
-.home-history-copy p,
-.home-history-copy li {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.48;
-}
-
-.home-history-copy strong {
-  font-weight: 900;
-}
-
-.home-history-copy ul {
-  display: grid;
-  gap: 9px;
-  margin: 0;
-  padding-left: 20px;
 }
 
 .home-history-bridge {
@@ -779,15 +694,42 @@ onBeforeUnmount(() => {
 .home-history {
   min-height: clamp(300px, 65svh, 500px);
   background-image: var(--history-image);
+  background-position: center 72%;
+}
+
+.home-history__content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-content: end center;
+  justify-items: center;
+  gap: 22px;
+  padding: 28px 28px clamp(20px, 5svh, 42px);
+  color: #ffffff;
+  text-align: center;
 }
 
 .home-history h1 {
-  position: absolute;
-  right: 24px;
-  bottom: 30px;
-  left: 24px;
-  z-index: 1;
+  margin: 0;
   color: #ffffff;
+}
+
+.home-history a {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #101114;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .home-section--mood {
@@ -815,6 +757,21 @@ onBeforeUnmount(() => {
 
 .home-order-link {
   margin-top: 26px;
+}
+
+.home-map {
+  width: calc(100% + 56px);
+  height: clamp(320px, 78svh, 520px);
+  margin: 34px -28px -34px;
+  overflow: hidden;
+  background: #f1f1ed;
+}
+
+.home-map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .home-footer {
@@ -877,6 +834,12 @@ onBeforeUnmount(() => {
     margin-left: -44px;
     padding-right: 48px;
     padding-left: 48px;
+  }
+
+  .home-map {
+    width: calc(100% + 88px);
+    margin-right: -44px;
+    margin-left: -44px;
   }
 
   .home-card-row,

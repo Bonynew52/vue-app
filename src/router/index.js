@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import EventReservationView from '../views/EventReservationView.vue'
+import HistoryView from '../views/HistoryView.vue'
 import LoginView from '../views/LoginView.vue'
 import MenuView from '../views/MenuView.vue'
 import OrderView from '../views/OrderView.vue'
@@ -35,6 +36,11 @@ export const router = createRouter({
       path: '/reservar-evento',
       name: 'eventReservation',
       component: EventReservationView,
+    },
+    {
+      path: '/nuestra-historia',
+      name: 'history',
+      component: HistoryView,
     },
     {
       path: '/ordenes',
