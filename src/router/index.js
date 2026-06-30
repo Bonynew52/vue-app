@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import EventReservationView from '../views/EventReservationView.vue'
 import LoginView from '../views/LoginView.vue'
 import MenuView from '../views/MenuView.vue'
 import OrderView from '../views/OrderView.vue'
@@ -29,6 +30,11 @@ export const router = createRouter({
       name: 'pickup',
       component: PickupView,
       meta: { orderMode: 'pickup' },
+    },
+    {
+      path: '/reservar-evento',
+      name: 'eventReservation',
+      component: EventReservationView,
     },
     {
       path: '/ordenes',

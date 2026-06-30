@@ -307,6 +307,17 @@ onBeforeUnmount(() => {
       </div>
     </section>
 
+    <section class="home-history-bridge" aria-label="Belly Monster">
+      <div>
+        <p>TO EAT&nbsp;&nbsp;&nbsp; TO SHARE&nbsp;&nbsp;&nbsp; TO ENJOY</p>
+        <h1>Reserva tu evento</h1>
+        <article class="home-history-bridge__card">
+          <span>Nota: sujeto a disponibilidad</span>
+          <a href="/reservar-evento" target="_blank" rel="noreferrer">mas informacion</a>
+        </article>
+      </div>
+    </section>
+
     <section class="home-section home-section--mood" aria-labelledby="mood-title">
       <h1 id="mood-title"><span>Belly</span> un <span>mood</span> completo</h1>
       <div class="home-mood-grid">
@@ -479,6 +490,85 @@ onBeforeUnmount(() => {
   gap: 9px;
   margin: 0;
   padding-left: 20px;
+}
+
+.home-history-bridge {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-block: 10px solid #101114;
+  background: #399ba4;
+}
+
+.home-history-bridge div {
+  display: grid;
+  width: 100%;
+  min-height: 172px;
+  place-items: center;
+  gap: 12px;
+  padding: 28px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.home-history-bridge p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.home-history-bridge h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.65rem, 7vw, 3.15rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.home-history-bridge a {
+  display: inline-flex;
+  justify-self: center;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #101114;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.home-history-bridge__card {
+  display: grid;
+  width: min(100%, 340px);
+  gap: 12px;
+  margin-top: 8px;
+  padding: 14px 16px;
+  border: 1px solid rgb(255 255 255 / 42%);
+  background: rgb(255 255 255 / 14%);
+  color: #ffffff;
+  font-family: var(--font-body);
+  text-align: center;
+}
+
+.home-history-bridge__card strong {
+  font-size: 0.88rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.home-history-bridge__card span {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  text-transform: uppercase;
 }
 
 .home-card-row,
