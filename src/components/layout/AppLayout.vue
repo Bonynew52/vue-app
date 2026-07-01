@@ -56,7 +56,7 @@ function closeReservationCard() {
       />
 
       <button v-if="route.name === 'home'" class="home-login-button" type="button" disabled>
-        Login
+        Ingresar
       </button>
     </header>
 
@@ -71,7 +71,7 @@ function closeReservationCard() {
     <aside id="side-menu" class="side-menu" :class="{ open: isMenuOpen }" aria-label="Menu lateral">
       <RouterLink :to="{ name: 'login' }" @click="closeMenu">Registrate</RouterLink>
       <RouterLink :to="{ name: 'menu' }" @click="closeMenu">Menu</RouterLink>
-      <RouterLink :to="{ name: 'history' }" @click="closeMenu">Nuestra historia</RouterLink>
+      <RouterLink :to="{ name: 'history' }" @click="closeMenu">Quienes somos</RouterLink>
       <a href="/#mood-title" @click="closeMenu">Contacto</a>
       <a href="/#comentarios" @click="closeMenu">Comentarios</a>
       <a

@@ -1691,13 +1691,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "/images/rappi/comidas-bbq-burger-d560d198-5e9f-4080-bebc-c71edbb54075.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/placeholder-comidas-burgers-belly-burgers.jpg",
+          "imageSource": "local-placeholder",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659549,
-            "rappiName": "Bbq Sandwich (sandwich)",
-            "rappiCategoryName": "Sandwiches (rappi)"
+            "fileName": "WhatsApp Image 2026-07-01 at 9.06.51 AM.jpeg",
+            "source": "WhatsApp placeholders 2026-07-01"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -1732,9 +1730,12 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "/images/menu/placeholder-comidas-burgers-jalapeno-burger.jpg",
+          "imageSource": "local-placeholder",
+          "imageMatch": {
+            "fileName": "WhatsApp Image 2026-07-01 at 9.06.50 AM.jpeg",
+            "source": "WhatsApp placeholders 2026-07-01"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 200201
@@ -1768,9 +1769,12 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "/images/menu/placeholder-comidas-burgers-belly-burgers.jpg",
+          "imageSource": "local-placeholder",
+          "imageMatch": {
+            "fileName": "WhatsApp Image 2026-07-01 at 9.06.51 AM.jpeg",
+            "source": "WhatsApp placeholders 2026-07-01"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 200202
@@ -1804,9 +1808,12 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "/images/menu/placeholder-comidas-burgers-jalapeno-burger.jpg",
+          "imageSource": "local-placeholder",
+          "imageMatch": {
+            "fileName": "WhatsApp Image 2026-07-01 at 9.06.50 AM.jpeg",
+            "source": "WhatsApp placeholders 2026-07-01"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 200203
@@ -1840,9 +1847,12 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "table",
-          "image": "",
-          "imageSource": null,
-          "imageMatch": null,
+          "image": "/images/menu/placeholder-comidas-burgers-belly-burgers.jpg",
+          "imageSource": "local-placeholder",
+          "imageMatch": {
+            "fileName": "WhatsApp Image 2026-07-01 at 9.06.51 AM.jpeg",
+            "source": "WhatsApp placeholders 2026-07-01"
+          },
           "isAvailable": true,
           "isPopular": false,
           "sortIndex": 200204
@@ -5860,13 +5870,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "/images/rappi/bebidas-capuchino-capuccino-helado-ccf4dca4-1279-4540-ba06-61419a38c0cb.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/placeholder-bebidas-cofy-helado.jpg",
+          "imageSource": "local-placeholder",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659486,
-            "rappiName": "Helado de Capuchino",
-            "rappiCategoryName": "Cofy (Helado)"
+            "fileName": "WhatsApp Image 2026-07-01 at 9.11.01 AM.jpeg",
+            "source": "WhatsApp placeholders 2026-07-01"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -5900,13 +5908,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "/images/rappi/bebidas-daily-cofy-americano-helado-c74bd44e-d6b1-4f2a-b072-322a7c8489bd.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/placeholder-bebidas-cofy-helado.jpg",
+          "imageSource": "local-placeholder",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659563,
-            "rappiName": "Helado Daily Cofy (Americano)",
-            "rappiCategoryName": "Cofy (Helado)"
+            "fileName": "WhatsApp Image 2026-07-01 at 9.11.01 AM.jpeg",
+            "source": "WhatsApp placeholders 2026-07-01"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -5944,13 +5950,11 @@
           ],
           "hasRequiredModifiers": true,
           "fulfillmentType": "counter",
-          "image": "/images/rappi/bebidas-godlatte-latte-helado-b96c3b72-0956-4842-84dd-0e182a7dc9eb.jpeg",
-          "imageSource": "rappi",
+          "image": "/images/menu/placeholder-bebidas-cofy-helado.jpg",
+          "imageSource": "local-placeholder",
           "imageMatch": {
-            "method": "rule-exact",
-            "rappiProductId": 7659508,
-            "rappiName": "Helado Godlatte (Latte)",
-            "rappiCategoryName": "Cofy (Helado)"
+            "fileName": "WhatsApp Image 2026-07-01 at 9.11.01 AM.jpeg",
+            "source": "WhatsApp placeholders 2026-07-01"
           },
           "isAvailable": true,
           "isPopular": false,
@@ -9499,10 +9503,10 @@
     "itemCount": 204,
     "categoryCount": 33,
     "modifierGroupCount": 35,
-    "imageMatchedCount": 126,
-    "imageMissingCount": 78,
+    "imageMatchedCount": 130,
+    "imageMissingCount": 74,
     "imageMissingByMenu": {
-      "comidas": 12,
+      "comidas": 8,
       "postres": 62,
       "bebidas": 4
     }

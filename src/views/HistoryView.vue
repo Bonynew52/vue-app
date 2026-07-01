@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
 <template>
   <main class="history-view">
     <section class="history-view__sheet" aria-labelledby="history-title">
-      <h1 id="history-title">Nuestra historia</h1>
+      <h1 id="history-title">Quienes somos</h1>
 
       <article>
         <h2>Mision</h2>

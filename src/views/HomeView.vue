@@ -272,7 +272,7 @@ onBeforeUnmount(() => {
     <section class="home-history" :style="{ '--history-image': `url(${refreshedImage(storefrontImage)})` }">
       <div class="home-history__shade"></div>
       <div class="home-history__content">
-        <h1>Nuestra historia</h1>
+        <h1>Quienes somos</h1>
         <a href="/nuestra-historia" target="_blank" rel="noreferrer">mas informacion</a>
       </div>
     </section>
@@ -311,11 +311,19 @@ onBeforeUnmount(() => {
       </div>
       <strong>To eat to share to enjoy</strong>
       <nav aria-label="Enlaces del sitio">
-        <RouterLink :to="{ name: 'order' }">Ordena ahora</RouterLink>
-        <RouterLink :to="{ name: 'menu' }">Menú</RouterLink>
-        <a href="#latest-title">Lo nuevo</a>
-        <RouterLink :to="{ name: 'history' }">Nuestra Historia</RouterLink>
+        <RouterLink :to="{ name: 'login' }">Registrate</RouterLink>
+        <RouterLink :to="{ name: 'menu' }">Menu</RouterLink>
+        <RouterLink :to="{ name: 'history' }">Quienes somos</RouterLink>
         <a href="#mood-title">Contacto</a>
+        <a href="#comentarios">Comentarios</a>
+        <a
+          href="https://www.google.com/maps?q=C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps."
+          target="_blank"
+          rel="noreferrer"
+        >
+          Ubicacion
+        </a>
+        <a href="/reservar-evento" target="_blank" rel="noreferrer">Reservaciones</a>
       </nav>
       <small>Terminos y condiciones</small>
     </footer>
