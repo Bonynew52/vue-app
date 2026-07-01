@@ -245,7 +245,8 @@ function closeReservationCard() {
 }
 
 .app-layout.orders-layout,
-.app-layout.login-layout {
+.app-layout.login-layout,
+.app-layout.eventReservation-layout {
   --app-header-height: 0px;
   --app-footer-min-height: 0px;
   background: #fff8ef;
@@ -402,7 +403,9 @@ function closeReservationCard() {
 .orders-layout .app-header,
 .orders-layout .app-footer,
 .login-layout .app-header,
-.login-layout .app-footer {
+.login-layout .app-footer,
+.eventReservation-layout .app-header,
+.eventReservation-layout .app-footer {
   display: none;
 }
 
