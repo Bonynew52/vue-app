@@ -1,882 +1,331 @@
 {
   "id": "postres",
   "name": "Postres",
-  "sourceFile": "Reposteria - 2026-06-12 10_46_30.xlsx",
+  "sourceFile": "Manual postres 2026-07-01",
   "products": [
     {
-      "name": "Affogato",
-      "price": 50,
-      "description": "",
-      "sku": "PFRGA-00000001",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Apple Crumble (Mayo)",
-      "price": 41,
-      "description": "",
-      "sku": "AR-1777928057003",
-      "categories": [
-        "Kuky"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Banana y Dulce de Leche (junio)",
+      "name": "Red velvet",
       "price": 0,
       "description": "",
-      "sku": "AR-1780337831125",
+      "sku": "POSTRES-GALLETAS-01",
       "categories": [
-        "Gelly"
+        "Galletas"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
+      "modifierGroups": [],
+      "image": "/images/menu/nuevo-postres-galletas-red-velvet.jpg"
     },
     {
-      "name": "Banana y Dulce de Leche (malteada)(junio",
+      "name": "Triple chocolate",
       "price": 0,
       "description": "",
-      "sku": "AR-1780338354002",
+      "sku": "POSTRES-GALLETAS-02",
       "categories": [
-        "Malteadas"
+        "Galletas"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
+      "modifierGroups": [],
+      "image": ""
     },
     {
-      "name": "Birthday Cake (Abril)",
-      "price": 41,
-      "description": "",
-      "sku": "PFRK-00000030",
-      "categories": [
-        "Kuky"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Biscoff",
-      "price": 65,
-      "description": "Cheesecake de crema de lotus biscoff con chispas de chocolate blanco",
-      "sku": "PFRC-00000011",
-      "categories": [
-        "Chiskay"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Blueberry, Blackberry y Lotus (Malteada)",
+      "name": "Pingüino",
       "price": 0,
       "description": "",
-      "sku": "AR-1777916326825",
+      "sku": "POSTRES-GALLETAS-03",
       "categories": [
-        "Malteadas"
+        "Galletas"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "Blueberry, Blackberry y Lotus (Mayo)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1777915978769",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Campfire (Smores)",
-      "price": 41,
-      "description": "S'mores, bombon, chocolate y graham crackers",
-      "sku": "PFRK-00000007",
-      "categories": [
-        "Kuky"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Caramel Popcorn (Junio)",
-      "price": 41,
-      "description": "Galleta de caramelo con betun de caramelo y palomitas caramelizadas.",
-      "sku": "PFRK-00000062",
-      "categories": [
-        "Kuky"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Cheesecake Fresa y Chocolate (junio)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1780337754291",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Cheesecake Fresa y Chocolate (malteada)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1780338236102",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "Chocolate Strawberry (Mayo)",
-      "price": 41,
-      "description": "",
-      "sku": "AR-1777928106448",
-      "categories": [
-        "Kuky"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Cinnamon Blondie",
-      "price": 58,
-      "description": "",
-      "sku": "PFRB-00000009",
-      "categories": [
-        "Brauny"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Cinnamon Peach (RC) (Junio)",
-      "price": 85,
-      "description": "Rol de canela con durazno.",
-      "sku": "PFBE-00000061",
-      "categories": [
-        "Roles de Canela"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Clasico Brownie",
-      "price": 58,
-      "description": "Clasico brownie de chocolate",
-      "sku": "PFRB-00000001",
-      "categories": [
-        "Brauny"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Coco, Frambuesa, Chocolate (Malteada)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1777916468970",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "Coco, Frambuesa, Chocolate (Mayo)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1777916126904",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Coffee (Julio)",
-      "price": 65,
-      "description": "Cheesecake sabor cafe con cubierta de chocolate",
-      "sku": "PFRC-00000013",
-      "categories": [
-        "Chiskay"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Cookies n Cream (Gelato)",
-      "price": 0,
-      "description": "Gelato de oreo",
-      "sku": "PFRG-00000003",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Cookies n Cream (Malteada)",
-      "price": 0,
-      "description": "Gelato de oreo",
-      "sku": "PFRGM-00000003",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "Dubai (Junio)",
-      "price": 41,
-      "description": "Galleta de chocolate con relleno de pistache.",
-      "sku": "PFRK-00000061",
-      "categories": [
-        "Kuky"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Esquimales",
-      "price": 55,
-      "description": "",
-      "sku": "PFGE-00000001",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Esquimales Sabores"
-      ]
-    },
-    {
-      "name": "Ferrero Brownie (Mr. Rocher)",
-      "price": 58,
-      "description": "Brownie de avellana, ferrero rocher y nutella",
-      "sku": "PFRB-00000003",
-      "categories": [
-        "Brauny"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Forest Ranger (V)",
-      "price": 58,
-      "description": "Blondie de s'mores, bombon, chocolate y graham crackers",
-      "sku": "PFRB-00000005",
-      "categories": [
-        "Brauny"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Frutos Rojos (Red Hoodie)",
-      "price": 65,
-      "description": "Cheesecake con mermelada de fresa, fresa y mezcla de frutos rojos",
-      "sku": "PFRC-00000009",
-      "categories": [
-        "Chiskay"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Litro Gelato",
-      "price": 300,
-      "description": "",
-      "sku": "PFRG-00001",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Lotus Biscoff (Gelato)",
-      "price": 0,
-      "description": "Gelato de galleta lotus biscoff",
-      "sku": "PFRG-00000005",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Lotus Biscoff (Malteada)",
-      "price": 0,
-      "description": "Gelato de galleta lotus biscoff",
-      "sku": "PFRGM-00000005",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "Lotus Monk",
-      "price": 41,
-      "description": "Galleta de vainilla con galletas y spread lotus biscoff con chocolate blanco",
-      "sku": "PFRK-00000003",
-      "categories": [
-        "Kuky"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Love's Secret (V)",
-      "price": 58,
-      "description": "Blondie con glorias, obleas y dulce de leche",
-      "sku": "PFRB-00000004",
-      "categories": [
-        "Brauny"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Macadamia",
-      "price": 41,
-      "description": "Galleta de vainilla con macadamia y chocolate blanco",
-      "sku": "PFRK-00000005",
-      "categories": [
-        "Kuky"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Mango (Malteada)",
-      "price": 0,
-      "description": "Sorbetto de Mango",
-      "sku": "PFRGM-00000009",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "Mango (Sorbetto)",
-      "price": 0,
-      "description": "Sorbetto de Mango",
-      "sku": "PFRG-00000009",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Matcha y Coco (junio)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1780337794319",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Matcha y Coco (malteada)(junio)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1780338277263",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "Milk Chocolate (Gelato)",
-      "price": 0,
-      "description": "Gelato de chocolate",
-      "sku": "PFRG-00000002",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Milk Chocolate (Malteada)",
-      "price": 0,
-      "description": "Gelato de chocolate",
-      "sku": "PFRGM-00000002",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "Mocha Oreo (Mayo)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1777915837377",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Mocha Oreo (Mayo)(Malteada)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1777916254845",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
+      "modifierGroups": [],
+      "image": "/images/menu/nuevo-postres-galletas-pinguino.jpg"
     },
     {
       "name": "Oreo",
-      "price": 41,
-      "description": "Galleta de vainilla con trozos de oreo y chocolate blanco",
-      "sku": "PFRK-00000002",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-GALLETAS-04",
       "categories": [
-        "Kuky"
+        "Galletas"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": []
+      "modifierGroups": [],
+      "image": "/images/menu/nuevo-postres-galletas-oreo.jpg"
     },
     {
-      "name": "Oreo Blondie (Blond Cowkie)",
-      "price": 58,
-      "description": "Blondie de oreo, chocolate blanco y Hershey's cookies and cream",
-      "sku": "PFRB-00000006",
+      "name": "S’mores",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-GALLETAS-05",
+      "categories": [
+        "Galletas"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": "/images/menu/nuevo-postres-galletas-smores.jpg"
+    },
+    {
+      "name": "Lotus",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-GALLETAS-06",
+      "categories": [
+        "Galletas"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": "/images/menu/nuevo-postres-galletas-lotus.jpg"
+    },
+    {
+      "name": "Macadamia",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-GALLETAS-07",
+      "categories": [
+        "Galletas"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
+    },
+    {
+      "name": "Clásico",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-BRAUNY-01",
       "categories": [
         "Brauny"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": []
+      "modifierGroups": [],
+      "image": ""
     },
     {
-      "name": "Oreo Brownie (Brown Cowkie)",
-      "price": 58,
-      "description": "Brownie con oreo, chocolate blanco y hershey's cookies and cream",
-      "sku": "PFRB-00000002",
+      "name": "Oreo brownies",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-BRAUNY-02",
       "categories": [
         "Brauny"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": []
+      "modifierGroups": [],
+      "image": ""
     },
     {
-      "name": "Oreo Chiskay (Midnight Treat)",
-      "price": 65,
-      "description": "Cheesecake con oreo, chocolate y chocolate blanco",
-      "sku": "PFRC-00000002",
-      "categories": [
-        "Chiskay"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Piña, Mango y Coco (junio)",
+      "name": "Oreo blondie",
       "price": 0,
       "description": "",
-      "sku": "AR-1780337875554",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Piña, Mango y Coco (malteada)(agua)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1780338424168",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "Pinguino",
-      "price": 41,
-      "description": "Galleta con relleno de bombon y chocolate",
-      "sku": "PFRK-00000013",
-      "categories": [
-        "Kuky"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Platano Chiskay (Nanas)",
-      "price": 65,
-      "description": "Cheesecake de platano, cajeta y nuez",
-      "sku": "PFRC-00000005",
-      "categories": [
-        "Chiskay"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Red Velvet",
-      "price": 41,
-      "description": "Galleta de Red Velvet con queso crema",
-      "sku": "PFRK-00000009",
-      "categories": [
-        "Kuky"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Rol de Canela (RC)",
-      "price": 75,
-      "description": "Rol relleno de canela y glaseado de vainilla",
-      "sku": "PFBE-00000005",
-      "categories": [
-        "Roles de Canela"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Rol de Chocolate (RC)",
-      "price": 85,
-      "description": "Rol relleno de chocolate con glaseado de vainilla y nutella",
-      "sku": "PFBE-00000007",
-      "categories": [
-        "Roles de Canela"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Rol de Lotus Biscoff (RC)",
-      "price": 85,
-      "description": "Rol relleno de Lotus Biscoff y glaseado de vainilla",
-      "sku": "PFBE-00000006",
-      "categories": [
-        "Roles de Canela"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Sandia Menta Limon  (junio)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1780337915276",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Sandia Menta Limon (malteada)(agua)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1780338469368",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "S'mores (Mayo)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1777916071128",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "S'mores (Mayo)(Malteada)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1777916392711",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "Strawberry Lemonade (Mayo)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1777916177670",
-      "categories": [
-        "Gelly"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
-    },
-    {
-      "name": "Strawberry Lemonade (Mayo)(Malteada)",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1777916522510",
-      "categories": [
-        "Malteadas"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
-    },
-    {
-      "name": "Sweet Yogui (Lotus) (V)",
-      "price": 58,
-      "description": "Blondie, galleta de lotus biscoff, chocolate blanco y spread de Lotus",
-      "sku": "PFRB-00000007",
+      "sku": "POSTRES-BRAUNY-03",
       "categories": [
         "Brauny"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": []
+      "modifierGroups": [],
+      "image": ""
     },
     {
-      "name": "Tiramisu (Mayo)",
-      "price": 41,
+      "name": "Ferrero rocher",
+      "price": 0,
       "description": "",
-      "sku": "AR-1777928004304",
+      "sku": "POSTRES-BRAUNY-04",
       "categories": [
-        "Kuky"
+        "Brauny"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": []
+      "modifierGroups": [],
+      "image": ""
     },
     {
-      "name": "Tortuga (Junio)",
-      "price": 65,
-      "description": "Cheesecake con caramelo, chocolate y nuez.",
-      "sku": "PFRC-00000012",
+      "name": "Frutos rojos",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-CHISKAY-01",
       "categories": [
         "Chiskay"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": []
+      "modifierGroups": [],
+      "image": ""
     },
     {
-      "name": "Triple Chocolate",
-      "price": 41,
-      "description": "Galleta de vainilla con chocolate blanco, leche y semiamargo",
-      "sku": "PFRK-00000017",
-      "categories": [
-        "Kuky"
-      ],
-      "saleType": "Precio Fijo",
-      "modifierGroups": []
-    },
-    {
-      "name": "Tropical Guayaba",
-      "price": 65,
-      "description": "Cheesecake de Guayaba con ate de guayaba y nuez",
-      "sku": "PFRC-00000003",
+      "name": "Guayaba",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-CHISKAY-02",
       "categories": [
         "Chiskay"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": []
+      "modifierGroups": [],
+      "image": ""
     },
     {
-      "name": "Vainilla (Gelato)",
+      "name": "Plátano",
       "price": 0,
-      "description": "Gelato de vainilla",
-      "sku": "PFRG-00000001",
+      "description": "",
+      "sku": "POSTRES-CHISKAY-03",
       "categories": [
-        "Gelly"
+        "Chiskay"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Gelly",
-        "Sabor extra"
-      ]
+      "modifierGroups": [],
+      "image": ""
     },
     {
-      "name": "Vainilla (Malteada)",
+      "name": "Oreo",
       "price": 0,
-      "description": "Gelato de vainilla",
-      "sku": "PFRGM-00000001",
+      "description": "",
+      "sku": "POSTRES-CHISKAY-04",
       "categories": [
-        "Malteadas"
+        "Chiskay"
       ],
       "saleType": "Precio Fijo",
-      "modifierGroups": [
-        "Tamaño Malteada"
-      ]
+      "modifierGroups": [],
+      "image": ""
     },
     {
-      "name": "12 oz (Chico)",
-      "price": 95,
+      "name": "Original",
+      "price": 0,
       "description": "",
-      "sku": "AR-1732995141013",
-      "categories": [],
-      "saleType": "Opción de modificador",
-      "modifierGroups": []
+      "sku": "POSTRES-ROLES-01",
+      "categories": [
+        "Roles"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
     },
     {
-      "name": "16 oz (Mediano)",
-      "price": 105,
+      "name": "Lotus",
+      "price": 0,
       "description": "",
-      "sku": "AR-1732995141052",
-      "categories": [],
-      "saleType": "Opción de modificador",
-      "modifierGroups": []
-    },
-    {
-      "name": "4 oz (Chico)",
-      "price": 58,
-      "description": "",
-      "sku": "AR-1732995425266",
-      "categories": [],
-      "saleType": "Opción de modificador",
-      "modifierGroups": []
-    },
-    {
-      "name": "6 oz (Mediano)",
-      "price": 78,
-      "description": "",
-      "sku": "AR-1732995425290",
-      "categories": [],
-      "saleType": "Opción de modificador",
-      "modifierGroups": []
+      "sku": "POSTRES-ROLES-02",
+      "categories": [
+        "Roles"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
     },
     {
       "name": "Chocolate",
       "price": 0,
       "description": "",
-      "sku": "AR-1733434187418",
-      "categories": [],
-      "saleType": "Opción de modificador",
-      "modifierGroups": []
-    },
-    {
-      "name": "Lotus Biscoff",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1775597154121",
-      "categories": [],
-      "saleType": "Opción de modificador",
-      "modifierGroups": []
-    },
-    {
-      "name": "Mango Chamoy",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1733434187459",
-      "categories": [],
-      "saleType": "Opción de modificador",
-      "modifierGroups": []
-    },
-    {
-      "name": "Oreo",
-      "price": 0,
-      "description": "",
-      "sku": "AR-1733434187438",
-      "categories": [],
-      "saleType": "Opción de modificador",
-      "modifierGroups": []
+      "sku": "POSTRES-ROLES-03",
+      "categories": [
+        "Roles"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
     },
     {
       "name": "Vainilla",
       "price": 0,
       "description": "",
-      "sku": "AR-1733434187388",
-      "categories": [],
-      "saleType": "Opción de modificador",
-      "modifierGroups": []
+      "sku": "POSTRES-NIEVES-01",
+      "categories": [
+        "Nieves"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
+    },
+    {
+      "name": "Milk chocolate",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-NIEVES-02",
+      "categories": [
+        "Nieves"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
+    },
+    {
+      "name": "Cookies and cream",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-NIEVES-03",
+      "categories": [
+        "Nieves"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
+    },
+    {
+      "name": "Lotus",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-NIEVES-04",
+      "categories": [
+        "Nieves"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
+    },
+    {
+      "name": "Vainilla",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-ESQUIMALES-01",
+      "categories": [
+        "Esquimales"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
+    },
+    {
+      "name": "Chocolate",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-ESQUIMALES-02",
+      "categories": [
+        "Esquimales"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
+    },
+    {
+      "name": "Oreo",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-ESQUIMALES-03",
+      "categories": [
+        "Esquimales"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
+    },
+    {
+      "name": "Mango",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-ESQUIMALES-04",
+      "categories": [
+        "Esquimales"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
+    },
+    {
+      "name": "Lotus",
+      "price": 0,
+      "description": "",
+      "sku": "POSTRES-ESQUIMALES-05",
+      "categories": [
+        "Esquimales"
+      ],
+      "saleType": "Precio Fijo",
+      "modifierGroups": [],
+      "image": ""
     }
   ],
   "modifiers": [
