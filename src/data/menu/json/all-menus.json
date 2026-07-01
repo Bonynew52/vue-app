@@ -197,19 +197,6 @@
           ]
         },
         {
-          "name": "Cortado",
-          "price": 50,
-          "description": "Shot de espresso con 2 oz de leche",
-          "sku": "BCO-00000002-C",
-          "categories": [
-            "Cofy (Caliente)"
-          ],
-          "saleType": "Precio Fijo",
-          "modifierGroups": [
-            "Tipo de Leche"
-          ]
-        },
-        {
           "name": "Daily Cofy (Americano) Caliente",
           "price": 0,
           "description": "Cafe Americano de Chiapas",
@@ -333,19 +320,6 @@
           "sku": "BTC-00000005-1",
           "categories": [
             "Té Caliente"
-          ],
-          "saleType": "Precio Fijo",
-          "modifierGroups": [
-            "Tamaño (Te y Coldbrew)"
-          ]
-        },
-        {
-          "name": "Frutos Rojos (Te Negro) Helado",
-          "price": 0,
-          "description": "Te negro con Frutos rojos",
-          "sku": "BTC-00000005-2",
-          "categories": [
-            "Té Helado"
           ],
           "saleType": "Precio Fijo",
           "modifierGroups": [
@@ -1966,11 +1940,6 @@
           "menuPrice": 0
         },
         {
-          "item": "Cortado",
-          "basePrice": 50,
-          "menuPrice": 50
-        },
-        {
           "item": "Daily Cofy (Americano) Caliente",
           "basePrice": 0,
           "menuPrice": 0
@@ -2017,11 +1986,6 @@
         },
         {
           "item": "Frutos Rojos (Te Negro) Caliente",
-          "basePrice": 0,
-          "menuPrice": 0
-        },
-        {
-          "item": "Frutos Rojos (Te Negro) Helado",
           "basePrice": 0,
           "menuPrice": 0
         },
@@ -2699,17 +2663,6 @@
             "grupo_modificador_2": "Adicionales"
           },
           {
-            "name": "Cortado",
-            "price": 50,
-            "description": "Shot de espresso con 2 oz de leche",
-            "sku": "BCO-00000002-C",
-            "categories": "Cofy (Caliente)",
-            "saleType": "Precio Fijo",
-            "modifierGroup": "Tipo de Leche",
-            "grupo_modificador_1": null,
-            "grupo_modificador_2": null
-          },
-          {
             "name": "Daily Cofy (Americano) Caliente",
             "price": 0,
             "description": "Cafe Americano de Chiapas",
@@ -2814,17 +2767,6 @@
             "description": "Te negro con Frutos rojos",
             "sku": "BTC-00000005-1",
             "categories": "Té Caliente",
-            "saleType": "Precio Fijo",
-            "modifierGroup": "Tamaño (Te y Coldbrew)",
-            "grupo_modificador_1": null,
-            "grupo_modificador_2": null
-          },
-          {
-            "name": "Frutos Rojos (Te Negro) Helado",
-            "price": 0,
-            "description": "Te negro con Frutos rojos",
-            "sku": "BTC-00000005-2",
-            "categories": "Té Helado",
             "saleType": "Precio Fijo",
             "modifierGroup": "Tamaño (Te y Coldbrew)",
             "grupo_modificador_1": null,
@@ -4701,11 +4643,6 @@
             "menuPrice": 0
           },
           {
-            "item": "Cortado",
-            "basePrice": 50,
-            "menuPrice": 50
-          },
-          {
             "item": "Daily Cofy (Americano) Caliente",
             "basePrice": 0,
             "menuPrice": 0
@@ -4752,11 +4689,6 @@
           },
           {
             "item": "Frutos Rojos (Te Negro) Caliente",
-            "basePrice": 0,
-            "menuPrice": 0
-          },
-          {
-            "item": "Frutos Rojos (Te Negro) Helado",
             "basePrice": 0,
             "menuPrice": 0
           },
