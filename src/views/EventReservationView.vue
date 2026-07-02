@@ -1,10 +1,8 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
 
 const reservationFormUrl =
   'https://docs.google.com/forms/d/e/1FAIpQLSf6t4oeY86rwgtwKo8nDSC5zUPcWYpJFRlxtlBIazYuolePbQ/viewform'
-const router = useRouter()
 
 const eventPackages = [
   {
@@ -266,15 +264,6 @@ function openPackage(eventPackage) {
 function closePackage() {
   selectedPackageId.value = ''
 }
-
-function goBack() {
-  if (window.history.length > 1) {
-    router.back()
-    return
-  }
-
-  router.push({ name: 'home' })
-}
 </script>
 
 <template>
@@ -299,9 +288,6 @@ function goBack() {
         </button>
       </div>
 
-      <div class="event-reservation-view__footer-action">
-        <button type="button" @click="goBack">Volver</button>
-      </div>
     </section>
 
     <Transition name="package-detail">
@@ -366,9 +352,14 @@ function goBack() {
             </section>
           </div>
 
-          <a class="package-detail-card__action" :href="reservationFormUrl" target="_blank" rel="noreferrer">
-            Solicita tu reservacion
-          </a>
+          <div class="package-detail-card__actions">
+            <button type="button" class="package-detail-card__back" @click="closePackage">
+              Volver
+            </button>
+            <a class="package-detail-card__action" :href="reservationFormUrl" target="_blank" rel="noreferrer">
+              Solicita tu reservacion
+            </a>
+          </div>
         </article>
       </section>
     </Transition>
@@ -499,32 +490,6 @@ function goBack() {
 }
 
 .event-package-card:focus-visible {
-  outline: 3px solid rgb(57 155 164 / 34%);
-  outline-offset: 3px;
-}
-
-.event-reservation-view__footer-action {
-  display: flex;
-  justify-content: center;
-  padding: 0 clamp(28px, 9vw, 58px) 42px;
-}
-
-.event-reservation-view__footer-action button {
-  min-height: 44px;
-  min-width: 128px;
-  padding: 12px 24px;
-  border: 1px solid #101114;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #101114;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 900;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.event-reservation-view__footer-action button:focus-visible {
   outline: 3px solid rgb(57 155 164 / 34%);
   outline-offset: 3px;
 }
@@ -741,14 +706,20 @@ function goBack() {
   color: var(--package-color);
 }
 
-.package-detail-card__action {
-  justify-self: center;
+.package-detail-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
   margin: 0 24px 28px;
+}
+
+.package-detail-card__action,
+.package-detail-card__back {
   min-height: 44px;
   padding: 14px 24px;
+  border: 0;
   border-radius: 999px;
-  background: var(--package-color);
-  color: #ffffff;
   font-family: var(--font-body);
   font-size: 0.86rem;
   font-weight: 900;
@@ -756,6 +727,18 @@ function goBack() {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  cursor: pointer;
+}
+
+.package-detail-card__action {
+  background: var(--package-color);
+  color: #ffffff;
+}
+
+.package-detail-card__back {
+  background: #ffffff;
+  color: #101114;
+  box-shadow: inset 0 0 0 1px rgb(16 17 20 / 18%);
 }
 
 .package-detail-enter-active,

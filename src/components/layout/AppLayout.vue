@@ -4,7 +4,6 @@ import { useRoute } from 'vue-router'
 import wordmarkLogo from '../../assets/brand/belly-monster-wordmark.png'
 
 const isMenuOpen = ref(false)
-const isReservationCardOpen = ref(false)
 const route = useRoute()
 
 function toggleMenu() {
@@ -15,14 +14,6 @@ function closeMenu() {
   isMenuOpen.value = false
 }
 
-function openReservationCard() {
-  isReservationCardOpen.value = true
-  closeMenu()
-}
-
-function closeReservationCard() {
-  isReservationCardOpen.value = false
-}
 </script>
 
 <template>
@@ -32,6 +23,19 @@ function closeReservationCard() {
     </div>
 
     <header class="app-header">
+      <RouterLink
+        v-if="route.name === 'menu'"
+        class="header-home-button"
+        :to="{ name: 'home' }"
+        aria-label="Volver al inicio"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 11.5 12 4l9 7.5" />
+          <path d="M5.5 10.5V20h13v-9.5" />
+          <path d="M9.5 20v-6h5v6" />
+        </svg>
+      </RouterLink>
+
       <nav class="header-actions" aria-label="Menu">
         <button
           class="menu-button"
@@ -75,44 +79,15 @@ function closeReservationCard() {
       <a href="/#mood-title" @click="closeMenu">Contacto</a>
       <a href="/#comentarios" @click="closeMenu">Comentarios</a>
       <a
-        href="https://www.google.com/maps?q=C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps."
+        href="https://www.google.com/maps?q=Belly%20Monster%20Bites%20Plaza%20Punto%20Madero%2C%20C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps.%2C%20Mexico"
         target="_blank"
         rel="noreferrer"
         @click="closeMenu"
       >
         Ubicacion
       </a>
-      <button type="button" @click="openReservationCard">Reservaciones</button>
+      <RouterLink :to="{ name: 'eventReservation' }" @click="closeMenu">Reservaciones</RouterLink>
     </aside>
-
-    <Teleport to="body">
-      <Transition name="reservation-card">
-        <section
-          v-if="isReservationCardOpen"
-          class="reservation-card-modal"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="reservation-card-title"
-        >
-          <button
-            class="reservation-card-modal__backdrop"
-            type="button"
-            aria-label="Cerrar reservaciones"
-            @click="closeReservationCard"
-          ></button>
-          <article class="reservation-card-modal__card">
-            <p>TO EAT&nbsp;&nbsp;&nbsp; TO SHARE&nbsp;&nbsp;&nbsp; TO ENJOY</p>
-            <h1 id="reservation-card-title">Reserva tu evento</h1>
-            <div>
-              <span>Nota: sujeto a disponibilidad</span>
-              <a href="/reservar-evento" target="_blank" rel="noreferrer" @click="closeReservationCard">
-                Mas informacion
-              </a>
-            </div>
-          </article>
-        </section>
-      </Transition>
-    </Teleport>
 
     <div class="app-content">
       <slot />
@@ -378,6 +353,25 @@ function closeReservationCard() {
   cursor: pointer;
 }
 
+.header-home-button {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  color: #101114;
+  text-decoration: none;
+}
+
+.header-home-button svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .home-login-button {
   position: absolute;
   top: 50%;
@@ -608,94 +602,6 @@ function closeReservationCard() {
 .side-menu a:hover,
 .side-menu button:hover {
   color: #ffe05d;
-}
-
-.reservation-card-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 120;
-  display: grid;
-  place-items: center;
-  padding: 22px;
-}
-
-.reservation-card-modal__backdrop {
-  position: absolute;
-  inset: 0;
-  border: 0;
-  background: rgb(16 17 20 / 58%);
-  backdrop-filter: blur(4px);
-}
-
-.reservation-card-modal__card {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  width: min(100%, 500px);
-  gap: 16px;
-  place-items: center;
-  padding: 34px 24px 28px;
-  background: #399ba4;
-  color: #ffffff;
-  box-shadow: 0 22px 54px rgb(0 0 0 / 28%);
-  text-align: center;
-}
-
-.reservation-card-modal__card p {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 900;
-  line-height: 1;
-}
-
-.reservation-card-modal__card h1 {
-  margin: 0;
-  color: #ffffff;
-  font-size: clamp(2.1rem, 10vw, 4rem);
-  line-height: 0.88;
-  text-transform: uppercase;
-}
-
-.reservation-card-modal__card div {
-  display: grid;
-  width: min(100%, 340px);
-  gap: 14px;
-  padding: 16px;
-  border: 1px solid rgb(255 255 255 / 48%);
-  background: rgb(255 255 255 / 10%);
-}
-
-.reservation-card-modal__card span {
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 900;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
-.reservation-card-modal__card a {
-  justify-self: center;
-  min-height: 42px;
-  padding: 12px 22px;
-  border-radius: 9px;
-  background: #ffffff;
-  color: #101114;
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 900;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.reservation-card-enter-active,
-.reservation-card-leave-active {
-  transition: opacity 180ms ease;
-}
-
-.reservation-card-enter-from,
-.reservation-card-leave-to {
-  opacity: 0;
 }
 
 .home-layout .side-menu a,

@@ -294,6 +294,9 @@ const setChipRef = (id) => (el) => {
   }
 }
 const categoryRail = ref(null)
+const stickyBar = ref(null)
+const showMenuReturnBar = ref(false)
+const highlightedMenuItemId = ref('')
 
 let observer = null
 function setupObserver() {
@@ -323,7 +326,17 @@ watch(isSearching, (searching) => {
   if (!searching) {
     nextTick(setupObserver)
   }
+  nextTick(updateMenuReturnBar)
 })
+
+watch(
+  () => route.query.categoria,
+  () => {
+    nextTick(() => {
+      requestAnimationFrame(scrollToMenuCategoryFromRoute)
+    })
+  },
+)
 
 watch(activeCategory, (id) => {
   if (!categoryScrollSyncEnabled) {
@@ -347,10 +360,53 @@ function goToCategory(id) {
     return
   }
   activeCategory.value = id
-  const el = sectionEls[id]
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  scrollToMenuCategory(id)
+}
+
+function updateMenuReturnBar() {
+  if (typeof window === 'undefined' || !stickyBar.value || isSearching.value) {
+    showMenuReturnBar.value = false
+    return
   }
+
+  const stickyBottom = stickyBar.value.offsetTop + stickyBar.value.offsetHeight
+  showMenuReturnBar.value = window.scrollY > stickyBottom + 24
+}
+
+function scrollToMenuControls() {
+  if (typeof window === 'undefined' || !stickyBar.value) {
+    return
+  }
+
+  const appHeaderHeight = 100
+  const top = stickyBar.value.offsetTop - appHeaderHeight - 10
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+}
+
+function routeCategoryId() {
+  const raw = route.query.categoria
+  return Array.isArray(raw) ? raw[0] : raw
+}
+
+function scrollToMenuCategory(categoryId) {
+  const el = sectionEls[categoryId]
+  if (!el || temporarilyDisabledCategoryIds.has(categoryId)) {
+    return
+  }
+
+  const targetOffset = 122
+  const top = el.getBoundingClientRect().top + window.scrollY - targetOffset
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+}
+
+function scrollToMenuCategoryFromRoute() {
+  const categoryId = routeCategoryId()
+  if (!categoryId) {
+    return
+  }
+
+  activeCategory.value = categoryId
+  scrollToMenuCategory(categoryId)
 }
 
 /* Pointer affordances for the chip rail: drag-to-scroll and wheel scrolling
@@ -436,8 +492,23 @@ onBeforeUnmount(() => {
   if (observer) {
     observer.disconnect()
   }
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('scroll', updateMenuReturnBar)
+    window.removeEventListener('resize', updateMenuReturnBar)
+  }
   if (typeof document !== 'undefined') {
     document.body.style.overflow = ''
+  }
+})
+
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    nextTick(() => {
+      updateMenuReturnBar()
+      requestAnimationFrame(scrollToMenuCategoryFromRoute)
+    })
+    window.addEventListener('scroll', updateMenuReturnBar, { passive: true })
+    window.addEventListener('resize', updateMenuReturnBar)
   }
 })
 
@@ -567,6 +638,7 @@ const editingExisting = computed(() => {
 })
 
 function openItem(item) {
+  highlightedMenuItemId.value = item.id
   activeItem.value = item
   if (hasModifiers(item)) {
     sheetQty.value = 1
@@ -1031,9 +1103,8 @@ function fulfillmentLabel(item) {
       </footer>
     </section>
 
-    <!-- Sticky bar: search + the single category rail. One slim row of chips,
-         horizontally scrollable on every viewport, sticky on mobile too. -->
-    <div v-if="!pickupLocked" class="sticky">
+    <!-- Sticky bar: search + static category grid. -->
+    <div v-if="!pickupLocked" ref="stickyBar" class="sticky">
       <div class="search">
         <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="11" cy="11" r="7" />
@@ -1064,11 +1135,6 @@ function fulfillmentLabel(item) {
         class="cats"
         :class="{ 'is-disabled': !categoryNavigationEnabled }"
         aria-label="Categorías del menú"
-        @pointerdown="startRailDrag"
-        @pointermove="moveRailDrag"
-        @pointerup="endRailDrag"
-        @pointercancel="endRailDrag"
-        @wheel="scrollRailWithWheel"
       >
         <button
           v-for="category in orderableCategories"
@@ -1087,6 +1153,19 @@ function fulfillmentLabel(item) {
         </button>
       </nav>
     </div>
+
+    <Transition name="menu-return">
+      <div v-if="showMenuReturnBar" class="menu-floating-return-bar">
+        <button
+          class="menu-floating-return"
+          type="button"
+          aria-label="Volver a las categorias"
+          @click="scrollToMenuControls"
+        >
+          Volver
+        </button>
+      </div>
+    </Transition>
 
     <!-- Search results -->
     <section v-if="isSearching && !pickupLocked" class="results">
@@ -1186,7 +1265,12 @@ function fulfillmentLabel(item) {
         <h2 class="section__title">{{ category.name }}</h2>
         <ul class="rows">
           <li v-for="item in category.items" :key="item.id">
-            <button class="row" type="button" @click="openItem(item)">
+            <button
+              class="row"
+              :class="{ 'is-route-target': highlightedMenuItemId === item.id }"
+              type="button"
+              @click="openItem(item)"
+            >
               <span class="row__body">
                 <span class="row__name">{{ item.name }}</span>
                 <span v-if="item.description" class="row__desc">{{ item.description }}</span>
@@ -1826,21 +1910,19 @@ function fulfillmentLabel(item) {
   font-weight: 950;
 }
 
-/* ---- Sticky bar: search + the single category rail ---- */
-/* One slim bar (~102px: 8 + 42 + 8 + chip row 44) that stays sticky on every
-   viewport; .menu-section scroll-margin-top below must clear it. */
+/* ---- Sticky bar: search + static category grid ---- */
 .sticky {
-  position: sticky;
-  top: 0;
-  z-index: 6;
-  background: var(--cream);
-  padding: 8px 0 0;
+  position: relative;
+  z-index: 4;
+  background: #419ea5;
+  padding: 14px 0 0;
+  box-shadow: 0 8px 14px -10px rgb(42 28 20 / 28%);
 }
 .search {
   position: relative;
   display: flex;
   align-items: center;
-  margin: 0 16px 8px;
+  margin: 0 16px 14px;
 }
 .search__icon {
   position: absolute;
@@ -1880,45 +1962,84 @@ function fulfillmentLabel(item) {
   line-height: 1;
   cursor: pointer;
 }
-/* The single permitted horizontal scroller on this view (see
-   docs/mobile-safari-menu-crash.md): scrolls on every viewport, scrollbars
-   hidden, drag/wheel-assisted on desktop. */
 .cats {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 2px 16px 8px;
-  box-shadow: 0 8px 12px -10px rgb(42 28 20 / 28%);
-  scrollbar-width: none;
-  cursor: grab;
-  user-select: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 0 16px 18px;
+  cursor: default;
 }
 .cats.is-disabled {
   cursor: default;
 }
-.cats::-webkit-scrollbar {
-  display: none;
-}
 .cats__chip {
-  flex: 0 0 auto;
-  padding: 8px 14px;
-  border: 1px solid var(--line);
+  display: grid;
+  min-height: 36px;
+  place-items: center;
+  padding: 6px 8px;
+  border: 0;
   border-radius: 999px;
   background: #fff;
-  color: var(--muted);
-  font-size: 0.82rem;
-  font-weight: 700;
-  white-space: nowrap;
+  color: #101114;
+  font-size: clamp(0.66rem, 2.6vw, 0.78rem);
+  font-weight: 900;
+  line-height: 1.1;
+  text-align: center;
   cursor: pointer;
   transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
 .cats__chip.is-active {
-  background: var(--brown);
-  border-color: var(--brown);
-  color: #fff;
+  background: #f59aa7;
+  color: #101114;
 }
 .cats__chip.is-disabled {
   cursor: default;
+}
+
+.menu-floating-return-bar {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  z-index: 9;
+  display: grid;
+  width: min(100%, var(--public-frame-width));
+  min-height: 44px;
+  place-items: center;
+  border-right: 1px solid #0f1115;
+  border-left: 1px solid #0f1115;
+  background: #419ea5;
+  transform: translateX(-50%);
+}
+
+.menu-floating-return {
+  display: grid;
+  width: min(154px, calc((100% - 32px) / 2));
+  min-height: 36px;
+  place-items: center;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 0;
+  background: #ffffff;
+  color: #101114;
+  font-family: var(--font-body);
+  font-size: clamp(0.72rem, 2.8vw, 0.84rem);
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 8px 18px rgb(0 0 0 / 12%);
+  cursor: pointer;
+}
+
+.menu-return-enter-active,
+.menu-return-leave-active {
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.menu-return-enter-from,
+.menu-return-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -8px);
 }
 
 /* ---- Sections ---- */
@@ -1932,7 +2053,7 @@ function fulfillmentLabel(item) {
    docs/mobile-safari-menu-crash.md). content-visibility skips paint/layout
    for sections the user hasn't scrolled to yet. */
 .menu-section {
-  scroll-margin-top: 112px;
+  scroll-margin-top: 122px;
   content-visibility: auto;
   contain-intrinsic-size: auto 480px;
 }
@@ -2009,6 +2130,10 @@ function fulfillmentLabel(item) {
   background: transparent;
   text-align: left;
   cursor: pointer;
+}
+.row.is-route-target {
+  background: rgb(245 154 167 / 18%);
+  box-shadow: inset 4px 0 0 #f59aa7;
 }
 .row__body {
   min-width: 0;
@@ -3049,3 +3174,4 @@ function fulfillmentLabel(item) {
   transform: translateY(6px) scale(0.97);
 }
 </style>
+

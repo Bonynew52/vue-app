@@ -9,20 +9,18 @@ import chessCustomers from '../assets/campaigns/belly-chess-table.jpg'
 import customersAtTable from '../assets/campaigns/belly-cafe-customers.jpg'
 import goldenWorldCupAward from '../assets/campaigns/monster-world-cup-award.png'
 import icedCoffeeHandoff from '../assets/campaigns/belly-iced-coffee-service.jpeg'
-import catalog from '../data/menuCatalog.generated.json'
+import { menuCategories as catalogMenuCategories } from '../data/menu'
 
 const isLogoIntroVisible = ref(true)
 const isDevelopmentNoticeVisible = ref(true)
-const latestRow = ref(null)
 const menuRow = ref(null)
-const isDraggingLatest = ref(false)
 const imageVersion = 'home-20260619-3'
 const selectedMenuCategory = ref('waffles-pan-frances')
 const menuCategories = [
-  { id: 'waffles-pan-frances', label: 'Waffles & Pan Frances' },
-  { id: 'chilaquiles', label: 'Chilaquiles' },
-  { id: 'egg-drop', label: 'Egg Drop' },
-  { id: 'toast', label: 'Toast' },
+  { id: 'waffles-pan-frances', label: 'Waffles & Pan Frances', sectionName: 'Waffles y Pan Frances' },
+  { id: 'chilaquiles', label: 'Chilaquiles', sectionName: 'Chilaquiles' },
+  { id: 'egg-drop', label: 'Egg Drop', sectionName: 'Egg Drop' },
+  { id: 'toast', label: 'Toast', sectionName: 'Toast' },
   { id: 'sandwiches', label: 'Sándwiches' },
   { id: 'bowl', label: 'Bowl' },
   { id: 'kids-menu', label: 'Kids menú' },
@@ -34,9 +32,23 @@ const menuCategories = [
   { id: 'bebidas', label: 'Bebidas' },
 ]
 const latestItems = [
-  { title: 'Belly en tu evento', image: cateringEvent, to: 'order' },
-  { title: 'Monster World Cup', image: goldenWorldCupAward, to: 'menu' },
+  { title: 'Belly en tu evento', image: cateringEvent },
+  { title: 'Monster World Cup', image: goldenWorldCupAward },
 ]
+
+const menuSectionByHomeId = {
+  'waffles-pan-frances': 'Waffles y Pan Frances',
+  chilaquiles: 'Chilaquiles',
+  'egg-drop': 'Egg Drop',
+  toast: 'Toast',
+  sandwiches: 'Sandwich',
+  bowl: 'Bowl',
+  'kids-menu': 'Kids Menu',
+  burgers: 'Burgers',
+  ensaladas: 'Ensalada',
+  sides: 'Sides',
+  sopas: 'Sopas',
+}
 
 function normalizeText(value) {
   return String(value || '')
@@ -46,54 +58,35 @@ function normalizeText(value) {
 }
 
 function catalogItemsForHomeCategory(categoryId) {
-  const categories = catalog.categories || []
-  const byCategory = (menuKey, pattern) =>
-    categories
-      .filter(
-        (category) =>
-          category.menuKey === menuKey && pattern.test(normalizeText(`${category.name} ${category.sourceName}`)),
-      )
-      .flatMap((category) => category.items || [])
-
-  const byMenu = (menuKey) =>
-    categories.filter((category) => category.menuKey === menuKey).flatMap((category) => category.items || [])
-
-  const byItem = (menuKey, pattern) =>
-    byMenu(menuKey).filter((item) => pattern.test(normalizeText(`${item.name} ${item.sourceName}`)))
-
-  const itemsByHomeCategory = {
-    'waffles-pan-frances': byCategory('desayunos', /waffles|pan frances/),
-    chilaquiles: byCategory('desayunos', /chilaquiles/),
-    'egg-drop': byItem('desayunos', /egg drop/),
-    toast: byCategory('desayunos', /toast/),
-    sandwiches: byCategory('desayunos', /sandwiches|sandwich/),
-    bowl: byCategory('desayunos', /bowl|bowls/),
-    'kids-menu': byCategory('desayunos', /kids/),
-    burgers: byCategory('comidas', /burgers|burger/),
-    ensaladas: byCategory('comidas', /ensaladas|ensalada|salad/),
-    sides: [...byCategory('desayunos', /sides/), ...byCategory('comidas', /sides/)],
-    sopas: byCategory('comidas', /sopas|sopa/),
-    postres: byMenu('postres'),
-    bebidas: byMenu('bebidas'),
-  }
-
-  const items = itemsByHomeCategory[categoryId] || []
+  const items = menuSectionForHomeCategory(categoryId)?.items || []
   const imageBackedItems = items.filter((item) => item.image)
 
   return imageBackedItems.length ? imageBackedItems : items
 }
 
-const menuCategoryCards = computed(() => {
-  return menuCategories.map((category) => {
-    const representativeItem = catalogItemsForHomeCategory(category.id)[0]
+function menuSectionForHomeCategory(categoryId) {
+  const sectionName = normalizeText(menuSectionByHomeId[categoryId])
 
-    return {
-      id: category.id,
-      image: representativeItem?.image || brandLogo,
-      title: category.label,
-      description: representativeItem?.description || representativeItem?.name || 'Categoria del menu Belly Monster.',
-    }
-  })
+  return (catalogMenuCategories || []).find(
+    (category) => category.menuId === 'comidas' && normalizeText(category.name) === sectionName,
+  )
+}
+
+const menuCategoryCards = computed(() => {
+  return menuCategories
+    .map((category) => {
+      const representativeItem = catalogItemsForHomeCategory(category.id)[0]
+      const menuSection = menuSectionForHomeCategory(category.id)
+
+      return {
+        id: category.id,
+        categoryId: menuSection?.id || '',
+        image: representativeItem?.image || brandLogo,
+        title: category.label,
+        description: representativeItem?.description || representativeItem?.name || 'Categoria del menu Belly Monster.',
+      }
+    })
+    .filter((category) => category.categoryId)
 })
 
 function selectMenuCategory(categoryId) {
@@ -117,52 +110,6 @@ function closeDevelopmentNotice() {
 }
 
 let logoIntroTimeout
-let latestDragStartX = 0
-let latestDragStartScrollLeft = 0
-
-function startLatestDrag(event) {
-  if (event.pointerType === 'mouse' && event.button !== 0) {
-    return
-  }
-
-  const row = latestRow.value
-
-  if (!row) {
-    return
-  }
-
-  isDraggingLatest.value = true
-  latestDragStartX = event.clientX
-  latestDragStartScrollLeft = row.scrollLeft
-  row.setPointerCapture?.(event.pointerId)
-}
-
-function moveLatestDrag(event) {
-  const row = latestRow.value
-
-  if (!isDraggingLatest.value || !row) {
-    return
-  }
-
-  event.preventDefault()
-  row.scrollLeft = latestDragStartScrollLeft - (event.clientX - latestDragStartX)
-}
-
-function endLatestDrag(event) {
-  const row = latestRow.value
-
-  if (!isDraggingLatest.value) {
-    return
-  }
-
-  isDraggingLatest.value = false
-
-  try {
-    row?.releasePointerCapture?.(event.pointerId)
-  } catch {
-    // The pointer can be released outside the scroll area.
-  }
-}
 
 onMounted(() => {
   logoIntroTimeout = window.setTimeout(() => {
@@ -218,21 +165,11 @@ onBeforeUnmount(() => {
 
     <section class="home-section home-section--latest" aria-labelledby="latest-title">
       <h1 id="latest-title">Lo nuevo</h1>
-      <div
-        ref="latestRow"
-        class="home-card-row"
-        :class="{ 'is-dragging': isDraggingLatest }"
-        @pointerdown="startLatestDrag"
-        @pointermove="moveLatestDrag"
-        @pointerup="endLatestDrag"
-        @pointercancel="endLatestDrag"
-        @pointerleave="endLatestDrag"
-      >
+      <div class="home-card-row">
         <article v-for="item in latestItems" :key="item.title" class="promo-card">
           <img :src="refreshedImage(item.image)" :alt="item.title" />
           <div class="promo-card__content">
             <h2>{{ item.title }}</h2>
-            <RouterLink :to="{ name: item.to }">Ver mas</RouterLink>
           </div>
         </article>
       </div>
@@ -241,30 +178,31 @@ onBeforeUnmount(() => {
     <section class="home-section home-section--menu" aria-labelledby="menu-title">
       <h1 id="menu-title">Explora nuestro menú</h1>
       <TransitionGroup ref="menuRow" name="menu-card-fade" tag="div" class="home-menu-row">
-          <article
+          <RouterLink
             v-for="card in menuCategoryCards"
             :key="card.id"
             class="menu-card"
             :class="{ 'is-active': selectedMenuCategory === card.id }"
             :data-category-id="card.id"
+            :to="{ name: 'menu', query: card.categoryId ? { categoria: card.categoryId } : {} }"
           >
           <img :src="refreshedImage(card.image)" :alt="card.title" />
           <div>
             <h2>{{ card.title }}</h2>
             <p>{{ card.description }}</p>
-            <RouterLink :to="{ name: 'menu' }">Ver mas</RouterLink>
+            <span>Ver mas</span>
           </div>
-        </article>
+        </RouterLink>
       </TransitionGroup>
       <div class="home-menu-tags" aria-label="Categorias de menu">
         <button
-          v-for="category in menuCategories"
+          v-for="category in menuCategoryCards"
           :key="category.id"
           type="button"
           :class="{ active: selectedMenuCategory === category.id }"
           @click="selectMenuCategory(category.id)"
         >
-          {{ category.label }}
+          {{ category.title }}
         </button>
       </div>
     </section>
@@ -283,7 +221,7 @@ onBeforeUnmount(() => {
         <h1>Reserva tu evento</h1>
         <article class="home-history-bridge__card">
           <span>Nota: sujeto a disponibilidad</span>
-          <a href="/reservar-evento" target="_blank" rel="noreferrer">mas informacion</a>
+          <RouterLink :to="{ name: 'eventReservation' }">mas informacion</RouterLink>
         </article>
       </div>
     </section>
@@ -298,7 +236,7 @@ onBeforeUnmount(() => {
       <div id="ubicacion" class="home-map" aria-label="Ubicacion Belly Monster">
         <iframe
           title="Belly Monster en Google Maps"
-          src="https://www.google.com/maps?q=C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps.&output=embed"
+          src="https://www.google.com/maps?q=Belly%20Monster%20Bites%20Plaza%20Punto%20Madero%2C%20C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps.%2C%20Mexico&output=embed"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
         ></iframe>
@@ -317,14 +255,38 @@ onBeforeUnmount(() => {
         <a href="#mood-title">Contacto</a>
         <a href="#comentarios">Comentarios</a>
         <a
-          href="https://www.google.com/maps?q=C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps."
+          href="https://www.google.com/maps?q=Belly%20Monster%20Bites%20Plaza%20Punto%20Madero%2C%20C.%20Rio%20Panuco%203610%2C%20Madero%2C%2088270%20Nuevo%20Laredo%2C%20Tamps.%2C%20Mexico"
           target="_blank"
           rel="noreferrer"
         >
           Ubicacion
         </a>
-        <a href="/reservar-evento" target="_blank" rel="noreferrer">Reservaciones</a>
+        <RouterLink :to="{ name: 'eventReservation' }">Reservaciones</RouterLink>
       </nav>
+      <div class="home-footer__social" aria-label="Redes sociales">
+        <a
+          href="https://www.instagram.com/bellymonsterbites/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Instagram"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1.2" />
+          </svg>
+        </a>
+        <a
+          href="https://www.facebook.com/bellymonsterbites/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Facebook"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14.5 8H17V4h-3c-3.3 0-5 2-5 5v2H6v4h3v6h4v-6h3.2l.6-4H13V9.2c0-.8.4-1.2 1.5-1.2Z" />
+          </svg>
+        </a>
+      </div>
       <small>Terminos y condiciones</small>
     </footer>
   </main>
@@ -606,23 +568,16 @@ onBeforeUnmount(() => {
 .home-card-row {
   display: flex;
   gap: 16px;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
+  overflow: hidden;
   padding: 0 28px 14px 0;
-  scroll-snap-type: x proximity;
   scrollbar-width: none;
-  touch-action: pan-x;
-  -webkit-overflow-scrolling: touch;
-  cursor: grab;
+  touch-action: auto;
+  cursor: default;
   user-select: none;
 }
 
 .home-card-row::-webkit-scrollbar {
   display: none;
-}
-
-.home-card-row.is-dragging {
-  cursor: grabbing;
 }
 
 .promo-card,
@@ -631,6 +586,11 @@ onBeforeUnmount(() => {
   min-height: 220px;
   border-radius: 14px;
   overflow: hidden;
+}
+
+.menu-card {
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .promo-card {
@@ -686,8 +646,7 @@ onBeforeUnmount(() => {
   line-height: 1.1;
 }
 
-.promo-card a,
-.menu-card a {
+.menu-card span {
   display: inline-flex;
   margin-top: 8px;
   padding: 6px 11px;
@@ -913,6 +872,40 @@ onBeforeUnmount(() => {
 .home-footer nav {
   display: grid;
   gap: 7px;
+}
+
+.home-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.home-footer__social a {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 2px solid rgb(255 255 255 / 70%);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 12%);
+  color: #ffffff;
+}
+
+.home-footer__social svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.home-footer__social a[aria-label='Facebook'] svg {
+  fill: currentColor;
+  stroke: none;
 }
 
 .home-footer a,
