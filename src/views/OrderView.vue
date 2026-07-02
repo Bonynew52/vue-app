@@ -141,6 +141,34 @@ const orderableCategories = moveTemporaryDisabledCategoriesLast([
 ])
 activeCategory.value = orderableCategories[0]?.id || ''
 
+const firstEnabledBeverageCategory = computed(() =>
+  beverageCategoriesOrdered.find((category) => !isTemporarilyDisabledCategory(category)),
+)
+const firstDessertCategory = computed(() => dessertCategoriesOrdered[0] || null)
+const navigationCategories = computed(() => [
+  ...mealCategoriesOrdered,
+  ...(firstEnabledBeverageCategory.value
+    ? [
+        {
+          id: 'group:bebidas',
+          name: 'Bebidas',
+          targetId: firstEnabledBeverageCategory.value.id,
+          menuId: 'bebidas',
+        },
+      ]
+    : []),
+  ...(firstDessertCategory.value
+    ? [
+        {
+          id: 'group:postres',
+          name: 'Postres',
+          targetId: firstDessertCategory.value.id,
+          menuId: 'postres',
+        },
+      ]
+    : []),
+])
+
 // Everything orderable right now (active meal menu + beverages), so search
 // spans the whole flat list.
 const allItems = computed(() => menuCategories.flatMap((category) => category.items))
@@ -356,11 +384,13 @@ function goToCategory(id) {
   if (!categoryNavigationEnabled) {
     return
   }
-  if (temporarilyDisabledCategoryIds.has(id)) {
+  const navCategory = navigationCategories.value.find((category) => category.id === id)
+  const targetId = navCategory?.targetId || id
+  if (temporarilyDisabledCategoryIds.has(targetId)) {
     return
   }
-  activeCategory.value = id
-  scrollToMenuCategory(id)
+  activeCategory.value = targetId
+  scrollToMenuCategory(targetId)
 }
 
 function updateMenuReturnBar() {
@@ -1130,23 +1160,26 @@ function fulfillmentLabel(item) {
       </div>
 
       <nav
-        v-show="!isSearching && orderableCategories.length"
+        v-show="!isSearching && navigationCategories.length"
         ref="categoryRail"
         class="cats"
         :class="{ 'is-disabled': !categoryNavigationEnabled }"
         aria-label="Categorías del menú"
       >
         <button
-          v-for="category in orderableCategories"
+          v-for="category in navigationCategories"
           :key="category.id"
           :ref="setChipRef(category.id)"
           class="cats__chip"
           :class="{
-            'is-active': activeCategory === category.id,
-            'is-disabled': !categoryNavigationEnabled || isTemporarilyDisabledCategory(category),
+            'is-active': activeCategory === (category.targetId || category.id),
+            'is-disabled':
+              !categoryNavigationEnabled || isTemporarilyDisabledCategory({ id: category.targetId || category.id }),
           }"
           type="button"
-          :aria-disabled="!categoryNavigationEnabled || isTemporarilyDisabledCategory(category)"
+          :aria-disabled="
+            !categoryNavigationEnabled || isTemporarilyDisabledCategory({ id: category.targetId || category.id })
+          "
           @click="goToCategory(category.id)"
         >
           {{ category.name }}
@@ -1261,6 +1294,7 @@ function fulfillmentLabel(item) {
         :ref="setSectionRef(category.id)"
         :data-cat-id="category.id"
         class="menu-section"
+        :class="`menu-section--${category.menuId}`"
       >
         <h2 class="section__title">{{ category.name }}</h2>
         <ul class="rows">
@@ -2048,6 +2082,15 @@ function fulfillmentLabel(item) {
   font-size: 1.18rem;
   font-weight: 900;
   letter-spacing: 0;
+}
+.menu-section--bebidas .section__title,
+.menu-section--postres .section__title {
+  margin-top: 14px;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 /* Larger catalog: keep offscreen sections cheap for iOS WebKit (see
    docs/mobile-safari-menu-crash.md). content-visibility skips paint/layout

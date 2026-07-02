@@ -65,6 +65,14 @@ function catalogItemsForHomeCategory(categoryId) {
 }
 
 function menuSectionForHomeCategory(categoryId) {
+  if (categoryId === 'bebidas') {
+    return (catalogMenuCategories || []).find((category) => category.menuId === 'bebidas')
+  }
+
+  if (categoryId === 'postres') {
+    return (catalogMenuCategories || []).find((category) => category.menuId === 'postres')
+  }
+
   const sectionName = normalizeText(menuSectionByHomeId[categoryId])
 
   return (catalogMenuCategories || []).find(

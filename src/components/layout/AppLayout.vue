@@ -19,7 +19,7 @@ function closeMenu() {
 <template>
   <div class="app-layout" :class="`${route.name || 'home'}-layout`">
     <div v-if="route.name === 'home'" class="home-announcement-bar">
-      <span>Todos los martes y miercoles 3x2 en galletas!</span>
+      <span>TO EAT TO SHARE TO ENJOY</span>
     </div>
 
     <header class="app-header">
