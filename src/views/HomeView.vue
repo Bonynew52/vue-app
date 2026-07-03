@@ -6,7 +6,7 @@ import brandLogo from '../assets/campaigns/belly-monster-logo-white.png'
 import storefrontImage from '../assets/campaigns/belly-storefront.jpg'
 import cateringEvent from '../assets/campaigns/belly-event-catering.jpg'
 import chessCustomers from '../assets/campaigns/belly-chess-table.jpg'
-import customersAtTable from '../assets/campaigns/belly-cafe-customers.jpg'
+import socialFoodPhotos from '../assets/campaigns/belly-social-food-photos.jpg'
 import goldenWorldCupAward from '../assets/campaigns/monster-world-cup-award.png'
 import icedCoffeeHandoff from '../assets/campaigns/belly-iced-coffee-service.jpeg'
 import { menuCategories as catalogMenuCategories } from '../data/menu'
@@ -238,7 +238,7 @@ onBeforeUnmount(() => {
       <h1 id="mood-title"><span>Belly</span> un <span>mood</span> completo</h1>
       <div class="home-mood-grid">
         <img :src="refreshedImage(chessCustomers)" alt="Clientes jugando ajedrez en Belly Monster" />
-        <img :src="refreshedImage(customersAtTable)" alt="Clientes en Belly Monster" />
+        <img :src="refreshedImage(socialFoodPhotos)" alt="Clientes fotografiando platillos Belly Monster" />
       </div>
       <button id="comentarios" class="home-order-link" type="button" disabled>Pagina en desarrollo</button>
       <div id="ubicacion" class="home-map" aria-label="Ubicacion Belly Monster">
