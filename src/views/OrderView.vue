@@ -325,6 +325,7 @@ const categoryRail = ref(null)
 const stickyBar = ref(null)
 const showMenuReturnBar = ref(false)
 const highlightedMenuItemId = ref('')
+let routeCategoryScrollTimer = 0
 
 let observer = null
 function setupObserver() {
@@ -360,9 +361,7 @@ watch(isSearching, (searching) => {
 watch(
   () => route.query.categoria,
   () => {
-    nextTick(() => {
-      requestAnimationFrame(scrollToMenuCategoryFromRoute)
-    })
+    scheduleRouteCategoryScroll()
   },
 )
 
@@ -437,6 +436,28 @@ function scrollToMenuCategoryFromRoute() {
 
   activeCategory.value = categoryId
   scrollToMenuCategory(categoryId)
+}
+
+function afterPaint(callback) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(callback)
+  })
+}
+
+function scheduleRouteCategoryScroll() {
+  if (typeof window === 'undefined') {
+    return
+  }
+
+  window.clearTimeout(routeCategoryScrollTimer)
+  nextTick(() => {
+    afterPaint(() => {
+      routeCategoryScrollTimer = window.setTimeout(() => {
+        scrollToMenuCategoryFromRoute()
+        routeCategoryScrollTimer = window.setTimeout(scrollToMenuCategoryFromRoute, 220)
+      }, 140)
+    })
+  })
 }
 
 /* Pointer affordances for the chip rail: drag-to-scroll and wheel scrolling
@@ -523,6 +544,7 @@ onBeforeUnmount(() => {
     observer.disconnect()
   }
   if (typeof window !== 'undefined') {
+    window.clearTimeout(routeCategoryScrollTimer)
     window.removeEventListener('scroll', updateMenuReturnBar)
     window.removeEventListener('resize', updateMenuReturnBar)
   }
@@ -535,7 +557,7 @@ onMounted(() => {
   if (typeof window !== 'undefined') {
     nextTick(() => {
       updateMenuReturnBar()
-      requestAnimationFrame(scrollToMenuCategoryFromRoute)
+      scheduleRouteCategoryScroll()
     })
     window.addEventListener('scroll', updateMenuReturnBar, { passive: true })
     window.addEventListener('resize', updateMenuReturnBar)

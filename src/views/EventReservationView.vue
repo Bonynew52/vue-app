@@ -4,6 +4,18 @@ import { computed, ref } from 'vue'
 const reservationFormUrl =
   'https://docs.google.com/forms/d/e/1FAIpQLSf6t4oeY86rwgtwKo8nDSC5zUPcWYpJFRlxtlBIazYuolePbQ/viewform'
 
+const reservationFormUrls = [
+  'https://forms.gle/XmVNtw9A8UBifcp38',
+  'https://forms.gle/MoJu7gdftLETGzxK6',
+  'https://forms.gle/T94urH6b8bPg5sww6',
+  'https://forms.gle/vc6jRKsoxEAYsCgD7',
+  'https://forms.gle/2KjXNqC2gd1Zw4DYA',
+  'https://forms.gle/XSye9RLe2U7tRqHk7',
+  'https://forms.gle/Rtxgc5Uak4kFgmAD7',
+  'https://forms.gle/WS2ynSF5BeYeiuE37',
+  'https://forms.gle/SCAzyhrKRrBumrqS6',
+]
+
 const eventPackages = [
   {
     id: 'desayuno-1',
@@ -249,7 +261,10 @@ const eventPackages = [
     ],
     priceColumns: ['10-20', '21-30', '31-40', '+40'],
   },
-]
+].map((eventPackage, index) => ({
+  ...eventPackage,
+  formUrl: reservationFormUrls[index] || reservationFormUrl,
+}))
 
 const selectedPackageId = ref('')
 
@@ -356,7 +371,7 @@ function closePackage() {
             <button type="button" class="package-detail-card__back" @click="closePackage">
               Volver
             </button>
-            <a class="package-detail-card__action" :href="reservationFormUrl" target="_blank" rel="noreferrer">
+            <a class="package-detail-card__action" :href="selectedPackage.formUrl" target="_blank" rel="noreferrer">
               Solicita tu reservacion
             </a>
           </div>
