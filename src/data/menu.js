@@ -589,7 +589,7 @@ export const menuCategories = buildActiveMenuCategories()
 
 export const monthlySpecialItems = MONTHLY_SPECIALS.map((item) => ({
   id: `monthly-special-${slugify(item.sku)}`,
-  title: item.name,
+  title: item.sourceName || item.name,
   image: item.image,
 }))
 
