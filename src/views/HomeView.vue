@@ -4,15 +4,12 @@ import { RouterLink } from 'vue-router'
 import assortedCookies from '../assets/campaigns/belly-cookie-selection.jpg'
 import brandLogo from '../assets/campaigns/belly-monster-logo-white.png'
 import storefrontImage from '../assets/campaigns/belly-storefront.jpg'
-import cateringEvent from '../assets/campaigns/belly-event-catering.jpg'
 import chessCustomers from '../assets/campaigns/belly-chess-table.jpg'
 import socialFoodPhotos from '../assets/campaigns/belly-social-food-photos.jpg'
-import goldenWorldCupAward from '../assets/campaigns/monster-world-cup-award.png'
 import icedCoffeeHandoff from '../assets/campaigns/belly-iced-coffee-service.jpeg'
-import { menuCategories as catalogMenuCategories } from '../data/menu'
+import { menuCategories as catalogMenuCategories, monthlySpecialItems } from '../data/menu'
 
 const isLogoIntroVisible = ref(true)
-const isDevelopmentNoticeVisible = ref(true)
 const menuRow = ref(null)
 const imageVersion = 'home-20260619-3'
 const selectedMenuCategory = ref('waffles-pan-frances')
@@ -31,10 +28,11 @@ const menuCategories = [
   { id: 'postres', label: 'Postres' },
   { id: 'bebidas', label: 'Bebidas' },
 ]
-const latestItems = [
-  { title: 'Belly en tu evento', image: cateringEvent },
-  { title: 'Monster World Cup', image: goldenWorldCupAward },
-]
+const latestItems = monthlySpecialItems.map((item) => ({
+  id: item.id,
+  title: item.title,
+  image: item.image,
+}))
 
 const menuSectionByHomeId = {
   'waffles-pan-frances': 'Waffles y Pan Frances',
@@ -113,10 +111,6 @@ function refreshedImage(src) {
   return `${src}${src.includes('?') ? '&' : '?'}v=${imageVersion}`
 }
 
-function closeDevelopmentNotice() {
-  isDevelopmentNoticeVisible.value = false
-}
-
 let logoIntroTimeout
 
 onMounted(() => {
@@ -144,37 +138,22 @@ onBeforeUnmount(() => {
       </Transition>
     </Teleport>
 
-    <Teleport to="body">
-      <Transition name="development-notice">
-        <section
-          v-if="isDevelopmentNoticeVisible && !isLogoIntroVisible"
-          class="development-notice"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="development-notice-title"
-        >
-          <article class="development-notice__card">
-            <p>Pagina en desarrollo</p>
-            <h1 id="development-notice-title">La pagina no es funcional de momento</h1>
-            <span>Estamos preparando la experiencia completa.</span>
-            <button type="button" @click="closeDevelopmentNotice">Entendido</button>
-          </article>
-        </section>
-      </Transition>
-    </Teleport>
-
     <section class="home-hero" :style="{ '--hero-image': `url(${refreshedImage(icedCoffeeHandoff)})` }">
       <div class="home-hero__shade"></div>
       <div class="home-hero__content">
         <p>To eat to share to enjoy</p>
-        <button type="button" disabled>Pagina en desarrollo</button>
+        <RouterLink :to="{ name: 'menu' }">Ver menu</RouterLink>
       </div>
     </section>
 
     <section class="home-section home-section--latest" aria-labelledby="latest-title">
       <h1 id="latest-title">Lo nuevo</h1>
       <div class="home-card-row">
-        <article v-for="item in latestItems" :key="item.title" class="promo-card">
+        <article
+          v-for="item in latestItems"
+          :key="item.id"
+          class="promo-card"
+        >
           <img :src="refreshedImage(item.image)" :alt="item.title" />
           <div class="promo-card__content">
             <h2>{{ item.title }}</h2>
@@ -240,7 +219,7 @@ onBeforeUnmount(() => {
         <img :src="refreshedImage(chessCustomers)" alt="Clientes jugando ajedrez en Belly Monster" />
         <img :src="refreshedImage(socialFoodPhotos)" alt="Clientes fotografiando platillos Belly Monster" />
       </div>
-      <button id="comentarios" class="home-order-link" type="button" disabled>Pagina en desarrollo</button>
+      <span id="comentarios" class="home-comments-anchor" aria-hidden="true"></span>
       <div id="ubicacion" class="home-map" aria-label="Ubicacion Belly Monster">
         <iframe
           title="Belly Monster en Google Maps"
@@ -335,79 +314,6 @@ onBeforeUnmount(() => {
   opacity: 0;
 }
 
-.development-notice {
-  position: fixed;
-  inset: 0;
-  z-index: 110;
-  display: grid;
-  place-items: center;
-  padding: 22px;
-  background: rgb(16 17 20 / 58%);
-  backdrop-filter: blur(4px);
-}
-
-.development-notice__card {
-  display: grid;
-  width: min(100%, 420px);
-  gap: 14px;
-  padding: 26px 24px 24px;
-  border: 3px solid #101114;
-  background: #399ba4;
-  color: #ffffff;
-  box-shadow: 0 22px 54px rgb(0 0 0 / 28%);
-  text-align: center;
-}
-
-.development-notice__card p {
-  margin: 0;
-  color: #ffe05d;
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 900;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.development-notice__card h1 {
-  margin: 0;
-  color: #ffffff;
-  font-size: clamp(1.55rem, 7vw, 2.55rem);
-  line-height: 0.94;
-  text-transform: uppercase;
-}
-
-.development-notice__card span {
-  color: #ffffff;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 700;
-  line-height: 1.35;
-}
-
-.development-notice__card button {
-  justify-self: center;
-  min-height: 42px;
-  padding: 0 24px;
-  border: 2px solid #101114;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #101114;
-  font-family: var(--font-body);
-  font-size: 0.86rem;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.development-notice-enter-active,
-.development-notice-leave-active {
-  transition: opacity 180ms ease;
-}
-
-.development-notice-enter-from,
-.development-notice-leave-to {
-  opacity: 0;
-}
-
 .home-hero,
 .home-history {
   position: relative;
@@ -446,9 +352,7 @@ onBeforeUnmount(() => {
   text-transform: uppercase;
 }
 
-.home-hero__content a,
-.home-hero__content button,
-.home-order-link {
+.home-hero__content a {
   display: inline-flex;
   min-height: 42px;
   align-items: center;
@@ -463,12 +367,6 @@ onBeforeUnmount(() => {
   font-weight: 900;
   text-decoration: none;
   text-transform: uppercase;
-}
-
-.home-hero__content button:disabled,
-.home-order-link:disabled {
-  opacity: 0.76;
-  cursor: default;
 }
 
 .home-section {
@@ -576,12 +474,14 @@ onBeforeUnmount(() => {
 .home-card-row {
   display: flex;
   gap: 16px;
-  overflow: hidden;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
   padding: 0 28px 14px 0;
+  scroll-snap-type: x proximity;
   scrollbar-width: none;
-  touch-action: auto;
-  cursor: default;
+  touch-action: pan-x;
   user-select: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .home-card-row::-webkit-scrollbar {
@@ -606,6 +506,8 @@ onBeforeUnmount(() => {
   min-height: clamp(260px, 72vw, 340px);
   flex: 0 0 auto;
   scroll-snap-align: start;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .promo-card img,
@@ -647,6 +549,7 @@ onBeforeUnmount(() => {
   line-height: 0.9;
 }
 
+.promo-card p,
 .menu-card p {
   margin: 8px 0;
   font-family: var(--font-body);
@@ -654,6 +557,7 @@ onBeforeUnmount(() => {
   line-height: 1.1;
 }
 
+.promo-card span,
 .menu-card span {
   display: inline-flex;
   margin-top: 8px;
@@ -827,8 +731,11 @@ onBeforeUnmount(() => {
   object-position: center;
 }
 
-.home-order-link {
-  margin-top: 26px;
+.home-comments-anchor {
+  display: block;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .home-map {

@@ -179,6 +179,64 @@ const PDF_CATEGORY_PLACEHOLDERS = {
   ],
 }
 
+const MONTHLY_SPECIALS = [
+  {
+    name: 'Temporal - Postre - Cheesecake Tortuga',
+    sourceName: 'Cheesecake Tortuga',
+    description: 'Postre temporal del mes.',
+    sku: 'TEMPORAL-POSTRE-CHEESECAKE-TORTUGA',
+    menuId: 'postres',
+    categoryName: 'Nieves',
+    image: '/images/menu/temporal-postre-cheesecake-tortuga.jpeg',
+  },
+  {
+    name: 'Temporal - Comida - Chorizo Burger',
+    sourceName: 'Chorizo Burger',
+    description: 'Platillo temporal del mes.',
+    sku: 'TEMPORAL-COMIDA-CHORIZO-BURGER',
+    menuId: 'comidas',
+    categoryName: 'Burgers',
+    image: '/images/menu/temporal-comida-chorizo-burger.jpeg',
+  },
+  {
+    name: 'Temporal - Galleta - Sea Salt Toffee',
+    sourceName: 'Sea Salt Toffee',
+    description: 'Galleta temporal del mes.',
+    sku: 'TEMPORAL-GALLETA-SEA-SALT-TOFFEE',
+    menuId: 'postres',
+    categoryName: 'Galletas',
+    image: '/images/menu/temporal-galleta-sea-salt-toffee.jpeg',
+  },
+  {
+    name: 'Temporal - Bebida - Limonada Sandia',
+    sourceName: 'Limonada Sandia',
+    description: 'Bebida temporal del mes.',
+    sku: 'TEMPORAL-BEBIDA-LIMONADA-SANDIA',
+    menuId: 'bebidas',
+    categoryName: 'Chillers',
+    image: '/images/menu/temporal-bebida-limonada-sandia.jpeg',
+  },
+  {
+    name: 'Temporal - Bebida - Pina Colada',
+    sourceName: 'Pina Colada',
+    description: 'Bebida temporal del mes.',
+    sku: 'TEMPORAL-BEBIDA-PINA-COLADA',
+    menuId: 'bebidas',
+    categoryName: 'Chillers',
+    image: '/images/menu/temporal-bebida-pina-colada.jpeg',
+  },
+  {
+    name: 'Temporal - Galleta - Brookie',
+    sourceName: 'Brookie',
+    description: 'Galleta temporal del mes.',
+    sku: 'TEMPORAL-GALLETA-BROOKIE',
+    menuId: 'postres',
+    categoryName: 'Galletas',
+    image: '/images/menu/temporal-galleta-brookie.jpg',
+  },
+]
+const MONTHLY_SPECIALS_ENABLED_IN_MENU = false
+
 // Customer-facing copy and order live in customerMenu.js. Rappi/Excel data below
 // remains only as technical backing for SKU, prices, modifiers, and fallback images.
 const PDF_COMBINED_MEAL_LAYOUT = customerMenuSections.map((section) => ({
@@ -477,7 +535,41 @@ function buildActiveMenuCategories() {
   const beverageCategories = buildCategories(bebidasMenu, mealCategories.length)
   const dessertCategories = buildCategories(postresMenu, mealCategories.length + beverageCategories.length)
 
-  return [...mealCategories, ...beverageCategories, ...dessertCategories]
+  const categories = [...mealCategories, ...beverageCategories, ...dessertCategories]
+
+  if (MONTHLY_SPECIALS_ENABLED_IN_MENU) {
+    for (const monthlySpecial of [...MONTHLY_SPECIALS].reverse()) {
+      const category = categories.find(
+        (entry) => entry.menuId === monthlySpecial.menuId && entry.name === monthlySpecial.categoryName,
+      )
+
+      if (!category) continue
+
+      category.items.unshift({
+        id: `item-temporal-${slugify(monthlySpecial.sku)}`,
+        rappiProductId: monthlySpecial.sku,
+        sku: monthlySpecial.sku,
+        categoryId: category.id,
+        categoryName: category.name,
+        menuId: category.menuId,
+        sourceName: monthlySpecial.sourceName,
+        name: monthlySpecial.name,
+        description: monthlySpecial.description,
+        price: 0,
+        realPrice: 0,
+        currency: 'MXN',
+        hasPrice: false,
+        image: monthlySpecial.image,
+        isAvailable: true,
+        isPopular: false,
+        hasToppings: false,
+        modifierGroups: [],
+        isMonthlySpecial: true,
+      })
+    }
+  }
+
+  return categories
 }
 
 export const menuSource = {
@@ -494,6 +586,12 @@ export const menuDisclaimer =
   'Menu de referencia. Confirma disponibilidad, opciones y precios con el mesero.'
 
 export const menuCategories = buildActiveMenuCategories()
+
+export const monthlySpecialItems = MONTHLY_SPECIALS.map((item) => ({
+  id: `monthly-special-${slugify(item.sku)}`,
+  title: item.name,
+  image: item.image,
+}))
 
 export const menuItemsById = Object.fromEntries(
   menuCategories.flatMap((category) => category.items.map((item) => [item.id, item])),

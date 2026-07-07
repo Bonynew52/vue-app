@@ -263,7 +263,9 @@ function closeMenu() {
   align-items: center;
   justify-content: flex-start;
   gap: clamp(24px, 4vw, 44px);
+  height: var(--app-header-height);
   min-height: 100px;
+  max-height: var(--app-header-height);
   padding: 0 clamp(20px, 5vw, 56px);
   border-bottom: 1px solid var(--color-border);
   background: color-mix(in srgb, var(--color-background) 88%, white);
@@ -287,6 +289,9 @@ function closeMenu() {
 }
 
 .menu-layout .app-header {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
   background: #ffffff;
 }
 
@@ -466,6 +471,7 @@ function closeMenu() {
 }
 
 .menu-layout .app-content {
+  margin-top: var(--app-header-height);
   background: #ffffff;
 }
 
@@ -731,7 +737,9 @@ function closeMenu() {
   }
 
   .app-header {
+    height: var(--app-header-height);
     min-height: 76px;
+    max-height: var(--app-header-height);
     gap: 10px;
     padding-inline: 14px;
   }

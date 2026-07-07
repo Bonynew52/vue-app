@@ -169,6 +169,26 @@ const navigationCategories = computed(() => [
     : []),
 ])
 
+function isFirstMenuGroupCategory(category, index) {
+  if (!['bebidas', 'postres'].includes(category.menuId)) {
+    return false
+  }
+
+  return !orderableCategories.slice(0, index).some((entry) => entry.menuId === category.menuId)
+}
+
+function menuGroupTitle(category) {
+  if (category.menuId === 'bebidas') {
+    return 'Bebidas'
+  }
+
+  if (category.menuId === 'postres') {
+    return 'Postres'
+  }
+
+  return ''
+}
+
 // Everything orderable right now (active meal menu + beverages), so search
 // spans the whole flat list.
 const allItems = computed(() => menuCategories.flatMap((category) => category.items))
@@ -305,6 +325,7 @@ const searchResults = computed(() => {
 /* ---- Category nav + scroll spy ---- */
 const sectionEls = {}
 const chipEls = {}
+const itemEls = {}
 const categoryNavigationEnabled = true
 const categoryScrollSyncEnabled = false
 const setSectionRef = (id) => (el) => {
@@ -321,11 +342,18 @@ const setChipRef = (id) => (el) => {
     delete chipEls[id]
   }
 }
+const setItemRef = (id) => (el) => {
+  if (el) {
+    itemEls[id] = el
+  } else {
+    delete itemEls[id]
+  }
+}
 const categoryRail = ref(null)
 const stickyBar = ref(null)
 const showMenuReturnBar = ref(false)
 const highlightedMenuItemId = ref('')
-let routeCategoryScrollTimer = 0
+let routeScrollTimers = []
 
 let observer = null
 function setupObserver() {
@@ -362,6 +390,13 @@ watch(
   () => route.query.categoria,
   () => {
     scheduleRouteCategoryScroll()
+  },
+)
+
+watch(
+  () => route.query.producto,
+  () => {
+    scheduleRouteProductScroll()
   },
 )
 
@@ -417,11 +452,36 @@ function routeCategoryId() {
   return Array.isArray(raw) ? raw[0] : raw
 }
 
+function routeProductId() {
+  const raw = route.query.producto
+  return Array.isArray(raw) ? raw[0] : raw
+}
+
+function clearRouteScrollTimers() {
+  routeScrollTimers.forEach((timer) => window.clearTimeout(timer))
+  routeScrollTimers = []
+}
+
 function scrollToMenuCategory(categoryId) {
   const el = sectionEls[categoryId]
   if (!el || temporarilyDisabledCategoryIds.has(categoryId)) {
     return
   }
+
+  const targetOffset = 122
+  const top = el.getBoundingClientRect().top + window.scrollY - targetOffset
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+}
+
+function scrollToMenuItem(itemId) {
+  const item = allItems.value.find((entry) => entry.id === itemId)
+  const el = itemEls[itemId]
+  if (!item || !el || temporarilyDisabledCategoryIds.has(item.categoryId)) {
+    return
+  }
+
+  activeCategory.value = item.categoryId
+  highlightedMenuItemId.value = item.id
 
   const targetOffset = 122
   const top = el.getBoundingClientRect().top + window.scrollY - targetOffset
@@ -438,6 +498,31 @@ function scrollToMenuCategoryFromRoute() {
   scrollToMenuCategory(categoryId)
 }
 
+function scrollToMenuProductFromRoute() {
+  const itemId = routeProductId()
+  if (!itemId) {
+    return
+  }
+
+  const item = allItems.value.find((entry) => entry.id === itemId)
+  if (!item) {
+    return
+  }
+
+  activeCategory.value = item.categoryId
+  highlightedMenuItemId.value = item.id
+  scrollToMenuCategory(item.categoryId)
+}
+
+function alignMenuProductFromRoute() {
+  const itemId = routeProductId()
+  if (!itemId) {
+    return
+  }
+
+  scrollToMenuItem(itemId)
+}
+
 function afterPaint(callback) {
   requestAnimationFrame(() => {
     requestAnimationFrame(callback)
@@ -448,14 +533,33 @@ function scheduleRouteCategoryScroll() {
   if (typeof window === 'undefined') {
     return
   }
+  if (routeProductId()) {
+    return
+  }
 
-  window.clearTimeout(routeCategoryScrollTimer)
+  clearRouteScrollTimers()
   nextTick(() => {
     afterPaint(() => {
-      routeCategoryScrollTimer = window.setTimeout(() => {
+      routeScrollTimers.push(window.setTimeout(() => {
         scrollToMenuCategoryFromRoute()
-        routeCategoryScrollTimer = window.setTimeout(scrollToMenuCategoryFromRoute, 220)
-      }, 140)
+        routeScrollTimers.push(window.setTimeout(scrollToMenuCategoryFromRoute, 220))
+      }, 140))
+    })
+  })
+}
+
+function scheduleRouteProductScroll() {
+  if (typeof window === 'undefined') {
+    return
+  }
+
+  clearRouteScrollTimers()
+  nextTick(() => {
+    afterPaint(() => {
+      routeScrollTimers.push(window.setTimeout(scrollToMenuProductFromRoute, 120))
+      ;[360, 760, 1300, 2100].forEach((delay) => {
+        routeScrollTimers.push(window.setTimeout(alignMenuProductFromRoute, delay))
+      })
     })
   })
 }
@@ -544,7 +648,7 @@ onBeforeUnmount(() => {
     observer.disconnect()
   }
   if (typeof window !== 'undefined') {
-    window.clearTimeout(routeCategoryScrollTimer)
+    clearRouteScrollTimers()
     window.removeEventListener('scroll', updateMenuReturnBar)
     window.removeEventListener('resize', updateMenuReturnBar)
   }
@@ -557,7 +661,11 @@ onMounted(() => {
   if (typeof window !== 'undefined') {
     nextTick(() => {
       updateMenuReturnBar()
-      scheduleRouteCategoryScroll()
+      if (routeProductId()) {
+        scheduleRouteProductScroll()
+      } else {
+        scheduleRouteCategoryScroll()
+      }
     })
     window.addEventListener('scroll', updateMenuReturnBar, { passive: true })
     window.addEventListener('resize', updateMenuReturnBar)
@@ -1311,19 +1419,24 @@ function fulfillmentLabel(item) {
       </section>
 
       <section
-        v-for="category in orderableCategories"
+        v-for="(category, categoryIndex) in orderableCategories"
         :key="category.id"
         :ref="setSectionRef(category.id)"
         :data-cat-id="category.id"
         class="menu-section"
         :class="`menu-section--${category.menuId}`"
       >
+        <h2 v-if="isFirstMenuGroupCategory(category, categoryIndex)" class="menu-group-title">
+          {{ menuGroupTitle(category) }}
+        </h2>
         <h2 class="section__title">{{ category.name }}</h2>
         <ul class="rows">
           <li v-for="item in category.items" :key="item.id">
             <button
+              :ref="setItemRef(item.id)"
               class="row"
               :class="{ 'is-route-target': highlightedMenuItemId === item.id }"
+              :data-item-id="item.id"
               type="button"
               @click="openItem(item)"
             >
@@ -1388,7 +1501,12 @@ function fulfillmentLabel(item) {
     <!-- Item detail sheet -->
     <Teleport to="body">
       <Transition name="sheet">
-        <div v-if="activeItem" class="sheet-root" @click.self="closeItem">
+        <div
+          v-if="activeItem"
+          class="sheet-root"
+          :class="{ 'sheet-root--catalog': catalogMode }"
+          @click.self="closeItem"
+        >
           <div class="sheet sheet--item" role="dialog" aria-modal="true">
             <button class="sheet__close" type="button" aria-label="Cerrar" @click="closeItem">×</button>
             <div class="sheet__scroll">
@@ -1426,9 +1544,10 @@ function fulfillmentLabel(item) {
                         :class="{
                           'is-on': isOptionOn(group, option),
                           'is-multi': group.multiple,
-                          'is-disabled': optionAtCap(group, option),
+                          'is-disabled': !isOrderingEnabled || optionAtCap(group, option),
                         }"
                         :aria-pressed="isOptionOn(group, option)"
+                        :disabled="!isOrderingEnabled || optionAtCap(group, option)"
                         @click="group.multiple ? toggleMulti(group, option) : chooseSingle(group, option)"
                       >
                         <span class="optcard__mark" aria-hidden="true"></span>
@@ -1974,6 +2093,12 @@ function fulfillmentLabel(item) {
   padding: 14px 0 0;
   box-shadow: 0 8px 14px -10px rgb(42 28 20 / 28%);
 }
+@media (min-width: 560px) {
+  .order.is-catalog-mode .sticky {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+  }
+}
 .search {
   position: relative;
   display: flex;
@@ -2054,7 +2179,7 @@ function fulfillmentLabel(item) {
 
 .menu-floating-return-bar {
   position: fixed;
-  top: 100px;
+  top: var(--app-header-height, 100px);
   left: 50%;
   z-index: 9;
   display: grid;
@@ -2101,6 +2226,13 @@ function fulfillmentLabel(item) {
 /* ---- Sections ---- */
 .section__title {
   margin: 18px 16px 10px;
+  font-size: 1.18rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+.menu-group-title {
+  margin: 24px 16px 8px;
+  color: var(--brown);
   font-size: 1.18rem;
   font-weight: 900;
   letter-spacing: 0;
@@ -2390,6 +2522,15 @@ function fulfillmentLabel(item) {
   justify-content: flex-end;
   background: rgb(20 12 8 / 46%);
 }
+.sheet-root--catalog {
+  top: var(--app-header-height, 100px);
+  z-index: 8;
+}
+@media (max-width: 640px) {
+  .sheet-root--catalog {
+    top: 76px;
+  }
+}
 .sheet {
   position: relative;
   width: 100%;
@@ -2401,6 +2542,13 @@ function fulfillmentLabel(item) {
   background: var(--cream);
   border-radius: 22px 22px 0 0;
   box-shadow: 0 -10px 40px rgb(0 0 0 / 24%);
+}
+.sheet--item {
+  max-height: calc(92svh - 14px);
+  margin-bottom: 14px;
+  border: 2px solid #101114;
+  border-radius: 18px;
+  overflow: hidden;
 }
 .sheet__grab {
   width: 40px;
@@ -2430,6 +2578,9 @@ function fulfillmentLabel(item) {
 .sheet__scroll {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+.sheet--item .sheet__scroll {
+  padding-bottom: 34px;
 }
 .sheet__foot {
   display: flex;
@@ -2521,7 +2672,7 @@ function fulfillmentLabel(item) {
 .optgroup__list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -2531,48 +2682,29 @@ function fulfillmentLabel(item) {
   align-items: center;
   gap: 10px;
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: #fff;
+  padding: 10px 2px;
+  border: 0;
+  border-top: 1px solid rgb(234 223 206 / 72%);
+  border-radius: 0;
+  background: transparent;
   text-align: left;
   cursor: pointer;
   transition: border-color 0.15s, background-color 0.15s;
 }
+.optgroup__list li:first-child .optcard {
+  border-top: 0;
+}
+.optcard:disabled {
+  cursor: default;
+}
 .optcard.is-on {
-  border-color: var(--accent);
-  background: rgb(31 157 87 / 8%);
+  background: transparent;
 }
 .optcard.is-disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
+  cursor: default;
 }
 .optcard__mark {
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #d6c8b8;
-  border-radius: 50%;
-  background: #fff;
-  transition: border-color 0.15s, background-color 0.15s;
-}
-.optcard.is-multi .optcard__mark {
-  border-radius: 7px;
-}
-.optcard.is-on .optcard__mark {
-  border-color: var(--accent);
-  background: var(--accent);
-}
-.optcard.is-on .optcard__mark::after {
-  content: '';
-  width: 9px;
-  height: 5px;
-  margin-top: -2px;
-  border-left: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  transform: rotate(-45deg);
+  display: none;
 }
 .optcard__name {
   flex: 1 1 auto;
