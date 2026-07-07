@@ -181,15 +181,6 @@ const PDF_CATEGORY_PLACEHOLDERS = {
 
 const MONTHLY_SPECIALS = [
   {
-    name: 'Temporal - Postre - Cheesecake Tortuga',
-    sourceName: 'Cheesecake Tortuga',
-    description: 'Postre temporal del mes.',
-    sku: 'TEMPORAL-POSTRE-CHEESECAKE-TORTUGA',
-    menuId: 'postres',
-    categoryName: 'Nieves',
-    image: '/images/menu/temporal-postre-cheesecake-tortuga.jpeg',
-  },
-  {
     name: 'Temporal - Comida - Chorizo Burger',
     sourceName: 'Chorizo Burger',
     description: 'Platillo temporal del mes.',
@@ -199,6 +190,15 @@ const MONTHLY_SPECIALS = [
     image: '/images/menu/temporal-comida-chorizo-burger.jpeg',
   },
   {
+    name: 'Temporal - Postre - Cheesecake Tortuga',
+    sourceName: 'Cheesecake Tortuga',
+    description: 'Postre temporal del mes.',
+    sku: 'TEMPORAL-POSTRE-CHEESECAKE-TORTUGA',
+    menuId: 'postres',
+    categoryName: 'Nieves',
+    image: '/images/menu/temporal-postre-cheesecake-tortuga.jpeg',
+  },
+  {
     name: 'Temporal - Galleta - Sea Salt Toffee',
     sourceName: 'Sea Salt Toffee',
     description: 'Galleta temporal del mes.',
@@ -206,6 +206,15 @@ const MONTHLY_SPECIALS = [
     menuId: 'postres',
     categoryName: 'Galletas',
     image: '/images/menu/temporal-galleta-sea-salt-toffee.jpeg',
+  },
+  {
+    name: 'Temporal - Galleta - Brookie',
+    sourceName: 'Brookie',
+    description: 'Galleta temporal del mes.',
+    sku: 'TEMPORAL-GALLETA-BROOKIE',
+    menuId: 'postres',
+    categoryName: 'Galletas',
+    image: '/images/menu/temporal-galleta-brookie.jpg',
   },
   {
     name: 'Temporal - Bebida - Limonada Sandia',
@@ -224,15 +233,6 @@ const MONTHLY_SPECIALS = [
     menuId: 'bebidas',
     categoryName: 'Chillers',
     image: '/images/menu/temporal-bebida-pina-colada.jpeg',
-  },
-  {
-    name: 'Temporal - Galleta - Brookie',
-    sourceName: 'Brookie',
-    description: 'Galleta temporal del mes.',
-    sku: 'TEMPORAL-GALLETA-BROOKIE',
-    menuId: 'postres',
-    categoryName: 'Galletas',
-    image: '/images/menu/temporal-galleta-brookie.jpg',
   },
 ]
 const MONTHLY_SPECIALS_ENABLED_IN_MENU = false
