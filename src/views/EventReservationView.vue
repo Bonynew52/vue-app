@@ -26,15 +26,15 @@ const eventPackages = [
     includes: [
       {
         title: 'Platillo principal',
-        text: '',
+        text: 'Cualquier platillo de nuestro menu de desayunos: Sandwiches, Egg Drop Sandwich, Toast, Waffle o Pan Frances a elegir.',
       },
       {
         title: 'Bebida Grande',
-        text: '',
+        text: 'Cofy caliente, helado o frappe 20oz; Chillers 20oz; tes y coldbrews 20oz; o malteada 16oz.',
       },
       {
         title: 'Sweet Bite',
-        text: '',
+        text: 'Una galleta, brownie, cheesecake o roll.',
       },
     ],
     prices: [
@@ -52,15 +52,15 @@ const eventPackages = [
     includes: [
       {
         title: 'Platillo principal',
-        text: '',
+        text: 'Cualquier platillo de nuestro menu de desayunos: Sandwiches, Egg Drop Sandwich, Toast, Waffle o Pan Frances a elegir.',
       },
       {
         title: 'Bebida Grande',
-        text: '',
+        text: 'Cofy caliente, helado o frappe 20oz; Chillers 20oz; tes y coldbrews 20oz; o malteada 16oz.',
       },
       {
         title: 'Kuky',
-        text: '',
+        text: 'Una galleta.',
       },
     ],
     prices: [
@@ -78,15 +78,15 @@ const eventPackages = [
     includes: [
       {
         title: 'Platillo principal',
-        text: '',
+        text: 'Cualquier platillo de nuestro menu de desayunos: Sandwiches, Egg Drop Sandwich, Toast, Waffle o Pan Frances a elegir.',
       },
       {
         title: 'Bebida mediana',
-        text: '',
+        text: 'Cofy caliente, helado o frappe 16oz; Chillers 16oz; tes y coldbrews 16oz; o malteada 12oz.',
       },
       {
         title: 'Kuky',
-        text: '',
+        text: 'Una galleta.',
       },
     ],
     prices: [
@@ -104,19 +104,19 @@ const eventPackages = [
     includes: [
       {
         title: 'Platillo principal',
-        text: '',
+        text: 'Cualquier platillo de nuestro menu: Sandwiches, hamburguesas, toast, waffle o pan frances.',
       },
       {
         title: '1/2 ensalada o sopa',
-        text: '',
+        text: 'Media ensalada o sopa a elegir.',
       },
       {
         title: 'Bebida grande',
-        text: '',
+        text: 'Cofy caliente, helado o frappe 20oz; Chillers 20oz; tes y coldbrews 20oz; o malteada 16oz.',
       },
       {
         title: 'Postre + gelato',
-        text: '',
+        text: 'Cualquier producto de reposteria: galleta, brownie, roll o cheesecake, mas 1 bolita de gelato.',
       },
     ],
     prices: [
@@ -134,19 +134,19 @@ const eventPackages = [
     includes: [
       {
         title: 'Platillo principal',
-        text: '',
+        text: 'Cualquier platillo de nuestro menu: Sandwiches, hamburguesas, toast, waffle o pan frances.',
       },
       {
         title: '1 side',
-        text: '',
+        text: 'French fries, Mac & Cheese, Sweet Potato Fries o Cream Corn.',
       },
       {
         title: 'Bebida grande',
-        text: '',
+        text: 'Cofy caliente, helado o frappe 20oz; Chillers 20oz; tes y coldbrews 20oz; o malteada 16oz.',
       },
       {
         title: 'Kuky o brownie o gelato',
-        text: '',
+        text: 'Galleta o brownie, mas 1 bolita de gelato.',
       },
     ],
     prices: [
@@ -164,15 +164,15 @@ const eventPackages = [
     includes: [
       {
         title: 'Platillo principal',
-        text: '',
+        text: 'Cualquier platillo de nuestro menu: Sandwiches, hamburguesas, toast, waffle, pan frances, ensalada o sopa.',
       },
       {
         title: 'Bebida mediana',
-        text: '',
+        text: 'Cofy caliente, helado o frappe 16oz; Chillers 16oz; tes y coldbrews 16oz; o malteada 12oz.',
       },
       {
         title: 'Kuky + gelato',
-        text: '',
+        text: 'Galleta y 1 bolita de gelato.',
       },
     ],
     prices: [
@@ -190,15 +190,15 @@ const eventPackages = [
     includes: [
       {
         title: 'Platillo principal',
-        text: '',
+        text: 'Cualquier platillo de nuestro menu: Sandwiches, hamburguesas, toast, waffle, pan frances, ensalada o sopa.',
       },
       {
         title: 'Bebida mediana',
-        text: '',
+        text: 'Cofy caliente, helado o frappe 16oz; Chillers 16oz; tes y coldbrews 16oz; o malteada 12oz.',
       },
       {
         title: 'Kuky',
-        text: '',
+        text: 'Galleta.',
       },
     ],
     prices: [
