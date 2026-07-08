@@ -20,20 +20,20 @@ const eventPackages = [
   {
     id: 'desayuno-1',
     title: 'Desayuno',
-    subtitle: 'Paquete 1',
+    subtitle: 'Platillo principal / Bebida Grande / Sweet Bite',
     tone: 'green',
     includes: [
       {
-        title: 'Platillo Principal',
-        text: 'Cualquier platillo de nuestro menu de desayunos: Sandwiches, Egg Drop Sandwich, Toast, Waffle o Pan Frances a elegir.',
+        title: 'Platillo principal',
+        text: '',
       },
       {
         title: 'Bebida Grande',
-        text: 'Cofy caliente, helado o frappe 20oz; Chillers 20oz; tes y coldbrews 20oz; o malteada 16oz.',
+        text: '',
       },
       {
         title: 'Sweet Bite',
-        text: 'Una galleta, brownie, cheesecake o roll.',
+        text: '',
       },
     ],
     prices: [
@@ -45,20 +45,20 @@ const eventPackages = [
   {
     id: 'desayuno-2',
     title: 'Desayuno',
-    subtitle: 'Paquete 2',
+    subtitle: 'Platillo principal / Bebida Grande / Kuky',
     tone: 'blue',
     includes: [
       {
-        title: 'Platillo Principal',
-        text: 'Cualquier platillo de nuestro menu de desayunos: Sandwiches, Egg Drop Sandwich, Toast, Waffle o Pan Frances a elegir.',
+        title: 'Platillo principal',
+        text: '',
       },
       {
         title: 'Bebida Grande',
-        text: 'Cofy caliente, helado o frappe 20oz; Chillers 20oz; tes y coldbrews 20oz; o malteada 16oz.',
+        text: '',
       },
       {
         title: 'Kuky',
-        text: 'Una galleta.',
+        text: '',
       },
     ],
     prices: [
@@ -70,20 +70,20 @@ const eventPackages = [
   {
     id: 'desayuno-3',
     title: 'Desayuno',
-    subtitle: 'Paquete 3',
+    subtitle: 'Platillo principal / Bebida mediana / Kuky',
     tone: 'purple',
     includes: [
       {
-        title: 'Platillo Principal',
-        text: 'Cualquier platillo de nuestro menu de desayunos: Sandwiches, Egg Drop Sandwich, Toast, Waffle o Pan Frances a elegir.',
+        title: 'Platillo principal',
+        text: '',
       },
       {
-        title: 'Bebida Mediana',
-        text: 'Cofy caliente, helado o frappe 16oz; Chillers 16oz; tes y coldbrews 16oz; o malteada 12oz.',
+        title: 'Bebida mediana',
+        text: '',
       },
       {
         title: 'Kuky',
-        text: 'Una galleta.',
+        text: '',
       },
     ],
     prices: [
@@ -95,24 +95,24 @@ const eventPackages = [
   {
     id: 'comida-1',
     title: 'Comida',
-    subtitle: 'Paquete 1',
+    subtitle: 'Platillo principal / 1/2 ensalada o sopa / Bebida grande / Postre + gelato',
     tone: 'purple',
     includes: [
       {
-        title: 'Platillo Principal',
-        text: 'Cualquier platillo de nuestro menu: Sandwiches, hamburguesas, toast, waffle o pan frances.',
+        title: 'Platillo principal',
+        text: '',
       },
       {
-        title: '1/2 Ensalada o Sopa',
-        text: 'Media ensalada o sopa a elegir.',
+        title: '1/2 ensalada o sopa',
+        text: '',
       },
       {
-        title: 'Bebida Grande',
-        text: 'Cofy caliente, helado o frappe 20oz; Chillers 20oz; tes y coldbrews 20oz; o malteada 16oz.',
+        title: 'Bebida grande',
+        text: '',
       },
       {
-        title: 'Postre + Gelato',
-        text: 'Cualquier producto de reposteria: galleta, brownie, roll o cheesecake, mas 1 bolita de gelato.',
+        title: 'Postre + gelato',
+        text: '',
       },
     ],
     prices: [
@@ -124,24 +124,24 @@ const eventPackages = [
   {
     id: 'comida-2',
     title: 'Comida',
-    subtitle: 'Paquete 2',
+    subtitle: 'Platillo principal / 1 side / Bebida grande / Kuky o brownie o gelato',
     tone: 'cyan',
     includes: [
       {
-        title: 'Platillo Principal',
-        text: 'Cualquier platillo de nuestro menu: Sandwiches, hamburguesas, toast, waffle o pan frances.',
+        title: 'Platillo principal',
+        text: '',
       },
       {
-        title: '1 Side a elegir',
-        text: 'French fries, Mac & Cheese, Sweet Potato Fries o Cream Corn.',
+        title: '1 side',
+        text: '',
       },
       {
-        title: 'Bebida Grande',
-        text: 'Cofy caliente, helado o frappe 20oz; Chillers 20oz; tes y coldbrews 20oz; o malteada 16oz.',
+        title: 'Bebida grande',
+        text: '',
       },
       {
-        title: 'Kuky o Brauny + Gelato',
-        text: 'Galleta o brownie, mas 1 bolita de gelato.',
+        title: 'Kuky o brownie o gelato',
+        text: '',
       },
     ],
     prices: [
@@ -153,20 +153,20 @@ const eventPackages = [
   {
     id: 'comida-3',
     title: 'Comida',
-    subtitle: 'Paquete 3',
+    subtitle: 'Platillo principal / Bebida mediana / Kuky + gelato',
     tone: 'pink',
     includes: [
       {
-        title: 'Platillo Principal',
-        text: 'Cualquier platillo de nuestro menu: Sandwiches, hamburguesas, toast, waffle, pan frances, ensalada o sopa.',
+        title: 'Platillo principal',
+        text: '',
       },
       {
-        title: 'Bebida Mediana',
-        text: 'Cofy caliente, helado o frappe 16oz; Chillers 16oz; tes y coldbrews 16oz; o malteada 12oz.',
+        title: 'Bebida mediana',
+        text: '',
       },
       {
-        title: 'Kuky + Gelato',
-        text: 'Galleta y 1 bolita de gelato.',
+        title: 'Kuky + gelato',
+        text: '',
       },
     ],
     prices: [
@@ -178,20 +178,20 @@ const eventPackages = [
   {
     id: 'comida-4',
     title: 'Comida',
-    subtitle: 'Paquete 4',
+    subtitle: 'Platillo principal / Bebida mediana / Kuky',
     tone: 'brown',
     includes: [
       {
-        title: 'Platillo Principal',
-        text: 'Cualquier platillo de nuestro menu: Sandwiches, hamburguesas, toast, waffle, pan frances, ensalada o sopa.',
+        title: 'Platillo principal',
+        text: '',
       },
       {
-        title: 'Bebida Mediana',
-        text: 'Cofy caliente, helado o frappe 16oz; Chillers 16oz; tes y coldbrews 16oz; o malteada 12oz.',
+        title: 'Bebida mediana',
+        text: '',
       },
       {
         title: 'Kuky',
-        text: 'Galleta.',
+        text: '',
       },
     ],
     prices: [
@@ -301,8 +301,8 @@ function closePackage() {
           <span>{{ eventPackage.title }}</span>
           <small v-if="eventPackage.subtitle">{{ eventPackage.subtitle }}</small>
         </button>
+        <RouterLink class="event-reservation-view__back" :to="{ name: 'home' }">Volver</RouterLink>
       </div>
-
     </section>
 
     <Transition name="package-detail">
@@ -340,7 +340,7 @@ function closePackage() {
               <ul>
                 <li v-for="item in selectedPackage.includes" :key="item.title">
                   <strong>{{ item.title }}</strong>
-                  <span>{{ item.text }}</span>
+                  <span v-if="item.text">{{ item.text }}</span>
                 </li>
               </ul>
             </section>
@@ -389,21 +389,21 @@ function closePackage() {
 }
 
 .event-reservation-view__sheet {
-  width: min(100%, 560px);
+  width: 100%;
   min-height: 100svh;
-  margin: 0 auto;
-  border-right: 1px solid #101114;
-  border-left: 1px solid #101114;
+  margin: 0;
+  border-right: 0;
+  border-left: 0;
   background: #f8f8f4;
 }
 
 .event-reservation-view__hero {
   display: grid;
-  min-height: 156px;
+  min-height: 124px;
   place-items: center;
   align-content: center;
-  gap: 10px;
-  padding: 32px 18px 28px;
+  gap: 6px;
+  padding: 22px 18px 20px;
   border-top: 1px solid #101114;
   border-bottom: 1px solid #101114;
   background: #ffe996;
@@ -430,20 +430,41 @@ function closePackage() {
 
 .event-reservation-view__packages {
   display: grid;
+  width: min(100%, 820px);
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px 16px;
-  padding: 64px clamp(28px, 9vw, 58px) 28px;
+  margin: 0 auto;
+  padding: 48px clamp(28px, 9vw, 58px) 24px;
+}
+
+.event-reservation-view__back {
+  display: inline-flex;
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc((100% - 16px) / 2);
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  margin: -2px 0 10px;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: #399ba4;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-decoration: none;
 }
 
 .event-package-card {
   --package-color: #6f9fce;
 
   display: grid;
-  min-height: 112px;
+  min-height: 126px;
   place-items: center;
   align-content: center;
-  gap: 4px;
-  padding: 18px 12px;
+  gap: 8px;
+  padding: 18px 14px;
   border: 0;
   border-radius: 22px;
   background: var(--package-color);
@@ -466,9 +487,11 @@ function closePackage() {
 
 .event-package-card small {
   font-family: var(--font-body);
-  font-size: clamp(0.68rem, 2.8vw, 0.86rem);
+  max-width: 96%;
+  font-size: clamp(0.58rem, 2.25vw, 0.72rem);
   font-weight: 900;
-  line-height: 1;
+  line-height: 1.16;
+  text-align: center;
   text-transform: none;
 }
 
@@ -532,7 +555,7 @@ function closePackage() {
   position: relative;
   z-index: 1;
   display: grid;
-  width: min(100%, 520px);
+  width: 100%;
   max-height: min(88svh, 820px);
   overflow: auto;
   border: 1px solid #101114;
@@ -589,8 +612,8 @@ function closePackage() {
 
 .package-detail-card__header {
   display: grid;
-  gap: 10px;
-  padding: 34px 24px 28px;
+  gap: 12px;
+  padding: 34px 24px 30px;
   background: var(--package-color);
   color: #ffffff;
   text-align: center;
@@ -607,7 +630,7 @@ function closePackage() {
 
 .package-detail-card__header h2 {
   display: grid;
-  gap: 3px;
+  gap: 10px;
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(2.1rem, 10vw, 4rem);
@@ -618,8 +641,10 @@ function closePackage() {
 
 .package-detail-card__header h2 small {
   font-family: var(--font-body);
-  font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-  line-height: 1;
+  max-width: min(360px, 88vw);
+  margin: 0 auto;
+  font-size: clamp(0.78rem, 3vw, 0.96rem);
+  line-height: 1.16;
   text-transform: none;
 }
 
@@ -783,7 +808,7 @@ function closePackage() {
   }
 
   .event-package-card {
-    min-height: 102px;
+    min-height: 118px;
     border-radius: 19px;
   }
 }

@@ -1806,8 +1806,8 @@ function fulfillmentLabel(item) {
 
   position: relative;
   width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   min-height: 100svh;
   padding-bottom: calc(120px + env(safe-area-inset-bottom));
   background: var(--cream);
@@ -2093,17 +2093,12 @@ function fulfillmentLabel(item) {
   padding: 14px 0 0;
   box-shadow: 0 8px 14px -10px rgb(42 28 20 / 28%);
 }
-@media (min-width: 560px) {
-  .order.is-catalog-mode .sticky {
-    width: calc(100% + 40px);
-    margin-left: -20px;
-  }
-}
 .search {
   position: relative;
   display: flex;
   align-items: center;
-  margin: 0 16px 14px;
+  width: min(100% - 32px, 820px);
+  margin: 0 auto 14px;
 }
 .search__icon {
   position: absolute;
@@ -2145,10 +2140,17 @@ function fulfillmentLabel(item) {
 }
 .cats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(100% - 32px, 820px);
+  grid-template-columns: minmax(0, 1fr);
   gap: 10px;
-  padding: 0 16px 18px;
+  margin: 0 auto;
+  padding: 0 0 18px;
   cursor: default;
+}
+@media (min-width: 520px) {
+  .cats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 .cats.is-disabled {
   cursor: default;
@@ -2183,11 +2185,9 @@ function fulfillmentLabel(item) {
   left: 50%;
   z-index: 9;
   display: grid;
-  width: min(100%, var(--public-frame-width));
+  width: 100%;
   min-height: 44px;
   place-items: center;
-  border-right: 1px solid #0f1115;
-  border-left: 1px solid #0f1115;
   background: #419ea5;
   transform: translateX(-50%);
 }
@@ -2225,13 +2225,15 @@ function fulfillmentLabel(item) {
 
 /* ---- Sections ---- */
 .section__title {
-  margin: 18px 16px 10px;
+  width: min(100% - 32px, 820px);
+  margin: 18px auto 10px;
   font-size: 1.18rem;
   font-weight: 900;
   letter-spacing: 0;
 }
 .menu-group-title {
-  margin: 24px 16px 8px;
+  width: min(100% - 32px, 820px);
+  margin: 24px auto 8px;
   color: var(--brown);
   font-size: 1.18rem;
   font-weight: 900;
@@ -2306,7 +2308,10 @@ function fulfillmentLabel(item) {
 
 /* ---- List rows ---- */
 .rows {
-  margin: 0;
+  width: min(100%, 820px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0 auto;
   padding: 0;
   list-style: none;
 }
@@ -2316,13 +2321,23 @@ function fulfillmentLabel(item) {
 .rows > li:last-child {
   border-bottom: 0;
 }
+@media (min-width: 720px) {
+  .rows {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rows > li:nth-last-child(2):nth-child(odd) {
+    border-bottom: 0;
+  }
+}
 .row {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
-  padding: 14px 16px;
+  min-height: 92px;
+  padding: 10px 12px;
   border: 0;
   background: transparent;
   text-align: left;
@@ -2336,18 +2351,18 @@ function fulfillmentLabel(item) {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  padding-top: 2px;
+  gap: 2px;
+  padding-top: 1px;
 }
 .row__name {
-  font-size: 0.98rem;
+  font-size: 0.92rem;
   font-weight: 700;
   line-height: 1.2;
 }
 .row__desc {
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   color: var(--muted);
-  line-height: 1.3;
+  line-height: 1.25;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -2361,7 +2376,7 @@ function fulfillmentLabel(item) {
   margin-top: 2px;
 }
 .row__price {
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   font-weight: 800;
 }
 .row__price.is-soft,
@@ -2373,25 +2388,25 @@ function fulfillmentLabel(item) {
   color: var(--muted);
 }
 .row__opt {
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 999px;
   background: #f3ece1;
   color: var(--brown);
-  font-size: 0.7rem;
+  font-size: 0.66rem;
   font-weight: 800;
   letter-spacing: 0.01em;
 }
 .row__media {
   position: relative;
   flex: 0 0 auto;
-  width: 96px;
-  height: 96px;
+  width: 72px;
+  height: 72px;
 }
 .row__media img,
 .row__placeholder {
-  width: 96px;
-  height: 96px;
-  border-radius: 14px;
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
   object-fit: cover;
   display: block;
   background: #f0e7da;
@@ -2401,8 +2416,8 @@ function fulfillmentLabel(item) {
   place-items: center;
 }
 .row__placeholder img {
-  width: 48px;
-  height: 48px;
+  width: 38px;
+  height: 38px;
   opacity: 0.55;
   border-radius: 0;
   background: transparent;
@@ -2534,8 +2549,8 @@ function fulfillmentLabel(item) {
 .sheet {
   position: relative;
   width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   max-height: 92svh;
   display: flex;
   flex-direction: column;

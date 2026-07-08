@@ -191,7 +191,7 @@ function closeMenu() {
 
 .app-layout.home-layout,
 .app-layout.menu-layout {
-  --public-frame-width: 560px;
+  --public-frame-width: 1920px;
   --app-side-background: #090a0c;
   --app-side-pattern: url("data:image/svg+xml,%3Csvg width='1080' height='180' viewBox='0 0 1080 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' font-family='Arial Black, Impact, sans-serif' font-size='13' font-weight='900' letter-spacing='1.2'%3E%3Ctext x='0' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='25'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='75'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='0' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='270' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='540' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='810' y='125'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='135' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='405' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='675' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3Ctext x='945' y='175'%3EBELLY MONSTER BITES%3C/text%3E%3C/g%3E%3C/svg%3E");
   align-items: center;
@@ -199,12 +199,12 @@ function closeMenu() {
 }
 
 .app-layout.home-layout {
-  --app-side-background: #f1f1ed;
+  --app-side-background: #090a0c;
   --app-frame-border: #0f1115;
 }
 
 .app-layout.menu-layout {
-  --app-side-background: #f1f1ed;
+  --app-side-background: #090a0c;
   --app-frame-border: #0f1115;
   --app-side-pattern: none;
 }
@@ -303,8 +303,6 @@ function closeMenu() {
   min-height: 54px;
   place-items: center;
   padding: 8px 16px;
-  border-right: 1px solid #0f1115;
-  border-left: 1px solid #0f1115;
   background: #e4c250;
   color: #ffffff;
   font-family: var(--font-display);
@@ -454,8 +452,6 @@ function closeMenu() {
 .home-layout .app-footer,
 .menu-layout .app-footer {
   width: min(100%, var(--public-frame-width));
-  border-right: 1px solid var(--app-frame-border);
-  border-left: 1px solid var(--app-frame-border);
 }
 
 .home-layout .app-content,
@@ -497,8 +493,8 @@ function closeMenu() {
 
 .order-layout .app-content :deep(.order),
 .pickup-layout .app-content :deep(.pickup-shell) {
-  border-right: 1px solid var(--app-frame-border);
-  border-left: 1px solid var(--app-frame-border);
+  border-right: 0;
+  border-left: 0;
 }
 
 .app-footer {

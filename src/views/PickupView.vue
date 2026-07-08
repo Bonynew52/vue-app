@@ -279,8 +279,8 @@ async function signOut() {
 <style scoped>
 .pickup-shell {
   width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   min-height: 100svh;
   background: #fff8ef;
 }

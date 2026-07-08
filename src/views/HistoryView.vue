@@ -8,23 +8,23 @@ import { RouterLink } from 'vue-router'
       <h1 id="history-title">Quienes somos</h1>
 
       <article>
-        <h2>Mision</h2>
+        <h2>Misión</h2>
         <p>
-          En Belly Monster Bites ofrecemos un espacio de felicidad libre de estres donde las personas se
-          desconecten de sus preocupaciones diarias a traves de reposteria, gelatos, bebidas y cafes de
-          especialidad excepcionales. Creamos una transicion perfecta entre un mundo divertido y la rutina
+          En Belly Monster Bites ofrecemos un espacio de felicidad libre de estrés donde las personas se
+          desconecten de sus preocupaciones diarias a través de repostería, gelatos, bebidas y cafés de
+          especialidad excepcionales. Creamos una transición perfecta entre un mundo divertido y la rutina
           humana, colocando siempre al cliente al centro de cada experiencia y para el disfrute de nuestros
-          productos que son elaborados con absoluta pasion.
+          productos que son elaborados con absoluta pasión.
         </p>
         <strong>TO EAT, TO SHARE, TO ENJOY</strong>
       </article>
 
       <article>
-        <h2>Vision</h2>
+        <h2>Visión</h2>
         <p>
-          Posicionarnos como la marca de reposteria y cafeteria tematica mas querida y reconocida en el
+          Posicionarnos como la marca de repostería y cafetería temática más querida y reconocida en el
           noreste de Mexico y el sur de Texas. Buscamos expandir nuestro modelo de franquicia de manera
-          sostenible, llevando innovacion constante a nuestra familia de productos y contagiando la alegria
+          sostenible, llevando innovación constante a nuestra familia de productos y contagiando la alegría
           de nuestros personajes a cada nueva comunidad que visitemos.
         </p>
       </article>
@@ -34,15 +34,15 @@ import { RouterLink } from 'vue-router'
         <ul>
           <li>
             <strong>Legado y Union Familiar:</strong>
-            Trabajamos con el mismo carino, confianza y apoyo mutuo con el que jugabamos en nuestra ninez.
+            Trabajamos con el mismo cariño, confianza y apoyo mutuo con el que jugábamos en nuestra niñez.
           </li>
           <li>
             <strong>Calidez en la Experiencia:</strong>
             Recibimos a cada cliente como a un invitado de honor en nuestra propia casa.
           </li>
           <li>
-            <strong>Pasion Artesanal:</strong>
-            Horneamos y creamos cada producto desde cero con el orgullo y la dedicacion de nuestra receta
+            <strong>Pasión Artesanal:</strong>
+            Horneamos y creamos cada producto desde cero con el orgullo y la dedicación de nuestra receta
             original.
           </li>
           <li>
@@ -51,13 +51,12 @@ import { RouterLink } from 'vue-router'
             generar confianza a largo plazo.
           </li>
           <li>
-            <strong>Alegria Colectiva:</strong>
-            Promovemos un ambiente de trabajo divertido donde el exito se comparte y se celebra en equipo.
+            <strong>Alegría Colectiva:</strong>
+            Promovemos un ambiente de trabajo divertido donde el éxito se comparte y se celebra en equipo.
           </li>
           <li>
             <strong>Innovacion con Identidad:</strong>
-            Buscamos evolucionar y adaptarnos a nuevos mercados sin perder nunca la esencia que nos vio
-            nacer.
+            Buscamos evolucionar y adaptarnos a nuevos mercados sin perder nunca la esencia que nos vio nacer.
           </li>
         </ul>
       </article>
@@ -78,9 +77,9 @@ import { RouterLink } from 'vue-router'
 
 .history-view__sheet {
   display: grid;
-  width: min(100%, 760px);
+  width: 100%;
   gap: 28px;
-  margin: 0 auto;
+  margin: 0;
   padding: 42px 24px 38px;
   background: #ffffff;
   color: #101114;
