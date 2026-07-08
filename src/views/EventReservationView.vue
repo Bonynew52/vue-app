@@ -20,7 +20,8 @@ const eventPackages = [
   {
     id: 'desayuno-1',
     title: 'Desayuno',
-    subtitle: 'Platillo principal / Bebida Grande / Sweet Bite',
+    subtitle: 'Paquete 1',
+    description: 'Platillo principal / Bebida Grande / Sweet Bite',
     tone: 'green',
     includes: [
       {
@@ -45,7 +46,8 @@ const eventPackages = [
   {
     id: 'desayuno-2',
     title: 'Desayuno',
-    subtitle: 'Platillo principal / Bebida Grande / Kuky',
+    subtitle: 'Paquete 2',
+    description: 'Platillo principal / Bebida Grande / Kuky',
     tone: 'blue',
     includes: [
       {
@@ -70,7 +72,8 @@ const eventPackages = [
   {
     id: 'desayuno-3',
     title: 'Desayuno',
-    subtitle: 'Platillo principal / Bebida mediana / Kuky',
+    subtitle: 'Paquete 3',
+    description: 'Platillo principal / Bebida mediana / Kuky',
     tone: 'purple',
     includes: [
       {
@@ -95,7 +98,8 @@ const eventPackages = [
   {
     id: 'comida-1',
     title: 'Comida',
-    subtitle: 'Platillo principal / 1/2 ensalada o sopa / Bebida grande / Postre + gelato',
+    subtitle: 'Paquete 1',
+    description: 'Platillo principal / 1/2 ensalada o sopa / Bebida grande / Postre + gelato',
     tone: 'purple',
     includes: [
       {
@@ -124,7 +128,8 @@ const eventPackages = [
   {
     id: 'comida-2',
     title: 'Comida',
-    subtitle: 'Platillo principal / 1 side / Bebida grande / Kuky o brownie o gelato',
+    subtitle: 'Paquete 2',
+    description: 'Platillo principal / 1 side / Bebida grande / Kuky o brownie o gelato',
     tone: 'cyan',
     includes: [
       {
@@ -153,7 +158,8 @@ const eventPackages = [
   {
     id: 'comida-3',
     title: 'Comida',
-    subtitle: 'Platillo principal / Bebida mediana / Kuky + gelato',
+    subtitle: 'Paquete 3',
+    description: 'Platillo principal / Bebida mediana / Kuky + gelato',
     tone: 'pink',
     includes: [
       {
@@ -178,7 +184,8 @@ const eventPackages = [
   {
     id: 'comida-4',
     title: 'Comida',
-    subtitle: 'Platillo principal / Bebida mediana / Kuky',
+    subtitle: 'Paquete 4',
+    description: 'Platillo principal / Bebida mediana / Kuky',
     tone: 'brown',
     includes: [
       {
@@ -300,6 +307,7 @@ function closePackage() {
         >
           <span>{{ eventPackage.title }}</span>
           <small v-if="eventPackage.subtitle">{{ eventPackage.subtitle }}</small>
+          <em v-if="eventPackage.description">{{ eventPackage.description }}</em>
         </button>
         <RouterLink class="event-reservation-view__back" :to="{ name: 'home' }">Volver</RouterLink>
       </div>
@@ -331,6 +339,7 @@ function closePackage() {
               {{ selectedPackage.title }}
               <small v-if="selectedPackage.subtitle">{{ selectedPackage.subtitle }}</small>
             </h2>
+            <span v-if="selectedPackage.description">{{ selectedPackage.description }}</span>
             <span v-if="selectedPackage.intro">{{ selectedPackage.intro }}</span>
           </header>
 
@@ -491,6 +500,17 @@ function closePackage() {
   font-size: clamp(0.58rem, 2.25vw, 0.72rem);
   font-weight: 900;
   line-height: 1.16;
+  text-align: center;
+  text-transform: none;
+}
+
+.event-package-card em {
+  max-width: 96%;
+  font-family: var(--font-body);
+  font-size: clamp(0.55rem, 2.05vw, 0.68rem);
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.14;
   text-align: center;
   text-transform: none;
 }

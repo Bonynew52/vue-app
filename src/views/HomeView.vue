@@ -10,6 +10,7 @@ import icedCoffeeHandoff from '../assets/campaigns/belly-iced-coffee-service.jpe
 import { menuCategories as catalogMenuCategories, monthlySpecialItems } from '../data/menu'
 
 const isLogoIntroVisible = ref(true)
+const latestRow = ref(null)
 const menuRow = ref(null)
 const imageVersion = 'home-20260619-3'
 const selectedMenuCategory = ref('waffles-pan-frances')
@@ -47,6 +48,19 @@ const menuSectionByHomeId = {
   sides: 'Sides',
   sopas: 'Sopas',
 }
+const categoryImageOverrides = {
+  bebidas: '/images/menu/category-bebidas-strawberry-matcha.jpeg',
+  postres: '/images/menu/temporal-galleta-sea-salt-toffee.jpeg',
+  sopas: '/images/menu/category-sopas-sopa-de-elote.jpeg',
+}
+const horizontalDrag = {
+  el: null,
+  pointerId: null,
+  startX: 0,
+  startScrollLeft: 0,
+  moved: false,
+}
+let suppressRailClick = false
 
 function normalizeText(value) {
   return String(value || '')
@@ -87,7 +101,7 @@ const menuCategoryCards = computed(() => {
       return {
         id: category.id,
         categoryId: menuSection?.id || '',
-        image: representativeItem?.image || brandLogo,
+        image: categoryImageOverrides[category.id] || representativeItem?.image || brandLogo,
         title: category.label,
         description: representativeItem?.description || representativeItem?.name || 'Categoria del menu Belly Monster.',
       }
@@ -105,6 +119,77 @@ function selectMenuCategory(categoryId) {
       card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
     }
   })
+}
+
+function startHorizontalDrag(event) {
+  if (event.button !== undefined && event.button !== 0) {
+    return
+  }
+
+  const rail = event.currentTarget
+  if (!rail || rail.scrollWidth <= rail.clientWidth) {
+    return
+  }
+
+  horizontalDrag.el = rail
+  horizontalDrag.pointerId = event.pointerId
+  horizontalDrag.startX = event.clientX
+  horizontalDrag.startScrollLeft = rail.scrollLeft
+  horizontalDrag.moved = false
+  rail.classList.add('is-dragging')
+  rail.setPointerCapture?.(event.pointerId)
+}
+
+function moveHorizontalDrag(event) {
+  if (!horizontalDrag.el || horizontalDrag.pointerId !== event.pointerId) {
+    return
+  }
+
+  const deltaX = event.clientX - horizontalDrag.startX
+  if (Math.abs(deltaX) > 4) {
+    horizontalDrag.moved = true
+  }
+
+  horizontalDrag.el.scrollLeft = horizontalDrag.startScrollLeft - deltaX
+}
+
+function endHorizontalDrag(event) {
+  if (!horizontalDrag.el || horizontalDrag.pointerId !== event.pointerId) {
+    return
+  }
+
+  horizontalDrag.el.releasePointerCapture?.(event.pointerId)
+  horizontalDrag.el.classList.remove('is-dragging')
+  suppressRailClick = horizontalDrag.moved
+  horizontalDrag.el = null
+  horizontalDrag.pointerId = null
+
+  if (suppressRailClick) {
+    window.setTimeout(() => {
+      suppressRailClick = false
+    }, 0)
+  }
+}
+
+function scrollHorizontalRailWithWheel(event) {
+  const rail = event.currentTarget
+  const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY
+
+  if (!delta || !rail || rail.scrollWidth <= rail.clientWidth) {
+    return
+  }
+
+  event.preventDefault()
+  rail.scrollLeft += delta
+}
+
+function cancelHorizontalDragClick(event) {
+  if (!suppressRailClick) {
+    return
+  }
+
+  event.preventDefault()
+  event.stopPropagation()
 }
 
 function refreshedImage(src) {
@@ -148,7 +233,16 @@ onBeforeUnmount(() => {
 
     <section class="home-section home-section--latest" aria-labelledby="latest-title">
       <h1 id="latest-title">Lo nuevo</h1>
-      <div class="home-card-row">
+      <div
+        ref="latestRow"
+        class="home-card-row"
+        @wheel="scrollHorizontalRailWithWheel"
+        @pointerdown="startHorizontalDrag"
+        @pointermove="moveHorizontalDrag"
+        @pointerup="endHorizontalDrag"
+        @pointercancel="endHorizontalDrag"
+        @click.capture="cancelHorizontalDragClick"
+      >
         <article
           v-for="item in latestItems"
           :key="item.id"
@@ -164,7 +258,18 @@ onBeforeUnmount(() => {
 
     <section class="home-section home-section--menu" aria-labelledby="menu-title">
       <h1 id="menu-title">Explora nuestro menú</h1>
-      <TransitionGroup ref="menuRow" name="menu-card-fade" tag="div" class="home-menu-row">
+      <TransitionGroup
+        ref="menuRow"
+        name="menu-card-fade"
+        tag="div"
+        class="home-menu-row"
+        @wheel="scrollHorizontalRailWithWheel"
+        @pointerdown="startHorizontalDrag"
+        @pointermove="moveHorizontalDrag"
+        @pointerup="endHorizontalDrag"
+        @pointercancel="endHorizontalDrag"
+        @click.capture="cancelHorizontalDragClick"
+      >
           <RouterLink
             v-for="card in menuCategoryCards"
             :key="card.id"
@@ -486,6 +591,7 @@ onBeforeUnmount(() => {
   scrollbar-width: none;
   touch-action: pan-x;
   user-select: none;
+  cursor: grab;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -593,7 +699,14 @@ onBeforeUnmount(() => {
   scroll-snap-type: x proximity;
   scrollbar-width: none;
   touch-action: pan-x;
+  cursor: grab;
   -webkit-overflow-scrolling: touch;
+}
+
+.home-card-row.is-dragging,
+.home-menu-row.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
 }
 
 .home-menu-row::-webkit-scrollbar {
