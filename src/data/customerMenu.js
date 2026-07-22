@@ -103,7 +103,7 @@ export const customerMenuSections = [
       { sourceName: 'Chicken n Fries (Kids)', description: 'Pollo empanizado con papas a la francesa.' },
       { sourceName: 'Mac N Chicken (Kids)', description: "Mac n' cheese con tiritas de pollo empanizado." },
       { sourceName: 'Pepperoni Toast (Kids)', description: 'Toast estilo pizza con pepperoni.' },
-      { sourceName: 'Kids Burger', description: 'Hamburguesa simple acompanada con papas a la francesa.' },
+      { sourceName: 'Kids Burger', description: 'Hamburguesa simple.' },
       { sourceName: 'Egg Drop Kids (Kids)', description: 'Sandwich de huevo revuelto con jamon de pavo, queso cheddar.' },
       { sourceName: 'Sandwichito (Kids)', description: 'Jamon de pavo, queso cheddar y mayonesa.' },
     ],
