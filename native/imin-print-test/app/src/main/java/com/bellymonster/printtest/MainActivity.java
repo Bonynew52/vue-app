@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,11 +23,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import io.sentry.Sentry;
-import io.sentry.SentryAttributes;
-import io.sentry.SentryLogLevel;
-import io.sentry.logger.SentryLogParameters;
-
 public class MainActivity extends Activity {
     private final AtomicInteger sequence = new AtomicInteger(0);
     private final String sessionId = UUID.randomUUID().toString();
@@ -42,11 +38,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(buildContentView());
-        Sentry.setTag("component", "native-imin-print-test");
-        Sentry.setTag("app", "belly-monster-bites");
         printer = IminPrintUtils.getInstance(this);
         IminPrintUtils.setIsOpenLog(1);
-        record(SentryLogLevel.INFO, "app_start", "App started", attrs(
+        record(Log.INFO, "app_start", "App started", attrs(
                 "sdk.family", "imin-v1",
                 "sdk.version", safeSdkVersion(),
                 "printer.connect_type", "USB"
@@ -56,8 +50,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        record(SentryLogLevel.INFO, "app_destroy", "App closing", attrs());
-        Sentry.flush(2000);
+        record(Log.INFO, "app_destroy", "App closing", attrs());
         super.onDestroy();
     }
 
@@ -115,7 +108,7 @@ public class MainActivity extends Activity {
     }
 
     private void initPrinterConnection() {
-        record(SentryLogLevel.INFO, "printer_v1_usb_init_start", "Initializing iMin V1 USB printer path...", attrs(
+        record(Log.INFO, "printer_v1_usb_init_start", "Initializing iMin V1 USB printer path...", attrs(
                 "printer.connect_type", "USB"
         ));
 
@@ -125,13 +118,13 @@ public class MainActivity extends Activity {
                 printerInitialized = true;
 
                 int status = safePrinterStatusCode();
-                record(status == 0 ? SentryLogLevel.INFO : SentryLogLevel.WARN, "printer_v1_usb_init_complete", "USB printer init complete. Status: " + status, attrs(
+                record(status == 0 ? Log.INFO : Log.WARN, "printer_v1_usb_init_complete", "USB printer init complete. Status: " + status, attrs(
                         "printer.connect_type", "USB",
                         "printer.status", status
                 ));
             } catch (Exception error) {
                 printerInitialized = false;
-                record(SentryLogLevel.ERROR, "printer_v1_usb_init_exception", "USB printer init failed: " + error.getClass().getSimpleName() + ": " + error.getMessage(), attrs(
+                record(Log.ERROR, "printer_v1_usb_init_exception", "USB printer init failed: " + error.getClass().getSimpleName() + ": " + error.getMessage(), attrs(
                         "error.type", error.getClass().getSimpleName(),
                         "error.message", String.valueOf(error.getMessage()),
                         "printer.connect_type", "USB"
@@ -139,18 +132,17 @@ public class MainActivity extends Activity {
             }
 
             runOnUiThread(() -> printButton.setEnabled(true));
-            record(SentryLogLevel.INFO, "printer_ready_prompt", "Tap the button to invoke one tiny USB receipt.", attrs(
+            record(Log.INFO, "printer_ready_prompt", "Tap the button to invoke one tiny USB receipt.", attrs(
                     "printer.connect_type", "USB",
                     "printer.initialized", printerInitialized,
                     "printer.status", safePrinterStatusCode()
             ));
-            Sentry.flush(2000);
         }, "imin-v1-usb-init").start();
     }
 
     private void printNativeTest() {
         printButton.setEnabled(false);
-        record(printerInitialized ? SentryLogLevel.INFO : SentryLogLevel.WARN, "print_button_tapped", "Starting iMin V1 USB print test...", attrs(
+        record(printerInitialized ? Log.INFO : Log.WARN, "print_button_tapped", "Starting iMin V1 USB print test...", attrs(
                 "printer.connect_type", "USB",
                 "printer.initialized", printerInitialized,
                 "printer.status", safePrinterStatusCode()
@@ -163,20 +155,20 @@ public class MainActivity extends Activity {
                 if (!printerInitialized) {
                     printer.initPrinter(IminPrintUtils.PrintConnectType.USB);
                     printerInitialized = true;
-                    record(SentryLogLevel.INFO, "printer_v1_usb_lazy_init_complete", "USB printer lazy init complete.", attrs(
+                    record(Log.INFO, "printer_v1_usb_lazy_init_complete", "USB printer lazy init complete.", attrs(
                             "printer.connect_type", "USB",
                             "printer.status", safePrinterStatusCode()
                     ));
                 }
 
                 int beforeStatus = safePrinterStatusCode();
-                record(beforeStatus == 0 ? SentryLogLevel.INFO : SentryLogLevel.WARN, "printer_status_before_print", "Printer status before print: " + beforeStatus, attrs(
+                record(beforeStatus == 0 ? Log.INFO : Log.WARN, "printer_status_before_print", "Printer status before print: " + beforeStatus, attrs(
                         "printer.connect_type", "USB",
                         "printer.status", beforeStatus
                 ));
 
                 printer.initParams();
-                record(SentryLogLevel.DEBUG, "printer_params_initialized", "Printer params initialized", attrs(
+                record(Log.DEBUG, "printer_params_initialized", "Printer params initialized", attrs(
                         "printer.connect_type", "USB",
                         "printer.status", safePrinterStatusCode()
                 ));
@@ -221,12 +213,12 @@ public class MainActivity extends Activity {
                 printer.printAndFeedPaper(120);
                 try {
                     printer.partialCut();
-                    record(SentryLogLevel.INFO, "printer_partial_cut_invoked", "Partial cut invoked in sample print.", attrs(
+                    record(Log.INFO, "printer_partial_cut_invoked", "Partial cut invoked in sample print.", attrs(
                             "printer.connect_type", "USB",
                             "printer.status", safePrinterStatusCode()
                     ));
                 } catch (Exception cutError) {
-                    record(SentryLogLevel.WARN, "printer_cut_failed", "Sample printed but cut failed: " + cutError.getMessage(), attrs(
+                    record(Log.WARN, "printer_cut_failed", "Sample printed but cut failed: " + cutError.getMessage(), attrs(
                             "error.type", cutError.getClass().getSimpleName(),
                             "error.message", String.valueOf(cutError.getMessage()),
                             "printer.connect_type", "USB",
@@ -236,21 +228,19 @@ public class MainActivity extends Activity {
 
                 int afterStatus = safePrinterStatusCode();
                 runOnUiThread(() -> printButton.setEnabled(true));
-                record(SentryLogLevel.INFO, "print_commands_invoked", "V1 USB print commands invoked. Paper output is the final proof.", attrs(
+                record(Log.INFO, "print_commands_invoked", "V1 USB print commands invoked. Paper output is the final proof.", attrs(
                         "printer.connect_type", "USB",
                         "printer.status", afterStatus
                 ));
-                Sentry.flush(2000);
             } catch (Exception error) {
                 runOnUiThread(() -> printButton.setEnabled(true));
-                record(SentryLogLevel.ERROR, "print_exception", "Print failed: " + error.getClass().getSimpleName() + ": " + error.getMessage(), attrs(
+                record(Log.ERROR, "print_exception", "Print failed: " + error.getClass().getSimpleName() + ": " + error.getMessage(), attrs(
                         "error.type", error.getClass().getSimpleName(),
                         "error.message", String.valueOf(error.getMessage()),
                         "printer.connect_type", "USB",
                         "printer.initialized", printerInitialized,
                         "printer.status", safePrinterStatusCode()
                 ));
-                Sentry.flush(2000);
             }
         }, "imin-v1-usb-print-test").start();
     }
@@ -273,7 +263,7 @@ public class MainActivity extends Activity {
         appendLog("Printer agent stop requested");
     }
 
-    private void record(SentryLogLevel level, String event, String message, Map<String, Object> attributes) {
+    private void record(int level, String event, String message, Map<String, Object> attributes) {
         runOnUiThread(() -> appendLog(message));
 
         Map<String, Object> enriched = new HashMap<>(attributes);
@@ -291,15 +281,7 @@ public class MainActivity extends Activity {
         enriched.put("printer.connect_type", "USB");
         enriched.put("printer.initialized", printerInitialized);
 
-        try {
-            Sentry.logger().log(
-                    level,
-                    SentryLogParameters.create(SentryAttributes.fromMap(enriched)),
-                    "[printer-test] " + message
-            );
-        } catch (Exception error) {
-            runOnUiThread(() -> appendLog("Sentry log failed: " + error.getClass().getSimpleName()));
-        }
+        Log.println(level, "BellyPrintTest", event + " · " + message + " · " + enriched);
     }
 
     private void appendLog(String message) {

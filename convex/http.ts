@@ -2,8 +2,15 @@ import { httpRouter } from "convex/server";
 import { httpAction } from "./_generated/server";
 import { internal } from "./_generated/api";
 import type { Id } from "./_generated/dataModel";
+import { authComponent, createAuth, trustedOrigins } from "./auth";
 
 const http = httpRouter();
+
+authComponent.registerRoutesLazy(http, createAuth, {
+  basePath: "/api/auth",
+  cors: true,
+  trustedOrigins: trustedOrigins(),
+});
 
 function json(body: unknown, init?: ResponseInit) {
   return new Response(JSON.stringify(body), {

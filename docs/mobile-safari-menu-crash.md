@@ -6,9 +6,9 @@ On May 31, 2026, `https://www.bellymonsterbites.com/menu` intermittently
 crashed on a real iPhone 15 in Mobile Safari with Safari's generic message:
 `A problem repeatedly occurred`.
 
-This was not a normal JavaScript exception. Sentry did not show a useful
-runtime error because the failure happened below the JS runtime, in Safari's
-WebKit WebContent renderer/compositor process.
+This was not a normal JavaScript exception. Client-side error reporting did not
+show a useful runtime error because the failure happened below the JS runtime,
+in Safari's WebKit WebContent renderer/compositor process.
 
 ## Cause
 
@@ -38,7 +38,7 @@ Real-device evidence:
   - `Received memory pressure event`
   - `Memory pressure relief`
   - `WebProcess::markAllLayersVolatile: Failed to mark layers as volatile`
-- No fresh JavaScript exception appeared in Sentry for the crash.
+- No fresh JavaScript exception appeared in client-side error reporting.
 
 Browser benchmark evidence:
 
@@ -68,7 +68,7 @@ After the fix, production mobile `/menu` measured:
 
 If a similar iPhone-only Safari crash appears:
 
-1. Do not assume Sentry will catch it. Sentry sees JS events, not every WebKit
+1. Do not assume JavaScript error reporting will catch every WebKit
    renderer/compositor kill.
 2. Test on a real iPhone when possible. Desktop WebKit emulation may not
    reproduce the crash.

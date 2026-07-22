@@ -4,12 +4,9 @@ import { clerkPlugin } from '@clerk/vue'
 import { esMX } from '@clerk/localizations'
 import App from './App.vue'
 import { router } from './router'
-import { setupSentry } from './lib/sentry'
 import './assets/styles/main.css'
 
 const app = createApp(App)
-
-setupSentry(app, router)
 
 app.use(router)
 

@@ -1,3 +1,6 @@
+import { getAuthConfigProvider } from "@convex-dev/better-auth/auth-config";
+import type { AuthConfig } from "convex/server";
+
 // No fallback issuer on purpose: a deployment that forgets to set
 // CLERK_JWT_ISSUER_DOMAIN must fail the push instead of silently trusting
 // JWTs minted by some other (e.g. dev) Clerk instance.
@@ -8,11 +11,16 @@ if (!issuerDomain) {
   );
 }
 
+export const betterAuthConfig = {
+  providers: [getAuthConfigProvider()],
+} satisfies AuthConfig;
+
 export default {
   providers: [
+    ...betterAuthConfig.providers,
     {
       domain: issuerDomain,
       applicationID: "convex",
     },
   ],
-};
+} satisfies AuthConfig;

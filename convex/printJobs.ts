@@ -3,6 +3,7 @@ import { internalMutation, query } from "./_generated/server";
 import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
 import { printJobStatus } from "./schema";
+import { requireStaff } from "./staffAuth";
 
 function cleanText(value: string, maxLength: number) {
   return value.trim().slice(0, maxLength);
@@ -52,6 +53,7 @@ export const list = query({
     status: v.union(v.literal("active"), v.literal("all"), printJobStatus),
   },
   handler: async (ctx, args) => {
+    await requireStaff(ctx);
     const activeStatuses = ["pending", "printing", "failed"] as const;
     const jobs =
       args.status === "all"
@@ -73,7 +75,9 @@ export const list = query({
               .slice(0, 200)
           : await ctx.db
               .query("printJobs")
-              .withIndex("by_status_and_createdAt", (q) => q.eq("status", args.status))
+              .withIndex("by_status_and_createdAt", (q) =>
+                q.eq("status", args.status as Doc<"printJobs">["status"]),
+              )
               .order("asc")
               .take(200);
 

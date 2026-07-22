@@ -1,6 +1,7 @@
 import { watch } from 'vue'
 import { useAuth } from '@clerk/vue'
 import { useConvexClient } from 'convex-vue'
+import { useRoute } from 'vue-router'
 
 const hasClerk = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY)
 const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL)
@@ -21,6 +22,7 @@ export function useClerkConvexBridge() {
   }
 
   const client = useConvexClient()
+  const route = useRoute()
   // From @clerk/vue, these are ComputedRefs; getToken resolves once Clerk loads
   // and returns null when there is no session.
   const { isLoaded, isSignedIn, getToken } = useAuth()
@@ -38,8 +40,11 @@ export function useClerkConvexBridge() {
   }
 
   watch(
-    [isLoaded, isSignedIn],
-    ([loaded, signedIn]) => {
+    [() => route.name, isLoaded, isSignedIn],
+    ([routeName, loaded, signedIn]) => {
+      if (routeName !== 'pickup') {
+        return
+      }
       if (!loaded) {
         return
       }

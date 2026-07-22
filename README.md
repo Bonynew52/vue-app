@@ -13,8 +13,7 @@ src/
   data/               Datos locales y presets
   utils/              Funciones puras de ayuda
   views/              Pantallas principales
-api/                  Endpoints de Vercel para autenticacion del personal
-convex/               Backend realtime de pedidos QR y panel del personal
+convex/               Backend realtime, datos y autenticacion del personal
 public/               Manifest y service worker de la PWA
 scripts/              Scripts operativos locales
 ```
@@ -31,9 +30,9 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 - Pedidos QR: https://bellymonsterbites.com/ordenar?mesa=1
 - Panel del personal: https://bellymonsterbites.com/ordenes
 
-La app usa Convex para pedidos, eventos y actualizaciones realtime del panel del
-personal. Vercel sirve el frontend Vue/Vite y conserva por ahora los endpoints
-de Better Auth para el login del personal.
+La app usa Convex para pedidos, eventos, actualizaciones realtime y el
+almacenamiento de Better Auth para el login del personal. Clerk se limita al
+flujo de clientes Pick&Go. Vercel sirve el frontend Vue/Vite.
 
 Vercel esta configurado para compilar con:
 
@@ -56,11 +55,8 @@ Variables principales:
 - `VITE_CONVEX_SITE_URL`
 - `CONVEX_DEPLOY_KEY` en Vercel para los deploys de produccion
 - `CONVEX_DEPLOYMENT`
-- `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`,
-  `ALLOW_STAFF_SIGNUP` mientras Better Auth siga usando Postgres.
-
-El usuario local de staff se crea con `npm run staff:create` usando
-`STAFF_EMAIL` y `STAFF_PASSWORD`.
+- `SITE_URL`, `BETTER_AUTH_SECRET` y `CLERK_JWT_ISSUER_DOMAIN` en Convex
+- `VITE_CLERK_PUBLISHABLE_KEY` en Vercel para Pick&Go
 
 ## Comandos
 

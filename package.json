@@ -11,23 +11,23 @@
     "preview": "vite preview",
     "menu:build": "node scripts/build-menu-catalog.mjs",
     "menu:images": "node scripts/download-rappi-images.mjs",
-    "menu:import": "node scripts/import-menu-catalog.mjs",
-    "staff:create": "node scripts/create-staff-user.mjs"
+    "menu:import": "node scripts/import-menu-catalog.mjs"
   },
   "dependencies": {
     "@clerk/localizations": "^4.8.1",
     "@clerk/vue": "^2.4.1",
-    "@sentry/vue": "^10.55.0",
-    "better-auth": "^1.6.11",
+    "@convex-dev/better-auth": "^0.12.5",
+    "better-auth": "~1.6.15",
     "convex": "^1.39.1",
     "convex-vue": "^0.1.5",
-    "pg": "^8.21.0",
     "vue": "^3.5.34",
     "vue-router": "^5.0.7"
   },
   "devDependencies": {
+    "@types/node": "^26.1.1",
     "@vitejs/plugin-vue": "^6.0.7",
     "exceljs": "^4.4.0",
+    "typescript": "^6.0.3",
     "vite": "^8.0.13"
   }
 }

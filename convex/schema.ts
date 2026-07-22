@@ -31,6 +31,7 @@ const orderItemModifier = v.object({
 
 export default defineSchema({
   orders: defineTable({
+    legacyId: v.optional(v.string()),
     shortCode: v.string(),
     tableId: v.optional(v.string()),
     orderType: v.optional(v.union(v.literal("table"), v.literal("pickup"))),
@@ -47,11 +48,13 @@ export default defineSchema({
     updatedAt: v.number(),
     closedAt: v.union(v.number(), v.null()),
   })
+    .index("by_legacyId", ["legacyId"])
     .index("by_status_and_createdAt", ["status", "createdAt"])
     .index("by_createdAt", ["createdAt"])
     .index("by_customerUserId_and_createdAt", ["customerUserId", "createdAt"]),
 
   orderItems: defineTable({
+    legacyId: v.optional(v.string()),
     orderId: v.id("orders"),
     menuItemId: v.string(),
     name: v.string(),
@@ -67,15 +70,28 @@ export default defineSchema({
     pickupStatus: v.optional(v.union(pickupStatus, v.null())),
     pickupReadyAt: v.optional(v.union(v.number(), v.null())),
     sortIndex: v.number(),
-  }).index("by_orderId_and_sortIndex", ["orderId", "sortIndex"]),
+  })
+    .index("by_legacyId", ["legacyId"])
+    .index("by_orderId_and_sortIndex", ["orderId", "sortIndex"]),
 
   orderEvents: defineTable({
+    legacyId: v.optional(v.string()),
     orderId: v.id("orders"),
     eventType: v.string(),
     actor: v.string(),
     detail: v.any(),
     createdAt: v.number(),
-  }).index("by_orderId_and_createdAt", ["orderId", "createdAt"]),
+  })
+    .index("by_legacyId", ["legacyId"])
+    .index("by_orderId_and_createdAt", ["orderId", "createdAt"]),
+
+  legacyMigrations: defineTable({
+    source: v.string(),
+    model: v.string(),
+    sourceId: v.string(),
+    targetId: v.string(),
+    migratedAt: v.number(),
+  }).index("by_source_model_sourceId", ["source", "model", "sourceId"]),
 
   printJobs: defineTable({
     orderId: v.id("orders"),

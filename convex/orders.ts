@@ -4,6 +4,7 @@ import { internal } from "./_generated/api";
 import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "./_generated/server";
 import { orderStatus, pickupStatus } from "./schema";
+import { requireStaff } from "./staffAuth";
 
 const activeStatuses = ["new", "capturing", "preparing", "ready"] as const;
 const allStatuses = [...activeStatuses, "served", "cancelled"] as const;
@@ -50,7 +51,7 @@ function plainText(value: string) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-function fulfillmentForItem(item: { name: string; categoryName: string }) {
+function fulfillmentForItem(item: { name: string; categoryName: string }): "table" | "counter" {
   const category = plainText(item.categoryName);
   const name = plainText(item.name);
   const counterCategory =
@@ -133,6 +134,7 @@ function normalizeItem(item: {
   const quantity = Math.max(1, Math.min(99, Math.floor(item.quantity) || 1));
   const unitPriceCents = item.unitPriceCents == null ? null : Math.max(0, Math.round(item.unitPriceCents));
   const fulfillmentType = fulfillmentForItem(item);
+  const itemPickupStatus: "pending" | null = fulfillmentType === "counter" ? "pending" : null;
   const modifiers = normalizeModifiers(item.modifiers);
 
   return {
@@ -147,7 +149,7 @@ function normalizeItem(item: {
     note: cleanText(item.note, 240),
     imageUrl: cleanText(item.imageUrl, 600),
     fulfillmentType,
-    pickupStatus: fulfillmentType === "counter" ? "pending" : null,
+    pickupStatus: itemPickupStatus,
     pickupReadyAt: null,
     sortIndex: Math.max(0, Math.floor(item.sortIndex) || 0),
   };
@@ -475,6 +477,7 @@ export const list = query({
     status: v.union(v.literal("active"), v.literal("all")),
   },
   handler: async (ctx, args) => {
+    await requireStaff(ctx);
     const orders =
       args.status === "all"
         ? await ctx.db.query("orders").withIndex("by_createdAt").order("desc").take(200)
@@ -490,10 +493,15 @@ export const list = query({
             )
           )
             .flat()
+            // Imported Neon orders remain available under "all" for history,
+            // but never re-enter the live kitchen queue long after cutover.
+            .filter((order) => !order.legacyId)
             .sort((a, b) => b.createdAt - a.createdAt)
             .slice(0, 200);
 
-    return await Promise.all(orders.map((order) => presentOrder(ctx, order)));
+    return await Promise.all(
+      orders.map((order) => presentOrder(ctx, order, { includePhone: true })),
+    );
   },
 });
 
@@ -520,6 +528,7 @@ export const updateStatus = mutation({
     status: orderStatus,
   },
   handler: async (ctx, args) => {
+    await requireStaff(ctx);
     const order = await ctx.db.get(args.orderId);
     if (!order) {
       throw new Error("Pedido no encontrado.");
@@ -595,6 +604,7 @@ export const updatePickupStatus = mutation({
     status: pickupStatus,
   },
   handler: async (ctx, args) => {
+    await requireStaff(ctx);
     const item = await ctx.db.get(args.orderItemId);
     if (!item) {
       throw new Error("Artículo no encontrado.");

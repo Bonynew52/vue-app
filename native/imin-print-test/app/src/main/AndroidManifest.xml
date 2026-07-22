@@ -9,22 +9,6 @@
         android:allowBackup="false"
         android:label="Belly Print Test"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="io.sentry.dsn"
-            android:value="${sentryDsn}" />
-        <meta-data
-            android:name="io.sentry.logs.enabled"
-            android:value="true" />
-        <meta-data
-            android:name="io.sentry.environment"
-            android:value="production" />
-        <meta-data
-            android:name="io.sentry.traces.sample-rate"
-            android:value="0.0" />
-        <meta-data
-            android:name="io.sentry.send-default-pii"
-            android:value="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">

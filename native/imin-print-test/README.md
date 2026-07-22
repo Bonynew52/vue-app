@@ -18,7 +18,6 @@ vercel env run --environment=production -- bash -lc \
 
 The APK build requires:
 
-- `SENTRY_DSN` or `VITE_SENTRY_DSN`
 - `CONVEX_HTTP_BASE_URL` or `VITE_CONVEX_SITE_URL`
 - `PRINTER_AGENT_TOKEN`
 
@@ -27,8 +26,6 @@ Gradle fails if any are missing. The same `PRINTER_AGENT_TOKEN` must also be set
 ```bash
 npx convex env set PRINTER_AGENT_TOKEN '...'
 ```
-
-The app emits Sentry Logs through the Android SDK with `io.sentry.logs.enabled=true`.
 
 Install locally through ADB when a device is connected:
 
@@ -40,4 +37,4 @@ Expected manual result: launch **Belly Print Test**, tap **Print sample comanda*
 
 Expected agent result: tap **Start printer agent**. The notification should stay visible while the foreground service polls Convex and prints pending commandas.
 
-The v0.4 APK uses iMin SDK V1.3.1 with the documented USB path for D4 / Android 11 devices. Sentry Logs include `sdk.family=imin-v1`, `printer.connect_type=USB`, `printer.status`, and printer-agent events.
+The v0.4 APK uses iMin SDK V1.3.1 with the documented USB path for D4 / Android 11 devices. Runtime diagnostics remain available through Android Logcat and the on-screen test log.

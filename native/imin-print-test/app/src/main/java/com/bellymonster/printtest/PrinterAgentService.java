@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.imin.printerlib.IminPrintUtils;
 
@@ -28,18 +29,10 @@ import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import io.sentry.Sentry;
-import io.sentry.SentryAttributes;
-import io.sentry.SentryLogLevel;
-import io.sentry.logger.SentryLogParameters;
 
 public class PrinterAgentService extends Service {
     public static final String ACTION_START = "com.bellymonster.printtest.START_AGENT";
@@ -64,9 +57,7 @@ public class PrinterAgentService extends Service {
         deviceId = stableDeviceId();
         printer = IminPrintUtils.getInstance(this);
         IminPrintUtils.setIsOpenLog(1);
-        Sentry.setTag("component", "native-imin-printer-agent");
-        Sentry.setTag("app", "belly-monster-bites");
-        log(SentryLogLevel.INFO, "service_create", "Printer agent service created");
+        log(Log.INFO, "service_create", "Printer agent service created");
     }
 
     @Override
@@ -85,8 +76,7 @@ public class PrinterAgentService extends Service {
     @Override
     public void onDestroy() {
         stopAgent();
-        log(SentryLogLevel.INFO, "service_destroy", "Printer agent service destroyed");
-        Sentry.flush(2000);
+        log(Log.INFO, "service_destroy", "Printer agent service destroyed");
         super.onDestroy();
     }
 
@@ -102,7 +92,7 @@ public class PrinterAgentService extends Service {
         running = true;
         worker = new Thread(this::runLoop, "belly-printer-agent");
         worker.start();
-        log(SentryLogLevel.INFO, "agent_started", "Printer agent started");
+        log(Log.INFO, "agent_started", "Printer agent started");
     }
 
     private synchronized void stopAgent() {
@@ -116,7 +106,7 @@ public class PrinterAgentService extends Service {
                 printer.disConnectDevices();
             }
         } catch (Exception error) {
-            log(SentryLogLevel.WARN, "printer_disconnect_failed", "Printer disconnect failed: " + error.getMessage());
+            log(Log.WARN, "printer_disconnect_failed", "Printer disconnect failed: " + error.getMessage());
         }
         stopForeground(true);
         stopSelf();
@@ -132,7 +122,7 @@ public class PrinterAgentService extends Service {
                     continue;
                 }
 
-                log(SentryLogLevel.INFO, "print_job_claimed", "Claimed comanda " + claim.job.id + " for " + claim.job.destinationLabel);
+                log(Log.INFO, "print_job_claimed", "Claimed comanda " + claim.job.id + " for " + claim.job.destinationLabel);
                 // tableId arrives as a full label ("Mesa 4" / "Pick&Go"); no prefix here.
                 updateNotification("Printing comanda", claim.job.tableId + " · #" + claim.job.shortCode);
 
@@ -141,20 +131,20 @@ public class PrinterAgentService extends Service {
                     printComanda(claim.job);
                     paperWasPrinted = true;
                     completePrintJob(claim, true, "");
-                    log(SentryLogLevel.INFO, "print_job_completed", "Printed comanda " + claim.job.id);
+                    log(Log.INFO, "print_job_completed", "Printed comanda " + claim.job.id);
                     updateNotification("Belly printer active", "Last printed #" + claim.job.shortCode);
                 } catch (Exception printError) {
                     if (paperWasPrinted) {
-                        log(SentryLogLevel.ERROR, "print_complete_failed_after_paper", "Paper printed but completion failed for " + claim.job.id + ": " + printError.getMessage());
+                        log(Log.ERROR, "print_complete_failed_after_paper", "Paper printed but completion failed for " + claim.job.id + ": " + printError.getMessage());
                         updateNotification("Printed, sync failed", "#" + claim.job.shortCode + " needs review");
                     } else {
                         completePrintJob(claim, false, printError.getClass().getSimpleName() + ": " + printError.getMessage());
-                        log(SentryLogLevel.ERROR, "print_job_failed", "Print failed for " + claim.job.id + ": " + printError.getMessage());
+                        log(Log.ERROR, "print_job_failed", "Print failed for " + claim.job.id + ": " + printError.getMessage());
                         updateNotification("Print failed", "#" + claim.job.shortCode + " needs attention");
                     }
                 }
             } catch (Exception error) {
-                log(SentryLogLevel.ERROR, "agent_loop_error", "Printer agent loop error: " + error.getClass().getSimpleName() + ": " + error.getMessage());
+                log(Log.ERROR, "agent_loop_error", "Printer agent loop error: " + error.getClass().getSimpleName() + ": " + error.getMessage());
                 sleep(POLL_INTERVAL_MS);
             }
         }
@@ -166,7 +156,7 @@ public class PrinterAgentService extends Service {
         }
         printer.initPrinter(IminPrintUtils.PrintConnectType.USB);
         printerInitialized = true;
-        log(SentryLogLevel.INFO, "printer_initialized", "USB printer initialized. Status: " + safePrinterStatusCode());
+        log(Log.INFO, "printer_initialized", "USB printer initialized. Status: " + safePrinterStatusCode());
     }
 
     private PrintJobClaim claimNextPrintJob() throws Exception {
@@ -286,9 +276,9 @@ public class PrinterAgentService extends Service {
         printer.printAndFeedPaper(120);
         try {
             printer.partialCut();
-            log(SentryLogLevel.INFO, "printer_partial_cut_invoked", "Partial cut invoked for " + job.id);
+            log(Log.INFO, "printer_partial_cut_invoked", "Partial cut invoked for " + job.id);
         } catch (Exception cutError) {
-            log(SentryLogLevel.WARN, "printer_cut_failed", "Comanda printed but cut failed: " + cutError.getMessage());
+            log(Log.WARN, "printer_cut_failed", "Comanda printed but cut failed: " + cutError.getMessage());
         }
     }
 
@@ -419,7 +409,7 @@ public class PrinterAgentService extends Service {
         manager.createNotificationChannel(channel);
     }
 
-    private void log(SentryLogLevel level, String event, String message) {
+    private void log(int level, String event, String message) {
         JSONObject attributes = new JSONObject();
         try {
             attributes.put("app", "belly-monster-bites");
@@ -437,14 +427,7 @@ public class PrinterAgentService extends Service {
         } catch (Exception ignored) {
         }
 
-        try {
-            Sentry.logger().log(
-                    level,
-                    SentryLogParameters.create(SentryAttributes.fromMap(JsonMaps.toMap(attributes))),
-                    "[printer-agent] " + message
-            );
-        } catch (Exception ignored) {
-        }
+        Log.println(level, "BellyPrinterAgent", event + " · " + message + " · " + attributes);
     }
 
     private static class PrintJobClaim {
@@ -546,15 +529,4 @@ public class PrinterAgentService extends Service {
         }
     }
 
-    private static class JsonMaps {
-        static Map<String, Object> toMap(JSONObject json) {
-            Map<String, Object> map = new HashMap<>();
-            Iterator<String> keys = json.keys();
-            while (keys.hasNext()) {
-                String key = keys.next();
-                map.put(key, json.opt(key));
-            }
-            return map;
-        }
-    }
 }
