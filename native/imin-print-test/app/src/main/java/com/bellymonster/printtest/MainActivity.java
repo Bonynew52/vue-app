@@ -7,8 +7,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -28,7 +30,9 @@ public class MainActivity extends Activity {
     private final String sessionId = UUID.randomUUID().toString();
 
     private TextView statusView;
+    private TextView configView;
     private Button printButton;
+    private Button configButton;
     private Button startAgentButton;
     private Button stopAgentButton;
     private IminPrintUtils printer;
@@ -54,7 +58,7 @@ public class MainActivity extends Activity {
         super.onDestroy();
     }
 
-    private ScrollView buildContentView() {
+    private FrameLayout buildContentView() {
         int pad = dp(20);
 
         LinearLayout content = new LinearLayout(this);
@@ -64,35 +68,49 @@ public class MainActivity extends Activity {
         content.setBackgroundColor(0xFFF7F3ED);
 
         TextView title = new TextView(this);
-        title.setText("Belly Print Test");
+        title.setText("Belly Printer");
         title.setTextSize(28);
         title.setTypeface(Typeface.DEFAULT_BOLD);
         title.setTextColor(0xFF14211B);
+        title.setPadding(0, dp(42), 0, 0);
         content.addView(title, fullWidth());
 
+        configView = new TextView(this);
+        configView.setText(configSummary());
+        configView.setTextSize(13);
+        configView.setTextColor(0xFF25312B);
+        configView.setPadding(dp(12), dp(12), dp(12), dp(12));
+        configView.setBackgroundColor(0xFFE8F3EE);
+        configView.setVisibility(View.GONE);
+        content.addView(configView, fullWidth());
+
         TextView subtitle = new TextView(this);
-        subtitle.setText("Native iMin/internal printer smoke test");
+        subtitle.setText("Receptor en segundo plano para textos y comandas");
         subtitle.setTextSize(16);
         subtitle.setTextColor(0xFF4E5D54);
         subtitle.setPadding(0, dp(8), 0, dp(20));
         content.addView(subtitle, fullWidth());
 
         printButton = new Button(this);
-        printButton.setText("Print sample comanda");
+        printButton.setText("Imprimir prueba");
         printButton.setAllCaps(false);
         printButton.setEnabled(false);
         printButton.setOnClickListener(view -> printNativeTest());
         content.addView(printButton, fullWidth());
 
         startAgentButton = new Button(this);
-        startAgentButton.setText("Start printer agent");
+        startAgentButton.setText("Encender receptor");
         startAgentButton.setAllCaps(false);
+        startAgentButton.setTextColor(0xFFFFFFFF);
+        startAgentButton.setBackgroundColor(0xFF116149);
         startAgentButton.setOnClickListener(view -> startPrinterAgent());
         content.addView(startAgentButton, fullWidth());
 
         stopAgentButton = new Button(this);
-        stopAgentButton.setText("Stop printer agent");
+        stopAgentButton.setText("Apagar receptor");
         stopAgentButton.setAllCaps(false);
+        stopAgentButton.setTextColor(0xFFFFFFFF);
+        stopAgentButton.setBackgroundColor(0xFFC0392B);
         stopAgentButton.setOnClickListener(view -> stopPrinterAgent());
         content.addView(stopAgentButton, fullWidth());
 
@@ -104,7 +122,48 @@ public class MainActivity extends Activity {
 
         ScrollView scroll = new ScrollView(this);
         scroll.addView(content);
-        return scroll;
+
+        FrameLayout frame = new FrameLayout(this);
+        frame.addView(scroll);
+
+        configButton = new Button(this);
+        configButton.setText("Config");
+        configButton.setAllCaps(false);
+        configButton.setTextSize(12);
+        configButton.setOnClickListener(view -> toggleConfig());
+        FrameLayout.LayoutParams configParams = new FrameLayout.LayoutParams(dp(92), dp(42));
+        configParams.gravity = Gravity.TOP | Gravity.END;
+        configParams.setMargins(0, dp(12), dp(12), 0);
+        frame.addView(configButton, configParams);
+
+        return frame;
+    }
+
+    private void toggleConfig() {
+        if (configView == null) {
+            return;
+        }
+        configView.setText(configSummary());
+        configView.setVisibility(configView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+    }
+
+    private String configSummary() {
+        return "Backend: " + BuildConfig.CONVEX_HTTP_BASE_URL
+                + "\nToken: " + maskedTokenState()
+                + "\nApp: " + appVersionName()
+                + "\nPrinter status: " + safePrinterStatusCode()
+                + "\nDevice: " + Build.MANUFACTURER + " " + Build.MODEL;
+    }
+
+    private String maskedTokenState() {
+        String token = BuildConfig.PRINTER_AGENT_TOKEN == null ? "" : BuildConfig.PRINTER_AGENT_TOKEN;
+        if (token.isEmpty()) {
+            return "missing";
+        }
+        if (token.length() <= 8) {
+            return "set (" + token.length() + " chars)";
+        }
+        return "set (" + token.substring(0, 4) + "..." + token.substring(token.length() - 4) + ")";
     }
 
     private void initPrinterConnection() {
@@ -253,14 +312,14 @@ public class MainActivity extends Activity {
         } else {
             startService(intent);
         }
-        appendLog("Printer agent start requested");
+        appendLog("Receptor encendido: revisando textos y comandas");
     }
 
     private void stopPrinterAgent() {
         Intent intent = new Intent(this, PrinterAgentService.class);
         intent.setAction(PrinterAgentService.ACTION_STOP);
         startService(intent);
-        appendLog("Printer agent stop requested");
+        appendLog("Receptor apagado: loop detenido");
     }
 
     private void record(int level, String event, String message, Map<String, Object> attributes) {
