@@ -11,16 +11,15 @@ The v0.4 app has two paths:
 
 The committed APK is available at:
 
-- [`../../public/downloads/belly-imin-print-test.apk`](../../public/downloads/belly-imin-print-test.apk)
+- [Download POS printer APK](https://raw.githubusercontent.com/Bonynew52/vue-app/main/public/downloads/belly-imin-print-test.apk)
 
 From GitHub on the tablet/POS:
 
-1. Open `public/downloads/belly-imin-print-test.apk`.
-2. Tap **Download raw file**.
-3. Open the downloaded APK.
-4. Allow unknown app installs if Android asks.
-5. Install and open **Belly Printer**.
-6. Tap **Encender receptor** to start the background polling loop.
+1. Open the direct APK link above.
+2. Open the downloaded APK.
+3. Allow unknown app installs if Android asks.
+4. Install and open **Belly Printer**.
+5. Tap **Encender receptor** to start the background polling loop.
 
 Rebuild and replace this APK whenever the native code changes.
 

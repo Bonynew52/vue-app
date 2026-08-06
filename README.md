@@ -34,11 +34,11 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 
 El APK para instalar en la tableta o terminal Android del punto de venta esta en:
 
-- [`public/downloads/belly-imin-print-test.apk`](public/downloads/belly-imin-print-test.apk)
+- [Descargar APK de impresora POS](https://raw.githubusercontent.com/Bonynew52/vue-app/main/public/downloads/belly-imin-print-test.apk)
 
-Desde GitHub, abre ese archivo y usa **Download raw file** para descargarlo en
-la tableta. Despues abre el APK, permite instalar apps desconocidas si Android
-lo solicita, instala la app y presiona **Encender receptor**.
+Desde la tableta, abre ese link directo para descargar el APK. Despues abre el
+archivo, permite instalar apps desconocidas si Android lo solicita, instala la
+app y presiona **Encender receptor**.
 
 Nota: el APK debe recompilarse y reemplazarse cuando cambie el codigo en
 `native/imin-print-test`.
