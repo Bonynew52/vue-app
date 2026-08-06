@@ -7,6 +7,23 @@ The v0.4 app has two paths:
 - **Print sample comanda**: manual iMin receipt test with feed + `partialCut()`.
 - **Printer agent foreground service**: polls Convex for pending `printJobs`, prints one comanda at a time, then marks it `printed` or `failed`.
 
+## Download and install on POS
+
+The committed APK is available at:
+
+- [`../../public/downloads/belly-imin-print-test.apk`](../../public/downloads/belly-imin-print-test.apk)
+
+From GitHub on the tablet/POS:
+
+1. Open `public/downloads/belly-imin-print-test.apk`.
+2. Tap **Download raw file**.
+3. Open the downloaded APK.
+4. Allow unknown app installs if Android asks.
+5. Install and open **Belly Printer**.
+6. Tap **Encender receptor** to start the background polling loop.
+
+Rebuild and replace this APK whenever the native code changes.
+
 Build:
 
 ```bash

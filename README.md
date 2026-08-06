@@ -30,6 +30,19 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 - Pedidos QR: https://bellymonsterbites.com/ordenar?mesa=1
 - Panel del personal: https://bellymonsterbites.com/ordenes
 
+## App de impresora POS
+
+El APK para instalar en la tableta o terminal Android del punto de venta esta en:
+
+- [`public/downloads/belly-imin-print-test.apk`](public/downloads/belly-imin-print-test.apk)
+
+Desde GitHub, abre ese archivo y usa **Download raw file** para descargarlo en
+la tableta. Despues abre el APK, permite instalar apps desconocidas si Android
+lo solicita, instala la app y presiona **Encender receptor**.
+
+Nota: el APK debe recompilarse y reemplazarse cuando cambie el codigo en
+`native/imin-print-test`.
+
 La app usa Convex para pedidos, eventos, actualizaciones realtime y el
 almacenamiento de Better Auth para el login del personal. Clerk se limita al
 flujo de clientes Pick&Go. Vercel sirve el frontend Vue/Vite.
