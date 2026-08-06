@@ -45,6 +45,16 @@ Desde la tableta, abre ese link directo para descargar el APK. Despues abre el
 archivo, permite instalar apps desconocidas si Android lo solicita, instala la
 app y presiona **Encender receptor**.
 
+En el boton **Config** de la app POS usa:
+
+```txt
+Backend URL:
+https://wonderful-basilisk-515.convex.site
+
+Token:
+el mismo valor configurado en Convex como PRINTER_AGENT_TOKEN
+```
+
 Nota: el APK debe recompilarse y reemplazarse cuando cambie el codigo en
 `native/imin-print-test`.
 
