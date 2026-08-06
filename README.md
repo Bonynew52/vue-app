@@ -1,6 +1,6 @@
 # Belly Monster Bites
 
-> **POS APK status:** codigo fuente `0.4.1` actualizado. APK descargable aun pendiente de recompilar/reemplazar.
+> **POS APK status:** version `0.4.1` publicada. El APK descargable ya incluye boton `Config`, backend visible y botones verde/rojo.
 
 Sitio y sistema inicial de pedidos QR para Belly Monster Bites.
 
@@ -34,9 +34,8 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 
 ## App de impresora POS
 
-**NEW:** el codigo fuente de la app POS ya esta en version `0.4.1` con boton
-`Config`, backend visible y botones verde/rojo. El APK descargable debe
-recompilarse y reemplazarse para incluir esos cambios.
+**NEW:** la app POS ya esta en version `0.4.1` con boton `Config`, backend
+visible y botones verde/rojo. El APK descargable ya fue recompilado y publicado.
 
 El APK para instalar en la tableta o terminal Android del punto de venta esta en:
 
@@ -91,5 +90,5 @@ npm run build
 
 - [Descargar APK POS 0.4.1](https://raw.githubusercontent.com/Bonynew52/vue-app/main/public/downloads/belly-imin-print-test-0.4.1.apk)
 
-Si este link todavia no descarga, ejecuta en GitHub Actions el workflow
-**Build POS APK**. Ese workflow compila la app Android y publica el APK nuevo.
+Este link apunta al archivo separado de la version nueva. El link anterior
+`belly-imin-print-test.apk` tambien fue reemplazado con esta misma compilacion.
