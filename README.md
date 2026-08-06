@@ -1,5 +1,7 @@
 # Belly Monster Bites
 
+> **POS APK status:** codigo fuente `0.4.1` actualizado. APK descargable aun pendiente de recompilar/reemplazar.
+
 Sitio y sistema inicial de pedidos QR para Belly Monster Bites.
 
 ## Estructura
