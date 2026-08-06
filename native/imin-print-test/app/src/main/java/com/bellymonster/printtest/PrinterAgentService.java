@@ -68,7 +68,7 @@ public class PrinterAgentService extends Service {
             return START_NOT_STICKY;
         }
 
-        startForeground(NOTIFICATION_ID, notification("Belly printer active", "Waiting for commandas"));
+        startForeground(NOTIFICATION_ID, notification("Belly printer active", "Waiting for texts and commandas"));
         startAgent();
         return START_STICKY;
     }
@@ -168,6 +168,15 @@ public class PrinterAgentService extends Service {
         return new PrintJobClaim(job == null ? null : PrintJob.fromJson(job), claimToken);
     }
 
+    private TextPrintJobClaim claimNextTextPrintJob() throws Exception {
+        JSONObject request = new JSONObject();
+        request.put("deviceId", deviceId);
+        JSONObject response = postJson("/text-printer/claim-next", request);
+        JSONObject job = response.optJSONObject("job");
+        String claimToken = response.optString("claimToken", "");
+        return new TextPrintJobClaim(job == null ? null : TextPrintJob.fromJson(job), claimToken);
+    }
+
     private void completePrintJob(PrintJobClaim claim, boolean success, String errorMessage) throws Exception {
         JSONObject request = new JSONObject();
         request.put("deviceId", deviceId);
@@ -178,10 +187,27 @@ public class PrinterAgentService extends Service {
         postJson("/printer/complete", request);
     }
 
+    private void completeTextPrintJob(TextPrintJobClaim claim, boolean success, String errorMessage) throws Exception {
+        JSONObject request = new JSONObject();
+        request.put("deviceId", deviceId);
+        request.put("textPrintJobId", claim.job.id);
+        request.put("claimToken", claim.claimToken);
+        request.put("success", success);
+        request.put("errorMessage", errorMessage == null ? "" : errorMessage);
+        postJson("/text-printer/complete", request);
+    }
+
     private JSONObject postJson(String path, JSONObject payload) throws Exception {
-        String baseUrl = BuildConfig.CONVEX_HTTP_BASE_URL;
+        String baseUrl = AppConfig.backendUrl(this);
         if (baseUrl.endsWith("/")) {
             baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
+        }
+        if (baseUrl.isEmpty()) {
+            throw new IllegalStateException("Missing backend URL. Open Config and set Backend.");
+        }
+        String token = AppConfig.agentToken(this);
+        if (token.isEmpty()) {
+            throw new IllegalStateException("Missing printer token. Open Config and set token.");
         }
 
         URL url = new URL(baseUrl + path);
@@ -189,7 +215,7 @@ public class PrinterAgentService extends Service {
         connection.setConnectTimeout(10000);
         connection.setReadTimeout(15000);
         connection.setRequestMethod("POST");
-        connection.setRequestProperty("Authorization", "Bearer " + BuildConfig.PRINTER_AGENT_TOKEN);
+        connection.setRequestProperty("Authorization", "Bearer " + token);
         connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
         connection.setDoOutput(true);
 
@@ -279,6 +305,44 @@ public class PrinterAgentService extends Service {
             log(Log.INFO, "printer_partial_cut_invoked", "Partial cut invoked for " + job.id);
         } catch (Exception cutError) {
             log(Log.WARN, "printer_cut_failed", "Comanda printed but cut failed: " + cutError.getMessage());
+        }
+    }
+
+    private void printTextJob(TextPrintJob job) {
+        printer.initParams();
+        printer.setPageFormat(0);
+        printer.setTextSize(RECEIPT_TEXT_SIZE);
+        printer.setAlignment(1);
+        printer.setTextStyle(Typeface.BOLD);
+        printer.printText("BELLY MONSTER BITES\n");
+        printer.setTextSize(26);
+        printer.printText("TEXTO\n");
+
+        printer.setTextSize(RECEIPT_TEXT_SIZE);
+        printer.setTextStyle(Typeface.NORMAL);
+        printer.setAlignment(0);
+        printLine();
+        printer.printText(safePrinterText(job.label).toUpperCase(Locale.US) + "\n");
+        printer.setTextStyle(Typeface.BOLD);
+        printer.setTextSize(30);
+        printer.printText("#" + safePrinterText(job.code).toUpperCase(Locale.US) + "\n");
+        printer.setTextSize(RECEIPT_TEXT_SIZE);
+        printer.setTextStyle(Typeface.NORMAL);
+        printLine();
+        printer.printText(nowLabel() + "\n");
+        printLine();
+        printWrapped(safePrinterText(job.text), 0);
+        printLine();
+        printer.setAlignment(1);
+        printer.printText("FIN TEXTO\n");
+        printer.setAlignment(0);
+        printLine();
+        printer.printAndFeedPaper(120);
+        try {
+            printer.partialCut();
+            log(Log.INFO, "text_printer_partial_cut_invoked", "Partial cut invoked for text " + job.id);
+        } catch (Exception cutError) {
+            log(Log.WARN, "text_printer_cut_failed", "Text printed but cut failed: " + cutError.getMessage());
         }
     }
 
@@ -437,6 +501,39 @@ public class PrinterAgentService extends Service {
         PrintJobClaim(PrintJob job, String claimToken) {
             this.job = job;
             this.claimToken = claimToken;
+        }
+    }
+
+    private static class TextPrintJobClaim {
+        final TextPrintJob job;
+        final String claimToken;
+
+        TextPrintJobClaim(TextPrintJob job, String claimToken) {
+            this.job = job;
+            this.claimToken = claimToken;
+        }
+    }
+
+    private static class TextPrintJob {
+        final String id;
+        final String code;
+        final String label;
+        final String text;
+
+        TextPrintJob(String id, String code, String label, String text) {
+            this.id = id;
+            this.code = code;
+            this.label = label;
+            this.text = text;
+        }
+
+        static TextPrintJob fromJson(JSONObject json) {
+            return new TextPrintJob(
+                    json.optString("id", ""),
+                    json.optString("code", ""),
+                    json.optString("label", ""),
+                    json.optString("text", "")
+            );
         }
     }
 

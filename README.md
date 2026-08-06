@@ -86,3 +86,10 @@ npm run dev
 npm run dev:full
 npm run build
 ```
+
+## APK nuevo POS 0.4.1
+
+- [Descargar APK POS 0.4.1](https://raw.githubusercontent.com/Bonynew52/vue-app/main/public/downloads/belly-imin-print-test-0.4.1.apk)
+
+Si este link todavia no descarga, ejecuta en GitHub Actions el workflow
+**Build POS APK**. Ese workflow compila la app Android y publica el APK nuevo.

@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -31,8 +32,11 @@ public class MainActivity extends Activity {
 
     private TextView statusView;
     private TextView configView;
+    private EditText backendInput;
+    private EditText tokenInput;
     private Button printButton;
     private Button configButton;
+    private Button saveConfigButton;
     private Button startAgentButton;
     private Button stopAgentButton;
     private IminPrintUtils printer;
@@ -83,6 +87,27 @@ public class MainActivity extends Activity {
         configView.setBackgroundColor(0xFFE8F3EE);
         configView.setVisibility(View.GONE);
         content.addView(configView, fullWidth());
+
+        backendInput = new EditText(this);
+        backendInput.setHint("Backend URL");
+        backendInput.setSingleLine(true);
+        backendInput.setText(AppConfig.backendUrl(this));
+        backendInput.setVisibility(View.GONE);
+        content.addView(backendInput, fullWidth());
+
+        tokenInput = new EditText(this);
+        tokenInput.setHint("Printer agent token");
+        tokenInput.setSingleLine(true);
+        tokenInput.setText(AppConfig.agentToken(this));
+        tokenInput.setVisibility(View.GONE);
+        content.addView(tokenInput, fullWidth());
+
+        saveConfigButton = new Button(this);
+        saveConfigButton.setText("Guardar config");
+        saveConfigButton.setAllCaps(false);
+        saveConfigButton.setVisibility(View.GONE);
+        saveConfigButton.setOnClickListener(view -> saveConfig());
+        content.addView(saveConfigButton, fullWidth());
 
         TextView subtitle = new TextView(this);
         subtitle.setText("Receptor en segundo plano para textos y comandas");
@@ -144,26 +169,27 @@ public class MainActivity extends Activity {
             return;
         }
         configView.setText(configSummary());
-        configView.setVisibility(configView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+        boolean show = configView.getVisibility() != View.VISIBLE;
+        configView.setVisibility(show ? View.VISIBLE : View.GONE);
+        backendInput.setText(AppConfig.backendUrl(this));
+        tokenInput.setText(AppConfig.agentToken(this));
+        backendInput.setVisibility(show ? View.VISIBLE : View.GONE);
+        tokenInput.setVisibility(show ? View.VISIBLE : View.GONE);
+        saveConfigButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    private void saveConfig() {
+        AppConfig.save(this, backendInput.getText().toString(), tokenInput.getText().toString());
+        configView.setText(configSummary());
+        appendLog("Config guardada");
     }
 
     private String configSummary() {
-        return "Backend: " + BuildConfig.CONVEX_HTTP_BASE_URL
-                + "\nToken: " + maskedTokenState()
+        return "Backend: " + AppConfig.backendUrl(this)
+                + "\nToken: " + AppConfig.maskedToken(this)
                 + "\nApp: " + appVersionName()
                 + "\nPrinter status: " + safePrinterStatusCode()
                 + "\nDevice: " + Build.MANUFACTURER + " " + Build.MODEL;
-    }
-
-    private String maskedTokenState() {
-        String token = BuildConfig.PRINTER_AGENT_TOKEN == null ? "" : BuildConfig.PRINTER_AGENT_TOKEN;
-        if (token.isEmpty()) {
-            return "missing";
-        }
-        if (token.length() <= 8) {
-            return "set (" + token.length() + " chars)";
-        }
-        return "set (" + token.substring(0, 4) + "..." + token.substring(token.length() - 4) + ")";
     }
 
     private void initPrinterConnection() {
