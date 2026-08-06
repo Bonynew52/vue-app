@@ -32,6 +32,10 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 
 ## App de impresora POS
 
+**NEW:** el codigo fuente de la app POS ya esta en version `0.4.1` con boton
+`Config`, backend visible y botones verde/rojo. El APK descargable debe
+recompilarse y reemplazarse para incluir esos cambios.
+
 El APK para instalar en la tableta o terminal Android del punto de venta esta en:
 
 - [Descargar APK de impresora POS](https://raw.githubusercontent.com/Bonynew52/vue-app/main/public/downloads/belly-imin-print-test.apk)
