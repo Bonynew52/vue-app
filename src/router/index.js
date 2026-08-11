@@ -6,6 +6,7 @@ import LoginView from '../views/LoginView.vue'
 import MenuView from '../views/MenuView.vue'
 import OrderView from '../views/OrderView.vue'
 import OrdersView from '../views/OrdersView.vue'
+import OwnerDmOrderView from '../views/OwnerDmOrderView.vue'
 import PickupView from '../views/PickupView.vue'
 
 export const router = createRouter({
@@ -46,6 +47,11 @@ export const router = createRouter({
       path: '/ordenes',
       name: 'orders',
       component: OrdersView,
+    },
+    {
+      path: '/pedidos-dm',
+      name: 'ownerDmOrders',
+      component: OwnerDmOrderView,
     },
     {
       path: '/login',
