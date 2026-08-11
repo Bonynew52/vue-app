@@ -189,6 +189,11 @@ public class MainActivity extends Activity {
     private String configSummary() {
         return "Backend: " + AppConfig.backendUrl(this)
                 + "\nToken: " + AppConfig.maskedToken(this)
+                + "\nRutas activas:"
+                + "\n  POST /printer/claim-next"
+                + "\n  POST /printer/complete"
+                + "\n  POST /printer/heartbeat"
+                + "\nCola: printJobs (Pedidos DM y comandas)"
                 + "\nApp: " + appVersionName()
                 + "\nPrinter status: " + safePrinterStatusCode()
                 + "\nDevice: " + Build.MANUFACTURER + " " + Build.MODEL;
