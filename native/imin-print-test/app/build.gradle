@@ -38,7 +38,7 @@ def convexHttpBaseUrl = propValue("convexHttpBaseUrl")
 def printerAgentToken = propValue("printerAgentToken")
         ?: System.getenv("PRINTER_AGENT_TOKEN")
         ?: localEnv["PRINTER_AGENT_TOKEN"]
-        ?: "prueba123"
+        ?: ""
 
 if (!convexHttpBaseUrl) {
     convexHttpBaseUrl = "https://wonderful-basilisk-515.convex.site"
@@ -60,8 +60,8 @@ android {
         applicationId "com.bellymonster.printtest"
         minSdk 23
         targetSdk 30
-        versionCode 10
-        versionName "0.4.7"
+        versionCode 11
+        versionName "0.4.8"
         buildConfigField "String", "CONVEX_HTTP_BASE_URL", javaString(convexHttpBaseUrl)
         buildConfigField "String", "PRINTER_AGENT_TOKEN", javaString(printerAgentToken)
     }

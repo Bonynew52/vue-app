@@ -2,7 +2,7 @@
 
 Tiny Android APK for proving and running third-party native printing through the kiosk's iMin/internal printer.
 
-The v0.4.7 app has two paths:
+The v0.4.8 app has two paths:
 
 - **Print sample comanda**: manual iMin receipt test with feed + `partialCut()`.
 - **Printer agent foreground service**: polls Convex for pending `printJobs`, prints one comanda at a time, then marks it `printed` or `failed`.
@@ -44,8 +44,9 @@ The APK build requires:
 - `CONVEX_HTTP_BASE_URL` or `VITE_CONVEX_SITE_URL`
 - `PRINTER_AGENT_TOKEN`
 
-If `PRINTER_AGENT_TOKEN` is missing, the debug APK uses `prueba123`. The same
-token must also be set in the target Convex deployment:
+The debug APK expects `PRINTER_AGENT_TOKEN` from Gradle properties, environment
+variables, `.env.local`, or the token saved in the in-app Config screen. The
+same token must also be set in the target Convex deployment:
 
 ```bash
 npx convex env set PRINTER_AGENT_TOKEN '...'
@@ -61,4 +62,4 @@ Expected manual result: launch **Belly Printer**, tap **Print sample comanda**, 
 
 Expected agent result: tap **Encender receptor**. The notification should stay visible while the foreground service polls Convex and prints pending commandas.
 
-The v0.4.7 APK uses iMin SDK V1.3.1 with the documented USB path for D4 / Android 11 devices. Runtime diagnostics remain available through Android Logcat and the on-screen test log. Config shows the active backend routes used by the agent. Tickets use a simplified plain-text format to reduce repeated-line printer issues.
+The v0.4.8 APK uses iMin SDK V1.3.1 with the documented USB path for D4 / Android 11 devices. Runtime diagnostics remain available through Android Logcat and the on-screen test log. Config shows the active backend routes used by the agent. Tickets use a simplified plain-text format to reduce repeated-line printer issues.

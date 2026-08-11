@@ -25,6 +25,8 @@ jobs:
 
       - name: Build debug APK
         working-directory: native/imin-print-test
+        env:
+          PRINTER_AGENT_TOKEN: ${{ secrets.PRINTER_AGENT_TOKEN }}
         run: |
           chmod +x ./gradlew
           ./gradlew assembleDebug
