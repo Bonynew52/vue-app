@@ -45,7 +45,7 @@ public class PrinterAgentService extends Service {
     private static final long POLL_INTERVAL_MS = 3000L;
     private static final long AFTER_PRINT_COOLDOWN_MS = 1500L;
     private static final int MAX_HANDLED_JOB_IDS = 80;
-    private static final int RECEIPT_TEXT_SIZE = 22;
+    private static final int RECEIPT_TEXT_SIZE = 26;
     private static final int RECEIPT_LINE_WIDTH = 32;
     private static final String PREFS_NAME = "printer-agent";
     private static final String HANDLED_JOB_IDS_KEY = "handledPrintJobIds";
@@ -307,27 +307,26 @@ public class PrinterAgentService extends Service {
 
         StringBuilder ticket = new StringBuilder();
         ticket.append("BELLY MONSTER BITES\n");
-        ticket.append("COMANDA\n");
+        ticket.append("COMANDA AVISOS LOCAL\n");
         appendLine(ticket);
-        ticket.append(safePrinterText(job.tableId).toUpperCase(Locale.US)).append("\n");
-        if (!job.customerName.trim().isEmpty()) {
-            ticket.append("CLIENTE: ").append(safePrinterText(job.customerName).toUpperCase(Locale.US)).append("\n");
-        }
+        ticket.append("NOMBRE: ").append(customerLabel(job)).append("\n");
         ticket.append("#").append(safePrinterText(job.shortCode).toUpperCase(Locale.US)).append("\n");
         appendLine(ticket);
         ticket.append(nowLabel()).append("\n");
-        ticket.append("DESTINO: ").append(safePrinterText(job.destinationLabel)).append("\n");
         appendLine(ticket);
-        ticket.append("ITEMS\n");
 
         for (PrintJobItem item : job.items) {
-            ticket.append("\n");
-            appendWrapped(ticket, item.quantity + "x " + safePrinterText(item.name).toUpperCase(Locale.US), 0);
-            for (PrintJobModifier modifier : item.modifiers) {
-                appendWrapped(ticket, "- " + printableModifierLabel(modifier), 3);
-            }
-            if (!item.note.trim().isEmpty()) {
-                appendNote(ticket, item.note, 3);
+            if (isTextOnlyItem(item)) {
+                appendMultilineWrapped(ticket, item.note, 0);
+            } else {
+                ticket.append("\n");
+                appendWrapped(ticket, item.quantity + "x " + safePrinterText(item.name).toUpperCase(Locale.US), 0);
+                for (PrintJobModifier modifier : item.modifiers) {
+                    appendWrapped(ticket, "- " + printableModifierLabel(modifier), 3);
+                }
+                if (!item.note.trim().isEmpty()) {
+                    appendNote(ticket, item.note, 3);
+                }
             }
         }
 
@@ -354,9 +353,9 @@ public class PrinterAgentService extends Service {
 
         StringBuilder ticket = new StringBuilder();
         ticket.append("BELLY MONSTER BITES\n");
-        ticket.append("TEXTO\n");
+        ticket.append("COMANDA AVISOS LOCAL\n");
         appendLine(ticket);
-        ticket.append(safePrinterText(job.label).toUpperCase(Locale.US)).append("\n");
+        ticket.append("NOMBRE: ").append(safePrinterText(job.label).toUpperCase(Locale.US)).append("\n");
         ticket.append("#").append(safePrinterText(job.code).toUpperCase(Locale.US)).append("\n");
         appendLine(ticket);
         ticket.append(nowLabel()).append("\n");
@@ -374,6 +373,21 @@ public class PrinterAgentService extends Service {
         } catch (Exception cutError) {
             log(Log.WARN, "text_printer_cut_failed", "Text printed but cut failed: " + cutError.getMessage());
         }
+    }
+
+    private String customerLabel(PrintJob job) {
+        String customerName = safePrinterText(job.customerName);
+        if (!customerName.isEmpty()) {
+            return customerName.toUpperCase(Locale.US);
+        }
+        String tableId = safePrinterText(job.tableId).replaceFirst("(?i)^mesa\\s+", "");
+        return tableId.toUpperCase(Locale.US);
+    }
+
+    private boolean isTextOnlyItem(PrintJobItem item) {
+        return item.modifiers.isEmpty()
+                && !item.note.trim().isEmpty()
+                && safePrinterText(item.name).equalsIgnoreCase("Texto libre");
     }
 
     private void appendMultilineWrapped(StringBuilder builder, String text, int indentSpaces) {

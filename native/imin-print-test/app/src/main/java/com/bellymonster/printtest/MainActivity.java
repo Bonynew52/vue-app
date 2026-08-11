@@ -268,21 +268,18 @@ public class MainActivity extends Activity {
                 printer.setPageFormat(0);
                 printer.setAlignment(0);
                 printer.setTextStyle(Typeface.NORMAL);
-                printer.setTextSize(22);
+                printer.setTextSize(26);
                 String sample = "BELLY MONSTER BITES\n"
-                        + "COMANDA\n"
+                        + "COMANDA AVISOS LOCAL\n"
                         + "--------------------------------\n"
-                        + "MESA 8\n"
-                        + "CLIENTE: PEDRO\n"
+                        + "NOMBRE: PEDRO\n"
                         + "#TEST01\n"
                         + "--------------------------------\n"
                         + "Time: " + timestamp + "\n"
-                        + "DESTINO: BARRA / PICKUP\n"
                         + "--------------------------------\n"
-                        + "ITEMS\n\n"
-                        + "1x LAVANDA LATTE\n"
-                        + "   * LECHE DESLACTOSADA\n\n"
-                        + "2x ROL DE CANELA\n"
+                        + "LAVANDA LATTE\n"
+                        + "LECHE DESLACTOSADA\n"
+                        + "ROL DE CANELA\n"
                         + "--------------------------------\n"
                         + "FIN COMANDA\n"
                         + "--------------------------------\n\n";
