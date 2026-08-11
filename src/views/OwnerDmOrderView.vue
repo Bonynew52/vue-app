@@ -4,69 +4,19 @@ import { useConvexMutation } from 'convex-vue'
 import { api } from '../../convex/_generated/api'
 import brandLogo from '../assets/background/belly_monster_logo.png'
 
-const TOKEN_STORAGE_KEY = 'belly-dm-request-token'
-
-function readStoredToken() {
-  if (typeof window === 'undefined') {
-    return ''
-  }
-  return window.localStorage.getItem(TOKEN_STORAGE_KEY) || ''
-}
-
-function saveStoredToken(value) {
-  if (typeof window === 'undefined') {
-    return
-  }
-  window.localStorage.setItem(TOKEN_STORAGE_KEY, value)
-}
-
-const password = ref(readStoredToken())
-const isUnlocked = ref(Boolean(password.value))
-const showTokenConfig = ref(false)
-const passwordError = ref('')
 const customerName = ref('')
 const messageText = ref('')
 const submitMessage = ref('')
 const submitError = ref('')
 const isSubmitting = ref(false)
 const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL)
-const createTextPrintJob = hasConvex ? useConvexMutation(api.textPrintJobs.create) : null
+const createOrder = hasConvex ? useConvexMutation(api.orders.create) : null
 
 const canSubmit = computed(() => customerName.value.trim() && messageText.value.trim() && !isSubmitting.value)
-
-function unlock() {
-  passwordError.value = ''
-  const token = password.value.trim()
-  if (!token) {
-    passwordError.value = 'Agrega el token antes de entrar.'
-    return
-  }
-  password.value = token
-  saveStoredToken(token)
-  isUnlocked.value = true
-  showTokenConfig.value = false
-}
-
-function openTokenConfig() {
-  passwordError.value = ''
-  showTokenConfig.value = true
-}
-
-function closeTokenConfig() {
-  password.value = readStoredToken()
-  passwordError.value = ''
-  showTokenConfig.value = false
-}
 
 async function submitRequest() {
   submitMessage.value = ''
   submitError.value = ''
-  const token = password.value.trim()
-  if (!token) {
-    submitError.value = 'Configura el token antes de enviar.'
-    showTokenConfig.value = true
-    return
-  }
 
   if (!canSubmit.value) {
     submitError.value = 'Agrega nombre y texto antes de enviar.'
@@ -80,14 +30,30 @@ async function submitRequest() {
 
   isSubmitting.value = true
   try {
-    const result = await createTextPrintJob.mutate({
-      password: token,
-      name: customerName.value,
-      text: messageText.value,
+    const name = customerName.value.trim()
+    const text = messageText.value.trim()
+    const result = await createOrder.mutate({
+      tableId: name,
+      customerName: name,
+      customerNote: '',
+      items: [
+        {
+          menuItemId: 'dm-text-request',
+          name: 'Texto libre',
+          sourceName: 'Pedidos DM',
+          categoryName: 'Comanda',
+          quantity: 1,
+          unitPriceCents: null,
+          lineTotalCents: null,
+          modifiers: [],
+          note: text,
+          imageUrl: '',
+          sortIndex: 0,
+        },
+      ],
     })
 
-    saveStoredToken(token)
-    submitMessage.value = `Se envio la peticion #${result.code}.`
+    submitMessage.value = `Se envio la peticion #${result.shortCode}.`
     customerName.value = ''
     messageText.value = ''
   } catch (error) {
@@ -105,43 +71,7 @@ async function submitRequest() {
       <p class="dm-eyebrow">Beta interna</p>
       <h1>Pedidos DM</h1>
 
-      <form v-if="!isUnlocked" class="dm-form" @submit.prevent="unlock">
-        <label>
-          Token
-          <input
-            v-model="password"
-            type="password"
-            autocomplete="current-password"
-            placeholder="Token de pedidos"
-          />
-        </label>
-        <p v-if="passwordError" class="dm-error" role="alert">{{ passwordError }}</p>
-        <button type="submit">Entrar</button>
-      </form>
-
-      <form v-else class="dm-form" @submit.prevent="submitRequest">
-        <div class="dm-toolbar">
-          <span>Token configurado</span>
-          <button type="button" class="dm-secondary" @click="openTokenConfig">Cambiar</button>
-        </div>
-
-        <div v-if="showTokenConfig" class="dm-config">
-          <label>
-            Token
-            <input
-              v-model="password"
-              type="password"
-              autocomplete="current-password"
-              placeholder="Token de pedidos"
-            />
-          </label>
-          <div class="dm-actions">
-            <button type="button" class="dm-secondary" @click="closeTokenConfig">Cancelar</button>
-            <button type="button" @click="unlock">Guardar token</button>
-          </div>
-          <p v-if="passwordError" class="dm-error" role="alert">{{ passwordError }}</p>
-        </div>
-
+      <form class="dm-form" @submit.prevent="submitRequest">
         <label>
           Nombre
           <input v-model="customerName" type="text" autocomplete="name" placeholder="Nombre del cliente" />
@@ -208,31 +138,6 @@ h1 {
   gap: 12px;
 }
 
-.dm-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  color: #2f7f57;
-  font-size: 0.9rem;
-  font-weight: 900;
-}
-
-.dm-config {
-  display: grid;
-  gap: 10px;
-  border: 1px solid #e6d4bd;
-  border-radius: 8px;
-  padding: 12px;
-  background: #fff4e6;
-}
-
-.dm-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
 label {
   display: grid;
   gap: 6px;
@@ -263,12 +168,6 @@ button {
   background: #2f7f57;
   color: #fff;
   font-weight: 900;
-}
-
-.dm-secondary {
-  border-color: #c9b396;
-  background: #fffaf3;
-  color: #694f3d;
 }
 
 button:disabled {
