@@ -1,6 +1,6 @@
 # Belly Monster Bites
 
-> **POS APK status:** version `0.4.1` publicada. El APK descargable ya incluye boton `Config`, backend visible y botones verde/rojo.
+> **POS APK status:** version `0.4.2` publicada. El APK descargable incluye la proteccion contra reimpresiones duplicadas y soporte para debug de peticiones.
 
 Sitio y sistema inicial de pedidos QR para Belly Monster Bites.
 
@@ -16,7 +16,7 @@ src/
   utils/              Funciones puras de ayuda
   views/              Pantallas principales
 convex/               Backend realtime, datos y autenticacion del personal
-public/               Manifest y service worker de la PWA
+public/               Manifest, service worker y descargas publicas
 scripts/              Scripts operativos locales
 ```
 
@@ -32,18 +32,14 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 - Pedidos QR: https://bellymonsterbites.com/ordenar?mesa=1
 - Panel del personal: https://bellymonsterbites.com/ordenes
 
-## App de impresora POS
+## Operacion
 
-**NEW:** la app POS ya esta en version `0.4.1` con boton `Config`, backend
-visible y botones verde/rojo. El APK descargable ya fue recompilado y publicado.
+- Pedidos DM: https://bellymonsterbites.com/pedidos-dm
+- Descargar APK de impresora POS v0.4.2: https://github.com/PedroAVJ/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
 
-El APK para instalar en la tableta o terminal Android del punto de venta esta en:
-
-- [Descargar APK de impresora POS](https://raw.githubusercontent.com/Bonynew52/vue-app/main/public/downloads/belly-imin-print-test.apk)
-
-Desde la tableta, abre ese link directo para descargar el APK. Despues abre el
-archivo, permite instalar apps desconocidas si Android lo solicita, instala la
-app y presiona **Encender receptor**.
+Para actualizar la terminal Parrot, descarga otra vez `belly-imin-print-test.apk`
+desde el mismo link e instalala encima de la version anterior. El archivo en
+`public/downloads/belly-imin-print-test.apk` debe ser siempre la version vigente.
 
 En el boton **Config** de la app POS usa:
 
@@ -54,9 +50,6 @@ https://wonderful-basilisk-515.convex.site
 Token:
 el mismo valor configurado en Convex como PRINTER_AGENT_TOKEN
 ```
-
-Nota: el APK debe recompilarse y reemplazarse cuando cambie el codigo en
-`native/imin-print-test`.
 
 La app usa Convex para pedidos, eventos, actualizaciones realtime y el
 almacenamiento de Better Auth para el login del personal. Clerk se limita al
@@ -95,10 +88,3 @@ npm run dev
 npm run dev:full
 npm run build
 ```
-
-## APK nuevo POS 0.4.1
-
-- [Descargar APK POS 0.4.1](https://raw.githubusercontent.com/Bonynew52/vue-app/main/public/downloads/belly-imin-print-test-0.4.1.apk)
-
-Este link apunta al archivo separado de la version nueva. El link anterior
-`belly-imin-print-test.apk` tambien fue reemplazado con esta misma compilacion.

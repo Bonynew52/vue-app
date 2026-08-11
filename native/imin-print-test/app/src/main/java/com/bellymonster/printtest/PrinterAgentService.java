@@ -29,8 +29,10 @@ import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -41,8 +43,12 @@ public class PrinterAgentService extends Service {
     private static final int NOTIFICATION_ID = 4201;
     private static final String CHANNEL_ID = "belly_printer_agent";
     private static final long POLL_INTERVAL_MS = 3000L;
+    private static final long AFTER_PRINT_COOLDOWN_MS = 1500L;
+    private static final int MAX_HANDLED_JOB_IDS = 80;
     private static final int RECEIPT_TEXT_SIZE = 22;
     private static final int RECEIPT_LINE_WIDTH = 32;
+    private static final String PREFS_NAME = "printer-agent";
+    private static final String HANDLED_JOB_IDS_KEY = "handledPrintJobIds";
 
     private final AtomicInteger sequence = new AtomicInteger(0);
     private volatile boolean running;
@@ -126,13 +132,23 @@ public class PrinterAgentService extends Service {
                 // tableId arrives as a full label ("Mesa 4" / "Pick&Go"); no prefix here.
                 updateNotification("Printing comanda", claim.job.tableId + " · #" + claim.job.shortCode);
 
+                if (wasHandledLocally(claim.job.id)) {
+                    completePrintJob(claim, true, "Already handled locally; skipped duplicate paper print.");
+                    log(Log.WARN, "print_job_duplicate_skipped", "Skipped duplicate paper print for " + claim.job.id);
+                    updateNotification("Duplicate skipped", "#" + claim.job.shortCode + " already handled");
+                    sleep(AFTER_PRINT_COOLDOWN_MS);
+                    continue;
+                }
+
                 boolean paperWasPrinted = false;
                 try {
                     printComanda(claim.job);
                     paperWasPrinted = true;
+                    rememberHandledLocally(claim.job.id);
                     completePrintJob(claim, true, "");
                     log(Log.INFO, "print_job_completed", "Printed comanda " + claim.job.id);
                     updateNotification("Belly printer active", "Last printed #" + claim.job.shortCode);
+                    sleep(AFTER_PRINT_COOLDOWN_MS);
                 } catch (Exception printError) {
                     if (paperWasPrinted) {
                         log(Log.ERROR, "print_complete_failed_after_paper", "Paper printed but completion failed for " + claim.job.id + ": " + printError.getMessage());
@@ -403,7 +419,7 @@ public class PrinterAgentService extends Service {
     }
 
     private String stableDeviceId() {
-        SharedPreferences preferences = getSharedPreferences("printer-agent", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         String existing = preferences.getString("deviceId", "");
         if (existing != null && !existing.isEmpty()) {
             return existing;
@@ -411,6 +427,33 @@ public class PrinterAgentService extends Service {
         String generated = "imin-" + UUID.randomUUID();
         preferences.edit().putString("deviceId", generated).apply();
         return generated;
+    }
+
+    private boolean wasHandledLocally(String printJobId) {
+        if (printJobId == null || printJobId.trim().isEmpty()) {
+            return false;
+        }
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        Set<String> handled = preferences.getStringSet(HANDLED_JOB_IDS_KEY, new LinkedHashSet<>());
+        return handled != null && handled.contains(printJobId);
+    }
+
+    private void rememberHandledLocally(String printJobId) {
+        if (printJobId == null || printJobId.trim().isEmpty()) {
+            return;
+        }
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        Set<String> existing = preferences.getStringSet(HANDLED_JOB_IDS_KEY, new LinkedHashSet<>());
+        LinkedHashSet<String> handled = new LinkedHashSet<>(existing == null ? new LinkedHashSet<>() : existing);
+        handled.remove(printJobId);
+        handled.add(printJobId);
+
+        while (handled.size() > MAX_HANDLED_JOB_IDS) {
+            String first = handled.iterator().next();
+            handled.remove(first);
+        }
+
+        preferences.edit().putStringSet(HANDLED_JOB_IDS_KEY, handled).apply();
     }
 
     private int safePrinterStatusCode() {
