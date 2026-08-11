@@ -302,54 +302,40 @@ public class PrinterAgentService extends Service {
         printer.initParams();
         printer.setPageFormat(0);
         printer.setTextSize(RECEIPT_TEXT_SIZE);
-        printer.setAlignment(1);
-        printer.setTextStyle(Typeface.BOLD);
-        printer.printText("BELLY MONSTER BITES\n");
-        printer.setTextSize(26);
-        printer.printText("COMANDA\n");
-
-        printer.setTextSize(RECEIPT_TEXT_SIZE);
-        printer.setTextStyle(Typeface.NORMAL);
         printer.setAlignment(0);
-        printLine();
-        // tableId is the full header label from the server ("Mesa 4" / "Pick&Go").
-        printer.printText(safePrinterText(job.tableId).toUpperCase(Locale.US) + "\n");
-        if (!job.customerName.trim().isEmpty()) {
-            printer.printText("CLIENTE: " + safePrinterText(job.customerName).toUpperCase(Locale.US) + "\n");
-        }
-        printer.setTextStyle(Typeface.BOLD);
-        printer.setTextSize(30);
-        printer.printText("#" + safePrinterText(job.shortCode).toUpperCase(Locale.US) + "\n");
-        printer.setTextSize(RECEIPT_TEXT_SIZE);
         printer.setTextStyle(Typeface.NORMAL);
-        printLine();
-        printer.printText(nowLabel() + "\n");
-        printer.printText("DESTINO: " + safePrinterText(job.destinationLabel) + "\n");
-        printLine();
-        printer.printText("ITEMS\n");
+
+        StringBuilder ticket = new StringBuilder();
+        ticket.append("BELLY MONSTER BITES\n");
+        ticket.append("COMANDA\n");
+        appendLine(ticket);
+        ticket.append(safePrinterText(job.tableId).toUpperCase(Locale.US)).append("\n");
+        if (!job.customerName.trim().isEmpty()) {
+            ticket.append("CLIENTE: ").append(safePrinterText(job.customerName).toUpperCase(Locale.US)).append("\n");
+        }
+        ticket.append("#").append(safePrinterText(job.shortCode).toUpperCase(Locale.US)).append("\n");
+        appendLine(ticket);
+        ticket.append(nowLabel()).append("\n");
+        ticket.append("DESTINO: ").append(safePrinterText(job.destinationLabel)).append("\n");
+        appendLine(ticket);
+        ticket.append("ITEMS\n");
 
         for (PrintJobItem item : job.items) {
-            printer.printText("\n");
-            printer.setTextStyle(Typeface.BOLD);
-            printer.printText(item.quantity + "x ");
-            printer.setTextStyle(Typeface.NORMAL);
-            printWrapped(safePrinterText(item.name).toUpperCase(Locale.US), 3);
+            ticket.append("\n");
+            appendWrapped(ticket, item.quantity + "x " + safePrinterText(item.name).toUpperCase(Locale.US), 0);
             for (PrintJobModifier modifier : item.modifiers) {
-                printer.setTextStyle(Typeface.NORMAL);
-                printWrapped("- " + printableModifierLabel(modifier), 5);
+                appendWrapped(ticket, "- " + printableModifierLabel(modifier), 3);
             }
             if (!item.note.trim().isEmpty()) {
-                printer.setTextStyle(Typeface.BOLD);
-                printWrapped("* " + safePrinterText(item.note), 3);
-                printer.setTextStyle(Typeface.NORMAL);
+                appendNote(ticket, item.note, 3);
             }
         }
 
-        printLine();
-        printer.setAlignment(1);
-        printer.printText("FIN COMANDA\n");
-        printer.setAlignment(0);
-        printLine();
+        appendLine(ticket);
+        ticket.append("FIN COMANDA\n");
+        appendLine(ticket);
+
+        printer.printText(ticket.toString());
         printer.printAndFeedPaper(120);
         try {
             printer.partialCut();
@@ -363,31 +349,24 @@ public class PrinterAgentService extends Service {
         printer.initParams();
         printer.setPageFormat(0);
         printer.setTextSize(RECEIPT_TEXT_SIZE);
-        printer.setAlignment(1);
-        printer.setTextStyle(Typeface.BOLD);
-        printer.printText("BELLY MONSTER BITES\n");
-        printer.setTextSize(26);
-        printer.printText("TEXTO\n");
+        printer.setAlignment(0);
+        printer.setTextStyle(Typeface.NORMAL);
 
-        printer.setTextSize(RECEIPT_TEXT_SIZE);
-        printer.setTextStyle(Typeface.NORMAL);
-        printer.setAlignment(0);
-        printLine();
-        printer.printText(safePrinterText(job.label).toUpperCase(Locale.US) + "\n");
-        printer.setTextStyle(Typeface.BOLD);
-        printer.setTextSize(30);
-        printer.printText("#" + safePrinterText(job.code).toUpperCase(Locale.US) + "\n");
-        printer.setTextSize(RECEIPT_TEXT_SIZE);
-        printer.setTextStyle(Typeface.NORMAL);
-        printLine();
-        printer.printText(nowLabel() + "\n");
-        printLine();
-        printWrapped(safePrinterText(job.text), 0);
-        printLine();
-        printer.setAlignment(1);
-        printer.printText("FIN TEXTO\n");
-        printer.setAlignment(0);
-        printLine();
+        StringBuilder ticket = new StringBuilder();
+        ticket.append("BELLY MONSTER BITES\n");
+        ticket.append("TEXTO\n");
+        appendLine(ticket);
+        ticket.append(safePrinterText(job.label).toUpperCase(Locale.US)).append("\n");
+        ticket.append("#").append(safePrinterText(job.code).toUpperCase(Locale.US)).append("\n");
+        appendLine(ticket);
+        ticket.append(nowLabel()).append("\n");
+        appendLine(ticket);
+        appendMultilineWrapped(ticket, job.text, 0);
+        appendLine(ticket);
+        ticket.append("FIN TEXTO\n");
+        appendLine(ticket);
+
+        printer.printText(ticket.toString());
         printer.printAndFeedPaper(120);
         try {
             printer.partialCut();
@@ -397,7 +376,23 @@ public class PrinterAgentService extends Service {
         }
     }
 
-    private void printWrapped(String text, int indentSpaces) {
+    private void appendMultilineWrapped(StringBuilder builder, String text, int indentSpaces) {
+        String cleaned = safePrinterBlockText(text);
+        String[] lines = cleaned.replace("\r\n", "\n").replace('\r', '\n').split("\n", -1);
+        for (String line : lines) {
+            appendWrapped(builder, line, indentSpaces);
+        }
+    }
+
+    private void appendNote(StringBuilder builder, String text, int indentSpaces) {
+        String cleaned = safePrinterBlockText(text);
+        String[] lines = cleaned.split("\n", -1);
+        for (String line : lines) {
+            appendWrapped(builder, line.trim().isEmpty() ? "" : "* " + line, indentSpaces);
+        }
+    }
+
+    private void appendWrapped(StringBuilder builder, String text, int indentSpaces) {
         String indent = spaces(indentSpaces);
         int width = Math.max(12, RECEIPT_LINE_WIDTH - indentSpaces);
         String[] words = text.trim().split("\\s+");
@@ -408,7 +403,7 @@ public class PrinterAgentService extends Service {
                 continue;
             }
             if (line.length() > 0 && line.length() + 1 + word.length() > width) {
-                printer.printText(indent + line + "\n");
+                builder.append(indent).append(line).append("\n");
                 line.setLength(0);
             }
             if (line.length() > 0) {
@@ -417,12 +412,14 @@ public class PrinterAgentService extends Service {
             line.append(word);
         }
         if (line.length() > 0) {
-            printer.printText(indent + line + "\n");
+            builder.append(indent).append(line).append("\n");
+        } else if (text.isEmpty()) {
+            builder.append("\n");
         }
     }
 
-    private void printLine() {
-        printer.printText("--------------------------------\n");
+    private void appendLine(StringBuilder builder) {
+        builder.append("--------------------------------\n");
     }
 
     private String printableModifierLabel(PrintJobModifier modifier) {
@@ -439,6 +436,16 @@ public class PrinterAgentService extends Service {
         String normalized = Normalizer.normalize(value == null ? "" : value, Normalizer.Form.NFD)
                 .replaceAll("\\p{M}", "");
         return normalized.replaceAll("[^\\x20-\\x7E]", "").trim();
+    }
+
+    private String safePrinterBlockText(String value) {
+        String normalized = Normalizer.normalize(value == null ? "" : value, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "");
+        return normalized
+                .replace("\r\n", "\n")
+                .replace('\r', '\n')
+                .replaceAll("[^\\x20-\\x7E\\n]", "")
+                .trim();
     }
 
     private String spaces(int count) {

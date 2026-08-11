@@ -266,42 +266,27 @@ public class MainActivity extends Activity {
                 ));
 
                 printer.setPageFormat(0);
-                printer.setAlignment(1);
-                printer.setTextStyle(Typeface.BOLD);
-                printer.setTextSize(24);
-                printer.printText("BELLY MONSTER BITES\n");
-                printer.setTextSize(28);
-                printer.printText("COMANDA\n");
+                printer.setAlignment(0);
                 printer.setTextStyle(Typeface.NORMAL);
                 printer.setTextSize(22);
-                printer.setAlignment(0);
-                printer.printText("--------------------------------\n");
-                printer.printText("MESA 8\n");
-                printer.printText("CLIENTE: PEDRO\n");
-                printer.setTextStyle(Typeface.BOLD);
-                printer.setTextSize(30);
-                printer.printText("#TEST01\n");
-                printer.setTextSize(22);
-                printer.setTextStyle(Typeface.NORMAL);
-                printer.printText("--------------------------------\n");
-                printer.printText("Time: " + timestamp + "\n");
-                printer.printText("DESTINO: BARRA / PICKUP\n");
-                printer.printText("--------------------------------\n");
-                printer.printText("ITEMS\n\n");
-                printer.setTextStyle(Typeface.BOLD);
-                printer.printText("1x ");
-                printer.setTextStyle(Typeface.NORMAL);
-                printer.printText("LAVANDA LATTE\n");
-                printer.setTextStyle(Typeface.BOLD);
-                printer.printText("   * LECHE DESLACTOSADA\n\n");
-                printer.printText("2x ");
-                printer.setTextStyle(Typeface.NORMAL);
-                printer.printText("ROL DE CANELA\n");
-                printer.printText("--------------------------------\n");
-                printer.setAlignment(1);
-                printer.printText("FIN COMANDA\n");
-                printer.setAlignment(0);
-                printer.printText("--------------------------------\n\n");
+                String sample = "BELLY MONSTER BITES\n"
+                        + "COMANDA\n"
+                        + "--------------------------------\n"
+                        + "MESA 8\n"
+                        + "CLIENTE: PEDRO\n"
+                        + "#TEST01\n"
+                        + "--------------------------------\n"
+                        + "Time: " + timestamp + "\n"
+                        + "DESTINO: BARRA / PICKUP\n"
+                        + "--------------------------------\n"
+                        + "ITEMS\n\n"
+                        + "1x LAVANDA LATTE\n"
+                        + "   * LECHE DESLACTOSADA\n\n"
+                        + "2x ROL DE CANELA\n"
+                        + "--------------------------------\n"
+                        + "FIN COMANDA\n"
+                        + "--------------------------------\n\n";
+                printer.printText(sample);
                 printer.printAndFeedPaper(120);
                 try {
                     printer.partialCut();
