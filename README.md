@@ -34,8 +34,7 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 
 ## Operacion
 
-- App iPhone Pedidos DM: https://bellymonsterbites.com/pedidos-dm
-- Guia iPhone/PWA: [docs/iphone-dm-pwa.md](docs/iphone-dm-pwa.md)
+- Ruta Pedidos DM placeholder: https://bellymonsterbites.com/pedidos-dm
 - Descargar APK de impresora POS v0.4.3: https://github.com/Bonynew52/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
 
 Para actualizar la terminal Parrot, descarga otra vez `belly-imin-print-test.apk`
@@ -47,9 +46,9 @@ Estandar de actualizacion de APK: cada cambio incrementa `versionName` y
 `public/downloads/belly-imin-print-test.apk`, actualiza este README y sube todo
 a `main`.
 
-Estandar de actualizacion iPhone/PWA: cada cambio de la app DM mantiene el link
-`/pedidos-dm`, actualiza `docs/iphone-dm-pwa.md` si cambia el modo de uso,
-corre `npm run build` y sube los cambios a `main`.
+Estandar de actualizacion Pedidos DM: cada cambio mantiene el link
+`/pedidos-dm`, corre `npm run build` y sube los cambios a `main`. Por ahora es
+un placeholder web con contrasena de prueba.
 
 En el boton **Config** de la app POS usa:
 
