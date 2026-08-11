@@ -1,5 +1,5 @@
-const CACHE_NAME = 'belly-monster-shell-v1'
-const SHELL_URLS = ['/', '/ordenes', '/ordenar?mesa=1', '/manifest.webmanifest', '/favicon.svg']
+const CACHE_NAME = 'belly-monster-shell-v2'
+const SHELL_URLS = ['/', '/ordenes', '/pedidos-dm', '/ordenar?mesa=1', '/manifest.webmanifest', '/favicon.svg']
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL_URLS)))
