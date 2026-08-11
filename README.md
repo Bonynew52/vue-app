@@ -41,6 +41,12 @@ Para actualizar la terminal Parrot, descarga otra vez `belly-imin-print-test.apk
 desde el mismo link e instalala encima de la version anterior. El archivo en
 `public/downloads/belly-imin-print-test.apk` debe ser siempre la version vigente.
 
+Si una peticion aparece en Convex como `printJobs.status = pending` y no cambia
+a `printing`/`printed`, la app instalada no la esta tomando. En ese caso
+reinstala el APK vigente v0.4.4 en la terminal y confirma que el receptor este
+encendido. La app POS debe escuchar la ruta estable `/printer/claim-next`; la
+web de Pedidos DM ya crea pedidos normales para esa misma cola.
+
 Estandar de actualizacion de APK: cada cambio incrementa `versionName` y
 `versionCode`, recompila `native/imin-print-test`, reemplaza
 `public/downloads/belly-imin-print-test.apk`, actualiza este README y sube todo
