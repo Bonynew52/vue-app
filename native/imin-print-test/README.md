@@ -2,7 +2,7 @@
 
 Tiny Android APK for proving and running third-party native printing through the kiosk's iMin/internal printer.
 
-The v0.4.2 app has two paths:
+The v0.4.3 app has two paths:
 
 - **Print sample comanda**: manual iMin receipt test with feed + `partialCut()`.
 - **Printer agent foreground service**: polls Convex for pending `printJobs`, prints one comanda at a time, then marks it `printed` or `failed`.
@@ -25,6 +25,11 @@ When the APK changes, replace `public/downloads/belly-imin-print-test.apk`.
 The terminal Parrot can download that same file again and install it over the
 previous version.
 
+Release standard: every APK change increments `versionName` and `versionCode`,
+rebuilds `native/imin-print-test`, replaces
+`public/downloads/belly-imin-print-test.apk`, updates the READMEs, and is pushed
+to `main`.
+
 Build:
 
 ```bash
@@ -39,8 +44,8 @@ The APK build requires:
 - `CONVEX_HTTP_BASE_URL` or `VITE_CONVEX_SITE_URL`
 - `PRINTER_AGENT_TOKEN`
 
-Gradle fails if `PRINTER_AGENT_TOKEN` is missing. The same `PRINTER_AGENT_TOKEN`
-must also be set in the target Convex deployment:
+If `PRINTER_AGENT_TOKEN` is missing, the debug APK uses `prueba 123`. The same
+token must also be set in the target Convex deployment:
 
 ```bash
 npx convex env set PRINTER_AGENT_TOKEN '...'
@@ -56,4 +61,4 @@ Expected manual result: launch **Belly Printer**, tap **Print sample comanda**, 
 
 Expected agent result: tap **Encender receptor**. The notification should stay visible while the foreground service polls Convex and prints pending commandas.
 
-The v0.4.2 APK uses iMin SDK V1.3.1 with the documented USB path for D4 / Android 11 devices. Runtime diagnostics remain available through Android Logcat and the on-screen test log.
+The v0.4.3 APK uses iMin SDK V1.3.1 with the documented USB path for D4 / Android 11 devices. Runtime diagnostics remain available through Android Logcat and the on-screen test log.

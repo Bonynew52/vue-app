@@ -141,8 +141,10 @@ public class MainActivity extends Activity {
 
         statusView = new TextView(this);
         statusView.setTextSize(15);
-        statusView.setTextColor(0xFF25312B);
-        statusView.setPadding(0, dp(20), 0, 0);
+        statusView.setTextColor(0xFFE7F6ED);
+        statusView.setTypeface(Typeface.MONOSPACE);
+        statusView.setPadding(dp(12), dp(12), dp(12), dp(12));
+        statusView.setBackgroundColor(0xFF050705);
         content.addView(statusView, fullWidth());
 
         ScrollView scroll = new ScrollView(this);

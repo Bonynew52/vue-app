@@ -1,6 +1,6 @@
 # Belly Monster Bites
 
-> **POS APK status:** version `0.4.2` publicada. El APK descargable incluye la proteccion contra reimpresiones duplicadas y soporte para debug de peticiones.
+> **POS APK status:** version `0.4.3` publicada. El APK descargable incluye token default `prueba 123`, terminal visual negra y soporte para debug de peticiones.
 
 Sitio y sistema inicial de pedidos QR para Belly Monster Bites.
 
@@ -35,11 +35,16 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 ## Operacion
 
 - Pedidos DM: https://bellymonsterbites.com/pedidos-dm
-- Descargar APK de impresora POS v0.4.2: https://github.com/Bonynew52/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
+- Descargar APK de impresora POS v0.4.3: https://github.com/Bonynew52/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
 
 Para actualizar la terminal Parrot, descarga otra vez `belly-imin-print-test.apk`
 desde el mismo link e instalala encima de la version anterior. El archivo en
 `public/downloads/belly-imin-print-test.apk` debe ser siempre la version vigente.
+
+Estandar de actualizacion de APK: cada cambio incrementa `versionName` y
+`versionCode`, recompila `native/imin-print-test`, reemplaza
+`public/downloads/belly-imin-print-test.apk`, actualiza este README y sube todo
+a `main`.
 
 En el boton **Config** de la app POS usa:
 
@@ -48,7 +53,7 @@ Backend URL:
 https://wonderful-basilisk-515.convex.site
 
 Token:
-el mismo valor configurado en Convex como PRINTER_AGENT_TOKEN
+prueba 123
 ```
 
 La app usa Convex para pedidos, eventos, actualizaciones realtime y el
