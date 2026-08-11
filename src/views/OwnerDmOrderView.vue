@@ -1,5 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { useConvexMutation } from 'convex-vue'
+import { api } from '../../convex/_generated/api'
 import brandLogo from '../assets/background/belly_monster_logo.png'
 
 const TEST_PASSWORD = 'prueba 123'
@@ -10,8 +12,12 @@ const passwordError = ref('')
 const customerName = ref('')
 const messageText = ref('')
 const submitMessage = ref('')
+const submitError = ref('')
+const isSubmitting = ref(false)
+const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL)
+const createTextPrintJob = hasConvex ? useConvexMutation(api.textPrintJobs.create) : null
 
-const canSubmit = computed(() => customerName.value.trim() && messageText.value.trim())
+const canSubmit = computed(() => customerName.value.trim() && messageText.value.trim() && !isSubmitting.value)
 
 function unlock() {
   passwordError.value = ''
@@ -22,15 +28,35 @@ function unlock() {
   isUnlocked.value = true
 }
 
-function submitRequest() {
+async function submitRequest() {
+  submitMessage.value = ''
+  submitError.value = ''
   if (!canSubmit.value) {
-    submitMessage.value = 'Agrega nombre y texto antes de enviar.'
+    submitError.value = 'Agrega nombre y texto antes de enviar.'
     return
   }
 
-  submitMessage.value = 'Se envio la peticion.'
-  customerName.value = ''
-  messageText.value = ''
+  if (!hasConvex) {
+    submitError.value = 'No hay conexion al backend.'
+    return
+  }
+
+  isSubmitting.value = true
+  try {
+    const result = await createTextPrintJob.mutate({
+      password: password.value,
+      name: customerName.value,
+      text: messageText.value,
+    })
+
+    submitMessage.value = `Se envio la peticion #${result.code}.`
+    customerName.value = ''
+    messageText.value = ''
+  } catch (error) {
+    submitError.value = error?.message || 'No se pudo enviar la peticion.'
+  } finally {
+    isSubmitting.value = false
+  }
 }
 </script>
 
@@ -48,7 +74,7 @@ function submitRequest() {
             v-model="password"
             type="password"
             autocomplete="current-password"
-            placeholder="Contrasena de prueba"
+            placeholder="Contrasena"
           />
         </label>
         <p v-if="passwordError" class="dm-error" role="alert">{{ passwordError }}</p>
@@ -66,7 +92,10 @@ function submitRequest() {
           <textarea v-model="messageText" rows="5" placeholder="Pedido o mensaje recibido" />
         </label>
 
-        <button type="submit">Enviar peticion</button>
+        <button type="submit" :disabled="!canSubmit">
+          {{ isSubmitting ? 'Enviando...' : 'Enviar peticion' }}
+        </button>
+        <p v-if="submitError" class="dm-error" role="alert">{{ submitError }}</p>
         <p v-if="submitMessage" class="dm-success" role="status">{{ submitMessage }}</p>
       </form>
     </section>
@@ -149,6 +178,11 @@ button {
   background: #2f7f57;
   color: #fff;
   font-weight: 900;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .dm-error {

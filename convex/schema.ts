@@ -127,7 +127,24 @@ export default defineSchema({
     fulfillmentType: fulfillmentType,
     sortIndex: v.number(),
   }).index("by_printJobId_and_sortIndex", ["printJobId", "sortIndex"]),
-
+  textPrintJobs: defineTable({
+    code: v.string(),
+    label: v.string(),
+    text: v.string(),
+    status: printJobStatus,
+    attemptCount: v.number(),
+    lockedBy: v.union(v.string(), v.null()),
+    lockedAt: v.union(v.number(), v.null()),
+    claimToken: v.union(v.string(), v.null()),
+    printedBy: v.union(v.string(), v.null()),
+    printedAt: v.union(v.number(), v.null()),
+    failedAt: v.union(v.number(), v.null()),
+    lastError: v.union(v.string(), v.null()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_status_and_createdAt", ["status", "createdAt"])
+    .index("by_status_and_lockedAt", ["status", "lockedAt"]),
   menuCatalogSnapshots: defineTable({
     key: v.string(),
     catalog: v.any(),

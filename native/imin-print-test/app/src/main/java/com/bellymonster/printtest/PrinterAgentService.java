@@ -124,7 +124,42 @@ public class PrinterAgentService extends Service {
                 ensurePrinter();
                 PrintJobClaim claim = claimNextPrintJob();
                 if (claim.job == null) {
-                    sleep(POLL_INTERVAL_MS);
+                    TextPrintJobClaim textClaim = claimNextTextPrintJob();
+                    if (textClaim.job == null) {
+                        sleep(POLL_INTERVAL_MS);
+                        continue;
+                    }
+
+                    log(Log.INFO, "text_print_job_claimed", "Claimed text " + textClaim.job.id + " for " + textClaim.job.label);
+                    updateNotification("Printing DM text", textClaim.job.label + " Â· #" + textClaim.job.code);
+
+                    if (wasHandledLocally(textClaim.job.id)) {
+                        completeTextPrintJob(textClaim, true, "Already handled locally; skipped duplicate paper print.");
+                        log(Log.WARN, "text_print_job_duplicate_skipped", "Skipped duplicate paper print for " + textClaim.job.id);
+                        updateNotification("Duplicate skipped", "#" + textClaim.job.code + " already handled");
+                        sleep(AFTER_PRINT_COOLDOWN_MS);
+                        continue;
+                    }
+
+                    boolean paperWasPrinted = false;
+                    try {
+                        printTextJob(textClaim.job);
+                        paperWasPrinted = true;
+                        rememberHandledLocally(textClaim.job.id);
+                        completeTextPrintJob(textClaim, true, "");
+                        log(Log.INFO, "text_print_job_completed", "Printed text " + textClaim.job.id);
+                        updateNotification("Belly printer active", "Last printed text #" + textClaim.job.code);
+                        sleep(AFTER_PRINT_COOLDOWN_MS);
+                    } catch (Exception printError) {
+                        if (paperWasPrinted) {
+                            log(Log.ERROR, "text_print_complete_failed_after_paper", "Paper printed but completion failed for text " + textClaim.job.id + ": " + printError.getMessage());
+                            updateNotification("Printed, sync failed", "#" + textClaim.job.code + " needs review");
+                        } else {
+                            completeTextPrintJob(textClaim, false, printError.getClass().getSimpleName() + ": " + printError.getMessage());
+                            log(Log.ERROR, "text_print_job_failed", "Text print failed for " + textClaim.job.id + ": " + printError.getMessage());
+                            updateNotification("Text print failed", "#" + textClaim.job.code + " needs attention");
+                        }
+                    }
                     continue;
                 }
 

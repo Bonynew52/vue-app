@@ -1,6 +1,6 @@
 # Belly Monster Bites
 
-> **POS APK status:** version `0.4.3` publicada. El APK descargable incluye token default `prueba 123`, terminal visual negra y soporte para debug de peticiones.
+> **POS APK status:** version `0.4.4` publicada. El APK descargable incluye token default `prueba 123`, terminal visual negra, soporte para debug de peticiones y cola DM de texto.
 
 Sitio y sistema inicial de pedidos QR para Belly Monster Bites.
 
@@ -34,8 +34,8 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 
 ## Operacion
 
-- Ruta Pedidos DM placeholder: https://bellymonsterbites.com/pedidos-dm
-- Descargar APK de impresora POS v0.4.3: https://github.com/Bonynew52/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
+- Ruta Pedidos DM: https://bellymonsterbites.com/pedidos-dm
+- Descargar APK de impresora POS v0.4.4: https://github.com/Bonynew52/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
 
 Para actualizar la terminal Parrot, descarga otra vez `belly-imin-print-test.apk`
 desde el mismo link e instalala encima de la version anterior. El archivo en
@@ -47,8 +47,7 @@ Estandar de actualizacion de APK: cada cambio incrementa `versionName` y
 a `main`.
 
 Estandar de actualizacion Pedidos DM: cada cambio mantiene el link
-`/pedidos-dm`, corre `npm run build` y sube los cambios a `main`. Por ahora es
-un placeholder web con contrasena de prueba.
+`/pedidos-dm`, corre `npm run build` y sube los cambios a `main`.
 
 En el boton **Config** de la app POS usa:
 

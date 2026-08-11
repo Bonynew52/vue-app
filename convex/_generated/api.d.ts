@@ -15,6 +15,7 @@ import type * as notifications from "../notifications.js";
 import type * as orders from "../orders.js";
 import type * as printJobs from "../printJobs.js";
 import type * as staffAuth from "../staffAuth.js";
+import type * as textPrintJobs from "../textPrintJobs.js";
 
 import type {
   ApiFromModules,
@@ -30,6 +31,7 @@ declare const fullApi: ApiFromModules<{
   orders: typeof orders;
   printJobs: typeof printJobs;
   staffAuth: typeof staffAuth;
+  textPrintJobs: typeof textPrintJobs;
 }>;
 
 /**

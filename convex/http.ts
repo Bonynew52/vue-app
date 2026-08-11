@@ -121,4 +121,61 @@ http.route({
   }),
 });
 
+http.route({
+  path: "/text-printer/claim-next",
+  method: "POST",
+  handler: httpAction(async (ctx, req) => {
+    if (!authorized(req)) {
+      return json({ error: "unauthorized" }, { status: 401 });
+    }
+
+    const body = await parseJson(req);
+    const deviceId = textArg(body, "deviceId", 120);
+    if (!deviceId) {
+      return json({ error: "deviceId_required" }, { status: 400 });
+    }
+
+    const claimToken = crypto.randomUUID();
+    const job = await ctx.runMutation(internal.textPrintJobs.claimNext, {
+      deviceId,
+      claimToken,
+      now: Date.now(),
+    });
+
+    return json({ job, claimToken: job ? claimToken : null });
+  }),
+});
+
+http.route({
+  path: "/text-printer/complete",
+  method: "POST",
+  handler: httpAction(async (ctx, req) => {
+    if (!authorized(req)) {
+      return json({ error: "unauthorized" }, { status: 401 });
+    }
+
+    const body = await parseJson(req);
+    const textPrintJobId = textArg(body, "textPrintJobId", 120);
+    const deviceId = textArg(body, "deviceId", 120);
+    const claimToken = textArg(body, "claimToken", 120);
+    const success = body.success === true;
+    const errorMessage = textArg(body, "errorMessage", 500);
+
+    if (!textPrintJobId || !deviceId || !claimToken) {
+      return json({ error: "textPrintJobId_deviceId_claimToken_required" }, { status: 400 });
+    }
+
+    const result = await ctx.runMutation(internal.textPrintJobs.complete, {
+      textPrintJobId: textPrintJobId as Id<"textPrintJobs">,
+      deviceId,
+      claimToken,
+      success,
+      errorMessage,
+      now: Date.now(),
+    });
+
+    return json(result, { status: result.ok ? 200 : 409 });
+  }),
+});
+
 export default http;
