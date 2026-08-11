@@ -2,8 +2,6 @@ import { v } from "convex/values";
 import { internalMutation, mutation, query } from "./_generated/server";
 
 const DEFAULT_DM_PASSWORD = "prueba 123";
-const STALE_LOCK_MS = 2 * 60 * 1000;
-
 function cleanText(value: string, maxLength: number) {
   return value.replace(/\s+/g, " ").trim().slice(0, maxLength);
 }
@@ -87,20 +85,11 @@ export const claimNext = internalMutation({
     now: v.number(),
   },
   handler: async (ctx, args) => {
-    const staleBefore = args.now - STALE_LOCK_MS;
-    const stale = await ctx.db
+    const job = await ctx.db
       .query("textPrintJobs")
-      .withIndex("by_status_and_lockedAt", (q) => q.eq("status", "printing").lt("lockedAt", staleBefore))
+      .withIndex("by_status_and_createdAt", (q) => q.eq("status", "pending"))
       .order("asc")
       .first();
-
-    const job =
-      stale ||
-      (await ctx.db
-        .query("textPrintJobs")
-        .withIndex("by_status_and_createdAt", (q) => q.eq("status", "pending"))
-        .order("asc")
-        .first());
 
     if (!job) {
       return null;
