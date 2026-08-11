@@ -35,7 +35,7 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 ## Operacion
 
 - Pedidos DM: https://bellymonsterbites.com/pedidos-dm
-- Descargar APK de impresora POS v0.4.2: https://github.com/PedroAVJ/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
+- Descargar APK de impresora POS v0.4.2: https://github.com/Bonynew52/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
 
 Para actualizar la terminal Parrot, descarga otra vez `belly-imin-print-test.apk`
 desde el mismo link e instalala encima de la version anterior. El archivo en

@@ -11,7 +11,7 @@ The v0.4.2 app has two paths:
 
 Use one APK link for installs and updates:
 
-- https://github.com/PedroAVJ/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
+- https://github.com/Bonynew52/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
 
 From GitHub on the tablet/POS:
 
