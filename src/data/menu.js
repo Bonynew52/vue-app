@@ -181,6 +181,33 @@ const PDF_CATEGORY_PLACEHOLDERS = {
 
 const MONTHLY_SPECIALS = [
   {
+    name: 'Nuevo - Nashville HotChicken',
+    sourceName: 'Nashville HotChicken',
+    description: 'Especial de temporada.',
+    sku: 'NUEVO-NASHVILLE-HOTCHICKEN',
+    menuId: 'comidas',
+    categoryName: 'Sandwich',
+    image: '/images/menu/nuevo-nashville-hotchicken.jpg',
+  },
+  {
+    name: 'Nuevo - Sopa de Tortilla',
+    sourceName: 'Sopa de Tortilla',
+    description: 'Especial de temporada.',
+    sku: 'NUEVO-SOPA-DE-TORTILLA',
+    menuId: 'comidas',
+    categoryName: 'Sopas',
+    image: '/images/menu/nuevo-sopa-de-tortilla.jpg',
+  },
+  {
+    name: 'Nuevo - Limonada',
+    sourceName: 'Limonada',
+    description: 'Especial de temporada.',
+    sku: 'NUEVO-LIMONADA',
+    menuId: 'bebidas',
+    categoryName: 'Chillers',
+    image: '/images/menu/nuevo-limonada.jpg',
+  },
+  {
     name: 'Nuevo - Banana Split',
     sourceName: 'Banana Split',
     description: 'Especial de temporada.',
@@ -197,24 +224,6 @@ const MONTHLY_SPECIALS = [
     menuId: 'postres',
     categoryName: 'Nieves',
     image: '/images/menu/nuevo-coco-almendra-chocolate.jpg',
-  },
-  {
-    name: 'Nuevo - Limonada',
-    sourceName: 'Limonada',
-    description: 'Especial de temporada.',
-    sku: 'NUEVO-LIMONADA',
-    menuId: 'bebidas',
-    categoryName: 'Chillers',
-    image: '/images/menu/nuevo-limonada.jpg',
-  },
-  {
-    name: 'Nuevo - Nashville HotChicken',
-    sourceName: 'Nashville HotChicken',
-    description: 'Especial de temporada.',
-    sku: 'NUEVO-NASHVILLE-HOTCHICKEN',
-    menuId: 'comidas',
-    categoryName: 'Sandwich',
-    image: '/images/menu/nuevo-nashville-hotchicken.jpg',
   },
   {
     name: 'Nuevo - Nieve de Sandia',
@@ -251,15 +260,6 @@ const MONTHLY_SPECIALS = [
     menuId: 'postres',
     categoryName: 'Nieves',
     image: '/images/menu/nuevo-smores.jpg',
-  },
-  {
-    name: 'Nuevo - Sopa de Tortilla',
-    sourceName: 'Sopa de Tortilla',
-    description: 'Especial de temporada.',
-    sku: 'NUEVO-SOPA-DE-TORTILLA',
-    menuId: 'comidas',
-    categoryName: 'Sopas',
-    image: '/images/menu/nuevo-sopa-de-tortilla.jpg',
   },
 ]
 const MONTHLY_SPECIALS_ENABLED_IN_MENU = false
