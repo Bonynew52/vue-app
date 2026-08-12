@@ -199,15 +199,6 @@ const MONTHLY_SPECIALS = [
     image: '/images/menu/nuevo-coco-almendra-chocolate.jpg',
   },
   {
-    name: 'Nuevo - Copia de Nashville HotChicken',
-    sourceName: 'Copia de Nashville HotChicken',
-    description: 'Especial de temporada.',
-    sku: 'NUEVO-COPIA-NASHVILLE-HOTCHICKEN',
-    menuId: 'comidas',
-    categoryName: 'Sopas',
-    image: '/images/menu/nuevo-copia-nashville-hotchicken.jpg',
-  },
-  {
     name: 'Nuevo - Limonada',
     sourceName: 'Limonada',
     description: 'Especial de temporada.',
