@@ -41,6 +41,8 @@ public class MainActivity extends Activity {
     private Button saveConfigButton;
     private Button startAgentButton;
     private Button stopAgentButton;
+    private Button refreshTraceButton;
+    private Button clearTraceButton;
     private IminPrintUtils printer;
     private boolean printerInitialized;
 
@@ -141,6 +143,18 @@ public class MainActivity extends Activity {
         stopAgentButton.setOnClickListener(view -> stopPrinterAgent());
         content.addView(stopAgentButton, fullWidth());
 
+        refreshTraceButton = new Button(this);
+        refreshTraceButton.setText("Actualizar terminal");
+        refreshTraceButton.setAllCaps(false);
+        refreshTraceButton.setOnClickListener(view -> refreshTerminal());
+        content.addView(refreshTraceButton, fullWidth());
+
+        clearTraceButton = new Button(this);
+        clearTraceButton.setText("Limpiar terminal");
+        clearTraceButton.setAllCaps(false);
+        clearTraceButton.setOnClickListener(view -> clearTerminal());
+        content.addView(clearTraceButton, fullWidth());
+
         statusView = new TextView(this);
         statusView.setTextSize(15);
         statusView.setTextColor(0xFFE7F6ED);
@@ -168,6 +182,12 @@ public class MainActivity extends Activity {
         return frame;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshTerminal();
+    }
+
     private void toggleConfig() {
         if (configView == null) {
             return;
@@ -185,7 +205,8 @@ public class MainActivity extends Activity {
     private void saveConfig() {
         AppConfig.save(this, backendInput.getText().toString(), tokenInput.getText().toString());
         configView.setText(configSummary());
-        appendLog("Config guardada");
+        appendTrace("OK", "config", "guardar backend/token", "config guardada", "");
+        refreshTerminal();
     }
 
     private String configSummary() {
@@ -314,18 +335,24 @@ public class MainActivity extends Activity {
         } else {
             startService(intent);
         }
-        appendLog("Receptor encendido: revisando textos y comandas");
+        appendTrace("OK", "agent_start", "servicio encendido", "startService enviado", "revisando textos y comandas");
+        refreshTerminal();
     }
 
     private void stopPrinterAgent() {
         Intent intent = new Intent(this, PrinterAgentService.class);
         intent.setAction(PrinterAgentService.ACTION_STOP);
         startService(intent);
-        appendLog("Receptor apagado: loop detenido");
+        appendTrace("OK", "agent_stop", "servicio apagado", "stopService enviado", "loop detenido");
+        refreshTerminal();
     }
 
     private void record(int level, String event, String message, Map<String, Object> attributes) {
-        runOnUiThread(() -> appendLog(message));
+        String levelText = level >= Log.ERROR ? "ERROR" : level >= Log.WARN ? "WARN" : "OK";
+        runOnUiThread(() -> {
+            appendTrace(levelText, event, "accion esperada sin excepcion", message, String.valueOf(attributes));
+            refreshTerminal();
+        });
 
         Map<String, Object> enriched = new HashMap<>(attributes);
         enriched.put("app", "belly-monster-bites");
@@ -345,10 +372,19 @@ public class MainActivity extends Activity {
         Log.println(level, "BellyPrintTest", event + " · " + message + " · " + enriched);
     }
 
-    private void appendLog(String message) {
-        String existing = statusView.getText().toString();
-        String line = "[" + timeOnly() + "] " + message;
-        statusView.setText(existing.isEmpty() ? line : existing + "\n" + line);
+    private void appendTrace(String level, String step, String expected, String actual, String detail) {
+        PrinterTrace.append(this, level, step, expected, actual, detail);
+    }
+
+    private void refreshTerminal() {
+        if (statusView != null) {
+            statusView.setText(PrinterTrace.read(this));
+        }
+    }
+
+    private void clearTerminal() {
+        PrinterTrace.clear(this);
+        refreshTerminal();
     }
 
     private Map<String, Object> attrs(Object... pairs) {
@@ -394,7 +430,18 @@ public class MainActivity extends Activity {
         raw.write(0x56);
         raw.write(0x42);
         raw.write(0x00);
-        printer.sendRAWData(raw.toByteArray());
+        byte[] bytes = raw.toByteArray();
+        appendTrace(
+                "STEP",
+                "escpos_build",
+                "ticket completo -> paquete ESC/POS raw",
+                "bytes=" + bytes.length + ", lines=" + normalized.split("\n", -1).length,
+                "hash=" + checksum(bytes)
+        );
+        int beforeStatus = safePrinterStatusCode();
+        printer.sendRAWData(bytes);
+        int afterStatus = safePrinterStatusCode();
+        appendTrace("OK", "escpos_send", "sendRAWData(byte[]) sin excepcion", "raw enviado al SDK", "statusBefore=" + beforeStatus + ", statusAfter=" + afterStatus);
         sleep(900);
     }
 
@@ -409,6 +456,14 @@ public class MainActivity extends Activity {
         } catch (InterruptedException interrupted) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    private String checksum(byte[] bytes) {
+        int hash = 1;
+        for (byte value : bytes) {
+            hash = 31 * hash + (value & 0xFF);
+        }
+        return Integer.toHexString(hash).toUpperCase(Locale.US);
     }
 
     private String appVersionName() {

@@ -280,6 +280,9 @@ public class PrinterAgentService extends Service {
         int status = connection.getResponseCode();
         String responseText = readStream(status >= 400 ? connection.getErrorStream() : connection.getInputStream());
         connection.disconnect();
+        if (status >= 400 || path.contains("complete") || responseText.contains("\"job\":{")) {
+            trace(status >= 400 ? "ERROR" : "OK", "http_response", "HTTP 2xx para " + path, "HTTP " + status, responseText);
+        }
         if (status >= 400) {
             throw new IllegalStateException("HTTP " + status + " " + responseText);
         }
@@ -336,6 +339,7 @@ public class PrinterAgentService extends Service {
         ticket.append("FIN COMANDA\n");
         appendLine(ticket);
 
+        trace("STEP", "ticket_expected", "armar comanda una sola vez", "job=" + job.id + ", code=" + job.shortCode, preview(ticket.toString()));
         printEscPosTicket(ticket.toString());
     }
 
@@ -360,6 +364,7 @@ public class PrinterAgentService extends Service {
         ticket.append("FIN TEXTO\n");
         appendLine(ticket);
 
+        trace("STEP", "ticket_expected", "armar texto una sola vez", "job=" + job.id + ", code=" + job.code, preview(ticket.toString()));
         printEscPosTicket(ticket.toString());
     }
 
@@ -388,7 +393,18 @@ public class PrinterAgentService extends Service {
         raw.write(0x56);
         raw.write(0x42);
         raw.write(0x00);
-        printer.sendRAWData(raw.toByteArray());
+        byte[] bytes = raw.toByteArray();
+        trace(
+                "STEP",
+                "escpos_build",
+                "ticket completo -> paquete ESC/POS raw",
+                "bytes=" + bytes.length + ", lines=" + normalized.split("\n", -1).length,
+                "hash=" + checksum(bytes)
+        );
+        int beforeStatus = safePrinterStatusCode();
+        printer.sendRAWData(bytes);
+        int afterStatus = safePrinterStatusCode();
+        trace("OK", "escpos_send", "sendRAWData(byte[]) sin excepcion", "raw enviado al SDK", "statusBefore=" + beforeStatus + ", statusAfter=" + afterStatus);
         sleep(PRINT_FINAL_SETTLE_MS);
     }
 
@@ -586,6 +602,7 @@ public class PrinterAgentService extends Service {
     }
 
     private void log(int level, String event, String message) {
+        trace(level >= Log.ERROR ? "ERROR" : level >= Log.WARN ? "WARN" : "OK", event, "accion esperada sin excepcion", message, "");
         JSONObject attributes = new JSONObject();
         try {
             attributes.put("app", "belly-monster-bites");
@@ -604,6 +621,23 @@ public class PrinterAgentService extends Service {
         }
 
         Log.println(level, "BellyPrinterAgent", event + " · " + message + " · " + attributes);
+    }
+
+    private void trace(String level, String step, String expected, String actual, String detail) {
+        PrinterTrace.append(this, level, step, expected, actual, detail);
+    }
+
+    private String preview(String ticket) {
+        String normalized = ticket.replace("\r\n", "\n").replace('\r', '\n').trim();
+        return normalized.length() <= 500 ? normalized : normalized.substring(0, 500) + "...";
+    }
+
+    private String checksum(byte[] bytes) {
+        int hash = 1;
+        for (byte value : bytes) {
+            hash = 31 * hash + (value & 0xFF);
+        }
+        return Integer.toHexString(hash).toUpperCase(Locale.US);
     }
 
     private static class PrintJobClaim {
