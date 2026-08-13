@@ -283,7 +283,7 @@ public class MainActivity extends Activity {
                         + "--------------------------------\n"
                         + "FIN COMANDA\n"
                         + "--------------------------------\n\n";
-                printer.printText(sample);
+                printTicketSafely(sample);
                 printer.printAndFeedPaper(120);
                 try {
                     printer.partialCut();
@@ -388,6 +388,24 @@ public class MainActivity extends Activity {
             return printer.getPrinterStatus(IminPrintUtils.PrintConnectType.USB);
         } catch (Exception error) {
             return -999;
+        }
+    }
+
+    private void printTicketSafely(String ticket) {
+        String normalized = ticket.replace("\r\n", "\n").replace('\r', '\n');
+        String[] lines = normalized.split("\n", -1);
+        for (String line : lines) {
+            printer.printText(line + "\n");
+            sleep(220);
+        }
+        sleep(700);
+    }
+
+    private void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException interrupted) {
+            Thread.currentThread().interrupt();
         }
     }
 

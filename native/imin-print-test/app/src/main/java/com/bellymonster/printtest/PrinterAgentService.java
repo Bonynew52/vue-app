@@ -47,6 +47,8 @@ public class PrinterAgentService extends Service {
     private static final int MAX_HANDLED_JOB_IDS = 80;
     private static final int RECEIPT_TEXT_SIZE = 26;
     private static final int RECEIPT_LINE_WIDTH = 32;
+    private static final long PRINT_LINE_PAUSE_MS = 220L;
+    private static final long PRINT_FINAL_SETTLE_MS = 700L;
     private static final String PREFS_NAME = "printer-agent";
     private static final String HANDLED_JOB_IDS_KEY = "handledPrintJobIds";
 
@@ -334,7 +336,7 @@ public class PrinterAgentService extends Service {
         ticket.append("FIN COMANDA\n");
         appendLine(ticket);
 
-        printer.printText(ticket.toString());
+        printTicketSafely(ticket.toString());
         printer.printAndFeedPaper(120);
         try {
             printer.partialCut();
@@ -365,7 +367,7 @@ public class PrinterAgentService extends Service {
         ticket.append("FIN TEXTO\n");
         appendLine(ticket);
 
-        printer.printText(ticket.toString());
+        printTicketSafely(ticket.toString());
         printer.printAndFeedPaper(120);
         try {
             printer.partialCut();
@@ -382,6 +384,16 @@ public class PrinterAgentService extends Service {
         }
         String tableId = safePrinterText(job.tableId).replaceFirst("(?i)^mesa\\s+", "");
         return tableId.toUpperCase(Locale.US);
+    }
+
+    private void printTicketSafely(String ticket) {
+        String normalized = ticket.replace("\r\n", "\n").replace('\r', '\n');
+        String[] lines = normalized.split("\n", -1);
+        for (String line : lines) {
+            printer.printText(line + "\n");
+            sleep(PRINT_LINE_PAUSE_MS);
+        }
+        sleep(PRINT_FINAL_SETTLE_MS);
     }
 
     private boolean isTextOnlyItem(PrintJobItem item) {

@@ -2,7 +2,7 @@
 
 Tiny Android APK for proving and running third-party native printing through the kiosk's iMin/internal printer.
 
-The v0.4.8 app has two paths:
+The v0.4.9 app has two paths:
 
 - **Print sample comanda**: manual iMin receipt test with feed + `partialCut()`.
 - **Printer agent foreground service**: polls Convex for pending `printJobs`, prints one comanda at a time, then marks it `printed` or `failed`.
@@ -62,4 +62,4 @@ Expected manual result: launch **Belly Printer**, tap **Print sample comanda**, 
 
 Expected agent result: tap **Encender receptor**. The notification should stay visible while the foreground service polls Convex and prints pending commandas.
 
-The v0.4.8 APK uses iMin SDK V1.3.1 with the documented USB path for D4 / Android 11 devices. Runtime diagnostics remain available through Android Logcat and the on-screen test log. Config shows the active backend routes used by the agent. Tickets use a simplified plain-text format to reduce repeated-line printer issues.
+The v0.4.9 APK uses iMin SDK V1.3.1 with the documented USB path for D4 / Android 11 devices. Runtime diagnostics remain available through Android Logcat and the on-screen test log. Config shows the active backend routes used by the agent. Tickets use a simplified plain-text format and sends each line with conservative pauses to reduce repeated-line printer issues.
