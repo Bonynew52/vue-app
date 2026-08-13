@@ -60,8 +60,8 @@ android {
         applicationId "com.bellymonster.printtest"
         minSdk 23
         targetSdk 30
-        versionCode 12
-        versionName "0.4.9"
+        versionCode 13
+        versionName "0.5.0"
         buildConfigField "String", "CONVEX_HTTP_BASE_URL", javaString(convexHttpBaseUrl)
         buildConfigField "String", "PRINTER_AGENT_TOKEN", javaString(printerAgentToken)
     }

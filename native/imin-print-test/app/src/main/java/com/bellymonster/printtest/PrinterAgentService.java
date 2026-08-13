@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -47,8 +48,7 @@ public class PrinterAgentService extends Service {
     private static final int MAX_HANDLED_JOB_IDS = 80;
     private static final int RECEIPT_TEXT_SIZE = 26;
     private static final int RECEIPT_LINE_WIDTH = 32;
-    private static final long PRINT_LINE_PAUSE_MS = 220L;
-    private static final long PRINT_FINAL_SETTLE_MS = 700L;
+    private static final long PRINT_FINAL_SETTLE_MS = 900L;
     private static final String PREFS_NAME = "printer-agent";
     private static final String HANDLED_JOB_IDS_KEY = "handledPrintJobIds";
 
@@ -336,14 +336,7 @@ public class PrinterAgentService extends Service {
         ticket.append("FIN COMANDA\n");
         appendLine(ticket);
 
-        printTicketSafely(ticket.toString());
-        printer.printAndFeedPaper(120);
-        try {
-            printer.partialCut();
-            log(Log.INFO, "printer_partial_cut_invoked", "Partial cut invoked for " + job.id);
-        } catch (Exception cutError) {
-            log(Log.WARN, "printer_cut_failed", "Comanda printed but cut failed: " + cutError.getMessage());
-        }
+        printEscPosTicket(ticket.toString());
     }
 
     private void printTextJob(TextPrintJob job) {
@@ -367,14 +360,7 @@ public class PrinterAgentService extends Service {
         ticket.append("FIN TEXTO\n");
         appendLine(ticket);
 
-        printTicketSafely(ticket.toString());
-        printer.printAndFeedPaper(120);
-        try {
-            printer.partialCut();
-            log(Log.INFO, "text_printer_partial_cut_invoked", "Partial cut invoked for text " + job.id);
-        } catch (Exception cutError) {
-            log(Log.WARN, "text_printer_cut_failed", "Text printed but cut failed: " + cutError.getMessage());
-        }
+        printEscPosTicket(ticket.toString());
     }
 
     private String customerLabel(PrintJob job) {
@@ -386,14 +372,29 @@ public class PrinterAgentService extends Service {
         return tableId.toUpperCase(Locale.US);
     }
 
-    private void printTicketSafely(String ticket) {
+    private void printEscPosTicket(String ticket) {
         String normalized = ticket.replace("\r\n", "\n").replace('\r', '\n');
-        String[] lines = normalized.split("\n", -1);
-        for (String line : lines) {
-            printer.printText(line + "\n");
-            sleep(PRINT_LINE_PAUSE_MS);
-        }
+        ByteArrayOutputStream raw = new ByteArrayOutputStream();
+        raw.write(0x1B);
+        raw.write(0x40);
+        raw.write(0x1B);
+        raw.write(0x74);
+        raw.write(0x00);
+        appendEscPosText(raw, normalized);
+        raw.write(0x0A);
+        raw.write(0x0A);
+        raw.write(0x0A);
+        raw.write(0x1D);
+        raw.write(0x56);
+        raw.write(0x42);
+        raw.write(0x00);
+        printer.sendRAWData(raw.toByteArray());
         sleep(PRINT_FINAL_SETTLE_MS);
+    }
+
+    private void appendEscPosText(ByteArrayOutputStream raw, String text) {
+        byte[] bytes = text.getBytes(StandardCharsets.US_ASCII);
+        raw.write(bytes, 0, bytes.length);
     }
 
     private boolean isTextOnlyItem(PrintJobItem item) {

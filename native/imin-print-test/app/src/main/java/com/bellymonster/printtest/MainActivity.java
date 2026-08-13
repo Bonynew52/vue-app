@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.imin.printerlib.IminPrintUtils;
 
+import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -283,22 +285,7 @@ public class MainActivity extends Activity {
                         + "--------------------------------\n"
                         + "FIN COMANDA\n"
                         + "--------------------------------\n\n";
-                printTicketSafely(sample);
-                printer.printAndFeedPaper(120);
-                try {
-                    printer.partialCut();
-                    record(Log.INFO, "printer_partial_cut_invoked", "Partial cut invoked in sample print.", attrs(
-                            "printer.connect_type", "USB",
-                            "printer.status", safePrinterStatusCode()
-                    ));
-                } catch (Exception cutError) {
-                    record(Log.WARN, "printer_cut_failed", "Sample printed but cut failed: " + cutError.getMessage(), attrs(
-                            "error.type", cutError.getClass().getSimpleName(),
-                            "error.message", String.valueOf(cutError.getMessage()),
-                            "printer.connect_type", "USB",
-                            "printer.status", safePrinterStatusCode()
-                    ));
-                }
+                printEscPosTicket(sample);
 
                 int afterStatus = safePrinterStatusCode();
                 runOnUiThread(() -> printButton.setEnabled(true));
@@ -391,14 +378,29 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void printTicketSafely(String ticket) {
+    private void printEscPosTicket(String ticket) {
         String normalized = ticket.replace("\r\n", "\n").replace('\r', '\n');
-        String[] lines = normalized.split("\n", -1);
-        for (String line : lines) {
-            printer.printText(line + "\n");
-            sleep(220);
-        }
-        sleep(700);
+        ByteArrayOutputStream raw = new ByteArrayOutputStream();
+        raw.write(0x1B);
+        raw.write(0x40);
+        raw.write(0x1B);
+        raw.write(0x74);
+        raw.write(0x00);
+        appendEscPosText(raw, normalized);
+        raw.write(0x0A);
+        raw.write(0x0A);
+        raw.write(0x0A);
+        raw.write(0x1D);
+        raw.write(0x56);
+        raw.write(0x42);
+        raw.write(0x00);
+        printer.sendRAWData(raw.toByteArray());
+        sleep(900);
+    }
+
+    private void appendEscPosText(ByteArrayOutputStream raw, String text) {
+        byte[] bytes = text.getBytes(StandardCharsets.US_ASCII);
+        raw.write(bytes, 0, bytes.length);
     }
 
     private void sleep(long millis) {
