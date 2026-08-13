@@ -4,7 +4,8 @@ import { useConvexMutation } from 'convex-vue'
 import { api } from '../../convex/_generated/api'
 import brandLogo from '../assets/background/belly_monster_logo.png'
 
-const accessPassword = ref('')
+const passwordStorageKey = 'belly-dm-password'
+const accessPassword = ref(readSavedPassword())
 const customerName = ref('')
 const messageText = ref('')
 const submitMessage = ref('')
@@ -40,12 +41,14 @@ async function submitRequest() {
   try {
     const name = customerName.value.trim()
     const text = messageText.value.trim()
+    const password = accessPassword.value.trim()
     const result = await createTextJob.mutate({
-      password: accessPassword.value,
+      password,
       name,
       text,
     })
 
+    savePassword(password)
     submitMessage.value = `Se envio la peticion #${result.code}.`
     customerName.value = ''
     messageText.value = ''
@@ -53,6 +56,22 @@ async function submitRequest() {
     submitError.value = error?.message || 'No se pudo enviar la peticion.'
   } finally {
     isSubmitting.value = false
+  }
+}
+
+function readSavedPassword() {
+  try {
+    return window.localStorage.getItem(passwordStorageKey) || ''
+  } catch {
+    return ''
+  }
+}
+
+function savePassword(password) {
+  try {
+    window.localStorage.setItem(passwordStorageKey, password)
+  } catch {
+    // Some locked-down browsers block storage; backend validation still applies.
   }
 }
 </script>
