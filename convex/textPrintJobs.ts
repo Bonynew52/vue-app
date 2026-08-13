@@ -1,7 +1,6 @@
 import { v } from "convex/values";
 import { internalMutation, mutation, query } from "./_generated/server";
 
-const DEFAULT_DM_PASSWORD = "prueba 123";
 function cleanText(value: string, maxLength: number) {
   return value.replace(/\s+/g, " ").trim().slice(0, maxLength);
 }
@@ -11,11 +10,12 @@ function cleanBody(value: string) {
 }
 
 function requestPassword() {
-  return process.env.DM_REQUEST_PASSWORD || DEFAULT_DM_PASSWORD;
+  return process.env.DM_REQUEST_PASSWORD || "";
 }
 
 function assertPassword(password: string) {
-  if (password.trim() !== requestPassword()) {
+  const expected = requestPassword();
+  if (!expected || password.trim() !== expected) {
     throw new Error("Contrasena incorrecta.");
   }
 }

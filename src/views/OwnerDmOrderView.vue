@@ -4,15 +4,23 @@ import { useConvexMutation } from 'convex-vue'
 import { api } from '../../convex/_generated/api'
 import brandLogo from '../assets/background/belly_monster_logo.png'
 
+const accessPassword = ref('')
 const customerName = ref('')
 const messageText = ref('')
 const submitMessage = ref('')
 const submitError = ref('')
 const isSubmitting = ref(false)
 const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL)
-const createOrder = hasConvex ? useConvexMutation(api.orders.create) : null
+const createTextJob = hasConvex ? useConvexMutation(api.textPrintJobs.create) : null
 
-const canSubmit = computed(() => customerName.value.trim() && messageText.value.trim() && !isSubmitting.value)
+const canSubmit = computed(
+  () =>
+    hasConvex &&
+    accessPassword.value.trim() &&
+    customerName.value.trim() &&
+    messageText.value.trim() &&
+    !isSubmitting.value,
+)
 
 async function submitRequest() {
   submitMessage.value = ''
@@ -32,28 +40,13 @@ async function submitRequest() {
   try {
     const name = customerName.value.trim()
     const text = messageText.value.trim()
-    const result = await createOrder.mutate({
-      tableId: name,
-      customerName: name,
-      customerNote: '',
-      items: [
-        {
-          menuItemId: 'dm-text-request',
-          name: 'Texto libre',
-          sourceName: 'Pedidos DM',
-          categoryName: 'Comanda',
-          quantity: 1,
-          unitPriceCents: null,
-          lineTotalCents: null,
-          modifiers: [],
-          note: text,
-          imageUrl: '',
-          sortIndex: 0,
-        },
-      ],
+    const result = await createTextJob.mutate({
+      password: accessPassword.value,
+      name,
+      text,
     })
 
-    submitMessage.value = `Se envio la peticion #${result.shortCode}.`
+    submitMessage.value = `Se envio la peticion #${result.code}.`
     customerName.value = ''
     messageText.value = ''
   } catch (error) {
@@ -72,6 +65,16 @@ async function submitRequest() {
       <h1>Pedidos DM</h1>
 
       <form class="dm-form" @submit.prevent="submitRequest">
+        <label>
+          Contraseña
+          <input
+            v-model="accessPassword"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Contraseña interna"
+          />
+        </label>
+
         <label>
           Nombre
           <input v-model="customerName" type="text" autocomplete="name" placeholder="Nombre del cliente" />
