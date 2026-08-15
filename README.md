@@ -1,6 +1,6 @@
 # Belly Monster Bites
 
-> **POS APK status:** version `0.5.1` publicada. El APK descargable usa token seguro desde GitHub Secrets, impresion ESC/POS raw, terminal visible de diagnostico, formato simplificado de ticket, soporte para debug de peticiones y rutas visibles en Config.
+> **POS APK status:** version `0.5.2` publicada. El APK descargable usa token seguro desde GitHub Secrets, impresion ESC/POS raw, terminal visible de diagnostico, formato simplificado de ticket, soporte para debug de peticiones, rutas visibles en Config y opcion de campana digital.
 
 Sitio y sistema inicial de pedidos QR para Belly Monster Bites.
 
@@ -35,7 +35,7 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 ## Operacion
 
 - Ruta Pedidos DM: https://bellymonsterbites.com/pedidos-dm
-- Descargar APK de impresora POS v0.5.1: https://github.com/Bonynew52/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
+- Descargar APK de impresora POS v0.5.2: https://github.com/Bonynew52/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
 
 Para actualizar la terminal Parrot, descarga otra vez `belly-imin-print-test.apk`
 desde el mismo link e instalala encima de la version anterior. El archivo en
@@ -43,9 +43,13 @@ desde el mismo link e instalala encima de la version anterior. El archivo en
 
 Si una peticion aparece en Convex como `printJobs.status = pending` y no cambia
 a `printing`/`printed`, la app instalada no la esta tomando. En ese caso
-reinstala el APK vigente v0.5.1 en la terminal y confirma que el receptor este
+reinstala el APK vigente v0.5.2 en la terminal y confirma que el receptor este
 encendido. La app POS debe escuchar la ruta estable `/printer/claim-next`; la
 web de Pedidos DM ya crea pedidos normales para esa misma cola.
+
+En **Config** puedes apagar o prender la opcion **Campana digital**. Cuando esta
+encendida, la terminal reproduce un aviso sonoro al tomar una peticion antes de
+imprimirla.
 
 Formato vigente del ticket POS: `BELLY MONSTER BITES`, `COMANDA AVISOS LOCAL`,
 `NOMBRE`, folio, fecha y texto del pedido. No imprime `MESA`, `CLIENTE`,

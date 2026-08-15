@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
@@ -49,6 +51,7 @@ public class PrinterAgentService extends Service {
     private static final int RECEIPT_TEXT_SIZE = 26;
     private static final int RECEIPT_LINE_WIDTH = 32;
     private static final long PRINT_FINAL_SETTLE_MS = 900L;
+    private static final int ORDER_ALERT_BEEP_COUNT = 3;
     private static final String PREFS_NAME = "printer-agent";
     private static final String HANDLED_JOB_IDS_KEY = "handledPrintJobIds";
 
@@ -135,6 +138,7 @@ public class PrinterAgentService extends Service {
                     log(Log.INFO, "text_print_job_claimed", "Claimed text " + textClaim.job.id + " for " + textClaim.job.label);
                     updateNotification("Printing DM text", textClaim.job.label + " Â· #" + textClaim.job.code);
 
+                    playOrderAlert();
                     if (wasHandledLocally(textClaim.job.id)) {
                         completeTextPrintJob(textClaim, true, "Already handled locally; skipped duplicate paper print.");
                         log(Log.WARN, "text_print_job_duplicate_skipped", "Skipped duplicate paper print for " + textClaim.job.id);
@@ -169,6 +173,7 @@ public class PrinterAgentService extends Service {
                 // tableId arrives as a full label ("Mesa 4" / "Pick&Go"); no prefix here.
                 updateNotification("Printing comanda", claim.job.tableId + " · #" + claim.job.shortCode);
 
+                playOrderAlert();
                 if (wasHandledLocally(claim.job.id)) {
                     completePrintJob(claim, true, "Already handled locally; skipped duplicate paper print.");
                     log(Log.WARN, "print_job_duplicate_skipped", "Skipped duplicate paper print for " + claim.job.id);
@@ -210,6 +215,29 @@ public class PrinterAgentService extends Service {
         printer.initPrinter(IminPrintUtils.PrintConnectType.USB);
         printerInitialized = true;
         log(Log.INFO, "printer_initialized", "USB printer initialized. Status: " + safePrinterStatusCode());
+    }
+
+    private void playOrderAlert() {
+        if (!AppConfig.digitalBellEnabled(this)) {
+            log(Log.INFO, "order_alert_sound_skipped", "Digital order alert disabled");
+            return;
+        }
+
+        ToneGenerator tone = null;
+        try {
+            tone = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+            for (int index = 0; index < ORDER_ALERT_BEEP_COUNT; index++) {
+                tone.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 180);
+                sleep(260L);
+            }
+            log(Log.INFO, "order_alert_sound_played", "Played digital order alert");
+        } catch (Exception error) {
+            log(Log.WARN, "order_alert_sound_failed", "Digital order alert failed: " + error.getMessage());
+        } finally {
+            if (tone != null) {
+                tone.release();
+            }
+        }
     }
 
     private PrintJobClaim claimNextPrintJob() throws Exception {

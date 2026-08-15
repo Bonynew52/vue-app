@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -36,6 +37,7 @@ public class MainActivity extends Activity {
     private TextView configView;
     private EditText backendInput;
     private EditText tokenInput;
+    private CheckBox digitalBellInput;
     private Button printButton;
     private Button configButton;
     private Button saveConfigButton;
@@ -105,6 +107,14 @@ public class MainActivity extends Activity {
         tokenInput.setText(AppConfig.agentToken(this));
         tokenInput.setVisibility(View.GONE);
         content.addView(tokenInput, fullWidth());
+
+        digitalBellInput = new CheckBox(this);
+        digitalBellInput.setText("Campana digital");
+        digitalBellInput.setTextColor(0xFF25312B);
+        digitalBellInput.setTextSize(15);
+        digitalBellInput.setChecked(AppConfig.digitalBellEnabled(this));
+        digitalBellInput.setVisibility(View.GONE);
+        content.addView(digitalBellInput, fullWidth());
 
         saveConfigButton = new Button(this);
         saveConfigButton.setText("Guardar config");
@@ -197,13 +207,20 @@ public class MainActivity extends Activity {
         configView.setVisibility(show ? View.VISIBLE : View.GONE);
         backendInput.setText(AppConfig.backendUrl(this));
         tokenInput.setText(AppConfig.agentToken(this));
+        digitalBellInput.setChecked(AppConfig.digitalBellEnabled(this));
         backendInput.setVisibility(show ? View.VISIBLE : View.GONE);
         tokenInput.setVisibility(show ? View.VISIBLE : View.GONE);
+        digitalBellInput.setVisibility(show ? View.VISIBLE : View.GONE);
         saveConfigButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     private void saveConfig() {
-        AppConfig.save(this, backendInput.getText().toString(), tokenInput.getText().toString());
+        AppConfig.save(
+                this,
+                backendInput.getText().toString(),
+                tokenInput.getText().toString(),
+                digitalBellInput.isChecked()
+        );
         configView.setText(configSummary());
         appendTrace("OK", "config", "guardar backend/token", "config guardada", "");
         refreshTerminal();
@@ -212,6 +229,7 @@ public class MainActivity extends Activity {
     private String configSummary() {
         return "Backend: " + AppConfig.backendUrl(this)
                 + "\nToken: " + AppConfig.maskedToken(this)
+                + "\nCampana digital: " + (AppConfig.digitalBellEnabled(this) ? "encendida" : "apagada")
                 + "\nRutas activas:"
                 + "\n  POST /printer/claim-next"
                 + "\n  POST /printer/complete"
