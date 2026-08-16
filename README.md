@@ -1,6 +1,6 @@
 # Belly Monster Bites
 
-> **POS APK status:** version `0.5.2` publicada. El APK descargable usa token seguro desde GitHub Secrets, impresion ESC/POS raw, terminal visible de diagnostico, formato simplificado de ticket, soporte para debug de peticiones, rutas visibles en Config y opcion de campana digital.
+> **POS APK status:** version `0.5.3` publicada. El APK descargable trae Backend URL y token POS por default, impresion ESC/POS raw, terminal visible de diagnostico, formato simplificado de ticket, soporte para debug de peticiones, rutas visibles en Config y opcion de campana digital.
 
 Sitio y sistema inicial de pedidos QR para Belly Monster Bites.
 
@@ -35,7 +35,7 @@ Los colores base estan centralizados en `src/assets/styles/tokens.css`.
 ## Operacion
 
 - Ruta Pedidos DM: https://bellymonsterbites.com/pedidos-dm
-- Descargar APK de impresora POS v0.5.2: https://github.com/Bonynew52/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
+- Descargar APK de impresora POS v0.5.3: https://github.com/Bonynew52/vue-app/raw/main/public/downloads/belly-imin-print-test.apk
 
 Para actualizar la terminal Parrot, descarga otra vez `belly-imin-print-test.apk`
 desde el mismo link e instalala encima de la version anterior. El archivo en
@@ -43,7 +43,7 @@ desde el mismo link e instalala encima de la version anterior. El archivo en
 
 Si una peticion aparece en Convex como `printJobs.status = pending` y no cambia
 a `printing`/`printed`, la app instalada no la esta tomando. En ese caso
-reinstala el APK vigente v0.5.2 en la terminal y confirma que el receptor este
+reinstala el APK vigente v0.5.3 en la terminal y confirma que el receptor este
 encendido. La app POS debe escuchar la ruta estable `/printer/claim-next`; la
 web de Pedidos DM ya crea pedidos normales para esa misma cola.
 
@@ -70,7 +70,7 @@ Backend URL:
 https://wonderful-basilisk-515.convex.site
 
 Token:
-configurar en la app POS; debe coincidir con `PRINTER_AGENT_TOKEN` en Convex.
+BMB-AAQ8N-T4CMY-3FDV9-ULNDX
 
 Rutas visibles en Config:
 POST /printer/claim-next
