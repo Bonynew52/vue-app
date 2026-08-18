@@ -14,6 +14,148 @@ const UNCATEGORIZED = 'Sin categoria'
 // Entries without a source product intentionally render with the existing
 // branded placeholder until the product table is updated.
 const PDF_MEAL_LAYOUTS = {
+  bebidas: [
+    {
+      name: 'Arma tu Latte o Matcha',
+      products: [
+        {
+          name: 'Elige tu Jarabe',
+          description: 'Caramelo, vainilla, mocha, lavanda, chai, pistache, miel de agave o canela.',
+          sku: 'pdf-bebidas-jarabes',
+        },
+        {
+          name: 'Elige tu Leche',
+          description: 'Entera, deslactosada, light, avena, almendra, coco o soya.',
+          sku: 'pdf-bebidas-leches',
+        },
+        {
+          name: 'Presentacion y tamano',
+          description: 'Helado, caliente o frappe. Tamaños chico, mediano y grande.',
+          sku: 'pdf-bebidas-presentacion-tamano',
+        },
+      ],
+    },
+    {
+      name: 'Cofy',
+      products: [
+        ['Daily Cofy (Americano) Caliente', 'Daily Cofy Americano'],
+        ['Godlatte (Latte) Caliente', 'Latte / Capuccino'],
+        ['Hot Chocolate (Caliente)', 'Hot Chocolate'],
+        ['Espresso Tonic'],
+        ['Sparkling Americano'],
+      ],
+    },
+    {
+      name: 'De especialidad',
+      products: [
+        {
+          name: 'Expreso Bar',
+          description: 'Sencillo o doble.',
+          sku: 'pdf-expreso-bar',
+        },
+        ['Matcha Lemonade'],
+        {
+          name: 'Matcha Ceremonial',
+          description: 'Con leche.',
+          sku: 'pdf-matcha-ceremonial',
+        },
+      ],
+    },
+    {
+      name: 'Te y Coldbrew',
+      products: [
+        {
+          name: 'Earl Grey',
+          description: 'Te negro. Disponible caliente o helado.',
+          sku: 'pdf-te-earl-grey',
+        },
+        {
+          name: 'Sencha',
+          description: 'Te verde con toques de limon. Disponible caliente o helado.',
+          sku: 'pdf-te-sencha',
+        },
+        {
+          name: 'Mintha',
+          description: 'Te de menta. Disponible caliente o helado.',
+          sku: 'pdf-te-mintha',
+        },
+        {
+          name: 'Mango',
+          description: 'Roiboos con mango. Disponible caliente o helado.',
+          sku: 'pdf-te-mango',
+        },
+        {
+          name: 'Frutos Rojos',
+          description: 'Te negro con frutos rojos. Disponible caliente.',
+          sku: 'pdf-te-frutos-rojos',
+        },
+        {
+          name: 'Durazno',
+          description: 'Te negro con durazno. Disponible caliente o helado.',
+          sku: 'pdf-te-durazno',
+        },
+        {
+          name: 'Manzanilla Lavanda',
+          description: 'Disponible caliente o helado.',
+          sku: 'pdf-te-manzanilla-lavanda',
+        },
+      ],
+    },
+    {
+      name: 'Chillers',
+      products: [
+        ['Lemonade'],
+        ['Rosa (Limonada Fresa)', 'Rosa'],
+        ['Mango Lemonade'],
+        ['Coconut Mint Lemonade'],
+        ['Arnie (Limonada Te Negro)', 'Arnie'],
+        ['Peach Tea Lemonade (Durazno)', 'Peach Tea Lemonade'],
+        ['Blackberry Basil Lemonade'],
+        ['Sparkling Mojito'],
+      ],
+    },
+    {
+      name: 'Frappe Chillers',
+      products: [
+        ['Pepino Menta'],
+        ['Jamaiquina'],
+        ['Mango Chamoy'],
+        ['Fresa Miguelito'],
+        ['Tamarindo Chamoy'],
+      ],
+    },
+    {
+      name: 'Otras Bebidas...',
+      products: [
+        ['Agua Mineral'],
+        ['Agua Natural'],
+        ['Choco'],
+        ['Jugo del Valle'],
+        ['Milky (Leche)'],
+        ['Refrescos'],
+      ],
+    },
+    {
+      name: 'Adicionales',
+      products: [
+        {
+          name: 'Shot Extra',
+          description: '$20',
+          sku: 'pdf-adicional-shot-extra',
+        },
+        {
+          name: 'Crema Batida',
+          description: '$10',
+          sku: 'pdf-adicional-crema-batida',
+        },
+        {
+          name: 'Cold Foams',
+          description: '$10. Fresa o pistache.',
+          sku: 'pdf-adicional-cold-foams',
+        },
+      ],
+    },
+  ],
   desayunos: [
     {
       name: 'Waffles y Pan Frances',

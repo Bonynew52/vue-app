@@ -76,11 +76,15 @@ function normalizeMenuText(value) {
 function beverageSubgroupForCategory(category) {
   const name = normalizeMenuText(category.name)
 
-  if (/(cofy|coffee|cafe|latte|frappe)/.test(name)) {
+  if (name === 'frappe chillers') {
+    return 'refreshers'
+  }
+
+  if (/(cofy|coffee|cafe|latte|frappe|especialidad)/.test(name)) {
     return 'cofy'
   }
 
-  if (/(refresher|refresh|chiller|limonada|soda|smoothie|te|tea)/.test(name)) {
+  if (/(refresher|refresh|chiller|limonada|soda|smoothie|te|tea|coldbrew)/.test(name)) {
     return 'refreshers'
   }
 
